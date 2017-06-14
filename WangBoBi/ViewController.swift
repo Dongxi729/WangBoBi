@@ -11,14 +11,6 @@ import AVFoundation
 
 class ViewController: UIViewController,AVCaptureMetadataOutputObjectsDelegate {
     
-    lazy var cameraBtn: UIButton = {
-        let d : UIButton = UIButton.init(frame: CGRect.init(x: 0, y: 0, width: 100, height: 100))
-        d.backgroundColor = UIColor.gray
-        d.addTarget(self, action: #selector(cameraSEl(sender:)), for: .touchUpInside)
-        return d
-    }()
-    
-    
     /// 输入数据源设备
     var device : AVCaptureDevice!
     
@@ -37,7 +29,7 @@ class ViewController: UIViewController,AVCaptureMetadataOutputObjectsDelegate {
     /// 扫描区域视图
     var scanRectView:UIView!
     
-    @objc private func cameraSEl(sender : UIButton) -> Void {
+    func cameraSEl() -> Void {
         print("照相机事件")
         self.device = AVCaptureDevice.defaultDevice(withMediaType: AVMediaTypeVideo)
         
@@ -53,46 +45,6 @@ class ViewController: UIViewController,AVCaptureMetadataOutputObjectsDelegate {
             
             self.output = AVCaptureMetadataOutput()
             output.setMetadataObjectsDelegate(self, queue: DispatchQueue.main)
-            
-            self.session = AVCaptureSession()
-            if UIScreen.main.bounds.size.height<500 {
-                self.session.sessionPreset = AVCaptureSessionPreset640x480
-            }else{
-                self.session.sessionPreset = AVCaptureSessionPresetHigh
-            }
-            
-            self.session.addInput(self.input)
-            self.session.addOutput(self.output)
-            
-            self.output.metadataObjectTypes = [AVMetadataObjectTypeQRCode]
-            
-            //计算中间可探测区域
-            let windowSize = UIScreen.main.bounds.size
-            let scanSize = CGSize(width:windowSize.width*3/4, height:windowSize.width*3/4)
-            var scanRect = CGRect(x:(windowSize.width-scanSize.width)/2,
-                                  y:(windowSize.height-scanSize.height)/2,
-                                  width:scanSize.width, height:scanSize.height)
-            //计算rectOfInterest 注意x,y交换位置
-            scanRect = CGRect(x:scanRect.origin.y/windowSize.height,
-                              y:scanRect.origin.x/windowSize.width,
-                              width:scanRect.size.height/windowSize.height,
-                              height:scanRect.size.width/windowSize.width);
-            //设置可探测区域
-            self.output.rectOfInterest = scanRect
-            
-            self.preview = AVCaptureVideoPreviewLayer(session:self.session)
-            self.preview.videoGravity = AVLayerVideoGravityResizeAspectFill
-            self.preview.frame = UIScreen.main.bounds
-            self.view.layer.insertSublayer(self.preview, at:0)
-            
-            //添加中间的探测区域绿框
-            self.scanRectView = UIView();
-            self.view.addSubview(self.scanRectView)
-            self.scanRectView.frame = CGRect(x:0, y:0, width:scanSize.width,
-                                             height:scanSize.height);
-            self.scanRectView.center = CGPoint( x:UIScreen.main.bounds.midX,
-                                                y:UIScreen.main.bounds.midY)
-            self.scanRectView.layer.borderColor = UIColor.green.cgColor
             self.scanRectView.layer.borderWidth = 1;
             
             //开始捕获
@@ -130,18 +82,4 @@ class ViewController: UIViewController,AVCaptureMetadataOutputObjectsDelegate {
         alertController.addAction(okAction)
         self.present(alertController, animated: true, completion: nil)
     }
-    
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        // Do any additional setup after loading the view, typically from a nib.
-        
-        view.addSubview(cameraBtn)
-    }
-    
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
-    
-    
 }
