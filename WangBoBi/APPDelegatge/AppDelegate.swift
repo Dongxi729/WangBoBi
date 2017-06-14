@@ -18,7 +18,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Override point for customization after application launch.
         
         window = UIWindow.init(frame: UIScreen.main.bounds)
-        window?.rootViewController = MainViewController()
+        
+        let nav = JFNavigationController.init(rootViewController: MainViewController())
+        window?.rootViewController = nav
         window?.makeKeyAndVisible()
         window?.backgroundColor = UIColor.white
         return true

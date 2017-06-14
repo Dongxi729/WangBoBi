@@ -38,6 +38,7 @@ class MainViewController: ViewController,UITableViewDelegate,UITableViewDataSour
         return d
     }()
     
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -45,9 +46,6 @@ class MainViewController: ViewController,UITableViewDelegate,UITableViewDataSour
         view.addSubview(cameraBtn)
         
         view.addSubview(tbv)
-        
-        view.addSubview(img)
-
     }
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
@@ -65,22 +63,10 @@ class MainViewController: ViewController,UITableViewDelegate,UITableViewDataSour
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        switch indexPath.section {
-        case 0:
-            
-            break
-        case 1:
-            
-            break
-        case 2:
-            
-            break
-        case 3:
-//            FTIndicator.showSuccess(withMessage: "asdsd")
-            
-            break
-        default:
-            break
-        }
+        
+        let vc = UIViewController.init()
+        vc.view.backgroundColor = UIColor.randomColor()
+        
+        self.navigationController?.pushViewController(vc, animated: true)
     }
 }

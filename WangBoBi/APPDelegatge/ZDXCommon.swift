@@ -11,7 +11,7 @@ import Foundation
 // MARK:- 网络工具类
 //POST请求
 func postWithPath(path: String,paras: Dictionary<String,Any>?,success: @escaping ((_ result: Any) -> ()),failure: @escaping ((_ error: Error) -> ())) {
-
+    
     //(1）设置请求路径
     let url:NSURL = NSURL(string:path)!//不需要传递参数
     
@@ -153,6 +153,9 @@ let SCREEN_BOUNDS = UIScreen.main.bounds
 
 /// 全局遮罩透明度
 let GLOBAL_SHADOW_ALPHA: CGFloat = 0.5
+
+/// 导航栏背景颜色
+let NAVIGATIONBAR_COLOR = UIColor(red:1,  green:1,  blue:1, alpha:1)
 
 /// 基于iPhone6水平方向适配
 ///
