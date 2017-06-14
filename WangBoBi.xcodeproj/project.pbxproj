@@ -60,7 +60,7 @@
 		2649612E1EF0D08F00A559D6 /* FTProgressIndicator.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 264961261EF0D08F00A559D6 /* FTProgressIndicator.bundle */; };
 		2649612F1EF0D08F00A559D6 /* FTProgressIndicator.m in Sources */ = {isa = PBXBuildFile; fileRef = 264961281EF0D08F00A559D6 /* FTProgressIndicator.m */; };
 		264961301EF0D08F00A559D6 /* FTToastIndicator.m in Sources */ = {isa = PBXBuildFile; fileRef = 2649612B1EF0D08F00A559D6 /* FTToastIndicator.m */; };
-		264961371EF0D16300A559D6 /* FTIndicatorV.swift in Sources */ = {isa = PBXBuildFile; fileRef = 264961361EF0D16300A559D6 /* FTIndicatorV.swift */; };
+		264961391EF0D7D500A559D6 /* replaceImg.png in Resources */ = {isa = PBXBuildFile; fileRef = 264961381EF0D7D500A559D6 /* replaceImg.png */; };
 		26F4847F1EEFD55400177670 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26F4847E1EEFD55400177670 /* ViewController.swift */; };
 		26F484821EEFD55400177670 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 26F484801EEFD55400177670 /* Main.storyboard */; };
 		26F484841EEFD55400177670 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 26F484831EEFD55400177670 /* Assets.xcassets */; };
@@ -168,7 +168,6 @@
 		264961161EF0CBAE00A559D6 /* UIImageExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIImageExtension.swift; sourceTree = "<group>"; };
 		264961181EF0CD3E00A559D6 /* UIView+Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIView+Extension.swift"; sourceTree = "<group>"; };
 		2649611A1EF0CD9200A559D6 /* NSString+extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "NSString+extension.swift"; sourceTree = "<group>"; };
-		2649611C1EF0CEF600A559D6 /* MyPlayground.playground */ = {isa = PBXFileReference; lastKnownFileType = file.playground; path = MyPlayground.playground; sourceTree = "<group>"; };
 		2649611D1EF0CF9300A559D6 /* Color+Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Color+Extension.swift"; sourceTree = "<group>"; };
 		264961201EF0D08F00A559D6 /* FTIndicator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FTIndicator.h; sourceTree = "<group>"; };
 		264961211EF0D08F00A559D6 /* FTIndicator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FTIndicator.m; sourceTree = "<group>"; };
@@ -179,7 +178,7 @@
 		264961281EF0D08F00A559D6 /* FTProgressIndicator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FTProgressIndicator.m; sourceTree = "<group>"; };
 		2649612A1EF0D08F00A559D6 /* FTToastIndicator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FTToastIndicator.h; sourceTree = "<group>"; };
 		2649612B1EF0D08F00A559D6 /* FTToastIndicator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FTToastIndicator.m; sourceTree = "<group>"; };
-		264961361EF0D16300A559D6 /* FTIndicatorV.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FTIndicatorV.swift; sourceTree = "<group>"; };
+		264961381EF0D7D500A559D6 /* replaceImg.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = replaceImg.png; sourceTree = "<group>"; };
 		26F484791EEFD55400177670 /* WangBoBi.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = WangBoBi.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		26F4847E1EEFD55400177670 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = ViewController.swift; path = ../ViewController.swift; sourceTree = "<group>"; };
 		26F484811EEFD55400177670 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -210,7 +209,6 @@
 				264960691EF0BF2500A559D6 /* AppDelegate.swift */,
 				264960831EF0C19F00A559D6 /* WangBoBi-Bridging-Header.h */,
 				264960861EF0C1B400A559D6 /* ZDXCommon.swift */,
-				2649611C1EF0CEF600A559D6 /* MyPlayground.playground */,
 			);
 			name = Applicaiotn;
 			path = APPDelegatge;
@@ -444,6 +442,7 @@
 		264960CF1EF0C33200A559D6 /* Extension */ = {
 			isa = PBXGroup;
 			children = (
+				264961381EF0D7D500A559D6 /* replaceImg.png */,
 				2649611D1EF0CF9300A559D6 /* Color+Extension.swift */,
 				264961161EF0CBAE00A559D6 /* UIImageExtension.swift */,
 				264961141EF0CAD100A559D6 /* UIImageViewWebImage.swift */,
@@ -575,7 +574,6 @@
 		264961311EF0D0F800A559D6 /* Utils */ = {
 			isa = PBXGroup;
 			children = (
-				264961361EF0D16300A559D6 /* FTIndicatorV.swift */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -673,6 +671,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				264961391EF0D7D500A559D6 /* replaceImg.png in Resources */,
 				26F484871EEFD55400177670 /* LaunchScreen.storyboard in Resources */,
 				26F484841EEFD55400177670 /* Assets.xcassets in Resources */,
 				2649612E1EF0D08F00A559D6 /* FTProgressIndicator.bundle in Resources */,
@@ -692,7 +691,6 @@
 				264960FB1EF0C9EC00A559D6 /* YYCache.m in Sources */,
 				264960C81EF0C28F00A559D6 /* POPGeometry.mm in Sources */,
 				264961041EF0C9EC00A559D6 /* UIImageView+YYWebImage.m in Sources */,
-				264961371EF0D16300A559D6 /* FTIndicatorV.swift in Sources */,
 				264961071EF0C9EC00A559D6 /* YYImage.m in Sources */,
 				264961081EF0C9EC00A559D6 /* YYImageCoder.m in Sources */,
 				264960CB1EF0C28F00A559D6 /* POPPropertyAnimation.mm in Sources */,
