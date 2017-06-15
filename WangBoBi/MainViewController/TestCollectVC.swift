@@ -64,12 +64,13 @@ extension TestCollectVC : UICollectionViewDataSource,UICollectionViewDelegateFlo
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cellID", for: indexPath) as! CollectionViewCell
         
-        
         return cell
     }
     
+    
+    
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
-        return UIEdgeInsets.init(top:0, left: commonMargin * SCREEN_SCALE * 2, bottom: 0, right: 2 * commonMargin * SCREEN_SCALE)
+        return UIEdgeInsets.init(top:0, left: commonMargin * SCREEN_SCALE, bottom: 0, right: commonMargin * SCREEN_SCALE)
     }
     
     func numberOfSections(in collectionView: UICollectionView) -> Int {
