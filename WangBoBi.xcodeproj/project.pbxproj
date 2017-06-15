@@ -15,7 +15,6 @@
 		2607D1571EF224C90015625E /* MainPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2607D1561EF224C90015625E /* MainPageViewController.swift */; };
 		2607D1591EF22AAF0015625E /* MyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2607D1581EF22AAF0015625E /* MyViewController.swift */; };
 		2607D15B1EF233660015625E /* HeadInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2607D15A1EF233660015625E /* HeadInfoView.swift */; };
-		2607D15D1EF23A270015625E /* TestCollectVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2607D15C1EF23A270015625E /* TestCollectVC.swift */; };
 		2607D15F1EF23BB70015625E /* CollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2607D15E1EF23BB70015625E /* CollectionViewCell.swift */; };
 		2649606F1EF0BF2500A559D6 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 264960691EF0BF2500A559D6 /* AppDelegate.swift */; };
 		264960701EF0BF2500A559D6 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2649606E1EF0BF2500A559D6 /* MainViewController.swift */; };
@@ -74,6 +73,7 @@
 		269C1C941EF12FB000364F32 /* WeatherModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 269C1C931EF12FB000364F32 /* WeatherModel.swift */; };
 		26A0A4A91EF0E26B00035D0D /* JFNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26A0A4A81EF0E26B00035D0D /* JFNavigationController.swift */; };
 		26A0A4AB1EF1064C00035D0D /* NetWorkTool.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26A0A4AA1EF1064C00035D0D /* NetWorkTool.swift */; };
+		26B14EFC1EF259AF0050135B /* CollectCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26B14EFB1EF259AF0050135B /* CollectCell.swift */; };
 		26F4847F1EEFD55400177670 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26F4847E1EEFD55400177670 /* ViewController.swift */; };
 		26F484821EEFD55400177670 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 26F484801EEFD55400177670 /* Main.storyboard */; };
 		26F484841EEFD55400177670 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 26F484831EEFD55400177670 /* Assets.xcassets */; };
@@ -89,8 +89,7 @@
 		2607D1541EF21E570015625E /* MainTabBarViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainTabBarViewController.swift; sourceTree = "<group>"; };
 		2607D1561EF224C90015625E /* MainPageViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainPageViewController.swift; sourceTree = "<group>"; };
 		2607D1581EF22AAF0015625E /* MyViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MyViewController.swift; sourceTree = "<group>"; };
-		2607D15A1EF233660015625E /* HeadInfoView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HeadInfoView.swift; sourceTree = "<group>"; };
-		2607D15C1EF23A270015625E /* TestCollectVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TestCollectVC.swift; sourceTree = "<group>"; };
+		2607D15A1EF233660015625E /* HeadInfoView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = HeadInfoView.swift; path = ../../Mine/View/HeadInfoView.swift; sourceTree = "<group>"; };
 		2607D15E1EF23BB70015625E /* CollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CollectionViewCell.swift; sourceTree = "<group>"; };
 		264960691EF0BF2500A559D6 /* AppDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		2649606E1EF0BF2500A559D6 /* MainViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MainViewController.swift; path = ../tool/MainViewController.swift; sourceTree = "<group>"; };
@@ -206,6 +205,7 @@
 		269C1C931EF12FB000364F32 /* WeatherModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WeatherModel.swift; sourceTree = "<group>"; };
 		26A0A4A81EF0E26B00035D0D /* JFNavigationController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JFNavigationController.swift; sourceTree = "<group>"; };
 		26A0A4AA1EF1064C00035D0D /* NetWorkTool.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NetWorkTool.swift; sourceTree = "<group>"; };
+		26B14EFB1EF259AF0050135B /* CollectCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CollectCell.swift; path = ../../Mine/View/CollectCell.swift; sourceTree = "<group>"; };
 		26F484791EEFD55400177670 /* WangBoBi.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = WangBoBi.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		26F4847E1EEFD55400177670 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = ViewController.swift; path = ../ViewController.swift; sourceTree = "<group>"; };
 		26F484811EEFD55400177670 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -283,6 +283,8 @@
 		264960741EF0BFC000A559D6 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				2607D15A1EF233660015625E /* HeadInfoView.swift */,
+				26B14EFB1EF259AF0050135B /* CollectCell.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -316,7 +318,6 @@
 		264960781EF0BFC000A559D6 /* View */ = {
 			isa = PBXGroup;
 			children = (
-				2607D15A1EF233660015625E /* HeadInfoView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -407,7 +408,6 @@
 				2649607A1EF0C02600A559D6 /* Friends-03 */,
 				264960711EF0BFC000A559D6 /* MainPage-01 */,
 				264960751EF0BFC000A559D6 /* Mine-04 */,
-				2607D15C1EF23A270015625E /* TestCollectVC.swift */,
 			);
 			path = MainViewController;
 			sourceTree = "<group>";
@@ -739,6 +739,7 @@
 				264960CB1EF0C28F00A559D6 /* POPPropertyAnimation.mm in Sources */,
 				264960C91EF0C28F00A559D6 /* POPLayerExtras.mm in Sources */,
 				264961001EF0C9EC00A559D6 /* CALayer+YYWebImage.m in Sources */,
+				26B14EFC1EF259AF0050135B /* CollectCell.swift in Sources */,
 				264960CE1EF0C28F00A559D6 /* TransformationMatrix.cpp in Sources */,
 				264960FE1EF0C9EC00A559D6 /* YYMemoryCache.m in Sources */,
 				2607D14E1EF212450015625E /* Reachability.m in Sources */,
@@ -772,7 +773,6 @@
 				2607D1571EF224C90015625E /* MainPageViewController.swift in Sources */,
 				264961051EF0C9EC00A559D6 /* YYAnimatedImageView.m in Sources */,
 				264960BF1EF0C28F00A559D6 /* POPAnimationEvent.mm in Sources */,
-				2607D15D1EF23A270015625E /* TestCollectVC.swift in Sources */,
 				264960CD1EF0C28F00A559D6 /* POPVector.mm in Sources */,
 				2649610B1EF0C9EC00A559D6 /* YYWebImageManager.m in Sources */,
 				264960FF1EF0C9EC00A559D6 /* _YYWebImageSetter.m in Sources */,
