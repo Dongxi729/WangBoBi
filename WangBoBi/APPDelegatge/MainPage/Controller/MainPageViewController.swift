@@ -135,10 +135,43 @@ extension MainPageViewController : UICollectionViewDataSource,UICollectionViewDe
             header.titleLabel.text = books[indexPath.section].title
             return header
         }
-        
-        CCog(message: "获取重用视图失败!")
 
         return reusableview
+    }
+    
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        switch indexPath.section {
+        case 0:
+            switch indexPath.row {
+                /// 扫一扫
+            case 0:
+                navigationController?.pushViewController(ViewController(), animated: true)
+                break
+                /// 收款
+            case 1:
+                
+                
+                
+                break
+                /// 充值
+            case 2:
+                
+                
+                break
+                /// 转账
+            case 3 :
+                
+                
+                
+                break
+            default:
+                break
+            }
+            break
+        default:
+            break
+        }
     }
     
     //返回分组头大小
