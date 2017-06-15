@@ -74,6 +74,8 @@
 		26A0A4A91EF0E26B00035D0D /* JFNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26A0A4A81EF0E26B00035D0D /* JFNavigationController.swift */; };
 		26A0A4AB1EF1064C00035D0D /* NetWorkTool.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26A0A4AA1EF1064C00035D0D /* NetWorkTool.swift */; };
 		26B14EFC1EF259AF0050135B /* CollectCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26B14EFB1EF259AF0050135B /* CollectCell.swift */; };
+		26B14F001EF29ABA0050135B /* ReceiveMonVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26B14EFF1EF29ABA0050135B /* ReceiveMonVC.swift */; };
+		26B14F021EF29F490050135B /* ReceiveCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26B14F011EF29F490050135B /* ReceiveCell.swift */; };
 		26F4847F1EEFD55400177670 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26F4847E1EEFD55400177670 /* ViewController.swift */; };
 		26F484821EEFD55400177670 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 26F484801EEFD55400177670 /* Main.storyboard */; };
 		26F484841EEFD55400177670 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 26F484831EEFD55400177670 /* Assets.xcassets */; };
@@ -206,6 +208,8 @@
 		26A0A4A81EF0E26B00035D0D /* JFNavigationController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JFNavigationController.swift; sourceTree = "<group>"; };
 		26A0A4AA1EF1064C00035D0D /* NetWorkTool.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NetWorkTool.swift; sourceTree = "<group>"; };
 		26B14EFB1EF259AF0050135B /* CollectCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CollectCell.swift; path = ../../Mine/View/CollectCell.swift; sourceTree = "<group>"; };
+		26B14EFF1EF29ABA0050135B /* ReceiveMonVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ReceiveMonVC.swift; path = ../../../../ReceiveMonVC.swift; sourceTree = "<group>"; };
+		26B14F011EF29F490050135B /* ReceiveCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReceiveCell.swift; sourceTree = "<group>"; };
 		26F484791EEFD55400177670 /* WangBoBi.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = WangBoBi.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		26F4847E1EEFD55400177670 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = ViewController.swift; path = ../ViewController.swift; sourceTree = "<group>"; };
 		26F484811EEFD55400177670 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -268,6 +272,7 @@
 		264960721EF0BFC000A559D6 /* Controller */ = {
 			isa = PBXGroup;
 			children = (
+				26B14EFF1EF29ABA0050135B /* ReceiveMonVC.swift */,
 				2607D1561EF224C90015625E /* MainPageViewController.swift */,
 			);
 			path = Controller;
@@ -285,6 +290,7 @@
 			children = (
 				2607D15A1EF233660015625E /* HeadInfoView.swift */,
 				26B14EFB1EF259AF0050135B /* CollectCell.swift */,
+				26B14F011EF29F490050135B /* ReceiveCell.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -727,6 +733,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				264960C71EF0C28F00A559D6 /* POPDecayAnimation.mm in Sources */,
+				26B14F001EF29ABA0050135B /* ReceiveMonVC.swift in Sources */,
 				269C1C921EF1275500364F32 /* SwiftyJSON.swift in Sources */,
 				264960CA1EF0C28F00A559D6 /* POPMath.mm in Sources */,
 				264960FB1EF0C9EC00A559D6 /* YYCache.m in Sources */,
@@ -748,6 +755,7 @@
 				2649612C1EF0D08F00A559D6 /* FTIndicator.m in Sources */,
 				264961301EF0D08F00A559D6 /* FTToastIndicator.m in Sources */,
 				264961061EF0C9EC00A559D6 /* YYFrameImage.m in Sources */,
+				26B14F021EF29F490050135B /* ReceiveCell.swift in Sources */,
 				264960701EF0BF2500A559D6 /* MainViewController.swift in Sources */,
 				264960871EF0C1B400A559D6 /* ZDXCommon.swift in Sources */,
 				2607D1551EF21E570015625E /* MainTabBarViewController.swift in Sources */,

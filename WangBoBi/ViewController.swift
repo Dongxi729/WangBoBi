@@ -11,14 +11,6 @@ import AVFoundation
 
 class ViewController: UIViewController,AVCaptureMetadataOutputObjectsDelegate {
     
-    lazy var cameraBtn: UIButton = {
-        let d : UIButton = UIButton.init(frame: CGRect.init(x: 0, y: 0, width: 100, height: 100))
-        d.backgroundColor = UIColor.gray
-//        d.addTarget(self, action: #selector(cameraSEl(sender:)), for: .touchUpInside)
-        return d
-    }()
-    
-    
     /// 输入数据源设备
     var device : AVCaptureDevice!
     
@@ -37,13 +29,6 @@ class ViewController: UIViewController,AVCaptureMetadataOutputObjectsDelegate {
     /// 扫描区域视图
     var scanRectView:UIView!
 
-    // MARK: - 描述文本
-    lazy var descLabel: UILabel = {
-        let d : UILabel = UILabel.init(frame: CGRect.init(x: 0, y: self.scanRectView.BottomY + COMMON_MARGIN, width: SCREEN_WIDTH, height: 20 * SCREEN_SCALE))
-        d.textAlignment = .center
-        d.text = "放入框内,自动扫描"
-        return d
-    }()
     
     @objc private func cameraSEl() -> Void {
         
@@ -53,9 +38,9 @@ class ViewController: UIViewController,AVCaptureMetadataOutputObjectsDelegate {
             self.device = AVCaptureDevice.defaultDevice(withMediaType: AVMediaTypeVideo)
             
             /// 设置自动对焦
-//            if device.isAdjustingFocus {
-//                device.focusMode = AVCaptureFocusMode.autoFocus
-//            }
+            if device.isAdjustingFocus {
+                device.focusMode = AVCaptureFocusMode.autoFocus
+            }
             
             self.input = try AVCaptureDeviceInput(device: device)
             
@@ -146,6 +131,17 @@ class ViewController: UIViewController,AVCaptureMetadataOutputObjectsDelegate {
         return d
     }()
     
+    
+    // MARK: - 描述文本
+    fileprivate lazy var descLabel: UILabel = {
+        let scanSize = CGSize(width:SCREEN_WIDTH * 3 / 4, height:SCREEN_WIDTH * 3 / 4)
+        let d : UILabel = UILabel.init(frame: CGRect.init(x: 0, y: SCREEN_HEIGHT * 0.5 - scanSize.height * 0.5 - 32 + SCREEN_WIDTH * 3 / 4, width: SCREEN_WIDTH, height: 20 * SCREEN_SCALE))
+        d.textAlignment = .center
+        d.textColor = UIColor.white
+        d.text = "放入框内,自动扫描"
+        return d
+    }()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
@@ -154,6 +150,7 @@ class ViewController: UIViewController,AVCaptureMetadataOutputObjectsDelegate {
         self.view.backgroundColor = UIColor.black
         
         
+        self.descLabel.isHidden = false
         
         DispatchQueue.main.async {
             self.view.addSubview(self.indicator)
@@ -170,32 +167,5 @@ class ViewController: UIViewController,AVCaptureMetadataOutputObjectsDelegate {
                 self.view.addSubview(self.descLabel)
             }
         }
-        
-        
-        
-        
-        maskLayer = CALayer()
-        maskLayer.frame = view.layer.bounds
-        maskLayer.delegate = self as? CALayerDelegate
-        view.layer.insertSublayer(maskLayer, above: preview)
-        maskLayer.setNeedsDisplay()
-
     }
-    
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
-    
-
-    func drawLayer(_ layer: CALayer, inContext ctx: CGContext?) {
-        if layer == maskLayer {
-            UIGraphicsBeginImageContextWithOptions(maskLayer.frame.size, false, 1.0)
-            ctx?.setFillColor(UIColor(red: CGFloat(0), green: CGFloat(0), blue: CGFloat(0), alpha: CGFloat(0.6)).cgColor)
-            ctx?.fill(maskLayer.frame)
-            let scanFrame = view.convert(self.view.frame, to: scanRectView.superview)
-            ctx?.clear(scanFrame)
-        }
-    }
-
 }

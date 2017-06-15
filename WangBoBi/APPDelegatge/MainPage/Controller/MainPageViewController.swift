@@ -154,7 +154,9 @@ extension MainPageViewController : UICollectionViewDataSource,UICollectionViewDe
                 /// 收款
             case 1:
                 
-                
+                DispatchQueue.main.async {
+                    self.navigationController?.pushViewController(ReceiveMonVC(), animated: true)
+                }
                 
                 break
                 /// 充值
