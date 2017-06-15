@@ -17,13 +17,7 @@ class MainTabBarViewController: BaseTabbarVC {
         
         // Do any additional setup after loading the view.
         
-        ///禁用tabbar的透明效果
-        self.tabBar.isTranslucent = false
-        
         self.setUpSubViews()
-        
-        self.navigationController?.navigationBar.isHidden = true
-        
     }
 }
 
@@ -33,18 +27,23 @@ extension MainTabBarViewController {
     fileprivate func setUpSubViews() -> Void {
         
         //首页
-        let mainPageVC = JFNavigationController.init(rootViewController: UIViewController())
+        let mainPageVC = JFNavigationController.init(rootViewController: MainPageViewController())
         
-        //订单
+        //商户
         let shopVc = JFNavigationController.init(rootViewController: UIViewController())
         
+        //朋友
+        let friendVc = JFNavigationController.init(rootViewController: UIViewController())
+        
         //我的模块
-        let meVC = JFNavigationController.init(rootViewController: UIViewController())
+        let meVC = JFNavigationController.init(rootViewController: MyViewController())
         
         
         self.setupChildVC(mainPageVC, title: "首页", imageName: "home_on", selectImageName: "home")
         
-        self.setupChildVC(shopVc, title: "订单", imageName: "detail", selectImageName: "detail_on")
+        self.setupChildVC(shopVc, title: "商户", imageName: "home_on", selectImageName: "home")
+        
+        self.setupChildVC(friendVc, title: "朋友", imageName: "detail", selectImageName: "detail_on")
         
         self.setupChildVC(meVC, title: "我的", imageName: "mine_on", selectImageName: "mine")
         

@@ -19,10 +19,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         window = UIWindow.init(frame: UIScreen.main.bounds)
         
-        let nav = JFNavigationController.init(rootViewController: MainTabBarViewController())
-        window?.rootViewController = nav
+        window?.rootViewController = TestCollectVC()
         window?.makeKeyAndVisible()
         window?.backgroundColor = UIColor.white
+        
+        // 设置全局颜色
+        UITabBar.appearance().tintColor = TABBAR_BGCOLOR
+        
+        
         return true
     }
 }

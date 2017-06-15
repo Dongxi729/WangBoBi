@@ -12,6 +12,11 @@
 		2607D1511EF214D50015625E /* AutoSigned.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2607D1501EF214D50015625E /* AutoSigned.swift */; };
 		2607D1531EF21E140015625E /* BaseTabbarVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2607D1521EF21E140015625E /* BaseTabbarVC.swift */; };
 		2607D1551EF21E570015625E /* MainTabBarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2607D1541EF21E570015625E /* MainTabBarViewController.swift */; };
+		2607D1571EF224C90015625E /* MainPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2607D1561EF224C90015625E /* MainPageViewController.swift */; };
+		2607D1591EF22AAF0015625E /* MyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2607D1581EF22AAF0015625E /* MyViewController.swift */; };
+		2607D15B1EF233660015625E /* HeadInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2607D15A1EF233660015625E /* HeadInfoView.swift */; };
+		2607D15D1EF23A270015625E /* TestCollectVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2607D15C1EF23A270015625E /* TestCollectVC.swift */; };
+		2607D15F1EF23BB70015625E /* CollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2607D15E1EF23BB70015625E /* CollectionViewCell.swift */; };
 		2649606F1EF0BF2500A559D6 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 264960691EF0BF2500A559D6 /* AppDelegate.swift */; };
 		264960701EF0BF2500A559D6 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2649606E1EF0BF2500A559D6 /* MainViewController.swift */; };
 		264960871EF0C1B400A559D6 /* ZDXCommon.swift in Sources */ = {isa = PBXBuildFile; fileRef = 264960861EF0C1B400A559D6 /* ZDXCommon.swift */; };
@@ -82,6 +87,11 @@
 		2607D1501EF214D50015625E /* AutoSigned.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AutoSigned.swift; sourceTree = "<group>"; };
 		2607D1521EF21E140015625E /* BaseTabbarVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseTabbarVC.swift; sourceTree = "<group>"; };
 		2607D1541EF21E570015625E /* MainTabBarViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainTabBarViewController.swift; sourceTree = "<group>"; };
+		2607D1561EF224C90015625E /* MainPageViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainPageViewController.swift; sourceTree = "<group>"; };
+		2607D1581EF22AAF0015625E /* MyViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MyViewController.swift; sourceTree = "<group>"; };
+		2607D15A1EF233660015625E /* HeadInfoView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HeadInfoView.swift; sourceTree = "<group>"; };
+		2607D15C1EF23A270015625E /* TestCollectVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TestCollectVC.swift; sourceTree = "<group>"; };
+		2607D15E1EF23BB70015625E /* CollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CollectionViewCell.swift; sourceTree = "<group>"; };
 		264960691EF0BF2500A559D6 /* AppDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		2649606E1EF0BF2500A559D6 /* MainViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MainViewController.swift; path = ../tool/MainViewController.swift; sourceTree = "<group>"; };
 		264960831EF0C19F00A559D6 /* WangBoBi-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "WangBoBi-Bridging-Header.h"; sourceTree = "<group>"; };
@@ -258,6 +268,7 @@
 		264960721EF0BFC000A559D6 /* Controller */ = {
 			isa = PBXGroup;
 			children = (
+				2607D1561EF224C90015625E /* MainPageViewController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -290,6 +301,7 @@
 		264960761EF0BFC000A559D6 /* Controller */ = {
 			isa = PBXGroup;
 			children = (
+				2607D1581EF22AAF0015625E /* MyViewController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -304,6 +316,7 @@
 		264960781EF0BFC000A559D6 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				2607D15A1EF233660015625E /* HeadInfoView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -387,12 +400,14 @@
 		264960821EF0C08D00A559D6 /* MainViewController */ = {
 			isa = PBXGroup;
 			children = (
+				2607D15E1EF23BB70015625E /* CollectionViewCell.swift */,
+				2607D1541EF21E570015625E /* MainTabBarViewController.swift */,
 				2649606E1EF0BF2500A559D6 /* MainViewController.swift */,
 				2649607E1EF0C02C00A559D6 /* Shopper-02 */,
 				2649607A1EF0C02600A559D6 /* Friends-03 */,
 				264960711EF0BFC000A559D6 /* MainPage-01 */,
 				264960751EF0BFC000A559D6 /* Mine-04 */,
-				2607D1541EF21E570015625E /* MainTabBarViewController.swift */,
+				2607D15C1EF23A270015625E /* TestCollectVC.swift */,
 			);
 			path = MainViewController;
 			sourceTree = "<group>";
@@ -737,8 +752,11 @@
 				2607D1551EF21E570015625E /* MainTabBarViewController.swift in Sources */,
 				2649612D1EF0D08F00A559D6 /* FTNotificationIndicator.m in Sources */,
 				269C1C941EF12FB000364F32 /* WeatherModel.swift in Sources */,
+				2607D15F1EF23BB70015625E /* CollectionViewCell.swift in Sources */,
 				264960C01EF0C28F00A559D6 /* POPAnimationExtras.mm in Sources */,
 				2649612F1EF0D08F00A559D6 /* FTProgressIndicator.m in Sources */,
+				2607D15B1EF233660015625E /* HeadInfoView.swift in Sources */,
+				2607D1591EF22AAF0015625E /* MyViewController.swift in Sources */,
 				2649606F1EF0BF2500A559D6 /* AppDelegate.swift in Sources */,
 				2607D1511EF214D50015625E /* AutoSigned.swift in Sources */,
 				264961031EF0C9EC00A559D6 /* UIImage+YYWebImage.m in Sources */,
@@ -751,8 +769,10 @@
 				264960C41EF0C28F00A559D6 /* POPBasicAnimation.mm in Sources */,
 				264961011EF0C9EC00A559D6 /* MKAnnotationView+YYWebImage.m in Sources */,
 				264961091EF0C9EC00A559D6 /* YYSpriteSheetImage.m in Sources */,
+				2607D1571EF224C90015625E /* MainPageViewController.swift in Sources */,
 				264961051EF0C9EC00A559D6 /* YYAnimatedImageView.m in Sources */,
 				264960BF1EF0C28F00A559D6 /* POPAnimationEvent.mm in Sources */,
+				2607D15D1EF23A270015625E /* TestCollectVC.swift in Sources */,
 				264960CD1EF0C28F00A559D6 /* POPVector.mm in Sources */,
 				2649610B1EF0C9EC00A559D6 /* YYWebImageManager.m in Sources */,
 				264960FF1EF0C9EC00A559D6 /* _YYWebImageSetter.m in Sources */,
@@ -902,7 +922,7 @@
 					"$(PROJECT_DIR)/WangBoBi/APPDelegatge/ThirdSDK",
 				);
 				INFOPLIST_FILE = WangBoBi/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 8.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.zdx.WangBoBi;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -924,7 +944,7 @@
 					"$(PROJECT_DIR)/WangBoBi/APPDelegatge/ThirdSDK",
 				);
 				INFOPLIST_FILE = WangBoBi/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 8.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.zdx.WangBoBi;
 				PRODUCT_NAME = "$(TARGET_NAME)";

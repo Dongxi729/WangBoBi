@@ -33,11 +33,6 @@ class WeatherModel: NSObject {
     var sc : String?
     var spd : String?
     
-//    init(dict : [String : Any]) {
-//        super.init()
-//        setValuesForKeys(dict)
-//    }
-    
     override func setValue(_ value: Any?, forUndefinedKey key: String) {
         
     }

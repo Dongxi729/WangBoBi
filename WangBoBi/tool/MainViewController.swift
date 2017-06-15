@@ -62,9 +62,6 @@ class MainViewController: ViewController,UITableViewDelegate,UITableViewDataSour
 
             self.model.deg = response?["deg"]?.string
             
-            
-            log(message: response)
-            
         }
         
         

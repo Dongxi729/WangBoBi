@@ -16,9 +16,9 @@ class JFNavigationController: UINavigationController, UIGestureRecognizerDelegat
         let navBar = navigationBar
         navBar.barTintColor = NAVIGATIONBAR_COLOR
         navBar.isTranslucent = false
-        navBar.barStyle = UIBarStyle.black
-        navBar.setBackgroundImage(UIImage(), for: UIBarMetrics.default)
-        navBar.shadowImage = UIImage()
+//        navBar.barStyle = UIBarStyle.black
+//        navBar.setBackgroundImage(UIImage(), for: UIBarMetrics.default)
+//        navBar.shadowImage = UIImage()
         navBar.titleTextAttributes = [
             NSForegroundColorAttributeName : UIColor.colorWithRGB(47, g: 47, b: 47),
             NSFontAttributeName : UIFont.systemFont(ofSize: 16)
