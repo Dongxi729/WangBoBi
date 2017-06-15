@@ -146,7 +146,10 @@ extension MainPageViewController : UICollectionViewDataSource,UICollectionViewDe
             switch indexPath.row {
                 /// 扫一扫
             case 0:
-                navigationController?.pushViewController(ViewController(), animated: true)
+                
+                DispatchQueue.main.async {
+                    self.navigationController?.pushViewController(ViewController(), animated: true)
+                }
                 break
                 /// 收款
             case 1:

@@ -36,18 +36,26 @@ class ViewController: UIViewController,AVCaptureMetadataOutputObjectsDelegate {
     
     /// 扫描区域视图
     var scanRectView:UIView!
+
+    // MARK: - 描述文本
+    lazy var descLabel: UILabel = {
+        let d : UILabel = UILabel.init(frame: CGRect.init(x: 0, y: self.scanRectView.BottomY + COMMON_MARGIN, width: SCREEN_WIDTH, height: 20 * SCREEN_SCALE))
+        d.textAlignment = .center
+        d.text = "放入框内,自动扫描"
+        return d
+    }()
     
     @objc private func cameraSEl() -> Void {
-        print("照相机事件")
+        
         self.device = AVCaptureDevice.defaultDevice(withMediaType: AVMediaTypeVideo)
         
         do {
             self.device = AVCaptureDevice.defaultDevice(withMediaType: AVMediaTypeVideo)
             
             /// 设置自动对焦
-            if device.isAdjustingFocus {
-                device.focusMode = AVCaptureFocusMode.autoFocus
-            }
+//            if device.isAdjustingFocus {
+//                device.focusMode = AVCaptureFocusMode.autoFocus
+//            }
             
             self.input = try AVCaptureDeviceInput(device: device)
             
@@ -88,10 +96,8 @@ class ViewController: UIViewController,AVCaptureMetadataOutputObjectsDelegate {
             //添加中间的探测区域绿框
             self.scanRectView = UIView();
             self.view.addSubview(self.scanRectView)
-            self.scanRectView.frame = CGRect(x:0, y:0, width:scanSize.width,
+            self.scanRectView.frame = CGRect(x:SCREEN_WIDTH * 0.5 - scanSize.width * 0.5, y:SCREEN_HEIGHT * 0.5 - scanSize.height * 0.5 - 32, width:scanSize.width,
                                              height:scanSize.height);
-            self.scanRectView.center = CGPoint( x:UIScreen.main.bounds.midX,
-                                                y:UIScreen.main.bounds.midY)
             self.scanRectView.layer.borderColor = UIColor.green.cgColor
             self.scanRectView.layer.borderWidth = 1;
             
@@ -131,13 +137,49 @@ class ViewController: UIViewController,AVCaptureMetadataOutputObjectsDelegate {
         self.present(alertController, animated: true, completion: nil)
     }
     
+    var maskLayer = CALayer()
+    
+
+    lazy var indicator: UIActivityIndicatorView = {
+        let d : UIActivityIndicatorView = UIActivityIndicatorView.init(frame: CGRect.init(x: SCREEN_WIDTH * 0.5 - 50, y: SCREEN_HEIGHT * 0.5 - 50 - 32, width: 100, height: 100))
+        d.activityIndicatorViewStyle = UIActivityIndicatorViewStyle.whiteLarge
+        return d
+    }()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
         
-//        view.addSubview(cameraBtn)
+        title = "扫一扫"
+        self.view.backgroundColor = UIColor.black
+        
+        
+        
+        DispatchQueue.main.async {
+            self.view.addSubview(self.indicator)
+            self.indicator.startAnimating()
+        }
+        
+        
+        //延时2秒执行
+        DispatchQueue.global(qos: .default).asyncAfter(deadline: DispatchTime.now() + 0.5) {
+            
+            DispatchQueue.main.async {
+                self.cameraSEl()
+                self.indicator.stopAnimating()
+                self.view.addSubview(self.descLabel)
+            }
+        }
+        
+        
+        
+        
+        maskLayer = CALayer()
+        maskLayer.frame = view.layer.bounds
+        maskLayer.delegate = self as? CALayerDelegate
+        view.layer.insertSublayer(maskLayer, above: preview)
+        maskLayer.setNeedsDisplay()
 
-        cameraSEl()
     }
     
     override func didReceiveMemoryWarning() {
@@ -145,5 +187,15 @@ class ViewController: UIViewController,AVCaptureMetadataOutputObjectsDelegate {
         // Dispose of any resources that can be recreated.
     }
     
-    
+
+    func drawLayer(_ layer: CALayer, inContext ctx: CGContext?) {
+        if layer == maskLayer {
+            UIGraphicsBeginImageContextWithOptions(maskLayer.frame.size, false, 1.0)
+            ctx?.setFillColor(UIColor(red: CGFloat(0), green: CGFloat(0), blue: CGFloat(0), alpha: CGFloat(0.6)).cgColor)
+            ctx?.fill(maskLayer.frame)
+            let scanFrame = view.convert(self.view.frame, to: scanRectView.superview)
+            ctx?.clear(scanFrame)
+        }
+    }
+
 }
