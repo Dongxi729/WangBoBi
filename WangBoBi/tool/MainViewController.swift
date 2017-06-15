@@ -29,7 +29,6 @@ class MainViewController: ViewController,UITableViewDelegate,UITableViewDataSour
         
         return d
     }()
-
     
     lazy var img: UIImageView = {
         let d : UIImageView = UIImageView.init(frame: CGRect.init(x: 100, y: 100, width: self.view.bounds.midX, height: self.view.bounds.midY))
@@ -39,6 +38,13 @@ class MainViewController: ViewController,UITableViewDelegate,UITableViewDataSour
     }()
     
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(true)
+        self.navigationController?.navigationBar.barTintColor = UIColor.orange
+    }
+    
+    var model = WeatherModel.init()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -46,6 +52,22 @@ class MainViewController: ViewController,UITableViewDelegate,UITableViewDataSour
         view.addSubview(cameraBtn)
         
         view.addSubview(tbv)
+
+        
+        let d = UIButton.init(frame: CGRect.init(x: 0, y: 0, width: 100, height: 100))
+        d.backgroundColor = UIColor.randomColor()
+        zdx_setupButtonSpringAnimation(d)
+        view.addSubview(d)
+        
+        NetWork.shared.reqiuestHeWeather { (boole, response, error) in
+            log(response)
+            
+
+            self.model.deg = response?["deg"]?.string
+            log(self.model.deg)
+        }
+        
+        
     }
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {

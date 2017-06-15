@@ -60,7 +60,10 @@
 		2649612E1EF0D08F00A559D6 /* FTProgressIndicator.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 264961261EF0D08F00A559D6 /* FTProgressIndicator.bundle */; };
 		2649612F1EF0D08F00A559D6 /* FTProgressIndicator.m in Sources */ = {isa = PBXBuildFile; fileRef = 264961281EF0D08F00A559D6 /* FTProgressIndicator.m */; };
 		264961301EF0D08F00A559D6 /* FTToastIndicator.m in Sources */ = {isa = PBXBuildFile; fileRef = 2649612B1EF0D08F00A559D6 /* FTToastIndicator.m */; };
+		269C1C921EF1275500364F32 /* SwiftyJSON.swift in Sources */ = {isa = PBXBuildFile; fileRef = 269C1C911EF1275500364F32 /* SwiftyJSON.swift */; };
+		269C1C941EF12FB000364F32 /* WeatherModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 269C1C931EF12FB000364F32 /* WeatherModel.swift */; };
 		26A0A4A91EF0E26B00035D0D /* JFNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26A0A4A81EF0E26B00035D0D /* JFNavigationController.swift */; };
+		26A0A4AB1EF1064C00035D0D /* NetWork.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26A0A4AA1EF1064C00035D0D /* NetWork.swift */; };
 		26F4847F1EEFD55400177670 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26F4847E1EEFD55400177670 /* ViewController.swift */; };
 		26F484821EEFD55400177670 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 26F484801EEFD55400177670 /* Main.storyboard */; };
 		26F484841EEFD55400177670 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 26F484831EEFD55400177670 /* Assets.xcassets */; };
@@ -178,7 +181,10 @@
 		264961281EF0D08F00A559D6 /* FTProgressIndicator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FTProgressIndicator.m; sourceTree = "<group>"; };
 		2649612A1EF0D08F00A559D6 /* FTToastIndicator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FTToastIndicator.h; sourceTree = "<group>"; };
 		2649612B1EF0D08F00A559D6 /* FTToastIndicator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FTToastIndicator.m; sourceTree = "<group>"; };
+		269C1C911EF1275500364F32 /* SwiftyJSON.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwiftyJSON.swift; sourceTree = "<group>"; };
+		269C1C931EF12FB000364F32 /* WeatherModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WeatherModel.swift; sourceTree = "<group>"; };
 		26A0A4A81EF0E26B00035D0D /* JFNavigationController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JFNavigationController.swift; sourceTree = "<group>"; };
+		26A0A4AA1EF1064C00035D0D /* NetWork.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NetWork.swift; sourceTree = "<group>"; };
 		26F484791EEFD55400177670 /* WangBoBi.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = WangBoBi.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		26F4847E1EEFD55400177670 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = ViewController.swift; path = ../ViewController.swift; sourceTree = "<group>"; };
 		26F484811EEFD55400177670 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -218,6 +224,7 @@
 			isa = PBXGroup;
 			children = (
 				26F4847E1EEFD55400177670 /* ViewController.swift */,
+				26A0A4AA1EF1064C00035D0D /* NetWork.swift */,
 			);
 			path = tool;
 			sourceTree = "<group>";
@@ -289,6 +296,7 @@
 		264960791EF0BFC000A559D6 /* ThirdSDK */ = {
 			isa = PBXGroup;
 			children = (
+				269C1C911EF1275500364F32 /* SwiftyJSON.swift */,
 				2649611F1EF0D08F00A559D6 /* FTIndicator */,
 				264960D21EF0C9EC00A559D6 /* YYWebImage */,
 				264960881EF0C28F00A559D6 /* pop */,
@@ -581,6 +589,7 @@
 		26F484701EEFD55400177670 = {
 			isa = PBXGroup;
 			children = (
+				269C1C931EF12FB000364F32 /* WeatherModel.swift */,
 				26F4847B1EEFD55400177670 /* WangBoBi */,
 				26F4847A1EEFD55400177670 /* Products */,
 				2649610D1EF0CA0900A559D6 /* Frameworks */,
@@ -686,11 +695,13 @@
 			buildActionMask = 2147483647;
 			files = (
 				264960C71EF0C28F00A559D6 /* POPDecayAnimation.mm in Sources */,
+				269C1C921EF1275500364F32 /* SwiftyJSON.swift in Sources */,
 				264960CA1EF0C28F00A559D6 /* POPMath.mm in Sources */,
 				264960FB1EF0C9EC00A559D6 /* YYCache.m in Sources */,
 				264960C81EF0C28F00A559D6 /* POPGeometry.mm in Sources */,
 				264961041EF0C9EC00A559D6 /* UIImageView+YYWebImage.m in Sources */,
 				264961071EF0C9EC00A559D6 /* YYImage.m in Sources */,
+				26A0A4AB1EF1064C00035D0D /* NetWork.swift in Sources */,
 				264961081EF0C9EC00A559D6 /* YYImageCoder.m in Sources */,
 				264960CB1EF0C28F00A559D6 /* POPPropertyAnimation.mm in Sources */,
 				264960C91EF0C28F00A559D6 /* POPLayerExtras.mm in Sources */,
@@ -705,6 +716,7 @@
 				264960701EF0BF2500A559D6 /* MainViewController.swift in Sources */,
 				264960871EF0C1B400A559D6 /* ZDXCommon.swift in Sources */,
 				2649612D1EF0D08F00A559D6 /* FTNotificationIndicator.m in Sources */,
+				269C1C941EF12FB000364F32 /* WeatherModel.swift in Sources */,
 				264960C01EF0C28F00A559D6 /* POPAnimationExtras.mm in Sources */,
 				2649612F1EF0D08F00A559D6 /* FTProgressIndicator.m in Sources */,
 				2649606F1EF0BF2500A559D6 /* AppDelegate.swift in Sources */,
@@ -865,6 +877,7 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)",
+					"$(PROJECT_DIR)/WangBoBi/APPDelegatge/ThirdSDK",
 				);
 				INFOPLIST_FILE = WangBoBi/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.1;
@@ -886,6 +899,7 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)",
+					"$(PROJECT_DIR)/WangBoBi/APPDelegatge/ThirdSDK",
 				);
 				INFOPLIST_FILE = WangBoBi/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.1;
