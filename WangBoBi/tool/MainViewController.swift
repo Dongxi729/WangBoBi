@@ -52,21 +52,28 @@ class MainViewController: ViewController,UITableViewDelegate,UITableViewDataSour
         view.addSubview(cameraBtn)
         
         view.addSubview(tbv)
-
         
         let d = UIButton.init(frame: CGRect.init(x: 0, y: 0, width: 100, height: 100))
         d.backgroundColor = UIColor.randomColor()
         zdx_setupButtonSpringAnimation(d)
         view.addSubview(d)
         
-        NetWork.shared.reqiuestHeWeather { (boole, response, error) in
-            log(response)
-            
+        NetWorkTool.shared.reqiuestHeWeather { (boole, response, error) in
 
             self.model.deg = response?["deg"]?.string
-            log(self.model.deg)
+            
+            
+            log(message: response)
+            
         }
         
+        
+        NetCheck.shared.returnNetStatus { (netCode) in
+
+            let dformatter = DateFormatter()
+            dformatter.dateFormat = "HH:mm:ss"
+
+        }
         
     }
     
