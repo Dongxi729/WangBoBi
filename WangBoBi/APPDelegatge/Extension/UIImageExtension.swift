@@ -72,5 +72,22 @@ extension UIImage {
         
         return result
     }
+
     
+    ///剪切图片
+    /**
+     ## 剪切图片
+     - img     图片
+     - size    图片裁剪大小
+     */
+    func scaleToSize(img : UIImage,size :CGSize) -> UIImage {
+        UIGraphicsBeginImageContext(size)
+        img.draw(in: CGRect(x: 0, y: 0, width: size.width, height: size.height))
+        let endImage = UIGraphicsGetImageFromCurrentImageContext()
+        UIGraphicsEndImageContext()
+        
+        return endImage!
+        
+    }
+
 }

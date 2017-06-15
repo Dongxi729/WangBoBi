@@ -19,7 +19,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         window = UIWindow.init(frame: UIScreen.main.bounds)
         
-        let nav = JFNavigationController.init(rootViewController: MainViewController())
+        let nav = JFNavigationController.init(rootViewController: MainTabBarViewController())
         window?.rootViewController = nav
         window?.makeKeyAndVisible()
         window?.backgroundColor = UIColor.white

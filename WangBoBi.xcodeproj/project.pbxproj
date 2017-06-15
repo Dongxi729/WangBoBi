@@ -10,6 +10,8 @@
 		2607D14E1EF212450015625E /* Reachability.m in Sources */ = {isa = PBXBuildFile; fileRef = 2607D14C1EF212450015625E /* Reachability.m */; };
 		2607D14F1EF212450015625E /* NetCheck.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2607D14D1EF212450015625E /* NetCheck.swift */; };
 		2607D1511EF214D50015625E /* AutoSigned.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2607D1501EF214D50015625E /* AutoSigned.swift */; };
+		2607D1531EF21E140015625E /* BaseTabbarVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2607D1521EF21E140015625E /* BaseTabbarVC.swift */; };
+		2607D1551EF21E570015625E /* MainTabBarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2607D1541EF21E570015625E /* MainTabBarViewController.swift */; };
 		2649606F1EF0BF2500A559D6 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 264960691EF0BF2500A559D6 /* AppDelegate.swift */; };
 		264960701EF0BF2500A559D6 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2649606E1EF0BF2500A559D6 /* MainViewController.swift */; };
 		264960871EF0C1B400A559D6 /* ZDXCommon.swift in Sources */ = {isa = PBXBuildFile; fileRef = 264960861EF0C1B400A559D6 /* ZDXCommon.swift */; };
@@ -78,6 +80,8 @@
 		2607D14C1EF212450015625E /* Reachability.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Reachability.m; sourceTree = "<group>"; };
 		2607D14D1EF212450015625E /* NetCheck.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NetCheck.swift; sourceTree = "<group>"; };
 		2607D1501EF214D50015625E /* AutoSigned.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AutoSigned.swift; sourceTree = "<group>"; };
+		2607D1521EF21E140015625E /* BaseTabbarVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseTabbarVC.swift; sourceTree = "<group>"; };
+		2607D1541EF21E570015625E /* MainTabBarViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainTabBarViewController.swift; sourceTree = "<group>"; };
 		264960691EF0BF2500A559D6 /* AppDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		2649606E1EF0BF2500A559D6 /* MainViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MainViewController.swift; path = ../tool/MainViewController.swift; sourceTree = "<group>"; };
 		264960831EF0C19F00A559D6 /* WangBoBi-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "WangBoBi-Bridging-Header.h"; sourceTree = "<group>"; };
@@ -388,6 +392,7 @@
 				2649607A1EF0C02600A559D6 /* Friends-03 */,
 				264960711EF0BFC000A559D6 /* MainPage-01 */,
 				264960751EF0BFC000A559D6 /* Mine-04 */,
+				2607D1541EF21E570015625E /* MainTabBarViewController.swift */,
 			);
 			path = MainViewController;
 			sourceTree = "<group>";
@@ -592,6 +597,7 @@
 		264961311EF0D0F800A559D6 /* Utils */ = {
 			isa = PBXGroup;
 			children = (
+				2607D1521EF21E140015625E /* BaseTabbarVC.swift */,
 				26A0A4A81EF0E26B00035D0D /* JFNavigationController.swift */,
 			);
 			path = Utils;
@@ -728,6 +734,7 @@
 				264961061EF0C9EC00A559D6 /* YYFrameImage.m in Sources */,
 				264960701EF0BF2500A559D6 /* MainViewController.swift in Sources */,
 				264960871EF0C1B400A559D6 /* ZDXCommon.swift in Sources */,
+				2607D1551EF21E570015625E /* MainTabBarViewController.swift in Sources */,
 				2649612D1EF0D08F00A559D6 /* FTNotificationIndicator.m in Sources */,
 				269C1C941EF12FB000364F32 /* WeatherModel.swift in Sources */,
 				264960C01EF0C28F00A559D6 /* POPAnimationExtras.mm in Sources */,
@@ -756,6 +763,7 @@
 				264961171EF0CBAE00A559D6 /* UIImageExtension.swift in Sources */,
 				264961021EF0C9EC00A559D6 /* UIButton+YYWebImage.m in Sources */,
 				2649610A1EF0C9EC00A559D6 /* YYImageCache.m in Sources */,
+				2607D1531EF21E140015625E /* BaseTabbarVC.swift in Sources */,
 				264960C51EF0C28F00A559D6 /* POPCGUtils.mm in Sources */,
 				264960FC1EF0C9EC00A559D6 /* YYDiskCache.m in Sources */,
 				264960C31EF0C28F00A559D6 /* POPAnimator.mm in Sources */,
