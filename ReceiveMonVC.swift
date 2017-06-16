@@ -47,6 +47,8 @@ class ReceiveMonVC: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        title = "转账"
+        
         self.view.addSubview(self.tableView)
         
         DispatchQueue.main.async {

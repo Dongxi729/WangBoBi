@@ -95,6 +95,7 @@ class MainPageViewController: UIViewController {
     
     func rightSEL(sender : UIButton) -> Void {
         CCog(message: "")
+        self.navigationController?.pushViewController(DetailViewController(), animated: true)
     }
     
 }
@@ -154,9 +155,7 @@ extension MainPageViewController : UICollectionViewDataSource,UICollectionViewDe
                 /// 收款
             case 1:
                 
-                DispatchQueue.main.async {
-                    self.navigationController?.pushViewController(ReceiveMonVC(), animated: true)
-                }
+              
                 
                 break
                 /// 充值
@@ -166,7 +165,9 @@ extension MainPageViewController : UICollectionViewDataSource,UICollectionViewDe
                 break
                 /// 转账
             case 3 :
-                
+                DispatchQueue.main.async {
+                    self.navigationController?.pushViewController(ReceiveMonVC(), animated: true)
+                }
                 break
             default:
                 break
