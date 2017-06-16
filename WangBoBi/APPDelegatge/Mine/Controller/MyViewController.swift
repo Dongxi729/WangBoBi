@@ -78,15 +78,11 @@ extension MyViewController : UITableViewDelegate,UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
-        let vc = UIViewController.init()
-        
-        
+
         
         switch indexPath.section {
         case 0:
             if indexPath.row == 0 {
-                vc.view.backgroundColor = UIColor.red
-                vc.title = "个人资料"
                 
             }
             
@@ -94,21 +90,17 @@ extension MyViewController : UITableViewDelegate,UITableViewDataSource {
             
         case 1 :
             if indexPath.row == 0 {
-                vc.title = "账号与与安全"
+                
+                DispatchQueue.main.async {
+                    self.navigationController?.pushViewController(AccountAndSaveVC(), animated: true)
+                }
             }
             break
         case 2:
-            
-            vc.view.backgroundColor = UIColor.green
-            vc.title = cellDataSource["sectionThree"]?[indexPath.row]
-            
-            
             break
         default:
             break
         }
-        
-        self.navigationController?.pushViewController(vc, animated: true)
     }
     
 }

@@ -167,8 +167,6 @@ extension MainPageViewController : UICollectionViewDataSource,UICollectionViewDe
                 /// 转账
             case 3 :
                 
-                
-                
                 break
             default:
                 break

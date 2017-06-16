@@ -69,4 +69,46 @@ extension AccountAndSaveVC : UITableViewDelegate,UITableViewDataSource {
     func numberOfSections(in tableView: UITableView) -> Int {
         return sectionTitle.count
     }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        switch indexPath.section {
+        case 0:
+            switch indexPath.row {
+            case 0:
+                /// 实名认证
+                self.navigationController?.pushViewController(TrueNameCertifiedVC(), animated: true)
+                break
+            case 1:
+                /// 设置双重认证
+                self.navigationController?.pushViewController(SetDoubelCertifiVC(), animated: true)
+                break
+            case 2:
+                /// 修改登录密码
+                self.navigationController?.pushViewController(ChangeLoginPassVC(), animated: true)
+                break
+            case 3:
+                /// 修改支付密码
+                self.navigationController?.pushViewController(ChangePaypassVC(), animated: true)
+                break
+            case 4:
+                /// 设置支付密码
+                self.navigationController?.pushViewController(SetPaymentPassVC(), animated: true)
+                break
+            default:
+                break
+            }
+        case 1:
+            /// 退出事件
+            self.logoutSEL()
+            
+            break
+        default:
+            break
+        }
+    }
+    
+    /// 退出事件
+    private func logoutSEL() -> Void {
+        CCog(message: "退出事件")
+    }
 }
