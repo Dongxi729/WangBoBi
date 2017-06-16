@@ -165,6 +165,8 @@ class ViewController: UIViewController,AVCaptureMetadataOutputObjectsDelegate {
                 self.cameraSEl()
                 self.indicator.stopAnimating()
                 self.view.addSubview(self.descLabel)
+                
+                
             }
         }
     }

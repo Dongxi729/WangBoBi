@@ -69,6 +69,7 @@
 		2649612E1EF0D08F00A559D6 /* FTProgressIndicator.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 264961261EF0D08F00A559D6 /* FTProgressIndicator.bundle */; };
 		2649612F1EF0D08F00A559D6 /* FTProgressIndicator.m in Sources */ = {isa = PBXBuildFile; fileRef = 264961281EF0D08F00A559D6 /* FTProgressIndicator.m */; };
 		264961301EF0D08F00A559D6 /* FTToastIndicator.m in Sources */ = {isa = PBXBuildFile; fileRef = 2649612B1EF0D08F00A559D6 /* FTToastIndicator.m */; };
+		266E97211EF3D5460057FD90 /* AccountAndSaveVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 266E97201EF3D5460057FD90 /* AccountAndSaveVC.swift */; };
 		269C1C921EF1275500364F32 /* SwiftyJSON.swift in Sources */ = {isa = PBXBuildFile; fileRef = 269C1C911EF1275500364F32 /* SwiftyJSON.swift */; };
 		269C1C941EF12FB000364F32 /* WeatherModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 269C1C931EF12FB000364F32 /* WeatherModel.swift */; };
 		26A0A4A91EF0E26B00035D0D /* JFNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26A0A4A81EF0E26B00035D0D /* JFNavigationController.swift */; };
@@ -203,6 +204,7 @@
 		264961281EF0D08F00A559D6 /* FTProgressIndicator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FTProgressIndicator.m; sourceTree = "<group>"; };
 		2649612A1EF0D08F00A559D6 /* FTToastIndicator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FTToastIndicator.h; sourceTree = "<group>"; };
 		2649612B1EF0D08F00A559D6 /* FTToastIndicator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FTToastIndicator.m; sourceTree = "<group>"; };
+		266E97201EF3D5460057FD90 /* AccountAndSaveVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AccountAndSaveVC.swift; path = "WangBoBi/Mine-04/Controller/AccountAndSaveVC.swift"; sourceTree = "<group>"; };
 		269C1C911EF1275500364F32 /* SwiftyJSON.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwiftyJSON.swift; sourceTree = "<group>"; };
 		269C1C931EF12FB000364F32 /* WeatherModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WeatherModel.swift; sourceTree = "<group>"; };
 		26A0A4A81EF0E26B00035D0D /* JFNavigationController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JFNavigationController.swift; sourceTree = "<group>"; };
@@ -627,6 +629,7 @@
 		26F484701EEFD55400177670 = {
 			isa = PBXGroup;
 			children = (
+				266E97201EF3D5460057FD90 /* AccountAndSaveVC.swift */,
 				269C1C931EF12FB000364F32 /* WeatherModel.swift */,
 				26F4847B1EEFD55400177670 /* WangBoBi */,
 				26F4847A1EEFD55400177670 /* Products */,
@@ -739,6 +742,7 @@
 				264960FB1EF0C9EC00A559D6 /* YYCache.m in Sources */,
 				264960C81EF0C28F00A559D6 /* POPGeometry.mm in Sources */,
 				264961041EF0C9EC00A559D6 /* UIImageView+YYWebImage.m in Sources */,
+				266E97211EF3D5460057FD90 /* AccountAndSaveVC.swift in Sources */,
 				2607D14F1EF212450015625E /* NetCheck.swift in Sources */,
 				264961071EF0C9EC00A559D6 /* YYImage.m in Sources */,
 				26A0A4AB1EF1064C00035D0D /* NetWorkTool.swift in Sources */,
