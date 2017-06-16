@@ -37,17 +37,24 @@ class AccountAndSaveVC: UIViewController {
 extension AccountAndSaveVC : UITableViewDelegate,UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "cellId")
+        
+        cell?.textLabel?.text = sectionTitle[indexPath.section][indexPath.row]
+        
+        
         switch indexPath.section {
-        case 0:
-            cell?.textLabel?.text = sectionTitle[indexPath.section][indexPath.row]
-            break
-        case 0:
-            cell?.textLabel?.text = sectionTitle[indexPath.section][indexPath.row]
+        case 1:
+            cell?.textLabel?.textAlignment = .center
             break
         default:
             break
         }
         return cell!
+    }
+    
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        if indexPath.section == 1 {
+            return 60
+        } else {return 45}
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
