@@ -97,6 +97,9 @@ extension MyViewController : UITableViewDelegate,UITableViewDataSource {
             }
             break
         case 2:
+            DispatchQueue.main.async {
+                self.navigationController?.pushViewController(TestViewController(), animated: true)
+            }
             break
         default:
             break

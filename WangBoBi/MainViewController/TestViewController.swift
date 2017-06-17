@@ -8,17 +8,24 @@
 
 import UIKit
 
-class TestViewController: UIViewController,UITableViewDelegate,UITableViewDataSource {
+class TestViewController: UIViewController,UITableViewDelegate,UITableViewDataSource,FooterVDelegate {
     
     var d : [String] = ["sdsad","sdsd","sdsad","sdsd","sdsad","sdsd","sdsad","sdsd","sdsad","sdsd"]
     
     lazy var monY: UITableView = {
-        let d : UITableView = UITableView.init(frame: self.view.bounds)
+        let d : UITableView = UITableView.init(frame: CGRect.init(x: 0, y: 0, width: SCREEN_WIDTH, height: SCREEN_HEIGHT - 64))
         d.delegate = self;
         d.dataSource = self;
         d.register(CCCryptor.self, forCellReuseIdentifier: "cellID")
         
-        d.separatorInset = UIEdgeInsets.init(top: 0, left: 0, bottom: -10, right: -10)
+        d.tableFooterView = self.fV
+        return d
+    }()
+    
+    lazy var fV: FooterV = {
+        let d : FooterV = FooterV.init(frame: CGRect.init(x: 0, y: 0, width: SCREEN_WIDTH, height: 100))
+        d.backgroundColor = UIColor.red
+        d.delegate = self
         return d
     }()
     
@@ -27,12 +34,12 @@ class TestViewController: UIViewController,UITableViewDelegate,UITableViewDataSo
 
         // Do any additional setup after loading the view.
         view.addSubview(monY)
-        
-        
+        title = "银行卡"
     }
-    
-    
 
+    func numberOfSections(in tableView: UITableView) -> Int {
+        return 2
+    }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return d.count
@@ -52,6 +59,15 @@ class TestViewController: UIViewController,UITableViewDelegate,UITableViewDataSo
         return cell
     }
 
+    
+    // MARK: - 尾部代理发放
+    func addCardsPage() {
+        let vc = UIViewController.init()
+        vc.view.backgroundColor = UIColor.red
+        navigationController?.pushViewController(vc, animated: true)
+        
+    }
+
 }
 
 
@@ -67,8 +83,6 @@ class CCCryptor: UITableViewCell {
             newFrame.origin.y += 10
             newFrame.size.height -= 10
             super.frame = newFrame
-            
-            
         }
     }
 
@@ -93,16 +107,40 @@ class CCCryptor: UITableViewCell {
         super.layoutSubviews()
         
 
-        
-        
-        CCog(message: "")
     }
     
     override func setHighlighted(_ highlighted: Bool, animated: Bool) {
         super.setHighlighted(false, animated: false)
     }
+}
+
+protocol FooterVDelegate {
+    func addCardsPage() -> Void
+}
+
+class FooterV: UIView {
     
+    var delegate : FooterVDelegate?
     
- 
+    fileprivate lazy var btn: UIButton = {
+        let d : UIButton = UIButton.init(frame: self.bounds)
+        d.setTitle("添加银行卡", for: .normal)
+        d.setTitleColor(UIColor.red, for: .normal)
+        d.addTarget(self, action: #selector(addCardsSEL(sender:)), for: .touchUpInside)
+        return d
+    }()
     
+    @objc fileprivate func addCardsSEL(sender : UIButton) -> Void {
+        CCog(message: "添加银行卡")
+        self.delegate?.addCardsPage()
+    }
+    
+    override init(frame: CGRect) {
+        super.init(frame: frame)
+        addSubview(btn)
+    }
+    
+    required init?(coder aDecoder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
 }
