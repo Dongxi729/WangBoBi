@@ -8,125 +8,49 @@
 
 import Foundation
 
-// MARK:- 网络工具类
-//POST请求
-func postWithPath(path: String,paras: Dictionary<String,Any>?,success: @escaping ((_ result: Any) -> ()),failure: @escaping ((_ error: Error) -> ())) {
-    
-    //(1）设置请求路径
-    let url:NSURL = NSURL(string:path)!//不需要传递参数
-    
-    //(2) 创建请求对象
-    let request:NSMutableURLRequest = NSMutableURLRequest(url: url as URL) //默认为get请求
-    request.timeoutInterval = 5.0 //设置请求超时为5秒
-    request.httpMethod = "POST"  //设置请求方法
-    
-    
-    //设置请求体
-    //拼接URL
-    var i = 0
-    var address: String = ""
-    
-    if let paras = paras {
-        
-        for (key,value) in paras {
-            
-            if i == 0 {
-                
-                address += "\(key)=\(value)"
-            }else {
-                
-                address += "&\(key)=\(value)"
-            }
-            
-            i += 1
-        }
-    }
-    
-    //把拼接后的字符串转换为data，设置请求体
-    request.httpBody = address.data(using: String.Encoding(rawValue: String.Encoding.utf8.rawValue))
-    
-    //(3) 发送请求
-    NSURLConnection.sendAsynchronousRequest(request as URLRequest, queue:OperationQueue()) { (res, data, error)in
-        //返回主线程执行
-        DispatchQueue.main.sync {
-            
-            if let data = data {
-                
-                if let result = try? JSONSerialization.jsonObject(with: data, options: .allowFragments) {
-                    
-                    success(result)
-                    
-                }
-                
-            }else {
-                failure(error!)
-            }
-            
-        }
-    }
-    
-    
+/// 判断是否是模拟器
+struct Platform {
+    static let isSimulator: Bool = {
+        var isSim = false
+        #if arch(i386) || arch(x86_64)
+            isSim = true
+        #endif
+        return isSim
+    }()
 }
 
-// MARK:- get请求
-func getWithPath(path: String,paras: Dictionary<String,Any>?,success: @escaping ((_ result: Any) -> ()),failure: @escaping ((_ error: Error) -> ())) {
-    
-    var i = 0
-    var address = path
-    if let paras = paras {
-        
-        for (key,value) in paras {
-            
-            if i == 0 {
-                
-                address += "?\(key)=\(value)"
-            }else {
-                
-                address += "&\(key)=\(value)"
-            }
-            
-            i += 1
-        }
-    }
-    
-    let url = URL(string: address.addingPercentEncoding(withAllowedCharacters: CharacterSet.urlQueryAllowed)!)
-    
-    let session = URLSession.shared
-    
-    let dataTask = session.dataTask(with: url!) { (data, respond, error) in
-        
-        if let data = data {
-            
-            if let result = try? JSONSerialization.jsonObject(with: data, options: .allowFragments){
-                
-                success(result)
-            }
-        }else {
-            
-            failure(error!)
-        }
-    }
-    dataTask.resume()
-    
-}
-
-
-
-/// 打印日志封装 - 打包的时候注释掉
+/// 输出日志
 ///
-/// - Parameter string: 需要打印的字符串
-func log(_ string: Any?) {
-    
-    let dformatter = DateFormatter()
-    dformatter.dateFormat = "HH:mm:ss"
-    
-    print("\(dformatter.string(from: Date()))","\((#file as NSString).lastPathComponent):",string as Any)
+/// - Parameters:
+///   - message: 输出日志
+///   - logError: 错误标记，默认是 false，如果是 true，发布时仍然会输出
+///   - file: 文件名
+///   - method: 方法名
+///   - line: 代码行数
+func CCog(message : Any,
+              logError: Bool = false,
+              file: String = #file,
+              method: String = #function,
+              line: Int = #line)
+{
+    if logError {
+        let dformatter = DateFormatter()
+        dformatter.dateFormat = "HH:mm:ss"
+        
+        print("\(dformatter.string(from: Date()))","\((file as NSString).lastPathComponent)[\(line)], \(method): \(message)")
+    } else {
+        #if DEBUG
+            let dformatter = DateFormatter()
+            dformatter.dateFormat = "HH:mm:ss"
+            print("\(dformatter.string(from: Date()))","\((file as NSString).lastPathComponent)[\(line)], \(method): \(message)")
+        #endif
+    }
 }
 
 /**
  给控件添加弹簧动画
  */
-func jf_setupButtonSpringAnimation(_ view: UIView) {
+func zdx_setupButtonSpringAnimation(_ view: UIView) {
     let sprintAnimation = POPSpringAnimation(propertyNamed: kPOPViewScaleXY)
     sprintAnimation?.fromValue = NSValue(cgPoint: CGPoint(x: 0.8, y: 0.8))
     sprintAnimation?.toValue = NSValue(cgPoint: CGPoint(x: 1, y: 1))
@@ -156,6 +80,12 @@ let GLOBAL_SHADOW_ALPHA: CGFloat = 0.5
 
 /// 导航栏背景颜色
 let NAVIGATIONBAR_COLOR = UIColor(red:1,  green:1,  blue:1, alpha:1)
+
+// MARK:- 背景颜色
+let TABBAR_BGCOLOR = UIColor.init(red: 118/255, green: 200/255, blue: 218/255, alpha: 1)
+
+// MARK: - 通用逻辑 间距
+let COMMON_MARGIN : CGFloat = 12
 
 /// 基于iPhone6水平方向适配
 ///
@@ -233,7 +163,6 @@ enum iPhoneModel {
         }
     }
 }
-
 
 // MARK:- 屏幕放大比例
 let SCREEN_SCALE = UIScreen.main.bounds.width / 320
