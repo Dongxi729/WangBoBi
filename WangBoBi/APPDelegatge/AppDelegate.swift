@@ -19,7 +19,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         window = UIWindow.init(frame: UIScreen.main.bounds)
         
-        window?.rootViewController = MainTabBarViewController()
+        window?.rootViewController = SetMoneyViewController()
         window?.makeKeyAndVisible()
         window?.backgroundColor = UIColor.white
         

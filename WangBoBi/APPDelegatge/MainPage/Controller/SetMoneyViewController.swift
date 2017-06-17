@@ -8,18 +8,42 @@
 
 import UIKit
 
-class SetMoneyViewController: UIViewController {
+class SetMoneyViewController: UIViewController,UIPickerViewDelegate,UIPickerViewDataSource {
+    
+    lazy var pickV: UIPickerView = {
+        let d : UIPickerView = UIPickerView.init(frame: CGRect.init(x: 0, y: 0, width: SCREEN_WIDTH / 2, height: 100))
+        d.delegate = self;
+        d.dataSource = self;
+        return d
+    }()
 
+    
+    var dataSource : [String] = ["颠三倒四多","是的撒多","巫毒娃娃"]
     override func viewDidLoad() {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
         
         title = "设置金额"
+        
+        view.addSubview(pickV)
+        
+        pickV.center = view.center
     }
-
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
+    
+    func numberOfComponents(in pickerView: UIPickerView) -> Int {
+        return 1
+    }
+    
+    func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
+        return dataSource[row]
+    }
+    
+    func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
+        return dataSource.count
+    }
+    
+    func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
+        CCog(message: dataSource[row])
     }
 }
