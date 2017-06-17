@@ -19,7 +19,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         window = UIWindow.init(frame: UIScreen.main.bounds)
         
-        window?.rootViewController = SetMoneyViewController()
+        window?.rootViewController = TestViewController()
         window?.makeKeyAndVisible()
         window?.backgroundColor = UIColor.white
         

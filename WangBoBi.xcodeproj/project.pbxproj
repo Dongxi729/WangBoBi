@@ -20,6 +20,7 @@
 		261F067A1EF4FB590019CE44 /* TestViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 261F06791EF4FB590019CE44 /* TestViewController.swift */; };
 		261F067C1EF50B510019CE44 /* ShouMoneyVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 261F067B1EF50B510019CE44 /* ShouMoneyVC.swift */; };
 		261F067E1EF5190C0019CE44 /* SetMoneyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 261F067D1EF5190C0019CE44 /* SetMoneyViewController.swift */; };
+		261F06801EF525BE0019CE44 /* BandCardsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 261F067F1EF525BE0019CE44 /* BandCardsViewController.swift */; };
 		2643CFC61EF3EE2200EFC720 /* DetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2643CFC51EF3EE2200EFC720 /* DetailViewController.swift */; };
 		2649606F1EF0BF2500A559D6 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 264960691EF0BF2500A559D6 /* AppDelegate.swift */; };
 		264960701EF0BF2500A559D6 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2649606E1EF0BF2500A559D6 /* MainViewController.swift */; };
@@ -108,6 +109,7 @@
 		261F06791EF4FB590019CE44 /* TestViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TestViewController.swift; sourceTree = "<group>"; };
 		261F067B1EF50B510019CE44 /* ShouMoneyVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShouMoneyVC.swift; sourceTree = "<group>"; };
 		261F067D1EF5190C0019CE44 /* SetMoneyViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SetMoneyViewController.swift; sourceTree = "<group>"; };
+		261F067F1EF525BE0019CE44 /* BandCardsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BandCardsViewController.swift; sourceTree = "<group>"; };
 		2643CFC51EF3EE2200EFC720 /* DetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DetailViewController.swift; sourceTree = "<group>"; };
 		264960691EF0BF2500A559D6 /* AppDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		2649606E1EF0BF2500A559D6 /* MainViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MainViewController.swift; path = ../tool/MainViewController.swift; sourceTree = "<group>"; };
@@ -342,6 +344,7 @@
 				26ED24491EF3E4EA00642804 /* SetDoubelCertifiVC.swift */,
 				26ED244B1EF3E55700642804 /* ChangeLoginPassVC.swift */,
 				26ED244D1EF3E59A00642804 /* ChangePaypassVC.swift */,
+				261F067F1EF525BE0019CE44 /* BandCardsViewController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -770,6 +773,7 @@
 				269C1C921EF1275500364F32 /* SwiftyJSON.swift in Sources */,
 				26ED24501EF3E5E300642804 /* SetPaymentPassVC.swift in Sources */,
 				264960CA1EF0C28F00A559D6 /* POPMath.mm in Sources */,
+				261F06801EF525BE0019CE44 /* BandCardsViewController.swift in Sources */,
 				264960FB1EF0C9EC00A559D6 /* YYCache.m in Sources */,
 				264960C81EF0C28F00A559D6 /* POPGeometry.mm in Sources */,
 				264961041EF0C9EC00A559D6 /* UIImageView+YYWebImage.m in Sources */,
