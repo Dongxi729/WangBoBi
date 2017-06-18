@@ -26,6 +26,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // 设置全局颜色
         UITabBar.appearance().tintColor = TABBAR_BGCOLOR
         
+        CCog(message: "程序启动")
         
         return true
     }

@@ -8,7 +8,7 @@
 
 import UIKit
 
-class TestViewController: UIViewController,UITableViewDelegate,UITableViewDataSource,FooterVDelegate {
+class MyBandCardVC: UIViewController,UITableViewDelegate,UITableViewDataSource,FooterVDelegate {
     
     var d : [String] = ["sdsad","sdsd","sdsad","sdsd","sdsad","sdsd","sdsad","sdsd","sdsad","sdsd"]
     

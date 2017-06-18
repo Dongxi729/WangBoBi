@@ -4,7 +4,7 @@
 //
 //  Created by 郑东喜 on 2017/6/15.
 //  Copyright © 2017年 郑东喜. All rights reserved.
-//  我的
+//  我的银行卡视图
 
 import UIKit
 
@@ -98,7 +98,7 @@ extension MyViewController : UITableViewDelegate,UITableViewDataSource {
             break
         case 2:
             DispatchQueue.main.async {
-                self.navigationController?.pushViewController(TestViewController(), animated: true)
+                self.navigationController?.pushViewController(MyBandCardVC(), animated: true)
             }
             break
         default:
