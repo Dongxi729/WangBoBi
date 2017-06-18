@@ -78,6 +78,7 @@
 		2649612E1EF0D08F00A559D6 /* FTProgressIndicator.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 264961261EF0D08F00A559D6 /* FTProgressIndicator.bundle */; };
 		2649612F1EF0D08F00A559D6 /* FTProgressIndicator.m in Sources */ = {isa = PBXBuildFile; fileRef = 264961281EF0D08F00A559D6 /* FTProgressIndicator.m */; };
 		264961301EF0D08F00A559D6 /* FTToastIndicator.m in Sources */ = {isa = PBXBuildFile; fileRef = 2649612B1EF0D08F00A559D6 /* FTToastIndicator.m */; };
+		265991F11EF65A9E004391E9 /* simhei.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 265991F01EF65A9E004391E9 /* simhei.ttf */; };
 		266E97211EF3D5460057FD90 /* AccountAndSaveVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 266E97201EF3D5460057FD90 /* AccountAndSaveVC.swift */; };
 		269C1C921EF1275500364F32 /* SwiftyJSON.swift in Sources */ = {isa = PBXBuildFile; fileRef = 269C1C911EF1275500364F32 /* SwiftyJSON.swift */; };
 		269C1C941EF12FB000364F32 /* WeatherModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 269C1C931EF12FB000364F32 /* WeatherModel.swift */; };
@@ -230,6 +231,7 @@
 		264961281EF0D08F00A559D6 /* FTProgressIndicator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FTProgressIndicator.m; sourceTree = "<group>"; };
 		2649612A1EF0D08F00A559D6 /* FTToastIndicator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FTToastIndicator.h; sourceTree = "<group>"; };
 		2649612B1EF0D08F00A559D6 /* FTToastIndicator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FTToastIndicator.m; sourceTree = "<group>"; };
+		265991F01EF65A9E004391E9 /* simhei.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = simhei.ttf; sourceTree = "<group>"; };
 		266E97201EF3D5460057FD90 /* AccountAndSaveVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AccountAndSaveVC.swift; path = "../../../Mine-04/Controller/AccountAndSaveVC.swift"; sourceTree = "<group>"; };
 		269C1C911EF1275500364F32 /* SwiftyJSON.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwiftyJSON.swift; sourceTree = "<group>"; };
 		269C1C931EF12FB000364F32 /* WeatherModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WeatherModel.swift; sourceTree = "<group>"; };
@@ -281,6 +283,7 @@
 		264960681EF0BF2500A559D6 /* Applicaiotn */ = {
 			isa = PBXGroup;
 			children = (
+				265991EE1EF659F6004391E9 /* resources */,
 				264961311EF0D0F800A559D6 /* Utils */,
 				264960CF1EF0C33200A559D6 /* Extension */,
 				264960691EF0BF2500A559D6 /* AppDelegate.swift */,
@@ -683,6 +686,14 @@
 			path = Utils;
 			sourceTree = "<group>";
 		};
+		265991EE1EF659F6004391E9 /* resources */ = {
+			isa = PBXGroup;
+			children = (
+				265991F01EF65A9E004391E9 /* simhei.ttf */,
+			);
+			name = resources;
+			sourceTree = "<group>";
+		};
 		26F484701EEFD55400177670 = {
 			isa = PBXGroup;
 			children = (
@@ -780,6 +791,7 @@
 				26F484871EEFD55400177670 /* LaunchScreen.storyboard in Resources */,
 				26F484841EEFD55400177670 /* Assets.xcassets in Resources */,
 				2649612E1EF0D08F00A559D6 /* FTProgressIndicator.bundle in Resources */,
+				265991F11EF65A9E004391E9 /* simhei.ttf in Resources */,
 				26F484821EEFD55400177670 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

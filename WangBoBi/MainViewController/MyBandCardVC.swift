@@ -110,6 +110,7 @@ class BandCardCell: UITableViewCell {
     lazy var cardNum: UILabel = {
         let d : UILabel = UILabel.init(frame: CGRect.init(x: self.cardsName.LeftX, y: self.cardsType.BottomY + COMMON_MARGIN, width: self.cardsName.Width, height: 15 * SCREEN_SCALE))
         d.text = "622392839202829282"
+        d.font = UIFont(name: "SimHei", size: 12 * SCREEN_SCALE)
         
         return d
     }()
