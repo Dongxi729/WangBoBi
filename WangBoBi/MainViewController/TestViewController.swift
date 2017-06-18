@@ -15,9 +15,7 @@ class TestViewController: UIViewController {
         let d : XLPasswordInputView = XLPasswordInputView.init(frame: CGRect.init(x: 0, y: 0, width: SCREEN_WIDTH, height: 100))
         XLPasswordInputView.init(passwordLength: 5)
         
-        d.passwordBlock = {(params) -> Void in
-            CCog(message: params as! String)
-        }
+  
         return d
     }()
     
@@ -27,7 +25,9 @@ class TestViewController: UIViewController {
         // Do any additional setup after loading the view.
         view.addSubview(poassV)
         
-        
+        poassV.passwordBlock = {(params) -> Void in
+            CCog(message: params!)
+        }
         
     }
 
