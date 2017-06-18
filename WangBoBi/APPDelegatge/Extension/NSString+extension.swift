@@ -11,10 +11,8 @@ import Foundation
 /**
  扩展String的 MD5加密
  */
-extension String
-{
-    func md5() -> String
-    {
+extension String {
+    func md5() -> String {
         let str = self.cString(using: String.Encoding.utf8)
         let strLen = CUnsignedInt(self.lengthOfBytes(using: String.Encoding.utf8))
         let digestLen = Int(CC_MD5_DIGEST_LENGTH)
@@ -27,5 +25,15 @@ extension String
         result.deinitialize()
         
         return String(format: hash as String)
+    }
+}
+
+// MARK: - 银行卡暗文
+
+extension String {
+    func replaceIndexStr(replaceStr newString : String,replaceLength index : Int,replaceStr stttr : String) -> String {
+        var ddd : String = newString
+        ddd.replaceSubrange(ddd.startIndex...ddd.index(ddd.startIndex, offsetBy: index), with: stttr)
+        return ddd
     }
 }

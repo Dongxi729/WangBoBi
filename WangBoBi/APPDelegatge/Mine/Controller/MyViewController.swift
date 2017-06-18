@@ -97,13 +97,23 @@ extension MyViewController : UITableViewDelegate,UITableViewDataSource {
             }
             break
         case 2:
-            DispatchQueue.main.async {
-                self.navigationController?.pushViewController(MyBandCardVC(), animated: true)
+
+            switch indexPath.row {
+            case 0:
+                DispatchQueue.main.async {
+                    self.navigationController?.pushViewController(MyBandCardVC(), animated: true)
+                }
+                break
+            default:
+                break
             }
+            
+            
             break
         default:
             break
         }
+    
     }
     
 }
