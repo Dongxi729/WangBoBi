@@ -28,16 +28,47 @@ class RigisterVC: UIViewController {
         return d
     }()
     
+    // MARK: - 确定按钮
+    fileprivate lazy var confirmBtn: UIButton = {
+        let d : UIButton = UIButton.init(frame: CGRect.init(x: 0.1256038647343 * SCREEN_WIDTH, y: SCREEN_HEIGHT * 0.53804347826087, width: SCREEN_WIDTH * 0.75, height: 30 * SCREEN_SCALE))
+        d.layer.borderWidth = 1
+        d.addTarget(self, action: #selector(jumpToRigisterDetailV), for: .touchUpInside)
+        return d
+    }()
+
+    // MARK: - 登录
+    lazy var loginBtn: UIButton = {
+        let d : UIButton = UIButton.init(frame: CGRect.init(x: SCREEN_WIDTH * 0.545088542256378, y: SCREEN_HEIGHT * 0.916213761205259, width: 50 * SCREEN_SCALE, height: 30 * SCREEN_SCALE))
+        d.addTarget(self, action: #selector(jumpTologin), for: .touchUpInside)
+        return d
+    }()
+
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
+        
+        title = "注册"
+        
         view.addSubview(bgImg)
         
         view.addSubview(AddLabel)
+        view.addSubview(confirmBtn)
+        view.addSubview(loginBtn)
         
-        title = "注册"
     }
 
+    /// 发生验证码
+    @objc fileprivate func jumpToRigisterDetailV() {
+        
+        DispatchQueue.main.async {
+            self.navigationController?.pushViewController(RigisterWithDetailVC(), animated: true)
+        }
+    }
     
+    /// 跳到首页
+    @objc fileprivate func jumpTologin() {
+        self.navigationController?.popToRootViewController(animated: true)
+    }
 }
