@@ -10,7 +10,7 @@ import UIKit
 
 class MainTabBarViewController: BaseTabbarVC {
     
-    var myWindow: UIWindow?
+
     
     override func viewDidLoad() {
         super.viewDidLoad()

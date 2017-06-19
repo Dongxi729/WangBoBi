@@ -16,9 +16,7 @@ class JFNavigationController: UINavigationController, UIGestureRecognizerDelegat
         let navBar = navigationBar
         navBar.barTintColor = NAVIGATIONBAR_COLOR
         navBar.isTranslucent = false
-//        navBar.barStyle = UIBarStyle.black
-//        navBar.setBackgroundImage(UIImage(), for: UIBarMetrics.default)
-//        navBar.shadowImage = UIImage()
+
         navBar.titleTextAttributes = [
             NSForegroundColorAttributeName : UIColor.colorWithRGB(47, g: 47, b: 47),
             NSFontAttributeName : UIFont.systemFont(ofSize: 16)
@@ -31,7 +29,7 @@ class JFNavigationController: UINavigationController, UIGestureRecognizerDelegat
     /**
      全屏返回手势
      */
-    func panGestureBack() {
+    private func panGestureBack() {
         let target = interactivePopGestureRecognizer?.delegate
         let pan = UIPanGestureRecognizer(target: target, action: Selector("handleNavigationTransition:"))
         pan.delegate = self

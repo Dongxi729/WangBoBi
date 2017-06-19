@@ -10,11 +10,13 @@ import UIKit
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
-
+    
     var window: UIWindow?
-
+    
     /// 性能占用显示。
     var performanceView: GDPerformanceMonitor?
+    
+    var nav : LoginNav?
 
     
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
@@ -24,14 +26,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         window = UIWindow.init(frame: UIScreen.main.bounds)
         
-        window?.rootViewController = LoginVC()
+        nav = LoginNav.init(rootViewController: LoginViewController())
+        window?.rootViewController = nav
+        
         window?.makeKeyAndVisible()
         window?.backgroundColor = UIColor.white
         
         // 设置全局颜色
-        UITabBar.appearance().tintColor = TABBAR_BGCOLOR
-        
-        CCog(message: "程序启动")
+//        UITabBar.appearance().tintColor = TABBAR_BGCOLOR
         
         return true
     }

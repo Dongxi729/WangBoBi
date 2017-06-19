@@ -8,8 +8,10 @@
 
 import UIKit
 
+
 class TfPlaceHolder : UITextField,UITextFieldDelegate,UIGestureRecognizerDelegate {
     
+
     //限定最大字数
     var maxLenth : Int = 40
     
@@ -31,11 +33,10 @@ class TfPlaceHolder : UITextField,UITextFieldDelegate,UIGestureRecognizerDelegat
      - holderColor      placeholder文字颜色
      - textFontSize     placeholder文字大小
      */
-    func plStrSize(str : String,holderColor : UIColor,textFontSize : CGFloat) -> Void {
+    func plStrSize(str : String,holderColor : UIColor) -> Void {
         
         self.attributedPlaceholder = NSAttributedString(string:str,
-                                                        attributes:[NSForegroundColorAttributeName: holderColor,
-                                                                    NSFontAttributeName :UIFont(name: "Arial", size: textFontSize)!])
+                                                        attributes:[NSForegroundColorAttributeName: holderColor])
     }
     
     
@@ -64,10 +65,12 @@ class TfPlaceHolder : UITextField,UITextFieldDelegate,UIGestureRecognizerDelegat
     }
     
     /// 完成单机事件
-    func cancelBtn() {
+    @objc fileprivate func cancelBtn() {
         
         self.endEditing(true)
-        
+        UIView.animate(withDuration: 0.5) {
+            UIApplication.shared.keyWindow?.frame = (UIApplication.shared.keyWindow?.rootViewController?.view.bounds)!
+        }
     }
     
     override func rightViewRect(forBounds bounds: CGRect) -> CGRect {
