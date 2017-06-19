@@ -9,10 +9,10 @@
 import UIKit
 
 class LoginViewController: UIViewController,UITextFieldDelegate {
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
         // Do any additional setup after loading the view.
         view.addSubview(bgImg)
         view.addSubview(accountLabel)
@@ -20,28 +20,25 @@ class LoginViewController: UIViewController,UITextFieldDelegate {
         view.addSubview(loginBtn)
         view.addSubview(forgetPass)
         view.addSubview(createNewAccount)
-    }
-
-    // MARK: - 背景
-    fileprivate lazy var bgImg: UIImageView = {
-        let d : UIImageView = UIImageView.init(frame: self.view.bounds)
-        d.contentMode = UIViewContentMode.scaleAspectFit
         
         
         //判断机型
         let deviceType = UIDevice.current.deviceType
         
-        switch deviceType {
-        case .iPhone4S:
+        if deviceType == .iPhone4S {
             
-            d.image = #imageLiteral(resourceName: "4s-LoginBG")
-            break
-        default:
-        
-            d.image = #imageLiteral(resourceName: "LoginBgV")
-            break
+            CCog(message: "4s")
+            bgImg.image = #imageLiteral(resourceName: "4s-LoginBG")
+        } else {
+            CCog(message: "不是4s")
+            bgImg.image = #imageLiteral(resourceName: "LoginBgV")
         }
-        
+    }
+    
+    // MARK: - 背景
+    fileprivate lazy var bgImg: UIImageView = {
+        let d : UIImageView = UIImageView.init(frame: self.view.bounds)
+        d.contentMode = UIViewContentMode.scaleAspectFit
         
         return d
     }()
@@ -106,7 +103,7 @@ class LoginViewController: UIViewController,UITextFieldDelegate {
         
         self.navigationController?.navigationBar.isHidden = true
     }
-
+    
     
     // MARK: - UitextFieldDelegate
     func textFieldShouldBeginEditing(_ textField: UITextField) -> Bool {
@@ -143,5 +140,5 @@ class LoginViewController: UIViewController,UITextFieldDelegate {
             self.navigationController?.pushViewController(vc, animated: true)
         }
     }
-
+    
 }

@@ -37,7 +37,7 @@ class RigisterVC: UIViewController {
     }()
 
     // MARK: - 登录
-    lazy var loginBtn: UIButton = {
+    fileprivate lazy var loginBtn: UIButton = {
         let d : UIButton = UIButton.init(frame: CGRect.init(x: SCREEN_WIDTH * 0.545088542256378, y: SCREEN_HEIGHT * 0.916213761205259, width: 50 * SCREEN_SCALE, height: 30 * SCREEN_SCALE))
         d.addTarget(self, action: #selector(jumpTologin), for: .touchUpInside)
         return d
@@ -65,10 +65,13 @@ class RigisterVC: UIViewController {
         DispatchQueue.main.async {
             self.navigationController?.pushViewController(RigisterWithDetailVC(), animated: true)
         }
+    
     }
+    
     
     /// 跳到首页
     @objc fileprivate func jumpTologin() {
         self.navigationController?.popToRootViewController(animated: true)
+    
     }
 }
