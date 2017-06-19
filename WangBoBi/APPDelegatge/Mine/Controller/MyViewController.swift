@@ -4,7 +4,7 @@
 //
 //  Created by 郑东喜 on 2017/6/15.
 //  Copyright © 2017年 郑东喜. All rights reserved.
-//  我的银行卡视图
+//  我的视图
 
 import UIKit
 
@@ -99,9 +99,28 @@ extension MyViewController : UITableViewDelegate,UITableViewDataSource {
         case 2:
 
             switch indexPath.row {
+                /// 我的银行卡
             case 0:
                 DispatchQueue.main.async {
                     self.navigationController?.pushViewController(MyBandCardVC(), animated: true)
+                }
+                break
+                /// 绑定手机
+            case 1:
+                DispatchQueue.main.async {
+                    self.navigationController?.pushViewController(BindPhoneVC(), animated: true)
+                }
+                break
+                ///  我的申述
+            case 2:
+                DispatchQueue.main.async {
+                    self.navigationController?.pushViewController(MyRequestVC(), animated: true)
+                }
+                break
+                ///  我的消息
+            case 3:
+                DispatchQueue.main.async {
+                    self.navigationController?.pushViewController(MyMsgVC(), animated: true)
                 }
                 break
             default:

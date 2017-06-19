@@ -20,18 +20,25 @@
 		260B20AB1EF7633800E78FD8 /* GDPerformanceMonitorDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 260B20A61EF7633800E78FD8 /* GDPerformanceMonitorDelegate.swift */; };
 		260B20AC1EF7633800E78FD8 /* GDPerformanceView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 260B20A71EF7633800E78FD8 /* GDPerformanceView.swift */; };
 		260B20AD1EF7633800E78FD8 /* GDWindowViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 260B20A81EF7633800E78FD8 /* GDWindowViewController.swift */; };
+		260B20AF1EF766A600E78FD8 /* BandCardCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 260B20AE1EF766A600E78FD8 /* BandCardCell.swift */; };
+		260B20B51EF7679D00E78FD8 /* BankModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 260B20B41EF7679D00E78FD8 /* BankModel.swift */; };
+		260B20C51EF76AD100E78FD8 /* BindPhoneVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 260B20C41EF76AD100E78FD8 /* BindPhoneVC.swift */; };
+		260B20C81EF76B5500E78FD8 /* MyRequestVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 260B20C71EF76B5500E78FD8 /* MyRequestVC.swift */; };
+		260B20CB1EF76BAA00E78FD8 /* MyMsgVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 260B20CA1EF76BAA00E78FD8 /* MyMsgVC.swift */; };
+		260B20D01EF7710F00E78FD8 /* LoginVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 260B20CF1EF7710F00E78FD8 /* LoginVC.swift */; };
+		260B20D21EF79F5100E78FD8 /* CommonV.swift in Sources */ = {isa = PBXBuildFile; fileRef = 260B20D11EF79F5100E78FD8 /* CommonV.swift */; };
+		260B20D41EF7A08D00E78FD8 /* TfPlaceHolder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 260B20D31EF7A08D00E78FD8 /* TfPlaceHolder.swift */; };
+		260B20D61EF7A0F900E78FD8 /* ToolBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 260B20D51EF7A0F900E78FD8 /* ToolBar.swift */; };
 		261F06781EF4FB060019CE44 /* MoneyBagV.swift in Sources */ = {isa = PBXBuildFile; fileRef = 261F06771EF4FB060019CE44 /* MoneyBagV.swift */; };
 		261F067A1EF4FB590019CE44 /* MyBandCardVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 261F06791EF4FB590019CE44 /* MyBandCardVC.swift */; };
 		261F067C1EF50B510019CE44 /* ShouMoneyVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 261F067B1EF50B510019CE44 /* ShouMoneyVC.swift */; };
 		261F067E1EF5190C0019CE44 /* SetMoneyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 261F067D1EF5190C0019CE44 /* SetMoneyViewController.swift */; };
-		261F06801EF525BE0019CE44 /* BandCardsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 261F067F1EF525BE0019CE44 /* BandCardsViewController.swift */; };
 		263CAF111EF62889006629BF /* UIImage+XLExtension.m in Sources */ = {isa = PBXBuildFile; fileRef = 263CAF0C1EF62889006629BF /* UIImage+XLExtension.m */; };
 		263CAF121EF62889006629BF /* UIView+XLExtension.m in Sources */ = {isa = PBXBuildFile; fileRef = 263CAF0E1EF62889006629BF /* UIView+XLExtension.m */; };
 		263CAF131EF62889006629BF /* XLPasswordInputView.m in Sources */ = {isa = PBXBuildFile; fileRef = 263CAF101EF62889006629BF /* XLPasswordInputView.m */; };
 		263CAF151EF62B89006629BF /* TestViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 263CAF141EF62B89006629BF /* TestViewController.swift */; };
 		2643CFC61EF3EE2200EFC720 /* DetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2643CFC51EF3EE2200EFC720 /* DetailViewController.swift */; };
 		2649606F1EF0BF2500A559D6 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 264960691EF0BF2500A559D6 /* AppDelegate.swift */; };
-		264960701EF0BF2500A559D6 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2649606E1EF0BF2500A559D6 /* MainViewController.swift */; };
 		264960871EF0C1B400A559D6 /* ZDXCommon.swift in Sources */ = {isa = PBXBuildFile; fileRef = 264960861EF0C1B400A559D6 /* ZDXCommon.swift */; };
 		264960BD1EF0C28F00A559D6 /* POPAnimatableProperty.mm in Sources */ = {isa = PBXBuildFile; fileRef = 2649608C1EF0C28F00A559D6 /* POPAnimatableProperty.mm */; };
 		264960BE1EF0C28F00A559D6 /* POPAnimation.mm in Sources */ = {isa = PBXBuildFile; fileRef = 2649608E1EF0C28F00A559D6 /* POPAnimation.mm */; };
@@ -120,11 +127,19 @@
 		260B20A61EF7633800E78FD8 /* GDPerformanceMonitorDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GDPerformanceMonitorDelegate.swift; sourceTree = "<group>"; };
 		260B20A71EF7633800E78FD8 /* GDPerformanceView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GDPerformanceView.swift; sourceTree = "<group>"; };
 		260B20A81EF7633800E78FD8 /* GDWindowViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GDWindowViewController.swift; sourceTree = "<group>"; };
+		260B20AE1EF766A600E78FD8 /* BandCardCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BandCardCell.swift; sourceTree = "<group>"; };
+		260B20B41EF7679D00E78FD8 /* BankModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BankModel.swift; sourceTree = "<group>"; };
+		260B20C41EF76AD100E78FD8 /* BindPhoneVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BindPhoneVC.swift; sourceTree = "<group>"; };
+		260B20C71EF76B5500E78FD8 /* MyRequestVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MyRequestVC.swift; sourceTree = "<group>"; };
+		260B20CA1EF76BAA00E78FD8 /* MyMsgVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MyMsgVC.swift; sourceTree = "<group>"; };
+		260B20CF1EF7710F00E78FD8 /* LoginVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginVC.swift; sourceTree = "<group>"; };
+		260B20D11EF79F5100E78FD8 /* CommonV.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CommonV.swift; sourceTree = "<group>"; };
+		260B20D31EF7A08D00E78FD8 /* TfPlaceHolder.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TfPlaceHolder.swift; sourceTree = "<group>"; };
+		260B20D51EF7A0F900E78FD8 /* ToolBar.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ToolBar.swift; sourceTree = "<group>"; };
 		261F06771EF4FB060019CE44 /* MoneyBagV.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MoneyBagV.swift; sourceTree = "<group>"; };
-		261F06791EF4FB590019CE44 /* MyBandCardVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MyBandCardVC.swift; path = ../../../MainViewController/MyBandCardVC.swift; sourceTree = "<group>"; };
+		261F06791EF4FB590019CE44 /* MyBandCardVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MyBandCardVC.swift; path = ../../MainViewController/MyBandCardVC.swift; sourceTree = "<group>"; };
 		261F067B1EF50B510019CE44 /* ShouMoneyVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShouMoneyVC.swift; sourceTree = "<group>"; };
 		261F067D1EF5190C0019CE44 /* SetMoneyViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SetMoneyViewController.swift; sourceTree = "<group>"; };
-		261F067F1EF525BE0019CE44 /* BandCardsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BandCardsViewController.swift; sourceTree = "<group>"; };
 		263CAF0B1EF62889006629BF /* UIImage+XLExtension.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+XLExtension.h"; sourceTree = "<group>"; };
 		263CAF0C1EF62889006629BF /* UIImage+XLExtension.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+XLExtension.m"; sourceTree = "<group>"; };
 		263CAF0D1EF62889006629BF /* UIView+XLExtension.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+XLExtension.h"; sourceTree = "<group>"; };
@@ -134,7 +149,6 @@
 		263CAF141EF62B89006629BF /* TestViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TestViewController.swift; sourceTree = "<group>"; };
 		2643CFC51EF3EE2200EFC720 /* DetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DetailViewController.swift; sourceTree = "<group>"; };
 		264960691EF0BF2500A559D6 /* AppDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		2649606E1EF0BF2500A559D6 /* MainViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MainViewController.swift; path = ../tool/MainViewController.swift; sourceTree = "<group>"; };
 		264960831EF0C19F00A559D6 /* WangBoBi-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "WangBoBi-Bridging-Header.h"; sourceTree = "<group>"; };
 		264960861EF0C1B400A559D6 /* ZDXCommon.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ZDXCommon.swift; sourceTree = "<group>"; };
 		264960891EF0C28F00A559D6 /* POP.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = POP.h; sourceTree = "<group>"; };
@@ -245,8 +259,8 @@
 		2649612B1EF0D08F00A559D6 /* FTToastIndicator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FTToastIndicator.m; sourceTree = "<group>"; };
 		265991F01EF65A9E004391E9 /* simhei.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = simhei.ttf; sourceTree = "<group>"; };
 		265991F31EF65D5C004391E9 /* CommonBtn.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CommonBtn.swift; sourceTree = "<group>"; };
-		265992131EF66C6B004391E9 /* AddBankCardVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddBankCardVC.swift; sourceTree = "<group>"; };
-		266E97201EF3D5460057FD90 /* AccountAndSaveVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AccountAndSaveVC.swift; path = "../../../Mine-04/Controller/AccountAndSaveVC.swift"; sourceTree = "<group>"; };
+		265992131EF66C6B004391E9 /* AddBankCardVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AddBankCardVC.swift; path = Controller/AddBankCardVC.swift; sourceTree = "<group>"; };
+		266E97201EF3D5460057FD90 /* AccountAndSaveVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AccountAndSaveVC.swift; path = "../../Mine-04/Controller/AccountAndSaveVC.swift"; sourceTree = "<group>"; };
 		269C1C911EF1275500364F32 /* SwiftyJSON.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwiftyJSON.swift; sourceTree = "<group>"; };
 		269C1C931EF12FB000364F32 /* WeatherModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WeatherModel.swift; sourceTree = "<group>"; };
 		26A0A4A81EF0E26B00035D0D /* JFNavigationController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JFNavigationController.swift; sourceTree = "<group>"; };
@@ -254,7 +268,7 @@
 		26B14EFB1EF259AF0050135B /* CollectCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CollectCell.swift; path = ../../Mine/View/CollectCell.swift; sourceTree = "<group>"; };
 		26B14EFF1EF29ABA0050135B /* ReceiveMonVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ReceiveMonVC.swift; path = ../../../../ReceiveMonVC.swift; sourceTree = "<group>"; };
 		26B14F011EF29F490050135B /* ReceiveCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReceiveCell.swift; sourceTree = "<group>"; };
-		26ED24471EF3E18C00642804 /* TrueNameCertifiedVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TrueNameCertifiedVC.swift; path = ../../../../TrueNameCertifiedVC.swift; sourceTree = "<group>"; };
+		26ED24471EF3E18C00642804 /* TrueNameCertifiedVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TrueNameCertifiedVC.swift; path = ../../../TrueNameCertifiedVC.swift; sourceTree = "<group>"; };
 		26ED24491EF3E4EA00642804 /* SetDoubelCertifiVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SetDoubelCertifiVC.swift; sourceTree = "<group>"; };
 		26ED244B1EF3E55700642804 /* ChangeLoginPassVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChangeLoginPassVC.swift; sourceTree = "<group>"; };
 		26ED244D1EF3E59A00642804 /* ChangePaypassVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChangePaypassVC.swift; sourceTree = "<group>"; };
@@ -291,6 +305,190 @@
 				260B20A81EF7633800E78FD8 /* GDWindowViewController.swift */,
 			);
 			path = GDPerformanceMonitoring;
+			sourceTree = "<group>";
+		};
+		260B20B01EF7674300E78FD8 /* MyBankCard-03 */ = {
+			isa = PBXGroup;
+			children = (
+				264960781EF0BFC000A559D6 /* View */,
+				260B20B31EF7675A00E78FD8 /* model */,
+				260B20B11EF7674C00E78FD8 /* controller */,
+			);
+			name = "MyBankCard-03";
+			sourceTree = "<group>";
+		};
+		260B20B11EF7674C00E78FD8 /* controller */ = {
+			isa = PBXGroup;
+			children = (
+				265992131EF66C6B004391E9 /* AddBankCardVC.swift */,
+				261F06791EF4FB590019CE44 /* MyBandCardVC.swift */,
+			);
+			name = controller;
+			sourceTree = "<group>";
+		};
+		260B20B31EF7675A00E78FD8 /* model */ = {
+			isa = PBXGroup;
+			children = (
+				260B20B41EF7679D00E78FD8 /* BankModel.swift */,
+			);
+			name = model;
+			sourceTree = "<group>";
+		};
+		260B20B61EF767C300E78FD8 /* AccountAndSave-02 */ = {
+			isa = PBXGroup;
+			children = (
+				260B20B91EF767DF00E78FD8 /* model */,
+				260B20B81EF767D800E78FD8 /* view */,
+				260B20B71EF767D100E78FD8 /* controller */,
+			);
+			name = "AccountAndSave-02";
+			sourceTree = "<group>";
+		};
+		260B20B71EF767D100E78FD8 /* controller */ = {
+			isa = PBXGroup;
+			children = (
+				266E97201EF3D5460057FD90 /* AccountAndSaveVC.swift */,
+			);
+			name = controller;
+			sourceTree = "<group>";
+		};
+		260B20B81EF767D800E78FD8 /* view */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = view;
+			sourceTree = "<group>";
+		};
+		260B20B91EF767DF00E78FD8 /* model */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = model;
+			sourceTree = "<group>";
+		};
+		260B20BA1EF768A900E78FD8 /* NameCertified-02-01 */ = {
+			isa = PBXGroup;
+			children = (
+				260B20BD1EF768D300E78FD8 /* view */,
+				260B20BC1EF768CD00E78FD8 /* model */,
+				260B20BB1EF768C700E78FD8 /* controller */,
+			);
+			name = "NameCertified-02-01";
+			sourceTree = "<group>";
+		};
+		260B20BB1EF768C700E78FD8 /* controller */ = {
+			isa = PBXGroup;
+			children = (
+				26ED24471EF3E18C00642804 /* TrueNameCertifiedVC.swift */,
+			);
+			name = controller;
+			sourceTree = "<group>";
+		};
+		260B20BC1EF768CD00E78FD8 /* model */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = model;
+			sourceTree = "<group>";
+		};
+		260B20BD1EF768D300E78FD8 /* view */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = view;
+			sourceTree = "<group>";
+		};
+		260B20BE1EF7690500E78FD8 /* SetPassPayVC-02-05 */ = {
+			isa = PBXGroup;
+			children = (
+				26ED244F1EF3E5E300642804 /* SetPaymentPassVC.swift */,
+			);
+			name = "SetPassPayVC-02-05";
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		260B20BF1EF769A100E78FD8 /* MyVC-01 */ = {
+			isa = PBXGroup;
+			children = (
+				2607D1581EF22AAF0015625E /* MyViewController.swift */,
+			);
+			name = "MyVC-01";
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		260B20C01EF769BF00E78FD8 /* SetDoubleCertifie-02-02 */ = {
+			isa = PBXGroup;
+			children = (
+				26ED24491EF3E4EA00642804 /* SetDoubelCertifiVC.swift */,
+			);
+			name = "SetDoubleCertifie-02-02";
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		260B20C11EF769E600E78FD8 /* ChangeLoginPassVC-02-03 */ = {
+			isa = PBXGroup;
+			children = (
+				26ED244B1EF3E55700642804 /* ChangeLoginPassVC.swift */,
+			);
+			name = "ChangeLoginPassVC-02-03";
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		260B20C21EF76A0100E78FD8 /* ChangePaypassVC-02-04 */ = {
+			isa = PBXGroup;
+			children = (
+				26ED244D1EF3E59A00642804 /* ChangePaypassVC.swift */,
+			);
+			name = "ChangePaypassVC-02-04";
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		260B20C31EF76AB100E78FD8 /* BindPhone-04 */ = {
+			isa = PBXGroup;
+			children = (
+				260B20C41EF76AD100E78FD8 /* BindPhoneVC.swift */,
+			);
+			name = "BindPhone-04";
+			sourceTree = "<group>";
+		};
+		260B20C61EF76B4700E78FD8 /* MyRequestVC-05 */ = {
+			isa = PBXGroup;
+			children = (
+				260B20C71EF76B5500E78FD8 /* MyRequestVC.swift */,
+			);
+			name = "MyRequestVC-05";
+			sourceTree = "<group>";
+		};
+		260B20C91EF76B9F00E78FD8 /* MyMsgVC-06 */ = {
+			isa = PBXGroup;
+			children = (
+				260B20CA1EF76BAA00E78FD8 /* MyMsgVC.swift */,
+			);
+			name = "MyMsgVC-06";
+			sourceTree = "<group>";
+		};
+		260B20CC1EF770CD00E78FD8 /* LoginAndRigister */ = {
+			isa = PBXGroup;
+			children = (
+				260B20CE1EF770FD00E78FD8 /* controller */,
+				260B20CD1EF770EA00E78FD8 /* view */,
+			);
+			name = LoginAndRigister;
+			sourceTree = "<group>";
+		};
+		260B20CD1EF770EA00E78FD8 /* view */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = view;
+			sourceTree = "<group>";
+		};
+		260B20CE1EF770FD00E78FD8 /* controller */ = {
+			isa = PBXGroup;
+			children = (
+				260B20CF1EF7710F00E78FD8 /* LoginVC.swift */,
+			);
+			name = controller;
 			sourceTree = "<group>";
 		};
 		263CAF0A1EF62869006629BF /* passInputV */ = {
@@ -378,41 +576,26 @@
 		264960751EF0BFC000A559D6 /* Mine-04 */ = {
 			isa = PBXGroup;
 			children = (
-				264960761EF0BFC000A559D6 /* Controller */,
-				264960771EF0BFC000A559D6 /* Model */,
-				264960781EF0BFC000A559D6 /* View */,
+				260B20C91EF76B9F00E78FD8 /* MyMsgVC-06 */,
+				260B20C61EF76B4700E78FD8 /* MyRequestVC-05 */,
+				260B20C31EF76AB100E78FD8 /* BindPhone-04 */,
+				260B20BF1EF769A100E78FD8 /* MyVC-01 */,
+				260B20B61EF767C300E78FD8 /* AccountAndSave-02 */,
+				260B20C21EF76A0100E78FD8 /* ChangePaypassVC-02-04 */,
+				260B20C11EF769E600E78FD8 /* ChangeLoginPassVC-02-03 */,
+				260B20C01EF769BF00E78FD8 /* SetDoubleCertifie-02-02 */,
+				260B20BE1EF7690500E78FD8 /* SetPassPayVC-02-05 */,
+				260B20BA1EF768A900E78FD8 /* NameCertified-02-01 */,
+				260B20B01EF7674300E78FD8 /* MyBankCard-03 */,
 			);
 			name = "Mine-04";
 			path = ../APPDelegatge/Mine;
 			sourceTree = "<group>";
 		};
-		264960761EF0BFC000A559D6 /* Controller */ = {
-			isa = PBXGroup;
-			children = (
-				261F06791EF4FB590019CE44 /* MyBandCardVC.swift */,
-				26ED24471EF3E18C00642804 /* TrueNameCertifiedVC.swift */,
-				266E97201EF3D5460057FD90 /* AccountAndSaveVC.swift */,
-				26ED244F1EF3E5E300642804 /* SetPaymentPassVC.swift */,
-				2607D1581EF22AAF0015625E /* MyViewController.swift */,
-				26ED24491EF3E4EA00642804 /* SetDoubelCertifiVC.swift */,
-				26ED244B1EF3E55700642804 /* ChangeLoginPassVC.swift */,
-				26ED244D1EF3E59A00642804 /* ChangePaypassVC.swift */,
-				261F067F1EF525BE0019CE44 /* BandCardsViewController.swift */,
-				265992131EF66C6B004391E9 /* AddBankCardVC.swift */,
-			);
-			path = Controller;
-			sourceTree = "<group>";
-		};
-		264960771EF0BFC000A559D6 /* Model */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Model;
-			sourceTree = "<group>";
-		};
 		264960781EF0BFC000A559D6 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				260B20AE1EF766A600E78FD8 /* BandCardCell.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -498,8 +681,8 @@
 		264960821EF0C08D00A559D6 /* MainViewController */ = {
 			isa = PBXGroup;
 			children = (
+				260B20CC1EF770CD00E78FD8 /* LoginAndRigister */,
 				2607D1541EF21E570015625E /* MainTabBarViewController.swift */,
-				2649606E1EF0BF2500A559D6 /* MainViewController.swift */,
 				2649607E1EF0C02C00A559D6 /* Shopper-02 */,
 				2649607A1EF0C02600A559D6 /* Friends-03 */,
 				264960711EF0BFC000A559D6 /* MainPage-01 */,
@@ -709,6 +892,9 @@
 		264961311EF0D0F800A559D6 /* Utils */ = {
 			isa = PBXGroup;
 			children = (
+				260B20D51EF7A0F900E78FD8 /* ToolBar.swift */,
+				260B20D31EF7A08D00E78FD8 /* TfPlaceHolder.swift */,
+				260B20D11EF79F5100E78FD8 /* CommonV.swift */,
 				2607D1521EF21E140015625E /* BaseTabbarVC.swift */,
 				26A0A4A81EF0E26B00035D0D /* JFNavigationController.swift */,
 			);
@@ -845,12 +1031,13 @@
 				269C1C921EF1275500364F32 /* SwiftyJSON.swift in Sources */,
 				26ED24501EF3E5E300642804 /* SetPaymentPassVC.swift in Sources */,
 				264960CA1EF0C28F00A559D6 /* POPMath.mm in Sources */,
-				261F06801EF525BE0019CE44 /* BandCardsViewController.swift in Sources */,
 				264960FB1EF0C9EC00A559D6 /* YYCache.m in Sources */,
 				264960C81EF0C28F00A559D6 /* POPGeometry.mm in Sources */,
+				260B20D61EF7A0F900E78FD8 /* ToolBar.swift in Sources */,
 				264961041EF0C9EC00A559D6 /* UIImageView+YYWebImage.m in Sources */,
 				266E97211EF3D5460057FD90 /* AccountAndSaveVC.swift in Sources */,
 				2607D14F1EF212450015625E /* NetCheck.swift in Sources */,
+				260B20CB1EF76BAA00E78FD8 /* MyMsgVC.swift in Sources */,
 				261F067A1EF4FB590019CE44 /* MyBandCardVC.swift in Sources */,
 				264961071EF0C9EC00A559D6 /* YYImage.m in Sources */,
 				26A0A4AB1EF1064C00035D0D /* NetWorkTool.swift in Sources */,
@@ -862,13 +1049,19 @@
 				264961001EF0C9EC00A559D6 /* CALayer+YYWebImage.m in Sources */,
 				263CAF121EF62889006629BF /* UIView+XLExtension.m in Sources */,
 				26B14EFC1EF259AF0050135B /* CollectCell.swift in Sources */,
+				260B20D01EF7710F00E78FD8 /* LoginVC.swift in Sources */,
 				26ED244E1EF3E59A00642804 /* ChangePaypassVC.swift in Sources */,
+				260B20C51EF76AD100E78FD8 /* BindPhoneVC.swift in Sources */,
 				260B20AC1EF7633800E78FD8 /* GDPerformanceView.swift in Sources */,
 				261F067C1EF50B510019CE44 /* ShouMoneyVC.swift in Sources */,
+				260B20C81EF76B5500E78FD8 /* MyRequestVC.swift in Sources */,
 				264960CE1EF0C28F00A559D6 /* TransformationMatrix.cpp in Sources */,
+				260B20D41EF7A08D00E78FD8 /* TfPlaceHolder.swift in Sources */,
 				2643CFC61EF3EE2200EFC720 /* DetailViewController.swift in Sources */,
 				264960FE1EF0C9EC00A559D6 /* YYMemoryCache.m in Sources */,
+				260B20D21EF79F5100E78FD8 /* CommonV.swift in Sources */,
 				2607D14E1EF212450015625E /* Reachability.m in Sources */,
+				260B20AF1EF766A600E78FD8 /* BandCardCell.swift in Sources */,
 				2649611B1EF0CD9200A559D6 /* NSString+extension.swift in Sources */,
 				264960BE1EF0C28F00A559D6 /* POPAnimation.mm in Sources */,
 				2649612C1EF0D08F00A559D6 /* FTIndicator.m in Sources */,
@@ -876,7 +1069,6 @@
 				264961061EF0C9EC00A559D6 /* YYFrameImage.m in Sources */,
 				260B20AB1EF7633800E78FD8 /* GDPerformanceMonitorDelegate.swift in Sources */,
 				26B14F021EF29F490050135B /* ReceiveCell.swift in Sources */,
-				264960701EF0BF2500A559D6 /* MainViewController.swift in Sources */,
 				260B20A91EF7633800E78FD8 /* GDMarginLabel.swift in Sources */,
 				264960871EF0C1B400A559D6 /* ZDXCommon.swift in Sources */,
 				2607D1551EF21E570015625E /* MainTabBarViewController.swift in Sources */,
@@ -909,6 +1101,7 @@
 				264960CD1EF0C28F00A559D6 /* POPVector.mm in Sources */,
 				2649610B1EF0C9EC00A559D6 /* YYWebImageManager.m in Sources */,
 				264960FF1EF0C9EC00A559D6 /* _YYWebImageSetter.m in Sources */,
+				260B20B51EF7679D00E78FD8 /* BankModel.swift in Sources */,
 				264960C11EF0C28F00A559D6 /* POPAnimationRuntime.mm in Sources */,
 				264960C21EF0C28F00A559D6 /* POPAnimationTracer.mm in Sources */,
 				264961151EF0CAD100A559D6 /* UIImageViewWebImage.swift in Sources */,
