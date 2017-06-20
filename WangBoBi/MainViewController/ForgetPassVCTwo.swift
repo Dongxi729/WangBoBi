@@ -8,7 +8,7 @@
 
 import UIKit
 
-class ForgetPassVCTwo: UIViewController,UITextFieldDelegate {
+class ForgetPassVCTwo: BaseViewController,UITextFieldDelegate {
 
     // MARK: - 背景图片
     lazy var bgImg: UIImageView = {
@@ -44,9 +44,6 @@ class ForgetPassVCTwo: UIViewController,UITextFieldDelegate {
     }()
     
     // MARK: - 保存
-    
-
-    
     @objc fileprivate func nextSEL() {
         self.navigationController?.pushViewController(ForgetPassVCThree(), animated: true)
     }

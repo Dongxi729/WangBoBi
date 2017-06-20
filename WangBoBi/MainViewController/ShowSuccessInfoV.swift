@@ -41,7 +41,7 @@ class ShowSuccessInfoV: UIView {
         
         addSubview(dismissBtn)
         
-        self.backgroundColor = UIColor.colorWithHexString("7F7F7F", alpha: 0.8)
+        self.backgroundColor = UIColor.colorWithHexString("7F7F7F", alpha: 0.3)
     }
     
     @objc fileprivate func dismissSELF() {

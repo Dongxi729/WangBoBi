@@ -8,7 +8,7 @@
 
 import UIKit
 
-class LoginViewController: UIViewController,UITextFieldDelegate {
+class LoginViewController: BaseViewController,UITextFieldDelegate {
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -90,14 +90,6 @@ class LoginViewController: UIViewController,UITextFieldDelegate {
         return d
     }()
     
-    
-    override func viewWillDisappear(_ animated: Bool) {
-        super.viewWillDisappear(animated)
-        self.navigationController?.navigationBar.isHidden = false
-        
-        UIApplication.shared.keyWindow?.rootViewController?.view.frame = self.view.bounds
-    }
-    
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
@@ -117,9 +109,20 @@ class LoginViewController: UIViewController,UITextFieldDelegate {
     
     // MARK: - 登录事件
     @objc fileprivate func loginSEL() {
-        CCog(message: "登录事件")
         
-        UIApplication.shared.keyWindow?.rootViewController = MainTabBarViewController()
+        /// 判断输入的邮箱、密码长度是否大于0
+        if !(accountLabel.text?.isEmpty)! && !(passTf.text?.isEmpty)! {
+            /// 从模型取结果
+            if LoginModel.shared.loginSuccess() {
+                ////  逻辑 : 判断邮箱地址、登录密码是否一致。
+                UIApplication.shared.keyWindow?.rootViewController = MainTabBarViewController()
+            } else {
+                /// 提示出错信息
+                FTIndicator.showToastMessage("登录信息有误")
+            }
+        } else {
+            FTIndicator.showToastMessage("邮箱或密码为空")
+        }
     }
     
     // MARK: - 忘记密码

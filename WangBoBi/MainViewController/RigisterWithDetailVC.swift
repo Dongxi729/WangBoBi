@@ -8,7 +8,7 @@
 
 import UIKit
 
-class RigisterWithDetailVC: UIViewController,UITextFieldDelegate {
+class RigisterWithDetailVC: BaseViewController,UITextFieldDelegate {
     
     fileprivate lazy var bgImg: UIImageView = {
         let d : UIImageView = UIImageView.init(frame: self.view.bounds)

@@ -9,6 +9,11 @@
 import UIKit
 import AVFoundation
 
+let kMargin = 35
+let kBorderW = 140
+let scanViewW = UIScreen.main.bounds.width - CGFloat(kMargin * 2)
+let scanViewH = UIScreen.main.bounds.width - CGFloat(kMargin * 2)
+
 class ViewController: UIViewController,AVCaptureMetadataOutputObjectsDelegate {
     
     /// 输入数据源设备
@@ -30,6 +35,52 @@ class ViewController: UIViewController,AVCaptureMetadataOutputObjectsDelegate {
     var scanRectView:UIView!
 
     
+    /// 定时器
+    var timer : Timer?
+    
+    /// 执行动画的线条
+    var slideLineView: UIImageView = UIImageView()
+
+    var scanView: UIView = UIView()
+
+    /// 扫描图标
+    var scanImageView : UIImageView = UIImageView()
+
+    /// 线条动画
+    @objc fileprivate func scanLineAnimate() {
+        timer = Timer.init(timeInterval: 3.0, target: self, selector: #selector(animationView), userInfo: nil, repeats: true)
+        RunLoop.main.add(timer!, forMode: .defaultRunLoopMode)
+        timer?.fire()
+    }
+    
+    
+    /// 扫描动画
+    func animationView() -> Void {
+        let anim = scanImageView.layer.animation(forKey: "translationAnimation")
+        if (anim != nil) {
+
+            scanImageView
+                .layer.speed = 1.1
+        } else {
+            
+            let scanImageViewH = 241
+            let scanViewH = view.bounds.width - CGFloat(kMargin) * 2
+            let scanImageViewW = scanView.bounds.width
+            
+            scanImageView.frame = CGRect(x: 0, y: -scanImageViewH, width: Int(scanImageViewW), height: scanImageViewH)
+            let scanAnim = CABasicAnimation()
+            scanAnim.keyPath = "transform.translation.y"
+            scanAnim.byValue = [scanViewH]
+            scanAnim.duration = 1.8
+            scanAnim.repeatCount = MAXFLOAT
+            scanImageView.layer.add(scanAnim, forKey: "translationAnimation")
+            scanView.addSubview(scanImageView)
+        }
+    }
+    
+    
+
+    /// 摄像头事件?
     @objc private func cameraSEl() -> Void {
         
         self.device = AVCaptureDevice.defaultDevice(withMediaType: AVMediaTypeVideo)
@@ -79,12 +130,39 @@ class ViewController: UIViewController,AVCaptureMetadataOutputObjectsDelegate {
             self.view.layer.insertSublayer(self.preview, at:0)
             
             //添加中间的探测区域绿框
-            self.scanRectView = UIView();
-            self.view.addSubview(self.scanRectView)
-            self.scanRectView.frame = CGRect(x:SCREEN_WIDTH * 0.5 - scanSize.width * 0.5, y:SCREEN_HEIGHT * 0.5 - scanSize.height * 0.5 - 32, width:scanSize.width,
-                                             height:scanSize.height);
-            self.scanRectView.layer.borderColor = UIColor.green.cgColor
-            self.scanRectView.layer.borderWidth = 1;
+            scanView = UIView(frame: CGRect(x: CGFloat(kMargin), y: CGFloat((view.bounds.height - scanViewW) / 2), width: scanViewW, height: scanViewH))
+            scanView.backgroundColor = UIColor.clear
+            scanView.clipsToBounds = true
+            view.addSubview(scanView)
+            
+            let widthOrHeight: CGFloat = 18
+            
+            let topLeft = UIButton(frame: CGRect(x: 0, y: 0, width: widthOrHeight, height: widthOrHeight))
+            topLeft.setImage(UIImage.init(named: "sweep_kuangupperleft.png"), for: .normal)
+            scanView.addSubview(topLeft)
+            
+            let topRight = UIButton(frame: CGRect(x: scanViewW - widthOrHeight, y: 0, width: widthOrHeight, height: widthOrHeight))
+            topRight.setImage(UIImage.init(named: "sweep_kuangupperright.png"), for: .normal)
+            scanView.addSubview(topRight)
+            
+            let bottomLeft = UIButton(frame: CGRect(x: 0, y: scanViewH - widthOrHeight, width: widthOrHeight, height: widthOrHeight))
+            bottomLeft.setImage(UIImage.init(named: "sweep_kuangdownleft.png"), for: .normal)
+            scanView.addSubview(bottomLeft)
+            
+            let bottomRight = UIButton(frame: CGRect(x: scanViewH - widthOrHeight, y: scanViewH - widthOrHeight, width: widthOrHeight, height: widthOrHeight))
+            bottomRight.setImage(UIImage.init(named: "sweep_kuangdownright.png"), for: .normal)
+            scanView.addSubview(bottomRight)
+
+            let scanImageViewH = 241
+
+            let scanImageViewW = scanView.bounds.width
+            
+            
+            /// 动画图标
+            scanImageView.frame = CGRect(x: 0, y: -scanImageViewH, width: Int(scanImageViewW), height: scanImageViewH)
+            scanImageView = UIImageView(image: UIImage.init(named: "sweep_bg_line.png"));
+            scanView.addSubview(scanImageView)
+
             
             //开始捕获
             self.session.startRunning()
@@ -97,8 +175,19 @@ class ViewController: UIViewController,AVCaptureMetadataOutputObjectsDelegate {
             alertController.addAction(cancelAction)
             self.present(alertController, animated: true, completion: nil)
         }
+    
+    }
+
+    /// 整体遮罩设置
+    fileprivate func setupMaskView() {
+        let maskView = UIView(frame: CGRect(x: -(view.bounds.height - view.bounds.width) / 2, y: 0, width: view.bounds.height, height: view.bounds.height))
+        maskView.layer.borderWidth = (view.bounds.height - scanViewW) / 2
+        maskView.layer.borderColor = UIColor.init(colorLiteralRed: 0, green: 0, blue: 0, alpha: 0.6).cgColor
+        view.addSubview(maskView)
     }
     
+
+
     func captureOutput(_ captureOutput: AVCaptureOutput!, didOutputMetadataObjects metadataObjects: [Any]!, from connection: AVCaptureConnection!) {
         var stringValue:String?
         if metadataObjects.count > 0 {
@@ -120,6 +209,7 @@ class ViewController: UIViewController,AVCaptureMetadataOutputObjectsDelegate {
         })
         alertController.addAction(okAction)
         self.present(alertController, animated: true, completion: nil)
+    
     }
     
     var maskLayer = CALayer()
@@ -146,11 +236,19 @@ class ViewController: UIViewController,AVCaptureMetadataOutputObjectsDelegate {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
         
+        UIApplication.shared.statusBarStyle = UIStatusBarStyle.lightContent
+        
         title = "扫一扫"
+    
         self.view.backgroundColor = UIColor.black
         
-        
         self.descLabel.isHidden = false
+        
+        
+        self.navigationController?.navigationBar.titleTextAttributes =
+            [NSForegroundColorAttributeName: UIColor.white]
+        
+        self.navigationController?.navigationBar.barTintColor = UIColor.init(colorLiteralRed: 0, green: 0, blue: 0, alpha: 0.8)
         
         DispatchQueue.main.async {
             self.view.addSubview(self.indicator)
@@ -162,11 +260,11 @@ class ViewController: UIViewController,AVCaptureMetadataOutputObjectsDelegate {
         DispatchQueue.global(qos: .default).asyncAfter(deadline: DispatchTime.now() + 0.5) {
             
             DispatchQueue.main.async {
+                self.setupMaskView()
                 self.cameraSEl()
                 self.indicator.stopAnimating()
                 self.view.addSubview(self.descLabel)
-                
-                
+                self.scanLineAnimate()
             }
         }
     }

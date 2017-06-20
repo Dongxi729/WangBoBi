@@ -57,13 +57,11 @@ class LoginNav: UINavigationController, UIGestureRecognizerDelegate {
         
         // 压入栈后创建返回按钮
 //        viewController.navigationItem.leftBarButtonItem = UIBarButtonItem(
-//            image: UIImage(named: "rean")?.withRenderingMode(UIImageRenderingMode.alwaysOriginal),
+//            image: UIImage(named: "")?.withRenderingMode(UIImageRenderingMode.alwaysOriginal),
 //            style: UIBarButtonItemStyle.done,
 //            target: self,
 //            action: #selector(back)
 //        )
-
-        
     }
     
     /**
@@ -75,6 +73,8 @@ class LoginNav: UINavigationController, UIGestureRecognizerDelegate {
         pan.delegate = self
         view.addGestureRecognizer(pan)
         interactivePopGestureRecognizer?.isEnabled = false
+
+        CCog(message: "=======-------")
     }
     
     // MARK: - UIGestureRecognizerDelegate
@@ -90,6 +90,7 @@ class LoginNav: UINavigationController, UIGestureRecognizerDelegate {
      全局返回操作
      */
     @objc fileprivate func back() {
+        CCog(message: "返回事件")
         popViewController(animated: true)
     }
     

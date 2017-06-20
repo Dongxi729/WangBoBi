@@ -154,6 +154,7 @@ extension NetWorkTool {
     }
     
     
+    //// 测试玩耍使用
     func reqiuestHeWeather(_ finished : @escaping NetWorkFinished) -> Void {
         
         

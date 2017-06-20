@@ -8,7 +8,7 @@
 
 import UIKit
 
-class ForgetPassVC: UIViewController,UITextFieldDelegate {
+class ForgetPassVC: BaseViewController,UITextFieldDelegate {
     
     // MARK: - 背景图片
     lazy var bgImg: UIImageView = {
@@ -60,12 +60,21 @@ class ForgetPassVC: UIViewController,UITextFieldDelegate {
         view.addSubview(loginBtn)
     }
     
-    /// 下一步
+    /// 发送验证码
     @objc fileprivate func jumpToNext() {
+        /// 判断是否为空
+        if !(self.AddLabel.text?.isEmpty)! {
+            /// 输入邮箱事件
+            
+            
+        } else {
+            FTIndicator.showToastMessage("邮箱地址不为空")
+        }
+        
         self.navigationController?.pushViewController(ForgetPassVCTwo(), animated: true)
     }
     
-    /// 发生验证码
+    /// 返回首页
     @objc fileprivate func backToMain() {
         self.navigationController?.popToRootViewController(animated: true)
     }

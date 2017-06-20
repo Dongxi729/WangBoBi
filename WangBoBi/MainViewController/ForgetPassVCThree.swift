@@ -8,7 +8,7 @@
 
 import UIKit
 
-class ForgetPassVCThree: UIViewController,UITextFieldDelegate {
+class ForgetPassVCThree: BaseViewController,UITextFieldDelegate {
     
     // MARK: - 背景图片
     lazy var bgImg: UIImageView = {
@@ -28,7 +28,7 @@ class ForgetPassVCThree: UIViewController,UITextFieldDelegate {
     // MARK: - 保存
     fileprivate lazy var saveBtn: UIButton = {
         let d : UIButton = UIButton.init(frame: CGRect.init(x: 0.1256038647343 * SCREEN_WIDTH, y: SCREEN_HEIGHT * 0.614130434782609, width: SCREEN_WIDTH * 0.75, height: 30 * SCREEN_SCALE))
-        d.layer.borderWidth = 1
+
         d.addTarget(self, action: #selector(saveSEL), for: .touchUpInside)
         return d
     }()
@@ -39,7 +39,6 @@ class ForgetPassVCThree: UIViewController,UITextFieldDelegate {
         let d : TfPlaceHolder = TfPlaceHolder.init(frame: CGRect.init(x: 0.172302725234469 * SCREEN_WIDTH, y: SCREEN_HEIGHT * 0.389945652173913, width: SCREEN_WIDTH * 0.7, height: 30 * SCREEN_SCALE))
         d.delegate = self
         d.font = UIFont.init(name: "SimHei", size: 12 * SCREEN_SCALE)
-        d.layer.borderWidth = 1
         return d
     }()
 
@@ -87,8 +86,13 @@ class ForgetPassVCThree: UIViewController,UITextFieldDelegate {
         view.addSubview(showSuccessView)
         zdx_setupButtonSpringAnimation(showSuccessView)
         /// 成功
-        
 //        self.navigationController?.popToRootViewController(animated: true)
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        view.endEditing(true)
+
     }
 
     
