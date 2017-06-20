@@ -23,11 +23,25 @@ class TestViewController: UIViewController {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
-        view.addSubview(poassV)
+//        view.addSubview(poassV)
+//        
+//        poassV.passwordBlock = {(params) -> Void in
+//            CCog(message: params!)
+//        }
         
-        poassV.passwordBlock = {(params) -> Void in
-            CCog(message: params!)
-        }
-        
+        view.backgroundColor = UIColor.randomColor()
+    }
+    
+
+    
+    
+    lazy var showInfoVVV: ShowFailV = {
+        let d : ShowFailV = ShowFailV.init(frame: self.view.bounds)
+        return d
+    }()
+    
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        zdx_setupButtonSpringAnimation(showInfoVVV)
+        view.addSubview(showInfoVVV)
     }
 }

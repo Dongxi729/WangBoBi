@@ -33,7 +33,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         window?.backgroundColor = UIColor.white
         
         // 设置全局颜色
-//        UITabBar.appearance().tintColor = TABBAR_BGCOLOR
+        UITabBar.appearance().tintColor = TABBAR_BGCOLOR
         
         return true
     }

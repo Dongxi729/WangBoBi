@@ -113,6 +113,8 @@
 		26ED244C1EF3E55700642804 /* ChangeLoginPassVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26ED244B1EF3E55700642804 /* ChangeLoginPassVC.swift */; };
 		26ED244E1EF3E59A00642804 /* ChangePaypassVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26ED244D1EF3E59A00642804 /* ChangePaypassVC.swift */; };
 		26ED24501EF3E5E300642804 /* SetPaymentPassVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26ED244F1EF3E5E300642804 /* SetPaymentPassVC.swift */; };
+		26EF14A01EF8F7FD005663F1 /* ShowSuccessInfoV.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26EF149F1EF8F7FD005663F1 /* ShowSuccessInfoV.swift */; };
+		26EF14A31EF900F8005663F1 /* ShowFailV.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26EF14A21EF900F8005663F1 /* ShowFailV.swift */; };
 		26F4847F1EEFD55400177670 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26F4847E1EEFD55400177670 /* ViewController.swift */; };
 		26F484821EEFD55400177670 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 26F484801EEFD55400177670 /* Main.storyboard */; };
 		26F484841EEFD55400177670 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 26F484831EEFD55400177670 /* Assets.xcassets */; };
@@ -287,6 +289,8 @@
 		26ED244B1EF3E55700642804 /* ChangeLoginPassVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChangeLoginPassVC.swift; sourceTree = "<group>"; };
 		26ED244D1EF3E59A00642804 /* ChangePaypassVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChangePaypassVC.swift; sourceTree = "<group>"; };
 		26ED244F1EF3E5E300642804 /* SetPaymentPassVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SetPaymentPassVC.swift; sourceTree = "<group>"; };
+		26EF149F1EF8F7FD005663F1 /* ShowSuccessInfoV.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ShowSuccessInfoV.swift; path = ../../MainViewController/ShowSuccessInfoV.swift; sourceTree = "<group>"; };
+		26EF14A21EF900F8005663F1 /* ShowFailV.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShowFailV.swift; sourceTree = "<group>"; };
 		26F484791EEFD55400177670 /* WangBoBi.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = WangBoBi.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		26F4847E1EEFD55400177670 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = ViewController.swift; path = ../ViewController.swift; sourceTree = "<group>"; };
 		26F484811EEFD55400177670 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -485,16 +489,8 @@
 			isa = PBXGroup;
 			children = (
 				260B20CE1EF770FD00E78FD8 /* controller */,
-				260B20CD1EF770EA00E78FD8 /* view */,
 			);
 			name = LoginAndRigister;
-			sourceTree = "<group>";
-		};
-		260B20CD1EF770EA00E78FD8 /* view */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			name = view;
 			sourceTree = "<group>";
 		};
 		260B20CE1EF770FD00E78FD8 /* controller */ = {
@@ -741,8 +737,8 @@
 		264960821EF0C08D00A559D6 /* MainViewController */ = {
 			isa = PBXGroup;
 			children = (
-				260B20CC1EF770CD00E78FD8 /* LoginAndRigister */,
 				2607D1541EF21E570015625E /* MainTabBarViewController.swift */,
+				260B20CC1EF770CD00E78FD8 /* LoginAndRigister */,
 				2649607E1EF0C02C00A559D6 /* Shopper-02 */,
 				2649607A1EF0C02600A559D6 /* Friends-03 */,
 				264960711EF0BFC000A559D6 /* MainPage-01 */,
@@ -952,6 +948,7 @@
 		264961311EF0D0F800A559D6 /* Utils */ = {
 			isa = PBXGroup;
 			children = (
+				26EF14A11EF900DD005663F1 /* AlertView */,
 				260B20D51EF7A0F900E78FD8 /* ToolBar.swift */,
 				260B20D31EF7A08D00E78FD8 /* TfPlaceHolder.swift */,
 				260B20D11EF79F5100E78FD8 /* CommonV.swift */,
@@ -976,6 +973,15 @@
 				265991F31EF65D5C004391E9 /* CommonBtn.swift */,
 			);
 			name = View;
+			sourceTree = "<group>";
+		};
+		26EF14A11EF900DD005663F1 /* AlertView */ = {
+			isa = PBXGroup;
+			children = (
+				26EF149F1EF8F7FD005663F1 /* ShowSuccessInfoV.swift */,
+				26EF14A21EF900F8005663F1 /* ShowFailV.swift */,
+			);
+			name = AlertView;
 			sourceTree = "<group>";
 		};
 		26F484701EEFD55400177670 = {
@@ -1109,6 +1115,7 @@
 				264961081EF0C9EC00A559D6 /* YYImageCoder.m in Sources */,
 				263CAF111EF62889006629BF /* UIImage+XLExtension.m in Sources */,
 				264960CB1EF0C28F00A559D6 /* POPPropertyAnimation.mm in Sources */,
+				26EF14A01EF8F7FD005663F1 /* ShowSuccessInfoV.swift in Sources */,
 				26ED244C1EF3E55700642804 /* ChangeLoginPassVC.swift in Sources */,
 				264960C91EF0C28F00A559D6 /* POPLayerExtras.mm in Sources */,
 				264961001EF0C9EC00A559D6 /* CALayer+YYWebImage.m in Sources */,
@@ -1187,6 +1194,7 @@
 				264960BD1EF0C28F00A559D6 /* POPAnimatableProperty.mm in Sources */,
 				2649611E1EF0CF9300A559D6 /* Color+Extension.swift in Sources */,
 				260B20AA1EF7633800E78FD8 /* GDPerformanceMonitor.swift in Sources */,
+				26EF14A31EF900F8005663F1 /* ShowFailV.swift in Sources */,
 				263CAF131EF62889006629BF /* XLPasswordInputView.m in Sources */,
 				260B21031EF7CD1F00E78FD8 /* RigisterVC.swift in Sources */,
 			);

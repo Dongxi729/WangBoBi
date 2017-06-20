@@ -118,6 +118,8 @@ class LoginViewController: UIViewController,UITextFieldDelegate {
     // MARK: - 登录事件
     @objc fileprivate func loginSEL() {
         CCog(message: "登录事件")
+        
+        UIApplication.shared.keyWindow?.rootViewController = MainTabBarViewController()
     }
     
     // MARK: - 忘记密码

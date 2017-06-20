@@ -55,7 +55,7 @@ class LoginNav: UINavigationController, UIGestureRecognizerDelegate {
         
         super.pushViewController(viewController, animated: animated)
         
-//        // 压入栈后创建返回按钮
+        // 压入栈后创建返回按钮
 //        viewController.navigationItem.leftBarButtonItem = UIBarButtonItem(
 //            image: UIImage(named: "rean")?.withRenderingMode(UIImageRenderingMode.alwaysOriginal),
 //            style: UIBarButtonItemStyle.done,
