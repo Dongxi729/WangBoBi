@@ -8,7 +8,7 @@
 
 import UIKit
 
-class ForgetPassVCThree: UIViewController {
+class ForgetPassVCThree: UIViewController,UITextFieldDelegate {
     
     // MARK: - 背景图片
     lazy var bgImg: UIImageView = {
@@ -33,6 +33,25 @@ class ForgetPassVCThree: UIViewController {
         return d
     }()
 
+    
+    // MARK: - 新登录密码
+    lazy var newLoginPass: TfPlaceHolder = {
+        let d : TfPlaceHolder = TfPlaceHolder.init(frame: CGRect.init(x: 0.172302725234469 * SCREEN_WIDTH, y: SCREEN_HEIGHT * 0.389945652173913, width: SCREEN_WIDTH * 0.7, height: 30 * SCREEN_SCALE))
+        d.delegate = self
+        d.font = UIFont.init(name: "SimHei", size: 12 * SCREEN_SCALE)
+        d.layer.borderWidth = 1
+        return d
+    }()
+
+    
+    // MARK: - 重复密码
+    lazy var repeatPass: TfPlaceHolder = {
+        let d : TfPlaceHolder = TfPlaceHolder.init(frame: CGRect.init(x: 0.172302725234469 * SCREEN_WIDTH, y: SCREEN_HEIGHT * 0.485054347826087, width: SCREEN_WIDTH * 0.7, height: 30 * SCREEN_SCALE))
+        d.delegate = self
+        d.font = UIFont.init(name: "SimHei", size: 12 * SCREEN_SCALE)
+        return d
+    }()
+
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -42,11 +61,15 @@ class ForgetPassVCThree: UIViewController {
         
         view.addSubview(bgImg)
         view.addSubview(saveBtn)
+        
+        
+        view.addSubview(newLoginPass)
+        view.addSubview(repeatPass)
     }
     
     // MARK: - 保存
     @objc fileprivate func saveSEL() {
-        self.navigationController?.popViewController(animated: true)
+        self.navigationController?.popToRootViewController(animated: true)
     }
 
     
@@ -64,4 +87,14 @@ class ForgetPassVCThree: UIViewController {
         self.navigationController?.popViewController(animated: true)
     }
 
+    
+    // MARK: - UitextFieldDelegate
+    func textFieldShouldBeginEditing(_ textField: UITextField) -> Bool {
+        
+        UIView.animate(withDuration: 0.5) {
+            UIApplication.shared.keyWindow?.frame = CGRect.init(x: 0, y: -100 * SCREEN_SCALE, width: SCREEN_WIDTH, height: SCREEN_HEIGHT)
+        }
+        
+        return true
+    }
 }

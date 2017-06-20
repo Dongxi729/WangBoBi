@@ -8,7 +8,7 @@
 
 import UIKit
 
-class ForgetPassVC: UIViewController {
+class ForgetPassVC: UIViewController,UITextFieldDelegate {
     
     // MARK: - 背景图片
     lazy var bgImg: UIImageView = {
@@ -22,7 +22,7 @@ class ForgetPassVC: UIViewController {
         let d : TfPlaceHolder = TfPlaceHolder.init(frame: CGRect.init(x: SCREEN_WIDTH * 0.18438001992046, y: SCREEN_HEIGHT * 0.385, width: SCREEN_WIDTH * 0.88 - SCREEN_WIDTH * 0.213, height: 30 * SCREEN_SCALE))
         d.plStrSize(str: "", holderColor: UIColor.white)
         d.layer.borderColor = UIColor.black.cgColor
-        
+        d.delegate = self
         d.font = UIFont.init(name: "SimHei", size: 12 * SCREEN_SCALE)
         return d
     }()
@@ -71,6 +71,14 @@ class ForgetPassVC: UIViewController {
     }
     
     
-    
+    // MARK: - UitextFieldDelegate
+    func textFieldShouldBeginEditing(_ textField: UITextField) -> Bool {
+        
+        UIView.animate(withDuration: 0.5) {
+            UIApplication.shared.keyWindow?.frame = CGRect.init(x: 0, y: -100 * SCREEN_SCALE, width: SCREEN_WIDTH, height: SCREEN_HEIGHT)
+        }
+        
+        return true
+    }
 
 }

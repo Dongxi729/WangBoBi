@@ -109,7 +109,7 @@ class LoginViewController: UIViewController,UITextFieldDelegate {
     func textFieldShouldBeginEditing(_ textField: UITextField) -> Bool {
         
         UIView.animate(withDuration: 0.5) {
-            UIApplication.shared.keyWindow?.frame = CGRect.init(x: 0, y: -100, width: SCREEN_WIDTH, height: SCREEN_HEIGHT)
+            UIApplication.shared.keyWindow?.frame = CGRect.init(x: 0, y: -200 * SCREEN_SCALE, width: SCREEN_WIDTH, height: SCREEN_HEIGHT)
         }
         
         return true

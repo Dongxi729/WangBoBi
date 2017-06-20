@@ -8,7 +8,7 @@
 
 import UIKit
 
-class RigisterWithDetailVC: UIViewController {
+class RigisterWithDetailVC: UIViewController,UITextFieldDelegate {
     
     fileprivate lazy var bgImg: UIImageView = {
         let d : UIImageView = UIImageView.init(frame: self.view.bounds)
@@ -22,27 +22,34 @@ class RigisterWithDetailVC: UIViewController {
     fileprivate lazy var loginBtn: UIButton = {
         let d : UIButton = UIButton.init(frame: CGRect.init(x: SCREEN_WIDTH * 0.545088542256378, y: SCREEN_HEIGHT * 0.916213761205259, width: 50 * SCREEN_SCALE, height: 30 * SCREEN_SCALE))
         d.addTarget(self, action: #selector(jumpTologin), for: .touchUpInside)
+        
         return d
     }()
     
     // MARK: - 邀请码
-    fileprivate lazy var yaoqingBtn: UIButton = {
-        let d: UIButton = UIButton.init(frame: CGRect.init(x: SCREEN_WIDTH * 0.18438001992046, y: SCREEN_HEIGHT * 0.407608695652174, width: SCREEN_WIDTH * 0.88 - SCREEN_WIDTH * 0.213, height: 30 * SCREEN_SCALE))
-        d.layer.borderWidth = 1
+    fileprivate lazy var yaoqingBtn: TfPlaceHolder = {
+        let d: TfPlaceHolder = TfPlaceHolder.init(frame: CGRect.init(x: SCREEN_WIDTH * 0.18438001992046, y: SCREEN_HEIGHT * 0.407608695652174, width: SCREEN_WIDTH * 0.88 - SCREEN_WIDTH * 0.213, height: 30 * SCREEN_SCALE))
+        d.delegate = self
+        d.textColor = UIColor.white
+        d.font = UIFont.init(name: "SimHei", size: 12 * SCREEN_SCALE)
         return d
     }()
     
     // MARK: - 登录密码
-    fileprivate lazy var loginPass: UIButton = {
-        let d : UIButton = UIButton.init(frame: CGRect.init(x: SCREEN_WIDTH * 0.18438001992046, y: SCREEN_HEIGHT * 0.504076086956522, width: SCREEN_WIDTH * 0.88 - SCREEN_WIDTH * 0.213, height: 30 * SCREEN_SCALE))
-        d.layer.borderWidth = 1
+    fileprivate lazy var loginPass: TfPlaceHolder = {
+        let d : TfPlaceHolder = TfPlaceHolder.init(frame: CGRect.init(x: SCREEN_WIDTH * 0.18438001992046, y: SCREEN_HEIGHT * 0.504076086956522, width: SCREEN_WIDTH * 0.88 - SCREEN_WIDTH * 0.213, height: 30 * SCREEN_SCALE))
+        d.delegate = self
+        d.textColor = UIColor.white
+        d.font = UIFont.init(name: "SimHei", size: 12 * SCREEN_SCALE)
         return d
     }()
     
     // MARK: - 登录密码
-    fileprivate lazy var repeatPass: UIButton = {
-        let d :UIButton = UIButton.init(frame: CGRect.init(x: SCREEN_WIDTH * 0.18438001992046, y: SCREEN_HEIGHT * 0.60054347826087, width: SCREEN_WIDTH * 0.88 - SCREEN_WIDTH * 0.213, height: 30 * SCREEN_SCALE))
-        d.layer.borderWidth = 1
+    fileprivate lazy var repeatPass: TfPlaceHolder = {
+        let d :TfPlaceHolder = TfPlaceHolder.init(frame: CGRect.init(x: SCREEN_WIDTH * 0.18438001992046, y: SCREEN_HEIGHT * 0.60054347826087, width: SCREEN_WIDTH * 0.88 - SCREEN_WIDTH * 0.213, height: 30 * SCREEN_SCALE))
+        d.delegate = self
+        d.textColor = UIColor.white
+        d.font = UIFont.init(name: "SimHei", size: 12 * SCREEN_SCALE)
         return d
     }()
     
@@ -77,6 +84,7 @@ class RigisterWithDetailVC: UIViewController {
     lazy var rigistBtn: UIButton = {
         let d : UIButton = UIButton.init(frame: CGRect.init(x: SCREEN_WIDTH * 0.0901771213697351, y: SCREEN_HEIGHT * 0.746829696323561, width: SCREEN_WIDTH * 0.8, height: 30 * SCREEN_SCALE))
         
+        
         d.layer.borderWidth = 1
         d.addTarget(self, action: #selector(rigisterSEL), for: .touchUpInside)
         return d
@@ -100,7 +108,7 @@ class RigisterWithDetailVC: UIViewController {
         view.addSubview(rigistBtn)
     }
     
-    /// 用户协议也没
+    /// 用户协议也没x
     @objc fileprivate func jumpToUserAgreeVC() {
         self.navigationController?.pushViewController(AgreeMentVC(), animated: true)
     }
@@ -126,5 +134,11 @@ class RigisterWithDetailVC: UIViewController {
         self.navigationController?.popToRootViewController(animated: true)
     }
     
-    
+    // MARK: - UITextFieldDelegate
+    func textFieldDidBeginEditing(_ textField: UITextField) {
+        
+        UIView.animate(withDuration: 0.5) {
+            UIApplication.shared.keyWindow?.frame = CGRect.init(x: 0, y: -200 * SCREEN_SCALE, width: SCREEN_WIDTH, height: SCREEN_HEIGHT)
+        }
+    }
 }

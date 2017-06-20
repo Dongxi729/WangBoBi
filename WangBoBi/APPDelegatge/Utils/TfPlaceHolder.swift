@@ -54,6 +54,10 @@ class TfPlaceHolder : UITextField,UITextFieldDelegate,UIGestureRecognizerDelegat
         
         self.addSubview(seePassImg)
         
+        /// 编辑时候显示取消按钮
+        self.clearsOnBeginEditing = true
+        
+        
         //继承代理
         self.delegate = self
         
