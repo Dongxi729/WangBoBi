@@ -55,7 +55,9 @@ func zdx_setupButtonSpringAnimation(_ view: UIView) {
     sprintAnimation?.fromValue = NSValue(cgPoint: CGPoint(x: 0.8, y: 0.8))
     sprintAnimation?.toValue = NSValue(cgPoint: CGPoint(x: 1, y: 1))
     sprintAnimation?.velocity = NSValue(cgPoint: CGPoint(x: 30, y: 30))
-    sprintAnimation?.springBounciness = 20
+    
+    /// 弹性系数
+    sprintAnimation?.springBounciness = 5
     view.pop_add(sprintAnimation, forKey: "springAnimation")
 }
 

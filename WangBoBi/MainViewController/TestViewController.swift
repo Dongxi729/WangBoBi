@@ -9,30 +9,30 @@
 import UIKit
 
 class TestViewController: UIViewController {
-
+    
     lazy var poassV: XLPasswordInputView = {
         
         let d : XLPasswordInputView = XLPasswordInputView.init(frame: CGRect.init(x: 0, y: 0, width: SCREEN_WIDTH, height: 100))
         XLPasswordInputView.init(passwordLength: 5)
         
-  
+        
         return d
     }()
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
         // Do any additional setup after loading the view.
-//        view.addSubview(poassV)
-//        
-//        poassV.passwordBlock = {(params) -> Void in
-//            CCog(message: params!)
-//        }
+        //        view.addSubview(poassV)
+        //
+        //        poassV.passwordBlock = {(params) -> Void in
+        //            CCog(message: params!)
+        //        }
         
         view.backgroundColor = UIColor.randomColor()
     }
     
-
+    
     
     
     lazy var showInfoVVV: ShowFailV = {

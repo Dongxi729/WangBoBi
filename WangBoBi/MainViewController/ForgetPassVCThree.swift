@@ -67,9 +67,28 @@ class ForgetPassVCThree: UIViewController,UITextFieldDelegate {
         view.addSubview(repeatPass)
     }
     
+    // MARK: - 成功
+    lazy var showSuccessView: ShowSuccessInfoV = {
+        let d : ShowSuccessInfoV = ShowSuccessInfoV.init(frame: self.view.bounds)
+        return d
+    }()
+
+    
+    // MARK: - 失败
+    lazy var showFailView: ShowFailV = {
+        let d : ShowFailV = ShowFailV.init(frame: self.view.bounds)
+        return d
+    }()
+    
     // MARK: - 保存
     @objc fileprivate func saveSEL() {
-        self.navigationController?.popToRootViewController(animated: true)
+    
+        /// 失败
+        view.addSubview(showSuccessView)
+        zdx_setupButtonSpringAnimation(showSuccessView)
+        /// 成功
+        
+//        self.navigationController?.popToRootViewController(animated: true)
     }
 
     

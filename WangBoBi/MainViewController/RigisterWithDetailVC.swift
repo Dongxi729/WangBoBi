@@ -64,9 +64,10 @@ class RigisterWithDetailVC: UIViewController,UITextFieldDelegate {
     
     // MARK: - 协议图标
     fileprivate lazy var agreeeBtn: UIButton = {
-        let d : UIButton = UIButton.init(frame: CGRect.init(x: 0.0901771213697351 * SCREEN_WIDTH, y: SCREEN_HEIGHT * 0.667119565217391, width: 12 * SCREEN_SCALE, height: 12 * SCREEN_SCALE))
+        let d : UIButton = UIButton.init(frame: CGRect.init(x: 0.0901771213697351 * SCREEN_WIDTH, y: SCREEN_HEIGHT * 0.667119565217391, width: 30 * SCREEN_SCALE, height: 30 * SCREEN_SCALE))
         d.contentMode = UIViewContentMode.scaleAspectFit
         d.addTarget(self, action: #selector(agreeSEL(sender:)), for: .touchUpInside)
+        
         return d
     }()
     
@@ -77,6 +78,7 @@ class RigisterWithDetailVC: UIViewController,UITextFieldDelegate {
         
         d.contentMode = UIViewContentMode.scaleAspectFit
         d.image = #imageLiteral(resourceName: "select")
+        d.layer.cornerRadius = 5.0
         return d
     }()
     

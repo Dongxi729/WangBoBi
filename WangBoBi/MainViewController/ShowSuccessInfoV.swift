@@ -31,7 +31,6 @@ class ShowSuccessInfoV: UIView {
     fileprivate lazy var dismissBtn: UIButton = {
         let d : UIButton = UIButton.init(frame: CGRect.init(x: SCREEN_WIDTH * 0.447665044075049, y: SCREEN_HEIGHT * 0.655344195987867, width: 50 * SCREEN_SCALE, height: 50 * SCREEN_SCALE))
         d.addTarget(self, action: #selector(dismissSELF), for: .touchUpInside)
-        d.layer.borderWidth = 1
         return d
     }()
     
@@ -41,7 +40,8 @@ class ShowSuccessInfoV: UIView {
         addSubview(showInfoBgV)
         
         addSubview(dismissBtn)
-  
+        
+        self.backgroundColor = UIColor.colorWithHexString("7F7F7F", alpha: 0.8)
     }
     
     @objc fileprivate func dismissSELF() {
