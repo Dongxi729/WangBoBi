@@ -65,7 +65,7 @@ class JFNavigationController: UINavigationController, UIGestureRecognizerDelegat
         if self.viewControllers.count > 1 {
             // 压入栈后创建返回按钮
             viewController.navigationItem.leftBarButtonItem = UIBarButtonItem(
-                image: UIImage(named: "top_navigation_back")?.withRenderingMode(UIImageRenderingMode.alwaysOriginal),
+                image: UIImage(named: "back")?.withRenderingMode(UIImageRenderingMode.alwaysOriginal),
                 style: UIBarButtonItemStyle.done,
                 target: self,
                 action: #selector(back)

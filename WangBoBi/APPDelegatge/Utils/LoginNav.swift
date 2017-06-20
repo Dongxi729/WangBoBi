@@ -4,7 +4,9 @@
 //
 //  Created by 郑东喜 on 2017/6/19.
 //  Copyright © 2017年 郑东喜. All rights reserved.
-//
+//  返回颜色 Hex Color:2796DD
+
+/// http://www.jianshu.com/p/f0d3df54baa6
 
 import UIKit
 
@@ -32,11 +34,36 @@ class LoginNav: UINavigationController, UIGestureRecognizerDelegate {
             NSForegroundColorAttributeName : UIColor.white,
             NSFontAttributeName : UIFont.systemFont(ofSize: 16 * SCREEN_SCALE)
         ]
-        
-        navBar.tintColor = UIColor.white
+
         
         // 全屏返回手势
         panGestureBack()
+    }
+    
+    /**
+     拦截push操作
+     
+     - parameter viewController: 即将压入栈的控制器
+     - parameter animated:       是否动画
+     */
+    override func pushViewController(_ viewController: UIViewController, animated: Bool) {
+        if viewControllers.count > 0 {
+            viewController.hidesBottomBarWhenPushed = true
+        } else {
+            viewController.hidesBottomBarWhenPushed = false
+        }
+        
+        super.pushViewController(viewController, animated: animated)
+        
+//        // 压入栈后创建返回按钮
+//        viewController.navigationItem.leftBarButtonItem = UIBarButtonItem(
+//            image: UIImage(named: "rean")?.withRenderingMode(UIImageRenderingMode.alwaysOriginal),
+//            style: UIBarButtonItemStyle.done,
+//            target: self,
+//            action: #selector(back)
+//        )
+
+        
     }
     
     /**

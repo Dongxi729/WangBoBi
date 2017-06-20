@@ -51,6 +51,7 @@ class RigisterWithDetailVC: UIViewController {
     fileprivate lazy var userAgree: UIButton = {
         let d : UIButton = UIButton.init(frame: CGRect.init(x: SCREEN_WIDTH * 0.355877604461523, y: SCREEN_HEIGHT * 0.665307957193126, width: 100 * SCREEN_SCALE, height: 30 * SCREEN_SCALE))
         d.layer.borderWidth = 1
+        d.addTarget(self, action: #selector(jumpToUserAgreeVC), for: .touchUpInside)
         return d
     }()
     
@@ -75,7 +76,9 @@ class RigisterWithDetailVC: UIViewController {
     // MARK: - 立即注册
     lazy var rigistBtn: UIButton = {
         let d : UIButton = UIButton.init(frame: CGRect.init(x: SCREEN_WIDTH * 0.0901771213697351, y: SCREEN_HEIGHT * 0.746829696323561, width: SCREEN_WIDTH * 0.8, height: 30 * SCREEN_SCALE))
+        
         d.layer.borderWidth = 1
+        d.addTarget(self, action: #selector(rigisterSEL), for: .touchUpInside)
         return d
     }()
 
@@ -97,6 +100,16 @@ class RigisterWithDetailVC: UIViewController {
         view.addSubview(rigistBtn)
     }
     
+    /// 用户协议也没
+    @objc fileprivate func jumpToUserAgreeVC() {
+        self.navigationController?.pushViewController(AgreeMentVC(), animated: true)
+    }
+    
+    /// 注册按钮
+    @objc fileprivate func rigisterSEL() {
+        self.navigationController?.popToRootViewController(animated: true)
+    }
+    
     //// 协议事件
     @objc fileprivate func agreeSEL(sender :UIButton) {
         sender.isSelected = !sender.isSelected
@@ -113,12 +126,5 @@ class RigisterWithDetailVC: UIViewController {
         self.navigationController?.popToRootViewController(animated: true)
     }
     
-    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-        let touch: UITouch? = touches.first
-        let touchPoint: CGPoint? = touch?.location(in: self.view)
-        print("\((touchPoint?.x)! / SCREEN_WIDTH)==\((touchPoint?.y)! / SCREEN_HEIGHT)")
-        let stringFloat = Int((touchPoint?.x)!)
-        let stringFloat1 = Int((touchPoint?.y)!)
-        print("\(stringFloat)\(stringFloat1)")
-    }
+    
 }
