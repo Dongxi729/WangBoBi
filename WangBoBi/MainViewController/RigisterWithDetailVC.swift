@@ -30,25 +30,25 @@ class RigisterWithDetailVC: BaseViewController,UITextFieldDelegate {
     fileprivate lazy var yaoqingBtn: TfPlaceHolder = {
         let d: TfPlaceHolder = TfPlaceHolder.init(frame: CGRect.init(x: SCREEN_WIDTH * 0.18438001992046, y: SCREEN_HEIGHT * 0.407608695652174, width: SCREEN_WIDTH * 0.88 - SCREEN_WIDTH * 0.213, height: 30 * SCREEN_SCALE))
         d.delegate = self
-        d.textColor = UIColor.white
+        d.textColor = UIColor.black
         d.font = UIFont.init(name: "SimHei", size: 12 * SCREEN_SCALE)
         return d
     }()
     
     // MARK: - 登录密码
-    fileprivate lazy var loginPass: TfPlaceHolder = {
-        let d : TfPlaceHolder = TfPlaceHolder.init(frame: CGRect.init(x: SCREEN_WIDTH * 0.18438001992046, y: SCREEN_HEIGHT * 0.504076086956522, width: SCREEN_WIDTH * 0.88 - SCREEN_WIDTH * 0.213, height: 30 * SCREEN_SCALE))
+    fileprivate lazy var loginPass: UITextField = {
+        let d : UITextField = UITextField.init(frame: CGRect.init(x: SCREEN_WIDTH * 0.18438001992046, y: SCREEN_HEIGHT * 0.504076086956522, width: SCREEN_WIDTH * 0.88 - SCREEN_WIDTH * 0.213, height: 30 * SCREEN_SCALE))
         d.delegate = self
-        d.textColor = UIColor.white
+        d.textColor = UIColor.black
         d.font = UIFont.init(name: "SimHei", size: 12 * SCREEN_SCALE)
         return d
     }()
     
     // MARK: - 登录密码
-    fileprivate lazy var repeatPass: TfPlaceHolder = {
-        let d :TfPlaceHolder = TfPlaceHolder.init(frame: CGRect.init(x: SCREEN_WIDTH * 0.18438001992046, y: SCREEN_HEIGHT * 0.60054347826087, width: SCREEN_WIDTH * 0.88 - SCREEN_WIDTH * 0.213, height: 30 * SCREEN_SCALE))
+    fileprivate lazy var repeatPass: UITextField = {
+        let d :UITextField = UITextField.init(frame: CGRect.init(x: SCREEN_WIDTH * 0.18438001992046, y: SCREEN_HEIGHT * 0.60054347826087, width: SCREEN_WIDTH * 0.88 - SCREEN_WIDTH * 0.213, height: 30 * SCREEN_SCALE))
         d.delegate = self
-        d.textColor = UIColor.white
+        d.textColor = UIColor.black
         d.font = UIFont.init(name: "SimHei", size: 12 * SCREEN_SCALE)
         return d
     }()
@@ -96,6 +96,7 @@ class RigisterWithDetailVC: BaseViewController,UITextFieldDelegate {
         
         // Do any additional setup after loading the view.
         title = "注册"
+        
         view.addSubview(bgImg)
         view.addSubview(loginBtn)
         view.addSubview(yaoqingBtn)
@@ -117,7 +118,37 @@ class RigisterWithDetailVC: BaseViewController,UITextFieldDelegate {
     
     /// 注册按钮
     @objc fileprivate func rigisterSEL() {
-        self.navigationController?.popToRootViewController(animated: true)
+        
+        CCog(message: loginPass.text)
+        CCog(message: repeatPass.text)
+        
+        if loginPass.text?.characters.count == 0 {
+            toast(toast: "请输入密码")
+            return
+        }
+        
+        if repeatPass.text?.characters.count == 0 {
+            toast(toast: "请再次输入密码")
+            return
+        }
+        
+        
+        if !(yaoqingBtn.text?.isEmpty)! && !(loginPass.text?.isEmpty)! && !(repeatPass.text?.isEmpty)! {
+
+            
+            if loginPass.text != repeatPass.text {
+                toast(toast: "两次输入密码不一致")
+            } else {
+                if agreeeImg.image != #imageLiteral(resourceName: "select") {
+                    toast(toast: "请同意协议")
+                    return
+                } else {
+                    AccountModel.register(referee: self.yaoqingBtn.text!, pass: loginPass.text!, repeatPass: repeatPass.text!)
+                }
+            }
+            
+            
+        }
     }
     
     //// 协议事件

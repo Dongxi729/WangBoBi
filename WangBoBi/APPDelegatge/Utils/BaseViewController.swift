@@ -26,6 +26,8 @@ class BaseViewController: UIViewController,UIGestureRecognizerDelegate,UINavigat
         //设置导航栏背景颜色透明
         UIApplication.shared.statusBarStyle = UIStatusBarStyle.lightContent
         
+        
+        /// 设置左上角按钮
         let btnn = CommonBtn()
         btnn.frame = CGRect.init(x: 0, y: SCREEN_HEIGHT * 0.01, width: SCREEN_WIDTH * 0.15, height: 20 * SCREEN_SCALE)
         
@@ -35,17 +37,18 @@ class BaseViewController: UIViewController,UIGestureRecognizerDelegate,UINavigat
         
         let rightFooBarButtonItem : UIBarButtonItem = UIBarButtonItem.init(customView: btnn)
         
+        /// 页面大于1，显示否则相反
         if (self.navigationController?.viewControllers.count)! > 1 {
             self.navigationItem.setLeftBarButton(rightFooBarButtonItem, animated: true)
         }
         
         
-        
+        /// 判断当前类名是否为协议的那个页面.
         if NSStringFromClass(self.classForCoder).contains("AgreeMentVC") {
 
             UIApplication.shared.statusBarStyle = UIStatusBarStyle.default
-
             
+            /// 为那个页面则修改左上角图标
             btnn.setBackgroundImage(UIImage.init(named: "back"), for: .normal)
             
             let navBar = navigationController?.navigationBar
@@ -54,11 +57,13 @@ class BaseViewController: UIViewController,UIGestureRecognizerDelegate,UINavigat
 
             view.addSubview(separatorLine)
             
+            /// 修改导航栏文字样式（富文本）
             navBar?.titleTextAttributes = [
                 NSForegroundColorAttributeName : UIColor.black,
                 NSFontAttributeName : UIFont.systemFont(ofSize: 16 * SCREEN_SCALE)
             ]
             
+            /// 设置
             navBar?.tintColor = UIColor.white
             
         } else {
@@ -87,9 +92,17 @@ class BaseViewController: UIViewController,UIGestureRecognizerDelegate,UINavigat
         self.navigationController?.interactivePopGestureRecognizer!.delegate = self
     }
     
+    /// 视图消失。将整个屏幕的大小改为最初的。
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         
+        view.endEditing(true)
+        UIView.animate(withDuration: 0.5) {
+            UIApplication.shared.keyWindow?.frame = (UIApplication.shared.keyWindow?.rootViewController?.view.bounds)!
+        }
+    }
+    
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         view.endEditing(true)
         UIView.animate(withDuration: 0.5) {
             UIApplication.shared.keyWindow?.frame = (UIApplication.shared.keyWindow?.rootViewController?.view.bounds)!

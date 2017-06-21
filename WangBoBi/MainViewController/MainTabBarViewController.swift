@@ -38,13 +38,13 @@ extension MainTabBarViewController {
         let meVC = JFNavigationController.init(rootViewController: MyViewController())
         
         
-        self.setupChildVC(mainPageVC, title: "首页", imageName: "home_on", selectImageName: "home")
+        self.setupChildVC(mainPageVC, title: "钱包", imageName: "icon1", selectImageName: "icon1_on")
         
-        self.setupChildVC(shopVc, title: "商户", imageName: "home_on", selectImageName: "home")
+        self.setupChildVC(shopVc, title: "商户", imageName: "icon2", selectImageName: "icon2_on")
         
-        self.setupChildVC(friendVc, title: "朋友", imageName: "detail", selectImageName: "detail_on")
+        self.setupChildVC(friendVc, title: "朋友", imageName: "icon3", selectImageName: "icon3_on")
         
-        self.setupChildVC(meVC, title: "我的", imageName: "mine_on", selectImageName: "mine")
+        self.setupChildVC(meVC, title: "我的", imageName: "icon4", selectImageName: "icon4_on")
         
         ///设置tabbar选择的图片
         let img = UIImage.init()

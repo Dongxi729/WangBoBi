@@ -40,6 +40,11 @@
 		261F067C1EF50B510019CE44 /* ShouMoneyVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 261F067B1EF50B510019CE44 /* ShouMoneyVC.swift */; };
 		261F067E1EF5190C0019CE44 /* SetMoneyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 261F067D1EF5190C0019CE44 /* SetMoneyViewController.swift */; };
 		262304541EFA210A007B0BF6 /* LoginNav.swift in Sources */ = {isa = PBXBuildFile; fileRef = 262304531EFA210A007B0BF6 /* LoginNav.swift */; };
+		262304581EFA2523007B0BF6 /* RigisterModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 262304571EFA2523007B0BF6 /* RigisterModel.swift */; };
+		2623045B1EFA45E4007B0BF6 /* AccountModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2623045A1EFA45E4007B0BF6 /* AccountModel.swift */; };
+		262304631EFA6988007B0BF6 /* NSArray+ ZXPUnicode.m in Sources */ = {isa = PBXBuildFile; fileRef = 2623045D1EFA6988007B0BF6 /* NSArray+ ZXPUnicode.m */; };
+		262304641EFA6988007B0BF6 /* NSDictionary+ZXPUnicode.m in Sources */ = {isa = PBXBuildFile; fileRef = 262304601EFA6988007B0BF6 /* NSDictionary+ZXPUnicode.m */; };
+		262304651EFA6988007B0BF6 /* NSObject+ZXPUnicode.m in Sources */ = {isa = PBXBuildFile; fileRef = 262304621EFA6988007B0BF6 /* NSObject+ZXPUnicode.m */; };
 		263CAF111EF62889006629BF /* UIImage+XLExtension.m in Sources */ = {isa = PBXBuildFile; fileRef = 263CAF0C1EF62889006629BF /* UIImage+XLExtension.m */; };
 		263CAF121EF62889006629BF /* UIView+XLExtension.m in Sources */ = {isa = PBXBuildFile; fileRef = 263CAF0E1EF62889006629BF /* UIView+XLExtension.m */; };
 		263CAF131EF62889006629BF /* XLPasswordInputView.m in Sources */ = {isa = PBXBuildFile; fileRef = 263CAF101EF62889006629BF /* XLPasswordInputView.m */; };
@@ -159,6 +164,14 @@
 		261F067B1EF50B510019CE44 /* ShouMoneyVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShouMoneyVC.swift; sourceTree = "<group>"; };
 		261F067D1EF5190C0019CE44 /* SetMoneyViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SetMoneyViewController.swift; sourceTree = "<group>"; };
 		262304531EFA210A007B0BF6 /* LoginNav.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginNav.swift; sourceTree = "<group>"; };
+		262304571EFA2523007B0BF6 /* RigisterModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RigisterModel.swift; sourceTree = "<group>"; };
+		2623045A1EFA45E4007B0BF6 /* AccountModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AccountModel.swift; sourceTree = "<group>"; };
+		2623045D1EFA6988007B0BF6 /* NSArray+ ZXPUnicode.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSArray+ ZXPUnicode.m"; sourceTree = "<group>"; };
+		2623045E1EFA6988007B0BF6 /* NSArray+ZXPUnicode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSArray+ZXPUnicode.h"; sourceTree = "<group>"; };
+		2623045F1EFA6988007B0BF6 /* NSDictionary+ZXPUnicode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSDictionary+ZXPUnicode.h"; sourceTree = "<group>"; };
+		262304601EFA6988007B0BF6 /* NSDictionary+ZXPUnicode.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSDictionary+ZXPUnicode.m"; sourceTree = "<group>"; };
+		262304611EFA6988007B0BF6 /* NSObject+ZXPUnicode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSObject+ZXPUnicode.h"; sourceTree = "<group>"; };
+		262304621EFA6988007B0BF6 /* NSObject+ZXPUnicode.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSObject+ZXPUnicode.m"; sourceTree = "<group>"; };
 		263CAF0B1EF62889006629BF /* UIImage+XLExtension.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+XLExtension.h"; sourceTree = "<group>"; };
 		263CAF0C1EF62889006629BF /* UIImage+XLExtension.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+XLExtension.m"; sourceTree = "<group>"; };
 		263CAF0D1EF62889006629BF /* UIView+XLExtension.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+XLExtension.h"; sourceTree = "<group>"; };
@@ -494,6 +507,7 @@
 		260B20CC1EF770CD00E78FD8 /* LoginAndRigister */ = {
 			isa = PBXGroup;
 			children = (
+				262304591EFA45B0007B0BF6 /* model */,
 				260B20CE1EF770FD00E78FD8 /* controller */,
 			);
 			name = LoginAndRigister;
@@ -532,7 +546,8 @@
 		260B21011EF7CD0D00E78FD8 /* RigisterV-01 */ = {
 			isa = PBXGroup;
 			children = (
-				260B21021EF7CD1F00E78FD8 /* RigisterVC.swift */,
+				262304561EFA2516007B0BF6 /* model */,
+				262304551EFA2507007B0BF6 /* controller */,
 			);
 			name = "RigisterV-01";
 			sourceTree = "<group>";
@@ -551,6 +566,43 @@
 				261004B41EF8BB9100DE000F /* AgreeMentVC.swift */,
 			);
 			name = AgreementVC;
+			sourceTree = "<group>";
+		};
+		262304551EFA2507007B0BF6 /* controller */ = {
+			isa = PBXGroup;
+			children = (
+				260B21021EF7CD1F00E78FD8 /* RigisterVC.swift */,
+			);
+			name = controller;
+			sourceTree = "<group>";
+		};
+		262304561EFA2516007B0BF6 /* model */ = {
+			isa = PBXGroup;
+			children = (
+				262304571EFA2523007B0BF6 /* RigisterModel.swift */,
+			);
+			name = model;
+			sourceTree = "<group>";
+		};
+		262304591EFA45B0007B0BF6 /* model */ = {
+			isa = PBXGroup;
+			children = (
+				2623045A1EFA45E4007B0BF6 /* AccountModel.swift */,
+			);
+			name = model;
+			sourceTree = "<group>";
+		};
+		2623045C1EFA6988007B0BF6 /* ZXPUnicode */ = {
+			isa = PBXGroup;
+			children = (
+				2623045D1EFA6988007B0BF6 /* NSArray+ ZXPUnicode.m */,
+				2623045E1EFA6988007B0BF6 /* NSArray+ZXPUnicode.h */,
+				2623045F1EFA6988007B0BF6 /* NSDictionary+ZXPUnicode.h */,
+				262304601EFA6988007B0BF6 /* NSDictionary+ZXPUnicode.m */,
+				262304611EFA6988007B0BF6 /* NSObject+ZXPUnicode.h */,
+				262304621EFA6988007B0BF6 /* NSObject+ZXPUnicode.m */,
+			);
+			path = ZXPUnicode;
 			sourceTree = "<group>";
 		};
 		263CAF0A1EF62869006629BF /* passInputV */ = {
@@ -666,6 +718,7 @@
 		264960791EF0BFC000A559D6 /* ThirdSDK */ = {
 			isa = PBXGroup;
 			children = (
+				2623045C1EFA6988007B0BF6 /* ZXPUnicode */,
 				260B20A31EF7633800E78FD8 /* GDPerformanceMonitoring */,
 				263CAF0A1EF62869006629BF /* passInputV */,
 				269C1C911EF1275500364F32 /* SwiftyJSON.swift */,
@@ -1134,9 +1187,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				262304581EFA2523007B0BF6 /* RigisterModel.swift in Sources */,
 				264960C71EF0C28F00A559D6 /* POPDecayAnimation.mm in Sources */,
 				26B14F001EF29ABA0050135B /* ReceiveMonVC.swift in Sources */,
 				269C1C921EF1275500364F32 /* SwiftyJSON.swift in Sources */,
+				262304631EFA6988007B0BF6 /* NSArray+ ZXPUnicode.m in Sources */,
 				26ED24501EF3E5E300642804 /* SetPaymentPassVC.swift in Sources */,
 				264960CA1EF0C28F00A559D6 /* POPMath.mm in Sources */,
 				26EF14A51EF90DC2005663F1 /* BaseViewController.swift in Sources */,
@@ -1144,6 +1199,7 @@
 				264960C81EF0C28F00A559D6 /* POPGeometry.mm in Sources */,
 				260B21061EF7DFF500E78FD8 /* RigisterWithDetailVC.swift in Sources */,
 				260B20D61EF7A0F900E78FD8 /* ToolBar.swift in Sources */,
+				262304651EFA6988007B0BF6 /* NSObject+ZXPUnicode.m in Sources */,
 				264961041EF0C9EC00A559D6 /* UIImageView+YYWebImage.m in Sources */,
 				266E97211EF3D5460057FD90 /* AccountAndSaveVC.swift in Sources */,
 				2607D14F1EF212450015625E /* NetCheck.swift in Sources */,
@@ -1155,6 +1211,7 @@
 				264961071EF0C9EC00A559D6 /* YYImage.m in Sources */,
 				26A0A4AB1EF1064C00035D0D /* NetWorkTool.swift in Sources */,
 				264961081EF0C9EC00A559D6 /* YYImageCoder.m in Sources */,
+				262304641EFA6988007B0BF6 /* NSDictionary+ZXPUnicode.m in Sources */,
 				263CAF111EF62889006629BF /* UIImage+XLExtension.m in Sources */,
 				264960CB1EF0C28F00A559D6 /* POPPropertyAnimation.mm in Sources */,
 				26EF14A01EF8F7FD005663F1 /* ShowSuccessInfoV.swift in Sources */,
@@ -1170,6 +1227,7 @@
 				260B20C81EF76B5500E78FD8 /* MyRequestVC.swift in Sources */,
 				264960CE1EF0C28F00A559D6 /* TransformationMatrix.cpp in Sources */,
 				260B20D41EF7A08D00E78FD8 /* TfPlaceHolder.swift in Sources */,
+				2623045B1EFA45E4007B0BF6 /* AccountModel.swift in Sources */,
 				2643CFC61EF3EE2200EFC720 /* DetailViewController.swift in Sources */,
 				264960FE1EF0C9EC00A559D6 /* YYMemoryCache.m in Sources */,
 				260B20D21EF79F5100E78FD8 /* CommonV.swift in Sources */,

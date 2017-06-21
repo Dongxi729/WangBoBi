@@ -9,7 +9,7 @@
 import Foundation
 
 /// 登录链接
-let LOGIN_URL = ""
+let LOGIN_URL = "http://192.168.1.10:8010/ifs/login.ashx"
 
 /// 忘记密码链接
 let FORGETPASS_URL = ""
@@ -24,5 +24,8 @@ let EMAILSIGNED_URL = ""
 let MODIFYLOGINPASS_URL = ""
 
 /// 注册请求
-let RIGISTER_URL = ""
+let RIGISTER_URL = "http://192.168.1.10:8010/ifs/reg.ashx"
+
+/// 验证token借口
+let CHECK_TOKEN = ""
 

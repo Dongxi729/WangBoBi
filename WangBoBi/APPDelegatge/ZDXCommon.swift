@@ -168,3 +168,10 @@ enum iPhoneModel {
 
 // MARK:- 屏幕放大比例
 let SCREEN_SCALE = UIScreen.main.bounds.width / 320
+
+
+// MARK: - 提示信息
+func toast(toast str : String) {
+    FTIndicator.showToastMessage(str)
+    FTIndicator.setIndicatorStyleToDefaultStyle()
+}

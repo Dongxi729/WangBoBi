@@ -25,6 +25,7 @@ class RigisterVC: BaseViewController,UITextFieldDelegate {
         d.layer.borderColor = UIColor.black.cgColor
         d.delegate = self
         d.font = UIFont.init(name: "SimHei", size: 12 * SCREEN_SCALE)
+        
         return d
     }()
     
@@ -62,10 +63,12 @@ class RigisterVC: BaseViewController,UITextFieldDelegate {
     /// 发生验证码
     @objc fileprivate func jumpToRigisterDetailV() {
         
-        DispatchQueue.main.async {
+        if !(AddLabel.text?.isEmpty)! {
+            AccountModel.shared()?.email = AddLabel.text!
             self.navigationController?.pushViewController(RigisterWithDetailVC(), animated: true)
+        } else {
+            toast(toast: "邮箱不能为空")
         }
-    
     }
     
     

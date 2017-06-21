@@ -47,6 +47,7 @@ class LoginViewController: BaseViewController,UITextFieldDelegate {
         d.plStrSize(str: "邮箱地址", holderColor: UIColor.white)
         d.textColor = UIColor.white
         d.font = UIFont.init(name: "SimHei", size: 12 * SCREEN_SCALE)
+        d.keyboardType = .numbersAndPunctuation
         d.delegate = self
         
         return d
@@ -58,6 +59,7 @@ class LoginViewController: BaseViewController,UITextFieldDelegate {
         d.plStrSize(str: "登录密码", holderColor: UIColor.white)
         d.textColor = UIColor.white
         d.font = UIFont.init(name: "SimHei", size: 12 * SCREEN_SCALE)
+        d.keyboardType = .numberPad
         d.delegate = self
         
         return d
@@ -88,13 +90,6 @@ class LoginViewController: BaseViewController,UITextFieldDelegate {
         return d
     }()
     
-//    override func viewWillAppear(_ animated: Bool) {
-//        super.viewWillAppear(animated)
-//        
-//        self.navigationController?.navigationBar.isHidden = true
-//    }
-    
-    
     // MARK: - UitextFieldDelegate
     func textFieldShouldBeginEditing(_ textField: UITextField) -> Bool {
         
@@ -110,16 +105,16 @@ class LoginViewController: BaseViewController,UITextFieldDelegate {
         
         /// 判断输入的邮箱、密码长度是否大于0
         if !(accountLabel.text?.isEmpty)! && !(passTf.text?.isEmpty)! {
-            /// 从模型取结果
-            if LoginModel.shared.loginSuccess() {
-                ////  逻辑 : 判断邮箱地址、登录密码是否一致。
-                UIApplication.shared.keyWindow?.rootViewController = MainTabBarViewController()
-            } else {
-                /// 提示出错信息
-                FTIndicator.showToastMessage("登录信息有误")
-            }
+            AccountModel.getInfo(emailStr: self.accountLabel.text!, pass: self.passTf.text!)
+
         } else {
             FTIndicator.showToastMessage("邮箱或密码为空")
+        }
+        
+        /// 收缩键盘
+        view.endEditing(true)
+        UIView.animate(withDuration: 0.5) {
+            UIApplication.shared.keyWindow?.frame = (UIApplication.shared.keyWindow?.rootViewController?.view.bounds)!
         }
     }
     

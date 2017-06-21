@@ -24,6 +24,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         setGraphicsAndCPU()
         
+        CCog(message: AccountModel.isLogin())
+        
         window = UIWindow.init(frame: UIScreen.main.bounds)
         
         nav = LoginNav.init(rootViewController: LoginViewController())
@@ -34,6 +36,19 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         // 设置全局颜色
         UITabBar.appearance().tintColor = TABBAR_BGCOLOR
+        
+//        NetWorkTool.shared.postWithPath(path: LOGIN_URL, paras: ["email" : "18259129536@163.com","pwd" : "123".md5()], success: { (result) in
+//            CCog(message: result)
+//        }) { (error) in
+//            CCog(message: error.localizedDescription)
+//        }
+        
+        NetWorkTool.shared.postWithPath(path: RIGISTER_URL, paras: ["email" : "18259129536@163.com","pwd" : "123".md5(),"referee" : ""], success: { (result) in
+            CCog(message: result)
+        }) { (error) in
+            CCog(message: error.localizedDescription)
+        }
+        
         
         return true
     }

@@ -32,9 +32,6 @@ class TestViewController: UIViewController {
         view.backgroundColor = UIColor.randomColor()
     }
     
-    
-    
-    
     lazy var showInfoVVV: ShowFailV = {
         let d : ShowFailV = ShowFailV.init(frame: self.view.bounds)
         return d
