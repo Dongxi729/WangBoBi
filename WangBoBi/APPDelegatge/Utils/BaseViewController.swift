@@ -40,6 +40,7 @@ class BaseViewController: UIViewController,UIGestureRecognizerDelegate,UINavigat
         }
         
         
+        
         if NSStringFromClass(self.classForCoder).contains("AgreeMentVC") {
 
             UIApplication.shared.statusBarStyle = UIStatusBarStyle.default
@@ -48,8 +49,8 @@ class BaseViewController: UIViewController,UIGestureRecognizerDelegate,UINavigat
             btnn.setBackgroundImage(UIImage.init(named: "back"), for: .normal)
             
             let navBar = navigationController?.navigationBar
-            navBar?.barTintColor = UIColor.white
-            navBar?.isTranslucent = false
+            navBar?.barTintColor = UIColor.clear
+            navBar?.isTranslucent = true
 
             view.addSubview(separatorLine)
             
@@ -62,9 +63,8 @@ class BaseViewController: UIViewController,UIGestureRecognizerDelegate,UINavigat
             
         } else {
             
-            
             let navBar = navigationController?.navigationBar
-            navBar?.barTintColor = UIColor.clear
+            navBar?.barTintColor = UIColor.white
             navBar?.isTranslucent = true
             
             

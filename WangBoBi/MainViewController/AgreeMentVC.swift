@@ -10,6 +10,23 @@ import UIKit
 
 class AgreeMentVC: BaseViewController {
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        let navBar = navigationController?.navigationBar
+        navBar?.barTintColor = UIColor.white
+        navBar?.isTranslucent = false
+        
+        
+        navBar?.setBackgroundImage(UIImage(), for: UIBarMetrics.default)
+        navBar?.shadowImage = UIImage()
+        
+        navBar?.titleTextAttributes = [
+            NSForegroundColorAttributeName : UIColor.black,
+            NSFontAttributeName : UIFont.systemFont(ofSize: 16 * SCREEN_SCALE)
+        ]
+    }
+    
     lazy var contentView: UITextView = {
         let d : UITextView = UITextView.init(frame: self.view.bounds)
         let str = "很少很少很少很少很少很少很少很少很少很少很少很少很少很少很少很少很少很少很少很少很少很少很少很少很少很少很少很少很少很少很少很少很少很少很少很少很少很少很少很少很少很少很少很少很少很少很少很少很少很少很少很少很少很少很少很少很少很少很少很少很少很少很少很少很少很少很少很少很少很少很少很少很少很少很少很少很少很少很少很少很少很少很少很少很少很少很少很少很少很少很少很少很少很少很少很少很少很少很少很少很少很少很少很少很少很少很少很少很少很少很少很少很少很少很少很少很少很少很少很少很少很少很少很少很少很少很少很少很少很少很少很少很少很少很少很少很少很少很少很少很少很少很少很少很少很少很少很少很少很少很少很少很少很少很少很少很少很少很少很少很少很少很少很少很少很少很少很少很少很少很少很少很少很少很少很少很少很少很少很少很少很少很少很少很少很少很少很少很少很少很少很少很少很少很少很少很少很少很少很少很少很少很少很少很少很少很少很少很少很少很少很少很少很少很少很少很少很少很少很少很少很少很少很少很少很少很少很少很少很少很少很少很少很少很少很少很少很少很少很少很少很少很少很少很少很少很少很少很少很少很少很少很少很少很少很少很少很少很少很少很少很少很少很少很少很少很少很少很少很少很少很少很少很少很少很少很少很少很少很少很少很少很少很少很少很少很少很少很少很少很少很少很少很少很少很少很少很少很少很少很少很少很少很少很少很少很少很少很少很少很少很少很少很少很少很少很少很少很少很少很少很少很少很少很少很少很少很少很少很少很少很少很少很少很少很少"

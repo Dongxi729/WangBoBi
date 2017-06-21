@@ -39,6 +39,7 @@
 		261F067A1EF4FB590019CE44 /* MyBandCardVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 261F06791EF4FB590019CE44 /* MyBandCardVC.swift */; };
 		261F067C1EF50B510019CE44 /* ShouMoneyVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 261F067B1EF50B510019CE44 /* ShouMoneyVC.swift */; };
 		261F067E1EF5190C0019CE44 /* SetMoneyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 261F067D1EF5190C0019CE44 /* SetMoneyViewController.swift */; };
+		262304541EFA210A007B0BF6 /* LoginNav.swift in Sources */ = {isa = PBXBuildFile; fileRef = 262304531EFA210A007B0BF6 /* LoginNav.swift */; };
 		263CAF111EF62889006629BF /* UIImage+XLExtension.m in Sources */ = {isa = PBXBuildFile; fileRef = 263CAF0C1EF62889006629BF /* UIImage+XLExtension.m */; };
 		263CAF121EF62889006629BF /* UIView+XLExtension.m in Sources */ = {isa = PBXBuildFile; fileRef = 263CAF0E1EF62889006629BF /* UIView+XLExtension.m */; };
 		263CAF131EF62889006629BF /* XLPasswordInputView.m in Sources */ = {isa = PBXBuildFile; fileRef = 263CAF101EF62889006629BF /* XLPasswordInputView.m */; };
@@ -157,6 +158,7 @@
 		261F06791EF4FB590019CE44 /* MyBandCardVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MyBandCardVC.swift; path = ../../MainViewController/MyBandCardVC.swift; sourceTree = "<group>"; };
 		261F067B1EF50B510019CE44 /* ShouMoneyVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShouMoneyVC.swift; sourceTree = "<group>"; };
 		261F067D1EF5190C0019CE44 /* SetMoneyViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SetMoneyViewController.swift; sourceTree = "<group>"; };
+		262304531EFA210A007B0BF6 /* LoginNav.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginNav.swift; sourceTree = "<group>"; };
 		263CAF0B1EF62889006629BF /* UIImage+XLExtension.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+XLExtension.h"; sourceTree = "<group>"; };
 		263CAF0C1EF62889006629BF /* UIImage+XLExtension.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+XLExtension.m"; sourceTree = "<group>"; };
 		263CAF0D1EF62889006629BF /* UIView+XLExtension.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+XLExtension.h"; sourceTree = "<group>"; };
@@ -956,6 +958,7 @@
 				26EF14A11EF900DD005663F1 /* AlertView */,
 				260B20D51EF7A0F900E78FD8 /* ToolBar.swift */,
 				260B20D31EF7A08D00E78FD8 /* TfPlaceHolder.swift */,
+				262304531EFA210A007B0BF6 /* LoginNav.swift */,
 				260B20D11EF79F5100E78FD8 /* CommonV.swift */,
 				2607D1521EF21E140015625E /* BaseTabbarVC.swift */,
 				26A0A4A81EF0E26B00035D0D /* JFNavigationController.swift */,
@@ -1144,6 +1147,7 @@
 				264961041EF0C9EC00A559D6 /* UIImageView+YYWebImage.m in Sources */,
 				266E97211EF3D5460057FD90 /* AccountAndSaveVC.swift in Sources */,
 				2607D14F1EF212450015625E /* NetCheck.swift in Sources */,
+				262304541EFA210A007B0BF6 /* LoginNav.swift in Sources */,
 				261004B01EF8B09B00DE000F /* ForgetPassVCTwo.swift in Sources */,
 				260B20CB1EF76BAA00E78FD8 /* MyMsgVC.swift in Sources */,
 				261F067A1EF4FB590019CE44 /* MyBandCardVC.swift in Sources */,
