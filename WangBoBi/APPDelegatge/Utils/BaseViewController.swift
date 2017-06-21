@@ -8,13 +8,13 @@
 
 import UIKit
 
-class BaseViewController: UIViewController {
+class BaseViewController: UIViewController,UIGestureRecognizerDelegate,UINavigationBarDelegate {
     
     var leftBarItem : UIButton = UIButton()
     
     /// 分割线
     lazy var separatorLine: UIView = {
-        let d : UIView = UIView.init(frame: CGRect.init(x: 0, y: (self.navigationController?.navigationBar.BottomY)!, width: SCREEN_WIDTH, height: 1))
+        let d : UIView = UIView.init(frame: CGRect.init(x: 0, y: 0, width: SCREEN_WIDTH, height: 1))
         d.backgroundColor = UIColor.gray
         return d
     }()
@@ -22,6 +22,10 @@ class BaseViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        
+        //设置导航栏背景颜色透明
+        UIApplication.shared.statusBarStyle = UIStatusBarStyle.lightContent
+        
         let btnn = CommonBtn()
         btnn.frame = CGRect.init(x: 0, y: SCREEN_HEIGHT * 0.01, width: SCREEN_WIDTH * 0.15, height: 20 * SCREEN_SCALE)
         
@@ -38,17 +42,27 @@ class BaseViewController: UIViewController {
         
         if NSStringFromClass(self.classForCoder).contains("AgreeMentVC") {
 
+            UIApplication.shared.statusBarStyle = UIStatusBarStyle.default
+
+            
             btnn.setBackgroundImage(UIImage.init(named: "back"), for: .normal)
             
             let navBar = navigationController?.navigationBar
-            navBar?.barTintColor = UIColor.clear
-            navBar?.isTranslucent = true
+            navBar?.barTintColor = UIColor.white
+            navBar?.isTranslucent = false
 
-            
-            CCog(message: "yes")
             view.addSubview(separatorLine)
             
+            navBar?.titleTextAttributes = [
+                NSForegroundColorAttributeName : UIColor.black,
+                NSFontAttributeName : UIFont.systemFont(ofSize: 16 * SCREEN_SCALE)
+            ]
+            
+            navBar?.tintColor = UIColor.white
+            
         } else {
+            
+            
             let navBar = navigationController?.navigationBar
             navBar?.barTintColor = UIColor.clear
             navBar?.isTranslucent = true
@@ -61,8 +75,6 @@ class BaseViewController: UIViewController {
                 NSForegroundColorAttributeName : UIColor.white,
                 NSFontAttributeName : UIFont.systemFont(ofSize: 16 * SCREEN_SCALE)
             ]
-            
-            CCog(message: "no")
         }
     }
     
@@ -70,6 +82,9 @@ class BaseViewController: UIViewController {
         super.viewDidLoad()
         
         // Do any additional setup after loading the view.
+        
+        //启用滑动返回（swipe back）
+        self.navigationController?.interactivePopGestureRecognizer!.delegate = self
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -82,18 +97,16 @@ class BaseViewController: UIViewController {
     }
     
     @objc fileprivate func back() {
-//        popViewController(animated: true)
+
         self.navigationController?.popViewController(animated: true)
     }
     
-    
-    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-        let touch: UITouch? = touches.first
-        let touchPoint: CGPoint? = touch?.location(in: self.view)
-        print("\((touchPoint?.x)! / SCREEN_WIDTH)==\((touchPoint?.y)! / SCREEN_HEIGHT)")
-        let stringFloat = Int((touchPoint?.x)!)
-        let stringFloat1 = Int((touchPoint?.y)!)
-        print("\(stringFloat)\(stringFloat1)")
+    //修复返回失效
+    func gestureRecognizerShouldBegin(_ gestureRecognizer: UIGestureRecognizer) -> Bool {
+        
+        if gestureRecognizer == self.navigationController?.interactivePopGestureRecognizer {
+            return (self.navigationController?.viewControllers.count)! > 1
+        }
+        return true
     }
-    
 }

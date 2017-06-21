@@ -29,7 +29,6 @@
 		260B20D41EF7A08D00E78FD8 /* TfPlaceHolder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 260B20D31EF7A08D00E78FD8 /* TfPlaceHolder.swift */; };
 		260B20D61EF7A0F900E78FD8 /* ToolBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 260B20D51EF7A0F900E78FD8 /* ToolBar.swift */; };
 		260B20DA1EF7B1FD00E78FD8 /* ForgetPassVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 260B20D91EF7B1FD00E78FD8 /* ForgetPassVC.swift */; };
-		260B20DE1EF7B4FA00E78FD8 /* LoginNav.swift in Sources */ = {isa = PBXBuildFile; fileRef = 260B20DD1EF7B4FA00E78FD8 /* LoginNav.swift */; };
 		260B21001EF7C0E900E78FD8 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 260B20FF1EF7C0E900E78FD8 /* LoginViewController.swift */; };
 		260B21031EF7CD1F00E78FD8 /* RigisterVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 260B21021EF7CD1F00E78FD8 /* RigisterVC.swift */; };
 		260B21061EF7DFF500E78FD8 /* RigisterWithDetailVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 260B21051EF7DFF500E78FD8 /* RigisterWithDetailVC.swift */; };
@@ -148,7 +147,6 @@
 		260B20D31EF7A08D00E78FD8 /* TfPlaceHolder.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TfPlaceHolder.swift; sourceTree = "<group>"; };
 		260B20D51EF7A0F900E78FD8 /* ToolBar.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ToolBar.swift; sourceTree = "<group>"; };
 		260B20D91EF7B1FD00E78FD8 /* ForgetPassVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ForgetPassVC.swift; sourceTree = "<group>"; };
-		260B20DD1EF7B4FA00E78FD8 /* LoginNav.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginNav.swift; sourceTree = "<group>"; };
 		260B20FF1EF7C0E900E78FD8 /* LoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		260B21021EF7CD1F00E78FD8 /* RigisterVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RigisterVC.swift; sourceTree = "<group>"; };
 		260B21051EF7DFF500E78FD8 /* RigisterWithDetailVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RigisterWithDetailVC.swift; sourceTree = "<group>"; };
@@ -961,7 +959,6 @@
 				260B20D11EF79F5100E78FD8 /* CommonV.swift */,
 				2607D1521EF21E140015625E /* BaseTabbarVC.swift */,
 				26A0A4A81EF0E26B00035D0D /* JFNavigationController.swift */,
-				260B20DD1EF7B4FA00E78FD8 /* LoginNav.swift */,
 				26EF14A41EF90DC2005663F1 /* BaseViewController.swift */,
 			);
 			path = Utils;
@@ -1140,7 +1137,6 @@
 				26ED24501EF3E5E300642804 /* SetPaymentPassVC.swift in Sources */,
 				264960CA1EF0C28F00A559D6 /* POPMath.mm in Sources */,
 				26EF14A51EF90DC2005663F1 /* BaseViewController.swift in Sources */,
-				260B20DE1EF7B4FA00E78FD8 /* LoginNav.swift in Sources */,
 				264960FB1EF0C9EC00A559D6 /* YYCache.m in Sources */,
 				264960C81EF0C28F00A559D6 /* POPGeometry.mm in Sources */,
 				260B21061EF7DFF500E78FD8 /* RigisterWithDetailVC.swift in Sources */,

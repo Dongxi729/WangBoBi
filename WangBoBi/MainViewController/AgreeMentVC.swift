@@ -10,13 +10,9 @@ import UIKit
 
 class AgreeMentVC: BaseViewController {
     
-    lazy var contentView: UILabel = {
-        let d : UILabel = UILabel.init(frame: CGRect.init(x: 0, y: 64, width: SCREEN_WIDTH, height: SCREEN_HEIGHT - 64))
+    lazy var contentView: UITextView = {
+        let d : UITextView = UITextView.init(frame: self.view.bounds)
         let str = "很少很少很少很少很少很少很少很少很少很少很少很少很少很少很少很少很少很少很少很少很少很少很少很少很少很少很少很少很少很少很少很少很少很少很少很少很少很少很少很少很少很少很少很少很少很少很少很少很少很少很少很少很少很少很少很少很少很少很少很少很少很少很少很少很少很少很少很少很少很少很少很少很少很少很少很少很少很少很少很少很少很少很少很少很少很少很少很少很少很少很少很少很少很少很少很少很少很少很少很少很少很少很少很少很少很少很少很少很少很少很少很少很少很少很少很少很少很少很少很少很少很少很少很少很少很少很少很少很少很少很少很少很少很少很少很少很少很少很少很少很少很少很少很少很少很少很少很少很少很少很少很少很少很少很少很少很少很少很少很少很少很少很少很少很少很少很少很少很少很少很少很少很少很少很少很少很少很少很少很少很少很少很少很少很少很少很少很少很少很少很少很少很少很少很少很少很少很少很少很少很少很少很少很少很少很少很少很少很少很少很少很少很少很少很少很少很少很少很少很少很少很少很少很少很少很少很少很少很少很少很少很少很少很少很少很少很少很少很少很少很少很少很少很少很少很少很少很少很少很少很少很少很少很少很少很少很少很少很少很少很少很少很少很少很少很少很少很少很少很少很少很少很少很少很少很少很少很少很少很少很少很少很少很少很少很少很少很少很少很少很少很少很少很少很少很少很少很少很少很少很少很少很少很少很少很少很少很少很少很少很少很少很少很少很少很少很少很少很少很少很少很少很少很少很少很少很少很少很少很少很少很少很少很少很少很少"
-
-        //设置允许换行
-        d.numberOfLines = 0
-        //要显示的文字
 
         //通过富文本来设置行间距
         let paraph = NSMutableParagraphStyle()
@@ -27,21 +23,11 @@ class AgreeMentVC: BaseViewController {
                           NSParagraphStyleAttributeName: paraph]
         d.attributedText = NSAttributedString(string: str, attributes: attributes)
         
+        /// 设置不可编辑
+        d.isEditable = false
+        
         return d
     }()
-    
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(true)
-        
-        inVNavStyle()
-    
-
-    }
-    
-    override func viewWillDisappear(_ animated: Bool) {
-        super.viewDidDisappear(true)
-        outNavStyle()
-    }
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -59,8 +45,7 @@ class AgreeMentVC: BaseViewController {
         let navBar = navigationController?.navigationBar
         navBar?.barTintColor = UIColor.clear
         navBar?.isTranslucent = true
-        
-        
+    
         navBar?.setBackgroundImage(UIImage(), for: UIBarMetrics.default)
         navBar?.shadowImage = UIImage()
         
