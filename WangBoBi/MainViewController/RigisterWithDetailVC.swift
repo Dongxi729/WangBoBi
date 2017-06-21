@@ -57,7 +57,6 @@ class RigisterWithDetailVC: BaseViewController,UITextFieldDelegate {
     // MARK: - 用户协议
     fileprivate lazy var userAgree: UIButton = {
         let d : UIButton = UIButton.init(frame: CGRect.init(x: SCREEN_WIDTH * 0.355877604461523, y: SCREEN_HEIGHT * 0.665307957193126, width: 100 * SCREEN_SCALE, height: 30 * SCREEN_SCALE))
-        d.layer.borderWidth = 1
         d.addTarget(self, action: #selector(jumpToUserAgreeVC), for: .touchUpInside)
         return d
     }()
@@ -86,8 +85,6 @@ class RigisterWithDetailVC: BaseViewController,UITextFieldDelegate {
     lazy var rigistBtn: UIButton = {
         let d : UIButton = UIButton.init(frame: CGRect.init(x: SCREEN_WIDTH * 0.0901771213697351, y: SCREEN_HEIGHT * 0.746829696323561, width: SCREEN_WIDTH * 0.8, height: 30 * SCREEN_SCALE))
         
-        
-        d.layer.borderWidth = 1
         d.addTarget(self, action: #selector(rigisterSEL), for: .touchUpInside)
         return d
     }()
@@ -112,7 +109,10 @@ class RigisterWithDetailVC: BaseViewController,UITextFieldDelegate {
     
     /// 用户协议也没x
     @objc fileprivate func jumpToUserAgreeVC() {
-        self.navigationController?.pushViewController(AgreeMentVC(), animated: true)
+        DispatchQueue.main.async {
+            self.navigationController?.pushViewController(AgreeMentVC(), animated: true)
+        }
+        
     }
     
     /// 注册按钮

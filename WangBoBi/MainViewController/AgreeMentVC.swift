@@ -8,7 +8,7 @@
 
 import UIKit
 
-class AgreeMentVC: UIViewController {
+class AgreeMentVC: BaseViewController {
     
     lazy var contentView: UILabel = {
         let d : UILabel = UILabel.init(frame: CGRect.init(x: 0, y: 64, width: SCREEN_WIDTH, height: SCREEN_HEIGHT - 64))
@@ -34,6 +34,8 @@ class AgreeMentVC: UIViewController {
         super.viewWillAppear(true)
         
         inVNavStyle()
+    
+
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -48,6 +50,7 @@ class AgreeMentVC: UIViewController {
         title = "用户协议"
         
         view.addSubview(contentView)
+        
     }
     
    fileprivate func outNavStyle() -> Void {

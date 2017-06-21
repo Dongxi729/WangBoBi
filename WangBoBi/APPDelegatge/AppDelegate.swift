@@ -16,7 +16,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     /// 性能占用显示。
     var performanceView: GDPerformanceMonitor?
     
-    var nav : UINavigationController?
+    var nav : LoginNav?
 
     
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {

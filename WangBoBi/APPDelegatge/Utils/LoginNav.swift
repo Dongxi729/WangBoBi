@@ -18,23 +18,22 @@ class LoginNav: UINavigationController, UIGestureRecognizerDelegate {
         //设置导航栏背景颜色透明
         UIApplication.shared.statusBarStyle = UIStatusBarStyle.lightContent
     }
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        let navBar = navigationBar
-        navBar.barTintColor = UIColor.clear
-        navBar.isTranslucent = true
-        
-        
-        navBar.setBackgroundImage(UIImage(), for: UIBarMetrics.default)
-        navBar.shadowImage = UIImage()
-        
-        navBar.titleTextAttributes = [
-            NSForegroundColorAttributeName : UIColor.white,
-            NSFontAttributeName : UIFont.systemFont(ofSize: 16 * SCREEN_SCALE)
-        ]
-
+//        let navBar = navigationBar
+//        navBar.barTintColor = UIColor.clear
+//        navBar.isTranslucent = true
+//        
+//        
+//        navBar.setBackgroundImage(UIImage(), for: UIBarMetrics.default)
+//        navBar.shadowImage = UIImage()
+//        
+//        navBar.titleTextAttributes = [
+//            NSForegroundColorAttributeName : UIColor.white,
+//            NSFontAttributeName : UIFont.systemFont(ofSize: 16 * SCREEN_SCALE)
+//        ]
         
         // 全屏返回手势
         panGestureBack()
@@ -55,13 +54,26 @@ class LoginNav: UINavigationController, UIGestureRecognizerDelegate {
         
         super.pushViewController(viewController, animated: animated)
         
-        // 压入栈后创建返回按钮
-//        viewController.navigationItem.leftBarButtonItem = UIBarButtonItem(
-//            image: UIImage(named: "")?.withRenderingMode(UIImageRenderingMode.alwaysOriginal),
-//            style: UIBarButtonItemStyle.done,
-//            target: self,
-//            action: #selector(back)
-//        )
+        //        // 压入栈后创建返回按钮
+        //        viewController.navigationItem.leftBarButtonItem = UIBarButtonItem(
+        //            image: UIImage(named: "rean")?.withRenderingMode(UIImageRenderingMode.alwaysOriginal),
+        //            style: UIBarButtonItemStyle.done,
+        //            target: self,
+        //            action: #selector(back)
+        //        )
+        
+//        let btnn = UIButton()
+//        btnn.frame = CGRect(x: 0, y: 64, width: 20, height: 20)
+//        
+//        btnn.addTarget(self, action:#selector(back), for: .touchUpInside)
+//        
+//        btnn.setBackgroundImage(UIImage.init(named: "back"), for: .normal)
+//        btnn.setBackgroundImage(UIImage.init(named: "back"), for: .highlighted)
+//        
+//        
+//        let rightFooBarButtonItem : UIBarButtonItem = UIBarButtonItem.init(customView: btnn)
+        
+//        self.navigationItem.setLeftBarButton(rightFooBarButtonItem, animated: true)
     }
     
     /**
@@ -73,8 +85,6 @@ class LoginNav: UINavigationController, UIGestureRecognizerDelegate {
         pan.delegate = self
         view.addGestureRecognizer(pan)
         interactivePopGestureRecognizer?.isEnabled = false
-
-        CCog(message: "=======-------")
     }
     
     // MARK: - UIGestureRecognizerDelegate
@@ -90,7 +100,6 @@ class LoginNav: UINavigationController, UIGestureRecognizerDelegate {
      全局返回操作
      */
     @objc fileprivate func back() {
-        CCog(message: "返回事件")
         popViewController(animated: true)
     }
     

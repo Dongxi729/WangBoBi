@@ -12,6 +12,7 @@ class CommonBtn: UIButton {
     
     override init(frame: CGRect) {
         super.init(frame: frame)
+        self.imageView?.contentMode = UIViewContentMode.scaleAspectFit
     }
     
     override func titleRect(forContentRect contentRect: CGRect) -> CGRect {

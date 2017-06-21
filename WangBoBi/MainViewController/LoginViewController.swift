@@ -26,11 +26,9 @@ class LoginViewController: BaseViewController,UITextFieldDelegate {
         let deviceType = UIDevice.current.deviceType
         
         if deviceType == .iPhone4S {
-            
-            CCog(message: "4s")
+
             bgImg.image = #imageLiteral(resourceName: "4s-LoginBG")
         } else {
-            CCog(message: "不是4s")
             bgImg.image = #imageLiteral(resourceName: "LoginBgV")
         }
     }
@@ -90,11 +88,11 @@ class LoginViewController: BaseViewController,UITextFieldDelegate {
         return d
     }()
     
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        
-        self.navigationController?.navigationBar.isHidden = true
-    }
+//    override func viewWillAppear(_ animated: Bool) {
+//        super.viewWillAppear(animated)
+//        
+//        self.navigationController?.navigationBar.isHidden = true
+//    }
     
     
     // MARK: - UitextFieldDelegate

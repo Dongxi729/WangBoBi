@@ -31,7 +31,6 @@ class RigisterVC: BaseViewController,UITextFieldDelegate {
     // MARK: - 确定按钮
     fileprivate lazy var confirmBtn: UIButton = {
         let d : UIButton = UIButton.init(frame: CGRect.init(x: 0.1256038647343 * SCREEN_WIDTH, y: SCREEN_HEIGHT * 0.53804347826087, width: SCREEN_WIDTH * 0.75, height: 30 * SCREEN_SCALE))
-        d.layer.borderWidth = 1
         d.addTarget(self, action: #selector(jumpToRigisterDetailV), for: .touchUpInside)
         return d
     }()
