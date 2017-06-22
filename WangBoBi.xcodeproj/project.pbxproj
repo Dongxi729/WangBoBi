@@ -294,6 +294,7 @@
 		265991F31EF65D5C004391E9 /* CommonBtn.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CommonBtn.swift; sourceTree = "<group>"; };
 		265992131EF66C6B004391E9 /* AddBankCardVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AddBankCardVC.swift; path = Controller/AddBankCardVC.swift; sourceTree = "<group>"; };
 		265D430B1EFBA8B1007F5AB8 /* MyInfoVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MyInfoVC.swift; sourceTree = "<group>"; };
+		265D430D1EFBC19D007F5AB8 /* MyPlayground.playground */ = {isa = PBXFileReference; lastKnownFileType = file.playground; path = MyPlayground.playground; sourceTree = "<group>"; };
 		266E97201EF3D5460057FD90 /* AccountAndSaveVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AccountAndSaveVC.swift; path = "../../Mine-04/Controller/AccountAndSaveVC.swift"; sourceTree = "<group>"; };
 		269C1C911EF1275500364F32 /* SwiftyJSON.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwiftyJSON.swift; sourceTree = "<group>"; };
 		26A0A4A81EF0E26B00035D0D /* JFNavigationController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JFNavigationController.swift; sourceTree = "<group>"; };
@@ -886,6 +887,7 @@
 				264960D01EF0C34B00A559D6 /* Device+extension.swift */,
 				264961181EF0CD3E00A559D6 /* UIView+Extension.swift */,
 				2649611A1EF0CD9200A559D6 /* NSString+extension.swift */,
+				265D430D1EFBC19D007F5AB8 /* MyPlayground.playground */,
 			);
 			path = Extension;
 			sourceTree = "<group>";

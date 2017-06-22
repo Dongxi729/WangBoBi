@@ -16,7 +16,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     /// 性能占用显示。
     var performanceView: GDPerformanceMonitor?
     
-    var nav : JFNavigationController?
+    var nav : LoginNav?
 
     
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
@@ -28,7 +28,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         window = UIWindow.init(frame: UIScreen.main.bounds)
         
-        nav = JFNavigationController.init(rootViewController: MainTabBarViewController())
+        nav = LoginNav.init(rootViewController: LoginViewController())
         window?.rootViewController = nav
         
         window?.makeKeyAndVisible()
@@ -57,8 +57,15 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 //            CCog(message: error.localizedDescription)
 //        }
         
+        let msgStr = "  18259129536@163.com"
+        
+        
+        CCog(message: msgStr.validateEmail())
+        
         return true
     }
+    
+    
     
     /// 设置显示和处理器性能
     private func setGraphicsAndCPU() -> Void {
@@ -73,3 +80,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
 }
 
+
+extension String {
+ 
+}

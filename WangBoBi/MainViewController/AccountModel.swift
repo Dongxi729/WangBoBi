@@ -21,8 +21,11 @@ class AccountModel: NSObject,NSCoding {
 //    /// 头像路径
 //    var avatarUrl : String?
 //    
-//    /// 邮箱
+    /// 邮箱
     var email : String = ""
+    
+    /// 验证码
+    var autoCode : String = ""
     
     // KVC 字典转模型
     init(dict: [String: Any]) {
@@ -124,6 +127,69 @@ class AccountModel: NSObject,NSCoding {
         finished("success")
     }
     
+    
+    // MARK: - 发生验证码
+    /// 发生验证码
+    ///
+    /// - Parameters:
+    ///   - str: 邮箱地址
+    ///   - finished: 传回发生成功记号
+    class func sendEmailAutoCode(str : String,finished : @escaping (_ sendResult : Bool)->()) {
+        let param : [String : String] = ["email" : str,"pwd" : "","ac" :"semail"]
+        
+        NetWorkTool.shared.postWithPath(path: FORGETPASS_URL, paras: param, success: { (result) in
+            CCog(message: result)
+            
+            /// 抽取提示信息
+            guard let alertMsg = result["msg"].string else {
+                
+                return
+            }
+            
+            if alertMsg == "发送成功" {
+                finished(true)
+            } else {
+                finished(false)
+            }
+            
+            toast(toast: alertMsg)
+            
+        }) { (error) in
+            let alertMsg = (error as NSError).userInfo["NSLocalizedDescription"]
+            toast(toast: alertMsg! as! String)
+        }
+    }
+    
+    // MARK: - 修改密码
+    class func modifyPass(emailStr : String,code : String,newPass : String,finished: @escaping (_ result : Bool)->()){
+        let param : [String : String] = ["email" : emailStr,"pwd" : newPass.md5(),"code" : code,"ac" : "femail"]
+        
+        CCog(message: param)
+        
+        NetWorkTool.shared.postWithPath(path: FORGETPASS_URL, paras: param, success: { (result) in
+            CCog(message: result)
+            
+            /// 抽取提示信息
+            guard let alertMsg = result["msg"].string else {
+                
+                return
+            }
+            
+            if alertMsg == "重置密码成功" {
+                finished(true)
+            } else {
+                finished(false)
+            }
+            
+            toast(toast: alertMsg)
+            
+        }) { (error) in
+            let alertMsg = (error as NSError).userInfo["NSLocalizedDescription"]
+            toast(toast: alertMsg! as! String)
+        }
+    }
+
+
     /// 登录保存
     func updateUserInfo() -> Void {
         AccountModel.userAccount = self

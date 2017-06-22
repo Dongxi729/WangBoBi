@@ -64,8 +64,14 @@ class RigisterVC: BaseViewController,UITextFieldDelegate {
     @objc fileprivate func jumpToRigisterDetailV() {
         
         if !(AddLabel.text?.isEmpty)! {
-            AccountModel.shared()?.email = AddLabel.text!
-            self.navigationController?.pushViewController(RigisterWithDetailVC(), animated: true)
+            if (AddLabel.text?.validateEmail())! {
+                AccountModel.shared()?.email = AddLabel.text!
+                self.navigationController?.pushViewController(RigisterWithDetailVC(), animated: true)
+            } else {
+                toast(toast: "邮件格式不正确")
+            }
+        
+            
         } else {
             toast(toast: "邮箱不能为空")
         }

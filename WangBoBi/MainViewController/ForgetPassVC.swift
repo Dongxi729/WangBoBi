@@ -64,9 +64,25 @@ class ForgetPassVC: BaseViewController,UITextFieldDelegate {
     @objc fileprivate func jumpToNext() {
         /// 判断是否为空
         if !(self.AddLabel.text?.isEmpty)! {
-            /// 输入邮箱事件
-            self.navigationController?.pushViewController(ForgetPassVCTwo(), animated: true)
             
+            
+            if (self.AddLabel.text?.validateEmail())! {
+                AccountModel.shared()?.email = AddLabel.text!
+                
+                AccountModel.sendEmailAutoCode(str: AddLabel.text!, finished: { (sendResult) in
+                    CCog(message: sendResult)
+                    
+                    if sendResult {
+                        
+                        DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 0.5, execute: {
+                            self.navigationController?.pushViewController(ForgetPassVCTwo(), animated: true)
+                        })
+                        
+                    }
+                })
+            } else {
+                toast(toast: "邮件格式不正确")
+            }
         } else {
             FTIndicator.showToastMessage("邮箱地址不为空")
         }

@@ -46,7 +46,16 @@ class ForgetPassVCTwo: BaseViewController,UITextFieldDelegate {
     // MARK: - 保存
     @objc fileprivate func nextSEL() {
         if !(AddLabel.text?.isEmpty)! {
-            self.navigationController?.pushViewController(ForgetPassVCThree(), animated: true)
+            
+            if (AddLabel.text?.validateAutoCode())! || (AddLabel.text?.characters.count)! > 6 {
+                AccountModel.shared()?.autoCode = AddLabel.text!
+                
+                self.navigationController?.pushViewController(ForgetPassVCThree(), animated: true)
+            } else {
+                toast(toast: "验证码格式不对")
+            }
+            
+            
         } else {
             toast(toast: "验证码不能为空")
         }

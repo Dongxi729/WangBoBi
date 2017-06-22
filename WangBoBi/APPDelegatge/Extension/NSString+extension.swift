@@ -29,11 +29,24 @@ extension String {
 }
 
 // MARK: - 银行卡暗文
-
 extension String {
     func replaceIndexStr(replaceStr newString : String,replaceLength index : Int,replaceStr stttr : String) -> String {
         var ddd : String = newString
         ddd.replaceSubrange(ddd.startIndex...ddd.index(ddd.startIndex, offsetBy: index), with: stttr)
         return ddd
+    }
+    
+    /// 检查邮箱格式
+    func validateEmail() -> Bool {
+        let emailRegex: String = "[A-Z0-9a-z._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,4}"
+        let emailTest: NSPredicate = NSPredicate(format: "SELF MATCHES %@", emailRegex)
+        return emailTest.evaluate(with: self)
+    }
+    
+    // 校验验证码
+    func validateAutoCode() -> Bool {
+        let emailRegex: String = "[A-Z0-9._%+-]+"
+        let emailTest: NSPredicate = NSPredicate(format: "SELF MATCHES %@", emailRegex)
+        return emailTest.evaluate(with: self)
     }
 }

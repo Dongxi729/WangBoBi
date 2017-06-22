@@ -90,15 +90,19 @@ class ForgetPassVCThree: BaseViewController,UITextFieldDelegate,ShowSuccessInfoV
             if newLoginPass.text != repeatPass.text {
                 toast(toast: "两次输入密码不一致")
             } else {
-                AccountModel.forgetPassRequest(finished: { (result) in
-                    if result == "success" {
-                        /// 失败
-                        view.addSubview(showSuccessView)
-                        zdx_setupButtonSpringAnimation(showSuccessView)
+
+                AccountModel.modifyPass(emailStr: (AccountModel.shared()?.email)!, code: (AccountModel.shared()?.autoCode)!, newPass:repeatPass.text! , finished: { (result) in
+                    CCog(message: result)
+                    
+                    if result {
                         
+                        /// 失败
+                        self.view.addSubview(self.showSuccessView)
+                        zdx_setupButtonSpringAnimation(self.showSuccessView)
+
                     } else {
-                        view.addSubview(showFailView)
-                        zdx_setupButtonSpringAnimation(showFailView)
+                        self.view.addSubview(self.showFailView)
+                        zdx_setupButtonSpringAnimation(self.showFailView)
                     }
                 })
             }
@@ -113,6 +117,8 @@ class ForgetPassVCThree: BaseViewController,UITextFieldDelegate,ShowSuccessInfoV
         }
     }
     
+    
+    /// 视图代理方法。返回首页
     func extraWork() {
         self.showSuccessView.removeFromSuperview()
         self.navigationController?.popToRootViewController(animated: true)
