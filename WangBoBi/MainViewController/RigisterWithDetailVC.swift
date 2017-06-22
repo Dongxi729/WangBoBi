@@ -127,16 +127,12 @@ class RigisterWithDetailVC: BaseViewController,UITextFieldDelegate {
             
         } else {
             agreeeImg.image = #imageLiteral(resourceName: "select")
-            
-            
         }
     }
     
     /// 注册按钮
     @objc fileprivate func rigisterSEL() {
         
-        CCog(message: loginPass.text)
-        CCog(message: repeatPass.text)
         
         if loginPass.text?.characters.count == 0 {
             toast(toast: "请输入密码")

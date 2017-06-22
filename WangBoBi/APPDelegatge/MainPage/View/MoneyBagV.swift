@@ -22,7 +22,7 @@ class MoneyBagV: UIView {
     lazy var receiveImgIcon: UIImageView = {
         let d : UIImageView = UIImageView.init(frame: CGRect.init(x: COMMON_MARGIN * SCREEN_SCALE, y: SCREEN_SCALE * COMMON_MARGIN, width: 30 * SCREEN_SCALE, height: 30 * SCREEN_SCALE))
         d.backgroundColor = UIColor.randomColor()
-        d.image = #imageLiteral(resourceName: "home")
+//        d.image = #imageLiteral(resourceName: "home")
         return d
     }()
     
@@ -47,7 +47,7 @@ class MoneyBagV: UIView {
     // MARK: - codeImg
     lazy var codeView: UIImageView = {
         let d : UIImageView = UIImageView.init(frame: CGRect.init(x: self.Width * 0.25, y: self.descLabel.BottomY + COMMON_MARGIN, width: self.Width / 2, height: self.Width / 2))
-        d.image = #imageLiteral(resourceName: "home")
+//        d.image = #imageLiteral(resourceName: "home")
         d.backgroundColor = UIColor.randomColor()
         return d
     }()

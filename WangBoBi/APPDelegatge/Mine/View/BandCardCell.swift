@@ -114,7 +114,7 @@ class AddCardCell: UITableViewCell {
     
     fileprivate lazy var discolerImg: UIImageView = {
         let d : UIImageView = UIImageView.init(frame: CGRect.init(x: SCREEN_WIDTH - 20 * SCREEN_SCALE , y:self.bounds.midY - 10 * SCREEN_SCALE , width: 20 * SCREEN_SCALE , height: 20 * SCREEN_SCALE))
-        d.image = #imageLiteral(resourceName: "home")
+//        d.image = #imageLiteral(resourceName: "home")
         d.contentMode = UIViewContentMode.scaleAspectFit
         d.layer.borderWidth = 1
         d.contentMode = UIViewContentMode.scaleAspectFit
@@ -133,3 +133,149 @@ class AddCardCell: UITableViewCell {
     }
     
 }
+
+
+
+class TabViewCell: UITableViewCell {
+    
+    lazy var SeparatorLine: UIView = {
+        let d: UIView = UIView.init(frame: CGRect.init(x: 0, y: self.Height, width: SCREEN_WIDTH, height: 0.5))
+        d.backgroundColor = UIColor.lightGray
+        return d
+    }()
+    
+    lazy var frontIconim: UIImageView = {
+        let d : UIImageView = UIImageView.init(frame: CGRect.init(x: COMMON_MARGIN, y: self.bounds.midY - 12.5 * SCREEN_SCALE  , width: 25 * SCREEN_SCALE, height: 25 * SCREEN_SCALE))
+        d.image = #imageLiteral(resourceName: "cashBag")
+        d.contentMode = UIViewContentMode.scaleAspectFit
+        return d
+    }()
+    
+    lazy var descLabel: UILabel = {
+        let d : UILabel = UILabel.init(frame: CGRect.init(x: self.frontIconim.RightX + COMMON_MARGIN, y: self.bounds.midY - 12.5 * SCREEN_SCALE, width: self.Width - self.frontIconim.Width + COMMON_MARGIN * 3, height: 25 * SCREEN_SCALE))
+        d.textColor = UIColor.black
+        return d
+    }()
+    
+    fileprivate lazy var JianJIao: UIImageView = {
+        let d : UIImageView = UIImageView.init(frame: CGRect.init(x: SCREEN_WIDTH - 15 * SCREEN_SCALE - COMMON_MARGIN, y: self.bounds.midY - 7.5 * SCREEN_SCALE, width: 15 * SCREEN_SCALE, height: 15 * SCREEN_SCALE))
+        d.contentMode = UIViewContentMode.scaleAspectFit
+        d.image = #imageLiteral(resourceName: "closuerimg")
+        return d
+    }()
+    
+    
+    
+    
+    override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
+        super.init(style: .default, reuseIdentifier: reuseIdentifier)
+        contentView.addSubview(frontIconim)
+        contentView.addSubview(descLabel)
+        contentView.addSubview(JianJIao)
+        contentView.addSubview(SeparatorLine)
+        
+        // 取出点击效果
+        self.selectionStyle = UITableViewCellSelectionStyle.none
+    }
+    
+    required init?(coder aDecoder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+}
+
+/// 我的信息第一行Cell
+class MyVCCell : UITableViewCell {
+    
+    lazy var AvatarHeadImg: UIImageView = {
+        let d: UIImageView = UIImageView.init(frame: CGRect.init(x: COMMON_MARGIN, y: COMMON_MARGIN, width: 60 * SCREEN_SCALE, height: 60 * SCREEN_SCALE))
+        d.image = #imageLiteral(resourceName: "cashBag")
+        d.contentMode = UIViewContentMode.scaleAspectFit
+        return d
+    }()
+    
+    fileprivate lazy var JianJIao: UIImageView = {
+        let d : UIImageView = UIImageView.init(frame: CGRect.init(x: SCREEN_WIDTH - 15 * SCREEN_SCALE - COMMON_MARGIN, y: self.bounds.midY + 15 * SCREEN_SCALE, width: 15 * SCREEN_SCALE, height: 15 * SCREEN_SCALE))
+        d.contentMode = UIViewContentMode.scaleAspectFit
+        d.image = #imageLiteral(resourceName: "closuerimg")
+        return d
+    }()
+    
+    lazy var nameLabel: UILabel = {
+        let d: UILabel = UILabel.init(frame: CGRect.init(x: self.AvatarHeadImg.RightX + COMMON_MARGIN, y: self.AvatarHeadImg.TopY + COMMON_MARGIN / 2, width: self.Width - self.AvatarHeadImg.Width - COMMON_MARGIN * 3, height: 20 * SCREEN_SCALE))
+        d.text = "哈哈就看见好看"
+        d.font = UIFont.systemFont(ofSize: 12 * SCREEN_SCALE)
+        return d
+    }()
+    
+    lazy var emailAddress: UILabel = {
+        let d : UILabel = UILabel.init(frame: CGRect.init(x: self.AvatarHeadImg.RightX + COMMON_MARGIN, y: self.nameLabel.BottomY + COMMON_MARGIN / 2, width: self.Width - self.AvatarHeadImg.Width - COMMON_MARGIN * 3, height: 20 * SCREEN_SCALE))
+        d.font = UIFont.systemFont(ofSize: 12 * SCREEN_SCALE)
+        d.text = "189879873@qq.com"
+        return d
+    }()
+    
+    lazy var SeparatorLine: UIView = {
+        let d: UIView = UIView.init(frame: CGRect.init(x: 0, y: 80 * SCREEN_SCALE, width: SCREEN_WIDTH, height: 0.5))
+        d.backgroundColor = UIColor.lightGray
+        return d
+    }()
+    
+    override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
+        super.init(style: .default, reuseIdentifier: reuseIdentifier)
+        contentView.addSubview(AvatarHeadImg)
+        contentView.addSubview(JianJIao)
+        contentView.addSubview(nameLabel)
+        contentView.addSubview(emailAddress)
+        contentView.addSubview(SeparatorLine)
+        
+        // 取出点击效果
+        self.selectionStyle = UITableViewCellSelectionStyle.none
+    }
+    
+    required init?(coder aDecoder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

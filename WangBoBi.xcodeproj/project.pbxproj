@@ -105,6 +105,7 @@
 		265991F11EF65A9E004391E9 /* simhei.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 265991F01EF65A9E004391E9 /* simhei.ttf */; };
 		265991F41EF65D5C004391E9 /* CommonBtn.swift in Sources */ = {isa = PBXBuildFile; fileRef = 265991F31EF65D5C004391E9 /* CommonBtn.swift */; };
 		265992141EF66C6B004391E9 /* AddBankCardVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 265992131EF66C6B004391E9 /* AddBankCardVC.swift */; };
+		265D430C1EFBA8B1007F5AB8 /* MyInfoVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 265D430B1EFBA8B1007F5AB8 /* MyInfoVC.swift */; };
 		266E97211EF3D5460057FD90 /* AccountAndSaveVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 266E97201EF3D5460057FD90 /* AccountAndSaveVC.swift */; };
 		269C1C921EF1275500364F32 /* SwiftyJSON.swift in Sources */ = {isa = PBXBuildFile; fileRef = 269C1C911EF1275500364F32 /* SwiftyJSON.swift */; };
 		26A0A4A91EF0E26B00035D0D /* JFNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26A0A4A81EF0E26B00035D0D /* JFNavigationController.swift */; };
@@ -123,7 +124,7 @@
 		26EF14A91EF9178D005663F1 /* LoginModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26EF14A81EF9178D005663F1 /* LoginModel.swift */; };
 		26EF14AD1EF91F05005663F1 /* ForgetPassModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26EF14AC1EF91F05005663F1 /* ForgetPassModel.swift */; };
 		26EF14AF1EF922CF005663F1 /* RequestCommon.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26EF14AE1EF922CF005663F1 /* RequestCommon.swift */; };
-		26F4847F1EEFD55400177670 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26F4847E1EEFD55400177670 /* ViewController.swift */; };
+		26F4847F1EEFD55400177670 /* ScanCodeController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26F4847E1EEFD55400177670 /* ScanCodeController.swift */; };
 		26F484821EEFD55400177670 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 26F484801EEFD55400177670 /* Main.storyboard */; };
 		26F484841EEFD55400177670 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 26F484831EEFD55400177670 /* Assets.xcassets */; };
 		26F484871EEFD55400177670 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 26F484851EEFD55400177670 /* LaunchScreen.storyboard */; };
@@ -292,6 +293,7 @@
 		265991F01EF65A9E004391E9 /* simhei.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = simhei.ttf; sourceTree = "<group>"; };
 		265991F31EF65D5C004391E9 /* CommonBtn.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CommonBtn.swift; sourceTree = "<group>"; };
 		265992131EF66C6B004391E9 /* AddBankCardVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AddBankCardVC.swift; path = Controller/AddBankCardVC.swift; sourceTree = "<group>"; };
+		265D430B1EFBA8B1007F5AB8 /* MyInfoVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MyInfoVC.swift; sourceTree = "<group>"; };
 		266E97201EF3D5460057FD90 /* AccountAndSaveVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AccountAndSaveVC.swift; path = "../../Mine-04/Controller/AccountAndSaveVC.swift"; sourceTree = "<group>"; };
 		269C1C911EF1275500364F32 /* SwiftyJSON.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwiftyJSON.swift; sourceTree = "<group>"; };
 		26A0A4A81EF0E26B00035D0D /* JFNavigationController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JFNavigationController.swift; sourceTree = "<group>"; };
@@ -311,7 +313,7 @@
 		26EF14AC1EF91F05005663F1 /* ForgetPassModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ForgetPassModel.swift; sourceTree = "<group>"; };
 		26EF14AE1EF922CF005663F1 /* RequestCommon.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RequestCommon.swift; sourceTree = "<group>"; };
 		26F484791EEFD55400177670 /* WangBoBi.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = WangBoBi.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		26F4847E1EEFD55400177670 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = ViewController.swift; path = ../ViewController.swift; sourceTree = "<group>"; };
+		26F4847E1EEFD55400177670 /* ScanCodeController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = ScanCodeController.swift; path = ../ScanCodeController.swift; sourceTree = "<group>"; };
 		26F484811EEFD55400177670 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		26F484831EEFD55400177670 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		26F484861EEFD55400177670 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -447,6 +449,7 @@
 		260B20BF1EF769A100E78FD8 /* MyVC-01 */ = {
 			isa = PBXGroup;
 			children = (
+				265D430A1EFBA897007F5AB8 /* MyInfoVC */,
 				2607D1581EF22AAF0015625E /* MyViewController.swift */,
 			);
 			name = "MyVC-01";
@@ -641,7 +644,7 @@
 				2607D14B1EF212450015625E /* Reachability.h */,
 				2607D14C1EF212450015625E /* Reachability.m */,
 				2607D14D1EF212450015625E /* NetCheck.swift */,
-				26F4847E1EEFD55400177670 /* ViewController.swift */,
+				26F4847E1EEFD55400177670 /* ScanCodeController.swift */,
 				26A0A4AA1EF1064C00035D0D /* NetWorkTool.swift */,
 			);
 			path = tool;
@@ -1036,6 +1039,14 @@
 			name = View;
 			sourceTree = "<group>";
 		};
+		265D430A1EFBA897007F5AB8 /* MyInfoVC */ = {
+			isa = PBXGroup;
+			children = (
+				265D430B1EFBA8B1007F5AB8 /* MyInfoVC.swift */,
+			);
+			name = MyInfoVC;
+			sourceTree = "<group>";
+		};
 		26EF14A11EF900DD005663F1 /* AlertView */ = {
 			isa = PBXGroup;
 			children = (
@@ -1270,6 +1281,7 @@
 				264960C41EF0C28F00A559D6 /* POPBasicAnimation.mm in Sources */,
 				264961011EF0C9EC00A559D6 /* MKAnnotationView+YYWebImage.m in Sources */,
 				264961091EF0C9EC00A559D6 /* YYSpriteSheetImage.m in Sources */,
+				265D430C1EFBA8B1007F5AB8 /* MyInfoVC.swift in Sources */,
 				2607D1571EF224C90015625E /* MainPageViewController.swift in Sources */,
 				264961051EF0C9EC00A559D6 /* YYAnimatedImageView.m in Sources */,
 				264960BF1EF0C28F00A559D6 /* POPAnimationEvent.mm in Sources */,
@@ -1281,7 +1293,7 @@
 				264960C21EF0C28F00A559D6 /* POPAnimationTracer.mm in Sources */,
 				26EF14A91EF9178D005663F1 /* LoginModel.swift in Sources */,
 				264961151EF0CAD100A559D6 /* UIImageViewWebImage.swift in Sources */,
-				26F4847F1EEFD55400177670 /* ViewController.swift in Sources */,
+				26F4847F1EEFD55400177670 /* ScanCodeController.swift in Sources */,
 				261F067E1EF5190C0019CE44 /* SetMoneyViewController.swift in Sources */,
 				264961171EF0CBAE00A559D6 /* UIImageExtension.swift in Sources */,
 				264961021EF0C9EC00A559D6 /* UIButton+YYWebImage.m in Sources */,

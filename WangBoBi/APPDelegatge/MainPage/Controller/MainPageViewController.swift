@@ -149,7 +149,7 @@ extension MainPageViewController : UICollectionViewDataSource,UICollectionViewDe
             case 0:
                 
                 DispatchQueue.main.async {
-                    self.navigationController?.pushViewController(ViewController(), animated: true)
+                    self.navigationController?.pushViewController(ScanCodeController(), animated: true)
                 }
                 break
                 /// 收款

@@ -8,7 +8,13 @@
 
 import UIKit
 
+protocol ShowFailVDelegte {
+    func failExtra() -> Void
+}
+
 class ShowFailV: UIView {
+    
+    var delegate : ShowFailVDelegte?
     
     /// 显示图片
     fileprivate lazy var showInfoBgV: UIImageView = {
@@ -17,15 +23,7 @@ class ShowFailV: UIView {
         d.contentMode = UIViewContentMode.scaleAspectFit
         return d
     }()
-    
-    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-        let touch: UITouch? = touches.first
-        let touchPoint: CGPoint? = touch?.location(in: self)
-        print("\((touchPoint?.x)! / self.Width)==\((touchPoint?.y)! / self.Height)")
-        let stringFloat = Int((touchPoint?.x)!)
-        let stringFloat1 = Int((touchPoint?.y)!)
-        print("\(stringFloat)\(stringFloat1)")
-    }
+
     
     // MARK: - dismissBtn
     fileprivate lazy var dismissBtn: UIButton = {
@@ -45,7 +43,7 @@ class ShowFailV: UIView {
     }
     
     @objc fileprivate func dismissSELF() {
-        self.removeFromSuperview()
+        self.delegate?.failExtra()
     }
     
     required init?(coder aDecoder: NSCoder) {

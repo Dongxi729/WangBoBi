@@ -11,8 +11,11 @@ import Foundation
 /// 登录链接
 let LOGIN_URL = "http://192.168.1.10:8010/ifs/login.ashx"
 
+
+//http://192.168.1.10:8010/ifs/passfind.ashx  忘记密码接口  返回格式：JSON
+//请求参数：email  邮箱地址 ，pwd  登陆密码MD5加密密文，code 验证码       ac  操作类型值（semail：发送验证码，femail：重置密码）
 /// 忘记密码链接
-let FORGETPASS_URL = ""
+let FORGETPASS_URL = "http://192.168.1.10:8010/ifs/passfind.ashx"
 
 /// 发生验证码
 let SENDAUTHO_URL = ""

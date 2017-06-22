@@ -8,7 +8,13 @@
 
 import UIKit
 
+protocol ShowSuccessInfoVDelegate {
+    func extraWork() -> Void
+}
+
 class ShowSuccessInfoV: UIView {
+    
+    var delegate : ShowSuccessInfoVDelegate?
     
     /// 显示图片
     fileprivate lazy var showInfoBgV: UIImageView = {
@@ -45,7 +51,9 @@ class ShowSuccessInfoV: UIView {
     }
     
     @objc fileprivate func dismissSELF() {
-        self.removeFromSuperview()
+//        self.removeFromSuperview()
+//        
+        self.delegate?.extraWork()
     }
     
     required init?(coder aDecoder: NSCoder) {

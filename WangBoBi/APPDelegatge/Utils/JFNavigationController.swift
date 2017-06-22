@@ -14,9 +14,11 @@ class JFNavigationController: UINavigationController, UIGestureRecognizerDelegat
         super.viewDidLoad()
         
         let navBar = navigationBar
-        navBar.barTintColor = NAVIGATIONBAR_COLOR
+        navBar.barTintColor = UIColor.gray
         navBar.isTranslucent = false
-
+        navBar.barStyle = UIBarStyle.black
+        navBar.setBackgroundImage(UIImage(), for: UIBarMetrics.default)
+        navBar.shadowImage = UIImage()
         navBar.titleTextAttributes = [
             NSForegroundColorAttributeName : UIColor.colorWithRGB(47, g: 47, b: 47),
             NSFontAttributeName : UIFont.systemFont(ofSize: 16)
@@ -24,6 +26,19 @@ class JFNavigationController: UINavigationController, UIGestureRecognizerDelegat
         
         // 全屏返回手势
         panGestureBack()
+    }
+    
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        /// 判断当前类名是否为协议的那个页面.
+        if NSStringFromClass(self.classForCoder).contains("ViewController") {
+            CCog(message: "true")
+        } else {
+            CCog(message: "FALSE")
+        }
+        
+        self.navigationController?.navigationBar.isHidden = true
     }
     
     /**

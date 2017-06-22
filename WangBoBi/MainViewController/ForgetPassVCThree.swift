@@ -8,7 +8,7 @@
 
 import UIKit
 
-class ForgetPassVCThree: BaseViewController,UITextFieldDelegate {
+class ForgetPassVCThree: BaseViewController,UITextFieldDelegate,ShowSuccessInfoVDelegate {
     
     // MARK: - 背景图片
     lazy var bgImg: UIImageView = {
@@ -72,6 +72,7 @@ class ForgetPassVCThree: BaseViewController,UITextFieldDelegate {
     // MARK: - 成功
     lazy var showSuccessView: ShowSuccessInfoV = {
         let d : ShowSuccessInfoV = ShowSuccessInfoV.init(frame: self.view.bounds)
+        d.delegate = self
         return d
     }()
 
@@ -110,8 +111,11 @@ class ForgetPassVCThree: BaseViewController,UITextFieldDelegate {
         if (repeatPass.text?.isEmpty)! {
             toast(toast: "确认密码不能为空")
         }
-        
-   
+    }
+    
+    func extraWork() {
+        self.showSuccessView.removeFromSuperview()
+        self.navigationController?.popToRootViewController(animated: true)
     }
     
     override func viewWillDisappear(_ animated: Bool) {

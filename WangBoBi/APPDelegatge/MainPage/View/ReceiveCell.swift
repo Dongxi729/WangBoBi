@@ -12,7 +12,7 @@ class ReceiveCell : UITableViewCell {
     
     fileprivate lazy var imgVi: UIImageView = {
         let d : UIImageView = UIImageView.init(frame: CGRect.init(x: COMMON_MARGIN * 1.2, y: self.Height * 0.2, width: self.Height * 0.8, height: self.Height * 0.9))
-        d.image = #imageLiteral(resourceName: "detail")
+//        d.image = #imageLiteral(resourceName: "detail")
         d.contentMode = UIViewContentMode.scaleAspectFit
         d.layer.borderWidth = 1
         return d
