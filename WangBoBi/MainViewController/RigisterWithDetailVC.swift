@@ -103,9 +103,11 @@ class RigisterWithDetailVC: BaseViewController,UITextFieldDelegate {
         view.addSubview(loginPass)
         view.addSubview(repeatPass)
         view.addSubview(userAgree)
-        view.addSubview(agreeeBtn)
+        
         view.addSubview(agreeeImg)
+        view.addSubview(agreeeBtn)
         view.addSubview(rigistBtn)
+        
     }
     
     /// 用户协议也没x
@@ -114,6 +116,20 @@ class RigisterWithDetailVC: BaseViewController,UITextFieldDelegate {
             self.navigationController?.pushViewController(AgreeMentVC(), animated: true)
         }
         
+    }
+    
+    //// 协议事件
+    @objc fileprivate func agreeSEL(sender :UIButton) {
+        sender.isSelected = !sender.isSelected
+    
+        if sender.isSelected {
+            agreeeImg.image = #imageLiteral(resourceName: "selected")
+            
+        } else {
+            agreeeImg.image = #imageLiteral(resourceName: "select")
+            
+            
+        }
     }
     
     /// 注册按钮
@@ -133,34 +149,24 @@ class RigisterWithDetailVC: BaseViewController,UITextFieldDelegate {
         }
         
         
-        if !(yaoqingBtn.text?.isEmpty)! && !(loginPass.text?.isEmpty)! && !(repeatPass.text?.isEmpty)! {
+        if !(loginPass.text?.isEmpty)! && !(repeatPass.text?.isEmpty)! {
 
             
             if loginPass.text != repeatPass.text {
                 toast(toast: "两次输入密码不一致")
-            } else {
-                if agreeeImg.image != #imageLiteral(resourceName: "select") {
-                    toast(toast: "请同意协议")
-                    return
-                } else {
-                    AccountModel.register(referee: self.yaoqingBtn.text!, pass: loginPass.text!, repeatPass: repeatPass.text!)
-                }
             }
             
-            
+            if agreeeBtn.isSelected {
+                toast(toast: "请同意协议")
+
+            } else {
+                CCog(message: "===")
+                AccountModel.register(referee: self.yaoqingBtn.text!, pass: loginPass.text!, repeatPass: repeatPass.text!)
+            }
         }
     }
     
-    //// 协议事件
-    @objc fileprivate func agreeSEL(sender :UIButton) {
-        sender.isSelected = !sender.isSelected
-        
-        if sender.isSelected {
-            agreeeImg.image = #imageLiteral(resourceName: "selected")
-        } else {
-            agreeeImg.image = #imageLiteral(resourceName: "select")
-        }
-    }
+
     
     /// 跳到首页
     @objc fileprivate func jumpTologin() {
