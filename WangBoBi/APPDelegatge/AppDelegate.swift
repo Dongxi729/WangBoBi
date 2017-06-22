@@ -43,12 +43,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 //            CCog(message: error.localizedDescription)
 //        }
         
-        NetWorkTool.shared.postWithPath(path: RIGISTER_URL, paras: ["email" : "18259129536@163.com","pwd" : "123".md5(),"referee" : ""], success: { (result) in
-            CCog(message: result)
-        }) { (error) in
-            CCog(message: error.localizedDescription)
-        }
-        
+//        NetWorkTool.shared.postWithPath(path: RIGISTER_URL, paras: ["email" : "18259129536@163.com","pwd" : "123".md5(),"referee" : ""], success: { (result) in
+//            CCog(message: result)
+//        }) { (error) in
+//            CCog(message: error.localizedDescription)
+//        }
+//        
         
         return true
     }

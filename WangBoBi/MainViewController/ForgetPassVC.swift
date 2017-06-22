@@ -65,13 +65,13 @@ class ForgetPassVC: BaseViewController,UITextFieldDelegate {
         /// 判断是否为空
         if !(self.AddLabel.text?.isEmpty)! {
             /// 输入邮箱事件
-            
+            self.navigationController?.pushViewController(ForgetPassVCTwo(), animated: true)
             
         } else {
             FTIndicator.showToastMessage("邮箱地址不为空")
         }
         
-        self.navigationController?.pushViewController(ForgetPassVCTwo(), animated: true)
+        
     }
     
     /// 返回首页

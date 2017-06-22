@@ -1,4 +1,4 @@
-//
+    //
 //  ForgetPassVC3.swift
 //  WangBoBi
 //
@@ -51,6 +51,7 @@ class ForgetPassVCThree: BaseViewController,UITextFieldDelegate {
         return d
     }()
 
+    
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -64,6 +65,8 @@ class ForgetPassVCThree: BaseViewController,UITextFieldDelegate {
         
         view.addSubview(newLoginPass)
         view.addSubview(repeatPass)
+        
+        view.addSubview(loginBtn)
     }
     
     // MARK: - 成功
@@ -82,11 +85,33 @@ class ForgetPassVCThree: BaseViewController,UITextFieldDelegate {
     // MARK: - 保存
     @objc fileprivate func saveSEL() {
     
-        /// 失败
-        view.addSubview(showSuccessView)
-        zdx_setupButtonSpringAnimation(showSuccessView)
-        /// 成功
-//        self.navigationController?.popToRootViewController(animated: true)
+        if !(newLoginPass.text?.isEmpty)! && !(repeatPass.text?.isEmpty)! {
+            if newLoginPass.text != repeatPass.text {
+                toast(toast: "两次输入密码不一致")
+            } else {
+                AccountModel.forgetPassRequest(finished: { (result) in
+                    if result == "success" {
+                        /// 失败
+                        view.addSubview(showSuccessView)
+                        zdx_setupButtonSpringAnimation(showSuccessView)
+                        
+                    } else {
+                        view.addSubview(showFailView)
+                        zdx_setupButtonSpringAnimation(showFailView)
+                    }
+                })
+            }
+        }
+        
+        if (newLoginPass.text?.isEmpty)! {
+            toast(toast: "密码不能为空")
+        }
+        
+        if (repeatPass.text?.isEmpty)! {
+            toast(toast: "确认密码不能为空")
+        }
+        
+   
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -107,7 +132,7 @@ class ForgetPassVCThree: BaseViewController,UITextFieldDelegate {
     
     // MARK: - 返回首页
     @objc fileprivate func backToMain() {
-        self.navigationController?.popViewController(animated: true)
+        self.navigationController?.popToRootViewController(animated: true)
     }
 
     

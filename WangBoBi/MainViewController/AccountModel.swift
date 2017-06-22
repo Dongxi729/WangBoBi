@@ -44,7 +44,7 @@ class AccountModel: NSObject,NSCoding {
         NSKeyedArchiver.archiveRootObject(self, toFile: AccountModel.accountPath)
     }
 
-    
+    // MARK: - 登录
     /// 登录接口
     ///
     /// - Parameters:
@@ -56,9 +56,7 @@ class AccountModel: NSObject,NSCoding {
         
         /// 返回数据
         NetWorkTool.shared.postWithPath(path: LOGIN_URL, paras: param, success: { (result) in
-            CCog(message: result)
-            CCog(message: result["data"])
-            
+
             guard let resultData = result["data"].dictionaryObject else {
                 
                 CCog(message: "登录信息无效")
@@ -86,7 +84,7 @@ class AccountModel: NSObject,NSCoding {
         }
     }
     
-    
+    // MARK: - 注册
     /// 注册接口
     ///
     /// - Parameters:
@@ -103,6 +101,7 @@ class AccountModel: NSObject,NSCoding {
             
             /// 抽取提示信息
             guard let alertMsg = result["msg"].string else {
+                
                 return
             }
             
@@ -117,6 +116,12 @@ class AccountModel: NSObject,NSCoding {
             let alertMsg = (error as NSError).userInfo["NSLocalizedDescription"]
             toast(toast: alertMsg! as! String)
         }
+    }
+    
+    
+    // MARK: - 忘记密码
+    class func forgetPassRequest(finished : (_ xxx : String)->()) -> Void {
+        finished("success")
     }
     
     /// 登录保存
@@ -142,6 +147,8 @@ class AccountModel: NSObject,NSCoding {
             CCog(message: "退出异常")
         }
     }
+    
+    
 
     // MARK: - 检查用户是否有效
     class func checuUserInfo() {

@@ -128,5 +128,6 @@ extension AccountAndSaveVC : UITableViewDelegate,UITableViewDataSource {
     /// 退出事件
     private func logoutSEL() -> Void {
         CCog(message: "退出事件")
+        UIApplication.shared.keyWindow?.rootViewController = LoginViewController()
     }
 }

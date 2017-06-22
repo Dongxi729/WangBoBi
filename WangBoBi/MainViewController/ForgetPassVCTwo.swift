@@ -1,4 +1,4 @@
-//
+    //
 //  ForgetPassVCTwo.swift
 //  WangBoBi
 //
@@ -45,10 +45,14 @@ class ForgetPassVCTwo: BaseViewController,UITextFieldDelegate {
     
     // MARK: - 保存
     @objc fileprivate func nextSEL() {
-        self.navigationController?.pushViewController(ForgetPassVCThree(), animated: true)
+        if !(AddLabel.text?.isEmpty)! {
+            self.navigationController?.pushViewController(ForgetPassVCThree(), animated: true)
+        } else {
+            toast(toast: "验证码不能为空")
+        }
     }
     
-    /// 发生验证码
+    /// 返回登录
     @objc fileprivate func loginSEL() {
         self.navigationController?.popToRootViewController(animated: true)
     }
