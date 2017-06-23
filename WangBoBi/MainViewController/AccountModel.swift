@@ -28,6 +28,9 @@ class AccountModel: NSObject,NSCoding {
     var autoCode : String = ""
     
     
+    /// 是否实名
+    var isCertiFied = false
+    
     
     // KVC 字典转模型
     init(dict: [String: Any]) {

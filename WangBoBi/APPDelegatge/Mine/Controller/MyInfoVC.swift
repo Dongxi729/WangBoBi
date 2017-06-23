@@ -116,6 +116,12 @@ class PersonInfoEditV : UIView {
         return d
     }()
     
+    lazy var cerNameIcon: CertifieNamed = {
+        let d : CertifieNamed = CertifieNamed.init(frame: CGRect.init(x: 0, y: 0, width: 100, height: 35))
+        
+        return d
+    }()
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
         
@@ -129,6 +135,45 @@ class PersonInfoEditV : UIView {
         addSubview(moneyAddresShow)
         
         addSubview(avatarImg)
+        
+        addSubview(cerNameIcon)
+        
+        cerNameIcon.showCerNam(str: "洛克时代精1213神")
+        
+    }
+    
+    required init?(coder aDecoder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+}
+
+
+// MARK: - 实名认证
+class CertifieNamed: UIView {
+    
+    var mark = "已实名"
+    
+    lazy var descLabel: UILabel = {
+        let d : UILabel = UILabel.init(frame: self.bounds)
+
+        
+        d.textAlignment = .center
+        d.textColor = UIColor.colorWithHexString("2796DD")
+        return d
+    }()
+    
+    func showCerNam(str : String) -> Void {
+        
+        self.layer.borderColor = UIColor.colorWithHexString("2796DD").cgColor
+        self.layer.cornerRadius = 5
+        self.layer.borderWidth = 1
+        
+        self.descLabel.text = str
+        addSubview(self.descLabel)
+    }
+    
+    override init(frame: CGRect) {
+        super.init(frame: frame)
 
     }
     
