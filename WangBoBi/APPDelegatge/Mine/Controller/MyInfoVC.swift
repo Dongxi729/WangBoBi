@@ -109,6 +109,13 @@ class PersonInfoEditV : UIView {
         return d
     }()
     
+    /// 头像
+    lazy var avatarImg: UIImageView = {
+        let d : UIImageView = UIImageView.init(frame: CGRect.init(x: self.Width - 50 * SCREEN_SCALE - COMMON_MARGIN * SCREEN_SCALE, y: self.nameLabel.TopY, width: 50 * SCREEN_SCALE, height: 50 * SCREEN_SCALE))
+        d.layer.borderWidth = 1
+        return d
+    }()
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
         
@@ -121,7 +128,7 @@ class PersonInfoEditV : UIView {
         addSubview(moneyAddress)
         addSubview(moneyAddresShow)
         
-        
+        addSubview(avatarImg)
 
     }
     
