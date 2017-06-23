@@ -24,6 +24,12 @@ class MyInfoVC: BaseViewController {
         return d
     }()
     
+    lazy var editV: PersonInfoEditV = {
+        let d : PersonInfoEditV = PersonInfoEditV.init(frame: CGRect.init(x: 0, y: self.personInfoV.Height * 0.25, width: self.personInfoV.Width, height: self.personInfoV.Height * 0.7))
+        d.layer.borderWidth = 1
+        return d
+    }()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -33,6 +39,93 @@ class MyInfoVC: BaseViewController {
         view.addSubview(backGroundV)
         view.addSubview(personInfoV)
         
+        self.personInfoV.addSubview(editV)
         view.backgroundColor = UIColor.white
+    }
+}
+
+
+// MARK: - 我的信息编辑视图
+class PersonInfoEditV : UIView {
+    
+    
+    
+    /// 名字
+    lazy var nameLabel: UILabel = {
+        let d: UILabel = UILabel.init(frame: CGRect.init(x: COMMON_MARGIN * SCREEN_SCALE, y: COMMON_MARGIN * SCREEN_SCALE, width: self.Width * 0.2, height: 20 * SCREEN_SCALE))
+        d.text = "姓名 :"
+        d.sizeToFit()
+        d.font = UIFont.systemFont(ofSize: 12 * SCREEN_SCALE)
+        d.textColor = UIColor.lightGray
+        return d
+    }()
+    
+    /// 名字显示
+    lazy var nameShowLabel: UILabel = {
+        let d : UILabel = UILabel.init(frame: CGRect.init(x: self.nameLabel.RightX, y: self.nameLabel.TopY, width: self.Width * 0.55, height: self.nameLabel.Height))
+        d.text = "撒了；肯德基阿斯利康杜撒"
+        d.font = UIFont.systemFont(ofSize: 12 * SCREEN_SCALE)
+        return d
+    }()
+    
+    
+    /// 钱包地址
+    lazy var moneyAddress: UILabel = {
+        let d : UILabel = UILabel.init(frame: CGRect.init(x: self.nameLabel.LeftX, y: self.emailAdd.BottomY + COMMON_MARGIN * 1.5 * SCREEN_SCALE, width: self.nameLabel.Width, height: self.nameLabel.Height))
+        d.text = "钱包地址 :"
+        d.sizeToFit()
+        d.textColor = UIColor.lightGray
+        d.font = UIFont.systemFont(ofSize: 12 * SCREEN_SCALE)
+        return d
+    }()
+    
+    /// 钱包地址显示
+    lazy var moneyAddresShow: UILabel = {
+        let d : UILabel = UILabel.init(frame: CGRect.init(x: self.moneyAddress.RightX, y: self.moneyAddress.TopY, width: self.Width * 0.7, height: 20 * SCREEN_SCALE))
+        d.text = "阿萨德拉拉队上课啦"
+        
+        d.sizeToFit()
+        d.font = UIFont.systemFont(ofSize: 12 * SCREEN_SCALE)
+        
+        return d
+    }()
+    
+    /// 邮件显示
+    lazy var emailShowLabel: UILabel = {
+        let d: UILabel = UILabel.init(frame: CGRect.init(x: self.emailAdd.RightX, y: self.emailAdd.TopY, width: self.Width * 0.7, height: 20 * SCREEN_SCALE))
+        d.text = "18838383838@qq.com"
+        d.sizeToFit()
+        d.font = UIFont.systemFont(ofSize: 12 * SCREEN_SCALE)
+        return d
+    }()
+    
+    /// 邮箱
+    lazy var emailAdd: UILabel = {
+        let d : UILabel = UILabel.init(frame: CGRect.init(x: self.nameLabel.LeftX, y: self.nameLabel.BottomY + COMMON_MARGIN * SCREEN_SCALE * 1.5, width: self.nameLabel.Width, height: self.nameLabel.Height))
+        d.text = "邮箱 :"
+        self.sizeToFit()
+        d.textColor = UIColor.lightGray
+        d.font = UIFont.systemFont(ofSize: 12 * SCREEN_SCALE)
+        return d
+    }()
+    
+    override init(frame: CGRect) {
+        super.init(frame: frame)
+        
+        addSubview(nameLabel)
+        addSubview(nameShowLabel)
+        
+        addSubview(emailAdd)
+        addSubview(emailShowLabel)
+        
+        addSubview(moneyAddress)
+        addSubview(moneyAddresShow)
+        
+        
+
+    }
+    
+    required init?(coder aDecoder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
     }
 }
