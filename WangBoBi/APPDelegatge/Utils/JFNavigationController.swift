@@ -38,6 +38,17 @@ class JFNavigationController: UINavigationController, UIGestureRecognizerDelegat
             CCog(message: "FALSE")
         }
         
+        
+        
+        /// 我的信息页面。导航栏透明
+        if NSStringFromClass(self.classForCoder).contains("MyInfoVC") {
+            
+            let navBar = navigationBar
+            navBar.barTintColor = UIColor.clear
+            navBar.isTranslucent = true
+            navBar.barStyle = UIBarStyle.black
+        }
+        
         self.navigationController?.navigationBar.isHidden = true
     }
     

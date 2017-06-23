@@ -19,6 +19,13 @@ class TestViewController: UIViewController {
         return d
     }()
     
+    
+    lazy var img: UIImageView = {
+        let d : UIImageView = UIImageView.init(frame: CGRect.init(x: 0, y: 0, width: SCREEN_WIDTH, height: SCREEN_WIDTH * (713 / 640)))
+        d.image = #imageLiteral(resourceName: "lazzz")
+        return d
+    }()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -30,6 +37,8 @@ class TestViewController: UIViewController {
         //        }
         
         view.backgroundColor = UIColor.randomColor()
+        
+        view.addSubview(img)
     }
     
     lazy var showInfoVVV: ShowFailV = {

@@ -123,8 +123,18 @@ extension MyViewController : UITableViewDelegate,UITableViewDataSource {
         
         switch indexPath.section {
         case 0:
+            
+            /// 我的信息
             if indexPath.row == 0 {
-                
+                DispatchQueue.main.async {
+                    self.navigationController?.pushViewController(MyInfoVC(), animated: true)
+                }
+            }
+            
+            if indexPath.row == 1 {
+                DispatchQueue.main.async {
+                    self.navigationController?.pushViewController(CodeProductor(), animated: true)
+                }
             }
             
             break

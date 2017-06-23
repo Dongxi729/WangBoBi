@@ -154,6 +154,7 @@ class TabViewCell: UITableViewCell {
     lazy var descLabel: UILabel = {
         let d : UILabel = UILabel.init(frame: CGRect.init(x: self.frontIconim.RightX + COMMON_MARGIN, y: self.bounds.midY - 12.5 * SCREEN_SCALE, width: self.Width - self.frontIconim.Width + COMMON_MARGIN * 3, height: 25 * SCREEN_SCALE))
         d.textColor = UIColor.black
+        d.font = UIFont.systemFont(ofSize: 12 * SCREEN_SCALE)
         return d
     }()
     
@@ -203,6 +204,7 @@ class MyVCCell : UITableViewCell {
     lazy var nameLabel: UILabel = {
         let d: UILabel = UILabel.init(frame: CGRect.init(x: self.AvatarHeadImg.RightX + COMMON_MARGIN, y: self.AvatarHeadImg.TopY + COMMON_MARGIN / 2, width: self.Width - self.AvatarHeadImg.Width - COMMON_MARGIN * 3, height: 20 * SCREEN_SCALE))
         d.text = "哈哈就看见好看"
+        AccountModel.shared()?.nickName = d.text!
         d.font = UIFont.systemFont(ofSize: 12 * SCREEN_SCALE)
         return d
     }()
@@ -211,6 +213,7 @@ class MyVCCell : UITableViewCell {
         let d : UILabel = UILabel.init(frame: CGRect.init(x: self.AvatarHeadImg.RightX + COMMON_MARGIN, y: self.nameLabel.BottomY + COMMON_MARGIN / 2, width: self.Width - self.AvatarHeadImg.Width - COMMON_MARGIN * 3, height: 20 * SCREEN_SCALE))
         d.font = UIFont.systemFont(ofSize: 12 * SCREEN_SCALE)
         d.text = "189879873@qq.com"
+        AccountModel.shared()?.email = d.text!
         return d
     }()
     

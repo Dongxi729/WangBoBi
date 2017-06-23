@@ -15,8 +15,8 @@ class AccountModel: NSObject,NSCoding {
     /// 用户ID
 //    var userID : Int = 0
 //    
-//    /// 昵称
-//    var nickName : String?
+    /// 昵称
+    var nickName : String = ""
 //
 //    /// 头像路径
 //    var avatarUrl : String?
@@ -26,6 +26,8 @@ class AccountModel: NSObject,NSCoding {
     
     /// 验证码
     var autoCode : String = ""
+    
+    
     
     // KVC 字典转模型
     init(dict: [String: Any]) {

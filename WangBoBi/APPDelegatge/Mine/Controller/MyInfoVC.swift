@@ -8,12 +8,31 @@
 
 import UIKit
 
-class MyInfoVC: UIViewController {
+class MyInfoVC: BaseViewController {
 
+    /// 背景视图
+    fileprivate lazy var backGroundV: UIImageView = {
+        let d : UIImageView = UIImageView.init(frame: CGRect.init(x: 0, y: 0, width: SCREEN_WIDTH, height: SCREEN_WIDTH * (500 / 640)))
+        d.image = #imageLiteral(resourceName: "bgV")
+        return d
+    }()
+    
+    lazy var personInfoV: UIImageView = {
+        let d : UIImageView = UIImageView.init(frame: CGRect.init(x: COMMON_MARGIN * SCREEN_SCALE, y: self.backGroundV.bounds.midX / 1.1, width: SCREEN_WIDTH - 2 * COMMON_MARGIN * SCREEN_SCALE , height: (SCREEN_WIDTH - 2 * COMMON_MARGIN * SCREEN_SCALE) * (SCREEN_WIDTH - 2 * COMMON_MARGIN * SCREEN_SCALE)))
+        d.image = #imageLiteral(resourceName: "infoV")
+        d.contentMode = UIViewContentMode.scaleAspectFit
+        return d
+    }()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
         title = "我的信息"
+        
+        view.addSubview(backGroundV)
+        view.addSubview(personInfoV)
+        
+        view.backgroundColor = UIColor.white
     }
 }

@@ -13,15 +13,25 @@ import UIKit
 class AccountAndSaveVC: UIViewController {
     
     
-    var sectionTitle : [[String]] = [["实名认证","设置双重认证","修改登录密码","修改支付密码","设置支付密码"],["退出登录"]]
+    var sectionTitle : [[String]] = [["实名认证","设置双重认证","修改登录密码","修改支付密码"]]
     
+    /// 表格
     fileprivate lazy var tableView: UITableView = {
         let d : UITableView = UITableView.init(frame: self.view.bounds, style: .grouped)
         d.delegate = self
         d.dataSource = self
-        d.register(UITableViewCell.self, forCellReuseIdentifier: "cellId")
+        d.register(TabViewCell.self, forCellReuseIdentifier: "cellId")
+        d.tableFooterView = self.footerV
         return d
     }()
+    
+    /// 尾部视图
+    fileprivate lazy var footerV: AccountAndSaveFooterV = {
+        let d : AccountAndSaveFooterV = AccountAndSaveFooterV.init(frame: CGRect.init(x: COMMON_MARGIN, y: 0, width: SCREEN_WIDTH - 2 * COMMON_MARGIN, height: 45))
+        d.delegate = self
+        return d
+    }()
+    
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -34,39 +44,35 @@ class AccountAndSaveVC: UIViewController {
     }
 }
 
-extension AccountAndSaveVC : UITableViewDelegate,UITableViewDataSource {
+extension AccountAndSaveVC : UITableViewDelegate,UITableViewDataSource,AccountAndSaveFooterVDelegate {
     
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         let d : UIView = UIView.init(frame: CGRect.init(x: 0, y: 0, width: SCREEN_WIDTH, height: 100))
         return d
     }
     
+    
+    
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        switch section {
-        case 0:
-            return 100
 
-        default:
-            break
-        }
         
-        return 0
+        return 0.000001
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "cellId")
+        let cell = tableView.dequeueReusableCell(withIdentifier: "cellId") as! TabViewCell
         
-        cell?.textLabel?.text = sectionTitle[indexPath.section][indexPath.row]
+        cell.descLabel.text = sectionTitle[indexPath.section][indexPath.row]
         
         
         switch indexPath.section {
         case 1:
-            cell?.textLabel?.textAlignment = .center
+            cell.textLabel?.textAlignment = .center
             break
         default:
             break
         }
-        return cell!
+        return cell
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
@@ -76,12 +82,9 @@ extension AccountAndSaveVC : UITableViewDelegate,UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        switch section {
-        case 0:
-            return 5
-        default:
-            return 1
-        }
+        
+        return sectionTitle[0].count
+
     }
     
     func numberOfSections(in tableView: UITableView) -> Int {
@@ -115,19 +118,50 @@ extension AccountAndSaveVC : UITableViewDelegate,UITableViewDataSource {
             default:
                 break
             }
-        case 1:
-            /// 退出事件
-            self.logoutSEL()
-            
-            break
         default:
             break
         }
     }
     
-    /// 退出事件
-    private func logoutSEL() -> Void {
-        CCog(message: "退出事件")
-        UIApplication.shared.keyWindow?.rootViewController = LoginViewController()
+    func footerSEL() {
+        CCog(message: "提出事件")
+        
+        var nav = LoginNav()
+        nav = LoginNav.init(rootViewController: LoginViewController())
+        
+        UIApplication.shared.keyWindow?.rootViewController = nav
+    }
+
+}
+
+
+// MARK: - 尾部视图
+protocol AccountAndSaveFooterVDelegate {
+    func footerSEL() -> Void
+}
+
+class AccountAndSaveFooterV : UIView {
+    
+    var delegate : AccountAndSaveFooterVDelegate?
+    
+    lazy var exitBtn: UIButton = {
+        let d : UIButton = UIButton.init(frame: self.bounds)
+        d.backgroundColor = UIColor.blue
+        d.setTitle("退出", for: .normal)
+        d.addTarget(self, action: #selector(exitSE(sender:)), for: .touchUpInside)
+        return d
+    }()
+    
+    func exitSE(sender : UIButton) -> Void {
+        self.delegate?.footerSEL()
+    }
+    
+    override init(frame: CGRect) {
+        super.init(frame: frame)
+        addSubview(exitBtn)
+    }
+    
+    required init?(coder aDecoder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
     }
 }

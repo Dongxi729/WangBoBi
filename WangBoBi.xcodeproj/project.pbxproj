@@ -106,6 +106,10 @@
 		265991F41EF65D5C004391E9 /* CommonBtn.swift in Sources */ = {isa = PBXBuildFile; fileRef = 265991F31EF65D5C004391E9 /* CommonBtn.swift */; };
 		265992141EF66C6B004391E9 /* AddBankCardVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 265992131EF66C6B004391E9 /* AddBankCardVC.swift */; };
 		265D430C1EFBA8B1007F5AB8 /* MyInfoVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 265D430B1EFBA8B1007F5AB8 /* MyInfoVC.swift */; };
+		265D430F1EFBD572007F5AB8 /* CodeProductor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 265D430E1EFBD572007F5AB8 /* CodeProductor.swift */; };
+		265D431B1EFBE318007F5AB8 /* String+QRCode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 265D43191EFBE318007F5AB8 /* String+QRCode.swift */; };
+		265D431C1EFBE318007F5AB8 /* UIImage+QRCode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 265D431A1EFBE318007F5AB8 /* UIImage+QRCode.swift */; };
+		265D431E1EFBE324007F5AB8 /* Tool.swift in Sources */ = {isa = PBXBuildFile; fileRef = 265D431D1EFBE324007F5AB8 /* Tool.swift */; };
 		266E97211EF3D5460057FD90 /* AccountAndSaveVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 266E97201EF3D5460057FD90 /* AccountAndSaveVC.swift */; };
 		269C1C921EF1275500364F32 /* SwiftyJSON.swift in Sources */ = {isa = PBXBuildFile; fileRef = 269C1C911EF1275500364F32 /* SwiftyJSON.swift */; };
 		26A0A4A91EF0E26B00035D0D /* JFNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26A0A4A81EF0E26B00035D0D /* JFNavigationController.swift */; };
@@ -294,7 +298,10 @@
 		265991F31EF65D5C004391E9 /* CommonBtn.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CommonBtn.swift; sourceTree = "<group>"; };
 		265992131EF66C6B004391E9 /* AddBankCardVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AddBankCardVC.swift; path = Controller/AddBankCardVC.swift; sourceTree = "<group>"; };
 		265D430B1EFBA8B1007F5AB8 /* MyInfoVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MyInfoVC.swift; sourceTree = "<group>"; };
-		265D430D1EFBC19D007F5AB8 /* MyPlayground.playground */ = {isa = PBXFileReference; lastKnownFileType = file.playground; path = MyPlayground.playground; sourceTree = "<group>"; };
+		265D430E1EFBD572007F5AB8 /* CodeProductor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CodeProductor.swift; sourceTree = "<group>"; };
+		265D43191EFBE318007F5AB8 /* String+QRCode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "String+QRCode.swift"; sourceTree = "<group>"; };
+		265D431A1EFBE318007F5AB8 /* UIImage+QRCode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIImage+QRCode.swift"; sourceTree = "<group>"; };
+		265D431D1EFBE324007F5AB8 /* Tool.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Tool.swift; sourceTree = "<group>"; };
 		266E97201EF3D5460057FD90 /* AccountAndSaveVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AccountAndSaveVC.swift; path = "../../Mine-04/Controller/AccountAndSaveVC.swift"; sourceTree = "<group>"; };
 		269C1C911EF1275500364F32 /* SwiftyJSON.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwiftyJSON.swift; sourceTree = "<group>"; };
 		26A0A4A81EF0E26B00035D0D /* JFNavigationController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JFNavigationController.swift; sourceTree = "<group>"; };
@@ -722,6 +729,7 @@
 		264960791EF0BFC000A559D6 /* ThirdSDK */ = {
 			isa = PBXGroup;
 			children = (
+				265D43181EFBE2F5007F5AB8 /* CreateCode */,
 				2623045C1EFA6988007B0BF6 /* ZXPUnicode */,
 				260B20A31EF7633800E78FD8 /* GDPerformanceMonitoring */,
 				263CAF0A1EF62869006629BF /* passInputV */,
@@ -808,6 +816,7 @@
 				264960711EF0BFC000A559D6 /* MainPage-01 */,
 				264960751EF0BFC000A559D6 /* Mine-04 */,
 				263CAF141EF62B89006629BF /* TestViewController.swift */,
+				265D430E1EFBD572007F5AB8 /* CodeProductor.swift */,
 			);
 			path = MainViewController;
 			sourceTree = "<group>";
@@ -887,7 +896,6 @@
 				264960D01EF0C34B00A559D6 /* Device+extension.swift */,
 				264961181EF0CD3E00A559D6 /* UIView+Extension.swift */,
 				2649611A1EF0CD9200A559D6 /* NSString+extension.swift */,
-				265D430D1EFBC19D007F5AB8 /* MyPlayground.playground */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -1047,6 +1055,16 @@
 				265D430B1EFBA8B1007F5AB8 /* MyInfoVC.swift */,
 			);
 			name = MyInfoVC;
+			sourceTree = "<group>";
+		};
+		265D43181EFBE2F5007F5AB8 /* CreateCode */ = {
+			isa = PBXGroup;
+			children = (
+				265D431D1EFBE324007F5AB8 /* Tool.swift */,
+				265D43191EFBE318007F5AB8 /* String+QRCode.swift */,
+				265D431A1EFBE318007F5AB8 /* UIImage+QRCode.swift */,
+			);
+			name = CreateCode;
 			sourceTree = "<group>";
 		};
 		26EF14A11EF900DD005663F1 /* AlertView */ = {
@@ -1211,6 +1229,7 @@
 				264960FB1EF0C9EC00A559D6 /* YYCache.m in Sources */,
 				264960C81EF0C28F00A559D6 /* POPGeometry.mm in Sources */,
 				260B21061EF7DFF500E78FD8 /* RigisterWithDetailVC.swift in Sources */,
+				265D431B1EFBE318007F5AB8 /* String+QRCode.swift in Sources */,
 				260B20D61EF7A0F900E78FD8 /* ToolBar.swift in Sources */,
 				262304651EFA6988007B0BF6 /* NSObject+ZXPUnicode.m in Sources */,
 				264961041EF0C9EC00A559D6 /* UIImageView+YYWebImage.m in Sources */,
@@ -1232,6 +1251,8 @@
 				264960C91EF0C28F00A559D6 /* POPLayerExtras.mm in Sources */,
 				264961001EF0C9EC00A559D6 /* CALayer+YYWebImage.m in Sources */,
 				263CAF121EF62889006629BF /* UIView+XLExtension.m in Sources */,
+				265D431E1EFBE324007F5AB8 /* Tool.swift in Sources */,
+				265D431C1EFBE318007F5AB8 /* UIImage+QRCode.swift in Sources */,
 				26B14EFC1EF259AF0050135B /* CollectCell.swift in Sources */,
 				26ED244E1EF3E59A00642804 /* ChangePaypassVC.swift in Sources */,
 				260B20C51EF76AD100E78FD8 /* BindPhoneVC.swift in Sources */,
@@ -1285,6 +1306,7 @@
 				264961091EF0C9EC00A559D6 /* YYSpriteSheetImage.m in Sources */,
 				265D430C1EFBA8B1007F5AB8 /* MyInfoVC.swift in Sources */,
 				2607D1571EF224C90015625E /* MainPageViewController.swift in Sources */,
+				265D430F1EFBD572007F5AB8 /* CodeProductor.swift in Sources */,
 				264961051EF0C9EC00A559D6 /* YYAnimatedImageView.m in Sources */,
 				264960BF1EF0C28F00A559D6 /* POPAnimationEvent.mm in Sources */,
 				264960CD1EF0C28F00A559D6 /* POPVector.mm in Sources */,

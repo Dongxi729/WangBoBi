@@ -37,8 +37,10 @@ class BaseViewController: UIViewController,UIGestureRecognizerDelegate,UINavigat
         
         let rightFooBarButtonItem : UIBarButtonItem = UIBarButtonItem.init(customView: btnn)
         
+
+        
         /// 页面大于1，显示否则相反
-        if (self.navigationController?.viewControllers.count)! > 1 {
+        if self.navigationController?.viewControllers != nil && (self.navigationController?.viewControllers.count)! > 1 {
             self.navigationItem.setLeftBarButton(rightFooBarButtonItem, animated: true)
         }
         
@@ -82,20 +84,39 @@ class BaseViewController: UIViewController,UIGestureRecognizerDelegate,UINavigat
             ]
         }
         
-        /// 判断当前类名是否为协议的那个页面.
-        if NSStringFromClass(self.classForCoder).contains("ViewController") {
+        /// 判断当前类名是否为协议的那个页面. --- 扫描视图
+        if NSStringFromClass(self.classForCoder).contains("ScanViewController") {
             /// 为那个页面则修改左上角图标
             btnn.setBackgroundImage(UIImage.init(named: "back"), for: .normal)
             
             let navBar = navigationController?.navigationBar
             navBar?.barTintColor = UIColor.clear
-//            navBar?.isTranslucent = false
-            
+
             view.addSubview(separatorLine)
             
             /// 修改导航栏文字样式（富文本）
             navBar?.titleTextAttributes = [
                 NSForegroundColorAttributeName : UIColor.black,
+                NSFontAttributeName : UIFont.systemFont(ofSize: 16 * SCREEN_SCALE)
+            ]
+            
+            /// 设置
+            navBar?.tintColor = UIColor.white
+        }
+        
+        /// 判断当前类名是否为协议的那个页面.--- 我的信息页面
+        if NSStringFromClass(self.classForCoder).contains("MyInfoVC") {
+            /// 为那个页面则修改左上角图标
+            btnn.setBackgroundImage(UIImage.init(named: "rean"), for: .normal)
+            
+            let navBar = navigationController?.navigationBar
+            navBar?.barTintColor = UIColor.clear
+
+            view.addSubview(separatorLine)
+            
+            /// 修改导航栏文字样式（富文本）
+            navBar?.titleTextAttributes = [
+                NSForegroundColorAttributeName : UIColor.white,
                 NSFontAttributeName : UIFont.systemFont(ofSize: 16 * SCREEN_SCALE)
             ]
             
@@ -111,6 +132,10 @@ class BaseViewController: UIViewController,UIGestureRecognizerDelegate,UINavigat
         
         //启用滑动返回（swipe back）
         self.navigationController?.interactivePopGestureRecognizer!.delegate = self
+        
+        /// 解决导航栏跳转后，控件下移64 的Bug
+        self.automaticallyAdjustsScrollViewInsets = false
+        self.extendedLayoutIncludesOpaqueBars = true
     }
     
     /// 视图消失。将整个屏幕的大小改为最初的。
