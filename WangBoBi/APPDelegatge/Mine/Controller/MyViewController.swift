@@ -140,46 +140,25 @@ extension MyViewController : UITableViewDelegate,UITableViewDataSource {
             break
             
         case 1 :
+            /// 账户和安全
             if indexPath.row == 0 {
                 
                 DispatchQueue.main.async {
                     self.navigationController?.pushViewController(AccountAndSaveVC(), animated: true)
                 }
             }
-            break
-        case 2:
-
-            switch indexPath.row {
-                /// 我的银行卡
-            case 0:
-                DispatchQueue.main.async {
-                    self.navigationController?.pushViewController(MyBandCardVC(), animated: true)
-                }
-                break
-                /// 绑定手机
-            case 1:
+            
+            /// 绑定手机
+            if indexPath.row == 1 {
+                
                 DispatchQueue.main.async {
                     self.navigationController?.pushViewController(BindPhoneVC(), animated: true)
                 }
-                break
-                ///  我的申述
-            case 2:
-                DispatchQueue.main.async {
-                    self.navigationController?.pushViewController(MyRequestVC(), animated: true)
-                }
-                break
-                ///  我的消息
-            case 3:
-                DispatchQueue.main.async {
-                    self.navigationController?.pushViewController(MyMsgVC(), animated: true)
-                }
-                break
-            default:
-                break
             }
             
             
             break
+
         default:
             break
         }
