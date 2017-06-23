@@ -41,6 +41,7 @@ class BindPhoneVC: UIViewController,UITableViewDelegate,UITableViewDataSource,Bi
         view.addSubview(tableView)
         
         view.addSubview(footerView)
+        footerView.setFooterTitle(str: "绑定手机")
     }
     
     // MARK: - 表格数据源、代理
@@ -101,10 +102,9 @@ class BindPhoneVC: UIViewController,UITableViewDelegate,UITableViewDataSource,Bi
     
     // MARK: - 尾部代理方法
     func bindPhonSELDelegate() {
-        CCog(message: self.numText)
-        CCog(message: self.phoneCode)
+        CCog(message: self.numText as Any)
+        CCog(message: self.phoneCode as Any)
     }
-
 }
 
 
@@ -128,21 +128,31 @@ class BindPhoneCell: UITableViewCell,UITextFieldDelegate {
     }()
     
     lazy var inputTF: TfPlaceHolder = {
-        let d : TfPlaceHolder = TfPlaceHolder.init(frame: CGRect.init(x: self.titLabel.RightX + COMMON_MARGIN, y: self.bounds.midY - 10 * SCREEN_SCALE, width: self.Width * 0.45, height: 20 * SCREEN_SCALE))
+        let d : TfPlaceHolder = TfPlaceHolder.init(frame: CGRect.init(x: self.titLabel.RightX + COMMON_MARGIN, y: self.bounds.midY - 10 * SCREEN_SCALE, width: self.Width * 0.7, height: 20 * SCREEN_SCALE))
         d.font = UIFont.systemFont(ofSize: 12 * SCREEN_SCALE)
-        
+        d.clearsOnBeginEditing = true
         d.delegate = self
         return d
     }()
     
-    lazy var sendSMS: UIButton = {
-        let d : UIButton = UIButton.init(frame: CGRect.init(x: SCREEN_WIDTH - 80 * SCREEN_SCALE - 2 * COMMON_MARGIN, y: self.inputTF.TopY, width: 80 * SCREEN_SCALE, height: self.inputTF.Height))
+    lazy var sendSMS: CountDownBtn = {
+        let d : CountDownBtn = CountDownBtn.init(frame: CGRect.init(x: SCREEN_WIDTH - 80 * SCREEN_SCALE - COMMON_MARGIN, y: self.inputTF.TopY, width: 80 * SCREEN_SCALE, height: self.inputTF.Height))
         d.setTitle("点击获取验证码", for: .normal)
         d.backgroundColor = UIColor.gray
         d.layer.borderColor = UIColor.lightGray.cgColor
         d.titleLabel?.font = UIFont.systemFont(ofSize: 10 * SCREEN_SCALE)
+        d.addTarget(self, action: #selector(autoSEL(sender:)), for: .touchUpInside)
+        
         return d
     }()
+    
+    //验证码事件
+    func autoSEL(sender : CountDownBtn) -> Void {
+        
+
+        sender.initwith(color: .gray, title: "点击重发", superView: self)
+    }
+    
     
     lazy var line: UIView = {
         let d : UIView = UIView.init(frame: CGRect.init(x: 0, y: self.Height, width: SCREEN_WIDTH, height: 0.5))
@@ -191,11 +201,20 @@ class BindPhoneFooterV : UIView {
     }()
     
     
+    func setFooterTitle(str : String) -> Void {
+        self.bindPhoneBtn.setTitle(str, for: .normal)
+        
+        addSubview(bindPhoneBtn)
+        
+        self.backgroundColor = UIColor.white
+        
+    }
+    
     lazy var bindPhoneBtn: CommonBtn = {
         let d : CommonBtn = CommonBtn.init(frame: CGRect.init(x: COMMON_MARGIN, y: COMMON_MARGIN * 0.7, width: SCREEN_WIDTH - 2 * COMMON_MARGIN, height: self.Height - 2 * COMMON_MARGIN * 0.7))
         d.backgroundColor = UIColor.colorWithHexString("2796DD")
         
-        d.setTitle("绑定手机", for: .normal)
+//        d.setTitle("绑定手机", for: .normal)
         d.addTarget(self, action: #selector(bindPhoneSEL(sender:)), for: .touchUpInside)
         d.titleLabel?.textAlignment = .center
         d.titleLabel?.font = UIFont.systemFont(ofSize: 12 * SCREEN_SCALE)

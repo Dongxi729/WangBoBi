@@ -1,8 +1,8 @@
-//
+    //
 //  TestViewController.swift
 //  WangBoBi
 //
-//  Created by 郑东喜 on 2017/6/18.
+//      Created by 郑东喜 on 2017/6/18.
 //  Copyright © 2017年 郑东喜. All rights reserved.
 //
 
@@ -26,8 +26,23 @@ class TestViewController: UIViewController {
         return d
     }()
     
+    lazy var countBtn: CountDownBtn = {
+        let d: CountDownBtn = CountDownBtn.init(frame: CGRect.init(x: 0, y: 64, width: 100, height: 100))
+        d.setTitle("三三四四", for: .normal)
+        d.backgroundColor = UIColor.gray
+        d.addTarget(self, action: #selector(countBenSEL(sender:)), for: .touchUpInside)
+        return d
+    }()
+    
+    func countBenSEL(sender : CountDownBtn) {
+        CCog(message: sender.currentTitle as Any)
+        
+        sender.initwith(color: UIColor.orange, title: "kjakj", superView: self.view)
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        view.addSubview(countBtn)
         
         // Do any additional setup after loading the view.
         //        view.addSubview(poassV)
@@ -36,9 +51,9 @@ class TestViewController: UIViewController {
         //            CCog(message: params!)
         //        }
         
-        view.backgroundColor = UIColor.randomColor()
+//        view.backgroundColor = UIColor.randomColor()
         
-        view.addSubview(img)
+//        view.addSubview(img)
     }
     
     lazy var showInfoVVV: ShowFailV = {

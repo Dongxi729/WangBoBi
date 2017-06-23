@@ -132,6 +132,7 @@
 		26F484821EEFD55400177670 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 26F484801EEFD55400177670 /* Main.storyboard */; };
 		26F484841EEFD55400177670 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 26F484831EEFD55400177670 /* Assets.xcassets */; };
 		26F484871EEFD55400177670 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 26F484851EEFD55400177670 /* LaunchScreen.storyboard */; };
+		26FCDC551EFCF21E008087F1 /* CountDownBtn.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26FCDC541EFCF21E008087F1 /* CountDownBtn.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -326,6 +327,7 @@
 		26F484831EEFD55400177670 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		26F484861EEFD55400177670 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		26F484881EEFD55400177670 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		26FCDC541EFCF21E008087F1 /* CountDownBtn.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CountDownBtn.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -670,6 +672,7 @@
 		2649606D1EF0BF2500A559D6 /* tool */ = {
 			isa = PBXGroup;
 			children = (
+				26FCDC541EFCF21E008087F1 /* CountDownBtn.swift */,
 				2607D1501EF214D50015625E /* AutoSigned.swift */,
 				2607D14B1EF212450015625E /* Reachability.h */,
 				2607D14C1EF212450015625E /* Reachability.m */,
@@ -1284,6 +1287,7 @@
 				26EF14AF1EF922CF005663F1 /* RequestCommon.swift in Sources */,
 				2607D14E1EF212450015625E /* Reachability.m in Sources */,
 				260B20AF1EF766A600E78FD8 /* BandCardCell.swift in Sources */,
+				26FCDC551EFCF21E008087F1 /* CountDownBtn.swift in Sources */,
 				260B20DA1EF7B1FD00E78FD8 /* ForgetPassVC.swift in Sources */,
 				2649611B1EF0CD9200A559D6 /* NSString+extension.swift in Sources */,
 				264960BE1EF0C28F00A559D6 /* POPAnimation.mm in Sources */,

@@ -111,10 +111,6 @@ extension AccountAndSaveVC : UITableViewDelegate,UITableViewDataSource,AccountAn
                 /// 修改支付密码
                 self.navigationController?.pushViewController(ChangePaypassVC(), animated: true)
                 break
-            case 4:
-                /// 设置支付密码
-                self.navigationController?.pushViewController(SetPaymentPassVC(), animated: true)
-                break
             default:
                 break
             }
@@ -148,6 +144,8 @@ class AccountAndSaveFooterV : UIView {
         let d : UIButton = UIButton.init(frame: self.bounds)
         d.backgroundColor = UIColor.blue
         d.setTitle("退出", for: .normal)
+        d.backgroundColor = UIColor.colorWithHexString("2796DD")
+        d.titleLabel?.font = UIFont.systemFont(ofSize: 12 * SCREEN_SCALE)
         d.addTarget(self, action: #selector(exitSE(sender:)), for: .touchUpInside)
         return d
     }()

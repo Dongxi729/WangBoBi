@@ -16,7 +16,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     /// 性能占用显示。
     var performanceView: GDPerformanceMonitor?
     
-    var nav : JFNavigationController?
+    var nav : LoginNav?
 
     
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
@@ -28,7 +28,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         window = UIWindow.init(frame: UIScreen.main.bounds)
         
-        nav = JFNavigationController.init(rootViewController: MainTabBarViewController())
+        nav = LoginNav.init(rootViewController: LoginViewController())
         window?.rootViewController = nav
         
         window?.makeKeyAndVisible()
@@ -37,31 +37,33 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // 设置全局颜色
         UITabBar.appearance().tintColor = TABBAR_BGCOLOR
         
-//        NetWorkTool.shared.postWithPath(path: LOGIN_URL, paras: ["email" : "946737816@qq.com","pwd" : "123456".md5()], success: { (result) in
-//            CCog(message: result)
-//        }) { (error) in
-//            CCog(message: error.localizedDescription)
-//        }
-//        
+        NetWorkTool.shared.postWithPath(path: LOGIN_URL, paras: ["email" : "946737816@qq.com","pwd" : "123456".md5()], success: { (result) in
+            CCog(message: result)
+            
+            guard let resultData = result as? NSDictionary else {
+                CCog(message: "格式不对")
+                return
+            }
+            CCog(message: resultData["data"])
+            
+        }) { (error) in
+            CCog(message: error.localizedDescription)
+        }
+//
 //        NetWorkTool.shared.postWithPath(path: RIGISTER_URL, paras: ["email" : "946737816@qq.com","pwd" : "123".md5(),"referee" : ""], success: { (result) in
 //            CCog(message: result)
 //        }) { (error) in
 //            CCog(message: error.localizedDescription)
 //        }
-//        
+        
         
         /// 充值密码
-//        NetWorkTool.shared.postWithPath(path: FORGETPASS_URL, paras: ["email" : "946737816@qq.com","pwd" : "123456".md5(),"code" : "CU0433","ac" : "femail"], success: { (result) in
+//        NetWorkTool.shared.postWithPath(path: FORGETPASS_URL, paras: ["email" : "946737816@qq.com","pwd" : "123456".md5(),"code" : "RN6240","ac" : "femail"], success: { (result) in
 //            CCog(message: result)
 //        }) { (error) in
 //            CCog(message: error.localizedDescription)
 //        }
-        
-        let msgStr = "  18259129536@163.com"
-        
-        
-        CCog(message: msgStr.validateEmail())
-        
+
         return true
     }
     

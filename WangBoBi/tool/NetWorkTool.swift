@@ -59,7 +59,7 @@ extension NetWorkTool {
     }
     
     //POST请求
-    func postWithPath(path: String,paras: Dictionary<String,Any>?,success: @escaping ((_ result: JSON) -> ()),failure: @escaping ((_ error: Error) -> ())) {
+    func postWithPath(path: String,paras: Dictionary<String,Any>?,success: @escaping ((_ result: Any) -> ()),failure: @escaping ((_ error: Error) -> ())) {
         
         //(1）设置请求路径
         let url:NSURL = NSURL(string:path)!//不需要传递参数
@@ -103,7 +103,7 @@ extension NetWorkTool {
                     
                     if let result = try? JSONSerialization.jsonObject(with: data, options: .allowFragments) {
                         
-                        success(JSON(result))
+                        success(result)
                     }
                     
                 }else {
@@ -150,26 +150,6 @@ extension NetWorkTool {
                     failure(error! as NSError)
                 }
             }
-        }
-    }
-    
-    
-    //// 测试玩耍使用
-    func reqiuestHeWeather(_ finished : @escaping NetWorkFinished) -> Void {
-        
-        
-        postWithPath(path: "https://api.heweather.com/x3/weather", paras: ["cityid" : "CN101010100","key" : "7747e655cce84f3eb3a921c58e0804e6"], success: { (response) in
-            
-            
-            let modelData = response["HeWeather data service 3.0"][0]["now"]["wind"].dictionary!
-            
-            finished(true, modelData, nil)
-            
- 
-            
-
-        }) { (error) in
-            finished(false, nil, error as NSError)
         }
     }
 }

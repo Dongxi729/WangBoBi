@@ -116,7 +116,32 @@ class BaseViewController: UIViewController,UIGestureRecognizerDelegate,UINavigat
             
             /// 修改导航栏文字样式（富文本）
             navBar?.titleTextAttributes = [
+                
                 NSForegroundColorAttributeName : UIColor.white,
+                NSFontAttributeName : UIFont.systemFont(ofSize: 16 * SCREEN_SCALE)
+            ]
+            
+            /// 设置
+            navBar?.tintColor = UIColor.white
+        }
+        
+        /// 实名认证
+        if NSStringFromClass(self.classForCoder).contains("TrueNameCertifiedVC") {
+            
+            UIApplication.shared.statusBarStyle = UIStatusBarStyle.default
+            
+            /// 为那个页面则修改左上角图标
+            btnn.setBackgroundImage(UIImage.init(named: "back"), for: .normal)
+            
+            let navBar = navigationController?.navigationBar
+            navBar?.barTintColor = UIColor.clear
+            
+            view.addSubview(separatorLine)
+            
+            /// 修改导航栏文字样式（富文本）
+            navBar?.titleTextAttributes = [
+                
+                NSForegroundColorAttributeName : UIColor.black,
                 NSFontAttributeName : UIFont.systemFont(ofSize: 16 * SCREEN_SCALE)
             ]
             

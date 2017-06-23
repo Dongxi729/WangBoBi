@@ -114,19 +114,22 @@ class AccountModel: NSObject,NSCoding {
         /// 返回数据
         NetWorkTool.shared.postWithPath(path: LOGIN_URL, paras: param, success: { (result) in
 
-            guard let resultData = result["data"].dictionaryObject else {
+            
+            guard let resultData = result as? NSDictionary else {
                 
                 CCog(message: "登录信息无效")
                 return
             }
             
-            let account = AccountModel(dict: resultData)
+            CCog(message: resultData)
+            
+            let account = AccountModel(dict: resultData as! [String : Any])
             account.saveAccount()
 
-            /// 抽取提示信息
-            guard let alertMsg = result["msg"].string else {
+            guard let alertMsg = resultData["msg"] as? String else {
                 return
             }
+
             
             if alertMsg == "登陆成功" {
                 UIApplication.shared.keyWindow?.rootViewController = MainTabBarViewController()
@@ -156,8 +159,12 @@ class AccountModel: NSObject,NSCoding {
         NetWorkTool.shared.postWithPath(path: RIGISTER_URL, paras: param, success: { (result) in
             CCog(message: result)
             
+            guard let resultData = result as? NSDictionary else {
+                return
+            }
+            
             /// 抽取提示信息
-            guard let alertMsg = result["msg"].string else {
+            guard let alertMsg = resultData["msg"] as? String else {
                 
                 return
             }
@@ -194,8 +201,16 @@ class AccountModel: NSObject,NSCoding {
         NetWorkTool.shared.postWithPath(path: FORGETPASS_URL, paras: param, success: { (result) in
             CCog(message: result)
             
+            
+            
+            guard let resultData = result as? NSDictionary else {
+                return
+            }
+            
+            
+            
             /// 抽取提示信息
-            guard let alertMsg = result["msg"].string else {
+            guard let alertMsg = resultData["msg"] as? String else {
                 
                 return
             }
@@ -223,8 +238,13 @@ class AccountModel: NSObject,NSCoding {
         NetWorkTool.shared.postWithPath(path: FORGETPASS_URL, paras: param, success: { (result) in
             CCog(message: result)
             
+            
+            guard let resultData = result as? NSDictionary  else {
+                return
+            }
+            
             /// 抽取提示信息
-            guard let alertMsg = result["msg"].string else {
+            guard let alertMsg = resultData["msg"] as? String else {
                 
                 return
             }
