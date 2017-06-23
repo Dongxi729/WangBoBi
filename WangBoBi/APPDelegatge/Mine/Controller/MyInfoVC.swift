@@ -18,7 +18,7 @@ class MyInfoVC: BaseViewController {
     }()
     
     lazy var personInfoV: UIImageView = {
-        let d : UIImageView = UIImageView.init(frame: CGRect.init(x: COMMON_MARGIN * SCREEN_SCALE, y: self.backGroundV.bounds.midX / 1.1, width: SCREEN_WIDTH - 2 * COMMON_MARGIN * SCREEN_SCALE , height: (SCREEN_WIDTH - 2 * COMMON_MARGIN * SCREEN_SCALE) * (SCREEN_WIDTH - 2 * COMMON_MARGIN * SCREEN_SCALE)))
+        let d : UIImageView = UIImageView.init(frame: CGRect.init(x: COMMON_MARGIN * SCREEN_SCALE, y: self.backGroundV.bounds.midX / 1.05, width: SCREEN_WIDTH - 2 * COMMON_MARGIN * SCREEN_SCALE , height: (SCREEN_WIDTH - 2 * COMMON_MARGIN * SCREEN_SCALE) * (369 / 598)))
         d.image = #imageLiteral(resourceName: "infoV")
         d.contentMode = UIViewContentMode.scaleAspectFit
         return d
