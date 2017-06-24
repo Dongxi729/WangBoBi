@@ -10,6 +10,12 @@ import UIKit
 
 class LoginViewController: BaseViewController,UITextFieldDelegate {
     
+    
+        
+    
+        
+
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -20,24 +26,23 @@ class LoginViewController: BaseViewController,UITextFieldDelegate {
         view.addSubview(loginBtn)
         view.addSubview(forgetPass)
         view.addSubview(createNewAccount)
-        
-        
-        //判断机型
-        let deviceType = UIDevice.current.deviceType
-        
-        if deviceType == .iPhone4S {
 
-            bgImg.image = #imageLiteral(resourceName: "4s-LoginBG")
-        } else {
-            bgImg.image = #imageLiteral(resourceName: "LoginBgV")
+        let deviceType = UIDevice.current.deviceType
+        if deviceType == .iPhone4S {
+            
+            
+            passTf.frame = CGRect.init(x: SCREEN_WIDTH * 0.213, y: 0.6 * SCREEN_HEIGHT, width: SCREEN_WIDTH * 0.88 - SCREEN_WIDTH * 0.213, height: 30 * SCREEN_SCALE)
+            loginBtn.frame = CGRect.init(x: SCREEN_WIDTH * 0.132045063995509, y: SCREEN_HEIGHT * 0.78, width: SCREEN_WIDTH * 0.7, height: SCREEN_HEIGHT * 0.794384044149648 - SCREEN_HEIGHT * 0.735960131106169)
+            forgetPass.frame = CGRect.init(x: 0.32206117934075 * SCREEN_WIDTH, y: 0.85 * SCREEN_HEIGHT, width: SCREEN_WIDTH * 0.16, height: 20 * SCREEN_SCALE)
+            createNewAccount.frame = CGRect.init(x: self.forgetPass.RightX, y: 0.85 * SCREEN_HEIGHT, width: SCREEN_WIDTH * 0.16, height: 20 * SCREEN_SCALE)
         }
     }
     
     // MARK: - 背景
     fileprivate lazy var bgImg: UIImageView = {
         let d : UIImageView = UIImageView.init(frame: self.view.bounds)
-        d.contentMode = UIViewContentMode.scaleAspectFit
-        
+        d.contentMode = UIViewContentMode.scaleAspectFill
+        d.image = #imageLiteral(resourceName: "LoginBgV")
         return d
     }()
     
@@ -46,10 +51,10 @@ class LoginViewController: BaseViewController,UITextFieldDelegate {
         let d : TfPlaceHolder = TfPlaceHolder.init(frame: CGRect.init(x: SCREEN_WIDTH * 0.213, y: 0.493 * SCREEN_HEIGHT, width: SCREEN_WIDTH * 0.88 - SCREEN_WIDTH * 0.213, height: 30 * SCREEN_SCALE))
         d.plStrSize(str: "邮箱地址", holderColor: UIColor.white)
         d.textColor = UIColor.white
-        d.font = UIFont.init(name: "SimHei", size: 12 * SCREEN_SCALE)
         d.keyboardType = .numbersAndPunctuation
         d.delegate = self
-        
+        d.layer.borderWidth = 1
+        d.layer.borderColor = UIColor.red.cgColor
         return d
     }()
     
@@ -58,10 +63,14 @@ class LoginViewController: BaseViewController,UITextFieldDelegate {
         let d : TfPlaceHolder = TfPlaceHolder.init(frame: CGRect.init(x: SCREEN_WIDTH * 0.213, y: 0.583 * SCREEN_HEIGHT, width: SCREEN_WIDTH * 0.88 - SCREEN_WIDTH * 0.213, height: 30 * SCREEN_SCALE))
         d.plStrSize(str: "登录密码", holderColor: UIColor.white)
         d.textColor = UIColor.white
-        d.font = UIFont.init(name: "SimHei", size: 12 * SCREEN_SCALE)
+        
         d.keyboardType = .numberPad
         d.delegate = self
+        d.layer.borderWidth = 1
+        d.layer.borderColor = UIColor.red.cgColor
         
+        
+      
         return d
     }()
     
@@ -70,6 +79,8 @@ class LoginViewController: BaseViewController,UITextFieldDelegate {
         let d : UIButton = UIButton.init(frame: CGRect.init(x: SCREEN_WIDTH * 0.132045063995509, y: SCREEN_HEIGHT * 0.735960131106169, width: SCREEN_WIDTH * 0.7, height: SCREEN_HEIGHT * 0.794384044149648 - SCREEN_HEIGHT * 0.735960131106169 ))
         
         d.addTarget(self, action: #selector(loginSEL), for: .touchUpInside)
+        d.layer.borderWidth = 1
+        d.layer.borderColor = UIColor.red.cgColor
         return d
     }()
     
@@ -78,7 +89,8 @@ class LoginViewController: BaseViewController,UITextFieldDelegate {
     fileprivate lazy var forgetPass: UIButton = {
         let d : UIButton = UIButton.init(frame: CGRect.init(x: 0.32206117934075 * SCREEN_WIDTH, y: 0.807518109031346 * SCREEN_HEIGHT, width: SCREEN_WIDTH * 0.16, height: 20 * SCREEN_SCALE))
         d.addTarget(self, action: #selector(forgetPassSEl), for: .touchUpInside)
-        
+        d.layer.borderWidth = 1
+        d.layer.borderColor = UIColor.red.cgColor
         return d
     }()
     
@@ -86,7 +98,8 @@ class LoginViewController: BaseViewController,UITextFieldDelegate {
     fileprivate lazy var createNewAccount: UIButton = {
         let d : UIButton = UIButton.init(frame: CGRect.init(x: self.forgetPass.RightX, y: 0.807518109031346 * SCREEN_HEIGHT, width: SCREEN_WIDTH * 0.16, height: 20 * SCREEN_SCALE))
         d.addTarget(self, action: #selector(createAccountSEL), for: .touchUpInside)
-        
+        d.layer.borderWidth = 1
+        d.layer.borderColor = UIColor.red.cgColor
         return d
     }()
     

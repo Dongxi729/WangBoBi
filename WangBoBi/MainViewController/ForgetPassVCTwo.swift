@@ -14,6 +14,7 @@ class ForgetPassVCTwo: BaseViewController,UITextFieldDelegate {
     lazy var bgImg: UIImageView = {
         let d: UIImageView = UIImageView.init(frame: self.view.bounds)
         d.image = #imageLiteral(resourceName: "forgetPass2")
+        d.contentMode = UIViewContentMode.scaleAspectFill
         return d
     }()
     

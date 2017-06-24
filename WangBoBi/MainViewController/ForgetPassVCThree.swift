@@ -15,6 +15,7 @@ class ForgetPassVCThree: BaseViewController,UITextFieldDelegate,ShowSuccessInfoV
         let d: UIImageView = UIImageView.init(frame: self.view.bounds)
         d.contentMode = UIViewContentMode.scaleAspectFit
         d.image = #imageLiteral(resourceName: "forgetPass3")
+        d.contentMode = UIViewContentMode.scaleAspectFill
         return d
     }()
     

@@ -1,59 +1,98 @@
+//////
+//////  AccountModel.swift
+//////  WangBoBi
+//////
+//////  Created by 郑东喜 on 2017/6/21.
+//////  Copyright © 2017年 郑东喜. All rights reserved.
+//////  用户信息模型
 ////
-////  AccountModel.swift
-////  WangBoBi
+////public static String userId = "";
+//////帐号
+////public static String userpassword="";
+//////密码
+////public static String userToker = "";
+//////唯一的 token
+////public static String userName="";
+//////姓名
+////public static String userImghead = "";
+//////头像地址
+////public static String userWallet = "";
+//////钱包地址
 ////
-////  Created by 郑东喜 on 2017/6/21.
-////  Copyright © 2017年 郑东喜. All rights reserved.
-////  用户信息模型
+////public static String userQRcode = "";
+//////加好友的二维码
+////
+////public static String user_Pay_QRcode= "";
+//////付款二维码id  暂无
+////
+////public static String user_Collect_QRcode = "";
+//////收款二维码id
+////
+////public static boolean realNameBoo = false;
+//////是否实名认证
+////
+////public static boolean realDoubleBoo = false;
+//////是否双重认证
+////
+////public static boolean payPasswordBoo = false;
+//////是否设置过支付密码
+////
+////public static boolean phoneBoo = false;
+//////是否绑定了手机号
+////
+////public static int WBC = 0;
+//////网博币
+////
+////public static Float JP= 0.0f;
+//////和日币的比例
+////
+////public static Float CP= 0.0f;
+//////和人民币的比例
+////
+////public static int  JF = 0;
+//////积分
+////
+////public static Float Trading = 0.0f;
+//////交易量
 //
-//public static String userId = "";
-////帐号
-//public static String userpassword="";
-////密码
-//public static String userToker = "";
-////唯一的 token
-//public static String userName="";
-////姓名
-//public static String userImghead = "";
-////头像地址
-//public static String userWallet = "";
-////钱包地址
-//
-//public static String userQRcode = "";
-////加好友的二维码
-//
-//public static String user_Pay_QRcode= "";
-////付款二维码id  暂无
-//
-//public static String user_Collect_QRcode = "";
-////收款二维码id
-//
-//public static boolean realNameBoo = false;
-////是否实名认证
-//
-//public static boolean realDoubleBoo = false;
-////是否双重认证
-//
-//public static boolean payPasswordBoo = false;
-////是否设置过支付密码
-//
-//public static boolean phoneBoo = false;
-////是否绑定了手机号
-//
-//public static int WBC = 0;
-////网博币
-//
-//public static Float JP= 0.0f;
-////和日币的比例
-//
-//public static Float CP= 0.0f;
-////和人民币的比例
-//
-//public static int  JF = 0;
-////积分
-//
-//public static Float Trading = 0.0f;
-////交易量
+//Optional({
+//    AcctType = "<null>";
+//    AdressCopy = "";
+//    BirthDate = "";
+//    ContractCopy = "";
+//    Credential = "";
+//    CredentialCopy = "";
+//    Email = "946737816@qq.com";
+//    ExpiryDate = "";
+//    Financed = "";
+//    FrinQCode = "wbf://c1ebc999-9d41-4127-99ce-7ddca383f01f";
+//    HeadImg = "http://192.168.1.10:8010/images/logo.jpg";
+//    Id = 1;
+//    IssueDate = "";
+//    Nationality = "";
+//    OpenedDate = "2017-06-23";
+//    OreMachine = "<null>";
+//    PayQCode = "wbp://ce6604ed-6c7b-4de8-80c3-49b00683dfdd";
+//    Phone = "";
+//    Profession = "";
+//    Referee = "";
+//    Remark = "";
+//    ResidenceAdress = "";
+//    SIMCardNo = "";
+//    SelfieCopy = "";
+//    Sex = "";
+//    SubmitTime = "2017-06-23T16:58:44";
+//    Token = ad84b3d10e994342bfb665e346d6b289;
+//    TraderPass = "";
+//    TraderStatus = "<null>";
+//    TrueName = "";
+//    UserName = "946737816@qq.com";
+//    UserPass = e10adc3949ba59abbe56e057f20f883e;
+//    WBCAdress = WXVxpEzLsP8nzmZS22PGYTuTsU1aCbT5gG;
+//    WorkingAdress = "";
+//    YearlySalary = "";
+//})
+
 
 import UIKit
 

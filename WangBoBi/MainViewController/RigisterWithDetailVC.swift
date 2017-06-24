@@ -12,7 +12,7 @@ class RigisterWithDetailVC: BaseViewController,UITextFieldDelegate {
     
     fileprivate lazy var bgImg: UIImageView = {
         let d : UIImageView = UIImageView.init(frame: self.view.bounds)
-        d.contentMode = UIViewContentMode.scaleAspectFit
+        d.contentMode = UIViewContentMode.scaleAspectFill
         d.image = #imageLiteral(resourceName: "RigisterSetPass")
         return d
     }()

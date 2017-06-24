@@ -21,6 +21,7 @@ class ChangePaypassVC: UIViewController,BindPhoneCellDelegate,BindPhoneFooterVDe
     
     /// 尾部视图
     lazy var footerView: BindPhoneFooterV = {
+        
         let d : BindPhoneFooterV = BindPhoneFooterV.init(frame: CGRect.init(x: 0, y: SCREEN_HEIGHT - 64 - 64, width: SCREEN_WIDTH, height: 64))
         d.delegate = self
         return d
@@ -40,6 +41,11 @@ class ChangePaypassVC: UIViewController,BindPhoneCellDelegate,BindPhoneFooterVDe
         view.addSubview(tableView)
         
         view.addSubview(footerView)
+        
+//        let deveceType = UIDevice.current.deviceType
+//        if deveceType == .iPhone4S {
+//            footerView.frame = CGRect.init(x: 0, y: SCREEN_HEIGHT - 64 - 64, width: SCREEN_WIDTH, height: 64)
+//        }
         
         footerView.setFooterTitle(str: "保存密码")
     }

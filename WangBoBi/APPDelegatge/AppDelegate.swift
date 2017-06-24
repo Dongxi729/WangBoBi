@@ -37,18 +37,18 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // 设置全局颜色
         UITabBar.appearance().tintColor = TABBAR_BGCOLOR
         
-        NetWorkTool.shared.postWithPath(path: LOGIN_URL, paras: ["email" : "946737816@qq.com","pwd" : "123456".md5()], success: { (result) in
-            CCog(message: result)
-            
-            guard let resultData = result as? NSDictionary else {
-                CCog(message: "格式不对")
-                return
-            }
-            CCog(message: resultData["data"])
-            
-        }) { (error) in
-            CCog(message: error.localizedDescription)
-        }
+//        NetWorkTool.shared.postWithPath(path: LOGIN_URL, paras: ["email" : "946737816@qq.com","pwd" : "123456".md5()], success: { (result) in
+//            CCog(message: result)
+//            
+//            guard let resultData = result as? NSDictionary else {
+//                CCog(message: "格式不对")
+//                return
+//            }
+//            CCog(message: resultData["data"])
+//            
+//        }) { (error) in
+//            CCog(message: error.localizedDescription)
+//        }
 //
 //        NetWorkTool.shared.postWithPath(path: RIGISTER_URL, paras: ["email" : "946737816@qq.com","pwd" : "123".md5(),"referee" : ""], success: { (result) in
 //            CCog(message: result)
