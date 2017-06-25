@@ -1,4 +1,4 @@
-    //
+//
 //  TestViewController.swift
 //  WangBoBi
 //
@@ -8,61 +8,76 @@
 
 import UIKit
 
-class TestViewController: UIViewController {
+class TestViewController: UIViewController, UIImagePickerControllerDelegate,UINavigationControllerDelegate {
     
-    lazy var poassV: XLPasswordInputView = {
+    var alertController = UIAlertController()
+    
+    lazy var chooseBtn: UIButton = {
+        let d : UIButton = UIButton.init(frame: CGRect.init(x: 0, y: 0, width: 100, height: 100))
+        d.backgroundColor = UIColor.red
         
-        let d : XLPasswordInputView = XLPasswordInputView.init(frame: CGRect.init(x: 0, y: 0, width: SCREEN_WIDTH, height: 100))
-        XLPasswordInputView.init(passwordLength: 5)
-        
-        
+        d.addTarget(self, action: #selector(choose), for: .touchUpInside)
         return d
     }()
-    
-    
-    lazy var img: UIImageView = {
-        let d : UIImageView = UIImageView.init(frame: CGRect.init(x: 0, y: 0, width: SCREEN_WIDTH, height: SCREEN_WIDTH * (713 / 640)))
-        d.image = #imageLiteral(resourceName: "lazzz")
-        return d
-    }()
-    
-    lazy var countBtn: CountDownBtn = {
-        let d: CountDownBtn = CountDownBtn.init(frame: CGRect.init(x: 0, y: 64, width: 100, height: 100))
-        d.setTitle("三三四四", for: .normal)
-        d.backgroundColor = UIColor.gray
-        d.addTarget(self, action: #selector(countBenSEL(sender:)), for: .touchUpInside)
-        return d
-    }()
-    
-    func countBenSEL(sender : CountDownBtn) {
-        CCog(message: sender.currentTitle as Any)
-        
-        sender.initwith(color: UIColor.orange, title: "kjakj", superView: self.view)
-    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.addSubview(countBtn)
         
-        // Do any additional setup after loading the view.
-        //        view.addSubview(poassV)
-        //
-        //        poassV.passwordBlock = {(params) -> Void in
-        //            CCog(message: params!)
-        //        }
-        
-//        view.backgroundColor = UIColor.randomColor()
-        
-//        view.addSubview(img)
+        view.addSubview(chooseBtn)
     }
     
-    lazy var showInfoVVV: ShowFailV = {
-        let d : ShowFailV = ShowFailV.init(frame: self.view.bounds)
-        return d
-    }()
+    func choose() -> Void {
+        UploadHeadTool.shared.choosePic { (dic, diddd) in
+            CCog(message: dic)
+        }
+    }
+    
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-        zdx_setupButtonSpringAnimation(showInfoVVV)
-        view.addSubview(showInfoVVV)
+        if UIImagePickerController.isSourceTypeAvailable(.photoLibrary){
+            //初始化图片控制器
+            let picker = UIImagePickerController()
+            //设置代理
+            picker.delegate = self
+            //指定图片控制器类型
+            picker.sourceType = UIImagePickerControllerSourceType.photoLibrary
+            //弹出控制器，显示界面
+            self.present(picker, animated: true, completion: {
+                () -> Void in
+            })
+        }else{
+            print("读取相册错误")
+        }
+    }
+    
+    
+    
+    //选择图片成功后代理
+    private func imagePickerController(picker: UIImagePickerController,
+                               didFinishPickingMediaWithInfo info: [String : AnyObject]) {
+        //获取选择的原图
+        let pickedImage = info[UIImagePickerControllerOriginalImage] as! UIImage
+        
+        //将选择的图片保存到Document目录下
+        let fileManager = FileManager.default
+        let rootPath = NSSearchPathForDirectoriesInDomains(.documentDirectory,
+                                                           .userDomainMask, true)[0] as String
+        let filePath = "\(rootPath)/pickedimage.jpg"
+        let imageData = UIImageJPEGRepresentation(pickedImage, 1.0)
+        fileManager.createFile(atPath: filePath, contents: imageData, attributes: nil)
+        
+        //上传图片
+        if (fileManager.fileExists(atPath: filePath)){
+            //取得NSURL
+            let _:NSURL = NSURL.init(fileURLWithPath: filePath)
+
+        }
+        
+        //图片控制器退出
+        picker.dismiss(animated: true, completion:nil)
+    }
+    
+    override func didReceiveMemoryWarning() {
+        super.didReceiveMemoryWarning()
     }
 }

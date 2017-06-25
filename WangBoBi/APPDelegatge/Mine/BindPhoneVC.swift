@@ -15,7 +15,7 @@ class BindPhoneVC: UIViewController,UITableViewDelegate,UITableViewDataSource,Bi
         d.delegate = self;
         d.dataSource = self;
         d.register(BindPhoneCell.self, forCellReuseIdentifier: "cellID")
-
+        d.separatorStyle = .none
         return d
     }()
     
@@ -171,7 +171,7 @@ class BindPhoneCell: UITableViewCell,UITextFieldDelegate {
         
         
         sendSMS.isHidden = true
-        self.selectionStyle = UITableViewCellSelectionStyle.none
+        self.selectionStyle = .none
     }
     
     
@@ -205,7 +205,7 @@ class BindPhoneFooterV : UIView {
         self.bindPhoneBtn.setTitle(str, for: .normal)
         
         addSubview(bindPhoneBtn)
-        
+        self.bindPhoneBtn.titleLabel?.font = UIFont.systemFont(ofSize: 13 * SCREEN_SCALE)
         self.backgroundColor = UIColor.white
         
     }

@@ -51,7 +51,7 @@ class Tool: NSObject
     ///1.单例
     
     static let shareTool = Tool()
-    private override init() {}
+//    private override init() {}
     
     var finishedImg : finishedImage?
     var isEditor = false

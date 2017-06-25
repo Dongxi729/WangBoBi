@@ -33,7 +33,6 @@ class CodeProductor: UIViewController {
         
         view.backgroundColor = UIColor.lightText
         
-        
         DispatchQueue.global().async {
             
             let context = ((AccountModel.shared()?.nickName)! + (AccountModel.shared()?.email)!)

@@ -57,7 +57,7 @@ class JFNavigationController: UINavigationController, UIGestureRecognizerDelegat
      */
     private func panGestureBack() {
         let target = interactivePopGestureRecognizer?.delegate
-        let pan = UIPanGestureRecognizer(target: target, action: Selector("handleNavigationTransition:"))
+        let pan = UIPanGestureRecognizer(target: target, action: Selector(("handleNavigationTransition:")))
         pan.delegate = self
         view.addGestureRecognizer(pan)
         interactivePopGestureRecognizer?.isEnabled = false

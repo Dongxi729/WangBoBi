@@ -8,7 +8,7 @@
 
 import UIKit
 
-class TrueNameCertifiedVC: BaseViewController {
+class TrueNameCertifiedVC: UIViewController {
     
     /// 背景图片
     fileprivate lazy var bgImg: UIImageView = {
@@ -17,17 +17,18 @@ class TrueNameCertifiedVC: BaseViewController {
         return d
     }()
 
-    
+    /// 实名验证按钮
     lazy var certiFyBtn: UIButton = {
-        let d : UIButton = UIButton.init(frame: CGRect.init(x: SCREEN_WIDTH * 0.0893719806763285, y: SCREEN_HEIGHT * 0.501811587292215, width: SCREEN_WIDTH, height: 50 * SCREEN_SCALE))
+        let d : UIButton = UIButton.init(frame: CGRect.init(x: SCREEN_WIDTH * 0.0893719806763285, y: SCREEN_HEIGHT * 0.501811587292215, width: SCREEN_WIDTH * 0.85, height: 50 * SCREEN_SCALE))
         d.layer.borderWidth = 1
-        d.addTarget(self, action: #selector(trueNameAdustSEL), for: .touchUpInside)
+        d.addTarget(self, action: #selector(jumpTocertified), for: .touchUpInside)
         return d
     }()
 
-    @objc fileprivate func trueNameAdustSEL() -> Void {
-        let vc = UIViewController()
-        vc.view.backgroundColor = UIColor.red
+    /// 跳往实名认证
+    @objc fileprivate func jumpTocertified() -> Void {
+        let vc = NameCerWithDetailVC()
+        
         self.navigationController?.pushViewController(vc, animated: true)
     }
 
@@ -49,5 +50,12 @@ class TrueNameCertifiedVC: BaseViewController {
         view.backgroundColor = UIColor.white
         
         view.addSubview(certiFyBtn)
+        
+        /// 机型适配
+        let device = UIDevice.current.deviceType
+        if device == .iPhone4S {
+            self.certiFyBtn.frame = CGRect.init(x: SCREEN_WIDTH * 0.0893719806763285, y: SCREEN_HEIGHT * 0.6, width: SCREEN_WIDTH * 0.85, height: 50 * SCREEN_SCALE)
+        }
+        
     }
 }

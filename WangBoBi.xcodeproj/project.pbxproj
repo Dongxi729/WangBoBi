@@ -128,6 +128,8 @@
 		26EF14A91EF9178D005663F1 /* LoginModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26EF14A81EF9178D005663F1 /* LoginModel.swift */; };
 		26EF14AD1EF91F05005663F1 /* ForgetPassModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26EF14AC1EF91F05005663F1 /* ForgetPassModel.swift */; };
 		26EF14AF1EF922CF005663F1 /* RequestCommon.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26EF14AE1EF922CF005663F1 /* RequestCommon.swift */; };
+		26F248B41EFFC05300599CC7 /* NameCerWithDetailVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26F248B31EFFC05300599CC7 /* NameCerWithDetailVC.swift */; };
+		26F248BA1EFFE9F500599CC7 /* UploadHeadTool.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26F248B91EFFE9F500599CC7 /* UploadHeadTool.swift */; };
 		26F4847F1EEFD55400177670 /* ScanCodeController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26F4847E1EEFD55400177670 /* ScanCodeController.swift */; };
 		26F484821EEFD55400177670 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 26F484801EEFD55400177670 /* Main.storyboard */; };
 		26F484841EEFD55400177670 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 26F484831EEFD55400177670 /* Assets.xcassets */; };
@@ -321,6 +323,8 @@
 		26EF14A81EF9178D005663F1 /* LoginModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginModel.swift; sourceTree = "<group>"; };
 		26EF14AC1EF91F05005663F1 /* ForgetPassModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ForgetPassModel.swift; sourceTree = "<group>"; };
 		26EF14AE1EF922CF005663F1 /* RequestCommon.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RequestCommon.swift; sourceTree = "<group>"; };
+		26F248B31EFFC05300599CC7 /* NameCerWithDetailVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NameCerWithDetailVC.swift; sourceTree = "<group>"; };
+		26F248B91EFFE9F500599CC7 /* UploadHeadTool.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UploadHeadTool.swift; sourceTree = "<group>"; };
 		26F484791EEFD55400177670 /* WangBoBi.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = WangBoBi.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		26F4847E1EEFD55400177670 /* ScanCodeController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = ScanCodeController.swift; path = ../ScanCodeController.swift; sourceTree = "<group>"; };
 		26F484811EEFD55400177670 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -432,6 +436,7 @@
 			isa = PBXGroup;
 			children = (
 				26ED24471EF3E18C00642804 /* TrueNameCertifiedVC.swift */,
+				26F248B31EFFC05300599CC7 /* NameCerWithDetailVC.swift */,
 			);
 			name = controller;
 			sourceTree = "<group>";
@@ -749,6 +754,7 @@
 		264960791EF0BFC000A559D6 /* ThirdSDK */ = {
 			isa = PBXGroup;
 			children = (
+				26F248B91EFFE9F500599CC7 /* UploadHeadTool.swift */,
 				265D43181EFBE2F5007F5AB8 /* CreateCode */,
 				2623045C1EFA6988007B0BF6 /* ZXPUnicode */,
 				260B20A31EF7633800E78FD8 /* GDPerformanceMonitoring */,
@@ -1294,6 +1300,7 @@
 				2649612C1EF0D08F00A559D6 /* FTIndicator.m in Sources */,
 				264961301EF0D08F00A559D6 /* FTToastIndicator.m in Sources */,
 				264961061EF0C9EC00A559D6 /* YYFrameImage.m in Sources */,
+				26F248B41EFFC05300599CC7 /* NameCerWithDetailVC.swift in Sources */,
 				261004B21EF8B1B100DE000F /* ForgetPassVCThree.swift in Sources */,
 				260B20AB1EF7633800E78FD8 /* GDPerformanceMonitorDelegate.swift in Sources */,
 				26B14F021EF29F490050135B /* ReceiveCell.swift in Sources */,
@@ -1320,6 +1327,7 @@
 				264961191EF0CD3E00A559D6 /* UIView+Extension.swift in Sources */,
 				264960CC1EF0C28F00A559D6 /* POPSpringAnimation.mm in Sources */,
 				26A0A4A91EF0E26B00035D0D /* JFNavigationController.swift in Sources */,
+				26F248BA1EFFE9F500599CC7 /* UploadHeadTool.swift in Sources */,
 				265992141EF66C6B004391E9 /* AddBankCardVC.swift in Sources */,
 				264960C41EF0C28F00A559D6 /* POPBasicAnimation.mm in Sources */,
 				264961011EF0C9EC00A559D6 /* MKAnnotationView+YYWebImage.m in Sources */,

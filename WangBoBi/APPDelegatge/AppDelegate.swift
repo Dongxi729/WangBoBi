@@ -16,7 +16,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     /// 性能占用显示。
     var performanceView: GDPerformanceMonitor?
     
-    var nav : LoginNav?
+    var nav : JFNavigationController?
 
     
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
@@ -28,7 +28,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         window = UIWindow.init(frame: UIScreen.main.bounds)
         
-        nav = LoginNav.init(rootViewController: LoginViewController())
+        nav = JFNavigationController.init(rootViewController: MainTabBarViewController())
         window?.rootViewController = nav
         
         window?.makeKeyAndVisible()
