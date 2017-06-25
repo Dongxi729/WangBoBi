@@ -31,7 +31,8 @@ class RigisterWithDetailVC: BaseViewController,UITextFieldDelegate {
         let d: TfPlaceHolder = TfPlaceHolder.init(frame: CGRect.init(x: SCREEN_WIDTH * 0.18438001992046, y: SCREEN_HEIGHT * 0.407608695652174, width: SCREEN_WIDTH * 0.88 - SCREEN_WIDTH * 0.213, height: 30 * SCREEN_SCALE))
         d.delegate = self
         d.textColor = UIColor.black
-        d.font = UIFont.init(name: "SimHei", size: 12 * SCREEN_SCALE)
+        d.layer.borderWidth = 1
+        d.layer.borderColor = UIColor.red.cgColor
         return d
     }()
     
@@ -39,8 +40,8 @@ class RigisterWithDetailVC: BaseViewController,UITextFieldDelegate {
     fileprivate lazy var loginPass: UITextField = {
         let d : UITextField = UITextField.init(frame: CGRect.init(x: SCREEN_WIDTH * 0.18438001992046, y: SCREEN_HEIGHT * 0.504076086956522, width: SCREEN_WIDTH * 0.88 - SCREEN_WIDTH * 0.213, height: 30 * SCREEN_SCALE))
         d.delegate = self
-        d.textColor = UIColor.black
-        d.font = UIFont.init(name: "SimHei", size: 12 * SCREEN_SCALE)
+        d.layer.borderWidth = 1
+        d.layer.borderColor = UIColor.red.cgColor
         return d
     }()
     
@@ -48,8 +49,8 @@ class RigisterWithDetailVC: BaseViewController,UITextFieldDelegate {
     fileprivate lazy var repeatPass: UITextField = {
         let d :UITextField = UITextField.init(frame: CGRect.init(x: SCREEN_WIDTH * 0.18438001992046, y: SCREEN_HEIGHT * 0.60054347826087, width: SCREEN_WIDTH * 0.88 - SCREEN_WIDTH * 0.213, height: 30 * SCREEN_SCALE))
         d.delegate = self
-        d.textColor = UIColor.black
-        d.font = UIFont.init(name: "SimHei", size: 12 * SCREEN_SCALE)
+        d.layer.borderWidth = 1
+        d.layer.borderColor = UIColor.red.cgColor
         return d
     }()
     
@@ -58,6 +59,8 @@ class RigisterWithDetailVC: BaseViewController,UITextFieldDelegate {
     fileprivate lazy var userAgree: UIButton = {
         let d : UIButton = UIButton.init(frame: CGRect.init(x: SCREEN_WIDTH * 0.355877604461523, y: SCREEN_HEIGHT * 0.665307957193126, width: 100 * SCREEN_SCALE, height: 30 * SCREEN_SCALE))
         d.addTarget(self, action: #selector(jumpToUserAgreeVC), for: .touchUpInside)
+        d.layer.borderWidth = 1
+        d.layer.borderColor = UIColor.red.cgColor
         return d
     }()
     
@@ -66,6 +69,8 @@ class RigisterWithDetailVC: BaseViewController,UITextFieldDelegate {
         let d : UIButton = UIButton.init(frame: CGRect.init(x: 0.0901771213697351 * SCREEN_WIDTH, y: SCREEN_HEIGHT * 0.667119565217391, width: 30 * SCREEN_SCALE, height: 30 * SCREEN_SCALE))
         d.contentMode = UIViewContentMode.scaleAspectFit
         d.addTarget(self, action: #selector(agreeSEL(sender:)), for: .touchUpInside)
+        d.layer.borderWidth = 1
+        d.layer.borderColor = UIColor.red.cgColor
         
         return d
     }()
@@ -78,6 +83,8 @@ class RigisterWithDetailVC: BaseViewController,UITextFieldDelegate {
         d.contentMode = UIViewContentMode.scaleAspectFit
         d.image = #imageLiteral(resourceName: "select")
         d.layer.cornerRadius = 5.0
+        d.layer.borderWidth = 1
+        d.layer.borderColor = UIColor.red.cgColor
         return d
     }()
     
@@ -86,10 +93,18 @@ class RigisterWithDetailVC: BaseViewController,UITextFieldDelegate {
         let d : UIButton = UIButton.init(frame: CGRect.init(x: SCREEN_WIDTH * 0.0901771213697351, y: SCREEN_HEIGHT * 0.746829696323561, width: SCREEN_WIDTH * 0.8, height: 30 * SCREEN_SCALE))
         
         d.addTarget(self, action: #selector(rigisterSEL), for: .touchUpInside)
+        d.layer.borderWidth = 1
+        d.layer.borderColor = UIColor.red.cgColor
         return d
     }()
 
-    
+    /// 底部图标
+    lazy var bottomImg: UIImageView = {
+        let d : UIImageView = UIImageView.init(frame: CGRect.init(x: 0, y: self.loginBtn.TopY, width: SCREEN_WIDTH, height: self.loginBtn.Height))
+        d.image = #imageLiteral(resourceName: "bottom01")
+        d.contentMode = UIViewContentMode.scaleAspectFit
+        return d
+    }()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -107,6 +122,19 @@ class RigisterWithDetailVC: BaseViewController,UITextFieldDelegate {
         view.addSubview(agreeeImg)
         view.addSubview(agreeeBtn)
         view.addSubview(rigistBtn)
+        
+        let deviceType = UIDevice.current.deviceType
+        if deviceType == .iPhone4S {
+            CCog(message: "====")
+            
+            self.yaoqingBtn.frame = CGRect.init(x: SCREEN_WIDTH * 0.18438001992046, y: SCREEN_HEIGHT * 0.39, width: SCREEN_WIDTH * 0.88 - SCREEN_WIDTH * 0.213, height: 30 * SCREEN_SCALE)
+            self.repeatPass.frame = CGRect.init(x: SCREEN_WIDTH * 0.18438001992046, y: SCREEN_HEIGHT * 0.62, width: SCREEN_WIDTH * 0.88 - SCREEN_WIDTH * 0.213, height: 30 * SCREEN_SCALE)
+            self.userAgree.frame = CGRect.init(x: SCREEN_WIDTH * 0.355877604461523, y: SCREEN_HEIGHT * 0.68, width: 100 * SCREEN_SCALE, height: 30 * SCREEN_SCALE)
+            self.agreeeImg.frame = CGRect.init(x: 0.0901771213697351 * SCREEN_WIDTH, y: SCREEN_HEIGHT * 0.7, width: 12 * SCREEN_SCALE, height: 12 * SCREEN_SCALE)
+            self.rigistBtn.frame = CGRect.init(x: SCREEN_WIDTH * 0.0901771213697351, y: SCREEN_HEIGHT * 0.8, width: SCREEN_WIDTH * 0.8, height: 30 * SCREEN_SCALE)
+            
+            view.addSubview(bottomImg)
+        }
         
     }
     

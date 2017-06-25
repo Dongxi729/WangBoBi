@@ -47,6 +47,13 @@ class ForgetPassVC: BaseViewController,UITextFieldDelegate {
         return d
     }()
 
+    /// 底部图标
+    lazy var bottomImg: UIImageView = {
+        let d : UIImageView = UIImageView.init(frame: CGRect.init(x: 0, y: self.loginBtn.TopY, width: SCREEN_WIDTH, height: self.loginBtn.Height))
+        d.image = #imageLiteral(resourceName: "bottom01")
+        d.contentMode = UIViewContentMode.scaleAspectFit
+        return d
+    }()
 
 
     override func viewDidLoad() {
@@ -60,15 +67,17 @@ class ForgetPassVC: BaseViewController,UITextFieldDelegate {
         view.addSubview(AddLabel)
         
         view.addSubview(confirmBtn)
-        
-        view.addSubview(loginBtn)
-        
+
         
         let deviceType = UIDevice.current.deviceType
         if deviceType == .iPhone4S {
             CCog(message: "====")
             AddLabel.frame = CGRect.init(x: SCREEN_WIDTH * 0.18438001992046, y: SCREEN_HEIGHT * 0.4, width: SCREEN_WIDTH * 0.88 - SCREEN_WIDTH * 0.213, height: 30 * SCREEN_SCALE)
+            view.addSubview(bottomImg)
         }
+       
+        view.addSubview(loginBtn)
+        
     }
     
     /// 发送验证码

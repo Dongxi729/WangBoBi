@@ -22,10 +22,10 @@ class RigisterVC: BaseViewController,UITextFieldDelegate {
     fileprivate lazy var AddLabel: TfPlaceHolder = {
         let d : TfPlaceHolder = TfPlaceHolder.init(frame: CGRect.init(x: SCREEN_WIDTH * 0.18438001992046, y: SCREEN_HEIGHT * 0.39, width: SCREEN_WIDTH * 0.88 - SCREEN_WIDTH * 0.213, height: 30 * SCREEN_SCALE))
         d.plStrSize(str: "", holderColor: UIColor.white)
-        d.layer.borderColor = UIColor.black.cgColor
+        d.layer.borderColor = UIColor.red.cgColor
+        d.layer.borderWidth = 1
         d.delegate = self
-        d.font = UIFont.init(name: "SimHei", size: 12 * SCREEN_SCALE)
-        
+
         return d
     }()
     
@@ -33,6 +33,8 @@ class RigisterVC: BaseViewController,UITextFieldDelegate {
     fileprivate lazy var confirmBtn: UIButton = {
         let d : UIButton = UIButton.init(frame: CGRect.init(x: 0.1256038647343 * SCREEN_WIDTH, y: SCREEN_HEIGHT * 0.53804347826087, width: SCREEN_WIDTH * 0.75, height: 30 * SCREEN_SCALE))
         d.addTarget(self, action: #selector(jumpToRigisterDetailV), for: .touchUpInside)
+        d.layer.borderColor = UIColor.red.cgColor
+        d.layer.borderWidth = 1
         return d
     }()
 
@@ -43,6 +45,14 @@ class RigisterVC: BaseViewController,UITextFieldDelegate {
         return d
     }()
     
+    /// 底部图标
+    lazy var bottomImg: UIImageView = {
+        let d : UIImageView = UIImageView.init(frame: CGRect.init(x: 0, y: self.loginBtn.TopY, width: SCREEN_WIDTH, height: self.loginBtn.Height))
+        d.image = #imageLiteral(resourceName: "bottom01")
+        d.contentMode = UIViewContentMode.scaleAspectFit
+        return d
+    }()
+
 
     
     override func viewDidLoad() {
@@ -56,8 +66,15 @@ class RigisterVC: BaseViewController,UITextFieldDelegate {
         
         view.addSubview(AddLabel)
         view.addSubview(confirmBtn)
-        view.addSubview(loginBtn)
         
+        let deviceType = UIDevice.current.deviceType
+        if deviceType == .iPhone4S {
+            CCog(message: "====")
+            AddLabel.frame = CGRect.init(x: SCREEN_WIDTH * 0.18438001992046, y: SCREEN_HEIGHT * 0.37, width: SCREEN_WIDTH * 0.88 - SCREEN_WIDTH * 0.213, height: 30 * SCREEN_SCALE)
+            view.addSubview(bottomImg)
+        }
+        
+        view.addSubview(loginBtn)
     }
 
     /// 发生验证码
