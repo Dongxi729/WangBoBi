@@ -186,6 +186,7 @@ class BindPhoneCell: UITableViewCell,UITextFieldDelegate {
 }
 
 
+
 protocol BindPhoneFooterVDelegate {
     func bindPhonSELDelegate() -> Void
 }

@@ -92,7 +92,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                 CCog(message: "格式不对")
                 return
             }
-            CCog(message: resultData["data"])
+
             
         }) { (error) in
             CCog(message: error.localizedDescription)

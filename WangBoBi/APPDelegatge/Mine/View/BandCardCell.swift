@@ -240,7 +240,6 @@ class MyVCCell : UITableViewCell {
         nameLabel.text = AccountModel.shared()?.TrueName
         emailAddress.text = AccountModel.shared()?.UserName
         
-        CCog(message: AccountModel.shared()?.Token)
         
     }
     

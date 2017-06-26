@@ -8,7 +8,7 @@
 
 import UIKit
 
-class NameCerWithDetailVC: UIViewController,UITableViewDataSource,UITableViewDelegate,BindPhoneFooterVDelegate,UPloadIDImgDelegate,UIImagePickerControllerDelegate {
+class NameCerWithDetailVC: UIViewController,UITableViewDataSource,UITableViewDelegate,BindPhoneFooterVDelegate,UPloadIDImgDelegate,UIImagePickerControllerDelegate,BindPhoneCellDelegate {
     
     fileprivate lazy var tbV: UITableView = {
         let d : UITableView = UITableView.init(frame: self.view.bounds, style: .grouped)
@@ -34,6 +34,8 @@ class NameCerWithDetailVC: UIViewController,UITableViewDataSource,UITableViewDel
         
         // Do any additional setup after loading the view.
         view.addSubview(tbV)
+        
+        title = "实名认证"
         
         view.addSubview(footerV)
         footerV.setFooterTitle(str: "提交信息")
@@ -80,6 +82,20 @@ class NameCerWithDetailVC: UIViewController,UITableViewDataSource,UITableViewDel
             cel.titLabel.text = dataSource["title"]?[indexPath.row]
             cel.sizeToFit()
             cel.inputTF.placeholder = dataSource["content"]?[indexPath.row]
+            cel.indexPath = indexPath as NSIndexPath
+            cel.delegate = self
+            
+            switch indexPath.row {
+            case 0:
+                cel.inputTF.keyboardType = .numbersAndPunctuation
+                break
+            case 1:
+                cel.inputTF.keyboardType = .numberPad
+                break
+            default:
+                break
+            }
+            
             break
         case 1:
             switch indexPath.row {
@@ -120,14 +136,56 @@ class NameCerWithDetailVC: UIViewController,UITableViewDataSource,UITableViewDel
     
     // MARK: - FooterViewDelegateMethod
     func bindPhonSELDelegate() {
-        CCog(message: "")
+        
+        if nameLabel == nil {
+            toast(toast: "姓名不为空")
+            return
+        } else {
+            if !(nameLabel?.checkUserName(userName: nameLabel! as NSString))! {
+                toast(toast: "名字格式不对")
+                return
+            }
+        }
+        
+        if cardID == nil {
+            toast(toast: "身份证号不为空")
+            return
+        } else {
+            if !(cardID?.checkUserIdCard(idCard: cardID!))! {
+                toast(toast: "身份证号格式不对")
+            }
+        }
     }
+    
     // MARK: - upLaodImgDelegate
     func frontChooseImgSEL() {
         //        UploadHeadTool.shared.choosePic { (uploa, ddd) in
         //            CCog(message: uploa)
         //        }
     }
+    
+    /// 名字
+    fileprivate var nameLabel : String?
+    
+    
+    /// 身份证
+    fileprivate var cardID : String?
+    
+    
+    // MARK: - BindPhoneCellDelegate
+    func text(indexPath: NSIndexPath, text: String) {
+        switch indexPath.row {
+        case 0:
+            nameLabel = text
+            break
+        case 1:
+            cardID = text
+            break
+        default:
+            break
+        }
+    }
+
     
     func backChooseImgSEL() {
         
