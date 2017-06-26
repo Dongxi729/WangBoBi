@@ -87,7 +87,7 @@ class ForgetPassVC: BaseViewController,UITextFieldDelegate {
             
             
             if (self.AddLabel.text?.validateEmail())! {
-                AccountModel.shared()?.email = AddLabel.text!
+                AccountModel.shared()?.Email = AddLabel.text!
                 
                 AccountModel.sendEmailAutoCode(str: AddLabel.text!, finished: { (sendResult) in
                     CCog(message: sendResult)

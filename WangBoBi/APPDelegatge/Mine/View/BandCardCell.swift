@@ -206,6 +206,7 @@ class MyVCCell : UITableViewCell {
         d.text = "哈哈就看见好看"
         AccountModel.shared()?.nickName = d.text!
         d.font = UIFont.systemFont(ofSize: 12 * SCREEN_SCALE)
+        d.textColor = UIColor.white
         return d
     }()
     
@@ -213,7 +214,8 @@ class MyVCCell : UITableViewCell {
         let d : UILabel = UILabel.init(frame: CGRect.init(x: self.AvatarHeadImg.RightX + COMMON_MARGIN, y: self.nameLabel.BottomY + COMMON_MARGIN / 2, width: self.Width - self.AvatarHeadImg.Width - COMMON_MARGIN * 3, height: 20 * SCREEN_SCALE))
         d.font = UIFont.systemFont(ofSize: 12 * SCREEN_SCALE)
         d.text = "189879873@qq.com"
-        AccountModel.shared()?.email = d.text!
+        AccountModel.shared()?.Email = d.text!
+        d.textColor = UIColor.white
         return d
     }()
     
@@ -233,6 +235,13 @@ class MyVCCell : UITableViewCell {
         
         // 取出点击效果
         self.selectionStyle = UITableViewCellSelectionStyle.none
+        
+        AvatarHeadImg.setImage(urlString: AccountModel.shared()?.HeadImg, placeholderImage: #imageLiteral(resourceName: "logo"))
+        nameLabel.text = AccountModel.shared()?.TrueName
+        emailAddress.text = AccountModel.shared()?.UserName
+        
+        CCog(message: AccountModel.shared()?.Token)
+        
     }
     
     required init?(coder aDecoder: NSCoder) {

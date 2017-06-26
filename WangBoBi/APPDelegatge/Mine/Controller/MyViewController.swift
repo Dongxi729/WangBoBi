@@ -16,7 +16,7 @@ class MyViewController: UIViewController {
     
     /// 表格
     lazy var tableView: UITableView = {
-        let d : UITableView = UITableView.init(frame: CGRect.init(x: 0, y: 0, width: SCREEN_WIDTH, height: SCREEN_HEIGHT - 64), style: .grouped)
+        let d : UITableView = UITableView.init(frame: CGRect.init(x: 0, y: 0, width: SCREEN_WIDTH, height: SCREEN_HEIGHT), style: .grouped)
         d.delegate = self
         d.dataSource = self
         d.register(TabViewCell.self, forCellReuseIdentifier: "cel")
@@ -28,7 +28,52 @@ class MyViewController: UIViewController {
     }()
     
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        UIApplication.shared.statusBarStyle = UIStatusBarStyle.lightContent
+        
+        self.navigationController?.navigationBar.barTintColor = UIColor.colorWithHexString("2796DD")
+        
+        let navBar = self.navigationController?.navigationBar
+        navBar?.isTranslucent = false
+        navBar?.barStyle = UIBarStyle.black
+        navBar?.setBackgroundImage(UIImage(), for: UIBarMetrics.default)
+        navBar?.shadowImage = UIImage()
+        navBar?.titleTextAttributes = [
+            NSForegroundColorAttributeName : UIColor.white,
+            
+            NSFontAttributeName : UIFont.systemFont(ofSize: 16 * SCREEN_SCALE)
+        ]
+        
+        
+        /// 设置
+        navBar?.tintColor = UIColor.white
+    }
     
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        
+        
+        UIApplication.shared.statusBarStyle = UIStatusBarStyle.default
+        
+        self.navigationController?.navigationBar.barTintColor = UIColor.white
+        
+        let navBar = self.navigationController?.navigationBar
+        navBar?.isTranslucent = false
+//        navBar?.barStyle = UIBarStyle.default
+//        navBar?.setBackgroundImage(UIImage(), for: UIBarMetrics.default)
+        navBar?.shadowImage = UIImage()
+        navBar?.titleTextAttributes = [
+            NSForegroundColorAttributeName : UIColor.black,
+            
+            NSFontAttributeName : UIFont.systemFont(ofSize: 16 * SCREEN_SCALE)
+        ]
+        
+        
+        /// 设置
+        navBar?.tintColor = UIColor.white
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -53,6 +98,7 @@ extension MyViewController : UITableViewDelegate,UITableViewDataSource {
             case 0:
 
                 let cell = tableView.dequeueReusableCell(withIdentifier: "MyVCCell") as! MyVCCell
+                cell.backgroundColor = UIColor.colorWithHexString("2796DD")
                 return cell
             case 1:
                 cell.descLabel.text = cellDataSource["sectionOne"]?[indexPath.row]

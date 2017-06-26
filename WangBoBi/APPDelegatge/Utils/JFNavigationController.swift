@@ -14,14 +14,14 @@ class JFNavigationController: UINavigationController, UIGestureRecognizerDelegat
         super.viewDidLoad()
         
         let navBar = navigationBar
-        navBar.barTintColor = UIColor.gray
+        navBar.barTintColor = UIColor.white
         navBar.isTranslucent = false
         navBar.barStyle = UIBarStyle.black
         navBar.setBackgroundImage(UIImage(), for: UIBarMetrics.default)
         navBar.shadowImage = UIImage()
         navBar.titleTextAttributes = [
             NSForegroundColorAttributeName : UIColor.colorWithRGB(47, g: 47, b: 47),
-            NSFontAttributeName : UIFont.systemFont(ofSize: 16)
+            NSFontAttributeName : UIFont.systemFont(ofSize: 16 * SCREEN_SCALE)
         ]
         
         // 全屏返回手势

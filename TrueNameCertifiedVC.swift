@@ -12,14 +12,14 @@ class TrueNameCertifiedVC: UIViewController {
     
     /// 背景图片
     fileprivate lazy var bgImg: UIImageView = {
-        let d : UIImageView = UIImageView.init(frame: CGRect.init(x: 0, y: 64.5, width: SCREEN_WIDTH, height: SCREEN_WIDTH * (749 / 640)))
+        let d : UIImageView = UIImageView.init(frame: CGRect.init(x: 0, y: 0.5, width: SCREEN_WIDTH, height: SCREEN_WIDTH * (749 / 640)))
         d.image = #imageLiteral(resourceName: "trueNameBgv")
         return d
     }()
 
     /// 实名验证按钮
     lazy var certiFyBtn: UIButton = {
-        let d : UIButton = UIButton.init(frame: CGRect.init(x: SCREEN_WIDTH * 0.0893719806763285, y: SCREEN_HEIGHT * 0.501811587292215, width: SCREEN_WIDTH * 0.85, height: 50 * SCREEN_SCALE))
+        let d : UIButton = UIButton.init(frame: CGRect.init(x: SCREEN_WIDTH * 0.0893719806763285, y: SCREEN_HEIGHT * 0.4, width: SCREEN_WIDTH * 0.85, height: 50 * SCREEN_SCALE))
         d.layer.borderWidth = 1
         d.addTarget(self, action: #selector(jumpTocertified), for: .touchUpInside)
         return d
@@ -34,7 +34,7 @@ class TrueNameCertifiedVC: UIViewController {
 
     /// 分割线
     fileprivate lazy var line: UIView = {
-        let d : UIView = UIView.init(frame: CGRect.init(x: 0, y: 64, width: SCREEN_WIDTH, height: 0.5))
+        let d : UIView = UIView.init(frame: CGRect.init(x: 0, y: 0, width: SCREEN_WIDTH, height: 0.5))
         d.backgroundColor = UIColor.lightGray
         return d
     }()
@@ -54,7 +54,7 @@ class TrueNameCertifiedVC: UIViewController {
         /// 机型适配
         let device = UIDevice.current.deviceType
         if device == .iPhone4S {
-            self.certiFyBtn.frame = CGRect.init(x: SCREEN_WIDTH * 0.0893719806763285, y: SCREEN_HEIGHT * 0.6, width: SCREEN_WIDTH * 0.85, height: 50 * SCREEN_SCALE)
+            self.certiFyBtn.frame = CGRect.init(x: SCREEN_WIDTH * 0.0893719806763285, y: SCREEN_HEIGHT * 0.5, width: SCREEN_WIDTH * 0.85, height: 50 * SCREEN_SCALE)
         }
         
     }

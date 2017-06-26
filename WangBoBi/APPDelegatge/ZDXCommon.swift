@@ -89,6 +89,10 @@ let TABBAR_BGCOLOR = UIColor.init(red: 118/255, green: 200/255, blue: 218/255, a
 // MARK: - 通用逻辑 间距
 let COMMON_MARGIN : CGFloat = 12
 
+// MARK: - 登录时间
+let LOGIN_TIME : CGFloat = 0
+
+
 /// 基于iPhone6水平方向适配
 ///
 /// - Parameter iPhone6: iPhone6水平方向尺寸

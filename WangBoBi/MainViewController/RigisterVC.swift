@@ -82,7 +82,7 @@ class RigisterVC: BaseViewController,UITextFieldDelegate {
         
         if !(AddLabel.text?.isEmpty)! {
             if (AddLabel.text?.validateEmail())! {
-                AccountModel.shared()?.email = AddLabel.text!
+                AccountModel.shared()?.Email = AddLabel.text!
                 self.navigationController?.pushViewController(RigisterWithDetailVC(), animated: true)
             } else {
                 toast(toast: "邮件格式不正确")

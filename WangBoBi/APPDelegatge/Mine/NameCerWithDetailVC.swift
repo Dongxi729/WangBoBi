@@ -21,22 +21,28 @@ class NameCerWithDetailVC: UIViewController,UITableViewDataSource,UITableViewDel
     }()
     
     fileprivate var dataSource : [String : [String]] = ["title" : ["姓名","身份证号"],
-                                           "content" : ["请输入姓名","请输入身份证号"]]
+                                                        "content" : ["请输入姓名","请输入身份证号"]]
     
     fileprivate lazy var footerV: BindPhoneFooterV = {
         let d : BindPhoneFooterV = BindPhoneFooterV.init(frame: CGRect.init(x: 0, y: SCREEN_HEIGHT - 64 * 2, width: SCREEN_WIDTH, height: 64))
         d.delegate = self;
         return d
     }()
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
         // Do any additional setup after loading the view.
         view.addSubview(tbV)
         
-//        view.addSubview(footerV)
+        view.addSubview(footerV)
         footerV.setFooterTitle(str: "提交信息")
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(view(dd:)), name: NSNotification.Name(rawValue: "imgData"), object: nil)
+    }
+    
+    func view(dd : Notification) -> Void {
+        
     }
     
     // MARK: - 表格代理属性和方法
@@ -58,12 +64,14 @@ class NameCerWithDetailVC: UIViewController,UITableViewDataSource,UITableViewDel
         }
     }
     
-//    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-//        UploadHeadTool.shared.choosePic { (uploa, ddd) in
-//            CCog(message: uploa)
-//        }
-//    }
     
+    func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
+        if section == 1 {
+            return 0.00001
+        } else {
+            return 0
+        }
+    }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cel = tableView.dequeueReusableCell(withIdentifier: "sss") as! BindPhoneCell
@@ -77,7 +85,7 @@ class NameCerWithDetailVC: UIViewController,UITableViewDataSource,UITableViewDel
             switch indexPath.row {
             case 0:
                 cel.titLabel.text = "上传身份证"
-
+                
             default:
                 break
             }
@@ -99,16 +107,16 @@ class NameCerWithDetailVC: UIViewController,UITableViewDataSource,UITableViewDel
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         switch indexPath.section {
-
+            
         case 2:
-
-                return 150 * SCREEN_SCALE
-
+            
+            return 112 * SCREEN_SCALE
+            
         default:
             return 45
         }
     }
-
+    
     
     // MARK: - FooterViewDelegateMethod
     func bindPhonSELDelegate() {
@@ -116,15 +124,15 @@ class NameCerWithDetailVC: UIViewController,UITableViewDataSource,UITableViewDel
     }
     // MARK: - upLaodImgDelegate
     func frontChooseImgSEL() {
-//        UploadHeadTool.shared.choosePic { (uploa, ddd) in
-//            CCog(message: uploa)
-//        }
+        //        UploadHeadTool.shared.choosePic { (uploa, ddd) in
+        //            CCog(message: uploa)
+        //        }
     }
     
     func backChooseImgSEL() {
         
     }
-
+    
 }
 
 // MARK: - Cell
@@ -136,21 +144,21 @@ class UPloadIDImgCell: UITableViewCell {
     
     var delegate : UPloadIDImgDelegate?
     
-    fileprivate lazy var leftImg: CommonBtn = {
-        let d : CommonBtn = CommonBtn.init(frame: CGRect.init(x: COMMON_MARGIN, y: COMMON_MARGIN + 45, width: SCREEN_WIDTH / 2 - 2 * COMMON_MARGIN, height: (SCREEN_WIDTH / 2 - 2 * COMMON_MARGIN) * (176 / 280)))
-
+    fileprivate lazy var leftImg: NameCerBtn = {
+        let d : NameCerBtn = NameCerBtn.init(frame: CGRect.init(x: COMMON_MARGIN, y: COMMON_MARGIN , width: SCREEN_WIDTH / 2 - 2 * COMMON_MARGIN, height: (SCREEN_WIDTH / 2 - 2 * COMMON_MARGIN) * (176 / 280)))
+        
         d.addTarget(self, action: #selector(frontChoose), for: .touchUpInside)
-
+        
         d.setImage(#imageLiteral(resourceName: "uploadIDFront"), for: .normal)
         return d
     }()
     
-    fileprivate lazy var rightImg : UIImageView = {
-        let d : UIImageView = UIImageView.init(frame: CGRect.init(x: self.leftImg.RightX + 2 * COMMON_MARGIN, y: 45 + COMMON_MARGIN, width: SCREEN_WIDTH / 2 - 2 * COMMON_MARGIN, height: (SCREEN_WIDTH / 2 - 2 * COMMON_MARGIN) * (176 / 280)))
-        d.image = #imageLiteral(resourceName: "uploadIDBack")
-        d.isUserInteractionEnabled = true
-        let tapGes = UITapGestureRecognizer.init(target: self, action: #selector(backChoose))
-        d.addGestureRecognizer(tapGes)
+    fileprivate lazy var rightImg : NameCerBtn = {
+        let d : NameCerBtn = NameCerBtn.init(frame: CGRect.init(x: self.leftImg.RightX + 2 * COMMON_MARGIN, y: COMMON_MARGIN, width: SCREEN_WIDTH / 2 - 2 * COMMON_MARGIN, height: (SCREEN_WIDTH / 2 - 2 * COMMON_MARGIN) * (176 / 280)))
+        
+        d.addTarget(self, action: #selector(backChoose), for: .touchUpInside)
+        
+        d.setImage(#imageLiteral(resourceName: "uploadIDBack"), for: .normal)
         return d
     }()
     
@@ -160,25 +168,44 @@ class UPloadIDImgCell: UITableViewCell {
         CCog(message: "frontChoose")
         UploadHeadTool.shared.choosePic { (uploa, ddd) in
             CCog(message: uploa)
+            DispatchQueue.main.async {
+            }
         }
-
     }
     
     /// 正面选择事件
     func backChoose() -> Void {
         CCog(message: "backChoose")
-        self.delegate?.backChooseImgSEL()
+        UploadHeadTool.shared.choosePic { (uploa, ddd) in
+            //            CCog(message: uploa)
+            self.leftImg.setImage(UIImage.init(data: uploa), for: .normal)
+        }
     }
-
     
-
+    
+    
     override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
         super.init(style: .default, reuseIdentifier: reuseIdentifier)
         
         contentView.addSubview(leftImg)
         contentView.addSubview(rightImg)
         
-//        self.selectionStyle = .none
+        //        self.selectionStyle = .none
+    }
+    
+    required init?(coder aDecoder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+}
+
+
+class NameCerBtn: UIButton {
+    override init(frame: CGRect) {
+        super.init(frame: frame)
+    }
+    
+    override func imageRect(forContentRect contentRect: CGRect) -> CGRect {
+        return self.bounds
     }
     
     required init?(coder aDecoder: NSCoder) {

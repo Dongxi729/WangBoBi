@@ -34,10 +34,10 @@ class CodeProductor: UIViewController {
         view.backgroundColor = UIColor.lightText
         
         DispatchQueue.global().async {
+
+            let context = AccountModel.shared()?.FrinQCode
             
-            let context = ((AccountModel.shared()?.nickName)! + (AccountModel.shared()?.email)!)
-            
-            let image = context.generateQRCode()
+            let image = context?.generateQRCode()
             
             DispatchQueue.main.async {
                 self.generatImgView.image = image

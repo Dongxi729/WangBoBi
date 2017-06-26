@@ -85,7 +85,7 @@ class UploadHeadTool: UIView,UIImagePickerControllerDelegate, UINavigationContro
                     self.imagePicker.sourceType = UIImagePickerControllerSourceType.camera
                     self.uploadHeadImg()
                 } else {
-//                    CustomAlertView.shared.alertWithTitle(strTitle: "相机不可用")
+                    toast(toast: "相机不可用")
                     return
                 }
             } else {
@@ -97,8 +97,8 @@ class UploadHeadTool: UIView,UIImagePickerControllerDelegate, UINavigationContro
                     
                     let url = NSURL.init(string: UIApplicationOpenSettingsURLString)
                     
-                    if UIApplication.shared.openURL(url as! URL) {
-                        UIApplication.shared.openURL(url as! URL)
+                    if UIApplication.shared.openURL(url! as URL) {
+                        UIApplication.shared.openURL(url! as URL)
                     }
                 }
                 sheet.addAction(tempAction)
@@ -197,7 +197,18 @@ extension UploadHeadTool {
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
         CCog(message: info)
         picker.dismiss(animated: true, completion: nil)
-
+        if let image = info[UIImagePickerControllerEditedImage] as? UIImage {
+            
+            //改变图片大小
+            let small = image.scaleToSize(img: image, size: CGSize.init(width: 100, height: 100))
+            
+            
+            let compresImage = UIImageJPEGRepresentation(small, 0.1) as Data!
+            
+            CCog(message: compresImage)
+            
+            NotificationCenter.default.post(name: NSNotification.Name(rawValue: "imgData"), object: nil, userInfo: ["ima":compresImage as Any])
+        }
         
     }
 }
