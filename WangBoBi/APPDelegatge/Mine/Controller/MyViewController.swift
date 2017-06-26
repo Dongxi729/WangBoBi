@@ -12,7 +12,9 @@ class MyViewController: UIViewController {
     
     var cellDataSource : [String : [String]] = ["sectionOne" : ["","我的二维码"],
                                                 "sectionThree" : ["账户与安全","绑定手机","我的申述","我的消息"],
-                                                "sectionFour" : ["地址管理"]]
+                                                "sectionImg" : ["Mine_Three","Mine_Four","Mine_Five","Mine_Six"],
+                                                "sectionFour" : ["地址管理"],
+                                                "secFourIMg" : ["Mine_add"]]
     
     /// 表格
     lazy var tableView: UITableView = {
@@ -109,10 +111,13 @@ extension MyViewController : UITableViewDelegate,UITableViewDataSource {
             
         case 1:
             cell.descLabel.text = cellDataSource["sectionThree"]?[indexPath.row]
+            cell.frontIconim.image = UIImage.init(named: (cellDataSource["sectionImg"]?[indexPath.row])!)
             break
         case 2:
             
             cell.descLabel.text = cellDataSource["sectionFour"]?[indexPath.row]
+//            secFourIMg
+            cell.frontIconim.image = UIImage.init(named: (cellDataSource["secFourIMg"]?[indexPath.row])!)
             break
 
         default:

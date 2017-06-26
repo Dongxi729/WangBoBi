@@ -145,8 +145,8 @@ class TabViewCell: UITableViewCell {
     }()
     
     lazy var frontIconim: UIImageView = {
-        let d : UIImageView = UIImageView.init(frame: CGRect.init(x: COMMON_MARGIN, y: self.bounds.midY - 12.5 * SCREEN_SCALE  , width: 25 * SCREEN_SCALE, height: 25 * SCREEN_SCALE))
-        d.image = #imageLiteral(resourceName: "cashBag")
+        let d : UIImageView = UIImageView.init(frame: CGRect.init(x: COMMON_MARGIN, y: self.bounds.midY - 10 * SCREEN_SCALE  , width: 20 * SCREEN_SCALE, height: 20 * SCREEN_SCALE))
+        d.image = #imageLiteral(resourceName: "Mine_Two")
         d.contentMode = UIViewContentMode.scaleAspectFit
         return d
     }()
@@ -161,7 +161,7 @@ class TabViewCell: UITableViewCell {
     fileprivate lazy var JianJIao: UIImageView = {
         let d : UIImageView = UIImageView.init(frame: CGRect.init(x: SCREEN_WIDTH - 15 * SCREEN_SCALE - COMMON_MARGIN, y: self.bounds.midY - 7.5 * SCREEN_SCALE, width: 15 * SCREEN_SCALE, height: 15 * SCREEN_SCALE))
         d.contentMode = UIViewContentMode.scaleAspectFit
-        d.image = #imageLiteral(resourceName: "closuerimg")
+        d.image = #imageLiteral(resourceName: "Mine_BlackDis")
         return d
     }()
     
@@ -189,7 +189,7 @@ class MyVCCell : UITableViewCell {
     
     lazy var AvatarHeadImg: UIImageView = {
         let d: UIImageView = UIImageView.init(frame: CGRect.init(x: COMMON_MARGIN, y: COMMON_MARGIN, width: 60 * SCREEN_SCALE, height: 60 * SCREEN_SCALE))
-        d.image = #imageLiteral(resourceName: "cashBag")
+        d.image = #imageLiteral(resourceName: "Mine_Two")
         d.contentMode = UIViewContentMode.scaleAspectFit
         return d
     }()
@@ -197,7 +197,7 @@ class MyVCCell : UITableViewCell {
     fileprivate lazy var JianJIao: UIImageView = {
         let d : UIImageView = UIImageView.init(frame: CGRect.init(x: SCREEN_WIDTH - 15 * SCREEN_SCALE - COMMON_MARGIN, y: self.bounds.midY + 15 * SCREEN_SCALE, width: 15 * SCREEN_SCALE, height: 15 * SCREEN_SCALE))
         d.contentMode = UIViewContentMode.scaleAspectFit
-        d.image = #imageLiteral(resourceName: "closuerimg")
+        d.image = #imageLiteral(resourceName: "Mine_dis")
         return d
     }()
     

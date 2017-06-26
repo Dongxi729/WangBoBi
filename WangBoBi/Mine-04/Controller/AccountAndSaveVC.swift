@@ -15,6 +15,8 @@ class AccountAndSaveVC: UIViewController {
     
     var sectionTitle : [[String]] = [["实名认证","设置双重认证","修改登录密码","修改支付密码"]]
     
+    fileprivate let imgName : [[String]] = [["named_one","named_two","named_three","named_four"]]
+    
     /// 表格
     fileprivate lazy var tableView: UITableView = {
         let d : UITableView = UITableView.init(frame: self.view.bounds, style: .grouped)
@@ -22,6 +24,7 @@ class AccountAndSaveVC: UIViewController {
         d.dataSource = self
         d.register(TabViewCell.self, forCellReuseIdentifier: "cellId")
         d.tableFooterView = self.footerV
+        d.separatorStyle = .none
         return d
     }()
     
@@ -63,11 +66,12 @@ extension AccountAndSaveVC : UITableViewDelegate,UITableViewDataSource,AccountAn
         let cell = tableView.dequeueReusableCell(withIdentifier: "cellId") as! TabViewCell
         
         cell.descLabel.text = sectionTitle[indexPath.section][indexPath.row]
-        
+        cell.frontIconim.image = UIImage.init(named: imgName[indexPath.section][indexPath.row])
         
         switch indexPath.section {
         case 1:
             cell.textLabel?.textAlignment = .center
+            
             break
         default:
             break
@@ -101,7 +105,11 @@ extension AccountAndSaveVC : UITableViewDelegate,UITableViewDataSource,AccountAn
                 break
             case 1:
                 /// 设置双重认证
-                self.navigationController?.pushViewController(SetDoubelCertifiVC(), animated: true)
+                
+                
+//                self.navigationController?.pushViewController(SetDoubelCertifiVC(), animated: true)
+                self.navigationController?.pushViewController(AleradyCertify(), animated: true)
+                
                 break
             case 2:
                 /// 修改登录密码

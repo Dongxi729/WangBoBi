@@ -32,6 +32,8 @@ class SetDoubelCertifiVC: UIViewController,PhoneCerViewDelegate {
         title = "设置双重认证"
         view.addSubview(bachV)
         view.addSubview(Bttn)
+        
+        view.backgroundColor = UIColor.white
     }
     
     lazy var alertPassView: PhoneCerView = {
