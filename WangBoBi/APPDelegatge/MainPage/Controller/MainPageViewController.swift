@@ -216,6 +216,52 @@ protocol HeadReuseDelegate {
 
 class HeadReuse : UICollectionReusableView {
 
+    /// 网博币余额
+    lazy var WBCLabel: UILabel = {
+        let d : UILabel = UILabel.init(frame: CGRect.init(x: 0, y: self.Height * 0.28, width: self.Width, height: 30 * SCREEN_SCALE))
+        d.font = UIFont.systemFont(ofSize: 25 * SCREEN_SCALE)
+        d.text = "6000"
+        d.textAlignment = .center
+        return d
+    }()
+    
+    /// 网博币/人民币
+    lazy var wbBToJp: UILabel = {
+        let d: UILabel = UILabel.init(frame: CGRect.init(x: self.Width * 0.173913043478261, y: self.Height * 0.42, width: self.Width * 0.3, height: 20 * SCREEN_SCALE))
+        d.text = "网博币/人民币:"
+        d.sizeToFit()
+        d.layer.borderWidth = 1
+        d.font = UIFont.systemFont(ofSize: 12 * SCREEN_SCALE)
+        return d
+    }()
+    
+    /// 网博币/日币
+    lazy var wbBToRp: UILabel = {
+        let d: UILabel = UILabel.init(frame: CGRect.init(x: self.Width * 0.173913043478261, y: self.wbBToJp.BottomY + COMMON_MARGIN * 0.8 * SCREEN_SCALE, width: self.Width * 0.3, height: 20 * SCREEN_SCALE))
+        d.text = "网博币/日币:"
+        d.sizeToFit()
+        d.layer.borderWidth = 1
+        d.font = UIFont.systemFont(ofSize: 12 * SCREEN_SCALE)
+        return d
+    }()
+    
+    /// 网博币/人民币转换后的
+    lazy var convertWBCToR: UILabel = {
+        let d : UILabel = UILabel.init(frame: CGRect.init(x: self.wbBToJp.RightX , y: self.wbBToJp.TopY, width: self.Width * 0.4, height: self.wbBToJp.Height))
+        d.font = UIFont.boldSystemFont(ofSize: 12 * SCREEN_SCALE)
+        d.layer.borderWidth = 1
+        d.text = "2000.0000"
+        return d
+    }()
+    
+    lazy var convertWBCToJ: UILabel = {
+        let d : UILabel = UILabel.init(frame: CGRect.init(x: self.wbBToRp.RightX , y: self.wbBToRp.TopY, width: self.Width * 0.4, height: self.wbBToRp.Height))
+        d.font = UIFont.boldSystemFont(ofSize: 12 * SCREEN_SCALE)
+        d.layer.borderWidth = 1
+        d.text = "2000.0000"
+        return d
+    }()
+    
     /// 头部背景图片
     fileprivate lazy var headBgImg: UIImageView = {
         let d : UIImageView = UIImageView.init(frame: CGRect.init(x: 0, y: 0, width: SCREEN_WIDTH, height: SCREEN_WIDTH * (749 / 640)))
@@ -223,6 +269,37 @@ class HeadReuse : UICollectionReusableView {
         return d
     }()
     
+    
+    // MARK: - 积分
+    lazy var jifenLabel: UILabel = {
+        let d:UILabel = UILabel.init(frame: CGRect.init(x: COMMON_MARGIN * 1.5, y: self.Height * 0.670093651942526, width: (SCREEN_WIDTH / 2 - 2 * COMMON_MARGIN), height: 20 * SCREEN_SCALE))
+        d.text = "13077"
+        d.textColor = UIColor.colorWithHexString("1693D9")
+        d.textAlignment = .center
+        d.font = UIFont.systemFont(ofSize: 12 * SCREEN_SCALE)
+        return d
+    }()
+    
+    // MARK: - 交易量
+    lazy var WBCSubmitCounts: UILabel = {
+        let d : UILabel = UILabel.init(frame: CGRect.init(x: self.jifenLabel.RightX + COMMON_MARGIN * 0.9, y: self.jifenLabel.TopY, width: self.jifenLabel.Width, height: self.jifenLabel.Height))
+        d.textColor = UIColor.colorWithHexString("1693D9")
+        d.font = UIFont.systemFont(ofSize: 12 * SCREEN_SCALE)
+        d.textAlignment = .center
+        d.text = "6789876"
+        return d
+    }()
+
+
+    
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        let touch: UITouch? = touches.first
+        let touchPoint: CGPoint? = touch?.location(in: self)
+        print("\((touchPoint?.x)! / self.Width)==\((touchPoint?.y)! / self.Height)")
+        let stringFloat = Int((touchPoint?.x)!)
+        let stringFloat1 = Int((touchPoint?.y)!)
+        print("\(stringFloat)\(stringFloat1)")
+    }
     
     var buttons : UIButton!
     
@@ -235,11 +312,21 @@ class HeadReuse : UICollectionReusableView {
         let tag = 600
         for index in 0..<4 {
             self.buttons = UIButton.init(frame: CGRect.init(x: CGFloat(index) * self.Width / 4, y: self.Height * 0.8, width: self.Width / 4 , height: self.Height * 0.2))
-            self.buttons.backgroundColor = UIColor.randomColor()
+//            self.buttons.backgroundColor = UIColor.randomColor()
             self.buttons.tag = tag + index
             self.buttons.addTarget(self, action: #selector(buttonSEL(sender:)), for: .touchUpInside)
             addSubview(buttons)
         }
+        
+        
+        addSubview(WBCLabel)
+        addSubview(wbBToJp)
+        addSubview(wbBToRp)
+        addSubview(convertWBCToR)
+        addSubview(convertWBCToJ)
+        
+        addSubview(jifenLabel)
+        addSubview(WBCSubmitCounts)
     }
     
     @objc fileprivate func buttonSEL(sender : UIButton) {
