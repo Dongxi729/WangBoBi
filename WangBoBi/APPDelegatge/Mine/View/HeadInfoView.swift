@@ -10,6 +10,14 @@ import UIKit
 
 class HeadInfoView: UIView {
     
+    /// 头部背景图片
+    fileprivate lazy var headBgImg: UIImageView = {
+        let d : UIImageView = UIImageView.init(frame: CGRect.init(x: 0, y: 0, width: SCREEN_WIDTH, height: SCREEN_WIDTH * (749 / 640)))
+        d.image = #imageLiteral(resourceName: "main_Bar")
+        return d
+    }()
+    
+    
     // MARK: - 第一行(汇率换算、交易量)
     fileprivate lazy var sectionA: UIView = {
         let d : UIView = UIView.init(frame: CGRect.init(x: 0, y: 0, width: SCREEN_WIDTH, height: 44 * SCREEN_SCALE))
@@ -30,7 +38,7 @@ class HeadInfoView: UIView {
         d.text = "WBC/JPY:"
         return d
     }()
-
+    
     
     // MARK: - 第二行
     lazy var sectionTwoV: MoneyV = {
@@ -39,17 +47,21 @@ class HeadInfoView: UIView {
         d.layer.borderColor = UIColor.red.cgColor
         return d
     }()
-    
+
+
     override init(frame: CGRect) {
         super.init(frame: frame)
-        addSubview(sectionA)
-        
         self.layer.borderWidth = 1
+
         
         sectionA.addSubview(moneyConvertLabel)
         sectionA.addSubview(jiaoyiCoun)
         
         addSubview(sectionTwoV)
+
+        
+        addSubview(headBgImg)
+
     }
     
     required init?(coder aDecoder: NSCoder) {

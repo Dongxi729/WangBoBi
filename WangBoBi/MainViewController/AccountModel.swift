@@ -162,15 +162,75 @@ enum AcctTypeEnum : Int {
     case staff = 0,GeneralAgent
 }
 
+/// 认证状态
+///
+/// - unNamed: 未认证
+/// - authing: 审核中
+/// - auhFailed: 认证失败
+/// - authSuccess: 认证成功
+enum realNameIntEnum : Int {
+    case unNamed = 0,authing,auhFailed,authSuccess
+}
+
 class AccountModel: NSObject,NSCoding {
     
+    /// 账号
+    var userId : String?
     
+    /// 密码
+    var userpassword : String?
+    
+    /// 唯一的 token
+    var userToker : String?
+
+    /// 头像地址
+    var userImghead : String?
+    
+    /// 钱包地址
+    var userWallet : String?
+    
+    /// 加好友用户二维码
+    var userQRcode : String?
+    
+    ///     //付款二维码id  暂无
+    var user_Pay_QRcode : String?
+    
+    /// 收款二维码id
+    var user_Collect_QRcode : String?
+    
+    /// 是否实名认证 0 未认证 1 审核中，2认证失败 3认证成功
+    var realNameInt : realNameIntEnum?
+    
+    /// /是否双重认证
+    var realDoubleBoo : Bool?
+    
+    /// 是否设置过支付密码
+    var payPasswordBoo : Bool?
+    
+    /// 是否绑定了手机号
+    var phoneBoo : Bool?
+    
+    /// 网博币
+    var WBC : Int?
+    
+    /// 和日币的比例
+    var JP : Int?
+    
+    /// 和人民币的比例
+    var CP : Int?
+    
+    /// 积分
+    var JF : Int?
+    
+    /// /交易量
+    var Trading : CGFloat?
+    
+    //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     //// 记录输入信息
     /// 昵称
     var nickName : String = ""
     
-//    /// 邮箱
-//    var email : String = ""
+
     
     /// 验证码
     var autoCode : String = ""
@@ -310,11 +370,15 @@ class AccountModel: NSObject,NSCoding {
     ///   - pass: 密码
     class func getInfo(emailStr : String,pass : String) -> Void {
         
+        
+        CCog(message: pass.md5())
         let param = ["email" : emailStr,"pwd" : pass.md5()]
+        
+        CCog(message: param)
         
         /// 返回数据
         NetWorkTool.shared.postWithPath(path: LOGIN_URL, paras: param, success: { (result) in
-            
+            CCog(message: result)
             
             guard let resultData = result as? NSDictionary else {
                 
@@ -326,13 +390,13 @@ class AccountModel: NSObject,NSCoding {
             
             let account = AccountModel(dict: resultData["data"] as! [String : Any])
             account.saveAccount()
+
             
             CCog(message: accountPath)
             
             guard let alertMsg = resultData["msg"] as? String else {
                 return
             }
-            
             
             if alertMsg == "登陆成功" {
                 
@@ -342,7 +406,7 @@ class AccountModel: NSObject,NSCoding {
                 
                 let timeStamp = Int(timerStamp)
                 
-                /// 记录本地登录成功的时间
+                /// 记录本地登录成功的时间/更新
                 UserDefaults.standard.set(timeStamp, forKey: "loginTime")
                 UserDefaults.standard.synchronize()
                 
@@ -369,7 +433,7 @@ class AccountModel: NSObject,NSCoding {
     ///   - repeatPass: 确认密码
     class func register(referee : String,pass : String,repeatPass : String) {
         
-        let param : [String : Any] = ["email" : AccountModel.shared()?.Email ?? "","pwd" : pass.md5(),"referee" : referee]
+        let param : [String : Any] = ["email" : tfemail ?? "","pwd" : pass.md5(),"referee" : referee]
         CCog(message: param)
         
         NetWorkTool.shared.postWithPath(path: RIGISTER_URL, paras: param, success: { (result) in
@@ -521,6 +585,7 @@ class AccountModel: NSObject,NSCoding {
     }
     
     
+    
     /// 获取用户对象(对象静态化，保存在内存中不释放)
     static func shared() -> AccountModel? {
         if userAccount == nil {
@@ -657,6 +722,11 @@ class AccountModel: NSObject,NSCoding {
         ResidenceAdress = aDecoder.decodeObject(forKey: "ResidenceAdress") as? String
         Email = aDecoder.decodeObject(forKey: "Email") as? String
         Phone = aDecoder.decodeObject(forKey: "Phone") as? String
+        
+        if Phone?.characters.count == 0 {
+            self.realNameInt = realNameIntEnum(rawValue: 3)
+        }
+        
         Referee = aDecoder.decodeObject(forKey: "Referee") as? String
         OreMachine = aDecoder.decodeObject(forKey: "OreMachine") as? OreMachineEnum
         SIMCardNo = aDecoder.decodeObject(forKey: "SIMCardNo") as? String

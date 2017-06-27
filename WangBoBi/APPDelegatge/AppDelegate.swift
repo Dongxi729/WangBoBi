@@ -77,6 +77,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         } else {
             setUnlogedMain()
         }
+        
+//        testComplement()
 
         return true
         
@@ -85,9 +87,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     //// 测试接口
     func testComplement() {
         
-        NetWorkTool.shared.postWithPath(path: LOGIN_URL, paras: ["email" : "946737816@qq.com","pwd" : "123456".md5()], success: { (result) in
+        NetWorkTool.shared.postWithPath(path: LOGIN_URL, paras: ["email" : "18259129536@163.com","pwd" : "123".md5()], success: { (result) in
             CCog(message: result)
             
+            CCog(message: "123".md5())
             guard let resultData = result as? NSDictionary else {
                 CCog(message: "格式不对")
                 return
@@ -98,19 +101,19 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             CCog(message: error.localizedDescription)
         }
         
-        NetWorkTool.shared.postWithPath(path: RIGISTER_URL, paras: ["email" : "946737816@qq.com","pwd" : "123".md5(),"referee" : ""], success: { (result) in
-            CCog(message: result)
-        }) { (error) in
-            CCog(message: error.localizedDescription)
-        }
+//        NetWorkTool.shared.postWithPath(path: RIGISTER_URL, paras: ["email" : "18259129536.com","pwd" : "123".md5(),"referee" : ""], success: { (result) in
+//            CCog(message: result)
+//        }) { (error) in
+//            CCog(message: error.localizedDescription)
+//        }
         
         
-        
-        NetWorkTool.shared.postWithPath(path: FORGETPASS_URL, paras: ["email" : "946737816@qq.com","pwd" : "123456".md5(),"code" : "RN6240","ac" : "femail"], success: { (result) in
-            CCog(message: result)
-        }) { (error) in
-            CCog(message: error.localizedDescription)
-        }
+//        
+//        NetWorkTool.shared.postWithPath(path: FORGETPASS_URL, paras: ["email" : "946737816@qq.com","pwd" : "123456".md5(),"code" : "RN6240","ac" : "femail"], success: { (result) in
+//            CCog(message: result)
+//        }) { (error) in
+//            CCog(message: error.localizedDescription)
+//        }
     }
     
     

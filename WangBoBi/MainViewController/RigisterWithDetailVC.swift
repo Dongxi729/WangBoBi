@@ -184,7 +184,9 @@ class RigisterWithDetailVC: BaseViewController,UITextFieldDelegate {
                 toast(toast: "请同意协议")
 
             } else {
-                CCog(message: "===")
+                CCog(message: tfemail)
+                
+                
                 AccountModel.register(referee: self.yaoqingBtn.text!, pass: loginPass.text!, repeatPass: repeatPass.text!)
             }
         }

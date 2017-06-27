@@ -35,12 +35,12 @@ class AccountAndSaveVC: UIViewController {
         return d
     }()
     
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
         title = "账号与安全"
-
+        
         // Do any additional setup after loading the view.
         
         view.addSubview(tableView)
@@ -57,7 +57,7 @@ extension AccountAndSaveVC : UITableViewDelegate,UITableViewDataSource,AccountAn
     
     
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-
+        
         
         return 0.000001
     }
@@ -88,7 +88,7 @@ extension AccountAndSaveVC : UITableViewDelegate,UITableViewDataSource,AccountAn
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         
         return sectionTitle[0].count
-
+        
     }
     
     func numberOfSections(in tableView: UITableView) -> Int {
@@ -100,15 +100,35 @@ extension AccountAndSaveVC : UITableViewDelegate,UITableViewDataSource,AccountAn
         case 0:
             switch indexPath.row {
             case 0:
-                /// 实名认证
-                self.navigationController?.pushViewController(TrueNameCertifiedVC(), animated: true)
+
+                
+                // 未实名
+                if AccountModel.shared()?.realNameInt?.rawValue == 0 {
+                    
+                    self.navigationController?.pushViewController(TrueNameCertifiedVC(), animated: true)
+                }
+                
+                // 审核中
+                if AccountModel.shared()?.realNameInt?.rawValue == 1 {
+                    self.navigationController?.pushViewController(AuthingVC(), animated: true)
+                }
+                
+                // 认证失败
+                if AccountModel.shared()?.realNameInt?.rawValue == 2 {
+                    
+                    self.navigationController?.pushViewController(AuthFailedVC(), animated: true)
+                }
+                
+                // 认证成功
+                if AccountModel.shared()?.realNameInt?.rawValue == 3 {
+                    self.navigationController?.pushViewController(AleradyCertify(), animated: true)
+                }
+                
+                
                 break
             case 1:
                 /// 设置双重认证
-                
-                
-//                self.navigationController?.pushViewController(SetDoubelCertifiVC(), animated: true)
-                self.navigationController?.pushViewController(AleradyCertify(), animated: true)
+                self.navigationController?.pushViewController(SetDoubelCertifiVC(), animated: true)
                 
                 break
             case 2:
@@ -135,7 +155,7 @@ extension AccountAndSaveVC : UITableViewDelegate,UITableViewDataSource,AccountAn
         
         UIApplication.shared.keyWindow?.rootViewController = nav
     }
-
+    
 }
 
 

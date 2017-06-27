@@ -8,6 +8,13 @@
 
 import Foundation
 
+//    /// 邮箱
+var tfemail : String?
+
+
+/// 验证码
+var authCode :String?
+
 /// 判断是否是模拟器
 struct Platform {
     static let isSimulator: Bool = {

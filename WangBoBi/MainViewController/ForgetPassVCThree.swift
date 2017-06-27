@@ -92,7 +92,7 @@ class ForgetPassVCThree: BaseViewController,UITextFieldDelegate,ShowSuccessInfoV
                 toast(toast: "两次输入密码不一致")
             } else {
 
-                AccountModel.modifyPass(emailStr: (AccountModel.shared()?.Email)!, code: (AccountModel.shared()?.autoCode)!, newPass:repeatPass.text! , finished: { (result) in
+                AccountModel.modifyPass(emailStr: (tfemail)!, code:authCode!, newPass:repeatPass.text! , finished: { (result) in
                     CCog(message: result)
                     
                     if result {

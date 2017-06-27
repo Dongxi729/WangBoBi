@@ -49,7 +49,7 @@ class ForgetPassVCTwo: BaseViewController,UITextFieldDelegate {
         if !(AddLabel.text?.isEmpty)! {
             
             if (AddLabel.text?.validateAutoCode())! || (AddLabel.text?.characters.count)! > 6 {
-                AccountModel.shared()?.autoCode = AddLabel.text!
+                authCode = AddLabel.text!
                 
                 self.navigationController?.pushViewController(ForgetPassVCThree(), animated: true)
             } else {

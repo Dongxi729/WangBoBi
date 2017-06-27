@@ -105,13 +105,34 @@ class BaseViewController: UIViewController,UIGestureRecognizerDelegate,UINavigat
         }
         
         /// 判断当前类名是否为协议的那个页面.--- 我的信息页面
-        if NSStringFromClass(self.classForCoder).contains("MyInfoVC") {
+        if NSStringFromClass(self.classForCoder).contains("MainPageVC") {
             /// 为那个页面则修改左上角图标
             btnn.setBackgroundImage(UIImage.init(named: "rean"), for: .normal)
             
             let navBar = navigationController?.navigationBar
             navBar?.barTintColor = UIColor.clear
 
+            view.addSubview(separatorLine)
+            
+            /// 修改导航栏文字样式（富文本）
+            navBar?.titleTextAttributes = [
+                
+                NSForegroundColorAttributeName : UIColor.white,
+                NSFontAttributeName : UIFont.systemFont(ofSize: 16 * SCREEN_SCALE)
+            ]
+            
+            /// 设置
+            navBar?.tintColor = UIColor.white
+        }
+        
+        /// 判断当前类名是否为协议的那个页面.--- 我的信息页面
+        if NSStringFromClass(self.classForCoder).contains("MyInfoVC") {
+            /// 为那个页面则修改左上角图标
+            btnn.setBackgroundImage(UIImage.init(named: "rean"), for: .normal)
+            
+            let navBar = navigationController?.navigationBar
+            navBar?.barTintColor = UIColor.clear
+            
             view.addSubview(separatorLine)
             
             /// 修改导航栏文字样式（富文本）
