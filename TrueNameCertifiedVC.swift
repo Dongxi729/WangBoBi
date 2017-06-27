@@ -20,7 +20,7 @@ class TrueNameCertifiedVC: UIViewController {
     /// 实名验证按钮
     lazy var certiFyBtn: UIButton = {
         let d : UIButton = UIButton.init(frame: CGRect.init(x: SCREEN_WIDTH * 0.0893719806763285, y: SCREEN_HEIGHT * 0.4, width: SCREEN_WIDTH * 0.85, height: 50 * SCREEN_SCALE))
-        d.layer.borderWidth = 1
+        
         d.addTarget(self, action: #selector(jumpTocertified), for: .touchUpInside)
         return d
     }()

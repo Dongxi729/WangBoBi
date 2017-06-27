@@ -6,55 +6,56 @@
 //  Copyright © 2017年 郑东喜. All rights reserved.
 //  用户信息模型
 
-////public static String userId = "";
+
+//public static String userId = "";
 ////帐号
-//public static String userpassword="";
+//public static String userpassword = "";
 ////密码
 //public static String userToker = "";
 ////唯一的 token
-//public static String userName="";
+//public static String userName = "";
 ////姓名
 //public static String userImghead = "";
 ////头像地址
 //public static String userWallet = "";
-//钱包地址
+////钱包地址
 //
 //public static String userQRcode = "";
 ////加好友的二维码
 //
-//public static String user_Pay_QRcode= "";
+//public static String user_Pay_QRcode = "";
 ////付款二维码id  暂无
 //
 //public static String user_Collect_QRcode = "";
 ////收款二维码id
 //
-//public static boolean realNameBoo = false;
-////是否实名认证
+//public static int realNameInt= 0;
+////是否实名认证 0 未认证 1 审核中，2认证失败 3认证成功
 //
 //public static boolean realDoubleBoo = false;
 ////是否双重认证
 //
 //public static boolean payPasswordBoo = false;
-////是否设置过支付密码    交易密码
+////是否设置过支付密码
 //
 //public static boolean phoneBoo = false;
 ////是否绑定了手机号
 //
+//
 //public static int WBC = 0;
 ////网博币
 //
-//public static Float JP= 0.0f;
+//public static Float JP = 0.0f;
 ////和日币的比例
 //
-//public static Float CP= 0.0f;
+//public static Float CP = 0.0f;
 ////和人民币的比例
 //
-//public static int  JF = 0;
+//public static int JF = 0;
 ////积分
 //
 //public static Float Trading = 0.0f;
-////交易量
-//
+//交易量
 //Optional({
 //    AcctType = "<null>";
 //    AdressCopy = "";

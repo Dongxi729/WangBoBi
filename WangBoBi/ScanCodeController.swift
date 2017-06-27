@@ -16,16 +16,30 @@ class ScanCodeController: UIViewController {
     var session = AVCaptureSession()
     
     // MARK: - 扫描二维码
-    lazy var scanLabel: UILabel = {
-        let d : UILabel = UILabel.init(frame: CGRect.init(x: 0, y: (self.scanView?.BottomY)! + COMMON_MARGIN * SCREEN_SCALE, width: SCREEN_WIDTH, height: 30 * SCREEN_SCALE))
-        d.text = "    扫描二维码"
+    fileprivate lazy var scanLabel: UILabel = {
+        let d : UILabel = UILabel.init(frame: CGRect.init(x: 0, y: (self.scanView?.BottomY)! + COMMON_MARGIN * SCREEN_SCALE, width: SCREEN_WIDTH, height: 15 * SCREEN_SCALE))
+        d.text = "     扫描二维码"
         d.textAlignment = .center
         d.textColor = UIColor.white
         d.font = UIFont.systemFont(ofSize: 10 * SCREEN_SCALE)
         return d
     }()
     
-    lazy var descLabel: UILabel = {
+    /// 设置前置小图标
+    fileprivate lazy var scanFrontImg: UILabel = {
+        let d : UILabel = UILabel.init(frame: CGRect.init(x: self.scanLabel.Width * 0.4, y: (self.scanView?.BottomY)! + COMMON_MARGIN * SCREEN_SCALE, width: SCREEN_WIDTH, height: 15 * SCREEN_SCALE))
+        let atch = NSTextAttachment.init()
+        atch.image = #imageLiteral(resourceName: "Sweep 1")
+        let ssss : NSAttributedString = NSAttributedString(attachment: atch)
+        
+        let mutableString = NSMutableAttributedString.init(attributedString: ssss)
+        
+        d.attributedText = mutableString
+        return d
+    }()
+    
+    /// 扫一扫
+    fileprivate lazy var descLabel: UILabel = {
         let f : UILabel = UILabel.init(frame: CGRect.init(x: 0, y: self.scanLabel.BottomY + COMMON_MARGIN / 2 * SCREEN_SCALE, width: SCREEN_WIDTH, height: 15))
         f.textAlignment = .center
         f.textColor = UIColor.white
@@ -52,13 +66,16 @@ class ScanCodeController: UIViewController {
         
         view.addSubview(scanLabel)
         view.addSubview(descLabel)
+        view.addSubview(scanFrontImg)
         
         
+        title = "扫一扫"
         
-//        scaning()
+        /// 开始扫描
+        scaning()
+        view.backgroundColor = UIColor.black
+        
         NotificationCenter.default.addObserver(self, selector: #selector(resetAnimatinon), name: NSNotification.Name.UIApplicationWillEnterForeground, object: nil)
-        
-        
     }
     
     deinit {
@@ -81,6 +98,10 @@ class ScanCodeController: UIViewController {
         scanView?.backgroundColor = UIColor.clear
         scanView?.clipsToBounds = true
         view.addSubview(scanView!)
+        
+        let scanViewImg : UIImageView = UIImageView.init(frame: (self.scanView?.frame)!)
+        scanViewImg.image = #imageLiteral(resourceName: "queue")
+        view.addSubview(scanFrontImg)
         
         scanImageView = UIImageView(image: UIImage.init(named: "sweep_bg_line.png"));
         let widthOrHeight: CGFloat = 18
