@@ -13,8 +13,7 @@ class CollectCell: UICollectionViewCell {
     
     /// 描述文本
     lazy var descLabl: UILabel = {
-        let d : UILabel = UILabel.init(frame: CGRect.init(x: 0, y: self.Height * 0.7, width: self.Width, height: self.Height * 0.3))
-        d.textAlignment = .center
+        let d : UILabel = UILabel.init(frame: CGRect.init(x: 0, y: self.Height - 30, width: self.Width, height: self.Height * 0.3))
         d.layer.borderWidth = 1
         d.text = "ssss"
         return d

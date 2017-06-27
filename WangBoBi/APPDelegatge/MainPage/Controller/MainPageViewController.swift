@@ -18,24 +18,14 @@ struct BookPreview {
 
 class MainPageViewController: BaseViewController {
     
-    // MARK: - 头部视图
-    lazy var headV: HeadInfoView = {
-        let d : HeadInfoView = HeadInfoView.init(frame: CGRect.init(x: 0, y: 0, width: SCREEN_WIDTH, height: SCREEN_WIDTH * (749 / 640)))
-        return d
-    }()
-    
-    /// 数据源
-    var dataSource : [String] = ["扫一扫","收款","充值","转账"]
-    
-    
     /// reuse数据源
     var sectionDataSource : [String] = ["猜您喜欢","推荐商家","第三方提供服务"]
     
     //所有书籍数据
     fileprivate let books = [
-        BookPreview(title: "五月新书", images: ["扫一扫","收款","充值","转账"]),
-        BookPreview(title: "六月新书", images: ["7.jpg", "8.jpg"]),
-        BookPreview(title: "六月新书", images: ["7.jpg", "8.jpg"]),
+        
+        BookPreview(title: "六月新书", images: ["7.jpg", "8000.jpg"]),
+        BookPreview(title: "六月新书", images: ["7.jpg", "8.jpg","7.jpg", "8.jpg"]),
         BookPreview(title: "六月新书", images: ["7.jpg", "8.jpg"]),
         BookPreview(title: "六月新书", images: ["7.jpg", "8.jpg"]),
         BookPreview(title: "六月新书", images: ["7.jpg", "8.jpg"]),
@@ -58,13 +48,13 @@ class MainPageViewController: BaseViewController {
         let collectionViewWidth = SCREEN_BOUNDS
         
         //计算单元格的宽度
-        let itemWidth = SCREEN_WIDTH / 4
+        let itemWidth = SCREEN_WIDTH / 3
         
         //设置单元格宽度和高度
-        layout.itemSize = CGSize(width:itemWidth * 0.77, height:itemWidth * 0.55)
+        layout.itemSize = CGSize(width:itemWidth * 0.8, height:itemWidth * 0.6)
         
         
-        layout.minimumLineSpacing = 10
+        layout.minimumLineSpacing = 0
         layout.minimumInteritemSpacing = 0
         
         /// 设置大小出错///
@@ -78,7 +68,7 @@ class MainPageViewController: BaseViewController {
         d.register(CollectCell.self, forCellWithReuseIdentifier: "cellID")
         d.register(ReuseV.self, forSupplementaryViewOfKind: UICollectionElementKindSectionHeader, withReuseIdentifier: "HeadInfoView")
         d.register(HeadReuse.self, forSupplementaryViewOfKind: UICollectionElementKindSectionHeader, withReuseIdentifier: "headReuse")
-
+        
         return d
     }()
     
@@ -86,12 +76,13 @@ class MainPageViewController: BaseViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
         // Do any additional setup after loading the view.
         self.title = "钱包"
-
+        
         view.addSubview(collV)
         view.backgroundColor = UIColor.gray
+        
     }
     
 }
@@ -103,58 +94,65 @@ extension MainPageViewController : UICollectionViewDataSource,UICollectionViewDe
         
         cell.descLabl.text = books[indexPath.section].images[indexPath.item]
         return cell
-    
+        
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
-        return UIEdgeInsets.init(top:0, left: COMMON_MARGIN * SCREEN_SCALE, bottom: 0, right: COMMON_MARGIN * SCREEN_SCALE)
-    
+        return UIEdgeInsets.init(top:0, left: COMMON_MARGIN * SCREEN_SCALE, bottom: 2 * COMMON_MARGIN * SCREEN_SCALE, right: COMMON_MARGIN * SCREEN_SCALE)
+        
     }
     
     func numberOfSections(in collectionView: UICollectionView) -> Int {
         
         return books.count
-    
+        
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         
         return books[section].images.count
-    
+        
     }
     
     func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
-
+        
         if indexPath.section == 0 {
-
+            
             let header = collectionView.dequeueReusableSupplementaryView(ofKind:
                 UICollectionElementKindSectionHeader, withReuseIdentifier: "headReuse",
                                                       for: indexPath) as? HeadReuse
             header?.delegate = self
+            
+            header?.titleLabel.text = books[indexPath.section].title
             return header!
         } else {
             let header = collectionView.dequeueReusableSupplementaryView(ofKind:
                 UICollectionElementKindSectionHeader, withReuseIdentifier: "HeadInfoView",
                                                       for: indexPath) as? ReuseV
-                  header?.titleLabel.text = books[indexPath.section].title
+            header?.titleLabel.text = books[indexPath.section].title
             return header!
         }
     }
     
     
     
-    //返回分组头大小
+    //返回头部间距
     func collectionView(_ collectionView: UICollectionView,
                         layout collectionViewLayout: UICollectionViewLayout,
                         referenceSizeForHeaderInSection section: Int) -> CGSize {
         
         
         if section == 0 {
-            return CGSize.init(width: SCREEN_WIDTH, height: SCREEN_WIDTH * (749 / 640))
+            return CGSize.init(width: SCREEN_WIDTH, height: SCREEN_WIDTH * (749 / 640) + 100 + 44 + 2 * COMMON_MARGIN)
         } else {
             return CGSize.init(width: SCREEN_WIDTH, height: 45)
         }
+    }
     
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForFooterInSection section: Int) -> CGSize {
+        
+        return CGSize.init(width: SCREEN_WIDTH, height: 15)
+        
     }
     
     // MARK: - HeadReuseDelegate
@@ -163,19 +161,19 @@ extension MainPageViewController : UICollectionViewDataSource,UICollectionViewDe
         let cc = UIViewController()
         cc.view.backgroundColor = UIColor.randomColor()
         switch index {
-            /// 扫一扫
+        /// 扫一扫
         case 600:
             self.navigationController?.pushViewController(ScanCodeController(), animated: true)
             break
-            /// 首付款
+        /// 首付款
         case 601:
             self.navigationController?.pushViewController(cc, animated: true)
             break
-            /// 充值
+        /// 充值
         case 602:
             self.navigationController?.pushViewController(cc, animated: true)
             break
-            /// 转账
+        /// 转账
         case 603:
             self.navigationController?.pushViewController(cc, animated: true)
             break
@@ -183,19 +181,20 @@ extension MainPageViewController : UICollectionViewDataSource,UICollectionViewDe
             break
         }
     }
-
+    
 }
 
 /// 头部复用视图
 class ReuseV : UICollectionReusableView {
-
+    
     lazy var titleLabel: UILabel = {
         let d : UILabel = UILabel.init(frame: CGRect.init(x: 0, y: 0, width: self.Width, height: 44))
         d.text = "说的"
+        d.textAlignment = .center
         return d
     }()
     
-
+    
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -215,10 +214,26 @@ protocol HeadReuseDelegate {
 }
 
 class HeadReuse : UICollectionReusableView {
-
+    
+    // MARK: - 广告视图
+    lazy var bannerImg: UIImageView = {
+        let d : UIImageView = UIImageView.init(frame: CGRect.init(x: 0, y: self.headBgImg.BottomY + COMMON_MARGIN, width: SCREEN_WIDTH, height: 100))
+        d.backgroundColor = UIColor.red
+        return d
+    }()
+    
+    
+    /// 补充的头部文字
+    lazy var titleLabel: UILabel = {
+        let d : UILabel = UILabel.init(frame: CGRect.init(x: 0, y: self.bannerImg.BottomY + COMMON_MARGIN , width: self.Width, height: 44))
+        d.text = "说的"
+        d.textAlignment = .center
+        return d
+    }()
+    
     /// 网博币余额
     lazy var WBCLabel: UILabel = {
-        let d : UILabel = UILabel.init(frame: CGRect.init(x: 0, y: self.Height * 0.28, width: self.Width, height: 30 * SCREEN_SCALE))
+        let d : UILabel = UILabel.init(frame: CGRect.init(x: 0, y: self.headBgImg.Height * 0.28, width: self.Width, height: 30 * SCREEN_SCALE))
         d.font = UIFont.systemFont(ofSize: 25 * SCREEN_SCALE)
         d.text = "6000"
         d.textAlignment = .center
@@ -227,7 +242,7 @@ class HeadReuse : UICollectionReusableView {
     
     /// 网博币/人民币
     lazy var wbBToJp: UILabel = {
-        let d: UILabel = UILabel.init(frame: CGRect.init(x: self.Width * 0.173913043478261, y: self.Height * 0.42, width: self.Width * 0.3, height: 20 * SCREEN_SCALE))
+        let d: UILabel = UILabel.init(frame: CGRect.init(x: self.Width * 0.173913043478261, y: self.headBgImg.Height * 0.42, width: self.Width * 0.3, height: 20 * SCREEN_SCALE))
         d.text = "网博币/人民币:"
         d.sizeToFit()
         d.layer.borderWidth = 1
@@ -272,7 +287,7 @@ class HeadReuse : UICollectionReusableView {
     
     // MARK: - 积分
     lazy var jifenLabel: UILabel = {
-        let d:UILabel = UILabel.init(frame: CGRect.init(x: COMMON_MARGIN * 1.5, y: self.Height * 0.670093651942526, width: (SCREEN_WIDTH / 2 - 2 * COMMON_MARGIN), height: 20 * SCREEN_SCALE))
+        let d:UILabel = UILabel.init(frame: CGRect.init(x: COMMON_MARGIN * 1.5, y: self.headBgImg.Height * 0.670093651942526, width: (SCREEN_WIDTH / 2 - 2 * COMMON_MARGIN), height: 20 * SCREEN_SCALE))
         d.text = "13077"
         d.textColor = UIColor.colorWithHexString("1693D9")
         d.textAlignment = .center
@@ -289,17 +304,6 @@ class HeadReuse : UICollectionReusableView {
         d.text = "6789876"
         return d
     }()
-
-
-    
-    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-        let touch: UITouch? = touches.first
-        let touchPoint: CGPoint? = touch?.location(in: self)
-        print("\((touchPoint?.x)! / self.Width)==\((touchPoint?.y)! / self.Height)")
-        let stringFloat = Int((touchPoint?.x)!)
-        let stringFloat1 = Int((touchPoint?.y)!)
-        print("\(stringFloat)\(stringFloat1)")
-    }
     
     var buttons : UIButton!
     
@@ -312,21 +316,23 @@ class HeadReuse : UICollectionReusableView {
         let tag = 600
         for index in 0..<4 {
             self.buttons = UIButton.init(frame: CGRect.init(x: CGFloat(index) * self.Width / 4, y: self.Height * 0.8, width: self.Width / 4 , height: self.Height * 0.2))
-//            self.buttons.backgroundColor = UIColor.randomColor()
+            //            self.buttons.backgroundColor = UIColor.randomColor()
             self.buttons.tag = tag + index
             self.buttons.addTarget(self, action: #selector(buttonSEL(sender:)), for: .touchUpInside)
             addSubview(buttons)
         }
         
+        headBgImg.addSubview(WBCLabel)
+        headBgImg.addSubview(wbBToJp)
+        headBgImg.addSubview(wbBToRp)
+        headBgImg.addSubview(convertWBCToR)
+        headBgImg.addSubview(convertWBCToJ)
         
-        addSubview(WBCLabel)
-        addSubview(wbBToJp)
-        addSubview(wbBToRp)
-        addSubview(convertWBCToR)
-        addSubview(convertWBCToJ)
+        headBgImg.addSubview(jifenLabel)
+        headBgImg.addSubview(WBCSubmitCounts)
         
-        addSubview(jifenLabel)
-        addSubview(WBCSubmitCounts)
+        addSubview(bannerImg)
+        addSubview(titleLabel)
     }
     
     @objc fileprivate func buttonSEL(sender : UIButton) {
