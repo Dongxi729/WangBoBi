@@ -200,6 +200,13 @@ class BaseViewController: UIViewController,UIGestureRecognizerDelegate,UINavigat
         UIView.animate(withDuration: 0.5) {
             UIApplication.shared.keyWindow?.frame = (UIApplication.shared.keyWindow?.rootViewController?.view.bounds)!
         }
+        
+        let touch: UITouch? = touches.first
+        let touchPoint: CGPoint? = touch?.location(in: self.view)
+        print("\((touchPoint?.x)! / SCREEN_WIDTH)==\((touchPoint?.y)! / SCREEN_HEIGHT)")
+        let stringFloat = Int((touchPoint?.x)!)
+        let stringFloat1 = Int((touchPoint?.y)!)
+        print("\(stringFloat)\(stringFloat1)")
     }
     
     @objc fileprivate func back() {
@@ -215,4 +222,5 @@ class BaseViewController: UIViewController,UIGestureRecognizerDelegate,UINavigat
         }
         return true
     }
+
 }

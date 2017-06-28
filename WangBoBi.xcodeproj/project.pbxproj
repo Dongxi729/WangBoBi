@@ -106,6 +106,9 @@
 		2650C1871F035D51005BE741 /* PaymentVCTwo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2650C1861F035D51005BE741 /* PaymentVCTwo.swift */; };
 		2650C1891F035E2E005BE741 /* PaymentThreeVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2650C1881F035E2E005BE741 /* PaymentThreeVC.swift */; };
 		2650C18C1F036109005BE741 /* GetMoneyScanVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2650C18B1F036109005BE741 /* GetMoneyScanVC.swift */; };
+		2650C18E1F038F7A005BE741 /* PaydescV.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2650C18D1F038F7A005BE741 /* PaydescV.swift */; };
+		2650C1901F039B66005BE741 /* UILabel + Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2650C18F1F039B66005BE741 /* UILabel + Extension.swift */; };
+		2650C1941F03AA82005BE741 /* PickerV.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2650C1931F03AA82005BE741 /* PickerV.swift */; };
 		265991F11EF65A9E004391E9 /* simhei.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 265991F01EF65A9E004391E9 /* simhei.ttf */; };
 		265991F41EF65D5C004391E9 /* CommonBtn.swift in Sources */ = {isa = PBXBuildFile; fileRef = 265991F31EF65D5C004391E9 /* CommonBtn.swift */; };
 		265992141EF66C6B004391E9 /* AddBankCardVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 265992131EF66C6B004391E9 /* AddBankCardVC.swift */; };
@@ -308,6 +311,9 @@
 		2650C1861F035D51005BE741 /* PaymentVCTwo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PaymentVCTwo.swift; sourceTree = "<group>"; };
 		2650C1881F035E2E005BE741 /* PaymentThreeVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PaymentThreeVC.swift; sourceTree = "<group>"; };
 		2650C18B1F036109005BE741 /* GetMoneyScanVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GetMoneyScanVC.swift; sourceTree = "<group>"; };
+		2650C18D1F038F7A005BE741 /* PaydescV.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PaydescV.swift; sourceTree = "<group>"; };
+		2650C18F1F039B66005BE741 /* UILabel + Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UILabel + Extension.swift"; sourceTree = "<group>"; };
+		2650C1931F03AA82005BE741 /* PickerV.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PickerV.swift; sourceTree = "<group>"; };
 		265991F01EF65A9E004391E9 /* simhei.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = simhei.ttf; sourceTree = "<group>"; };
 		265991F31EF65D5C004391E9 /* CommonBtn.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CommonBtn.swift; sourceTree = "<group>"; };
 		265992131EF66C6B004391E9 /* AddBankCardVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AddBankCardVC.swift; path = Controller/AddBankCardVC.swift; sourceTree = "<group>"; };
@@ -744,6 +750,7 @@
 				26B14EFB1EF259AF0050135B /* CollectCell.swift */,
 				26B14F011EF29F490050135B /* ReceiveCell.swift */,
 				261F06771EF4FB060019CE44 /* MoneyBagV.swift */,
+				2650C18D1F038F7A005BE741 /* PaydescV.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -940,6 +947,7 @@
 				264960D01EF0C34B00A559D6 /* Device+extension.swift */,
 				264961181EF0CD3E00A559D6 /* UIView+Extension.swift */,
 				2649611A1EF0CD9200A559D6 /* NSString+extension.swift */,
+				2650C18F1F039B66005BE741 /* UILabel + Extension.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -1107,6 +1115,7 @@
 			isa = PBXGroup;
 			children = (
 				265991F31EF65D5C004391E9 /* CommonBtn.swift */,
+				2650C1931F03AA82005BE741 /* PickerV.swift */,
 			);
 			name = View;
 			sourceTree = "<group>";
@@ -1288,6 +1297,7 @@
 				26ED24501EF3E5E300642804 /* SetPaymentPassVC.swift in Sources */,
 				264960CA1EF0C28F00A559D6 /* POPMath.mm in Sources */,
 				26EF14A51EF90DC2005663F1 /* BaseViewController.swift in Sources */,
+				2650C18E1F038F7A005BE741 /* PaydescV.swift in Sources */,
 				264960FB1EF0C9EC00A559D6 /* YYCache.m in Sources */,
 				264960C81EF0C28F00A559D6 /* POPGeometry.mm in Sources */,
 				260B21061EF7DFF500E78FD8 /* RigisterWithDetailVC.swift in Sources */,
@@ -1379,6 +1389,7 @@
 				2607D1571EF224C90015625E /* MainPageViewController.swift in Sources */,
 				265D430F1EFBD572007F5AB8 /* CodeProductor.swift in Sources */,
 				264961051EF0C9EC00A559D6 /* YYAnimatedImageView.m in Sources */,
+				2650C1941F03AA82005BE741 /* PickerV.swift in Sources */,
 				264960BF1EF0C28F00A559D6 /* POPAnimationEvent.mm in Sources */,
 				264960CD1EF0C28F00A559D6 /* POPVector.mm in Sources */,
 				2649610B1EF0C9EC00A559D6 /* YYWebImageManager.m in Sources */,
@@ -1393,6 +1404,7 @@
 				261F067E1EF5190C0019CE44 /* SetMoneyViewController.swift in Sources */,
 				264961171EF0CBAE00A559D6 /* UIImageExtension.swift in Sources */,
 				264961021EF0C9EC00A559D6 /* UIButton+YYWebImage.m in Sources */,
+				2650C1901F039B66005BE741 /* UILabel + Extension.swift in Sources */,
 				2649610A1EF0C9EC00A559D6 /* YYImageCache.m in Sources */,
 				2607D1531EF21E140015625E /* BaseTabbarVC.swift in Sources */,
 				264960C51EF0C28F00A559D6 /* POPCGUtils.mm in Sources */,
