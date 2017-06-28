@@ -169,6 +169,7 @@ class BaseViewController: UIViewController,UIGestureRecognizerDelegate,UINavigat
             /// 设置
             navBar?.tintColor = UIColor.white
         }
+
     }
     
     override func viewDidLoad() {

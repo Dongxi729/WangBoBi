@@ -102,6 +102,10 @@
 		2649612E1EF0D08F00A559D6 /* FTProgressIndicator.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 264961261EF0D08F00A559D6 /* FTProgressIndicator.bundle */; };
 		2649612F1EF0D08F00A559D6 /* FTProgressIndicator.m in Sources */ = {isa = PBXBuildFile; fileRef = 264961281EF0D08F00A559D6 /* FTProgressIndicator.m */; };
 		264961301EF0D08F00A559D6 /* FTToastIndicator.m in Sources */ = {isa = PBXBuildFile; fileRef = 2649612B1EF0D08F00A559D6 /* FTToastIndicator.m */; };
+		2650C1851F035868005BE741 /* PaymoneyVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2650C1841F035868005BE741 /* PaymoneyVC.swift */; };
+		2650C1871F035D51005BE741 /* PaymentVCTwo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2650C1861F035D51005BE741 /* PaymentVCTwo.swift */; };
+		2650C1891F035E2E005BE741 /* PaymentThreeVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2650C1881F035E2E005BE741 /* PaymentThreeVC.swift */; };
+		2650C18C1F036109005BE741 /* GetMoneyScanVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2650C18B1F036109005BE741 /* GetMoneyScanVC.swift */; };
 		265991F11EF65A9E004391E9 /* simhei.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 265991F01EF65A9E004391E9 /* simhei.ttf */; };
 		265991F41EF65D5C004391E9 /* CommonBtn.swift in Sources */ = {isa = PBXBuildFile; fileRef = 265991F31EF65D5C004391E9 /* CommonBtn.swift */; };
 		265992141EF66C6B004391E9 /* AddBankCardVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 265992131EF66C6B004391E9 /* AddBankCardVC.swift */; };
@@ -300,7 +304,10 @@
 		264961281EF0D08F00A559D6 /* FTProgressIndicator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FTProgressIndicator.m; sourceTree = "<group>"; };
 		2649612A1EF0D08F00A559D6 /* FTToastIndicator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FTToastIndicator.h; sourceTree = "<group>"; };
 		2649612B1EF0D08F00A559D6 /* FTToastIndicator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FTToastIndicator.m; sourceTree = "<group>"; };
-		2650C1821F034810005BE741 /* MyPlayground.playground */ = {isa = PBXFileReference; lastKnownFileType = file.playground; path = MyPlayground.playground; sourceTree = "<group>"; };
+		2650C1841F035868005BE741 /* PaymoneyVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PaymoneyVC.swift; sourceTree = "<group>"; };
+		2650C1861F035D51005BE741 /* PaymentVCTwo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PaymentVCTwo.swift; sourceTree = "<group>"; };
+		2650C1881F035E2E005BE741 /* PaymentThreeVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PaymentThreeVC.swift; sourceTree = "<group>"; };
+		2650C18B1F036109005BE741 /* GetMoneyScanVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GetMoneyScanVC.swift; sourceTree = "<group>"; };
 		265991F01EF65A9E004391E9 /* simhei.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = simhei.ttf; sourceTree = "<group>"; };
 		265991F31EF65D5C004391E9 /* CommonBtn.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CommonBtn.swift; sourceTree = "<group>"; };
 		265992131EF66C6B004391E9 /* AddBankCardVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AddBankCardVC.swift; path = Controller/AddBankCardVC.swift; sourceTree = "<group>"; };
@@ -701,6 +708,8 @@
 		264960711EF0BFC000A559D6 /* MainPage-01 */ = {
 			isa = PBXGroup;
 			children = (
+				2650C18A1F0360F4005BE741 /* GetMoneyByScan */,
+				2650C1831F03584E005BE741 /* payMoney */,
 				264960721EF0BFC000A559D6 /* Controller */,
 				264960731EF0BFC000A559D6 /* Model */,
 				264960741EF0BFC000A559D6 /* View */,
@@ -1068,6 +1077,24 @@
 			path = Utils;
 			sourceTree = "<group>";
 		};
+		2650C1831F03584E005BE741 /* payMoney */ = {
+			isa = PBXGroup;
+			children = (
+				2650C1841F035868005BE741 /* PaymoneyVC.swift */,
+				2650C1861F035D51005BE741 /* PaymentVCTwo.swift */,
+				2650C1881F035E2E005BE741 /* PaymentThreeVC.swift */,
+			);
+			name = payMoney;
+			sourceTree = "<group>";
+		};
+		2650C18A1F0360F4005BE741 /* GetMoneyByScan */ = {
+			isa = PBXGroup;
+			children = (
+				2650C18B1F036109005BE741 /* GetMoneyScanVC.swift */,
+			);
+			name = GetMoneyByScan;
+			sourceTree = "<group>";
+		};
 		265991EE1EF659F6004391E9 /* resources */ = {
 			isa = PBXGroup;
 			children = (
@@ -1148,7 +1175,6 @@
 		26F484701EEFD55400177670 = {
 			isa = PBXGroup;
 			children = (
-				2650C1821F034810005BE741 /* MyPlayground.playground */,
 				26F4847B1EEFD55400177670 /* WangBoBi */,
 				26F4847A1EEFD55400177670 /* Products */,
 				2649610D1EF0CA0900A559D6 /* Frameworks */,
@@ -1280,6 +1306,7 @@
 				264961071EF0C9EC00A559D6 /* YYImage.m in Sources */,
 				26A0A4AB1EF1064C00035D0D /* NetWorkTool.swift in Sources */,
 				264961081EF0C9EC00A559D6 /* YYImageCoder.m in Sources */,
+				2650C1851F035868005BE741 /* PaymoneyVC.swift in Sources */,
 				262304641EFA6988007B0BF6 /* NSDictionary+ZXPUnicode.m in Sources */,
 				263CAF111EF62889006629BF /* UIImage+XLExtension.m in Sources */,
 				264960CB1EF0C28F00A559D6 /* POPPropertyAnimation.mm in Sources */,
@@ -1325,6 +1352,7 @@
 				260B20AD1EF7633800E78FD8 /* GDWindowViewController.swift in Sources */,
 				261004B51EF8BB9100DE000F /* AgreeMentVC.swift in Sources */,
 				2649612D1EF0D08F00A559D6 /* FTNotificationIndicator.m in Sources */,
+				2650C18C1F036109005BE741 /* GetMoneyScanVC.swift in Sources */,
 				26EF14AD1EF91F05005663F1 /* ForgetPassModel.swift in Sources */,
 				264960C01EF0C28F00A559D6 /* POPAnimationExtras.mm in Sources */,
 				265991F41EF65D5C004391E9 /* CommonBtn.swift in Sources */,
@@ -1343,6 +1371,7 @@
 				26A0A4A91EF0E26B00035D0D /* JFNavigationController.swift in Sources */,
 				26F248BA1EFFE9F500599CC7 /* UploadHeadTool.swift in Sources */,
 				265992141EF66C6B004391E9 /* AddBankCardVC.swift in Sources */,
+				2650C1891F035E2E005BE741 /* PaymentThreeVC.swift in Sources */,
 				264960C41EF0C28F00A559D6 /* POPBasicAnimation.mm in Sources */,
 				264961011EF0C9EC00A559D6 /* MKAnnotationView+YYWebImage.m in Sources */,
 				264961091EF0C9EC00A559D6 /* YYSpriteSheetImage.m in Sources */,
@@ -1357,6 +1386,7 @@
 				260B20B51EF7679D00E78FD8 /* BankModel.swift in Sources */,
 				264960C11EF0C28F00A559D6 /* POPAnimationRuntime.mm in Sources */,
 				264960C21EF0C28F00A559D6 /* POPAnimationTracer.mm in Sources */,
+				2650C1871F035D51005BE741 /* PaymentVCTwo.swift in Sources */,
 				26EF14A91EF9178D005663F1 /* LoginModel.swift in Sources */,
 				264961151EF0CAD100A559D6 /* UIImageViewWebImage.swift in Sources */,
 				26F4847F1EEFD55400177670 /* ScanCodeController.swift in Sources */,

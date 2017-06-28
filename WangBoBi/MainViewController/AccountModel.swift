@@ -56,7 +56,7 @@
 //
 //public static Float Trading = 0.0f;
 //交易量
-//Optional({
+//({
 //    AcctType = "<null>";
 //    AdressCopy = "";
 //    BirthDate = "";
@@ -66,31 +66,32 @@
 //    Email = "946737816@qq.com";
 //    ExpiryDate = "";
 //    Financed = "";
-//    FrinQCode = "wbf://c1ebc999-9d41-4127-99ce-7ddca383f01f";
+//    FrinQCode = "wbf://e9b001fc-7891-48b1-9600-f99a3c507231";
 //    HeadImg = "http://192.168.1.10:8010/images/logo.jpg";
-//    Id = 1;
+//    Id = 6;
+//    Integral = 0;
 //    IssueDate = "";
 //    Nationality = "";
-//    OpenedDate = "2017-06-23";
-//    OreMachine = "<null>";
-//    PayQCode = "wbp://ce6604ed-6c7b-4de8-80c3-49b00683dfdd";
+//    OpenedDate = "2017-06-27";
+//    PayQCode = "wbp://0ea29461-85be-41ca-8bee-6e115ef2d45c";
 //    Phone = "";
 //    Profession = "";
-
 //    Referee = "";
 //    Remark = "";
 //    ResidenceAdress = "";
 //    SIMCardNo = "";
 //    SelfieCopy = "";
 //    Sex = "";
-//    SubmitTime = "2017-06-23T16:58:44";
-//    Token = ad84b3d10e994342bfb665e346d6b289;
+//    SubmitTime = "2017-06-27T16:18:42";
+//    Token = 82fc33ad885742bdb917873eab438089;
 //    TraderPass = "";
 //    TraderStatus = "<null>";
 //    TrueName = "";
 //    UserName = "946737816@qq.com";
 //    UserPass = e10adc3949ba59abbe56e057f20f883e;
-//    WBCAdress = WXVxpEzLsP8nzmZS22PGYTuTsU1aCbT5gG;
+//    VerifiStatus = 0;
+//    WBC = "0.000000";
+//    WBCAdress = WecT9nJx8xMkJxFK3idsdDYG1upYzUBZNT;
 //    WorkingAdress = "";
 //    YearlySalary = "";
 //})
@@ -182,7 +183,7 @@ class AccountModel: NSObject,NSCoding {
     
     /// 唯一的 token
     var userToker : String?
-
+    
     /// 头像地址
     var userImghead : String?
     
@@ -230,7 +231,7 @@ class AccountModel: NSObject,NSCoding {
     /// 昵称
     var nickName : String = ""
     
-
+    
     
     /// 验证码
     var autoCode : String = ""
@@ -251,9 +252,12 @@ class AccountModel: NSObject,NSCoding {
     /// 头像地址
     var HeadImg :String?
     
-    
+    /// https://stackoverflow.com/questions/36154590/how-to-encode-int-as-an-optional-using-nscoding
     /// 积分
     var Integral : NSNumber = 0
+    
+    /// 认证状态
+    var VerifiStatus : NSNumber = 0
     
     /// 我的二维码地址(加好友)
     var FrinQCode : String?
@@ -394,7 +398,7 @@ class AccountModel: NSObject,NSCoding {
             
             let account = AccountModel(dict: resultData["data"] as! [String : Any])
             account.saveAccount()
-
+            
             
             CCog(message: accountPath)
             
@@ -659,13 +663,13 @@ class AccountModel: NSObject,NSCoding {
         aCoder.encode(Email, forKey: "Email")
         /// 手机号码
         aCoder.encode(Phone, forKey: "Phone")
-
+        
         /// 开户推荐人ID
         aCoder.encode(Referee, forKey: "Referee")
         
         /// 矿机型号
         aCoder.encode(OreMachine, forKey: "OreMachine")
-
+        
         /// SIM card 号码
         aCoder.encode(SIMCardNo, forKey: "SIMCardNo")
         
@@ -709,6 +713,9 @@ class AccountModel: NSObject,NSCoding {
         
         /// 网博币
         aCoder.encode(WBC, forKey: "WBC")
+        
+        /// 认证状态
+        aCoder.encode(VerifiStatus, forKey: "VerifiStatus")
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -734,7 +741,25 @@ class AccountModel: NSObject,NSCoding {
         Phone = aDecoder.decodeObject(forKey: "Phone") as? String
         Integral = (aDecoder.decodeObject(forKey: "Integral") as? NSNumber)!
         
-        if Phone?.characters.count == 0 {
+        VerifiStatus = (aDecoder.decodeObject(forKey: "VerifiStatus") as? NSNumber)!
+        
+        CCog(message: VerifiStatus.intValue)
+        
+        /// 根据认证状态鉴别实名认证状态
+        //        实名认证 0 未认证 1 审核中，2认证失败 3认证成功
+        if VerifiStatus.intValue == 0 {
+            self.realNameInt = realNameIntEnum(rawValue: 0)
+        }
+        
+        if VerifiStatus.intValue == 1 {
+            self.realNameInt = realNameIntEnum(rawValue: 1)
+        }
+        
+        if VerifiStatus.intValue == 2 {
+            self.realNameInt = realNameIntEnum(rawValue: 2)
+        }
+        
+        if VerifiStatus.intValue == 3 {
             self.realNameInt = realNameIntEnum(rawValue: 3)
         }
         
@@ -754,7 +779,7 @@ class AccountModel: NSObject,NSCoding {
         SubmitTime = aDecoder.decodeObject(forKey: "SubmitTime") as? String
         WBC = aDecoder.decodeObject(forKey: "WBC") as? String
         
-//        CCog(message: WBC)
+        //        CCog(message: WBC)
         CCog(message: Integral.stringValue)
     }
     

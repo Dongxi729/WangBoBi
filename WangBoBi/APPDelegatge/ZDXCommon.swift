@@ -99,6 +99,9 @@ let COMMON_MARGIN : CGFloat = 12
 // MARK: - 登录时间
 let LOGIN_TIME : CGFloat = 0
 
+// MARK: - 共同的背景颜色
+let COMMON_BGCOLOR = UIColor.colorWithHexString("1693D9")
+
 
 /// 基于iPhone6水平方向适配
 ///

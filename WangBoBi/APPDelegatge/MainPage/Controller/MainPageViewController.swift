@@ -167,7 +167,7 @@ extension MainPageViewController : UICollectionViewDataSource,UICollectionViewDe
             break
         /// 首付款
         case 601:
-            self.navigationController?.pushViewController(cc, animated: true)
+            self.navigationController?.pushViewController(PaymoneyVC(), animated: true)
             break
         /// 充值
         case 602:
@@ -289,7 +289,7 @@ class HeadReuse : UICollectionReusableView {
     lazy var jifenLabel: UILabel = {
         let d:UILabel = UILabel.init(frame: CGRect.init(x: COMMON_MARGIN * 1.5, y: self.headBgImg.Height * 0.670093651942526, width: (SCREEN_WIDTH / 2 - 2 * COMMON_MARGIN), height: 20 * SCREEN_SCALE))
         d.text = AccountModel.shared()?.Integral.stringValue
-        d.textColor = UIColor.colorWithHexString("1693D9")
+        d.textColor = COMMON_BGCOLOR
         d.textAlignment = .center
         d.font = UIFont.systemFont(ofSize: 12 * SCREEN_SCALE)
         return d
@@ -298,7 +298,7 @@ class HeadReuse : UICollectionReusableView {
     // MARK: - 交易量
     lazy var WBCSubmitCounts: UILabel = {
         let d : UILabel = UILabel.init(frame: CGRect.init(x: self.jifenLabel.RightX + COMMON_MARGIN * 0.9, y: self.jifenLabel.TopY, width: self.jifenLabel.Width, height: self.jifenLabel.Height))
-        d.textColor = UIColor.colorWithHexString("1693D9")
+        d.textColor = COMMON_BGCOLOR
         d.font = UIFont.systemFont(ofSize: 12 * SCREEN_SCALE)
         d.textAlignment = .center
         d.text = "6789876"
@@ -315,8 +315,8 @@ class HeadReuse : UICollectionReusableView {
         
         let tag = 600
         for index in 0..<4 {
-            self.buttons = UIButton.init(frame: CGRect.init(x: CGFloat(index) * self.Width / 4, y: self.Height * 0.8, width: self.Width / 4 , height: self.Height * 0.2))
-            //            self.buttons.backgroundColor = UIColor.randomColor()
+            self.buttons = UIButton.init(frame: CGRect.init(x: CGFloat(index) * self.Width / 4, y: self.headBgImg.Height * 0.8, width: self.Width / 4 , height: self.Height * 0.2))
+//            self.buttons.backgroundColor = UIColor.randomColor()
             self.buttons.tag = tag + index
             self.buttons.addTarget(self, action: #selector(buttonSEL(sender:)), for: .touchUpInside)
             addSubview(buttons)
