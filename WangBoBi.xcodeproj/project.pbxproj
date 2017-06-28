@@ -300,6 +300,7 @@
 		264961281EF0D08F00A559D6 /* FTProgressIndicator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FTProgressIndicator.m; sourceTree = "<group>"; };
 		2649612A1EF0D08F00A559D6 /* FTToastIndicator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FTToastIndicator.h; sourceTree = "<group>"; };
 		2649612B1EF0D08F00A559D6 /* FTToastIndicator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FTToastIndicator.m; sourceTree = "<group>"; };
+		2650C1821F034810005BE741 /* MyPlayground.playground */ = {isa = PBXFileReference; lastKnownFileType = file.playground; path = MyPlayground.playground; sourceTree = "<group>"; };
 		265991F01EF65A9E004391E9 /* simhei.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = simhei.ttf; sourceTree = "<group>"; };
 		265991F31EF65D5C004391E9 /* CommonBtn.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CommonBtn.swift; sourceTree = "<group>"; };
 		265992131EF66C6B004391E9 /* AddBankCardVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AddBankCardVC.swift; path = Controller/AddBankCardVC.swift; sourceTree = "<group>"; };
@@ -1147,6 +1148,7 @@
 		26F484701EEFD55400177670 = {
 			isa = PBXGroup;
 			children = (
+				2650C1821F034810005BE741 /* MyPlayground.playground */,
 				26F4847B1EEFD55400177670 /* WangBoBi */,
 				26F4847A1EEFD55400177670 /* Products */,
 				2649610D1EF0CA0900A559D6 /* Frameworks */,

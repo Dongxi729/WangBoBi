@@ -235,7 +235,7 @@ class HeadReuse : UICollectionReusableView {
     lazy var WBCLabel: UILabel = {
         let d : UILabel = UILabel.init(frame: CGRect.init(x: 0, y: self.headBgImg.Height * 0.28, width: self.Width, height: 30 * SCREEN_SCALE))
         d.font = UIFont.systemFont(ofSize: 25 * SCREEN_SCALE)
-        d.text = "6000"
+        d.text = AccountModel.shared()?.WBC
         d.textAlignment = .center
         return d
     }()
@@ -288,7 +288,7 @@ class HeadReuse : UICollectionReusableView {
     // MARK: - 积分
     lazy var jifenLabel: UILabel = {
         let d:UILabel = UILabel.init(frame: CGRect.init(x: COMMON_MARGIN * 1.5, y: self.headBgImg.Height * 0.670093651942526, width: (SCREEN_WIDTH / 2 - 2 * COMMON_MARGIN), height: 20 * SCREEN_SCALE))
-        d.text = "13077"
+        d.text = AccountModel.shared()?.Integral.stringValue
         d.textColor = UIColor.colorWithHexString("1693D9")
         d.textAlignment = .center
         d.font = UIFont.systemFont(ofSize: 12 * SCREEN_SCALE)

@@ -211,7 +211,7 @@ class AccountModel: NSObject,NSCoding {
     var phoneBoo : Bool?
     
     /// 网博币
-    var WBC : Int?
+    var WBC : String?
     
     /// 和日币的比例
     var JP : Int?
@@ -220,7 +220,7 @@ class AccountModel: NSObject,NSCoding {
     var CP : Int?
     
     /// 积分
-    var JF : Int?
+    var JF : NSNumber?
     
     /// /交易量
     var Trading : CGFloat?
@@ -250,6 +250,10 @@ class AccountModel: NSObject,NSCoding {
     
     /// 头像地址
     var HeadImg :String?
+    
+    
+    /// 积分
+    var Integral : NSNumber = 0
     
     /// 我的二维码地址(加好友)
     var FrinQCode : String?
@@ -386,7 +390,7 @@ class AccountModel: NSObject,NSCoding {
                 return
             }
             
-            CCog(message: resultData["data"])
+            CCog(message: (resultData["data"] as? [String : Any])?["Integral"])
             
             let account = AccountModel(dict: resultData["data"] as! [String : Any])
             account.saveAccount()
@@ -699,6 +703,12 @@ class AccountModel: NSObject,NSCoding {
         /// 提交时间 http://www.hangge.com/blog/cache/detail_1198.html#
         
         aCoder.encode(SubmitTime, forKey: "SubmitTime")
+        
+        /// 积分
+        aCoder.encode(Integral, forKey: "Integral")
+        
+        /// 网博币
+        aCoder.encode(WBC, forKey: "WBC")
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -722,6 +732,7 @@ class AccountModel: NSObject,NSCoding {
         ResidenceAdress = aDecoder.decodeObject(forKey: "ResidenceAdress") as? String
         Email = aDecoder.decodeObject(forKey: "Email") as? String
         Phone = aDecoder.decodeObject(forKey: "Phone") as? String
+        Integral = (aDecoder.decodeObject(forKey: "Integral") as? NSNumber)!
         
         if Phone?.characters.count == 0 {
             self.realNameInt = realNameIntEnum(rawValue: 3)
@@ -741,6 +752,10 @@ class AccountModel: NSObject,NSCoding {
         AcctType = aDecoder.decodeObject(forKey: "AcctType") as? AcctTypeEnum
         WBCAdress = aDecoder.decodeObject(forKey: "WBCAdress") as? String
         SubmitTime = aDecoder.decodeObject(forKey: "SubmitTime") as? String
+        WBC = aDecoder.decodeObject(forKey: "WBC") as? String
+        
+//        CCog(message: WBC)
+        CCog(message: Integral.stringValue)
     }
     
     
