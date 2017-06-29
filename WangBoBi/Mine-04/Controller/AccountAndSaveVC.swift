@@ -150,6 +150,9 @@ extension AccountAndSaveVC : UITableViewDelegate,UITableViewDataSource,AccountAn
     func footerSEL() {
         CCog(message: "提出事件")
         
+        /// 清理本地缓存文件
+        AccountModel.logout()
+        
         var nav = LoginNav()
         nav = LoginNav.init(rootViewController: LoginViewController())
         

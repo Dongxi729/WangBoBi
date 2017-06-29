@@ -25,6 +25,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         nav = JFNavigationController.init(rootViewController: MainTabBarViewController())
         window?.rootViewController = nav
         
+        /// 请求首页数据
+        /// 请求首页数据
+        AccountModel.shared()?.indexInfo()
+        
         window?.makeKeyAndVisible()
         window?.backgroundColor = UIColor.white
         
@@ -33,7 +37,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
     
     // MARK: - 设置未主界面
-    fileprivate func setUnlogedMain() -> Void {
+    func setUnlogedMain() -> Void {
         window = UIWindow.init(frame: UIScreen.main.bounds)
         
         nav = LoginNav.init(rootViewController: LoginViewController())
@@ -70,7 +74,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                 UserDefaults.standard.set(timeStamp, forKey: "loginTime")
                 UserDefaults.standard.synchronize()
                 
-                setLogedMain()
+                /// 取出本地的账号密码重新登录，刷新本地的token
+                AccountModel.loginWithLocalPassAndAccount()
+//                setLogedMain()
             } else {
                 setUnlogedMain()
             }

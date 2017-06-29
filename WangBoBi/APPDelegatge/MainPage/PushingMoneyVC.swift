@@ -101,7 +101,7 @@ class PushingMoneyVC: BaseViewController,UITextFieldDelegate,BindPhoneFooterVDel
         }
         
         /// 模拟跳完成功界面
-        self.navigationController?.pushViewController(PushMoneySuccessVC(), animated: true)
+        self.navigationController?.pushViewController(PushMoneyFailVC(), animated: true)
     }
     
     func textFieldShouldBeginEditing(_ textField: UITextField) -> Bool {

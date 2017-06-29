@@ -121,6 +121,8 @@
 		266B89011F04A5650033BFA7 /* PushingMoneyVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 266B89001F04A5650033BFA7 /* PushingMoneyVC.swift */; };
 		266B89031F04AE1D0033BFA7 /* PushMoneySuccessVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 266B89021F04AE1D0033BFA7 /* PushMoneySuccessVC.swift */; };
 		266B89051F04AF8C0033BFA7 /* PushMoneyFailVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 266B89041F04AF8C0033BFA7 /* PushMoneyFailVC.swift */; };
+		266B89071F04E1F70033BFA7 /* HeadReuse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 266B89061F04E1F70033BFA7 /* HeadReuse.swift */; };
+		266B89091F04E2200033BFA7 /* ReuseV.swift in Sources */ = {isa = PBXBuildFile; fileRef = 266B89081F04E2200033BFA7 /* ReuseV.swift */; };
 		266E97211EF3D5460057FD90 /* AccountAndSaveVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 266E97201EF3D5460057FD90 /* AccountAndSaveVC.swift */; };
 		269C1C921EF1275500364F32 /* SwiftyJSON.swift in Sources */ = {isa = PBXBuildFile; fileRef = 269C1C911EF1275500364F32 /* SwiftyJSON.swift */; };
 		26A0A4A91EF0E26B00035D0D /* JFNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26A0A4A81EF0E26B00035D0D /* JFNavigationController.swift */; };
@@ -330,6 +332,8 @@
 		266B89001F04A5650033BFA7 /* PushingMoneyVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PushingMoneyVC.swift; sourceTree = "<group>"; };
 		266B89021F04AE1D0033BFA7 /* PushMoneySuccessVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PushMoneySuccessVC.swift; sourceTree = "<group>"; };
 		266B89041F04AF8C0033BFA7 /* PushMoneyFailVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PushMoneyFailVC.swift; sourceTree = "<group>"; };
+		266B89061F04E1F70033BFA7 /* HeadReuse.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HeadReuse.swift; sourceTree = "<group>"; };
+		266B89081F04E2200033BFA7 /* ReuseV.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReuseV.swift; sourceTree = "<group>"; };
 		266E97201EF3D5460057FD90 /* AccountAndSaveVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AccountAndSaveVC.swift; path = "../../Mine-04/Controller/AccountAndSaveVC.swift"; sourceTree = "<group>"; };
 		269C1C911EF1275500364F32 /* SwiftyJSON.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwiftyJSON.swift; sourceTree = "<group>"; };
 		26A0A4A81EF0E26B00035D0D /* JFNavigationController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JFNavigationController.swift; sourceTree = "<group>"; };
@@ -761,6 +765,8 @@
 				261F06771EF4FB060019CE44 /* MoneyBagV.swift */,
 				2650C18D1F038F7A005BE741 /* PaydescV.swift */,
 				266B88EC1F04907A0033BFA7 /* PayPassInputV.swift */,
+				266B89061F04E1F70033BFA7 /* HeadReuse.swift */,
+				266B89081F04E2200033BFA7 /* ReuseV.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -1334,6 +1340,7 @@
 				260B20CB1EF76BAA00E78FD8 /* MyMsgVC.swift in Sources */,
 				261F067A1EF4FB590019CE44 /* MyBandCardVC.swift in Sources */,
 				260B21001EF7C0E900E78FD8 /* LoginViewController.swift in Sources */,
+				266B89091F04E2200033BFA7 /* ReuseV.swift in Sources */,
 				264961071EF0C9EC00A559D6 /* YYImage.m in Sources */,
 				26A0A4AB1EF1064C00035D0D /* NetWorkTool.swift in Sources */,
 				264961081EF0C9EC00A559D6 /* YYImageCoder.m in Sources */,
@@ -1420,6 +1427,7 @@
 				260B20B51EF7679D00E78FD8 /* BankModel.swift in Sources */,
 				264960C11EF0C28F00A559D6 /* POPAnimationRuntime.mm in Sources */,
 				264960C21EF0C28F00A559D6 /* POPAnimationTracer.mm in Sources */,
+				266B89071F04E1F70033BFA7 /* HeadReuse.swift in Sources */,
 				2650C1871F035D51005BE741 /* PaymentVCTwo.swift in Sources */,
 				26EF14A91EF9178D005663F1 /* LoginModel.swift in Sources */,
 				264961151EF0CAD100A559D6 /* UIImageViewWebImage.swift in Sources */,

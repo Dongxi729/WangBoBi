@@ -28,11 +28,13 @@ extension MainTabBarViewController {
         //首页
         let mainPageVC = JFNavigationController.init(rootViewController: MainPageViewController())
         
+        let view = UIViewController()
+        view.view.backgroundColor = UIColor.white
         //商户
-        let shopVc = JFNavigationController.init(rootViewController: UIViewController())
+        let shopVc = JFNavigationController.init(rootViewController: view)
         
         //朋友
-        let friendVc = JFNavigationController.init(rootViewController: UIViewController())
+        let friendVc = JFNavigationController.init(rootViewController: view)
         
         //我的模块
         let meVC = JFNavigationController.init(rootViewController: MyViewController())

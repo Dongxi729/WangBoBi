@@ -16,12 +16,11 @@ class ScanCodeController: UIViewController {
     var session = AVCaptureSession()
     
     // MARK: - 扫描二维码
-    fileprivate lazy var scanLabel: UILabel = {
-        let d : UILabel = UILabel.init(frame: CGRect.init(x: 0, y: (self.scanView?.BottomY)! + COMMON_MARGIN * SCREEN_SCALE, width: SCREEN_WIDTH, height: 15 * SCREEN_SCALE))
-        d.text = "     扫描二维码"
-        d.textAlignment = .center
-        d.textColor = UIColor.white
-        d.font = UIFont.systemFont(ofSize: 10 * SCREEN_SCALE)
+    fileprivate lazy var scanLabel: BtnWithImage = {
+        let d : BtnWithImage = BtnWithImage.init(frame: CGRect.init(x: SCREEN_WIDTH / 2 - SCREEN_WIDTH / 6, y: (self.scanView?.BottomY)! + COMMON_MARGIN * SCREEN_SCALE, width: SCREEN_WIDTH / 3, height: 10 * SCREEN_SCALE))
+
+        d.setTitle("扫描二维码", for: .normal)
+        d.setImage(#imageLiteral(resourceName: "Sweep 1"), for: .normal)
         return d
     }()
     
@@ -66,7 +65,7 @@ class ScanCodeController: UIViewController {
         
         view.addSubview(scanLabel)
         view.addSubview(descLabel)
-        view.addSubview(scanFrontImg)
+//        view.addSubview(scanFrontImg)
         
         
         title = "扫一扫"
@@ -101,7 +100,7 @@ class ScanCodeController: UIViewController {
         
         let scanViewImg : UIImageView = UIImageView.init(frame: (self.scanView?.frame)!)
         scanViewImg.image = #imageLiteral(resourceName: "queue")
-        view.addSubview(scanFrontImg)
+//        view.addSubview(scanFrontImg)
         
         scanImageView = UIImageView(image: UIImage.init(named: "sweep_bg_line.png"));
         let widthOrHeight: CGFloat = 18
@@ -221,5 +220,28 @@ extension ScanCodeController:AVCaptureMetadataOutputObjectsDelegate {
                 }
             }
         }
+    }
+}
+
+
+class BtnWithImage: UIButton {
+    override init(frame: CGRect) {
+        super.init(frame: frame)
+        self.imageView?.contentMode = UIViewContentMode.scaleAspectFit
+        self.titleLabel?.font = UIFont.systemFont(ofSize: 10 * SCREEN_SCALE)
+    }
+    
+    override func titleRect(forContentRect contentRect: CGRect) -> CGRect {
+        return CGRect.init(x: self.bounds.width * 0.3, y: 0, width: self.bounds.width * 0.7, height: self.bounds.height)
+    }
+    
+    override func imageRect(forContentRect contentRect: CGRect) -> CGRect {
+        
+        return CGRect.init(x: 0, y: 0, width: self.bounds.width * 0.3, height: self.bounds.height)
+        
+    }
+    
+    required init?(coder aDecoder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
     }
 }

@@ -240,6 +240,9 @@ class AccountModel: NSObject,NSCoding {
     /// 令牌
     var Token : String?
     
+    /// var 用户ID
+    var Id : NSNumber = 0
+    
     /// 开户日期
     var OpenedDate : String?
     
@@ -367,7 +370,63 @@ class AccountModel: NSObject,NSCoding {
     
     // MARK: - 保存对象
     func saveAccount() {
-        NSKeyedArchiver.archiveRootObject(self, toFile: AccountModel.accountPath)
+        
+            NSKeyedArchiver.archiveRootObject(self, toFile: AccountModel.accountPath)
+    }
+    
+    
+    
+    // MARK: - 检查用户是否有效
+    class func checuUserInfo() {
+        if isLogin() {
+            // 已经登录并且保存过的信息
+            
+            let params : [String : String ] = [:]
+            NetWorkTool.shared.postWithPath(path: CHECK_TOKEN, paras: params, success: { (result) in
+                
+            }, failure: { (error) in
+                CCog(message: error.localizedDescription)
+            })
+        }
+    }
+    
+    /// 登录保存
+    func updateUserInfo() -> Void {
+        AccountModel.userAccount = self
+        // 归档用户信息
+        saveAccount()
+    }
+    
+    // MARK: - 是否登录
+    class func isLogin() -> Bool{
+        return AccountModel.shared() != nil
+    }
+    
+    // MARK: - 退出接口
+    func logout() -> Void {
+        // 清楚内存中的账号对象和归档
+        AccountModel.userAccount = nil
+        
+        do {
+            try FileManager.default.removeItem(atPath: AccountModel.accountPath)
+        } catch {
+            CCog(message: "退出异常")
+        }
+    }
+    
+    
+    /**
+     注销清理
+     */
+    class func logout() {
+        
+        // 清除内存中的账号对象和归档
+        AccountModel.userAccount = nil
+        do {
+            try FileManager.default.removeItem(atPath: AccountModel.accountPath)
+        } catch {
+            CCog(message: "退出异常")
+        }
     }
     
     // MARK: - 登录
@@ -400,6 +459,7 @@ class AccountModel: NSObject,NSCoding {
             account.saveAccount()
             
             
+            
             CCog(message: accountPath)
             
             guard let alertMsg = resultData["Msg"] as? String else {
@@ -418,9 +478,10 @@ class AccountModel: NSObject,NSCoding {
                 UserDefaults.standard.set(timeStamp, forKey: "loginTime")
                 UserDefaults.standard.synchronize()
                 
-                
-                
                 UIApplication.shared.keyWindow?.rootViewController = MainTabBarViewController()
+                
+                /// 请求首页数据
+                AccountModel.shared()?.indexInfo()
             } else {
                 toast(toast: alertMsg)
             }
@@ -431,6 +492,60 @@ class AccountModel: NSObject,NSCoding {
             toast(toast: alertMsg! as! String)
         }
     }
+    
+    // MARK: - 默认登录
+    class func loginWithLocalPassAndAccount() -> Void {
+//        getInfo(emailStr: (AccountModel.shared()?.Email)!, pass: (AccountModel.shared()?.UserPass)!)
+        CCog(message: AccountModel.shared()?.Email)
+        CCog(message: AccountModel.shared()?.UserPass)
+        let d : [String : String] = ["email" : (AccountModel.shared()?.Email)!,
+                                     "pwd" : (AccountModel.shared()?.UserPass)!]
+        NetWorkTool.shared.postWithPath(path: LOGIN_URL, paras: d, success: { (result) in
+            
+            CCog(message: result)
+            
+            guard let resultData = result as? NSDictionary else {
+                
+                CCog(message: "登录信息无效")
+                return
+            }
+            
+            let account = AccountModel(dict: resultData["Data"] as! [String : Any])
+            account.updateUserInfo()
+
+            guard let alertMsg = resultData["Msg"] as? String else {
+                return
+            }
+            
+            if alertMsg == "登陆成功" {
+                
+                /// 记录登录时间
+                let now = Date()
+                let timerStamp : TimeInterval = now.timeIntervalSince1970
+                
+                let timeStamp = Int(timerStamp)
+                
+                /// 记录本地登录成功的时间/更新
+                UserDefaults.standard.set(timeStamp, forKey: "loginTime")
+                UserDefaults.standard.synchronize()
+                
+                UIApplication.shared.keyWindow?.rootViewController = MainTabBarViewController()
+                
+                /// 请求首页数据
+                AccountModel.shared()?.indexInfo()
+            }
+        }) { (error) in
+            let alertMsg = (error as NSError).userInfo["NSLocalizedDescription"]
+            toast(toast: alertMsg! as! String)
+            
+            var nav = LoginNav()
+            nav = LoginNav.init(rootViewController: LoginViewController())
+            
+            UIApplication.shared.keyWindow?.rootViewController = nav
+        }
+        
+    }
+
     
     // MARK: - 注册
     /// 注册接口
@@ -551,49 +666,6 @@ class AccountModel: NSObject,NSCoding {
         }
     }
     
-    
-    /// 登录保存
-    func updateUserInfo() -> Void {
-        AccountModel.userAccount = self
-        // 归档用户信息
-        saveAccount()
-    }
-    
-    // MARK: - 是否登录
-    class func isLogin() -> Bool{
-        return AccountModel.shared() != nil
-    }
-    
-    // MARK: - 退出接口
-    func logout() -> Void {
-        // 清楚内存中的账号对象和归档
-        AccountModel.userAccount = nil
-        
-        do {
-            try FileManager.default.removeItem(atPath: AccountModel.accountPath)
-        } catch {
-            CCog(message: "退出异常")
-        }
-    }
-    
-    
-    
-    // MARK: - 检查用户是否有效
-    class func checuUserInfo() {
-        if isLogin() {
-            // 已经登录并且保存过的信息
-            
-            let params : [String : String ] = [:]
-            NetWorkTool.shared.postWithPath(path: CHECK_TOKEN, paras: params, success: { (result) in
-                
-            }, failure: { (error) in
-                CCog(message: error.localizedDescription)
-            })
-        }
-    }
-    
-    
-    
     /// 获取用户对象(对象静态化，保存在内存中不释放)
     static func shared() -> AccountModel? {
         if userAccount == nil {
@@ -604,6 +676,23 @@ class AccountModel: NSObject,NSCoding {
             return userAccount
         }
     }
+    
+
+    // MARK: - 首页接口
+    func indexInfo() -> Void {
+        
+        let param : [String :String] = ["uid" : (AccountModel.shared()?.Id.stringValue)!,
+                                        "token" : (AccountModel.shared()?.Token)!]
+        
+        CCog(message: param)
+        NetWorkTool.shared.postWithPath(path: INDEX_URL, paras: param, success: { (result) in
+            CCog(message: result)
+        }) { (error) in
+            CCog(message: error.localizedDescription)
+        }
+    }
+
+
     
     // MARK: - 归档接档
     func encode(with aCoder: NSCoder) {
@@ -716,6 +805,9 @@ class AccountModel: NSObject,NSCoding {
         
         /// 认证状态
         aCoder.encode(VerifiStatus, forKey: "VerifiStatus")
+        
+        /// 用户ID
+        aCoder.encode(Id, forKey: "Id")
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -738,10 +830,13 @@ class AccountModel: NSObject,NSCoding {
         WorkingAdress = aDecoder.decodeObject(forKey: "WorkingAdress") as? String
         ResidenceAdress = aDecoder.decodeObject(forKey: "ResidenceAdress") as? String
         Email = aDecoder.decodeObject(forKey: "Email") as? String
+        CCog(message: Email)
         Phone = aDecoder.decodeObject(forKey: "Phone") as? String
         Integral = (aDecoder.decodeObject(forKey: "Integral") as? NSNumber)!
         
         VerifiStatus = (aDecoder.decodeObject(forKey: "VerifiStatus") as? NSNumber)!
+        
+        Id = (aDecoder.decodeObject(forKey: "Id") as? NSNumber)!
         
         CCog(message: VerifiStatus.intValue)
         

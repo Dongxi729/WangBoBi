@@ -32,3 +32,5 @@ let RIGISTER_URL = "http://192.168.1.10:8010/ifs/reg.ashx"
 /// 验证token借口
 let CHECK_TOKEN = ""
 
+/// 首页请求接口
+let INDEX_URL = "http://192.168.1.10:8010/ifs/index.ashx"
