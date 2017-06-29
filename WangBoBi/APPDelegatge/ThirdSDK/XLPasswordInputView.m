@@ -199,7 +199,7 @@
 {
     _passwordLength = 6;
     _gridLineWidth = 1.0f;
-    _gridLineColor = [UIColor blackColor];
+    _gridLineColor = [UIColor grayColor];
     _dotWidth = 12.0f;
     _dotColor = [UIColor blackColor];
     _secureTextEntry = YES;

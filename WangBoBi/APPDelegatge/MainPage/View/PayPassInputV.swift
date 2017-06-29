@@ -15,6 +15,9 @@ protocol PayPassInputVDelagete {
     func confirmSEL(str : String) -> Void
     func restoreBgColor() -> Void
     func canceelSEL()
+    
+    /// 输出密码
+    func passStrOutput(str :String) -> Void
 }
 
 // MARK: - 手机验证视图
@@ -45,15 +48,52 @@ class PayPassInputV : CommonV {
         return d
     }()
     
+    /// 输入密码视图
+    fileprivate lazy var passV: XLPasswordInputView = {
+        let d : XLPasswordInputView = XLPasswordInputView.init(frame: CGRect(x: COMMON_MARGIN, y: self.center.y + COMMON_MARGIN * SCREEN_SCALE, width: self.Width - 2 * COMMON_MARGIN , height: 30 * SCREEN_SCALE))
+        d.layer.borderColor = UIColor.gray.cgColor
+        return d
+    }()
+    
+    /// 网博币
+    fileprivate lazy var wbcLabel: UILabel = {
+        let d : UILabel = UILabel.init(frame: CGRect.init(x: COMMON_MARGIN, y: self.Height * 0.35, width: self.Width - 2 * COMMON_MARGIN, height: 20 * SCREEN_SCALE))
+        d.font = UIFont.systemFont(ofSize: 20 * SCREEN_SCALE)
+        d.textAlignment = .center
+        return d
+    }()
+    
+    /// 可用网博币
+    lazy var avaluableLabel: UILabel = {
+        let d : UILabel = UILabel.init(frame: CGRect.init(x: COMMON_MARGIN, y: self.Height * 0.35 + 20 * SCREEN_SCALE, width: self.Width - 2 * COMMON_MARGIN, height: 10 * SCREEN_SCALE))
+        d.text = "可用WBC300"
+        d.font = UIFont.systemFont(ofSize: 10 * SCREEN_SCALE)
+        d.textAlignment = .center
+        d.textColor = UIColor.colorWithHexString("E5711F")
+        return d
+    }()
+    
+    /// 密码字符串
+    var passStr : String?
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
         addSubview(bgImgV)
         addSubview(cancelBtn)
         addSubview(confirm)
-    }
-    
-    @objc fileprivate func sendAuthSEL(sender : CountDownBtn) {
-        sender.initwith(color: UIColor.colorWithHexString("E6E6E6"), title: "点击获取验证码", superView: self)
+        addSubview(passV)
+        
+        addSubview(wbcLabel)
+        addSubview(avaluableLabel)
+        
+        wbcLabel.text = "WBC100"
+        passV.passwordBlock = {(params) -> Void in
+            
+            self.passStr = params
+            
+            self.delegate?.passStrOutput(str: self.passStr!)
+            print(params!)
+        }
     }
     
     /// 取消事件
