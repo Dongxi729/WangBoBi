@@ -47,8 +47,6 @@ class LoginViewController: BaseViewController,UITextFieldDelegate {
         d.textColor = UIColor.white
         d.keyboardType = .numbersAndPunctuation
         d.delegate = self
-        d.layer.borderWidth = 1
-        d.layer.borderColor = UIColor.red.cgColor
         return d
     }()
     
@@ -60,11 +58,6 @@ class LoginViewController: BaseViewController,UITextFieldDelegate {
         
         d.keyboardType = .numberPad
         d.delegate = self
-        d.layer.borderWidth = 1
-        d.layer.borderColor = UIColor.red.cgColor
-        
-        
-      
         return d
     }()
     
@@ -73,8 +66,7 @@ class LoginViewController: BaseViewController,UITextFieldDelegate {
         let d : UIButton = UIButton.init(frame: CGRect.init(x: SCREEN_WIDTH * 0.132045063995509, y: SCREEN_HEIGHT * 0.735960131106169, width: SCREEN_WIDTH * 0.7, height: SCREEN_HEIGHT * 0.794384044149648 - SCREEN_HEIGHT * 0.735960131106169 ))
         
         d.addTarget(self, action: #selector(loginSEL), for: .touchUpInside)
-        d.layer.borderWidth = 1
-        d.layer.borderColor = UIColor.red.cgColor
+
         return d
     }()
     
@@ -83,8 +75,7 @@ class LoginViewController: BaseViewController,UITextFieldDelegate {
     fileprivate lazy var forgetPass: UIButton = {
         let d : UIButton = UIButton.init(frame: CGRect.init(x: 0.32206117934075 * SCREEN_WIDTH, y: 0.807518109031346 * SCREEN_HEIGHT, width: SCREEN_WIDTH * 0.16, height: 20 * SCREEN_SCALE))
         d.addTarget(self, action: #selector(forgetPassSEl), for: .touchUpInside)
-        d.layer.borderWidth = 1
-        d.layer.borderColor = UIColor.red.cgColor
+
         return d
     }()
     
@@ -92,8 +83,7 @@ class LoginViewController: BaseViewController,UITextFieldDelegate {
     fileprivate lazy var createNewAccount: UIButton = {
         let d : UIButton = UIButton.init(frame: CGRect.init(x: self.forgetPass.RightX, y: 0.807518109031346 * SCREEN_HEIGHT, width: SCREEN_WIDTH * 0.16, height: 20 * SCREEN_SCALE))
         d.addTarget(self, action: #selector(createAccountSEL), for: .touchUpInside)
-        d.layer.borderWidth = 1
-        d.layer.borderColor = UIColor.red.cgColor
+
         return d
     }()
     

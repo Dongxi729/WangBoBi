@@ -394,15 +394,15 @@ class AccountModel: NSObject,NSCoding {
                 return
             }
             
-            CCog(message: (resultData["data"] as? [String : Any])?["Integral"])
+            CCog(message: (resultData["Data"] as? [String : Any])?["Integral"])
             
-            let account = AccountModel(dict: resultData["data"] as! [String : Any])
+            let account = AccountModel(dict: resultData["Data"] as! [String : Any])
             account.saveAccount()
             
             
             CCog(message: accountPath)
             
-            guard let alertMsg = resultData["msg"] as? String else {
+            guard let alertMsg = resultData["Msg"] as? String else {
                 return
             }
             
@@ -452,7 +452,7 @@ class AccountModel: NSObject,NSCoding {
             }
             
             /// 抽取提示信息
-            guard let alertMsg = resultData["msg"] as? String else {
+            guard let alertMsg = resultData["Msg"] as? String else {
                 
                 return
             }
@@ -498,7 +498,7 @@ class AccountModel: NSObject,NSCoding {
             
             
             /// 抽取提示信息
-            guard let alertMsg = resultData["msg"] as? String else {
+            guard let alertMsg = resultData["Msg"] as? String else {
                 
                 return
             }
@@ -532,7 +532,7 @@ class AccountModel: NSObject,NSCoding {
             }
             
             /// 抽取提示信息
-            guard let alertMsg = resultData["msg"] as? String else {
+            guard let alertMsg = resultData["Msg"] as? String else {
                 
                 return
             }

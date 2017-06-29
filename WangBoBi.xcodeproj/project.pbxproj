@@ -117,6 +117,7 @@
 		265D431B1EFBE318007F5AB8 /* String+QRCode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 265D43191EFBE318007F5AB8 /* String+QRCode.swift */; };
 		265D431C1EFBE318007F5AB8 /* UIImage+QRCode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 265D431A1EFBE318007F5AB8 /* UIImage+QRCode.swift */; };
 		265D431E1EFBE324007F5AB8 /* Tool.swift in Sources */ = {isa = PBXBuildFile; fileRef = 265D431D1EFBE324007F5AB8 /* Tool.swift */; };
+		266B88ED1F04907A0033BFA7 /* PayPassInputV.swift in Sources */ = {isa = PBXBuildFile; fileRef = 266B88EC1F04907A0033BFA7 /* PayPassInputV.swift */; };
 		266E97211EF3D5460057FD90 /* AccountAndSaveVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 266E97201EF3D5460057FD90 /* AccountAndSaveVC.swift */; };
 		269C1C921EF1275500364F32 /* SwiftyJSON.swift in Sources */ = {isa = PBXBuildFile; fileRef = 269C1C911EF1275500364F32 /* SwiftyJSON.swift */; };
 		26A0A4A91EF0E26B00035D0D /* JFNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26A0A4A81EF0E26B00035D0D /* JFNavigationController.swift */; };
@@ -322,6 +323,7 @@
 		265D43191EFBE318007F5AB8 /* String+QRCode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "String+QRCode.swift"; sourceTree = "<group>"; };
 		265D431A1EFBE318007F5AB8 /* UIImage+QRCode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIImage+QRCode.swift"; sourceTree = "<group>"; };
 		265D431D1EFBE324007F5AB8 /* Tool.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Tool.swift; sourceTree = "<group>"; };
+		266B88EC1F04907A0033BFA7 /* PayPassInputV.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PayPassInputV.swift; sourceTree = "<group>"; };
 		266E97201EF3D5460057FD90 /* AccountAndSaveVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AccountAndSaveVC.swift; path = "../../Mine-04/Controller/AccountAndSaveVC.swift"; sourceTree = "<group>"; };
 		269C1C911EF1275500364F32 /* SwiftyJSON.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwiftyJSON.swift; sourceTree = "<group>"; };
 		26A0A4A81EF0E26B00035D0D /* JFNavigationController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JFNavigationController.swift; sourceTree = "<group>"; };
@@ -751,6 +753,7 @@
 				26B14F011EF29F490050135B /* ReceiveCell.swift */,
 				261F06771EF4FB060019CE44 /* MoneyBagV.swift */,
 				2650C18D1F038F7A005BE741 /* PaydescV.swift */,
+				266B88EC1F04907A0033BFA7 /* PayPassInputV.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -1410,6 +1413,7 @@
 				264960C51EF0C28F00A559D6 /* POPCGUtils.mm in Sources */,
 				264960FC1EF0C9EC00A559D6 /* YYDiskCache.m in Sources */,
 				261F06781EF4FB060019CE44 /* MoneyBagV.swift in Sources */,
+				266B88ED1F04907A0033BFA7 /* PayPassInputV.swift in Sources */,
 				264960C31EF0C28F00A559D6 /* POPAnimator.mm in Sources */,
 				264960FD1EF0C9EC00A559D6 /* YYKVStorage.m in Sources */,
 				26ED24481EF3E18C00642804 /* TrueNameCertifiedVC.swift in Sources */,
