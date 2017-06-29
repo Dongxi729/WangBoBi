@@ -224,24 +224,31 @@ extension ScanCodeController:AVCaptureMetadataOutputObjectsDelegate {
 }
 
 
+
 class BtnWithImage: UIButton {
+    
+    // MARK:- 屏幕放大比例
+    let SCREEN_SCALE = UIScreen.main.bounds.width / 320
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
         self.imageView?.contentMode = UIViewContentMode.scaleAspectFit
-        self.titleLabel?.font = UIFont.systemFont(ofSize: 10 * SCREEN_SCALE)
+        self.isEnabled = false
+        
     }
     
     override func titleRect(forContentRect contentRect: CGRect) -> CGRect {
-        return CGRect.init(x: self.bounds.width * 0.3, y: 0, width: self.bounds.width * 0.7, height: self.bounds.height)
+        return CGRect.init(x: SCREEN_SCALE * 20, y: 0, width: UIScreen.main.bounds.width - SCREEN_SCALE * 20, height: self.bounds.height)
     }
     
     override func imageRect(forContentRect contentRect: CGRect) -> CGRect {
         
-        return CGRect.init(x: 0, y: 0, width: self.bounds.width * 0.3, height: self.bounds.height)
+        return CGRect.init(x: 0, y: self.bounds.height * 0.1, width: 20 * 0.8 * SCREEN_SCALE , height: self.bounds.height * 0.8)
         
     }
     
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
+    
 }
