@@ -36,7 +36,7 @@ class BindPhoneVC: UIViewController,UITableViewDelegate,UITableViewDataSource,Bi
         // Do any additional setup after loading the view.
         title = "绑定手机"
         
-        view.backgroundColor = UIColor.white
+        view.backgroundColor = COMMON_TBBGCOLOR
         
         view.addSubview(tableView)
         
@@ -218,6 +218,7 @@ class BindPhoneFooterV : UIView {
 //        d.setTitle("绑定手机", for: .normal)
         d.addTarget(self, action: #selector(bindPhoneSEL(sender:)), for: .touchUpInside)
         d.titleLabel?.textAlignment = .center
+        d.layer.cornerRadius = 5.0
         d.titleLabel?.font = UIFont.systemFont(ofSize: 12 * SCREEN_SCALE)
         return d
     }()

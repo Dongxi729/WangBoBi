@@ -171,7 +171,7 @@ extension MainPageViewController : UICollectionViewDataSource,UICollectionViewDe
             break
         /// 充值
         case 602:
-            self.navigationController?.pushViewController(cc, animated: true)
+            self.navigationController?.pushViewController(PushingMoneyVC(), animated: true)
             break
         /// 转账
         case 603:
