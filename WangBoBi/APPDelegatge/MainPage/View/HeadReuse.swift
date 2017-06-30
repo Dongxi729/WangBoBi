@@ -25,10 +25,12 @@ class HeadReuse : UICollectionReusableView {
     
     
     /// 补充的头部文字
-    lazy var titleLabel: UILabel = {
-        let d : UILabel = UILabel.init(frame: CGRect.init(x: 0, y: self.bannerImg.BottomY + COMMON_MARGIN , width: self.Width, height: 44))
-        d.text = "说的"
-        d.textAlignment = .center
+    lazy var sectionImg: BtnWithImage = {
+        let d : BtnWithImage = BtnWithImage.init(frame:  CGRect.init(x: 0, y: self.bannerImg.BottomY + COMMON_MARGIN , width: self.Width, height: 44))
+        d.setTitle("猜你喜欢顶顶顶顶xxxxxxxxxxxx", for: .normal)
+        d.sizeToFit()
+        d.setTitleColor(UIColor.red, for: .normal)
+        d.layer.borderWidth = 1
         return d
     }()
     
@@ -133,7 +135,7 @@ class HeadReuse : UICollectionReusableView {
         headBgImg.addSubview(WBCSubmitCounts)
         
         addSubview(bannerImg)
-        addSubview(titleLabel)
+        addSubview(sectionImg)
     }
     
     @objc fileprivate func buttonSEL(sender : UIButton) {

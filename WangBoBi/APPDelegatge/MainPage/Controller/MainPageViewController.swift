@@ -18,15 +18,13 @@ struct BookPreview {
 
 class MainPageViewController: BaseViewController {
     
-    /// reuse数据源
-    var sectionDataSource : [String] = ["猜您喜欢","推荐商家","第三方提供服务"]
     
     //所有书籍数据
     fileprivate let books = [
         
-        BookPreview(title: "六月新书", images: ["7.jpg", "8000.jpg"]),
-        BookPreview(title: "六月新书", images: ["7.jpg", "8.jpg","7.jpg", "8.jpg"]),
-        BookPreview(title: "六月新书", images: ["7.jpg", "8.jpg"]),
+        BookPreview(title: "1月新书", images: ["7.jpg", "8000.jpg"]),
+        BookPreview(title: "2月新书", images: ["7.jpg", "8.jpg","7.jpg", "8.jpg"]),
+        BookPreview(title: "3月新书", images: ["7.jpg", "8.jpg"]),
         BookPreview(title: "六月新书", images: ["7.jpg", "8.jpg"]),
         BookPreview(title: "六月新书", images: ["7.jpg", "8.jpg"]),
         BookPreview(title: "六月新书", images: ["7.jpg", "8.jpg"]),
@@ -51,9 +49,7 @@ class MainPageViewController: BaseViewController {
         let itemWidth = SCREEN_WIDTH / 3
         
         //设置单元格宽度和高度
-        layout.itemSize = CGSize(width:itemWidth * 0.8, height:itemWidth * 0.6)
-        
-        
+        layout.itemSize = CGSize(width:itemWidth, height:itemWidth * 1.4)
         layout.minimumLineSpacing = 0
         layout.minimumInteritemSpacing = 0
         
@@ -73,6 +69,8 @@ class MainPageViewController: BaseViewController {
     }()
     
     
+    var movies = [IndexMertopModel]()
+    var model2 = [IndexCommentTopModel]()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -83,7 +81,20 @@ class MainPageViewController: BaseViewController {
         view.addSubview(collV)
         view.backgroundColor = COMMON_TBBGCOLOR
         
+        AccountModel.indexInfo(finished: { (mm) in
+            self.model2 = mm
+            CCog(message: mm.count)
+            self.collV.reloadData()
+            
+        }) { (mm2) in
+            self.movies = mm2
+            CCog(message: mm2.count)
+        }
+        
     }
+    
+    static let shared = MainPageViewController()
+    
     
 }
 
@@ -92,26 +103,27 @@ extension MainPageViewController : UICollectionViewDataSource,UICollectionViewDe
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cellID", for: indexPath) as! CollectCell
         
-        cell.descLabl.text = books[indexPath.section].images[indexPath.item]
+//        cell.descLabl.text = books[indexPath.section].images[indexPath.item]
+        let xxx = movies[indexPath.row]
+        let xxx2 = model2[indexPath.row]
+        
+        cell.dataSource = xxx2
+        cell.dataSource2 = xxx
+        
         return cell
         
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
-        return UIEdgeInsets.init(top:0, left: COMMON_MARGIN * SCREEN_SCALE, bottom: 2 * COMMON_MARGIN * SCREEN_SCALE, right: COMMON_MARGIN * SCREEN_SCALE)
-        
+        return UIEdgeInsets.init(top:0, left: 0, bottom: 0, right:0)
     }
     
     func numberOfSections(in collectionView: UICollectionView) -> Int {
-        
-        return books.count
-        
+        return movies.count
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        
-        return books[section].images.count
-        
+        return movies.count
     }
     
     func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
@@ -122,14 +134,14 @@ extension MainPageViewController : UICollectionViewDataSource,UICollectionViewDe
                 UICollectionElementKindSectionHeader, withReuseIdentifier: "headReuse",
                                                       for: indexPath) as? HeadReuse
             header?.delegate = self
-            
-            header?.titleLabel.text = books[indexPath.section].title
+//            header?.sectionImg.setTitle(books[indexPath.section].title, for: .normal)
+//            header?.sectionImg.sizeToFit()
             return header!
         } else {
             let header = collectionView.dequeueReusableSupplementaryView(ofKind:
                 UICollectionElementKindSectionHeader, withReuseIdentifier: "HeadInfoView",
                                                       for: indexPath) as? ReuseV
-            header?.titleLabel.text = books[indexPath.section].title
+//            header?.sectionImg.setTitle(books[indexPath.section].title, for: .normal)
             return header!
         }
     }
@@ -152,6 +164,16 @@ extension MainPageViewController : UICollectionViewDataSource,UICollectionViewDe
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForFooterInSection section: Int) -> CGSize {
         
         return CGSize.init(width: SCREEN_WIDTH, height: 15)
+        
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        let vvvvv = UIViewController()
+        vvvvv.view.backgroundColor = UIColor.randomColor()
+        self.navigationController?.pushViewController(vvvvv, animated: true)
+        
+        CCog(message: indexPath.row)
+        CCog(message: indexPath.section)
         
     }
     

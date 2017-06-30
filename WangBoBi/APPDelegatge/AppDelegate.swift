@@ -27,7 +27,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         /// 请求首页数据
         /// 请求首页数据
-        AccountModel.shared()?.indexInfo()
+//        AccountModel.shared()?.indexInfo()
         
         window?.makeKeyAndVisible()
         window?.backgroundColor = UIColor.white

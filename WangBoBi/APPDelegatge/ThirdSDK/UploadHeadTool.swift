@@ -61,8 +61,8 @@ class UploadHeadTool: UIView,UIImagePickerControllerDelegate, UINavigationContro
                     
                     let url = NSURL.init(string: UIApplicationOpenSettingsURLString)
                     
-                    if UIApplication.shared.openURL(url as! URL) {
-                        UIApplication.shared.openURL(url as! URL)
+                    if UIApplication.shared.openURL(url! as URL) {
+                        UIApplication.shared.openURL(url! as URL)
                     }
                     
                 }

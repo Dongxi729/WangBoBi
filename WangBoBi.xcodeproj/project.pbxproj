@@ -124,6 +124,7 @@
 		266B89071F04E1F70033BFA7 /* HeadReuse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 266B89061F04E1F70033BFA7 /* HeadReuse.swift */; };
 		266B89091F04E2200033BFA7 /* ReuseV.swift in Sources */ = {isa = PBXBuildFile; fileRef = 266B89081F04E2200033BFA7 /* ReuseV.swift */; };
 		266E97211EF3D5460057FD90 /* AccountAndSaveVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 266E97201EF3D5460057FD90 /* AccountAndSaveVC.swift */; };
+		268959181F050DFD0064C957 /* IndexLoginModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 268959171F050DFD0064C957 /* IndexLoginModel.swift */; };
 		269C1C921EF1275500364F32 /* SwiftyJSON.swift in Sources */ = {isa = PBXBuildFile; fileRef = 269C1C911EF1275500364F32 /* SwiftyJSON.swift */; };
 		26A0A4A91EF0E26B00035D0D /* JFNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26A0A4A81EF0E26B00035D0D /* JFNavigationController.swift */; };
 		26A0A4AB1EF1064C00035D0D /* NetWorkTool.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26A0A4AA1EF1064C00035D0D /* NetWorkTool.swift */; };
@@ -335,6 +336,7 @@
 		266B89061F04E1F70033BFA7 /* HeadReuse.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HeadReuse.swift; sourceTree = "<group>"; };
 		266B89081F04E2200033BFA7 /* ReuseV.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReuseV.swift; sourceTree = "<group>"; };
 		266E97201EF3D5460057FD90 /* AccountAndSaveVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AccountAndSaveVC.swift; path = "../../Mine-04/Controller/AccountAndSaveVC.swift"; sourceTree = "<group>"; };
+		268959171F050DFD0064C957 /* IndexLoginModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IndexLoginModel.swift; sourceTree = "<group>"; };
 		269C1C911EF1275500364F32 /* SwiftyJSON.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwiftyJSON.swift; sourceTree = "<group>"; };
 		26A0A4A81EF0E26B00035D0D /* JFNavigationController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JFNavigationController.swift; sourceTree = "<group>"; };
 		26A0A4AA1EF1064C00035D0D /* NetWorkTool.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NetWorkTool.swift; sourceTree = "<group>"; };
@@ -752,6 +754,7 @@
 		264960731EF0BFC000A559D6 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				268959171F050DFD0064C957 /* IndexLoginModel.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -1374,6 +1377,7 @@
 				2607D14E1EF212450015625E /* Reachability.m in Sources */,
 				260B20AF1EF766A600E78FD8 /* BandCardCell.swift in Sources */,
 				26F80A181F0202B0009A9746 /* AuthingVC.swift in Sources */,
+				268959181F050DFD0064C957 /* IndexLoginModel.swift in Sources */,
 				26FCDC551EFCF21E008087F1 /* CountDownBtn.swift in Sources */,
 				260B20DA1EF7B1FD00E78FD8 /* ForgetPassVC.swift in Sources */,
 				2649611B1EF0CD9200A559D6 /* NSString+extension.swift in Sources */,

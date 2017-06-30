@@ -11,26 +11,27 @@ import UIKit
 /// 头部复用视图
 class ReuseV : UICollectionReusableView {
     
+    var dataSource : [String : String]? {
+        didSet{
+            CCog(message: dataSource)
+        }
+    }
+    
     lazy var sectionImg: BtnWithImage = {
         let d : BtnWithImage = BtnWithImage.init(frame: CGRect.init(x: 0, y: 0, width: SCREEN_WIDTH, height: 20 * SCREEN_SCALE))
-        d.setImage(#imageLiteral(resourceName: "suggest"), for: .normal)
+        d.setImage(#imageLiteral(resourceName: "hot"), for: .normal)
         d.setTitle("猜你喜欢顶顶顶顶xxxxxxxxxxxx", for: .normal)
-        return d
-    }()
-    
-    lazy var titleLabel: UILabel = {
-        let d : UILabel = UILabel.init(frame: CGRect.init(x: 0, y: 0, width: self.Width, height: 44))
-        d.text = "说的"
-        d.textAlignment = .center
+        d.sizeToFit()
+        d.setTitleColor(UIColor.red, for: .normal)
+        d.layer.borderWidth = 1
         return d
     }()
 
     override init(frame: CGRect) {
         super.init(frame: frame)
         
-        sectionImg.center.x = self.center.x
-        addSubview(titleLabel)
         addSubview(sectionImg)
+        sectionImg.center.x = self.center.x
     }
     
     required init?(coder aDecoder: NSCoder) {

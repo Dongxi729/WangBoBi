@@ -366,7 +366,8 @@ class AccountModel: NSObject,NSCoding {
     // 归档账号的路径
     static let accountPath = NSSearchPathForDirectoriesInDomains(FileManager.SearchPathDirectory.documentDirectory, FileManager.SearchPathDomainMask.userDomainMask, true).last! + "/Account.plist"
     
-    
+    // 归档账号的路径
+    static let userData = NSSearchPathForDirectoriesInDomains(FileManager.SearchPathDirectory.documentDirectory, FileManager.SearchPathDomainMask.userDomainMask, true).last! + "/Data.plist"
     
     // MARK: - 保存对象
     func saveAccount() {
@@ -481,7 +482,7 @@ class AccountModel: NSObject,NSCoding {
                 UIApplication.shared.keyWindow?.rootViewController = MainTabBarViewController()
                 
                 /// 请求首页数据
-                AccountModel.shared()?.indexInfo()
+//                AccountModel.shared()?.indexInfo()
             } else {
                 toast(toast: alertMsg)
             }
@@ -495,9 +496,7 @@ class AccountModel: NSObject,NSCoding {
     
     // MARK: - 默认登录
     class func loginWithLocalPassAndAccount() -> Void {
-//        getInfo(emailStr: (AccountModel.shared()?.Email)!, pass: (AccountModel.shared()?.UserPass)!)
-        CCog(message: AccountModel.shared()?.Email)
-        CCog(message: AccountModel.shared()?.UserPass)
+
         let d : [String : String] = ["email" : (AccountModel.shared()?.Email)!,
                                      "pwd" : (AccountModel.shared()?.UserPass)!]
         NetWorkTool.shared.postWithPath(path: LOGIN_URL, paras: d, success: { (result) in
@@ -532,7 +531,7 @@ class AccountModel: NSObject,NSCoding {
                 UIApplication.shared.keyWindow?.rootViewController = MainTabBarViewController()
                 
                 /// 请求首页数据
-                AccountModel.shared()?.indexInfo()
+//                AccountModel.shared()?.indexInfo()
             }
         }) { (error) in
             let alertMsg = (error as NSError).userInfo["NSLocalizedDescription"]
@@ -679,14 +678,50 @@ class AccountModel: NSObject,NSCoding {
     
 
     // MARK: - 首页接口
-    func indexInfo() -> Void {
+    class func indexInfo(finished : @escaping (_ values : [IndexCommentTopModel])->(),finishedTop : @escaping (_ values : [IndexMertopModel])->()) {
         
         let param : [String :String] = ["uid" : (AccountModel.shared()?.Id.stringValue)!,
                                         "token" : (AccountModel.shared()?.Token)!]
-        
+    
         CCog(message: param)
         NetWorkTool.shared.postWithPath(path: INDEX_URL, paras: param, success: { (result) in
             CCog(message: result)
+            
+            guard let resultData = result as? NSDictionary  else {
+                return
+            }
+            
+            resultData.write(toFile:AccountModel.userData, atomically: true)
+            
+            CCog(message: AccountModel.userData)
+            
+            /// 抽取提示信息
+            guard let alertMsg = resultData["Msg"] as? String else {
+                
+                return
+            }
+            
+            /// 取数据
+            if alertMsg == "操作成功" {
+                if let dic = resultData["Data"] as? [String : Any] {
+                    if let dicc = [dic["CommendTop"] as? NSArray][0] {
+                        if let diccc = dicc[0] as? NSDictionary {
+
+                            let topmodel = IndexCommentTopModel.init(HeadImg: (diccc["HeadImg"] as? String)!, Href: (diccc["Href"] as? String)!, Num: diccc["Num"] as? NSNumber, Title: (diccc["Title"] as? String)!)
+                            finished([topmodel])
+                        }
+                    }
+                    
+                    if let dicc = [dic["MerTop"] as? NSArray][0] {
+                        if let diccc = dicc[0] as? NSDictionary {
+
+                            let model2 = IndexMertopModel(Company: (diccc["Company"] as? String)!, LogoImg: (diccc["LogoImg"] as? String)!, Num: (diccc["Num"] as? String)!)
+                            finishedTop([model2])
+                        }
+                    }
+                }
+            }
+            
         }) { (error) in
             CCog(message: error.localizedDescription)
         }
