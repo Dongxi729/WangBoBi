@@ -234,7 +234,8 @@ class BtnWithImage: UIButton {
         super.init(frame: frame)
         self.imageView?.contentMode = UIViewContentMode.scaleAspectFit
         self.isEnabled = false
-        
+        self.titleLabel?.font = UIFont.systemFont(ofSize: 13 * SCREEN_SCALE)
+        self.setTitleColor(UIColor.black, for: .normal)
     }
     
     override func titleRect(forContentRect contentRect: CGRect) -> CGRect {

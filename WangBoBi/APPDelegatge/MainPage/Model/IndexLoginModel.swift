@@ -22,32 +22,19 @@
 //);
 //};
 
-struct xxx {
-    /// 头像
-    var HeadImg : String?
-    
-    /// 链接
-    var Href : String?
-    
-    /// 评论
-    var Num : Int?
-    
-    /// 标题
-    var Title : String?
-}
-
-
-struct cxx2 {
-    /// 公司
-    var Company : String?
-    
-    /// logo
-    var LogoImg : String?
-    
-    var Num : String?
-}
-
 import UIKit
+
+class IndexLoginModel: NSObject {
+    var CommendTop : IndexCommentTopModel?
+    var MerTop : IndexMertopModel?
+    
+    init(dict: [String : Any]) {
+        super.init()
+        setValuesForKeys(dict)
+    }
+    override func setValue(_ value: Any?, forUndefinedKey key: String) {}
+
+}
 
 class IndexCommentTopModel: NSObject {
     /// 头像
@@ -57,18 +44,17 @@ class IndexCommentTopModel: NSObject {
     var Href : String?
     
     /// 评论
-    var Num : NSNumber?
+    var Num : String?
     
     /// 标题
     var Title : String?
-    
-    init(HeadImg : String,Href : String,Num : NSNumber?,Title : String) {
+
+    init(dict: [String : Any]) {
         super.init()
-        self.Num = Num
-        self.Title = Title
-        self.HeadImg = HeadImg
-        self.Href = Href
+        setValuesForKeys(dict)
     }
+    
+    override func setValue(_ value: Any?, forUndefinedKey key: String) {}
 }
 
 
@@ -79,13 +65,14 @@ class IndexMertopModel : NSObject {
     /// logo
     var LogoImg : String?
     
+    /// 评论数量
     var Num : String?
+
     
-    
-    init(Company : String,LogoImg : String,Num : String) {
+    init(dict: [String : Any]) {
         super.init()
-        self.Company = Company
-        self.LogoImg = LogoImg
-        self.Num = Num
+        setValuesForKeys(dict)
     }
+    
+    override func setValue(_ value: Any?, forUndefinedKey key: String) {}
 }

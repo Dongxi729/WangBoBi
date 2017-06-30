@@ -8,32 +8,8 @@
 
 import UIKit
 
-
-//每月书籍
-struct BookPreview {
-    var title:String
-    var images:[String]
-}
-
-
 class MainPageViewController: BaseViewController {
-    
-    
-    //所有书籍数据
-    fileprivate let books = [
-        
-        BookPreview(title: "1月新书", images: ["7.jpg", "8000.jpg"]),
-        BookPreview(title: "2月新书", images: ["7.jpg", "8.jpg","7.jpg", "8.jpg"]),
-        BookPreview(title: "3月新书", images: ["7.jpg", "8.jpg"]),
-        BookPreview(title: "六月新书", images: ["7.jpg", "8.jpg"]),
-        BookPreview(title: "六月新书", images: ["7.jpg", "8.jpg"]),
-        BookPreview(title: "六月新书", images: ["7.jpg", "8.jpg"]),
-        BookPreview(title: "六月新书", images: ["7.jpg", "8.jpg"]),
-        BookPreview(title: "六月新书", images: ["7.jpg", "8.jpg"]),
-        BookPreview(title: "七月新书", images: ["10.jpg", "11.jpg", "12.jpg", "13.jpg"])
-    ]
-    
-    
+
     /// 九宫格
     lazy var collV: UICollectionView = {
         
@@ -68,9 +44,14 @@ class MainPageViewController: BaseViewController {
         return d
     }()
     
+    /// 热评商户
+    var mertopModel = [IndexMertopModel]()
     
-    var movies = [IndexMertopModel]()
-    var model2 = [IndexCommentTopModel]()
+    /// 头条推荐
+    var topModel = [IndexCommentTopModel]()
+    
+    /// 模型总数
+    var loginModel : Int = 0
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -81,21 +62,22 @@ class MainPageViewController: BaseViewController {
         view.addSubview(collV)
         view.backgroundColor = COMMON_TBBGCOLOR
         
-        AccountModel.indexInfo(finished: { (mm) in
-            self.model2 = mm
-            CCog(message: mm.count)
+        AccountModel.indexInfo(finished: { (commenModel) in
+            self.topModel = commenModel
+
+            CCog(message: commenModel.count)
+        }, finishedTop: { (merTopModel) in
+            self.mertopModel = merTopModel
+            CCog(message: merTopModel.count)
+        }) { (xxx) in
+            self.loginModel = xxx
+            CCog(message: xxx)
             self.collV.reloadData()
-            
-        }) { (mm2) in
-            self.movies = mm2
-            CCog(message: mm2.count)
         }
-        
     }
     
     static let shared = MainPageViewController()
-    
-    
+
 }
 
 extension MainPageViewController : UICollectionViewDataSource,UICollectionViewDelegateFlowLayout,HeadReuseDelegate {
@@ -103,13 +85,17 @@ extension MainPageViewController : UICollectionViewDataSource,UICollectionViewDe
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cellID", for: indexPath) as! CollectCell
         
-//        cell.descLabl.text = books[indexPath.section].images[indexPath.item]
-        let xxx = movies[indexPath.row]
-        let xxx2 = model2[indexPath.row]
-        
-        cell.dataSource = xxx2
-        cell.dataSource2 = xxx
-        
+        if indexPath.section == 0 {
+            
+            let xxx = mertopModel[indexPath.row]
+            cell.dataSource2 = xxx
+            
+            
+        } else {
+            let xxx2 = topModel[indexPath.row]
+            cell.dataSource = xxx2
+        }
+
         return cell
         
     }
@@ -119,11 +105,16 @@ extension MainPageViewController : UICollectionViewDataSource,UICollectionViewDe
     }
     
     func numberOfSections(in collectionView: UICollectionView) -> Int {
-        return movies.count
+        return loginModel
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return movies.count
+        switch section {
+        case 0:
+            return self.mertopModel.count
+        default:
+            return self.topModel.count
+        }
     }
     
     func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
@@ -134,19 +125,20 @@ extension MainPageViewController : UICollectionViewDataSource,UICollectionViewDe
                 UICollectionElementKindSectionHeader, withReuseIdentifier: "headReuse",
                                                       for: indexPath) as? HeadReuse
             header?.delegate = self
-//            header?.sectionImg.setTitle(books[indexPath.section].title, for: .normal)
-//            header?.sectionImg.sizeToFit()
+            header?.sectionImg.setTitle("热评商户", for: .normal)
+            header?.sectionImg.setImage(#imageLiteral(resourceName: "hot"), for: .normal)
+            header?.sectionImg.sizeToFit()
             return header!
         } else {
             let header = collectionView.dequeueReusableSupplementaryView(ofKind:
                 UICollectionElementKindSectionHeader, withReuseIdentifier: "HeadInfoView",
                                                       for: indexPath) as? ReuseV
-//            header?.sectionImg.setTitle(books[indexPath.section].title, for: .normal)
+            header?.sectionImg.setTitle("头条推荐", for: .normal)
+            header?.sectionImg.setImage(#imageLiteral(resourceName: "suggest"), for: .normal)
+            header?.sectionImg.sizeToFit()
             return header!
         }
     }
-    
-    
     
     //返回头部间距
     func collectionView(_ collectionView: UICollectionView,
@@ -155,7 +147,7 @@ extension MainPageViewController : UICollectionViewDataSource,UICollectionViewDe
         
         
         if section == 0 {
-            return CGSize.init(width: SCREEN_WIDTH, height: SCREEN_WIDTH * (749 / 640) + 100 + 44 + 2 * COMMON_MARGIN)
+            return CGSize.init(width: SCREEN_WIDTH, height: SCREEN_WIDTH * (749 / 640) + SCREEN_WIDTH *  (309 / 640) + 44 + 2 * COMMON_MARGIN)
         } else {
             return CGSize.init(width: SCREEN_WIDTH, height: 45)
         }
@@ -163,7 +155,7 @@ extension MainPageViewController : UICollectionViewDataSource,UICollectionViewDe
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForFooterInSection section: Int) -> CGSize {
         
-        return CGSize.init(width: SCREEN_WIDTH, height: 15)
+        return CGSize.init(width: SCREEN_WIDTH, height: COMMON_MARGIN)
         
     }
     
@@ -172,9 +164,11 @@ extension MainPageViewController : UICollectionViewDataSource,UICollectionViewDe
         vvvvv.view.backgroundColor = UIColor.randomColor()
         self.navigationController?.pushViewController(vvvvv, animated: true)
         
-        CCog(message: indexPath.row)
-        CCog(message: indexPath.section)
-        
+        if indexPath.section == 0 {
+
+        } else {
+            let xxx2 = topModel[indexPath.row]
+        }
     }
     
     // MARK: - HeadReuseDelegate

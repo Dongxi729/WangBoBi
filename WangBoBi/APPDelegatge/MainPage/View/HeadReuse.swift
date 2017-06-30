@@ -18,8 +18,9 @@ class HeadReuse : UICollectionReusableView {
     
     // MARK: - 广告视图
     lazy var bannerImg: UIImageView = {
-        let d : UIImageView = UIImageView.init(frame: CGRect.init(x: 0, y: self.headBgImg.BottomY + COMMON_MARGIN, width: SCREEN_WIDTH, height: 100))
-        d.backgroundColor = UIColor.red
+        let d : UIImageView = UIImageView.init(frame: CGRect.init(x: 0, y: self.headBgImg.BottomY, width: SCREEN_WIDTH, height: SCREEN_WIDTH *  (309 / 640)))
+        d.image = #imageLiteral(resourceName: "banner")
+        d.layer.borderWidth = 1
         return d
     }()
     
@@ -28,8 +29,8 @@ class HeadReuse : UICollectionReusableView {
     lazy var sectionImg: BtnWithImage = {
         let d : BtnWithImage = BtnWithImage.init(frame:  CGRect.init(x: 0, y: self.bannerImg.BottomY + COMMON_MARGIN , width: self.Width, height: 44))
         d.setTitle("猜你喜欢顶顶顶顶xxxxxxxxxxxx", for: .normal)
+        
         d.sizeToFit()
-        d.setTitleColor(UIColor.red, for: .normal)
         d.layer.borderWidth = 1
         return d
     }()

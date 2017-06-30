@@ -572,7 +572,8 @@ class AccountModel: NSObject,NSCoding {
             }
             
             if alertMsg == "恭喜您，注册成功" {
-                UIApplication.shared.keyWindow?.rootViewController = MainTabBarViewController()
+                UIApplication.shared.keyWindow?.rootViewController = LoginViewController()
+                
             } else {
                 toast(toast: alertMsg)
             }
@@ -678,19 +679,19 @@ class AccountModel: NSObject,NSCoding {
     
 
     // MARK: - 首页接口
-    class func indexInfo(finished : @escaping (_ values : [IndexCommentTopModel])->(),finishedTop : @escaping (_ values : [IndexMertopModel])->()) {
+    class func indexInfo(finished : @escaping (_ values : [IndexCommentTopModel])->(),finishedTop : @escaping (_ values : [IndexMertopModel])->(),finishedTotalModel : @escaping (_ values : Int)->()) {
         
-        let param : [String :String] = ["uid" : (AccountModel.shared()?.Id.stringValue)!,
-                                        "token" : (AccountModel.shared()?.Token)!]
+//        let param : [String :String] = ["uid" : (AccountModel.shared()?.Id.stringValue)!,
+//                                        "token" : (AccountModel.shared()?.Token)!]
     
-        CCog(message: param)
-        NetWorkTool.shared.postWithPath(path: INDEX_URL, paras: param, success: { (result) in
-            CCog(message: result)
-            
-            guard let resultData = result as? NSDictionary  else {
-                return
-            }
-            
+//        CCog(message: param)
+//        NetWorkTool.shared.postWithPath(path: INDEX_URL, paras: param, success: { (result) in
+//            CCog(message: result)
+//            
+//            guard let resultData = result as? NSDictionary  else {
+//                return
+//            }
+        if let resultData = NSDictionary.init(contentsOfFile: "/Users/zhengdongxi/Desktop/Data.plist") {
             resultData.write(toFile:AccountModel.userData, atomically: true)
             
             CCog(message: AccountModel.userData)
@@ -704,27 +705,60 @@ class AccountModel: NSObject,NSCoding {
             /// 取数据
             if alertMsg == "操作成功" {
                 if let dic = resultData["Data"] as? [String : Any] {
+                    
+                    finishedTotalModel(dic.count)
+                    CCog(message: dic.count)
+                    
                     if let dicc = [dic["CommendTop"] as? NSArray][0] {
-                        if let diccc = dicc[0] as? NSDictionary {
+                        
+                        var mmm = [IndexCommentTopModel]()
+                        for vv in dicc {
+                            CCog(message: vv)
+                            if let diccc = vv as? NSDictionary {
+    
+                                let topMedel = IndexCommentTopModel.init(dict: diccc as! [String : Any])
+                                
+                                mmm.append(topMedel)
+                                
+                                CCog(message: mmm.count)
+                                CCog(message: dicc.count)
 
-                            let topmodel = IndexCommentTopModel.init(HeadImg: (diccc["HeadImg"] as? String)!, Href: (diccc["Href"] as? String)!, Num: diccc["Num"] as? NSNumber, Title: (diccc["Title"] as? String)!)
-                            finished([topmodel])
+                                if mmm.count == dicc.count {
+                                    finished(mmm)
+                                }
+                            }
                         }
                     }
                     
                     if let dicc = [dic["MerTop"] as? NSArray][0] {
-                        if let diccc = dicc[0] as? NSDictionary {
-
-                            let model2 = IndexMertopModel(Company: (diccc["Company"] as? String)!, LogoImg: (diccc["LogoImg"] as? String)!, Num: (diccc["Num"] as? String)!)
-                            finishedTop([model2])
+                        var mmm = [IndexMertopModel]()
+                        for vv in dicc {
+                            CCog(message: vv)
+                            if let diccc = vv as? NSDictionary {
+                                
+                                let topMedel = IndexMertopModel.init(dict: diccc as! [String : Any])
+                                
+                                mmm.append(topMedel)
+                                
+                                CCog(message: mmm.count)
+                                CCog(message: dicc.count)
+                                
+                                if mmm.count == dicc.count {
+                                    finishedTop(mmm)
+                                }
+                            }
                         }
                     }
                 }
             }
-            
-        }) { (error) in
-            CCog(message: error.localizedDescription)
         }
+
+        
+  
+            
+//        }) { (error) in
+//            CCog(message: error.localizedDescription)
+//        }
     }
 
 

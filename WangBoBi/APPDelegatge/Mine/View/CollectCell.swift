@@ -11,18 +11,25 @@ import UIKit
 /// 单个cell
 class CollectCell: UICollectionViewCell {
 
+    
+    /// 头条推荐
     var dataSource : IndexCommentTopModel? {
         didSet {
 
             self.descLabl.text = dataSource?.Title
-            self.commentLabel.text = dataSource?.Num?.stringValue
+            self.commentLabel.text = (dataSource?.Num)! + "好评"
             self.imgView.setImage(urlString: dataSource?.HeadImg, placeholderImage: #imageLiteral(resourceName: "logo"))
         }
     }
     
+    /// 热评商户
     var dataSource2 : IndexMertopModel? {
         didSet {
-
+            self.descLabl.text = dataSource2?.Company
+            self.commentImg.image = #imageLiteral(resourceName: "saw")
+            self.commentLabel.text = (dataSource2?.Num)!
+            self.commentLabel.textColor = UIColor.gray
+            self.imgView.setImage(urlString: dataSource2?.LogoImg, placeholderImage: #imageLiteral(resourceName: "logo"))
         }
     }
     
@@ -39,13 +46,17 @@ class CollectCell: UICollectionViewCell {
     fileprivate lazy var commentImg: UIImageView = {
         let d : UIImageView = UIImageView.init(frame: CGRect.init(x: 0, y: self.descLabl.BottomY, width: 15 * SCREEN_SCALE, height: 15 * SCREEN_SCALE))
         d.image = #imageLiteral(resourceName: "like")
+        d.contentMode = UIViewContentMode.scaleAspectFit
+        d.layer.borderWidth = 1
         return d
     }()
     
     /// 评论
     lazy var commentLabel: UILabel = {
-        let d : UILabel = UILabel.init(frame: CGRect.init(x: self.descLabl.BottomY, y: self.descLabl.LeftX, width: self.Width, height: 15 * SCREEN_SCALE))
-        
+        let d : UILabel = UILabel.init(frame: CGRect.init(x: self.commentImg.RightX, y:self.commentImg.TopY , width: self.Width, height: 15 * SCREEN_SCALE))
+        d.font = UIFont.systemFont(ofSize: 10 * SCREEN_SCALE)
+        d.textColor = UIColor.red
+        d.layer.borderWidth = 1
         return d
     }()
     

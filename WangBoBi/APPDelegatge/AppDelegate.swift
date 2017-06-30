@@ -59,33 +59,30 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         let timerStamp : TimeInterval = now.timeIntervalSince1970
         
         let timeStamp = Int(timerStamp)
-        
-        CCog(message: timeStamp)
-        
-        
-        if let lastLoginTime = UserDefaults.standard.object(forKey: "loginTime") as? Int {
-            CCog(message: lastLoginTime)
             
-            CCog(message: (timeStamp - lastLoginTime))
-            
-            /// 检查登录时间，小于10分钟直接登录。
-            if (timeStamp - lastLoginTime) <= 60 * 10 {
-                
-                UserDefaults.standard.set(timeStamp, forKey: "loginTime")
-                UserDefaults.standard.synchronize()
-                
-                /// 取出本地的账号密码重新登录，刷新本地的token
-                AccountModel.loginWithLocalPassAndAccount()
-//                setLogedMain()
-            } else {
-                setUnlogedMain()
-            }
-        } else {
-            setUnlogedMain()
-        }
+        setLogedMain()
         
-//        testComplement()
-
+        
+//        if let lastLoginTime = UserDefaults.standard.object(forKey: "loginTime") as? Int {
+//            CCog(message: lastLoginTime)
+//            
+//            CCog(message: (timeStamp - lastLoginTime))
+//            
+//            /// 检查登录时间，小于10分钟直接登录。
+//            if (timeStamp - lastLoginTime) <= 60 * 10 {
+//                
+//                UserDefaults.standard.set(timeStamp, forKey: "loginTime")
+//                UserDefaults.standard.synchronize()
+//                
+//                /// 取出本地的账号密码重新登录，刷新本地的token
+//                AccountModel.loginWithLocalPassAndAccount()
+//            } else {
+//                setUnlogedMain()
+//            }
+//        } else {
+//            setUnlogedMain()
+//        }
+        
         return true
         
     }
