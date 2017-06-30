@@ -26,8 +26,8 @@ class MainPageViewController: BaseViewController {
         
         //设置单元格宽度和高度
         layout.itemSize = CGSize(width:itemWidth, height:itemWidth * 1.4)
-        layout.minimumLineSpacing = 0
-        layout.minimumInteritemSpacing = 0
+        layout.minimumLineSpacing = COMMON_MARGIN
+        layout.minimumInteritemSpacing = COMMON_MARGIN
         
         /// 设置大小出错///
         let d : UICollectionView = UICollectionView.init(frame:CGRect.init(x: 0, y: 0, width: SCREEN_WIDTH, height: SCREEN_HEIGHT - 64), collectionViewLayout: layout)
@@ -90,10 +90,11 @@ extension MainPageViewController : UICollectionViewDataSource,UICollectionViewDe
             let xxx = mertopModel[indexPath.row]
             cell.dataSource2 = xxx
             
-            
+            cell.topView.isHidden = true
         } else {
             let xxx2 = topModel[indexPath.row]
             cell.dataSource = xxx2
+            cell.topView.setLabelNo(str: "TOP" + String(indexPath.row))
         }
 
         return cell

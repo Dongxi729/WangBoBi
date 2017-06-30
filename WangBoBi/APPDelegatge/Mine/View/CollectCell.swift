@@ -11,13 +11,12 @@ import UIKit
 /// 单个cell
 class CollectCell: UICollectionViewCell {
 
-    
     /// 头条推荐
     var dataSource : IndexCommentTopModel? {
         didSet {
 
             self.descLabl.text = dataSource?.Title
-            self.commentLabel.text = (dataSource?.Num)! + "好评"
+            self.commentLabel.text = (dataSource?.Num)! + " 好评"
             self.imgView.setImage(urlString: dataSource?.HeadImg, placeholderImage: #imageLiteral(resourceName: "logo"))
         }
     }
@@ -36,14 +35,14 @@ class CollectCell: UICollectionViewCell {
     
     /// 描述文本
     lazy var descLabl: UILabel = {
-        let d : UILabel = UILabel.init(frame: CGRect.init(x: 0, y: self.Height * 0.75, width: self.Width, height: 20 * SCREEN_SCALE))
+        let d : UILabel = UILabel.init(frame: CGRect.init(x: 0, y: self.imgView.BottomY + 5 * SCREEN_SCALE, width: self.Width, height: 13 * SCREEN_SCALE))
         d.font = UIFont.systemFont(ofSize: 12 * SCREEN_SCALE)
         return d
     }()
     
     /// 评论图片
     fileprivate lazy var commentImg: UIImageView = {
-        let d : UIImageView = UIImageView.init(frame: CGRect.init(x: 0, y: self.descLabl.BottomY, width: 15 * SCREEN_SCALE, height: 15 * SCREEN_SCALE))
+        let d : UIImageView = UIImageView.init(frame: CGRect.init(x: 0, y: self.descLabl.BottomY + COMMON_MARGIN / 2, width: 13 * SCREEN_SCALE, height: 13 * SCREEN_SCALE))
         d.image = #imageLiteral(resourceName: "like")
         d.contentMode = UIViewContentMode.scaleAspectFit
         return d
@@ -51,7 +50,7 @@ class CollectCell: UICollectionViewCell {
     
     /// 评论
     lazy var commentLabel: UILabel = {
-        let d : UILabel = UILabel.init(frame: CGRect.init(x: self.commentImg.RightX, y:self.commentImg.TopY , width: self.Width, height: 15 * SCREEN_SCALE))
+        let d : UILabel = UILabel.init(frame: CGRect.init(x: self.commentImg.RightX + COMMON_MARGIN / 2, y:self.commentImg.TopY , width: self.Width, height: 15 * SCREEN_SCALE))
         d.font = UIFont.systemFont(ofSize: 10 * SCREEN_SCALE)
         d.textColor = UIColor.red
         return d
@@ -67,17 +66,54 @@ class CollectCell: UICollectionViewCell {
         return d
     }()
     
+    /// 顶部视图
+    lazy var topView: TopV = {
+        let d : TopV = TopV.init(frame: CGRect.init(x: COMMON_MARGIN, y: 0, width: self.Width * 0.4, height: (30 / 74) * self.Width * 0.4))
+        return d
+    }()
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
-        
-        self.layer.borderWidth = 1
-        
+
         self.contentView.addSubview(imgView)
         
         self.contentView.addSubview(descLabl)
         self.contentView.addSubview(self.commentImg)
         
         self.contentView.addSubview(commentLabel)
+        self.contentView.addSubview(topView)
+        topView.setLabelNo(str: "TopDDD")
+    }
+    
+    required init?(coder aDecoder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+}
+
+
+class TopV: UIView {
+    lazy var topBgV: UIImageView = {
+        let d : UIImageView = UIImageView.init(frame: CGRect.init(x: 0, y: 0, width: self.Width, height: self.Height))
+        d.image = #imageLiteral(resourceName: "top")
+        return d
+    }()
+    
+    lazy var commentLabel: UILabel = {
+        let d : UILabel = UILabel.init(frame: self.bounds)
+        d.textAlignment = .center
+        d.textColor = UIColor.white
+        d.font = UIFont.systemFont(ofSize: 12 * SCREEN_SCALE)
+        return d
+    }()
+    
+    func setLabelNo(str : String) -> Void {
+        addSubview(commentLabel)
+        commentLabel.text = str
+    }
+    
+    override init(frame: CGRect) {
+        super.init(frame: frame)
+        addSubview(topBgV)
     }
     
     required init?(coder aDecoder: NSCoder) {

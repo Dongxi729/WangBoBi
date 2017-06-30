@@ -681,17 +681,17 @@ class AccountModel: NSObject,NSCoding {
     // MARK: - 首页接口
     class func indexInfo(finished : @escaping (_ values : [IndexCommentTopModel])->(),finishedTop : @escaping (_ values : [IndexMertopModel])->(),finishedTotalModel : @escaping (_ values : Int)->()) {
         
-//        let param : [String :String] = ["uid" : (AccountModel.shared()?.Id.stringValue)!,
-//                                        "token" : (AccountModel.shared()?.Token)!]
-//    
-//        CCog(message: param)
-//        NetWorkTool.shared.postWithPath(path: INDEX_URL, paras: param, success: { (result) in
-//            CCog(message: result)
-//            
-//            guard let resultData = result as? NSDictionary  else {
-//                return
-//            }
-        if let resultData = NSDictionary.init(contentsOfFile: "/Users/zhengdongxi/Desktop/Data.plist") {
+        let param : [String :String] = ["uid" : (AccountModel.shared()?.Id.stringValue)!,
+                                        "token" : (AccountModel.shared()?.Token)!]
+    
+        CCog(message: param)
+        NetWorkTool.shared.postWithPath(path: INDEX_URL, paras: param, success: { (result) in
+            CCog(message: result)
+            
+            guard let resultData = result as? NSDictionary  else {
+                return
+            }
+//        if let resultData = NSDictionary.init(contentsOfFile: "/Users/zhengdongxi/Desktop/Data.plist") {
             resultData.write(toFile:AccountModel.userData, atomically: true)
             
             CCog(message: AccountModel.userData)
@@ -713,7 +713,6 @@ class AccountModel: NSObject,NSCoding {
                         
                         var mmm = [IndexCommentTopModel]()
                         for vv in dicc {
-                            CCog(message: vv)
                             if let diccc = vv as? NSDictionary {
     
                                 let topMedel = IndexCommentTopModel.init(dict: diccc as! [String : Any])
@@ -745,10 +744,10 @@ class AccountModel: NSObject,NSCoding {
                     }
                 }
             }
-        }
-//        }) { (error) in
-//            CCog(message: error.localizedDescription)
 //        }
+        }) { (error) in
+            CCog(message: error.localizedDescription)
+        }
     }
 
 
