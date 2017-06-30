@@ -10,20 +10,10 @@ import UIKit
 
 /// 头部复用视图
 class ReuseV : UICollectionReusableView {
-    
-    var dataSource : [String : String]? {
-        didSet{
-            CCog(message: dataSource)
-        }
-    }
-    
+
     lazy var sectionImg: BtnWithImage = {
-        let d : BtnWithImage = BtnWithImage.init(frame: CGRect.init(x: 0, y: 0, width: SCREEN_WIDTH, height: 20 * SCREEN_SCALE))
-        d.setImage(#imageLiteral(resourceName: "hot"), for: .normal)
+        let d : BtnWithImage = BtnWithImage.init(frame: CGRect.init(x: SCREEN_WIDTH / 2 - 40 * SCREEN_SCALE, y: 0, width: 80 * SCREEN_SCALE, height: 20 * SCREEN_SCALE))
         d.setTitle("猜你喜欢顶顶顶顶xxxxxxxxxxxx", for: .normal)
-        d.sizeToFit()
-        d.setTitleColor(UIColor.red, for: .normal)
-        d.layer.borderWidth = 1
         return d
     }()
 
@@ -31,7 +21,6 @@ class ReuseV : UICollectionReusableView {
         super.init(frame: frame)
         
         addSubview(sectionImg)
-        sectionImg.center.x = self.center.x
     }
     
     required init?(coder aDecoder: NSCoder) {

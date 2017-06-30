@@ -94,8 +94,7 @@ class PushingMoneyVC: BaseViewController,UITextFieldDelegate,BindPhoneFooterVDel
 
     // MARK: - bindPhonSELDelegate
     func bindPhonSELDelegate() {
-        CCog(message: self.cardPass.text)
-        CCog(message: self.cardNumLabel.text)
+
         UIView.animate(withDuration: 0.5) {
             UIApplication.shared.keyWindow?.frame = CGRect.init(x: 0, y: 0, width: SCREEN_WIDTH, height: SCREEN_HEIGHT)
         }

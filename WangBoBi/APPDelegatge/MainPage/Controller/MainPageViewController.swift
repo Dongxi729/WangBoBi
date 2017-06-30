@@ -22,7 +22,7 @@ class MainPageViewController: BaseViewController {
         let collectionViewWidth = SCREEN_BOUNDS
         
         //计算单元格的宽度
-        let itemWidth = SCREEN_WIDTH / 3
+        let itemWidth = SCREEN_WIDTH / 3.5
         
         //设置单元格宽度和高度
         layout.itemSize = CGSize(width:itemWidth, height:itemWidth * 1.4)
@@ -101,7 +101,7 @@ extension MainPageViewController : UICollectionViewDataSource,UICollectionViewDe
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
-        return UIEdgeInsets.init(top:0, left: 0, bottom: 0, right:0)
+        return UIEdgeInsets.init(top:0, left: COMMON_MARGIN, bottom: 0, right:COMMON_MARGIN)
     }
     
     func numberOfSections(in collectionView: UICollectionView) -> Int {
@@ -135,7 +135,6 @@ extension MainPageViewController : UICollectionViewDataSource,UICollectionViewDe
                                                       for: indexPath) as? ReuseV
             header?.sectionImg.setTitle("头条推荐", for: .normal)
             header?.sectionImg.setImage(#imageLiteral(resourceName: "suggest"), for: .normal)
-            header?.sectionImg.sizeToFit()
             return header!
         }
     }
@@ -147,9 +146,9 @@ extension MainPageViewController : UICollectionViewDataSource,UICollectionViewDe
         
         
         if section == 0 {
-            return CGSize.init(width: SCREEN_WIDTH, height: SCREEN_WIDTH * (749 / 640) + SCREEN_WIDTH *  (309 / 640) + 44 + 2 * COMMON_MARGIN)
+            return CGSize.init(width: SCREEN_WIDTH, height: SCREEN_WIDTH * (749 / 640) + SCREEN_WIDTH *  (309 / 640) + 30 * SCREEN_SCALE)
         } else {
-            return CGSize.init(width: SCREEN_WIDTH, height: 45)
+            return CGSize.init(width: SCREEN_WIDTH, height: 30 * SCREEN_SCALE)
         }
     }
     

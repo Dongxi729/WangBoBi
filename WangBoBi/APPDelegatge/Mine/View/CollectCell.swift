@@ -37,8 +37,7 @@ class CollectCell: UICollectionViewCell {
     /// 描述文本
     lazy var descLabl: UILabel = {
         let d : UILabel = UILabel.init(frame: CGRect.init(x: 0, y: self.Height * 0.75, width: self.Width, height: 20 * SCREEN_SCALE))
-        d.layer.borderWidth = 1
-        d.text = "ssss"
+        d.font = UIFont.systemFont(ofSize: 12 * SCREEN_SCALE)
         return d
     }()
     
@@ -47,7 +46,6 @@ class CollectCell: UICollectionViewCell {
         let d : UIImageView = UIImageView.init(frame: CGRect.init(x: 0, y: self.descLabl.BottomY, width: 15 * SCREEN_SCALE, height: 15 * SCREEN_SCALE))
         d.image = #imageLiteral(resourceName: "like")
         d.contentMode = UIViewContentMode.scaleAspectFit
-        d.layer.borderWidth = 1
         return d
     }()
     
@@ -56,7 +54,6 @@ class CollectCell: UICollectionViewCell {
         let d : UILabel = UILabel.init(frame: CGRect.init(x: self.commentImg.RightX, y:self.commentImg.TopY , width: self.Width, height: 15 * SCREEN_SCALE))
         d.font = UIFont.systemFont(ofSize: 10 * SCREEN_SCALE)
         d.textColor = UIColor.red
-        d.layer.borderWidth = 1
         return d
     }()
     
@@ -72,6 +69,8 @@ class CollectCell: UICollectionViewCell {
     
     override init(frame: CGRect) {
         super.init(frame: frame)
+        
+        self.layer.borderWidth = 1
         
         self.contentView.addSubview(imgView)
         

@@ -683,7 +683,7 @@ class AccountModel: NSObject,NSCoding {
         
 //        let param : [String :String] = ["uid" : (AccountModel.shared()?.Id.stringValue)!,
 //                                        "token" : (AccountModel.shared()?.Token)!]
-    
+//    
 //        CCog(message: param)
 //        NetWorkTool.shared.postWithPath(path: INDEX_URL, paras: param, success: { (result) in
 //            CCog(message: result)
@@ -719,9 +719,6 @@ class AccountModel: NSObject,NSCoding {
                                 let topMedel = IndexCommentTopModel.init(dict: diccc as! [String : Any])
                                 
                                 mmm.append(topMedel)
-                                
-                                CCog(message: mmm.count)
-                                CCog(message: dicc.count)
 
                                 if mmm.count == dicc.count {
                                     finished(mmm)
@@ -739,10 +736,7 @@ class AccountModel: NSObject,NSCoding {
                                 let topMedel = IndexMertopModel.init(dict: diccc as! [String : Any])
                                 
                                 mmm.append(topMedel)
-                                
-                                CCog(message: mmm.count)
-                                CCog(message: dicc.count)
-                                
+
                                 if mmm.count == dicc.count {
                                     finishedTop(mmm)
                                 }
@@ -752,10 +746,6 @@ class AccountModel: NSObject,NSCoding {
                 }
             }
         }
-
-        
-  
-            
 //        }) { (error) in
 //            CCog(message: error.localizedDescription)
 //        }

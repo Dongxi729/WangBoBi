@@ -20,18 +20,15 @@ class HeadReuse : UICollectionReusableView {
     lazy var bannerImg: UIImageView = {
         let d : UIImageView = UIImageView.init(frame: CGRect.init(x: 0, y: self.headBgImg.BottomY, width: SCREEN_WIDTH, height: SCREEN_WIDTH *  (309 / 640)))
         d.image = #imageLiteral(resourceName: "banner")
-        d.layer.borderWidth = 1
+        
         return d
     }()
     
     
     /// 补充的头部文字
     lazy var sectionImg: BtnWithImage = {
-        let d : BtnWithImage = BtnWithImage.init(frame:  CGRect.init(x: 0, y: self.bannerImg.BottomY + COMMON_MARGIN , width: self.Width, height: 44))
+        let d : BtnWithImage = BtnWithImage.init(frame: CGRect.init(x: SCREEN_WIDTH / 2 - 40 * SCREEN_SCALE, y: self.bannerImg.BottomY, width: 80 * SCREEN_SCALE, height: 20 * SCREEN_SCALE))
         d.setTitle("猜你喜欢顶顶顶顶xxxxxxxxxxxx", for: .normal)
-        
-        d.sizeToFit()
-        d.layer.borderWidth = 1
         return d
     }()
     
@@ -49,7 +46,7 @@ class HeadReuse : UICollectionReusableView {
         let d: UILabel = UILabel.init(frame: CGRect.init(x: self.Width * 0.173913043478261, y: self.headBgImg.Height * 0.42, width: self.Width * 0.3, height: 20 * SCREEN_SCALE))
         d.text = "网博币/人民币:"
         d.sizeToFit()
-        d.layer.borderWidth = 1
+        
         d.font = UIFont.systemFont(ofSize: 12 * SCREEN_SCALE)
         return d
     }()
@@ -59,7 +56,7 @@ class HeadReuse : UICollectionReusableView {
         let d: UILabel = UILabel.init(frame: CGRect.init(x: self.Width * 0.173913043478261, y: self.wbBToJp.BottomY + COMMON_MARGIN * 0.8 * SCREEN_SCALE, width: self.Width * 0.3, height: 20 * SCREEN_SCALE))
         d.text = "网博币/日币:"
         d.sizeToFit()
-        d.layer.borderWidth = 1
+        
         d.font = UIFont.systemFont(ofSize: 12 * SCREEN_SCALE)
         return d
     }()
@@ -68,7 +65,7 @@ class HeadReuse : UICollectionReusableView {
     lazy var convertWBCToR: UILabel = {
         let d : UILabel = UILabel.init(frame: CGRect.init(x: self.wbBToJp.RightX , y: self.wbBToJp.TopY, width: self.Width * 0.4, height: self.wbBToJp.Height))
         d.font = UIFont.boldSystemFont(ofSize: 12 * SCREEN_SCALE)
-        d.layer.borderWidth = 1
+        
         d.text = "2000.0000"
         return d
     }()
@@ -76,7 +73,7 @@ class HeadReuse : UICollectionReusableView {
     lazy var convertWBCToJ: UILabel = {
         let d : UILabel = UILabel.init(frame: CGRect.init(x: self.wbBToRp.RightX , y: self.wbBToRp.TopY, width: self.Width * 0.4, height: self.wbBToRp.Height))
         d.font = UIFont.boldSystemFont(ofSize: 12 * SCREEN_SCALE)
-        d.layer.borderWidth = 1
+        
         d.text = "2000.0000"
         return d
     }()
