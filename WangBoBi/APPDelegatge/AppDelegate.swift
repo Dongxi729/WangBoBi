@@ -75,34 +75,58 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                 UserDefaults.standard.synchronize()
                 
                 /// 取出本地的账号密码重新登录，刷新本地的token
-                AccountModel.loginWithLocalPassAndAccount()
+                
+                if AccountModel.isLogin() {
+                    AccountModel.loginWithLocalPassAndAccount()
+                } else {
+                    setUnlogedMain()
+                    AccountModel.logout()
+                }
+                
             } else {
+                AccountModel.logout()
                 setUnlogedMain()
+                
+                
             }
         } else {
             setUnlogedMain()
+            AccountModel.logout()
         }
         
+        
+//        testComplement()
         return true
         
     }
     
     //// 测试接口
     func testComplement() {
-        
-        NetWorkTool.shared.postWithPath(path: LOGIN_URL, paras: ["email" : "18259129536@163.com","pwd" : "123".md5()], success: { (result) in
+        let param : [String : String] = ["uid" : (AccountModel.shared()?.Id.stringValue)!,
+                                         "token" : (AccountModel.shared()?.Token)!,
+                                         "phone" : "15960005714",
+                                         "code" : "",
+                                         "ac" : "smsg"]
+        CCog(message: param)
+        NetWorkTool.shared.postWithPath(path: DOB_AUTH, paras: param, success: { (result) in
             CCog(message: result)
-            
-            CCog(message: "123".md5())
-            guard let resultData = result as? NSDictionary else {
-                CCog(message: "格式不对")
-                return
-            }
-
-            
         }) { (error) in
             CCog(message: error.localizedDescription)
         }
+        
+//        NetWorkTool.shared.postWithPath(path: LOGIN_URL, paras: ["email" : "18259129536@163.com","pwd" : "123".md5()], success: { (result) in
+//            CCog(message: result)
+//            
+//            CCog(message: "123".md5())
+//            guard let resultData = result as? NSDictionary else {
+//                CCog(message: "格式不对")
+//                return
+//            }
+//
+//            
+//        }) { (error) in
+//            CCog(message: error.localizedDescription)
+//        }
         
 //        NetWorkTool.shared.postWithPath(path: RIGISTER_URL, paras: ["email" : "18259129536.com","pwd" : "123".md5(),"referee" : ""], success: { (result) in
 //            CCog(message: result)

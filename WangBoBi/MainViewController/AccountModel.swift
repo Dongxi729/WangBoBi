@@ -746,10 +746,67 @@ class AccountModel: NSObject,NSCoding {
             }
 //        }
         }) { (error) in
-            CCog(message: error.localizedDescription)
+            let alertMsg = (error as NSError).userInfo["NSLocalizedDescription"]
+            toast(toast: alertMsg! as! String)
         }
     }
 
+    // MARK: - 发送验证码
+    class func sendAuthSEL(phoneNum : String) {
+        let param : [String : String] = ["uid" : (AccountModel.shared()?.Id.stringValue)!,
+                                         "token" : (AccountModel.shared()?.Token)!,
+                                         "phone" : phoneNum,
+                                         "code" : "",
+                                         "ac" : "smsg"]
+        CCog(message: param)
+        NetWorkTool.shared.postWithPath(path: DOB_AUTH, paras: param, success: { (result) in
+            CCog(message: result)
+            
+            
+            
+            guard let resultData = result as? NSDictionary  else {
+                return
+            }
+            
+            /// 抽取提示信息
+            guard let alertMsg = resultData["Msg"] as? String else {
+                
+                return
+            }
+            toast(toast: alertMsg)
+            
+        }) { (error) in
+            let alertMsg = (error as NSError).userInfo["NSLocalizedDescription"]
+            toast(toast: alertMsg! as! String)
+        }
+    }
+
+    // MARK: - 双重验证
+    class func doubleCerSEL(auth : String,phoneNum : String) {
+        let param : [String : String] = ["uid" : (AccountModel.shared()?.Id.stringValue)!,
+                                         "token" : (AccountModel.shared()?.Token)!,
+                                         "phone" : phoneNum,
+                                         "code" : auth,
+                                         "ac" : "gauth"]
+        CCog(message: param)
+        NetWorkTool.shared.postWithPath(path: DOB_AUTH, paras: param, success: { (result) in
+            CCog(message: result)
+            
+            guard let resultData = result as? NSDictionary  else {
+                return
+            }
+            
+            /// 抽取提示信息
+            guard let alertMsg = resultData["Msg"] as? String else {
+                
+                return
+            }
+            toast(toast: alertMsg)
+        }) { (error) in
+            let alertMsg = (error as NSError).userInfo["NSLocalizedDescription"]
+            toast(toast: alertMsg! as! String)
+        }
+    }
 
     
     // MARK: - 归档接档
@@ -888,34 +945,13 @@ class AccountModel: NSObject,NSCoding {
         WorkingAdress = aDecoder.decodeObject(forKey: "WorkingAdress") as? String
         ResidenceAdress = aDecoder.decodeObject(forKey: "ResidenceAdress") as? String
         Email = aDecoder.decodeObject(forKey: "Email") as? String
-        CCog(message: Email)
         Phone = aDecoder.decodeObject(forKey: "Phone") as? String
         Integral = (aDecoder.decodeObject(forKey: "Integral") as? NSNumber)!
         
         VerifiStatus = (aDecoder.decodeObject(forKey: "VerifiStatus") as? NSNumber)!
         
         Id = (aDecoder.decodeObject(forKey: "Id") as? NSNumber)!
-        
-        CCog(message: VerifiStatus.intValue)
-        
-        /// 根据认证状态鉴别实名认证状态
-        //        实名认证 0 未认证 1 审核中，2认证失败 3认证成功
-        if VerifiStatus.intValue == 0 {
-            self.realNameInt = realNameIntEnum(rawValue: 0)
-        }
-        
-        if VerifiStatus.intValue == 1 {
-            self.realNameInt = realNameIntEnum(rawValue: 1)
-        }
-        
-        if VerifiStatus.intValue == 2 {
-            self.realNameInt = realNameIntEnum(rawValue: 2)
-        }
-        
-        if VerifiStatus.intValue == 3 {
-            self.realNameInt = realNameIntEnum(rawValue: 3)
-        }
-        
+
         Referee = aDecoder.decodeObject(forKey: "Referee") as? String
         OreMachine = aDecoder.decodeObject(forKey: "OreMachine") as? OreMachineEnum
         SIMCardNo = aDecoder.decodeObject(forKey: "SIMCardNo") as? String
@@ -935,6 +971,4 @@ class AccountModel: NSObject,NSCoding {
         //        CCog(message: WBC)
         CCog(message: Integral.stringValue)
     }
-    
-    
 }

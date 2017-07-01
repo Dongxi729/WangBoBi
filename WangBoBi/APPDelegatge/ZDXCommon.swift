@@ -105,6 +105,9 @@ let COMMON_BGCOLOR = UIColor.colorWithHexString("1693D9")
 // MARK: - 表格背景颜色
 let COMMON_TBBGCOLOR = UIColor.colorWithHexString("F7F6F7")
 
+//本地存储
+let localSave = UserDefaults.standard
+
 /// 基于iPhone6水平方向适配
 ///
 /// - Parameter iPhone6: iPhone6水平方向尺寸

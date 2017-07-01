@@ -43,20 +43,16 @@ class HeadReuse : UICollectionReusableView {
     
     /// 网博币/人民币
     lazy var wbBToJp: UILabel = {
-        let d: UILabel = UILabel.init(frame: CGRect.init(x: self.Width * 0.173913043478261, y: self.headBgImg.Height * 0.42, width: self.Width * 0.3, height: 20 * SCREEN_SCALE))
+        let d: UILabel = UILabel.init(frame: CGRect.init(x: self.Width * 0.173913043478261, y: self.headBgImg.Height * 0.415, width: 90 * SCREEN_SCALE, height: 20 * SCREEN_SCALE))
         d.text = "网博币/人民币:"
-        d.sizeToFit()
-        
         d.font = UIFont.systemFont(ofSize: 12 * SCREEN_SCALE)
         return d
     }()
     
     /// 网博币/日币
     lazy var wbBToRp: UILabel = {
-        let d: UILabel = UILabel.init(frame: CGRect.init(x: self.Width * 0.173913043478261, y: self.wbBToJp.BottomY + COMMON_MARGIN * 0.8 * SCREEN_SCALE, width: self.Width * 0.3, height: 20 * SCREEN_SCALE))
+        let d: UILabel = UILabel.init(frame: CGRect.init(x: self.Width * 0.173913043478261, y: self.headBgImg.Height * 0.48, width: 75 * SCREEN_SCALE, height: 20 * SCREEN_SCALE))
         d.text = "网博币/日币:"
-        d.sizeToFit()
-        
         d.font = UIFont.systemFont(ofSize: 12 * SCREEN_SCALE)
         return d
     }()
@@ -64,7 +60,7 @@ class HeadReuse : UICollectionReusableView {
     /// 网博币/人民币转换后的
     lazy var convertWBCToR: UILabel = {
         let d : UILabel = UILabel.init(frame: CGRect.init(x: self.wbBToJp.RightX , y: self.wbBToJp.TopY, width: self.Width * 0.4, height: self.wbBToJp.Height))
-        d.font = UIFont.boldSystemFont(ofSize: 12 * SCREEN_SCALE)
+        d.font = UIFont.boldSystemFont(ofSize: 14 * SCREEN_SCALE)
         
         d.text = "2000.0000"
         return d
@@ -72,7 +68,7 @@ class HeadReuse : UICollectionReusableView {
     
     lazy var convertWBCToJ: UILabel = {
         let d : UILabel = UILabel.init(frame: CGRect.init(x: self.wbBToRp.RightX , y: self.wbBToRp.TopY, width: self.Width * 0.4, height: self.wbBToRp.Height))
-        d.font = UIFont.boldSystemFont(ofSize: 12 * SCREEN_SCALE)
+        d.font = UIFont.boldSystemFont(ofSize: 14 * SCREEN_SCALE)
         
         d.text = "2000.0000"
         return d
@@ -92,7 +88,7 @@ class HeadReuse : UICollectionReusableView {
         d.text = AccountModel.shared()?.Integral.stringValue
         d.textColor = COMMON_BGCOLOR
         d.textAlignment = .center
-        d.font = UIFont.systemFont(ofSize: 12 * SCREEN_SCALE)
+        d.font = UIFont.systemFont(ofSize: 14 * SCREEN_SCALE)
         return d
     }()
     
@@ -100,7 +96,7 @@ class HeadReuse : UICollectionReusableView {
     lazy var WBCSubmitCounts: UILabel = {
         let d : UILabel = UILabel.init(frame: CGRect.init(x: self.jifenLabel.RightX + COMMON_MARGIN * 0.9, y: self.jifenLabel.TopY, width: self.jifenLabel.Width, height: self.jifenLabel.Height))
         d.textColor = COMMON_BGCOLOR
-        d.font = UIFont.systemFont(ofSize: 12 * SCREEN_SCALE)
+        d.font = UIFont.systemFont(ofSize: 14 * SCREEN_SCALE)
         d.textAlignment = .center
         d.text = "6789876"
         return d

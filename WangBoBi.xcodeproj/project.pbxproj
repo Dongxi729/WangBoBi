@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		2600D2A81F064B3E00EF7F6A /* WebVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2600D2A71F064B3E00EF7F6A /* WebVC.swift */; };
 		2607D14E1EF212450015625E /* Reachability.m in Sources */ = {isa = PBXBuildFile; fileRef = 2607D14C1EF212450015625E /* Reachability.m */; };
 		2607D14F1EF212450015625E /* NetCheck.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2607D14D1EF212450015625E /* NetCheck.swift */; };
 		2607D1511EF214D50015625E /* AutoSigned.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2607D1501EF214D50015625E /* AutoSigned.swift */; };
@@ -109,7 +110,6 @@
 		2650C18E1F038F7A005BE741 /* PaydescV.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2650C18D1F038F7A005BE741 /* PaydescV.swift */; };
 		2650C1901F039B66005BE741 /* UILabel + Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2650C18F1F039B66005BE741 /* UILabel + Extension.swift */; };
 		2650C1941F03AA82005BE741 /* PickerV.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2650C1931F03AA82005BE741 /* PickerV.swift */; };
-		265991F11EF65A9E004391E9 /* simhei.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 265991F01EF65A9E004391E9 /* simhei.ttf */; };
 		265991F41EF65D5C004391E9 /* CommonBtn.swift in Sources */ = {isa = PBXBuildFile; fileRef = 265991F31EF65D5C004391E9 /* CommonBtn.swift */; };
 		265992141EF66C6B004391E9 /* AddBankCardVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 265992131EF66C6B004391E9 /* AddBankCardVC.swift */; };
 		265D430C1EFBA8B1007F5AB8 /* MyInfoVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 265D430B1EFBA8B1007F5AB8 /* MyInfoVC.swift */; };
@@ -155,6 +155,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		2600D2A71F064B3E00EF7F6A /* WebVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WebVC.swift; sourceTree = "<group>"; };
 		2607D14B1EF212450015625E /* Reachability.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Reachability.h; sourceTree = "<group>"; };
 		2607D14C1EF212450015625E /* Reachability.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Reachability.m; sourceTree = "<group>"; };
 		2607D14D1EF212450015625E /* NetCheck.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NetCheck.swift; sourceTree = "<group>"; };
@@ -321,7 +322,6 @@
 		2650C18D1F038F7A005BE741 /* PaydescV.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PaydescV.swift; sourceTree = "<group>"; };
 		2650C18F1F039B66005BE741 /* UILabel + Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UILabel + Extension.swift"; sourceTree = "<group>"; };
 		2650C1931F03AA82005BE741 /* PickerV.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PickerV.swift; sourceTree = "<group>"; };
-		265991F01EF65A9E004391E9 /* simhei.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = simhei.ttf; sourceTree = "<group>"; };
 		265991F31EF65D5C004391E9 /* CommonBtn.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CommonBtn.swift; sourceTree = "<group>"; };
 		265992131EF66C6B004391E9 /* AddBankCardVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AddBankCardVC.swift; path = Controller/AddBankCardVC.swift; sourceTree = "<group>"; };
 		265D430B1EFBA8B1007F5AB8 /* MyInfoVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MyInfoVC.swift; sourceTree = "<group>"; };
@@ -382,6 +382,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		2600D2A61F064B2C00EF7F6A /* WebView */ = {
+			isa = PBXGroup;
+			children = (
+				2600D2A71F064B3E00EF7F6A /* WebVC.swift */,
+			);
+			name = WebView;
+			sourceTree = "<group>";
+		};
 		260B20A31EF7633800E78FD8 /* GDPerformanceMonitoring */ = {
 			isa = PBXGroup;
 			children = (
@@ -728,6 +736,7 @@
 		264960711EF0BFC000A559D6 /* MainPage-01 */ = {
 			isa = PBXGroup;
 			children = (
+				2600D2A61F064B2C00EF7F6A /* WebView */,
 				266B88FF1F04A54D0033BFA7 /* PushMoney 03 */,
 				2650C18A1F0360F4005BE741 /* GetMoneyByScan 01 */,
 				2650C1831F03584E005BE741 /* payMoney02 */,
@@ -1125,7 +1134,6 @@
 		265991EE1EF659F6004391E9 /* resources */ = {
 			isa = PBXGroup;
 			children = (
-				265991F01EF65A9E004391E9 /* simhei.ttf */,
 			);
 			name = resources;
 			sourceTree = "<group>";
@@ -1306,7 +1314,6 @@
 				26F484871EEFD55400177670 /* LaunchScreen.storyboard in Resources */,
 				26F484841EEFD55400177670 /* Assets.xcassets in Resources */,
 				2649612E1EF0D08F00A559D6 /* FTProgressIndicator.bundle in Resources */,
-				265991F11EF65A9E004391E9 /* simhei.ttf in Resources */,
 				26F484821EEFD55400177670 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1351,6 +1358,7 @@
 				262304641EFA6988007B0BF6 /* NSDictionary+ZXPUnicode.m in Sources */,
 				263CAF111EF62889006629BF /* UIImage+XLExtension.m in Sources */,
 				264960CB1EF0C28F00A559D6 /* POPPropertyAnimation.mm in Sources */,
+				2600D2A81F064B3E00EF7F6A /* WebVC.swift in Sources */,
 				26EF14A01EF8F7FD005663F1 /* ShowSuccessInfoV.swift in Sources */,
 				26ED244C1EF3E55700642804 /* ChangeLoginPassVC.swift in Sources */,
 				264960C91EF0C28F00A559D6 /* POPLayerExtras.mm in Sources */,

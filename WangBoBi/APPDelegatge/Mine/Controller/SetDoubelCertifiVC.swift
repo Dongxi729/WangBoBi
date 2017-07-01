@@ -69,13 +69,14 @@ class PhoneCerView : UIView,UITextFieldDelegate {
         let d : TfPlaceHolder = TfPlaceHolder.init(frame: CGRect.init(x: self.phNum.LeftX, y: self.Height * 0.47, width: self.Width * 0.4, height: self.phNum.Height))
         d.placeholder = "验证码"
         d.font = UIFont.systemFont(ofSize: 12 * SCREEN_SCALE)
-        
+        d.delegate = self
+
         return d
     }()
     
     /// 手机号
     fileprivate lazy var phNum: TfPlaceHolder = {
-        let d : TfPlaceHolder = TfPlaceHolder.init(frame: CGRect.init(x: self.Width * 0.177938808373591, y: self.Height * 0.255, width: self.Width * 0.7, height: 30 * SCREEN_SCALE))
+        let d : TfPlaceHolder = TfPlaceHolder.init(frame: CGRect.init(x: self.Width * 0.177938808373591, y: self.Height * 0.263, width: self.Width * 0.7, height: 30 * SCREEN_SCALE))
         d.placeholder = "手机号码"
         d.delegate = self
         d.font = UIFont.systemFont(ofSize: 12 * SCREEN_SCALE)
@@ -127,10 +128,29 @@ class PhoneCerView : UIView,UITextFieldDelegate {
         addSubview(yzmLabel)
         
         addSubview(sendAuthCode)
+        
+
     }
     
+    
     @objc fileprivate func sendAuthSEL(sender : CountDownBtn) {
-        sender.initwith(color: UIColor.colorWithHexString("E6E6E6"), title: "点击获取验证码", superView: self)
+        
+        CCog(message: "")
+        
+        if !(phNum.text?.checkMobile(mobileNumbel: phNum.text! as NSString))! {
+            toast(toast: "电话格式不对")
+            return
+        } else {
+            
+            AccountModel.sendAuthSEL(phoneNum: phNum.text!)
+            
+            sender.initwith(color: UIColor.colorWithHexString("E6E6E6"), title: "点击获取验证码", superView: self)
+            
+//            UIView.animate(withDuration: 0.5) {
+//                UIApplication.shared.keyWindow?.frame = CGRect.init(x: 0, y:0, width: SCREEN_WIDTH, height: SCREEN_HEIGHT)
+//            }
+        }
+        
     }
     
     /// 验证事件
@@ -151,6 +171,16 @@ class PhoneCerView : UIView,UITextFieldDelegate {
             if !(yzmLabel.text?.checkAuthStr(password: yzmLabel.text! as NSString))! {
                 toast(toast: "验证码格式不对")
                 return
+            } else {
+                /// 验证电话号码
+                AccountModel.doubleCerSEL(auth: yzmLabel.text!, phoneNum: phNum.text!)
+            
+//                UIView.animate(withDuration: 0.5) {
+//                    UIApplication.shared.keyWindow?.frame = CGRect.init(x: 0, y:0, width: SCREEN_WIDTH, height: SCREEN_HEIGHT)
+//                }
+                
+                self.removeFromSuperview()
+                self.delegate?.restoreBGColor()
             }
         } else {
             toast(toast: "验证码不为空")
@@ -160,7 +190,7 @@ class PhoneCerView : UIView,UITextFieldDelegate {
             
         ////...
 //        self.removeFromSuperview()
-        self.delegate?.restoreBGColor()
+//        self.delegate?.restoreBGColor()
     }
     
     // MARK: - UitextFieldDelegate

@@ -16,8 +16,9 @@ class CodeProductor: UIViewController {
     }()
     
     lazy var descLabel: UILabel = {
-        let d : UILabel = UILabel.init(frame: CGRect.init(x: 0, y: self.generatImgView.BottomY + COMMON_MARGIN * SCREEN_SCALE, width: SCREEN_WIDTH, height: 30 * SCREEN_SCALE))
+        let d : UILabel = UILabel.init(frame: CGRect.init(x: SCREEN_WIDTH / 2 - SCREEN_WIDTH * 0.35, y: self.generatImgView.BottomY + COMMON_MARGIN * SCREEN_SCALE, width: SCREEN_WIDTH * 0.7, height: 30 * SCREEN_SCALE))
         d.text = "用网博支付钱包扫一扫二维码，加我好友"
+        d.font = UIFont.systemFont(ofSize: 12 * SCREEN_SCALE)
         d.textAlignment = .center
         return d
     }()
@@ -31,7 +32,7 @@ class CodeProductor: UIViewController {
 
         title = "我的二维码"
         
-        view.backgroundColor = UIColor.lightText
+        view.backgroundColor = COMMON_TBBGCOLOR
         
         DispatchQueue.global().async {
 

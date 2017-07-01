@@ -101,26 +101,26 @@ extension AccountAndSaveVC : UITableViewDelegate,UITableViewDataSource,AccountAn
             switch indexPath.row {
             case 0:
 
-                
+                CCog(message: AccountModel.shared()?.VerifiStatus.intValue)
                 // 未实名
-                if AccountModel.shared()?.realNameInt?.rawValue == 0 {
+                if AccountModel.shared()?.VerifiStatus.intValue == 0 {
                     
                     self.navigationController?.pushViewController(TrueNameCertifiedVC(), animated: true)
                 }
                 
                 // 审核中
-                if AccountModel.shared()?.realNameInt?.rawValue == 1 {
+                if AccountModel.shared()?.VerifiStatus.intValue == 1 {
                     self.navigationController?.pushViewController(AuthingVC(), animated: true)
                 }
                 
                 // 认证失败
-                if AccountModel.shared()?.realNameInt?.rawValue == 2 {
+                if AccountModel.shared()?.VerifiStatus.intValue == 2 {
                     
                     self.navigationController?.pushViewController(AuthFailedVC(), animated: true)
                 }
                 
                 // 认证成功
-                if AccountModel.shared()?.realNameInt?.rawValue == 3 {
+                if AccountModel.shared()?.VerifiStatus.intValue == 3 {
                     self.navigationController?.pushViewController(AleradyCertify(), animated: true)
                 }
                 
@@ -158,7 +158,6 @@ extension AccountAndSaveVC : UITableViewDelegate,UITableViewDataSource,AccountAn
         
         UIApplication.shared.keyWindow?.rootViewController = nav
     }
-    
 }
 
 

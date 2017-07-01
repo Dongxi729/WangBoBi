@@ -10,6 +10,34 @@ import UIKit
 
 class MainPageViewController: BaseViewController {
 
+    lazy var freshControl: UIRefreshControl = {
+        let d:UIRefreshControl = UIRefreshControl.init(frame: CGRect.init(x: 0, y: 0, width: SCREEN_WIDTH, height: 64))
+        d.addTarget(self, action: #selector(refreshSEL(sender:)), for: .valueChanged)
+        return d
+    }()
+    
+    @objc fileprivate func refreshSEL(sender : UIRefreshControl) {
+        CCog(message: "refreshSEL")
+        
+        AccountModel.indexInfo(finished: { (commenModel) in
+            self.topModel = commenModel
+            
+            CCog(message: commenModel.count)
+        }, finishedTop: { (merTopModel) in
+            self.mertopModel = merTopModel
+            CCog(message: merTopModel.count)
+        }) { (xxx) in
+            self.loginModel = xxx
+            CCog(message: xxx)
+            
+            sleep(UInt32(2.0))
+            self.collV.reloadData()
+            sender.endRefreshing()
+        }
+        
+
+    }
+    
     /// 九宫格
     lazy var collV: UICollectionView = {
         
@@ -74,6 +102,8 @@ class MainPageViewController: BaseViewController {
             CCog(message: xxx)
             self.collV.reloadData()
         }
+        
+        self.collV.addSubview(freshControl)
     }
     
     static let shared = MainPageViewController()
@@ -161,13 +191,19 @@ extension MainPageViewController : UICollectionViewDataSource,UICollectionViewDe
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let vvvvv = UIViewController()
-        vvvvv.view.backgroundColor = UIColor.randomColor()
-        self.navigationController?.pushViewController(vvvvv, animated: true)
+//        vvvvv.view.backgroundColor = UIColor.randomColor()
+//        self.navigationController?.pushViewController(vvvvv, animated: true)
         
         if indexPath.section == 0 {
 
         } else {
             let xxx2 = topModel[indexPath.row]
+            
+            CCog(message: xxx2.Href)
+            let webVIew = WebVC()
+            webVIew.url = xxx2.Href
+            self.navigationController?.pushViewController(webVIew, animated: true)
+            webVIew.view.backgroundColor = UIColor.white
         }
     }
     

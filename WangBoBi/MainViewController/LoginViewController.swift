@@ -46,7 +46,11 @@ class LoginViewController: BaseViewController,UITextFieldDelegate {
         d.plStrSize(str: "邮箱地址", holderColor: UIColor.white)
         d.textColor = UIColor.white
         d.keyboardType = .numbersAndPunctuation
+        d.font = UIFont.systemFont(ofSize: 13 * SCREEN_SCALE)
         d.delegate = self
+        if AccountModel.shared()?.UserName != nil {
+            d.text = AccountModel.shared()?.UserName
+        }
         return d
     }()
     
@@ -55,9 +59,14 @@ class LoginViewController: BaseViewController,UITextFieldDelegate {
         let d : TfPlaceHolder = TfPlaceHolder.init(frame: CGRect.init(x: SCREEN_WIDTH * 0.213, y: 0.583 * SCREEN_HEIGHT, width: SCREEN_WIDTH * 0.88 - SCREEN_WIDTH * 0.213, height: 30 * SCREEN_SCALE))
         d.plStrSize(str: "登录密码", holderColor: UIColor.white)
         d.textColor = UIColor.white
-        
+        d.font = UIFont.systemFont(ofSize: 13 * SCREEN_SCALE)
         d.keyboardType = .numberPad
         d.delegate = self
+        d.isSecureTextEntry = true
+        
+        if localSave.object(forKey: "password") != nil {
+            d.text = localSave.object(forKey: "password") as? String
+        }
         return d
     }()
     
@@ -100,9 +109,16 @@ class LoginViewController: BaseViewController,UITextFieldDelegate {
     // MARK: - 登录事件
     @objc fileprivate func loginSEL() {
         
+        
         /// 判断输入的邮箱、密码长度是否大于0
         if !(accountLabel.text?.isEmpty)! && !(passTf.text?.isEmpty)! {
+            
+            localSave.set("password", forKey: passTf.text!)
+            localSave.synchronize()
+            
             AccountModel.getInfo(emailStr: self.accountLabel.text!, pass: self.passTf.text!)
+            
+            
 
         } else {
             FTIndicator.showToastMessage("邮箱或密码为空")

@@ -34,3 +34,6 @@ let CHECK_TOKEN = ""
 
 /// 首页请求接口
 let INDEX_URL = "http://192.168.1.10:8010/ifs/index.ashx"
+
+/// 双重验证
+let DOB_AUTH = "http://192.168.1.10:8010/ifs/dobauth.ashx"
