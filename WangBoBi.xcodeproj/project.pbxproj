@@ -125,6 +125,9 @@
 		266B89091F04E2200033BFA7 /* ReuseV.swift in Sources */ = {isa = PBXBuildFile; fileRef = 266B89081F04E2200033BFA7 /* ReuseV.swift */; };
 		266E97211EF3D5460057FD90 /* AccountAndSaveVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 266E97201EF3D5460057FD90 /* AccountAndSaveVC.swift */; };
 		268959181F050DFD0064C957 /* IndexLoginModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 268959171F050DFD0064C957 /* IndexLoginModel.swift */; };
+		269B5ECC1F077BD300AA573F /* footerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 269B5EC91F077BD300AA573F /* footerView.swift */; };
+		269B5ECD1F077BD300AA573F /* headerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 269B5ECA1F077BD300AA573F /* headerView.swift */; };
+		269B5ECE1F077BD300AA573F /* UIScrollView-extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 269B5ECB1F077BD300AA573F /* UIScrollView-extension.swift */; };
 		269C1C921EF1275500364F32 /* SwiftyJSON.swift in Sources */ = {isa = PBXBuildFile; fileRef = 269C1C911EF1275500364F32 /* SwiftyJSON.swift */; };
 		26A0A4A91EF0E26B00035D0D /* JFNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26A0A4A81EF0E26B00035D0D /* JFNavigationController.swift */; };
 		26A0A4AB1EF1064C00035D0D /* NetWorkTool.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26A0A4AA1EF1064C00035D0D /* NetWorkTool.swift */; };
@@ -337,6 +340,9 @@
 		266B89081F04E2200033BFA7 /* ReuseV.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReuseV.swift; sourceTree = "<group>"; };
 		266E97201EF3D5460057FD90 /* AccountAndSaveVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AccountAndSaveVC.swift; path = "../../Mine-04/Controller/AccountAndSaveVC.swift"; sourceTree = "<group>"; };
 		268959171F050DFD0064C957 /* IndexLoginModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IndexLoginModel.swift; sourceTree = "<group>"; };
+		269B5EC91F077BD300AA573F /* footerView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = footerView.swift; sourceTree = "<group>"; };
+		269B5ECA1F077BD300AA573F /* headerView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = headerView.swift; sourceTree = "<group>"; };
+		269B5ECB1F077BD300AA573F /* UIScrollView-extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIScrollView-extension.swift"; sourceTree = "<group>"; };
 		269C1C911EF1275500364F32 /* SwiftyJSON.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwiftyJSON.swift; sourceTree = "<group>"; };
 		26A0A4A81EF0E26B00035D0D /* JFNavigationController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JFNavigationController.swift; sourceTree = "<group>"; };
 		26A0A4AA1EF1064C00035D0D /* NetWorkTool.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NetWorkTool.swift; sourceTree = "<group>"; };
@@ -808,6 +814,7 @@
 		264960791EF0BFC000A559D6 /* ThirdSDK */ = {
 			isa = PBXGroup;
 			children = (
+				269B5ECF1F077C0C00AA573F /* refresh */,
 				26F248B91EFFE9F500599CC7 /* UploadHeadTool.swift */,
 				265D43181EFBE2F5007F5AB8 /* CreateCode */,
 				2623045C1EFA6988007B0BF6 /* ZXPUnicode */,
@@ -1175,6 +1182,16 @@
 			name = "PushMoney 03";
 			sourceTree = "<group>";
 		};
+		269B5ECF1F077C0C00AA573F /* refresh */ = {
+			isa = PBXGroup;
+			children = (
+				269B5EC91F077BD300AA573F /* footerView.swift */,
+				269B5ECA1F077BD300AA573F /* headerView.swift */,
+				269B5ECB1F077BD300AA573F /* UIScrollView-extension.swift */,
+			);
+			name = refresh;
+			sourceTree = "<group>";
+		};
 		26EF14A11EF900DD005663F1 /* AlertView */ = {
 			isa = PBXGroup;
 			children = (
@@ -1340,6 +1357,7 @@
 				260B21061EF7DFF500E78FD8 /* RigisterWithDetailVC.swift in Sources */,
 				26F80A1A1F0206C3009A9746 /* AuthFailedVC.swift in Sources */,
 				265D431B1EFBE318007F5AB8 /* String+QRCode.swift in Sources */,
+				269B5ECC1F077BD300AA573F /* footerView.swift in Sources */,
 				260B20D61EF7A0F900E78FD8 /* ToolBar.swift in Sources */,
 				262304651EFA6988007B0BF6 /* NSObject+ZXPUnicode.m in Sources */,
 				264961041EF0C9EC00A559D6 /* UIImageView+YYWebImage.m in Sources */,
@@ -1365,6 +1383,7 @@
 				264961001EF0C9EC00A559D6 /* CALayer+YYWebImage.m in Sources */,
 				263CAF121EF62889006629BF /* UIView+XLExtension.m in Sources */,
 				265D431E1EFBE324007F5AB8 /* Tool.swift in Sources */,
+				269B5ECE1F077BD300AA573F /* UIScrollView-extension.swift in Sources */,
 				265D431C1EFBE318007F5AB8 /* UIImage+QRCode.swift in Sources */,
 				26B14EFC1EF259AF0050135B /* CollectCell.swift in Sources */,
 				26ED244E1EF3E59A00642804 /* ChangePaypassVC.swift in Sources */,
@@ -1439,6 +1458,7 @@
 				260B20B51EF7679D00E78FD8 /* BankModel.swift in Sources */,
 				264960C11EF0C28F00A559D6 /* POPAnimationRuntime.mm in Sources */,
 				264960C21EF0C28F00A559D6 /* POPAnimationTracer.mm in Sources */,
+				269B5ECD1F077BD300AA573F /* headerView.swift in Sources */,
 				266B89071F04E1F70033BFA7 /* HeadReuse.swift in Sources */,
 				2650C1871F035D51005BE741 /* PaymentVCTwo.swift in Sources */,
 				26EF14A91EF9178D005663F1 /* LoginModel.swift in Sources */,

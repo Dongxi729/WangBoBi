@@ -103,7 +103,10 @@ class MainPageViewController: BaseViewController {
             self.collV.reloadData()
         }
         
-        self.collV.addSubview(freshControl)
+//        self.collV.addSubview(freshControl)
+        self.collV.addHeaderViewfun()
+        let d : headerView = collV.viewWithTag(888) as! headerView
+        d.delegate = self;
     }
     
     static let shared = MainPageViewController()
@@ -190,16 +193,12 @@ extension MainPageViewController : UICollectionViewDataSource,UICollectionViewDe
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        let vvvvv = UIViewController()
-//        vvvvv.view.backgroundColor = UIColor.randomColor()
-//        self.navigationController?.pushViewController(vvvvv, animated: true)
-        
+
         if indexPath.section == 0 {
 
         } else {
             let xxx2 = topModel[indexPath.row]
             
-            CCog(message: xxx2.Href)
             let webVIew = WebVC()
             webVIew.url = xxx2.Href
             self.navigationController?.pushViewController(webVIew, animated: true)
@@ -234,4 +233,31 @@ extension MainPageViewController : UICollectionViewDataSource,UICollectionViewDe
         }
     }
     
+}
+
+extension MainPageViewController : headerViewelegate {
+    func headerViewEndfun(_ _endRefresh: () -> Void) {
+        
+        /// 取出刷新头
+        let d : headerView = self.collV.viewWithTag(888) as! headerView
+        
+        AccountModel.indexInfo(finished: { (commenModel) in
+            self.topModel = commenModel
+            
+            CCog(message: commenModel.count)
+        }, finishedTop: { (merTopModel) in
+            self.mertopModel = merTopModel
+            CCog(message: merTopModel.count)
+        }) { (xxx) in
+            self.loginModel = xxx
+            CCog(message: xxx)
+            
+//            sleep(UInt32(2.0))
+            self.collV.reloadData()
+            d.endRefresh()
+        }
+        
+
+
+    }
 }
