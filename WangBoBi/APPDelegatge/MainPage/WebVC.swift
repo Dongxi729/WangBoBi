@@ -13,8 +13,13 @@ class WebVC: UIViewController {
     
     var url : String? {
         didSet {
+            
+            DispatchQueue.main.async {
+                self.webView.load(URLRequest.init(url: URL.init(string: self.url!)!))
+            }
+
             CCog(message: "设置了")
-            self.webView.load(URLRequest.init(url: URL.init(string: url!)!))
+            
         }
     }
     
@@ -28,6 +33,6 @@ class WebVC: UIViewController {
 
         // Do any additional setup after loading the view.
         view.addSubview(webView)
-        self.webView.load(URLRequest.init(url: URL.init(string: "http://sale.jd.com/act/4kIOxPynN5TQjMf0.html?cpdad=1DLSUE")!))
+//        self.webView.load(URLRequest.init(url: URL.init(string: "http://sale.jd.com/act/4kIOxPynN5TQjMf0.html?cpdad=1DLSUE")!))
     }
 }

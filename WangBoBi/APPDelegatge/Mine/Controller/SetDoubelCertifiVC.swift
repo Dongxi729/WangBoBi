@@ -89,6 +89,7 @@ class PhoneCerView : UIView,UITextFieldDelegate {
         let d: UIButton = UIButton.init(frame: CGRect.init(x: self.Width * 0.1, y: self.Height * 0.73525561687451, width: self.Width * 0.4, height: self.Height * 0.2))
         
         d.addTarget(self, action: #selector(dismissSELF), for: .touchUpInside)
+        
         return d
     }()
     
@@ -175,9 +176,7 @@ class PhoneCerView : UIView,UITextFieldDelegate {
                 /// 验证电话号码
                 AccountModel.doubleCerSEL(auth: yzmLabel.text!, phoneNum: phNum.text!)
             
-//                UIView.animate(withDuration: 0.5) {
-//                    UIApplication.shared.keyWindow?.frame = CGRect.init(x: 0, y:0, width: SCREEN_WIDTH, height: SCREEN_HEIGHT)
-//                }
+
                 
                 self.removeFromSuperview()
                 self.delegate?.restoreBGColor()
@@ -207,6 +206,11 @@ class PhoneCerView : UIView,UITextFieldDelegate {
     @objc fileprivate func dismissSELF() {
         self.removeFromSuperview()
         self.delegate?.restoreBGColor()
+        
+                        UIView.animate(withDuration: 0.5) {
+                            UIApplication.shared.keyWindow?.frame = CGRect.init(x: 0, y:0, width: SCREEN_WIDTH, height: SCREEN_HEIGHT)
+                        }
+    
     }
     
     required init?(coder aDecoder: NSCoder) {

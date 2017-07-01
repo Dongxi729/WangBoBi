@@ -36,7 +36,7 @@ class CountDownBtn: UIButton {
         self.isEnabled=false
         myTimer = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(tiemrBengin), userInfo: self, repeats: true)
         
-        
+        RunLoop.main.add(myTimer!, forMode: RunLoopMode.commonModes)
         superView.addSubview(self)
         
         self.isUserInteractionEnabled = true
