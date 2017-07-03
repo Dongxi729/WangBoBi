@@ -372,7 +372,7 @@ class AccountModel: NSObject,NSCoding {
     // MARK: - 保存对象
     func saveAccount() {
         
-            NSKeyedArchiver.archiveRootObject(self, toFile: AccountModel.accountPath)
+        NSKeyedArchiver.archiveRootObject(self, toFile: AccountModel.accountPath)
     }
     
     
@@ -456,11 +456,12 @@ class AccountModel: NSObject,NSCoding {
             
             CCog(message: (resultData["Data"] as? [String : Any])?["Integral"])
             
+            
+            /// 更新本地存储信息
             let account = AccountModel(dict: resultData["Data"] as! [String : Any])
             account.saveAccount()
             
-            
-            
+
             CCog(message: accountPath)
             
             guard let alertMsg = resultData["Msg"] as? String else {
@@ -482,7 +483,7 @@ class AccountModel: NSObject,NSCoding {
                 UIApplication.shared.keyWindow?.rootViewController = MainTabBarViewController()
                 
                 /// 请求首页数据
-//                AccountModel.shared()?.indexInfo()
+                //                AccountModel.shared()?.indexInfo()
             } else {
                 toast(toast: alertMsg)
             }
@@ -496,7 +497,7 @@ class AccountModel: NSObject,NSCoding {
     
     // MARK: - 默认登录
     class func loginWithLocalPassAndAccount() -> Void {
-
+        
         let d : [String : String] = ["email" : (AccountModel.shared()?.Email)!,
                                      "pwd" : (AccountModel.shared()?.UserPass)!]
         NetWorkTool.shared.postWithPath(path: LOGIN_URL, paras: d, success: { (result) in
@@ -511,7 +512,7 @@ class AccountModel: NSObject,NSCoding {
             
             let account = AccountModel(dict: resultData["Data"] as! [String : Any])
             account.updateUserInfo()
-
+            
             guard let alertMsg = resultData["Msg"] as? String else {
                 return
             }
@@ -531,7 +532,7 @@ class AccountModel: NSObject,NSCoding {
                 UIApplication.shared.keyWindow?.rootViewController = MainTabBarViewController()
                 
                 /// 请求首页数据
-//                AccountModel.shared()?.indexInfo()
+                //                AccountModel.shared()?.indexInfo()
             }
         }) { (error) in
             let alertMsg = (error as NSError).userInfo["NSLocalizedDescription"]
@@ -544,7 +545,7 @@ class AccountModel: NSObject,NSCoding {
         }
         
     }
-
+    
     
     // MARK: - 注册
     /// 注册接口
@@ -602,16 +603,11 @@ class AccountModel: NSObject,NSCoding {
         let param : [String : String] = ["email" : str,"pwd" : "","ac" :"semail"]
         
         NetWorkTool.shared.postWithPath(path: FORGETPASS_URL, paras: param, success: { (result) in
-            CCog(message: result)
-            
-            
             
             guard let resultData = result as? NSDictionary else {
                 return
             }
-            
-            
-            
+        
             /// 抽取提示信息
             guard let alertMsg = resultData["Msg"] as? String else {
                 
@@ -677,13 +673,13 @@ class AccountModel: NSObject,NSCoding {
         }
     }
     
-
+    
     // MARK: - 首页接口
     class func indexInfo(finished : @escaping (_ values : [IndexCommentTopModel])->(),finishedTop : @escaping (_ values : [IndexMertopModel])->(),finishedTotalModel : @escaping (_ values : Int)->()) {
         
         let param : [String :String] = ["uid" : (AccountModel.shared()?.Id.stringValue)!,
                                         "token" : (AccountModel.shared()?.Token)!]
-    
+        
         CCog(message: param)
         NetWorkTool.shared.postWithPath(path: INDEX_URL, paras: param, success: { (result) in
             CCog(message: result)
@@ -691,7 +687,7 @@ class AccountModel: NSObject,NSCoding {
             guard let resultData = result as? NSDictionary  else {
                 return
             }
-//        if let resultData = NSDictionary.init(contentsOfFile: "/Users/zhengdongxi/Desktop/Data.plist") {
+            //        if let resultData = NSDictionary.init(contentsOfFile: "/Users/zhengdongxi/Desktop/Data.plist") {
             resultData.write(toFile:AccountModel.userData, atomically: true)
             
             CCog(message: AccountModel.userData)
@@ -714,11 +710,11 @@ class AccountModel: NSObject,NSCoding {
                         var mmm = [IndexCommentTopModel]()
                         for vv in dicc {
                             if let diccc = vv as? NSDictionary {
-    
+                                
                                 let topMedel = IndexCommentTopModel.init(dict: diccc as! [String : Any])
                                 
                                 mmm.append(topMedel)
-
+                                
                                 if mmm.count == dicc.count {
                                     finished(mmm)
                                 }
@@ -735,7 +731,7 @@ class AccountModel: NSObject,NSCoding {
                                 let topMedel = IndexMertopModel.init(dict: diccc as! [String : Any])
                                 
                                 mmm.append(topMedel)
-
+                                
                                 if mmm.count == dicc.count {
                                     finishedTop(mmm)
                                 }
@@ -744,13 +740,13 @@ class AccountModel: NSObject,NSCoding {
                     }
                 }
             }
-//        }
+            //        }
         }) { (error) in
             let alertMsg = (error as NSError).userInfo["NSLocalizedDescription"]
             toast(toast: alertMsg! as! String)
         }
     }
-
+    
     // MARK: - 发送验证码
     class func sendAuthSEL(phoneNum : String) {
         let param : [String : String] = ["uid" : (AccountModel.shared()?.Id.stringValue)!,
@@ -761,8 +757,6 @@ class AccountModel: NSObject,NSCoding {
         CCog(message: param)
         NetWorkTool.shared.postWithPath(path: DOB_AUTH, paras: param, success: { (result) in
             CCog(message: result)
-            
-            
             
             guard let resultData = result as? NSDictionary  else {
                 return
@@ -780,7 +774,7 @@ class AccountModel: NSObject,NSCoding {
             toast(toast: alertMsg! as! String)
         }
     }
-
+    
     // MARK: - 双重验证
     class func doubleCerSEL(auth : String,phoneNum : String) {
         let param : [String : String] = ["uid" : (AccountModel.shared()?.Id.stringValue)!,
@@ -807,7 +801,154 @@ class AccountModel: NSObject,NSCoding {
             toast(toast: alertMsg! as! String)
         }
     }
+    
+    
+    // MARK: - 绑定手机接口
+    // MARK: - 双重验证
+    class func bindPhoneSEL(auth : String,phoneNum : String,finished : @escaping (_ ddd : Bool) -> ()) {
+        let param : [String : String] = ["uid" : (AccountModel.shared()?.Id.stringValue)!,
+                                         "token" : (AccountModel.shared()?.Token)!,
+                                         "phone" : phoneNum,
+                                         "code" : auth,
+                                         "ac" : "bpon"]
+        CCog(message: param)
+        NetWorkTool.shared.postWithPath(path: DOB_AUTH, paras: param, success: { (result) in
+            CCog(message: result)
+            
+            guard let resultData = result as? NSDictionary  else {
+                return
+            }
+            
+            /// 抽取提示信息
+            guard let alertMsg = resultData["Msg"] as? String else {
+                
+                return
+            }
+            toast(toast: alertMsg)
+            
 
+            
+        }) { (error) in
+            let alertMsg = (error as NSError).userInfo["NSLocalizedDescription"]
+            toast(toast: alertMsg! as! String)
+        }
+    }
+    
+
+    
+    // MARK: - 修改登录密码
+    ///
+    /// - Parameters:
+    ///   - oldStr: 旧密码
+    ///   - newPass: 新密码
+    class func changeLoginPass(oldStr : String,newPass : String,finished : @escaping (_ result : Bool) -> ()) -> Void {
+        let param = ["uid" : (AccountModel.shared()?.Id.stringValue)!,
+                     "token" : (AccountModel.shared()?.Token)!,
+                     "oldpwd" : oldStr.md5(),
+                     "newpwd" : newPass.md5()]
+        NetWorkTool.shared.postWithPath(path: CHANGELOGIN_PASS, paras: param, success: { (result) in
+            CCog(message: result)
+            guard let resultData = result as? NSDictionary  else {
+                return
+            }
+            
+            /// 抽取提示信息
+            guard let alertMsg = resultData["Msg"] as? String else {
+                
+                return
+            }
+            
+            if alertMsg == "修改登陆密码成功" {
+                finished(true)
+            }
+            
+            toast(toast: alertMsg)
+        }) { (error) in
+            let alertMsg = (error as NSError).userInfo["NSLocalizedDescription"]
+            toast(toast: alertMsg! as! String)
+        }
+    }
+    
+    // MARK: - 设置支付密码
+    ///
+    /// - Parameters:
+    ///   - payPass: 支付密码
+    ///   - repeatPass: 重复支付密码
+    ///   - finished: 结果
+    class func payPassSEL(payPass : String,finished : @escaping (_ result : Bool) -> ()) {
+        let param = ["uid" : (AccountModel.shared()?.Id.stringValue)!,
+                     "token" : (AccountModel.shared()?.Token)!,
+                     "oldpwd" : "",
+                     "newpwd" : payPass.md5(),
+                     "ac" : "spd"]
+        
+        CCog(message: param)
+        
+        NetWorkTool.shared.postWithPath(path: PAY_PASS, paras: param, success: { (result) in
+            CCog(message: result)
+            guard let resultData = result as? NSDictionary  else {
+                return
+            }
+            
+            /// 抽取提示信息
+            guard let alertMsg = resultData["Msg"] as? String else {
+                
+                return
+            }
+            
+            if alertMsg == "设置支付密码成功" {
+                finished(true)
+            }
+            
+            toast(toast: alertMsg)
+            
+        }) { (error) in
+            let alertMsg = (error as NSError).userInfo["NSLocalizedDescription"]
+            toast(toast: alertMsg! as! String)
+        }
+    }
+    
+    
+    
+    /// 修改支付密码
+    ///
+    /// - Parameters:
+    ///   - newPass: 新密码
+    ///   - oldPass: 旧密码
+    ///   - finshed: 完成结果
+    class func changePayPass(newPass : String,oldPass : String,finshed : @escaping (_ result : Bool) -> ()) {
+        let param = ["uid" : (AccountModel.shared()?.Id.stringValue)!,
+                     "token" : (AccountModel.shared()?.Token)!,
+                     "oldpwd" : oldPass.md5(),
+                     "newpwd" : newPass.md5(),
+                     "ac" : "rpd"]
+        
+        CCog(message: param)
+        
+        
+        NetWorkTool.shared.postWithPath(path: PAY_PASS, paras: param, success: { (result) in
+            CCog(message: result)
+            
+            guard let resultData = result as? NSDictionary  else {
+                return
+            }
+            
+            /// 抽取提示信息
+            guard let alertMsg = resultData["Msg"] as? String else {
+                
+                return
+            }
+            
+            if alertMsg == "修改支付密码成功" {
+                finshed(true)
+            }
+            
+            toast(toast: alertMsg)
+        }) { (error) in
+            let alertMsg = (error as NSError).userInfo["NSLocalizedDescription"]
+            toast(toast: alertMsg! as! String)
+        }
+    }
     
     // MARK: - 归档接档
     func encode(with aCoder: NSCoder) {
@@ -934,6 +1075,7 @@ class AccountModel: NSObject,NSCoding {
         FrinQCode = aDecoder.decodeObject(forKey: "FrinQCode") as? String
         PayQCode = aDecoder.decodeObject(forKey: "PayQCode") as? String
         TraderPass = aDecoder.decodeObject(forKey: "TraderPass") as? String
+        CCog(message: TraderPass)
         TraderStatus = aDecoder.decodeObject(forKey: "TraderStatus") as? TraderStatus
         TrueName = aDecoder.decodeObject(forKey: "TrueName") as? String
         Sex = aDecoder.decodeObject(forKey: "Sex") as? SEXEnum
@@ -946,12 +1088,21 @@ class AccountModel: NSObject,NSCoding {
         ResidenceAdress = aDecoder.decodeObject(forKey: "ResidenceAdress") as? String
         Email = aDecoder.decodeObject(forKey: "Email") as? String
         Phone = aDecoder.decodeObject(forKey: "Phone") as? String
+        
+        CCog(message: Phone)
+        
+        /// 识别双重认证状态、绑定手机状态
+        if Phone?.characters.count > 0 {
+            self.realDoubleBoo = true
+        } else {
+            self.realDoubleBoo = false
+        }
         Integral = (aDecoder.decodeObject(forKey: "Integral") as? NSNumber)!
         
         VerifiStatus = (aDecoder.decodeObject(forKey: "VerifiStatus") as? NSNumber)!
         
         Id = (aDecoder.decodeObject(forKey: "Id") as? NSNumber)!
-
+        
         Referee = aDecoder.decodeObject(forKey: "Referee") as? String
         OreMachine = aDecoder.decodeObject(forKey: "OreMachine") as? OreMachineEnum
         SIMCardNo = aDecoder.decodeObject(forKey: "SIMCardNo") as? String

@@ -333,6 +333,7 @@
 		265D43191EFBE318007F5AB8 /* String+QRCode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "String+QRCode.swift"; sourceTree = "<group>"; };
 		265D431A1EFBE318007F5AB8 /* UIImage+QRCode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIImage+QRCode.swift"; sourceTree = "<group>"; };
 		265D431D1EFBE324007F5AB8 /* Tool.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Tool.swift; sourceTree = "<group>"; };
+		266096441F0A20E200F54106 /* MyPlayground.playground */ = {isa = PBXFileReference; lastKnownFileType = file.playground; path = MyPlayground.playground; sourceTree = "<group>"; };
 		2662B6011F087E1200942692 /* NetLostV.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NetLostV.swift; sourceTree = "<group>"; };
 		266B88EC1F04907A0033BFA7 /* PayPassInputV.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PayPassInputV.swift; sourceTree = "<group>"; };
 		266B89001F04A5650033BFA7 /* PushingMoneyVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PushingMoneyVC.swift; sourceTree = "<group>"; };
@@ -984,6 +985,7 @@
 				264960D01EF0C34B00A559D6 /* Device+extension.swift */,
 				264961181EF0CD3E00A559D6 /* UIView+Extension.swift */,
 				2649611A1EF0CD9200A559D6 /* NSString+extension.swift */,
+				266096441F0A20E200F54106 /* MyPlayground.playground */,
 				2650C18F1F039B66005BE741 /* UILabel + Extension.swift */,
 			);
 			path = Extension;

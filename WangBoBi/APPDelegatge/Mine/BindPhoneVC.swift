@@ -66,6 +66,7 @@ class BindPhoneVC: UIViewController,UITableViewDelegate,UITableViewDataSource,Bi
         switch indexPath.row {
         case 0:
             cell.sendSMS.isHidden = false
+            cell.inputTF.frame = CGRect.init(x: cell.titLabel.RightX + COMMON_MARGIN, y: cell.bounds.midY - 10 * SCREEN_SCALE, width: cell.Width * 0.6, height: 20 * SCREEN_SCALE)
             break
         case 1:
             cell.sendSMS.isHidden = true
@@ -98,12 +99,15 @@ class BindPhoneVC: UIViewController,UITableViewDelegate,UITableViewDataSource,Bi
         default:
             break
         }
+    
     }
     
     // MARK: - 尾部代理方法
     func bindPhonSELDelegate() {
         CCog(message: self.numText as Any)
         CCog(message: self.phoneCode as Any)
+    
+        
     }
 }
 
@@ -120,16 +124,16 @@ class BindPhoneCell: UITableViewCell,UITextFieldDelegate {
     var indexPath : NSIndexPath?
     
     lazy var titLabel: UILabel = {
-        let d : UILabel = UILabel.init(frame: CGRect.init(x: COMMON_MARGIN, y: COMMON_MARGIN, width: 100, height: 20 * SCREEN_SCALE))
-        d.font = UIFont.systemFont(ofSize: 12 * SCREEN_SCALE)
+        let d : UILabel = UILabel.init(frame: CGRect.init(x: COMMON_MARGIN, y: self.Height / 2 - 10 * SCREEN_SCALE + 5, width: 100, height: 20 * SCREEN_SCALE))
+        d.font = UIFont.systemFont(ofSize: 13 * SCREEN_SCALE)
         d.textColor = UIColor.lightGray
-        
         return d
     }()
     
+    
     lazy var inputTF: TfPlaceHolder = {
         let d : TfPlaceHolder = TfPlaceHolder.init(frame: CGRect.init(x: self.titLabel.RightX + COMMON_MARGIN, y: self.bounds.midY - 10 * SCREEN_SCALE, width: self.Width * 0.7, height: 20 * SCREEN_SCALE))
-        d.font = UIFont.systemFont(ofSize: 12 * SCREEN_SCALE)
+        d.font = UIFont.systemFont(ofSize: 13 * SCREEN_SCALE)
         d.clearsOnBeginEditing = true
         d.delegate = self
         return d
@@ -148,9 +152,15 @@ class BindPhoneCell: UITableViewCell,UITextFieldDelegate {
     
     //验证码事件
     func autoSEL(sender : CountDownBtn) -> Void {
-        
-
-        sender.initwith(color: .gray, title: "点击重发", superView: self)
+        if !(inputTF.text?.isEmpty)! {
+            if (inputTF.text?.checkMobile(mobileNumbel: (inputTF.text as NSString?)!))! {
+                sender.initwith(color: .gray, title: "点击重发", superView: self)
+            } else {
+                toast(toast: "手机格式不对")
+            }
+        } else {
+            toast(toast: "手机号码不为空")
+        }
     }
     
     
@@ -172,6 +182,8 @@ class BindPhoneCell: UITableViewCell,UITextFieldDelegate {
         
         sendSMS.isHidden = true
         self.selectionStyle = .none
+        
+        
     }
     
     

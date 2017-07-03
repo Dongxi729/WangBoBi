@@ -66,6 +66,15 @@ extension String {
         return isMatch;
     }
     
+    /// 检密码
+    func checkPass(passStr : String) -> Bool {
+        let regex = "^[A-Za-z0-9\\^\\$\\.\\+\\*_@!#%&~=-]{6,32}$"
+        let predicate = NSPredicate(format: "SELF MATCHES %@", regex)
+        let isMatch:Bool = predicate.evaluate(with: passStr)
+        return isMatch
+    }
+    
+    
     /// 校验手机号
     func checkMobile(mobileNumbel:NSString) ->Bool
     {
@@ -108,6 +117,7 @@ extension String {
         let isMatch:Bool = pred.evaluate(with: password)
         return isMatch;
     }
+
 }
 
 

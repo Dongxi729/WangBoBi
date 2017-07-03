@@ -99,6 +99,8 @@ class PaydescV : CommonV,UITextViewDelegate {
     }
     
     @objc fileprivate func sendAuthSEL(sender : CountDownBtn) {
+
+        
         sender.initwith(color: UIColor.colorWithHexString("E6E6E6"), title: "点击获取验证码", superView: self)
     }
     

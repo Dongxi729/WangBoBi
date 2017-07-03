@@ -37,3 +37,12 @@ let INDEX_URL = "http://192.168.1.10:8010/ifs/index.ashx"
 
 /// 双重验证
 let DOB_AUTH = "http://192.168.1.10:8010/ifs/dobauth.ashx"
+
+/// 修改登录密码
+let CHANGELOGIN_PASS = "http://192.168.1.10:8010/ifs/resetpwd.ashx"
+
+/// 绑定手机接口
+let BIND_PHONE = "http://192.168.1.10:8010/ifs/toiv.ashx"
+
+/// 支付密码
+let PAY_PASS = "http://192.168.1.10:8010/ifs/resetpaypwd.ashx"

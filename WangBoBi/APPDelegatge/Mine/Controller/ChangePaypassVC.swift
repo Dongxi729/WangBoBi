@@ -27,8 +27,8 @@ class ChangePaypassVC: UIViewController,BindPhoneCellDelegate,BindPhoneFooterVDe
         return d
     }()
     
-    var dataSource : [String:[String]] = ["title" : ["支付密码","重复输入"],
-                                          "content" : ["请输入支付密码","请重复输入支付密码"]]
+    var dataSource : [String:[String]] = ["title" : ["支付密码","新密码","重复输入"],
+                                          "content" : ["请输入旧支付密码","请输入支付密码","请重复输入支付密码"]]
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -41,11 +41,6 @@ class ChangePaypassVC: UIViewController,BindPhoneCellDelegate,BindPhoneFooterVDe
         view.addSubview(tableView)
         
         view.addSubview(footerView)
-        
-//        let deveceType = UIDevice.current.deviceType
-//        if deveceType == .iPhone4S {
-//            footerView.frame = CGRect.init(x: 0, y: SCREEN_HEIGHT - 64 - 64, width: SCREEN_WIDTH, height: 64)
-//        }
         
         footerView.setFooterTitle(str: "保存密码")
     }
@@ -84,25 +79,27 @@ class ChangePaypassVC: UIViewController,BindPhoneCellDelegate,BindPhoneFooterVDe
     }
     
     /// 支付密码
-    var payPass : String?
+    var oldPass : String?
     
-    /// 确认密码
-    var repeatPayPass : String?
-
+    /// 新密码
+    var newPayPass : String?
+    
+    /// 确认新密码
+    var confirmPass : String?
     
     // MARK: - cell代理方法
     func text(indexPath: NSIndexPath, text: String) {
-        CCog(message: indexPath)
-        CCog(message: text)
         
         switch indexPath.row {
         case 0:
-            self.payPass = text
+            self.oldPass = text
             break
         case 1:
-            self.repeatPayPass = text
+            self.newPayPass = text
             break
-        
+        case 2:
+            self.confirmPass = text
+            break
         default:
             break
         }
@@ -110,7 +107,42 @@ class ChangePaypassVC: UIViewController,BindPhoneCellDelegate,BindPhoneFooterVDe
     
     // MARK: - 尾部代理方法
     func bindPhonSELDelegate() {
-        CCog(message: self.payPass)
-        CCog(message: self.repeatPayPass)
+        
+        if self.oldPass != nil {
+            
+            if (self.oldPass?.checkPass(passStr: self.oldPass!))! {
+                if self.newPayPass != nil {
+                    if (self.newPayPass?.checkPass(passStr: self.newPayPass!))! {
+                        if self.confirmPass != nil {
+                            if (self.confirmPass?.checkPass(passStr: self.confirmPass!))! {
+                                if self.newPayPass == self.confirmPass {
+                                    AccountModel.changePayPass(newPass: self.oldPass!, oldPass: self.newPayPass!, finshed: { (result) in
+                                        if result {
+                                            self.navigationController?.popViewController(animated: true)
+                                        }
+                                    })
+                                } else {
+                                    toast(toast: "两次密码输入不一致")
+                                }
+                            } else {
+                                toast(toast: "确认密码不合法")
+                            }
+                        } else {
+                            toast(toast: "确认密码不为空")
+                        }
+                    
+                    } else {
+                        toast(toast: "新密码不合法")
+                    }
+                
+                } else {
+                    toast(toast: "新密码不为空")
+                }
+            } else {
+                toast(toast: "输入密码不合法")
+            }
+        } else {
+            toast(toast: "密码不为空")
+        }
     }
 }

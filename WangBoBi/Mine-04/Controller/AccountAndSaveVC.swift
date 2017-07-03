@@ -101,7 +101,6 @@ extension AccountAndSaveVC : UITableViewDelegate,UITableViewDataSource,AccountAn
             switch indexPath.row {
             case 0:
 
-                CCog(message: AccountModel.shared()?.VerifiStatus.intValue)
                 // 未实名
                 if AccountModel.shared()?.VerifiStatus.intValue == 0 {
                     
@@ -128,7 +127,13 @@ extension AccountAndSaveVC : UITableViewDelegate,UITableViewDataSource,AccountAn
                 break
             case 1:
                 /// 设置双重认证
-                self.navigationController?.pushViewController(SetDoubelCertifiVC(), animated: true)
+                if AccountModel.shared()?.Phone?.characters.count > 0 {
+                    self.navigationController?.pushViewController(AleradyCertify(), animated: true)
+                    /// 已双重认证
+                } else {
+                    self.navigationController?.pushViewController(SetDoubelCertifiVC(), animated: true)
+                    /// 未双重认证
+                }
                 
                 break
             case 2:
@@ -137,7 +142,16 @@ extension AccountAndSaveVC : UITableViewDelegate,UITableViewDataSource,AccountAn
                 break
             case 3:
                 /// 修改支付密码
-                self.navigationController?.pushViewController(ChangePaypassVC(), animated: true)
+                
+                if AccountModel.shared()?.TraderPass?.characters.count > 0 {
+                    /// 交易密码有
+                    self.navigationController?.pushViewController(ChangePaypassVC(), animated: true)
+                } else {
+                    /// 交易密码无
+                    self.navigationController?.pushViewController(SetPaymentPassVC(), animated: true)
+                }
+                
+                
                 break
             default:
                 break

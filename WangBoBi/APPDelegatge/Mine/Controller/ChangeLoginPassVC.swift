@@ -15,7 +15,7 @@ class ChangeLoginPassVC: UIViewController,BindPhoneCellDelegate,BindPhoneFooterV
         d.delegate = self;
         d.dataSource = self;
         d.register(BindPhoneCell.self, forCellReuseIdentifier: "cellID")
-        
+        d.separatorStyle = .none
         return d
     }()
     
@@ -63,6 +63,7 @@ class ChangeLoginPassVC: UIViewController,BindPhoneCellDelegate,BindPhoneFooterV
         cell.indexPath = indexPath as NSIndexPath
         cell.delegate = self
         
+        /// 隐藏发生验证码按钮
         switch indexPath.row {
         case 0:
             cell.sendSMS.isHidden = true
@@ -72,6 +73,11 @@ class ChangeLoginPassVC: UIViewController,BindPhoneCellDelegate,BindPhoneFooterV
             break
         default:
             break
+        }
+        
+        if indexPath.row != 0 {
+            cell.inputTF.keyboardType = .numberPad
+            
         }
         
         return cell
@@ -88,9 +94,7 @@ class ChangeLoginPassVC: UIViewController,BindPhoneCellDelegate,BindPhoneFooterV
     
     // MARK: - cell代理方法
     func text(indexPath: NSIndexPath, text: String) {
-        CCog(message: indexPath)
-        CCog(message: text)
-        
+
         switch indexPath.row {
         case 0:
             self.loginPass = text
@@ -108,8 +112,31 @@ class ChangeLoginPassVC: UIViewController,BindPhoneCellDelegate,BindPhoneFooterV
     
     // MARK: - 尾部代理方法
     func bindPhonSELDelegate() {
-        CCog(message: self.loginPass)
-        CCog(message: self.newLoginPass)
-        CCog(message: self.repeatNewPass)
+
+        /// 确定字段不为空
+        if self.loginPass != nil {
+            if self.newLoginPass != nil {
+     
+                if self.repeatNewPass != nil {
+                    
+                    if self.newLoginPass == self.repeatNewPass {
+                        AccountModel.changeLoginPass(oldStr: self.loginPass!, newPass: newLoginPass!, finished: { (result) in
+                            if result {
+                                self.navigationController?.popViewController(animated: true)
+                            }
+                        })
+                        
+                    } else {
+                        toast(toast: "两次密码输入不一致")
+                    }
+                } else {
+                    toast(toast: "确认密码不为空")
+                }
+            } else {
+                toast(toast: "新登录密码不为空")
+            }
+        } else {
+            toast(toast: "登录密码不为空")
+        }
     }
 }

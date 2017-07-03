@@ -102,17 +102,17 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     //// 测试接口
     func testComplement() {
-        let param : [String : String] = ["uid" : (AccountModel.shared()?.Id.stringValue)!,
-                                         "token" : (AccountModel.shared()?.Token)!,
-                                         "phone" : "15960005714",
-                                         "code" : "",
-                                         "ac" : "smsg"]
-        CCog(message: param)
-        NetWorkTool.shared.postWithPath(path: DOB_AUTH, paras: param, success: { (result) in
-            CCog(message: result)
-        }) { (error) in
-            CCog(message: error.localizedDescription)
-        }
+//        let param : [String : String] = ["uid" : (AccountModel.shared()?.Id.stringValue)!,
+//                                         "token" : (AccountModel.shared()?.Token)!,
+//                                         "phone" : "15960005714",
+//                                         "code" : "",
+//                                         "ac" : "smsg"]
+//        CCog(message: param)
+//        NetWorkTool.shared.postWithPath(path: DOB_AUTH, paras: param, success: { (result) in
+//            CCog(message: result)
+//        }) { (error) in
+//            CCog(message: error.localizedDescription)
+//        }
         
 //        NetWorkTool.shared.postWithPath(path: LOGIN_URL, paras: ["email" : "18259129536@163.com","pwd" : "123".md5()], success: { (result) in
 //            CCog(message: result)
@@ -141,6 +141,48 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 //        }) { (error) in
 //            CCog(message: error.localizedDescription)
 //        }
+        
+//        let param = ["uid" : (AccountModel.shared()?.Id.stringValue)!,
+//                     "token" : (AccountModel.shared()?.Token)!,
+//                     "oldpwd" : "123456".md5(),
+//                     "newpwd" : "123".md5()]
+//        NetWorkTool.shared.postWithPath(path: CHANGELOGIN_PASS, paras: param, success: { (result) in
+//            CCog(message: result)
+//        }) { (error) in
+//            CCog(message: error.localizedDescription)
+//        }
+        
+//        let param : [String : String] = ["uid" : (AccountModel.shared()?.Id.stringValue)!,
+//                                         "token" : (AccountModel.shared()?.Token)!,
+//                                         "phone" : "18905036476",
+//                                         "code" : "446652",
+//                                         "ac" : "bpon"]
+//        CCog(message: param)
+//        NetWorkTool.shared.postWithPath(path: BIND_PHONE, paras: param, success: { (result) in
+//            CCog(message: result)
+//
+//        }) { (error) in
+//            let alertMsg = (error as NSError).userInfo["NSLocalizedDescription"]
+//            toast(toast: alertMsg! as! String)
+//        }
+        
+        
+        let param = ["uid" : (AccountModel.shared()?.Id.stringValue)!,
+                     "token" : (AccountModel.shared()?.Token)!,
+                     "oldpwd" : "123".md5(),
+                     "newpwd" : "123456".md5(),
+            "ac" : "rpd"]
+        
+        CCog(message: param)
+        
+        
+        NetWorkTool.shared.postWithPath(path: PAY_PASS, paras: param, success: { (result) in
+            CCog(message: result)
+
+        }) { (error) in
+            let alertMsg = (error as NSError).userInfo["NSLocalizedDescription"]
+            toast(toast: alertMsg! as! String)
+        }
     }
     
     
