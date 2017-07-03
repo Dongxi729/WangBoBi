@@ -29,7 +29,7 @@ class BaseTabbarVC: UITabBarController {
         let myHeight = self.tabBar.frame.height
         
         ///调整tabbar文本的高度
-        UITabBarItem.appearance().titlePositionAdjustment = UIOffsetMake(0.0, -3.0)
+        UITabBarItem.appearance().titlePositionAdjustment = UIOffsetMake(0.0, -1.0)
         
         
         //重新设置tabbar 的高度
