@@ -502,7 +502,7 @@ class AccountModel: NSObject,NSCoding {
                                      "pwd" : (AccountModel.shared()?.UserPass)!]
         NetWorkTool.shared.postWithPath(path: LOGIN_URL, paras: d, success: { (result) in
             
-            CCog(message: result)
+//            CCog(message: result)
             
             guard let resultData = result as? NSDictionary else {
                 
@@ -680,7 +680,7 @@ class AccountModel: NSObject,NSCoding {
         let param : [String :String] = ["uid" : (AccountModel.shared()?.Id.stringValue)!,
                                         "token" : (AccountModel.shared()?.Token)!]
         
-        CCog(message: param)
+//        CCog(message: param)
         NetWorkTool.shared.postWithPath(path: INDEX_URL, paras: param, success: { (result) in
             CCog(message: result)
             
@@ -747,7 +747,7 @@ class AccountModel: NSObject,NSCoding {
         }
     }
     
-    // MARK: - 发送验证码
+    // MARK: - 发送验证码 --- 双重验证码接口
     class func sendAuthSEL(phoneNum : String) {
         let param : [String : String] = ["uid" : (AccountModel.shared()?.Id.stringValue)!,
                                          "token" : (AccountModel.shared()?.Token)!,
@@ -756,6 +756,33 @@ class AccountModel: NSObject,NSCoding {
                                          "ac" : "smsg"]
         CCog(message: param)
         NetWorkTool.shared.postWithPath(path: DOB_AUTH, paras: param, success: { (result) in
+            CCog(message: result)
+            
+            guard let resultData = result as? NSDictionary  else {
+                return
+            }
+            
+            /// 抽取提示信息
+            guard let alertMsg = resultData["Msg"] as? String else {
+                
+                return
+            }
+            toast(toast: alertMsg)
+            
+        }) { (error) in
+            let alertMsg = (error as NSError).userInfo["NSLocalizedDescription"]
+            toast(toast: alertMsg! as! String)
+        }
+    }
+    
+    class func bindPhoneAuthSEL(phoneNum : String) {
+        let param : [String : String] = ["uid" : (AccountModel.shared()?.Id.stringValue)!,
+                                         "token" : (AccountModel.shared()?.Token)!,
+                                         "phone" : phoneNum,
+                                         "code" : "",
+                                         "ac" : "smsg"]
+        CCog(message: param)
+        NetWorkTool.shared.postWithPath(path: BIND_PHONE, paras: param, success: { (result) in
             CCog(message: result)
             
             guard let resultData = result as? NSDictionary  else {
@@ -812,7 +839,7 @@ class AccountModel: NSObject,NSCoding {
                                          "code" : auth,
                                          "ac" : "bpon"]
         CCog(message: param)
-        NetWorkTool.shared.postWithPath(path: DOB_AUTH, paras: param, success: { (result) in
+        NetWorkTool.shared.postWithPath(path: BIND_PHONE, paras: param, success: { (result) in
             CCog(message: result)
             
             guard let resultData = result as? NSDictionary  else {
@@ -821,11 +848,14 @@ class AccountModel: NSObject,NSCoding {
             
             /// 抽取提示信息
             guard let alertMsg = resultData["Msg"] as? String else {
-                
                 return
             }
+
             toast(toast: alertMsg)
             
+            if alertMsg == "恭喜您，绑定手机成功" {
+                finished(true)
+            }
 
             
         }) { (error) in

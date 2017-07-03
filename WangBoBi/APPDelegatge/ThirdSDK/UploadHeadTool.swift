@@ -200,13 +200,10 @@ extension UploadHeadTool {
         if let image = info[UIImagePickerControllerEditedImage] as? UIImage {
             
             //改变图片大小
-            let small = image.scaleToSize(img: image, size: CGSize.init(width: 100, height: 100))
+//            let small = image.scaleToSize(img: image, size: CGSize.init(width: 100, height: 100))
             
-            
-            let compresImage = UIImageJPEGRepresentation(small, 0.1) as Data!
-            
-            CCog(message: compresImage)
-            
+            let compresImage = UIImageJPEGRepresentation(image, 0.6) as Data!
+
             NotificationCenter.default.post(name: NSNotification.Name(rawValue: "imgData"), object: nil, userInfo: ["ima":compresImage as Any])
         }
         

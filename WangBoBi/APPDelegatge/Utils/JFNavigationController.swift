@@ -33,9 +33,9 @@ class JFNavigationController: UINavigationController, UIGestureRecognizerDelegat
         super.viewWillAppear(animated)
         /// 判断当前类名是否为协议的那个页面.
         if NSStringFromClass(self.classForCoder).contains("ViewController") {
-            CCog(message: "true")
+//            CCog(message: "true")
         } else {
-            CCog(message: "FALSE")
+//            CCog(message: "FALSE")
         }
         
         

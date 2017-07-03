@@ -118,7 +118,7 @@ extension NetWorkTool {
     /// - Parameters:
     ///   - imgData: 图片二进制数据
     ///   - path: 上传接口
-    func postWithImageWithData(imgData : Data ,path: String,success: @escaping ((_ result: JSON) -> ()),failure: @escaping ((_ error: NSError) -> ())) {
+    func postWithImageWithData(imgData : Data ,path: String,success: @escaping ((_ result: Any) -> ()),failure: @escaping ((_ error: NSError) -> ())) {
         
         
         //(1）设置请求路径
@@ -143,7 +143,7 @@ extension NetWorkTool {
                     
                     if let result = try? JSONSerialization.jsonObject(with: data, options: .allowFragments) {
                         
-                        success(JSON(result))
+                        success(result)
                     }
                     
                 } else {

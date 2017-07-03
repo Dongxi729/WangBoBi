@@ -167,21 +167,28 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 //        }
         
         
-        let param = ["uid" : (AccountModel.shared()?.Id.stringValue)!,
-                     "token" : (AccountModel.shared()?.Token)!,
-                     "oldpwd" : "123".md5(),
-                     "newpwd" : "123456".md5(),
-            "ac" : "rpd"]
+//        let param = ["uid" : (AccountModel.shared()?.Id.stringValue)!,
+//                     "token" : (AccountModel.shared()?.Token)!,
+//                     "oldpwd" : "123".md5(),
+//                     "newpwd" : "123456".md5(),
+//            "ac" : "rpd"]
+//        
+//        CCog(message: param)
+//        
+//        
+//        NetWorkTool.shared.postWithPath(path: PAY_PASS, paras: param, success: { (result) in
+//            CCog(message: result)
+//
+//        }) { (error) in
+//            let alertMsg = (error as NSError).userInfo["NSLocalizedDescription"]
+//            toast(toast: alertMsg! as! String)
+//        }
         
-        CCog(message: param)
-        
-        
-        NetWorkTool.shared.postWithPath(path: PAY_PASS, paras: param, success: { (result) in
+        let compresImage = UIImageJPEGRepresentation(#imageLiteral(resourceName: "Mine_add"), 1.0)
+        NetWorkTool.shared.postWithImageWithData(imgData: compresImage!, path: UPLOAD_IMGDATA, success: { (result) in
             CCog(message: result)
-
         }) { (error) in
-            let alertMsg = (error as NSError).userInfo["NSLocalizedDescription"]
-            toast(toast: alertMsg! as! String)
+            CCog(message: error.localizedDescription)
         }
     }
     

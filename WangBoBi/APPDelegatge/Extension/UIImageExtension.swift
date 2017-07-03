@@ -83,6 +83,7 @@ extension UIImage {
     func scaleToSize(img : UIImage,size :CGSize) -> UIImage {
         UIGraphicsBeginImageContext(size)
         img.draw(in: CGRect(x: 0, y: 0, width: size.width, height: size.height))
+        
         let endImage = UIGraphicsGetImageFromCurrentImageContext()
         UIGraphicsEndImageContext()
         

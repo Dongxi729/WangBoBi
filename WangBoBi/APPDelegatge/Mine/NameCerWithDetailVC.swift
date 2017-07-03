@@ -39,13 +39,9 @@ class NameCerWithDetailVC: UIViewController,UITableViewDataSource,UITableViewDel
         
         view.addSubview(footerV)
         footerV.setFooterTitle(str: "提交信息")
-        
-        NotificationCenter.default.addObserver(self, selector: #selector(view(dd:)), name: NSNotification.Name(rawValue: "imgData"), object: nil)
     }
     
-    func view(dd : Notification) -> Void {
-        
-    }
+   
     
     // MARK: - 表格代理属性和方法
     func numberOfSections(in tableView: UITableView) -> Int {
@@ -101,7 +97,7 @@ class NameCerWithDetailVC: UIViewController,UITableViewDataSource,UITableViewDel
             switch indexPath.row {
             case 0:
                 cel.titLabel.text = "上传身份证"
-                
+                cel.inputTF.isEnabled = false
             default:
                 break
             }
@@ -200,6 +196,8 @@ protocol UPloadIDImgDelegate {
 }
 class UPloadIDImgCell: UITableViewCell {
     
+    
+    
     var delegate : UPloadIDImgDelegate?
     
     fileprivate lazy var leftImg: NameCerBtn = {
@@ -221,34 +219,86 @@ class UPloadIDImgCell: UITableViewCell {
     }()
     
     
+    /// 正在选择图片
+    fileprivate var leftSelectedImg = false
+    
+    fileprivate var rightSelectedImg = false
+    
     /// 正面选择事件
     func frontChoose() -> Void {
         CCog(message: "frontChoose")
+        
         UploadHeadTool.shared.choosePic { (uploa, ddd) in
             CCog(message: uploa)
             DispatchQueue.main.async {
             }
         }
+        leftSelectedImg = true
     }
     
     /// 正面选择事件
     func backChoose() -> Void {
-        CCog(message: "backChoose")
         UploadHeadTool.shared.choosePic { (uploa, ddd) in
             //            CCog(message: uploa)
             self.leftImg.setImage(UIImage.init(data: uploa), for: .normal)
         }
+        rightSelectedImg = true
     }
     
+    
+    fileprivate lazy var XXXXX: UIImageView = {
+        let d : UIImageView = UIImageView.init(frame: self.bounds)
+        d.layer.borderWidth = 1
+        return d
+    }()
     
     
     override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
         super.init(style: .default, reuseIdentifier: reuseIdentifier)
         
+        contentView.addSubview(XXXXX)
         contentView.addSubview(leftImg)
         contentView.addSubview(rightImg)
+
+        /// 接收图片选择器传来的数据信息
+        NotificationCenter.default.addObserver(self, selector: #selector(view(dd:)), name: NSNotification.Name(rawValue: "imgData"), object: nil)
+
+    }
+    
+    func view(dd : Notification) -> Void {
+
+        if let imgDataDic = dd.userInfo {
+            if let imgData = imgDataDic["ima"] as? Data {
+                
+                CCog(message: imgData)
+                
+                DispatchQueue.main.async {
+                    if self.leftSelectedImg {
+                        
+                        NetWorkTool.shared.postWithImageWithData(imgData: imgData, path: UPLOAD_IMGDATA, success: { (result) in
+                            CCog(message: result)
+                        }) { (error) in
+                            CCog(message: error.localizedDescription)
+                        }
+                        
+                        
+                        self.leftImg.setImage(UIImage.init(data: imgData), for: .normal)
+                        self.leftSelectedImg = false
+                    }
+                    
+                    if self.rightSelectedImg {
+                        self.rightImg.setImage(UIImage.init(data: imgData), for: .normal)
+                        self.rightSelectedImg = false
+                    }
+                }
+            }
+        }
         
-        //        self.selectionStyle = .none
+    }
+    
+    deinit {
+        NotificationCenter.default.removeObserver(self, name: NSNotification.Name(rawValue: "imgData"), object: nil)
+        CCog(message: "这句话")
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -260,6 +310,7 @@ class UPloadIDImgCell: UITableViewCell {
 class NameCerBtn: UIButton {
     override init(frame: CGRect) {
         super.init(frame: frame)
+        self.imageView?.contentMode = UIViewContentMode.scaleAspectFit
     }
     
     override func imageRect(forContentRect contentRect: CGRect) -> CGRect {

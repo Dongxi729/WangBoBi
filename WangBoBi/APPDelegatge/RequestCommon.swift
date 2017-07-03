@@ -46,3 +46,7 @@ let BIND_PHONE = "http://192.168.1.10:8010/ifs/toiv.ashx"
 
 /// 支付密码
 let PAY_PASS = "http://192.168.1.10:8010/ifs/resetpaypwd.ashx"
+
+
+/// 上传图片
+let UPLOAD_IMGDATA = "http://192.168.1.10:8010/ifs/headimg.ashx"

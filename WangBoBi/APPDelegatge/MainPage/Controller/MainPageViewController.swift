@@ -139,7 +139,7 @@ extension MainPageViewController : UICollectionViewDataSource,UICollectionViewDe
     }
     
     func numberOfSections(in collectionView: UICollectionView) -> Int {
-        return loginModel
+        return loginModel - 1
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {

@@ -63,13 +63,31 @@ class BindPhoneVC: UIViewController,UITableViewDelegate,UITableViewDataSource,Bi
         cell.indexPath = indexPath as NSIndexPath
         cell.delegate = self
         
+        let deveceTyp = UIDevice.current.deviceType
+        
         switch indexPath.row {
         case 0:
             cell.sendSMS.isHidden = false
-            cell.inputTF.frame = CGRect.init(x: cell.titLabel.RightX + COMMON_MARGIN, y: cell.bounds.midY - 10 * SCREEN_SCALE, width: cell.Width * 0.6, height: 20 * SCREEN_SCALE)
+            
+            
+            if deveceTyp == .iPhone4S {
+                cell.inputTF.frame = CGRect.init(x: cell.Width * 0.3, y: cell.bounds.midY - 10 * SCREEN_SCALE, width: cell.Width * 0.4, height: 20 * SCREEN_SCALE)
+            } else {
+                cell.inputTF.frame = CGRect.init(x: cell.Width * 0.35, y: cell.bounds.midY - 10 * SCREEN_SCALE, width: cell.Width * 0.5, height: 20 * SCREEN_SCALE)
+            }
+            
             break
         case 1:
             cell.sendSMS.isHidden = true
+            
+            if deveceTyp == .iPhone4S {
+            
+                cell.inputTF.frame = CGRect.init(x: cell.Width * 0.3, y: cell.bounds.midY - 10 * SCREEN_SCALE, width: cell.Width * 0.5, height: 20 * SCREEN_SCALE)
+            } else {
+                cell.inputTF.frame = CGRect.init(x: cell.Width * 0.35, y: cell.bounds.midY - 10 * SCREEN_SCALE, width: cell.Width * 0.8, height: 20 * SCREEN_SCALE)
+            }
+            
+            
             break
         default:
             break
@@ -86,9 +104,6 @@ class BindPhoneVC: UIViewController,UITableViewDelegate,UITableViewDataSource,Bi
     
     // MARK: - cell代理方法
     func text(indexPath: NSIndexPath, text: String) {
-        CCog(message: indexPath)
-        CCog(message: text)
-        
         switch indexPath.row {
         case 0:
             self.numText = text
@@ -104,10 +119,29 @@ class BindPhoneVC: UIViewController,UITableViewDelegate,UITableViewDataSource,Bi
     
     // MARK: - 尾部代理方法
     func bindPhonSELDelegate() {
-        CCog(message: self.numText as Any)
-        CCog(message: self.phoneCode as Any)
-    
-        
+
+        if numText?.characters.count > 0 {
+            
+            if phoneCode?.characters.count > 0 {
+                
+                if (phoneCode?.checkAuthStr(password: phoneCode! as NSString))! {
+                    
+                    AccountModel.bindPhoneSEL(auth: phoneCode!, phoneNum: numText!, finished: { (result) in
+                        
+                        CCog(message: result)
+                        if result {
+                            self.navigationController?.popViewController(animated: true)
+                        }
+                    })
+                } else {
+                    toast(toast: "验证码格式不对")
+                }
+            } else {
+                toast(toast: "验证码不为空")
+            }
+        } else {
+            toast(toast: "手机号不为空")
+        }
     }
 }
 
@@ -123,10 +157,11 @@ class BindPhoneCell: UITableViewCell,UITextFieldDelegate {
     
     var indexPath : NSIndexPath?
     
-    lazy var titLabel: UILabel = {
-        let d : UILabel = UILabel.init(frame: CGRect.init(x: COMMON_MARGIN, y: self.Height / 2 - 10 * SCREEN_SCALE + 5, width: 100, height: 20 * SCREEN_SCALE))
+    lazy var titLabel: TfPlaceHolder = {
+        let d : TfPlaceHolder = TfPlaceHolder.init(frame: CGRect.init(x: COMMON_MARGIN, y: self.bounds.midY - 7 * SCREEN_SCALE , width: 100, height: 0))
         d.font = UIFont.systemFont(ofSize: 13 * SCREEN_SCALE)
         d.textColor = UIColor.lightGray
+        d.isEnabled = false
         return d
     }()
     
@@ -134,7 +169,7 @@ class BindPhoneCell: UITableViewCell,UITextFieldDelegate {
     lazy var inputTF: TfPlaceHolder = {
         let d : TfPlaceHolder = TfPlaceHolder.init(frame: CGRect.init(x: self.titLabel.RightX + COMMON_MARGIN, y: self.bounds.midY - 10 * SCREEN_SCALE, width: self.Width * 0.7, height: 20 * SCREEN_SCALE))
         d.font = UIFont.systemFont(ofSize: 13 * SCREEN_SCALE)
-        d.clearsOnBeginEditing = true
+//        d.clearsOnBeginEditing = true
         d.delegate = self
         return d
     }()
@@ -142,11 +177,12 @@ class BindPhoneCell: UITableViewCell,UITextFieldDelegate {
     lazy var sendSMS: CountDownBtn = {
         let d : CountDownBtn = CountDownBtn.init(frame: CGRect.init(x: SCREEN_WIDTH - 80 * SCREEN_SCALE - COMMON_MARGIN, y: self.inputTF.TopY, width: 80 * SCREEN_SCALE, height: self.inputTF.Height))
         d.setTitle("点击获取验证码", for: .normal)
-        d.backgroundColor = UIColor.gray
+        d.backgroundColor = UIColor.colorWithHexString("E6E6E6")
         d.layer.borderColor = UIColor.lightGray.cgColor
         d.titleLabel?.font = UIFont.systemFont(ofSize: 10 * SCREEN_SCALE)
         d.addTarget(self, action: #selector(autoSEL(sender:)), for: .touchUpInside)
-        
+        d.setTitleColor(UIColor.black, for: .normal)
+        d.layer.borderWidth = 1
         return d
     }()
     
@@ -154,6 +190,10 @@ class BindPhoneCell: UITableViewCell,UITextFieldDelegate {
     func autoSEL(sender : CountDownBtn) -> Void {
         if !(inputTF.text?.isEmpty)! {
             if (inputTF.text?.checkMobile(mobileNumbel: (inputTF.text as NSString?)!))! {
+                
+                /// 发生验证码
+                AccountModel.bindPhoneAuthSEL(phoneNum: inputTF.text!)
+                
                 sender.initwith(color: .gray, title: "点击重发", superView: self)
             } else {
                 toast(toast: "手机格式不对")
