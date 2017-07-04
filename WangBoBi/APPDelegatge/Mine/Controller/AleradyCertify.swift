@@ -19,7 +19,7 @@ class AleradyCertify: UIViewController {
     
     /// 分割线
     fileprivate lazy var line: UIView = {
-        let d : UIView = UIView.init(frame: CGRect.init(x: 0, y: 64, width: SCREEN_WIDTH, height: 0.5))
+        let d : UIView = UIView.init(frame: CGRect.init(x: 0, y: 0, width: SCREEN_WIDTH, height: 0.5))
         d.backgroundColor = UIColor.colorWithHexString("C8C7CB")
         return d
     }()

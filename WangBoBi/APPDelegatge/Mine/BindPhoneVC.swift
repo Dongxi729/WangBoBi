@@ -150,13 +150,13 @@ class BindPhoneVC: UIViewController,UITableViewDelegate,UITableViewDataSource,Bi
 
 
 // MARK: - Cell
-protocol BindPhoneCellDelegate {
+protocol BindPhoneCellDelegate : class {
     func text(indexPath : NSIndexPath,text : String) -> Void
 }
 
 class BindPhoneCell: UITableViewCell,UITextFieldDelegate {
     
-    var delegate : BindPhoneCellDelegate?
+    weak var delegate : BindPhoneCellDelegate?
     
     var indexPath : NSIndexPath?
     
