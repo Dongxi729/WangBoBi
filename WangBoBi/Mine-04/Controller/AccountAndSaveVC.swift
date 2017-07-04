@@ -24,7 +24,7 @@ class AccountAndSaveVC: UIViewController {
         d.dataSource = self
         d.register(TabViewCell.self, forCellReuseIdentifier: "cellId")
         d.tableFooterView = self.footerV
-        d.separatorStyle = .none
+//        d.separatorStyle = .none
         return d
     }()
     
@@ -64,6 +64,10 @@ extension AccountAndSaveVC : UITableViewDelegate,UITableViewDataSource,AccountAn
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "cellId") as! TabViewCell
+        
+        cell.preservesSuperviewLayoutMargins = false
+        cell.separatorInset = UIEdgeInsets.zero
+        cell.layoutMargins = UIEdgeInsets.zero
         
         cell.descLabel.text = sectionTitle[indexPath.section][indexPath.row]
         cell.frontIconim.image = UIImage.init(named: imgName[indexPath.section][indexPath.row])
@@ -200,6 +204,7 @@ class AccountAndSaveFooterV : UIView {
     
     override init(frame: CGRect) {
         super.init(frame: frame)
+        self.layer.cornerRadius = 5
         addSubview(exitBtn)
     }
     

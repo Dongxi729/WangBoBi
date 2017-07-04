@@ -28,7 +28,6 @@ class PayPassInputV : CommonV {
     /// 取消
     lazy var cancelBtn: UIButton = {
         let d: UIButton = UIButton.init(frame: CGRect.init(x: self.Width * 0.0770646247310915, y: self.Height * 0.766692546583851, width: self.Width * 0.4, height: self.Height * 0.2))
-        d.layer.borderWidth = 1
         d.addTarget(self, action: #selector(cancelSEL), for: .touchUpInside)
         return d
     }()
@@ -37,7 +36,6 @@ class PayPassInputV : CommonV {
     /// 确定事件
     lazy var confirm: UIButton = {
         let D : UIButton = UIButton.init(frame: CGRect.init(x: self.Width * 0.593512767425811, y: self.cancelBtn.TopY, width: self.cancelBtn.Width, height: self.cancelBtn.Height))
-        D.layer.borderWidth = 1
         D.addTarget(self, action: #selector(confirmSEL), for: .touchUpInside)
         return D
     }()

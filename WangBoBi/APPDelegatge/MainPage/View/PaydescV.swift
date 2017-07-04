@@ -24,7 +24,6 @@ class PaydescV : CommonV,UITextViewDelegate {
     /// 取消
     lazy var cancelBtn: UIButton = {
         let d: UIButton = UIButton.init(frame: CGRect.init(x: self.Width * 0.0770646247310915, y: self.Height * 0.766692546583851, width: self.Width * 0.4, height: self.Height * 0.2))
-        d.layer.borderWidth = 1
         d.addTarget(self, action: #selector(cancelSEL), for: .touchUpInside)
         return d
     }()
@@ -33,7 +32,6 @@ class PaydescV : CommonV,UITextViewDelegate {
     /// 确定事件
     lazy var confirm: UIButton = {
         let D : UIButton = UIButton.init(frame: CGRect.init(x: self.Width * 0.593512767425811, y: self.cancelBtn.TopY, width: self.cancelBtn.Width, height: self.cancelBtn.Height))
-        D.layer.borderWidth = 1
         D.addTarget(self, action: #selector(confirmSEL), for: .touchUpInside)
         return D
     }()
@@ -50,12 +48,10 @@ class PaydescV : CommonV,UITextViewDelegate {
     
     /// 输入的内容描述文本
     fileprivate lazy var txtView: UITextView = {
-        let d : UITextView = UITextView.init(frame: CGRect.init(x: COMMON_MARGIN * 1.5 * SCREEN_SCALE, y: self.Height * 0.25, width: self.Width - 2 * (COMMON_MARGIN * 1.5 * SCREEN_SCALE), height: 80 * SCREEN_SCALE))
-        d.delegate = self
-        
-        d.layer.borderWidth = 1
-        
-        ///添加工具栏
+        let d : UITextView = UITextView.init(frame: CGRect.init(x: COMMON_MARGIN * 1.49 * SCREEN_SCALE, y: self.Height * 0.28, width: self.Width * 0.83, height: 50 * SCREEN_SCALE))
+        d.delegate = self        ///添加工具栏
+//        d.layer.borderWidth = 1
+//        d.layer.borderColor = UIColor.red.cgColor
         let toolBar = ToolBar()
         
         toolBar.seToolBarWithOne(confirmTitle: "完成", comfirmSEL: #selector(cancelBtnSEL), target: self)
@@ -90,12 +86,13 @@ class PaydescV : CommonV,UITextViewDelegate {
     
     override init(frame: CGRect) {
         super.init(frame: frame)
+        
+        
         addSubview(bgImgV)
+        addSubview(txtView)
         addSubview(cancelBtn)
         addSubview(confirm)
-        
-        addSubview(txtView)
-        self.layer.borderWidth = 1
+
     }
     
     @objc fileprivate func sendAuthSEL(sender : CountDownBtn) {

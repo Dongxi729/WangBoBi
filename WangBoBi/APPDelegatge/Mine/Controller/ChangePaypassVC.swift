@@ -58,8 +58,8 @@ class ChangePaypassVC: UIViewController,BindPhoneCellDelegate,BindPhoneFooterVDe
         let cell = tableView.dequeueReusableCell(withIdentifier: "cellID") as! BindPhoneCell
         
         
-        cell.titLabel.text = dataSource["title"]?[indexPath.row]
-        cell.titLabel.sizeToFit()
+        cell.textLabel?.text = dataSource["title"]?[indexPath.row]
+//        cell.titLabel.sizeToFit()
         cell.inputTF.placeholder = dataSource["content"]?[indexPath.row]
         cell.indexPath = indexPath as NSIndexPath
         cell.delegate = self

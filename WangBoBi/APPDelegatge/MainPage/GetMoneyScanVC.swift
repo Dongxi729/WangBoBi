@@ -12,9 +12,9 @@ class GetMoneyScanVC: BaseViewController {
 
     lazy var scanBtn: UIButton = {
         let l : UIButton = UIButton.init(frame: CGRect.init(x: COMMON_MARGIN, y: SCREEN_HEIGHT * 0.610507239466128, width: SCREEN_WIDTH - 2 * COMMON_MARGIN, height: 50))
-        l.backgroundColor = UIColor.randomColor()
+        
         l.addTarget(self, action: #selector(scanPayCode), for: .touchUpInside)
-        l.layer.borderWidth = 1
+        
         return l
     }()
     

@@ -15,6 +15,8 @@ class CodeProductor: UIViewController {
         return d
     }()
     
+    
+    
     lazy var descLabel: UILabel = {
         let d : UILabel = UILabel.init(frame: CGRect.init(x: SCREEN_WIDTH / 2 - SCREEN_WIDTH * 0.35, y: self.generatImgView.BottomY + COMMON_MARGIN * SCREEN_SCALE, width: SCREEN_WIDTH * 0.7, height: 30 * SCREEN_SCALE))
         d.text = "用网博支付钱包扫一扫二维码，加我好友"
@@ -44,11 +46,5 @@ class CodeProductor: UIViewController {
                 self.generatImgView.image = image
             }
         }
-    }
-    
-    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-        view.endEditing(true)
+    }}
 
-    
-    }
-}

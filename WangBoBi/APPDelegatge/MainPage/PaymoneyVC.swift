@@ -15,7 +15,6 @@ class PaymoneyVC: BaseViewController {
     
     lazy var getMoebtn: UIButton = {
         let d : UIButton = UIButton.init(frame: CGRect.init(x: COMMON_MARGIN, y: SCREEN_HEIGHT * 0.610507239466128,   width: SCREEN_WIDTH - 2 * COMMON_MARGIN, height: self.scanBtn.Height))
-        d.backgroundColor = UIColor.randomColor()
         d.addTarget(self, action: #selector(scanMoney), for: .touchUpInside)
         return d
     }()
@@ -23,9 +22,7 @@ class PaymoneyVC: BaseViewController {
 //    跳转支付
     lazy var scanBtn: UIButton = {
         let l : UIButton = UIButton.init(frame: CGRect(x: COMMON_MARGIN, y: SCREEN_HEIGHT * 0.452898543813954 , width: SCREEN_WIDTH - 2 * COMMON_MARGIN, height: 50 * SCREEN_SCALE))
-        l.backgroundColor = UIColor.randomColor()
         l.addTarget(self, action: #selector(scanPayCode), for: .touchUpInside)
-        l.layer.borderWidth = 1
         return l
     }()
     

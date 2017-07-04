@@ -9,12 +9,6 @@
 import UIKit
 
 class MainPageViewController: BaseViewController {
-
-    lazy var freshControl: UIRefreshControl = {
-        let d:UIRefreshControl = UIRefreshControl.init(frame: CGRect.init(x: 0, y: 0, width: SCREEN_WIDTH, height: 64))
-        d.addTarget(self, action: #selector(refreshSEL(sender:)), for: .valueChanged)
-        return d
-    }()
     
     @objc fileprivate func refreshSEL(sender : UIRefreshControl) {
         CCog(message: "refreshSEL")
@@ -102,8 +96,6 @@ class MainPageViewController: BaseViewController {
             CCog(message: xxx)
             self.collV.reloadData()
         }
-        
-//        self.collV.addSubview(freshControl)
         self.collV.addHeaderViewfun()
         let d : headerView = collV.viewWithTag(888) as! headerView
         d.delegate = self;
@@ -235,6 +227,7 @@ extension MainPageViewController : UICollectionViewDataSource,UICollectionViewDe
     
 }
 
+// MARK: - 刷新控件
 extension MainPageViewController : headerViewelegate {
     func headerViewEndfun(_ _endRefresh: () -> Void) {
         
@@ -251,14 +244,10 @@ extension MainPageViewController : headerViewelegate {
         }) { (xxx) in
             self.loginModel = xxx
             CCog(message: xxx)
-            
-//            sleep(UInt32(2.0))
+
             self.collV.reloadData()
             d.endRefresh()
         }
-        
-
-
     }
 }
 

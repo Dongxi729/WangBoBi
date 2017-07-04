@@ -17,6 +17,12 @@ class AuthingVC: UIViewController {
         return d
     }()
     
+    /// 分割线
+    lazy var line: UIView = {
+        let d : UIView = UIView.init(frame: CGRect.init(x: 0, y: 64, width: SCREEN_WIDTH, height: 0.5))
+        d.backgroundColor = UIColor.colorWithHexString("C8C7CB")
+        return d
+    }()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -26,6 +32,7 @@ class AuthingVC: UIViewController {
         title = "实名认证"
         
         view.addSubview(bachV)
+        view.addSubview(line)
     }
 
 }

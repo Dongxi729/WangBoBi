@@ -35,7 +35,7 @@ class PushingMoneyVC: BaseViewController,UITextFieldDelegate,BindPhoneFooterVDel
     /// 充值卡账号
     lazy var cardNumLabel: TfPlaceHolder = {
         let d : TfPlaceHolder = TfPlaceHolder.init(frame: CGRect.init(x: COMMON_MARGIN, y: self.bgImg.Height * 0.66, width: SCREEN_WIDTH * 0.82, height: 30 * SCREEN_SCALE))
-        d.layer.borderWidth = 1
+        
         d.delegate = self
         d.tag = 1111
         return d
@@ -44,7 +44,6 @@ class PushingMoneyVC: BaseViewController,UITextFieldDelegate,BindPhoneFooterVDel
     /// 充值卡验证码
     lazy var cardPass: TfPlaceHolder = {
         let d : TfPlaceHolder = TfPlaceHolder.init(frame: CGRect.init(x: COMMON_MARGIN, y: self.bgImg.Height * 0.816, width: SCREEN_WIDTH - 2 * COMMON_MARGIN, height: 30 * SCREEN_SCALE))
-        d.layer.borderWidth = 1
         d.delegate = self
         d.tag = 1112
         return d
@@ -53,12 +52,16 @@ class PushingMoneyVC: BaseViewController,UITextFieldDelegate,BindPhoneFooterVDel
     /// 照相机📷
     fileprivate lazy var cameraBn: UIButton = {
         let d : UIButton = UIButton.init(frame: CGRect.init(x: self.cardNumLabel.RightX, y: self.cardNumLabel.TopY, width: 50 * SCREEN_SCALE, height: 30 * SCREEN_SCALE))
-        d.layer.borderWidth = 1
         d.addTarget(self, action: #selector(scanCodeSEL), for: .touchUpInside)
         return d
     }()
 
-    
+    /// 分割线
+    lazy var line: UIView = {
+        let d : UIView = UIView.init(frame: CGRect.init(x: 0, y: 64, width: SCREEN_WIDTH, height: 0.5))
+        d.backgroundColor = UIColor.colorWithHexString("C8C7CB")
+        return d
+    }()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -68,6 +71,7 @@ class PushingMoneyVC: BaseViewController,UITextFieldDelegate,BindPhoneFooterVDel
         title = "充值卡充值"
         
         view.addSubview(scrollView)
+        view.addSubview(line)
         
         scrollView.addSubview(bgImg)
         view.addSubview(footerView)
@@ -100,7 +104,7 @@ class PushingMoneyVC: BaseViewController,UITextFieldDelegate,BindPhoneFooterVDel
         }
         
         /// 模拟跳完成功界面
-        self.navigationController?.pushViewController(PushMoneyFailVC(), animated: true)
+        self.navigationController?.pushViewController(PushMoneySuccessVC(), animated: true)
     }
     
     func textFieldShouldBeginEditing(_ textField: UITextField) -> Bool {

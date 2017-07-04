@@ -18,13 +18,13 @@ class MyViewController: UIViewController {
     
     /// 表格
     lazy var tableView: UITableView = {
-        let d : UITableView = UITableView.init(frame: CGRect.init(x: 0, y: 0, width: SCREEN_WIDTH, height: SCREEN_HEIGHT), style: .grouped)
+        let d : UITableView = UITableView.init(frame: CGRect.init(x: 0, y: -1, width: SCREEN_WIDTH, height: SCREEN_HEIGHT), style: .grouped)
         d.delegate = self
         d.dataSource = self
         d.register(TabViewCell.self, forCellReuseIdentifier: "cel")
         d.register(MyVCCell.self, forCellReuseIdentifier: "MyVCCell")
         
-        d.separatorStyle = UITableViewCellSeparatorStyle.none
+//        d.separatorStyle = UITableViewCellSeparatorStyle.none
         
         return d
     }()
@@ -92,19 +92,27 @@ class MyViewController: UIViewController {
 extension MyViewController : UITableViewDelegate,UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "cel") as! TabViewCell
-        
+
+        cell.preservesSuperviewLayoutMargins = false
+        cell.separatorInset = UIEdgeInsets.zero
+        cell.layoutMargins = UIEdgeInsets.zero
         switch indexPath.section {
         case 0:
-            
             switch indexPath.row {
             case 0:
+                
 
                 let cell = tableView.dequeueReusableCell(withIdentifier: "MyVCCell") as! MyVCCell
+ 
                 cell.backgroundColor = UIColor.colorWithHexString("2796DD")
+                
+
+
                 return cell
             case 1:
-                cell.descLabel.text = cellDataSource["sectionOne"]?[indexPath.row]
                 
+                cell.descLabel.text = cellDataSource["sectionOne"]?[indexPath.row]
+      
             default:
                 break
             }
@@ -114,6 +122,7 @@ extension MyViewController : UITableViewDelegate,UITableViewDataSource {
             cell.frontIconim.image = UIImage.init(named: (cellDataSource["sectionImg"]?[indexPath.row])!)
             break
         case 2:
+            
             
             cell.descLabel.text = cellDataSource["sectionFour"]?[indexPath.row]
 //            secFourIMg
@@ -128,6 +137,7 @@ extension MyViewController : UITableViewDelegate,UITableViewDataSource {
     }
     
     func numberOfSections(in tableView: UITableView) -> Int {
+        CCog(message: cellDataSource.count)
         return cellDataSource.count
     }
     
@@ -150,11 +160,19 @@ extension MyViewController : UITableViewDelegate,UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        
+        let deviceType = UIDevice.current.deviceType
+        
         switch indexPath.section {
         case 0:
             switch indexPath.row {
             case 0:
-                return 80 * SCREEN_SCALE
+                if deviceType == .iPhone4S {
+                    return 80
+                } else {
+                    return 80 * SCREEN_SCALE
+                }
+                
             default:
                 return 45
             }

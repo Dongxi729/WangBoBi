@@ -14,9 +14,11 @@ class NameCerWithDetailVC: UIViewController,UITableViewDataSource,UITableViewDel
         let d : UITableView = UITableView.init(frame: self.view.bounds, style: .grouped)
         d.register(BindPhoneCell.self, forCellReuseIdentifier: "sss")
         d.register(UPloadIDImgCell.self, forCellReuseIdentifier: "sss2")
+        d.register(UITableViewCell.self, forCellReuseIdentifier: "ccc")
+        
         d.delegate = self;
         d.dataSource = self;
-        d.separatorStyle = .none
+//        d.separatorStyle = .none
         return d
     }()
     
@@ -73,10 +75,20 @@ class NameCerWithDetailVC: UIViewController,UITableViewDataSource,UITableViewDel
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cel = tableView.dequeueReusableCell(withIdentifier: "sss") as! BindPhoneCell
+        
+        cel.separatorInset = UIEdgeInsets.zero
+        cel.layoutMargins = UIEdgeInsets.zero
+        cel.preservesSuperviewLayoutMargins = false
         switch indexPath.section {
         case 0:
-            cel.titLabel.text = dataSource["title"]?[indexPath.row]
-            cel.sizeToFit()
+//            cel.titLabel.text = dataSource["title"]?[indexPath.row]
+////            cel.sizeToFit()
+//            cel.inputTF.placeholder = dataSource["content"]?[indexPath.row]
+//            cel.indexPath = indexPath as NSIndexPath
+//            cel.delegate = self
+            
+            cel.textLabel?.text = dataSource["title"]?[indexPath.row]
+//            cel.titLabel.sizeToFit()
             cel.inputTF.placeholder = dataSource["content"]?[indexPath.row]
             cel.indexPath = indexPath as NSIndexPath
             cel.delegate = self
@@ -96,7 +108,10 @@ class NameCerWithDetailVC: UIViewController,UITableViewDataSource,UITableViewDel
         case 1:
             switch indexPath.row {
             case 0:
-                cel.titLabel.text = "上传身份证"
+                
+                cel.textLabel?.text = "上传身份证"
+                
+                cel.sizeToFit()
                 cel.inputTF.isEnabled = false
             default:
                 break
@@ -245,18 +260,9 @@ class UPloadIDImgCell: UITableViewCell {
         rightSelectedImg = true
     }
     
-    
-    fileprivate lazy var XXXXX: UIImageView = {
-        let d : UIImageView = UIImageView.init(frame: self.bounds)
-        d.layer.borderWidth = 1
-        return d
-    }()
-    
-    
     override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
         super.init(style: .default, reuseIdentifier: reuseIdentifier)
         
-        contentView.addSubview(XXXXX)
         contentView.addSubview(leftImg)
         contentView.addSubview(rightImg)
 
@@ -293,12 +299,6 @@ class UPloadIDImgCell: UITableViewCell {
                 }
             }
         }
-        
-    }
-    
-    deinit {
-        NotificationCenter.default.removeObserver(self, name: NSNotification.Name(rawValue: "imgData"), object: nil)
-        CCog(message: "这句话")
     }
     
     required init?(coder aDecoder: NSCoder) {

@@ -22,8 +22,7 @@ class RigisterVC: BaseViewController,UITextFieldDelegate {
     fileprivate lazy var AddLabel: TfPlaceHolder = {
         let d : TfPlaceHolder = TfPlaceHolder.init(frame: CGRect.init(x: SCREEN_WIDTH * 0.18438001992046, y: SCREEN_HEIGHT * 0.39, width: SCREEN_WIDTH * 0.88 - SCREEN_WIDTH * 0.213, height: 30 * SCREEN_SCALE))
         d.plStrSize(str: "", holderColor: UIColor.white)
-        d.layer.borderColor = UIColor.red.cgColor
-        d.layer.borderWidth = 1
+
         d.delegate = self
 
         return d
@@ -33,8 +32,6 @@ class RigisterVC: BaseViewController,UITextFieldDelegate {
     fileprivate lazy var confirmBtn: UIButton = {
         let d : UIButton = UIButton.init(frame: CGRect.init(x: 0.1256038647343 * SCREEN_WIDTH, y: SCREEN_HEIGHT * 0.53804347826087, width: SCREEN_WIDTH * 0.75, height: 30 * SCREEN_SCALE))
         d.addTarget(self, action: #selector(jumpToRigisterDetailV), for: .touchUpInside)
-        d.layer.borderColor = UIColor.red.cgColor
-        d.layer.borderWidth = 1
         return d
     }()
 
@@ -84,9 +81,7 @@ class RigisterVC: BaseViewController,UITextFieldDelegate {
             if (AddLabel.text?.validateEmail())! {
                 tfemail = AddLabel.text!
                 CCog(message: AddLabel.text!)
-                
-                CCog(message: tfemail)
-                
+
                 self.navigationController?.pushViewController(RigisterWithDetailVC(), animated: true)
             } else {
                 toast(toast: "邮件格式不正确")

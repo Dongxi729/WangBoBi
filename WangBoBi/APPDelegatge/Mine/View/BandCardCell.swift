@@ -173,7 +173,7 @@ class TabViewCell: UITableViewCell {
         contentView.addSubview(frontIconim)
         contentView.addSubview(descLabel)
         contentView.addSubview(JianJIao)
-        contentView.addSubview(SeparatorLine)
+//        contentView.addSubview(SeparatorLine)
         
         // 取出点击效果
         self.selectionStyle = UITableViewCellSelectionStyle.none
@@ -234,7 +234,7 @@ class MyVCCell : UITableViewCell {
         contentView.addSubview(SeparatorLine)
         
         // 取出点击效果
-        self.selectionStyle = UITableViewCellSelectionStyle.none
+//        self.selectionStyle = UITableViewCellSelectionStyle.none
         
         AvatarHeadImg.setImage(urlString: AccountModel.shared()?.HeadImg, placeholderImage: #imageLiteral(resourceName: "logo"))
         nameLabel.text = AccountModel.shared()?.TrueName
@@ -247,46 +247,3 @@ class MyVCCell : UITableViewCell {
         fatalError("init(coder:) has not been implemented")
     }
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

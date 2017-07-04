@@ -12,10 +12,7 @@ import UIKit
 class AppDelegate: UIResponder, UIApplicationDelegate {
     
     var window: UIWindow?
-    
-    /// 性能占用显示。
-    var performanceView: GDPerformanceMonitor?
-    
+
     var nav : UINavigationController?
     
     // MARK: - 设置已经登录主界面
@@ -52,8 +49,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
-        
-        setGraphicsAndCPU()
+
         
         let now = Date()
         let timerStamp : TimeInterval = now.timeIntervalSince1970
@@ -190,19 +186,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         }) { (error) in
             CCog(message: error.localizedDescription)
         }
-    }
-    
-    
-    /// 设置显示和处理器性能
-    private func setGraphicsAndCPU() -> Void {
-        #if DEBUG
-            GDPerformanceMonitor.sharedInstance.startMonitoring()
-            GDPerformanceMonitor.sharedInstance.configure(configuration: { (textLabel) in
-                textLabel?.backgroundColor = .black
-                textLabel?.textColor = .white
-                textLabel?.layer.borderColor = UIColor.black.cgColor
-            })
-        #endif
     }
 }
 

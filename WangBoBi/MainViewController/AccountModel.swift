@@ -454,9 +454,6 @@ class AccountModel: NSObject,NSCoding {
                 return
             }
             
-            CCog(message: (resultData["Data"] as? [String : Any])?["Integral"])
-            
-            
             /// 更新本地存储信息
             let account = AccountModel(dict: resultData["Data"] as! [String : Any])
             account.saveAccount()
@@ -501,9 +498,6 @@ class AccountModel: NSObject,NSCoding {
         let d : [String : String] = ["email" : (AccountModel.shared()?.Email)!,
                                      "pwd" : (AccountModel.shared()?.UserPass)!]
         NetWorkTool.shared.postWithPath(path: LOGIN_URL, paras: d, success: { (result) in
-            
-//            CCog(message: result)
-            
             guard let resultData = result as? NSDictionary else {
                 
                 CCog(message: "登录信息无效")
@@ -1105,7 +1099,7 @@ class AccountModel: NSObject,NSCoding {
         FrinQCode = aDecoder.decodeObject(forKey: "FrinQCode") as? String
         PayQCode = aDecoder.decodeObject(forKey: "PayQCode") as? String
         TraderPass = aDecoder.decodeObject(forKey: "TraderPass") as? String
-        CCog(message: TraderPass)
+        CCog(message: TraderPass as Any)
         TraderStatus = aDecoder.decodeObject(forKey: "TraderStatus") as? TraderStatus
         TrueName = aDecoder.decodeObject(forKey: "TrueName") as? String
         Sex = aDecoder.decodeObject(forKey: "Sex") as? SEXEnum
@@ -1119,7 +1113,7 @@ class AccountModel: NSObject,NSCoding {
         Email = aDecoder.decodeObject(forKey: "Email") as? String
         Phone = aDecoder.decodeObject(forKey: "Phone") as? String
         
-        CCog(message: Phone)
+        CCog(message: Phone as Any)
         
         /// 识别双重认证状态、绑定手机状态
         if Phone?.characters.count > 0 {

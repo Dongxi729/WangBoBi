@@ -15,7 +15,7 @@ class BindPhoneVC: UIViewController,UITableViewDelegate,UITableViewDataSource,Bi
         d.delegate = self;
         d.dataSource = self;
         d.register(BindPhoneCell.self, forCellReuseIdentifier: "cellID")
-        d.separatorStyle = .none
+//        d.separatorStyle = .none
         return d
     }()
     
@@ -56,8 +56,11 @@ class BindPhoneVC: UIViewController,UITableViewDelegate,UITableViewDataSource,Bi
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "cellID") as! BindPhoneCell
         
+        cell.preservesSuperviewLayoutMargins = false
+        cell.separatorInset = UIEdgeInsets.zero
+        cell.layoutMargins = .zero
         
-        cell.titLabel.text = dataSource["title"]?[indexPath.row]
+        cell.textLabel?.text = dataSource["title"]?[indexPath.row]
         cell.titLabel.sizeToFit()
         cell.inputTF.placeholder = dataSource["content"]?[indexPath.row]
         cell.indexPath = indexPath as NSIndexPath
@@ -175,7 +178,7 @@ class BindPhoneCell: UITableViewCell,UITextFieldDelegate {
     }()
     
     lazy var sendSMS: CountDownBtn = {
-        let d : CountDownBtn = CountDownBtn.init(frame: CGRect.init(x: SCREEN_WIDTH - 80 * SCREEN_SCALE - COMMON_MARGIN, y: self.inputTF.TopY, width: 80 * SCREEN_SCALE, height: self.inputTF.Height))
+        let d : CountDownBtn = CountDownBtn.init(frame: CGRect.init(x: SCREEN_WIDTH - 80 * SCREEN_SCALE - COMMON_MARGIN, y: self.bounds.midY - 15 * SCREEN_SCALE, width: 80 * SCREEN_SCALE, height: 30 * SCREEN_SCALE))
         d.setTitle("点击获取验证码", for: .normal)
         d.backgroundColor = UIColor.colorWithHexString("E6E6E6")
         d.layer.borderColor = UIColor.lightGray.cgColor
@@ -217,11 +220,11 @@ class BindPhoneCell: UITableViewCell,UITextFieldDelegate {
         contentView.addSubview(inputTF)
         contentView.addSubview(sendSMS)
         
-        contentView.addSubview(line)
+//        contentView.addSubview(line)
         
         
         sendSMS.isHidden = true
-        self.selectionStyle = .none
+//        self.selectionStyle = .none
         
         
     }
