@@ -9,7 +9,7 @@ let scanViewH = (UIScreen.main.bounds.width - CGFloat(kMargin * 2)) * 0.8
 import UIKit
 import AVFoundation
 
-class ScanCodeController: UIViewController {
+class ScanCodeController: BaseViewController {
     
     var scanView: UIView? = nil
     var scanImageView: UIImageView? = nil
@@ -17,25 +17,26 @@ class ScanCodeController: UIViewController {
     
     // MARK: - 扫描二维码
     fileprivate lazy var scanLabel: BtnWithImage = {
-        let d : BtnWithImage = BtnWithImage.init(frame: CGRect.init(x: SCREEN_WIDTH / 2 - SCREEN_WIDTH / 6, y: (self.scanView?.BottomY)! + COMMON_MARGIN * SCREEN_SCALE, width: SCREEN_WIDTH / 3, height: 10 * SCREEN_SCALE))
+        let d : BtnWithImage = BtnWithImage.init(frame: CGRect.init(x: SCREEN_WIDTH * 0.5 - SCREEN_WIDTH / 6 + 10 * SCREEN_SCALE, y: (self.scanView?.BottomY)! + COMMON_MARGIN * SCREEN_SCALE, width: SCREEN_WIDTH / 2.5, height: 20 * SCREEN_SCALE))
 
-        d.setTitle("扫描二维码", for: .normal)
+        d.setTitle(" 扫描二维码", for: .normal)
         d.setImage(#imageLiteral(resourceName: "Sweep 1"), for: .normal)
+        d.setTitleColor(UIColor.white, for: .normal)
         return d
     }()
     
     /// 设置前置小图标
-    fileprivate lazy var scanFrontImg: UILabel = {
-        let d : UILabel = UILabel.init(frame: CGRect.init(x: self.scanLabel.Width * 0.4, y: (self.scanView?.BottomY)! + COMMON_MARGIN * SCREEN_SCALE, width: SCREEN_WIDTH, height: 15 * SCREEN_SCALE))
-        let atch = NSTextAttachment.init()
-        atch.image = #imageLiteral(resourceName: "Sweep 1")
-        let ssss : NSAttributedString = NSAttributedString(attachment: atch)
-        
-        let mutableString = NSMutableAttributedString.init(attributedString: ssss)
-        
-        d.attributedText = mutableString
-        return d
-    }()
+//    fileprivate lazy var scanFrontImg: UILabel = {
+//        let d : UILabel = UILabel.init(frame: CGRect.init(x: self.scanLabel.Width * 0.4, y: (self.scanView?.BottomY)! + COMMON_MARGIN * SCREEN_SCALE, width: SCREEN_WIDTH, height: 20 * SCREEN_SCALE))
+//        let atch = NSTextAttachment.init()
+//        atch.image = #imageLiteral(resourceName: "Sweep 1")
+//        let ssss : NSAttributedString = NSAttributedString(attachment: atch)
+//        
+//        let mutableString = NSMutableAttributedString.init(attributedString: ssss)
+//        
+//        d.attributedText = mutableString
+//        return d
+//    }()
     
     /// 扫一扫
     fileprivate lazy var descLabel: UILabel = {
@@ -46,6 +47,8 @@ class ScanCodeController: UIViewController {
         f.font = UIFont.systemFont(ofSize: 10 * SCREEN_SCALE)
         return f
     }()
+    
+    
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
@@ -75,6 +78,9 @@ class ScanCodeController: UIViewController {
         view.backgroundColor = UIColor.black
         
         NotificationCenter.default.addObserver(self, selector: #selector(resetAnimatinon), name: NSNotification.Name.UIApplicationWillEnterForeground, object: nil)
+        
+        
+        
     }
     
     deinit {
@@ -97,10 +103,12 @@ class ScanCodeController: UIViewController {
         scanView?.backgroundColor = UIColor.clear
         scanView?.clipsToBounds = true
         view.addSubview(scanView!)
-        
+
         let scanViewImg : UIImageView = UIImageView.init(frame: (self.scanView?.frame)!)
         scanViewImg.image = #imageLiteral(resourceName: "queue")
-//        view.addSubview(scanFrontImg)
+//        scanViewImg.backgroundColor = UIColor.red
+        view.addSubview(scanViewImg)
+        
         
         scanImageView = UIImageView(image: UIImage.init(named: "sweep_bg_line.png"));
         let widthOrHeight: CGFloat = 18
