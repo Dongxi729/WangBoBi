@@ -79,26 +79,23 @@ class NameCerWithDetailVC: UIViewController,UITableViewDataSource,UITableViewDel
         cel.separatorInset = UIEdgeInsets.zero
         cel.layoutMargins = UIEdgeInsets.zero
         cel.preservesSuperviewLayoutMargins = false
+        cel.delegate = self
         switch indexPath.section {
         case 0:
-//            cel.titLabel.text = dataSource["title"]?[indexPath.row]
-////            cel.sizeToFit()
-//            cel.inputTF.placeholder = dataSource["content"]?[indexPath.row]
-//            cel.indexPath = indexPath as NSIndexPath
-//            cel.delegate = self
-            
+
             cel.textLabel?.text = dataSource["title"]?[indexPath.row]
-//            cel.titLabel.sizeToFit()
             cel.inputTF.placeholder = dataSource["content"]?[indexPath.row]
+            cel.inputTF.frame = CGRect.init(x: cel.Width * 0.3, y: cel.inputTF.TopY, width: cel.Width * 0.6, height: cel.inputTF.Height)
+            cel.inputTF.layer.borderWidth = 1
             cel.indexPath = indexPath as NSIndexPath
             cel.delegate = self
             
             switch indexPath.row {
             case 0:
-                cel.inputTF.keyboardType = .numbersAndPunctuation
+                cel.inputTF.keyboardType = .default
                 break
             case 1:
-                cel.inputTF.keyboardType = .numberPad
+                cel.inputTF.keyboardType = .numbersAndPunctuation
                 break
             default:
                 break
@@ -147,24 +144,53 @@ class NameCerWithDetailVC: UIViewController,UITableViewDataSource,UITableViewDel
     
     // MARK: - FooterViewDelegateMethod
     func bindPhonSELDelegate() {
-        
-        if nameLabel == nil {
+        /// 名字检查
+        if nameLabel?.characters.count > 0 {
+            
+            if (nameLabel?.checkUserName(userName: nameLabel! as NSString))! {
+                /// 身份证检查
+                if cardID?.characters.count > 0 {
+                    
+                    if (cardID?.checkUserIdCard(idCard: cardID!))! {
+                        
+                        /// 身份证前面路径
+                        if CardModel.shared.frontUrl != nil {
+                            
+                            /// 身份证反面路径
+                            if CardModel.shared.backURL != nil {
+                                AccountModel.trueNameCertify(frontImg: CardModel.shared.frontUrl!, backImgURL: CardModel.shared.backURL!, idCode: cardID!, nameStr: nameLabel!, finished: { (result) in
+                                    if result {
+                                        
+                                        ////        //返回首页
+                                        let allVC = self.navigationController?.viewControllers
+
+                                        let inventoryListVC = allVC![1]
+                                        
+                                        if (inventoryListVC.isKind(of: AccountAndSaveVC.self)) {
+                                            self.navigationController!.popToViewController(inventoryListVC, animated: true)
+                                        }
+                                    }
+                                })
+                            } else {
+                                toast(toast: "请上传身份证反面照片")
+                            }
+                            
+                        } else {
+                            toast(toast: "请上传身份证正面照片")
+                        }
+                    } else {
+                        toast(toast: "身份证格式不对")
+                    }
+                } else {
+                    toast(toast: "身份证不为空")
+                }
+            } else {
+                toast(toast: "姓名不合法")
+            }
+            
+            
+        } else {
             toast(toast: "姓名不为空")
-            return
-        } else {
-            if !(nameLabel?.checkUserName(userName: nameLabel! as NSString))! {
-                toast(toast: "名字格式不对")
-                return
-            }
-        }
-        
-        if cardID == nil {
-            toast(toast: "身份证号不为空")
-            return
-        } else {
-            if !(cardID?.checkUserIdCard(idCard: cardID!))! {
-                toast(toast: "身份证号格式不对")
-            }
         }
     }
     
@@ -182,6 +208,11 @@ class NameCerWithDetailVC: UIViewController,UITableViewDataSource,UITableViewDel
     /// 身份证
     fileprivate var cardID : String?
     
+    /// 正面身份证路径
+    fileprivate var frontIDCardURL : String?
+    
+    /// 背面身份证路径
+    fileprivate var backIDCardURL : String?
     
     // MARK: - BindPhoneCellDelegate
     func text(indexPath: NSIndexPath, text: String) {
@@ -195,6 +226,10 @@ class NameCerWithDetailVC: UIViewController,UITableViewDataSource,UITableViewDel
         default:
             break
         }
+        
+        CCog(message: nameLabel as Any)
+        CCog(message: cardID as Any)
+        
     }
 
     
@@ -246,6 +281,7 @@ class UPloadIDImgCell: UITableViewCell {
         UploadHeadTool.shared.choosePic { (uploa, ddd) in
             CCog(message: uploa)
             DispatchQueue.main.async {
+                
             }
         }
         leftSelectedImg = true
@@ -281,12 +317,11 @@ class UPloadIDImgCell: UITableViewCell {
                 DispatchQueue.main.async {
                     if self.leftSelectedImg {
                         
-                        NetWorkTool.shared.postWithImageWithData(imgData: imgData, path: UPLOAD_IMGDATA, success: { (result) in
+                        AccountModel.uploadImgFromLocalLibrary(imgData: imgData, finished: { (result) in
                             CCog(message: result)
-                        }) { (error) in
-                            CCog(message: error.localizedDescription)
-                        }
-                        
+                            
+                            CardModel.shared.frontUrl = result
+                        })
                         
                         self.leftImg.setImage(UIImage.init(data: imgData), for: .normal)
                         self.leftSelectedImg = false
@@ -295,6 +330,14 @@ class UPloadIDImgCell: UITableViewCell {
                     if self.rightSelectedImg {
                         self.rightImg.setImage(UIImage.init(data: imgData), for: .normal)
                         self.rightSelectedImg = false
+                        
+                        
+                        AccountModel.uploadImgFromLocalLibrary(imgData: imgData, finished: { (result) in
+                            CCog(message: result)
+                            
+                            CardModel.shared.backURL = result
+                        })
+                        
                     }
                 }
             }
@@ -320,4 +363,12 @@ class NameCerBtn: UIButton {
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
+}
+
+
+/// 身份证模型
+class CardModel: NSObject {
+    var frontUrl : String?
+    var backURL :String?
+    static let shared = CardModel()
 }

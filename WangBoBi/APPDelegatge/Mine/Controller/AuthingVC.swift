@@ -12,14 +12,14 @@ class AuthingVC: UIViewController {
 
     /// 背景图片
     fileprivate lazy var bachV: UIImageView = {
-        let d : UIImageView = UIImageView.init(frame: CGRect.init(x: COMMON_MARGIN, y: COMMON_MARGIN, width: SCREEN_WIDTH - 2 * COMMON_MARGIN, height: (SCREEN_WIDTH - 2 * COMMON_MARGIN) * (605 / 640)))
+        let d : UIImageView = UIImageView.init(frame: CGRect.init(x: 0, y: 0, width: SCREEN_WIDTH, height: SCREEN_WIDTH * (605 / 640)))
         d.image = #imageLiteral(resourceName: "Authing")
         return d
     }()
     
     /// 分割线
     lazy var line: UIView = {
-        let d : UIView = UIView.init(frame: CGRect.init(x: 0, y: 64, width: SCREEN_WIDTH, height: 0.5))
+        let d : UIView = UIView.init(frame: CGRect.init(x: 0, y: 0, width: SCREEN_WIDTH, height: 0.5))
         d.backgroundColor = UIColor.colorWithHexString("C8C7CB")
         return d
     }()
@@ -33,6 +33,8 @@ class AuthingVC: UIViewController {
         
         view.addSubview(bachV)
         view.addSubview(line)
+        
+        view.backgroundColor = COMMON_TBBGCOLOR
     }
 
 }

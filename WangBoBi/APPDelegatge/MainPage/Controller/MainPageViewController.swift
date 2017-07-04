@@ -99,6 +99,8 @@ class MainPageViewController: BaseViewController {
         self.collV.addHeaderViewfun()
         let d : headerView = collV.viewWithTag(888) as! headerView
         d.delegate = self;
+        
+
     }
     
     static let shared = MainPageViewController()

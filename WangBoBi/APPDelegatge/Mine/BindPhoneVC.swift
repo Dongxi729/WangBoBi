@@ -224,9 +224,8 @@ class BindPhoneCell: UITableViewCell,UITextFieldDelegate {
         
         
         sendSMS.isHidden = true
-//        self.selectionStyle = .none
-        
-        
+        self.selectionStyle = .none
+
     }
     
     

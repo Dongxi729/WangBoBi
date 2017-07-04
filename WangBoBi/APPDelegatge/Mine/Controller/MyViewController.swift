@@ -100,13 +100,8 @@ extension MyViewController : UITableViewDelegate,UITableViewDataSource {
         case 0:
             switch indexPath.row {
             case 0:
-                
-
                 let cell = tableView.dequeueReusableCell(withIdentifier: "MyVCCell") as! MyVCCell
- 
                 cell.backgroundColor = UIColor.colorWithHexString("2796DD")
-                
-
 
                 return cell
             case 1:

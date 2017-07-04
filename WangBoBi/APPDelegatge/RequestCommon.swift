@@ -50,3 +50,9 @@ let PAY_PASS = "http://192.168.1.10:8010/ifs/resetpaypwd.ashx"
 
 /// 上传图片
 let UPLOAD_IMGDATA = "http://192.168.1.10:8010/ifs/headimg.ashx"
+
+/// 实名认证
+let TRUENAME_AUTH = "http://192.168.1.10:8010/ifs/realauth.ashx"
+
+/// 刷新接口
+let REFRESH_INFO = "http://192.168.1.10:8010/ifs/basicinfo.ashx"

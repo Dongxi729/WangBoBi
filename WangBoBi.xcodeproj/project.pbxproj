@@ -84,7 +84,6 @@
 		2649610B1EF0C9EC00A559D6 /* YYWebImageManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 264960F81EF0C9EC00A559D6 /* YYWebImageManager.m */; };
 		2649610C1EF0C9EC00A559D6 /* YYWebImageOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = 264960FA1EF0C9EC00A559D6 /* YYWebImageOperation.m */; };
 		2649610F1EF0CA0900A559D6 /* libsqlite3.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 2649610E1EF0CA0900A559D6 /* libsqlite3.tbd */; };
-		264961111EF0CA3B00A559D6 /* WebP.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 264961101EF0CA3B00A559D6 /* WebP.framework */; };
 		264961131EF0CA4D00A559D6 /* libz.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 264961121EF0CA4D00A559D6 /* libz.tbd */; };
 		264961151EF0CAD100A559D6 /* UIImageViewWebImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 264961141EF0CAD100A559D6 /* UIImageViewWebImage.swift */; };
 		264961171EF0CBAE00A559D6 /* UIImageExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 264961161EF0CBAE00A559D6 /* UIImageExtension.swift */; };
@@ -370,7 +369,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				264961131EF0CA4D00A559D6 /* libz.tbd in Frameworks */,
-				264961111EF0CA3B00A559D6 /* WebP.framework in Frameworks */,
 				2649610F1EF0CA0900A559D6 /* libsqlite3.tbd in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

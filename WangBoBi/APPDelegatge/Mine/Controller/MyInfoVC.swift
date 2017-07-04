@@ -144,8 +144,9 @@ class PersonInfoEditV : UIView {
         /// 实名显示
         if AccountModel.shared()?.TrueName?.characters.count == 0 {
             cerNameIcon.showCerNam(str: "未实名")
+        } else {
+            nameLabel.text = AccountModel.shared()?.TrueName
         }
-        
         /// 头像
         avatarImg.setImage(urlString: AccountModel.shared()?.HeadImg, placeholderImage: #imageLiteral(resourceName: "logo"))
         

@@ -45,7 +45,7 @@ extension String {
     
     // 校验验证码
     func validateAutoCode() -> Bool {
-        let emailRegex: String = "[A-Z0-9._%+-]+"
+        let emailRegex: String = "[a-zA-Z0-9._%+-]+"
         let emailTest: NSPredicate = NSPredicate(format: "SELF MATCHES %@", emailRegex)
         return emailTest.evaluate(with: self)
     }

@@ -234,7 +234,7 @@ class MyVCCell : UITableViewCell {
         contentView.addSubview(SeparatorLine)
         
         // 取出点击效果
-//        self.selectionStyle = UITableViewCellSelectionStyle.none
+        self.selectionStyle = UITableViewCellSelectionStyle.none
         
         AvatarHeadImg.setImage(urlString: AccountModel.shared()?.HeadImg, placeholderImage: #imageLiteral(resourceName: "logo"))
         nameLabel.text = AccountModel.shared()?.TrueName

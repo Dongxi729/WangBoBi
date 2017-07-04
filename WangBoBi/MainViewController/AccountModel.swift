@@ -974,6 +974,102 @@ class AccountModel: NSObject,NSCoding {
         }
     }
     
+    // MARK: - 上次图片返回图片地址
+    /// 上次图片
+    ///
+    /// - Parameters:
+    ///   - imgData: 图片数据
+    ///   - finished: 返回图片链接地址
+    class func uploadImgFromLocalLibrary(imgData : Data,finished: @escaping (_ imgUrl : String) -> ()) {
+        if imgData.count > 0 {
+            NetWorkTool.shared.postWithImageWithData(imgData: imgData, path: UPLOAD_IMGDATA, success: { (result) in
+                CCog(message: result)
+                
+                guard let resultData = result as? NSDictionary  else {
+                    return
+                }
+                
+                /// 抽取提示信息
+                guard let alertMsg = resultData["Msg"] as? String else {
+                    
+                    return
+                }
+                
+                if alertMsg == "操作成功" {
+                    /// 抽取提示信息
+                    guard let headImgDic = resultData["Data"] as? NSDictionary else {
+                        
+                        return
+                    }
+                    
+                    if headImgDic.count > 0 {
+                        finished([resultData["Data"] as! NSDictionary][0]["HeadUrl"] as! String)
+                        CCog(message: [resultData["Data"] as! NSDictionary][0]["HeadUrl"] as! String)
+                    }
+                    
+                    CCog(message: headImgDic)
+                    
+                    
+                }
+            }, failure: { (error) in
+                CCog(message: error.localizedDescription)
+            })
+        } else {
+            toast(toast: "图片数据不对")
+        }
+    }
+    // MARK: - 实名认证接口
+    ///
+    /// - Parameters:
+    ///   - frontImg: 正面图片路径
+    ///   - backImgURL: 背面图片路径
+    ///   - idCode: 身份证号码
+    ///   - nameStr: 名字
+    ///   - finished: 请求结果
+    class func trueNameCertify(frontImg : String,backImgURL :String,idCode : String,nameStr : String,finished : @escaping (_ result : Bool) -> ()) {
+        let param : [String : String] = ["uid" : (AccountModel.shared()?.Id.stringValue)!,
+                                         "token" : (AccountModel.shared()?.Token)!,
+                                         "name" : nameStr,
+                                         "idcode" : idCode,
+                                         "front" : frontImg,
+                                         "reverse" : backImgURL]
+
+        CCog(message: param)
+        
+        NetWorkTool.shared.postWithPath(path: TRUENAME_AUTH, paras: param, success: { (result) in
+            CCog(message: result)
+            
+            guard let resultData = result as? NSDictionary  else {
+                return
+            }
+            
+            /// 抽取提示信息
+            guard let alertMsg = resultData["Msg"] as? String else {
+                
+                return
+            }
+            
+            if alertMsg == "操作成功" {
+                
+                DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 1.0, execute: {
+                    toast(toast: "请求成功")
+                })
+                
+                finished(true)
+                
+                let patram = ["uid" : (AccountModel.shared()?.Id.stringValue)!,
+                              "token" : (AccountModel.shared()?.Token)!]
+                NetWorkTool.shared.postWithPath(path: REFRESH_INFO, paras: patram, success: { (result) in
+                    CCog(message: result)
+                }, failure: { (error) in
+                    CCog(message: error.localizedDescription)
+                })
+            }
+        }) { (error) in
+            CCog(message: error.localizedDescription)
+        }
+    }
+    
     // MARK: - 归档接档
     func encode(with aCoder: NSCoder) {
         
@@ -1005,6 +1101,7 @@ class AccountModel: NSObject,NSCoding {
         aCoder.encode(TraderStatus, forKey: "TraderStatus")
         
         aCoder.encode(TrueName, forKey: "TrueName")
+        
         /// 性别
         aCoder.encode(Sex, forKey: "Sex")
         

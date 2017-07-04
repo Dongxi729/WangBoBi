@@ -74,6 +74,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                 
                 if AccountModel.isLogin() {
                     AccountModel.loginWithLocalPassAndAccount()
+                    
+//                            testComplement()
+
                 } else {
                     setUnlogedMain()
                     AccountModel.logout()
@@ -179,13 +182,63 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 //            let alertMsg = (error as NSError).userInfo["NSLocalizedDescription"]
 //            toast(toast: alertMsg! as! String)
 //        }
+
         
+//        let compresImage = UIImageJPEGRepresentation(#imageLiteral(resourceName: "Mine_add"), 1.0)
+//        
+//        NetWorkTool.shared.postWithImageWithData(imgData: compresImage!, path: UPLOAD_IMGDATA, success: { (result) in
+//            CCog(message: result)
+//        }) { (error) in
+//            CCog(message: error.localizedDescription)
+//        }
+        
+        //        NetWorkTool.shared.postWithImageWithData(imgData: compresImage!, path: TRUENAME_AUTH, success: { (result) in
+        //            CCog(message: result)
+        //        }) { (error) in
+        //            CCog(message: error.localizedDescription)
+        //        }
+        
+        
+//        http://192.168.1.10:8010/UploadFile/image/20170704034636.png
+        ///////////////////////////////////////////////////////////////////////////
         let compresImage = UIImageJPEGRepresentation(#imageLiteral(resourceName: "Mine_add"), 1.0)
-        NetWorkTool.shared.postWithImageWithData(imgData: compresImage!, path: UPLOAD_IMGDATA, success: { (result) in
+        
+        let param : [String : String] = ["uid" : (AccountModel.shared()?.Id.stringValue)!,
+                                         "token" : (AccountModel.shared()?.Token)!,
+                                         "name" : (AccountModel.shared()?.UserName)!,
+                                         "idcode" : "111111111111111111",
+                                         "front" : "http://192.168.1.10:8010/UploadFile/image/20170704034636.png",
+                                         "reverse" : "http://192.168.1.10:8010/UploadFile/image/20170704034636.png"]
+        
+
+        CCog(message: param)
+        
+        NetWorkTool.shared.postWithPath(path: TRUENAME_AUTH, paras: param, success: { (result) in
             CCog(message: result)
+            
+            guard let resultData = result as? NSDictionary  else {
+                return
+            }
+            
+            /// 抽取提示信息
+            guard let alertMsg = resultData["Msg"] as? String else {
+                
+                return
+            }
+            
+            if alertMsg == "操作成功" {
+                let patram = ["uid" : (AccountModel.shared()?.Id.stringValue)!,
+                              "token" : (AccountModel.shared()?.Token)!]
+                NetWorkTool.shared.postWithPath(path: REFRESH_INFO, paras: patram, success: { (result) in
+                    CCog(message: result)
+                }, failure: { (error) in
+                    CCog(message: error.localizedDescription)
+                })
+            }
         }) { (error) in
             CCog(message: error.localizedDescription)
         }
+        
     }
 }
 

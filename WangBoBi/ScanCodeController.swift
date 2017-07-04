@@ -68,9 +68,7 @@ class ScanCodeController: BaseViewController {
         
         view.addSubview(scanLabel)
         view.addSubview(descLabel)
-//        view.addSubview(scanFrontImg)
-        
-        
+
         title = "扫一扫"
         
         /// 开始扫描
