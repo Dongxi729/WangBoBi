@@ -28,7 +28,7 @@
 		<true/>
 	</dict>
 	<key>NSCameraUsageDescription</key>
-	<string>请在iPhone的\&quot;设置-隐私-相机\&quot;选项中,允许本程序访问您的相机</string>
+	<string>请在iPhone的&quot;设置-隐私-相机&quot;选项中,允许本程序访问您的相机</string>
 	<key>NSPhotoLibraryUsageDescription</key>
 	<string>需要您的许可来存取照片</string>
 	<key>UILaunchStoryboardName</key>
