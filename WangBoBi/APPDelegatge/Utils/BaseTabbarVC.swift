@@ -39,6 +39,9 @@ class BaseTabbarVC: UITabBarController {
         self.tabBar.frame = frame
         self.tabBar.barStyle = .default
         
+        /// 不透明
+        self.tabBar.isTranslucent = false
+        
         //设置图片偏移，因为加高了tabbar-----只是修改tabbar的图片位置
         for i in 0..<self.tabBar.items!.count {
             let itm = self.tabBar.items![i]

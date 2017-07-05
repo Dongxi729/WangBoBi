@@ -980,7 +980,7 @@ class AccountModel: NSObject,NSCoding {
     /// - Parameters:
     ///   - imgData: 图片数据
     ///   - finished: 返回图片链接地址
-    class func uploadImgFromLocalLibrary(imgData : Data,finished: @escaping (_ imgUrl : String) -> ()) {
+    class func uploadImgFromLocalLibrary(imgData : Data,finished: @escaping (_ imgUrl : String,_ uploadResult : Bool) -> ()) {
         if imgData.count > 0 {
             NetWorkTool.shared.postWithImageWithData(imgData: imgData, path: UPLOAD_IMGDATA, success: { (result) in
                 CCog(message: result)
@@ -1003,16 +1003,18 @@ class AccountModel: NSObject,NSCoding {
                     }
                     
                     if headImgDic.count > 0 {
-                        finished([resultData["Data"] as! NSDictionary][0]["HeadUrl"] as! String)
+                        finished([resultData["Data"] as! NSDictionary][0]["HeadUrl"] as! String,true)
                         CCog(message: [resultData["Data"] as! NSDictionary][0]["HeadUrl"] as! String)
                     }
                     
                     CCog(message: headImgDic)
                     
-                    
+                    toast(toast: "上传成功")
                 }
             }, failure: { (error) in
                 CCog(message: error.localizedDescription)
+                toast(toast: error.localizedDescription)
+                finished("",false)
             })
         } else {
             toast(toast: "图片数据不对")

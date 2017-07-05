@@ -172,13 +172,12 @@ class BindPhoneCell: UITableViewCell,UITextFieldDelegate {
     lazy var inputTF: TfPlaceHolder = {
         let d : TfPlaceHolder = TfPlaceHolder.init(frame: CGRect.init(x: self.titLabel.RightX + COMMON_MARGIN, y: self.bounds.midY - 10 * SCREEN_SCALE, width: self.Width * 0.7, height: 20 * SCREEN_SCALE))
         d.font = UIFont.systemFont(ofSize: 13 * SCREEN_SCALE)
-//        d.clearsOnBeginEditing = true
         d.delegate = self
         return d
     }()
     
     lazy var sendSMS: CountDownBtn = {
-        let d : CountDownBtn = CountDownBtn.init(frame: CGRect.init(x: SCREEN_WIDTH - 80 * SCREEN_SCALE - COMMON_MARGIN, y: self.bounds.midY - 15 * SCREEN_SCALE, width: 80 * SCREEN_SCALE, height: 30 * SCREEN_SCALE))
+        let d : CountDownBtn = CountDownBtn.init(frame: CGRect.init(x: SCREEN_WIDTH - 80 * SCREEN_SCALE - COMMON_MARGIN, y: self.bounds.midY - 15, width: 80 * SCREEN_SCALE, height: 30))
         d.setTitle("点击获取验证码", for: .normal)
         d.backgroundColor = UIColor.colorWithHexString("E6E6E6")
         d.layer.borderColor = UIColor.lightGray.cgColor

@@ -154,7 +154,7 @@ class TabViewCell: UITableViewCell {
     lazy var descLabel: UILabel = {
         let d : UILabel = UILabel.init(frame: CGRect.init(x: self.frontIconim.RightX + COMMON_MARGIN, y: self.bounds.midY - 12.5 * SCREEN_SCALE, width: self.Width - self.frontIconim.Width + COMMON_MARGIN * 3, height: 25 * SCREEN_SCALE))
         d.textColor = UIColor.black
-        d.font = UIFont.systemFont(ofSize: 12 * SCREEN_SCALE)
+        d.font = UIFont.systemFont(ofSize: 13 * SCREEN_SCALE)
         return d
     }()
     
@@ -187,6 +187,7 @@ class TabViewCell: UITableViewCell {
 /// 我的信息第一行Cell
 class MyVCCell : UITableViewCell {
     
+    /// 头像
     lazy var AvatarHeadImg: UIImageView = {
         let d: UIImageView = UIImageView.init(frame: CGRect.init(x: COMMON_MARGIN, y: COMMON_MARGIN, width: 60 * SCREEN_SCALE, height: 60 * SCREEN_SCALE))
         d.image = #imageLiteral(resourceName: "Mine_Two")
@@ -201,6 +202,7 @@ class MyVCCell : UITableViewCell {
         return d
     }()
     
+    /// 名字
     lazy var nameLabel: UILabel = {
         let d: UILabel = UILabel.init(frame: CGRect.init(x: self.AvatarHeadImg.RightX + COMMON_MARGIN, y: self.AvatarHeadImg.TopY + COMMON_MARGIN / 2, width: self.Width - self.AvatarHeadImg.Width - COMMON_MARGIN * 3, height: 20 * SCREEN_SCALE))
         d.text = "哈哈就看见好看"
@@ -210,6 +212,7 @@ class MyVCCell : UITableViewCell {
         return d
     }()
     
+    /// 邮箱地址
     lazy var emailAddress: UILabel = {
         let d : UILabel = UILabel.init(frame: CGRect.init(x: self.AvatarHeadImg.RightX + COMMON_MARGIN, y: self.nameLabel.BottomY + COMMON_MARGIN / 2, width: self.Width - self.AvatarHeadImg.Width - COMMON_MARGIN * 3, height: 20 * SCREEN_SCALE))
         d.font = UIFont.systemFont(ofSize: 12 * SCREEN_SCALE)
@@ -236,6 +239,7 @@ class MyVCCell : UITableViewCell {
         // 取出点击效果
         self.selectionStyle = UITableViewCellSelectionStyle.none
         
+        /// 头像
         AvatarHeadImg.setImage(urlString: AccountModel.shared()?.HeadImg, placeholderImage: #imageLiteral(resourceName: "logo"))
         nameLabel.text = AccountModel.shared()?.TrueName
         emailAddress.text = AccountModel.shared()?.UserName

@@ -117,6 +117,13 @@ extension String {
         let isMatch:Bool = pred.evaluate(with: password)
         return isMatch;
     }
+    
+    // 校验金额
+    func validateMoney() -> Bool {
+        let emailRegex: String = "[0-9._%+]+"
+        let emailTest: NSPredicate = NSPredicate(format: "SELF MATCHES %@", emailRegex)
+        return emailTest.evaluate(with: self)
+    }
 
 }
 

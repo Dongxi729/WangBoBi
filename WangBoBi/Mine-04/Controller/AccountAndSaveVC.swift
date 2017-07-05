@@ -24,7 +24,6 @@ class AccountAndSaveVC: UIViewController {
         d.dataSource = self
         d.register(TabViewCell.self, forCellReuseIdentifier: "cellId")
         d.tableFooterView = self.footerV
-//        d.separatorStyle = .none
         return d
     }()
     
@@ -194,7 +193,7 @@ class AccountAndSaveFooterV : UIView {
         d.backgroundColor = UIColor.blue
         d.setTitle("退出", for: .normal)
         d.backgroundColor = UIColor.colorWithHexString("2796DD")
-        d.titleLabel?.font = UIFont.systemFont(ofSize: 12 * SCREEN_SCALE)
+        d.titleLabel?.font = UIFont.systemFont(ofSize: 13 * SCREEN_SCALE)
         d.addTarget(self, action: #selector(exitSE(sender:)), for: .touchUpInside)
         return d
     }()
@@ -205,7 +204,7 @@ class AccountAndSaveFooterV : UIView {
     
     override init(frame: CGRect) {
         super.init(frame: frame)
-        self.layer.cornerRadius = 5
+        self.exitBtn.layer.cornerRadius = 5
         addSubview(exitBtn)
     }
     

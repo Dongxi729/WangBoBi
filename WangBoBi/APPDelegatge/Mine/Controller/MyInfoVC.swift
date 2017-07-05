@@ -21,12 +21,13 @@ class MyInfoVC: BaseViewController {
         let d : UIImageView = UIImageView.init(frame: CGRect.init(x: COMMON_MARGIN * SCREEN_SCALE, y: self.backGroundV.bounds.midX / 1.05, width: SCREEN_WIDTH - 2 * COMMON_MARGIN * SCREEN_SCALE , height: (SCREEN_WIDTH - 2 * COMMON_MARGIN * SCREEN_SCALE) * (369 / 598)))
         d.image = #imageLiteral(resourceName: "infoV")
         d.contentMode = UIViewContentMode.scaleAspectFit
+        d.isUserInteractionEnabled = true
+
         return d
     }()
     
     lazy var editV: PersonInfoEditV = {
         let d : PersonInfoEditV = PersonInfoEditV.init(frame: CGRect.init(x: 0, y: self.personInfoV.Height * 0.25, width: self.personInfoV.Width, height: self.personInfoV.Height * 0.7))
-        d.layer.borderWidth = 1
         return d
     }()
     
@@ -62,7 +63,7 @@ class PersonInfoEditV : UIView {
     
     /// 名字显示
     lazy var nameShowLabel: UILabel = {
-        let d : UILabel = UILabel.init(frame: CGRect.init(x: self.nameLabel.RightX, y: COMMON_MARGIN * SCREEN_SCALE, width: 100 * SCREEN_SCALE, height: self.nameLabel.Height))
+        let d : UILabel = UILabel.init(frame: CGRect.init(x: self.nameLabel.RightX, y: self.nameLabel.TopY, width: 100 * SCREEN_SCALE, height: self.nameLabel.Height))
         d.text = "khj,hlllkhlk"
         d.font = UIFont.systemFont(ofSize: 11 * SCREEN_SCALE)
         return d
@@ -109,7 +110,12 @@ class PersonInfoEditV : UIView {
     
     /// 头像
     lazy var avatarImg: UIImageView = {
-        let d : UIImageView = UIImageView.init(frame: CGRect.init(x: self.Width - 50 * SCREEN_SCALE - COMMON_MARGIN * SCREEN_SCALE, y: self.nameLabel.TopY, width: 50 * SCREEN_SCALE, height: 50 * SCREEN_SCALE))
+        let d : UIImageView = UIImageView.init(frame: CGRect.init(x: self.Width - 65 * SCREEN_SCALE - COMMON_MARGIN * SCREEN_SCALE, y: self.nameLabel.TopY, width: 65 * SCREEN_SCALE, height: 65 * SCREEN_SCALE))
+        
+        d.isUserInteractionEnabled = true
+        /// 添加上传头像动作
+        let tapGes = UITapGestureRecognizer.init(target: self, action: #selector(uploadHeadImg))
+        d.addGestureRecognizer(tapGes)
         
         return d
     }()
@@ -119,6 +125,15 @@ class PersonInfoEditV : UIView {
         let d : CertifieNamed = CertifieNamed.init(frame: CGRect.init(x: self.nameShowLabel.RightX , y: self.nameShowLabel.TopY, width: 50 * SCREEN_SCALE, height: 20 * SCREEN_SCALE))
         return d
     }()
+    
+    /// 上传头像接口
+    @objc fileprivate func uploadHeadImg() {
+        CCog(message: "")
+        
+        UploadHeadTool.shared.choosePic { (_, _) in
+            
+        }
+    }
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -136,11 +151,6 @@ class PersonInfoEditV : UIView {
         
         addSubview(cerNameIcon)
         
-        nameShowLabel.text = AccountModel.shared()?.TrueName
-        
-        
-        nameShowLabel.sizeToFit()
-        
         /// 实名显示
         if AccountModel.shared()?.TrueName?.characters.count == 0 {
             cerNameIcon.showCerNam(str: "未实名")
@@ -157,6 +167,26 @@ class PersonInfoEditV : UIView {
         moneyAddresShow.text = AccountModel.shared()?.WBCAdress
         
         
+        /// 接收图片选择器传来的数据信息
+        NotificationCenter.default.addObserver(self, selector: #selector(view(dd:)), name: NSNotification.Name(rawValue: "imgData"), object: nil)
+        
+    }
+    
+    @objc fileprivate func view(dd : Notification) -> Void {
+        
+        if let imgDataDic = dd.userInfo {
+            if let imgData = imgDataDic["ima"] as? Data {
+                
+                CCog(message: imgData)
+
+                
+                
+                AccountModel.uploadImgFromLocalLibrary(imgData: imgData, finished: { (result) in
+                    CCog(message: result)
+                    
+                })
+            }
+        }
     }
     
     required init?(coder aDecoder: NSCoder) {

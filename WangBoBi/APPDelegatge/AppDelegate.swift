@@ -47,6 +47,22 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         UITabBar.appearance().tintColor = TABBAR_BGCOLOR
     }
     
+    /// 测试
+    func testPae() -> Void {
+        
+            window = UIWindow.init(frame: UIScreen.main.bounds)
+            
+            nav = LoginNav.init(rootViewController: LoginViewController())
+            window?.rootViewController = nav
+            
+            window?.makeKeyAndVisible()
+            window?.backgroundColor = UIColor.white
+            
+            // 设置全局颜色
+            UITabBar.appearance().tintColor = TABBAR_BGCOLOR
+        
+    }
+    
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
 
@@ -71,11 +87,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                 UserDefaults.standard.synchronize()
                 
                 /// 取出本地的账号密码重新登录，刷新本地的token
-                
                 if AccountModel.isLogin() {
                     AccountModel.loginWithLocalPassAndAccount()
-                    
-//                            testComplement()
 
                 } else {
                     setUnlogedMain()

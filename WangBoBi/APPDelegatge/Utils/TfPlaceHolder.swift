@@ -53,9 +53,7 @@ class TfPlaceHolder : UITextField,UITextFieldDelegate,UIGestureRecognizerDelegat
         seePassImg.isUserInteractionEnabled = true
         
         self.addSubview(seePassImg)
-        
-        /// 编辑时候显示取消按钮
-        self.clearsOnBeginEditing = true
+
         
         
         //继承代理
@@ -116,8 +114,8 @@ class TfPlaceHolder : UITextField,UITextFieldDelegate,UIGestureRecognizerDelegat
     //    }
     
     //统计文字个数
-    func textField(_ textField: UITextField, shouldChangeCharactersIn range:      NSRange, replacementString string: String) -> Bool {
-        
+    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
+       
         if self.isSecureTextEntry == true {
             seePassImg.isHidden = false
             

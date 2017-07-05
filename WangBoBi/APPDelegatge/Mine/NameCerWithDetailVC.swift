@@ -226,10 +226,6 @@ class NameCerWithDetailVC: UIViewController,UITableViewDataSource,UITableViewDel
         default:
             break
         }
-        
-        CCog(message: nameLabel as Any)
-        CCog(message: cardID as Any)
-        
     }
 
     
@@ -315,29 +311,32 @@ class UPloadIDImgCell: UITableViewCell {
                 CCog(message: imgData)
                 
                 DispatchQueue.main.async {
+                    
+                    /// 左边身份证
                     if self.leftSelectedImg {
                         
-                        AccountModel.uploadImgFromLocalLibrary(imgData: imgData, finished: { (result) in
-                            CCog(message: result)
-                            
-                            CardModel.shared.frontUrl = result
+                        AccountModel.uploadImgFromLocalLibrary(imgData: imgData, finished: { (result, uploadResutl) in
+                            if uploadResutl {
+                                
+                                /// 赋值
+                                CardModel.shared.frontUrl = result
+                                
+                                self.leftImg.setImage(UIImage.init(data: imgData), for: .normal)
+                                self.leftSelectedImg = false
+                            }
                         })
-                        
-                        self.leftImg.setImage(UIImage.init(data: imgData), for: .normal)
-                        self.leftSelectedImg = false
                     }
                     
+                    /// 右边身份证
                     if self.rightSelectedImg {
-                        self.rightImg.setImage(UIImage.init(data: imgData), for: .normal)
-                        self.rightSelectedImg = false
-                        
-                        
-                        AccountModel.uploadImgFromLocalLibrary(imgData: imgData, finished: { (result) in
-                            CCog(message: result)
+                        AccountModel.uploadImgFromLocalLibrary(imgData: imgData, finished: { (result, iploadResult) in
                             
-                            CardModel.shared.backURL = result
+                            if iploadResult {
+                                CardModel.shared.backURL = result
+                                self.rightImg.setImage(UIImage.init(data: imgData), for: .normal)
+                                self.rightSelectedImg = false
+                            }
                         })
-                        
                     }
                 }
             }

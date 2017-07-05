@@ -138,7 +138,6 @@
 		26EF14A31EF900F8005663F1 /* ShowFailV.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26EF14A21EF900F8005663F1 /* ShowFailV.swift */; };
 		26EF14A51EF90DC2005663F1 /* BaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26EF14A41EF90DC2005663F1 /* BaseViewController.swift */; };
 		26EF14A91EF9178D005663F1 /* LoginModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26EF14A81EF9178D005663F1 /* LoginModel.swift */; };
-		26EF14AD1EF91F05005663F1 /* ForgetPassModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26EF14AC1EF91F05005663F1 /* ForgetPassModel.swift */; };
 		26EF14AF1EF922CF005663F1 /* RequestCommon.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26EF14AE1EF922CF005663F1 /* RequestCommon.swift */; };
 		26F248B41EFFC05300599CC7 /* NameCerWithDetailVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26F248B31EFFC05300599CC7 /* NameCerWithDetailVC.swift */; };
 		26F248BA1EFFE9F500599CC7 /* UploadHeadTool.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26F248B91EFFE9F500599CC7 /* UploadHeadTool.swift */; };
@@ -348,7 +347,6 @@
 		26EF14A21EF900F8005663F1 /* ShowFailV.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShowFailV.swift; sourceTree = "<group>"; };
 		26EF14A41EF90DC2005663F1 /* BaseViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseViewController.swift; sourceTree = "<group>"; };
 		26EF14A81EF9178D005663F1 /* LoginModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginModel.swift; sourceTree = "<group>"; };
-		26EF14AC1EF91F05005663F1 /* ForgetPassModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ForgetPassModel.swift; sourceTree = "<group>"; };
 		26EF14AE1EF922CF005663F1 /* RequestCommon.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RequestCommon.swift; sourceTree = "<group>"; };
 		26F248B31EFFC05300599CC7 /* NameCerWithDetailVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NameCerWithDetailVC.swift; sourceTree = "<group>"; };
 		26F248B91EFFE9F500599CC7 /* UploadHeadTool.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UploadHeadTool.swift; sourceTree = "<group>"; };
@@ -577,7 +575,6 @@
 		260B20D71EF7B19400E78FD8 /* ForgetPass */ = {
 			isa = PBXGroup;
 			children = (
-				26EF14AB1EF91EEE005663F1 /* model */,
 				26EF14AA1EF91EE2005663F1 /* controller */,
 			);
 			name = ForgetPass;
@@ -1186,14 +1183,6 @@
 			name = controller;
 			sourceTree = "<group>";
 		};
-		26EF14AB1EF91EEE005663F1 /* model */ = {
-			isa = PBXGroup;
-			children = (
-				26EF14AC1EF91F05005663F1 /* ForgetPassModel.swift */,
-			);
-			name = model;
-			sourceTree = "<group>";
-		};
 		26F484701EEFD55400177670 = {
 			isa = PBXGroup;
 			children = (
@@ -1377,7 +1366,6 @@
 				261004B51EF8BB9100DE000F /* AgreeMentVC.swift in Sources */,
 				2649612D1EF0D08F00A559D6 /* FTNotificationIndicator.m in Sources */,
 				2650C18C1F036109005BE741 /* GetMoneyScanVC.swift in Sources */,
-				26EF14AD1EF91F05005663F1 /* ForgetPassModel.swift in Sources */,
 				264960C01EF0C28F00A559D6 /* POPAnimationExtras.mm in Sources */,
 				26CF98511F0B26CD008F8F23 /* AccountModel.swift in Sources */,
 				265991F41EF65D5C004391E9 /* CommonBtn.swift in Sources */,
