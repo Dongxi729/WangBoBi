@@ -29,7 +29,7 @@ extension NetWorkTool {
                 if i == 0 {
                     
                     address += "?\(key)=\(value)"
-                }else {
+                } else {
                     
                     address += "&\(key)=\(value)"
                 }

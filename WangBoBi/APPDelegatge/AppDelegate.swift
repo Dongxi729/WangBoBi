@@ -12,7 +12,7 @@ import UIKit
 class AppDelegate: UIResponder, UIApplicationDelegate {
     
     var window: UIWindow?
-
+    
     var nav : UINavigationController?
     
     // MARK: - 设置已经登录主界面
@@ -24,7 +24,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         /// 请求首页数据
         /// 请求首页数据
-//        AccountModel.shared()?.indexInfo()
+        //        AccountModel.shared()?.indexInfo()
         
         window?.makeKeyAndVisible()
         window?.backgroundColor = UIColor.white
@@ -50,22 +50,22 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     /// 测试
     func testPae() -> Void {
         
-            window = UIWindow.init(frame: UIScreen.main.bounds)
-            
-            nav = LoginNav.init(rootViewController: LoginViewController())
-            window?.rootViewController = nav
-            
-            window?.makeKeyAndVisible()
-            window?.backgroundColor = UIColor.white
-            
-            // 设置全局颜色
-            UITabBar.appearance().tintColor = TABBAR_BGCOLOR
+        window = UIWindow.init(frame: UIScreen.main.bounds)
+        
+        nav = LoginNav.init(rootViewController: LoginViewController())
+        window?.rootViewController = nav
+        
+        window?.makeKeyAndVisible()
+        window?.backgroundColor = UIColor.white
+        
+        // 设置全局颜色
+        UITabBar.appearance().tintColor = TABBAR_BGCOLOR
         
     }
     
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
-
+        
         
         let now = Date()
         let timerStamp : TimeInterval = now.timeIntervalSince1970
@@ -74,7 +74,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         CCog(message: timeStamp)
         
-        
+        //
         if let lastLoginTime = UserDefaults.standard.object(forKey: "loginTime") as? Int {
             CCog(message: lastLoginTime)
             
@@ -89,7 +89,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                 /// 取出本地的账号密码重新登录，刷新本地的token
                 if AccountModel.isLogin() {
                     AccountModel.loginWithLocalPassAndAccount()
-
+                    
                 } else {
                     setUnlogedMain()
                     AccountModel.logout()
@@ -114,140 +114,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     //// 测试接口
     func testComplement() {
-//        let param : [String : String] = ["uid" : (AccountModel.shared()?.Id.stringValue)!,
-//                                         "token" : (AccountModel.shared()?.Token)!,
-//                                         "phone" : "15960005714",
-//                                         "code" : "",
-//                                         "ac" : "smsg"]
-//        CCog(message: param)
-//        NetWorkTool.shared.postWithPath(path: DOB_AUTH, paras: param, success: { (result) in
-//            CCog(message: result)
-//        }) { (error) in
-//            CCog(message: error.localizedDescription)
-//        }
+        let compresImage = UIImageJPEGRepresentation(#imageLiteral(resourceName: "forgetPass3"), 1.0)
         
-//        NetWorkTool.shared.postWithPath(path: LOGIN_URL, paras: ["email" : "18259129536@163.com","pwd" : "123".md5()], success: { (result) in
-//            CCog(message: result)
-//            
-//            CCog(message: "123".md5())
-//            guard let resultData = result as? NSDictionary else {
-//                CCog(message: "格式不对")
-//                return
-//            }
-//
-//            
-//        }) { (error) in
-//            CCog(message: error.localizedDescription)
-//        }
+        let request = "http://192.168.1.10:8010/ifs/headimg.ashx?uid=\((AccountModel.shared()?.Id.stringValue)!)&token=\((AccountModel.shared()?.Token)!)&ac=dd"
+        CCog(message: request)
         
-//        NetWorkTool.shared.postWithPath(path: RIGISTER_URL, paras: ["email" : "18259129536.com","pwd" : "123".md5(),"referee" : ""], success: { (result) in
-//            CCog(message: result)
-//        }) { (error) in
-//            CCog(message: error.localizedDescription)
-//        }
-        
-        
-//        
-//        NetWorkTool.shared.postWithPath(path: FORGETPASS_URL, paras: ["email" : "946737816@qq.com","pwd" : "123456".md5(),"code" : "RN6240","ac" : "femail"], success: { (result) in
-//            CCog(message: result)
-//        }) { (error) in
-//            CCog(message: error.localizedDescription)
-//        }
-        
-//        let param = ["uid" : (AccountModel.shared()?.Id.stringValue)!,
-//                     "token" : (AccountModel.shared()?.Token)!,
-//                     "oldpwd" : "123456".md5(),
-//                     "newpwd" : "123".md5()]
-//        NetWorkTool.shared.postWithPath(path: CHANGELOGIN_PASS, paras: param, success: { (result) in
-//            CCog(message: result)
-//        }) { (error) in
-//            CCog(message: error.localizedDescription)
-//        }
-        
-//        let param : [String : String] = ["uid" : (AccountModel.shared()?.Id.stringValue)!,
-//                                         "token" : (AccountModel.shared()?.Token)!,
-//                                         "phone" : "18905036476",
-//                                         "code" : "446652",
-//                                         "ac" : "bpon"]
-//        CCog(message: param)
-//        NetWorkTool.shared.postWithPath(path: BIND_PHONE, paras: param, success: { (result) in
-//            CCog(message: result)
-//
-//        }) { (error) in
-//            let alertMsg = (error as NSError).userInfo["NSLocalizedDescription"]
-//            toast(toast: alertMsg! as! String)
-//        }
-        
-        
-//        let param = ["uid" : (AccountModel.shared()?.Id.stringValue)!,
-//                     "token" : (AccountModel.shared()?.Token)!,
-//                     "oldpwd" : "123".md5(),
-//                     "newpwd" : "123456".md5(),
-//            "ac" : "rpd"]
-//        
-//        CCog(message: param)
-//        
-//        
-//        NetWorkTool.shared.postWithPath(path: PAY_PASS, paras: param, success: { (result) in
-//            CCog(message: result)
-//
-//        }) { (error) in
-//            let alertMsg = (error as NSError).userInfo["NSLocalizedDescription"]
-//            toast(toast: alertMsg! as! String)
-//        }
-
-        
-//        let compresImage = UIImageJPEGRepresentation(#imageLiteral(resourceName: "Mine_add"), 1.0)
-//        
-//        NetWorkTool.shared.postWithImageWithData(imgData: compresImage!, path: UPLOAD_IMGDATA, success: { (result) in
-//            CCog(message: result)
-//        }) { (error) in
-//            CCog(message: error.localizedDescription)
-//        }
-        
-        //        NetWorkTool.shared.postWithImageWithData(imgData: compresImage!, path: TRUENAME_AUTH, success: { (result) in
-        //            CCog(message: result)
-        //        }) { (error) in
-        //            CCog(message: error.localizedDescription)
-        //        }
-        
-        
-//        http://192.168.1.10:8010/UploadFile/image/20170704034636.png
-        ///////////////////////////////////////////////////////////////////////////
-        let compresImage = UIImageJPEGRepresentation(#imageLiteral(resourceName: "Mine_add"), 1.0)
-        
-        let param : [String : String] = ["uid" : (AccountModel.shared()?.Id.stringValue)!,
-                                         "token" : (AccountModel.shared()?.Token)!,
-                                         "name" : (AccountModel.shared()?.UserName)!,
-                                         "idcode" : "111111111111111111",
-                                         "front" : "http://192.168.1.10:8010/UploadFile/image/20170704034636.png",
-                                         "reverse" : "http://192.168.1.10:8010/UploadFile/image/20170704034636.png"]
-        
-
-        CCog(message: param)
-        
-        NetWorkTool.shared.postWithPath(path: TRUENAME_AUTH, paras: param, success: { (result) in
+        NetWorkTool.shared.postWithImageWithData(imgData: compresImage!, path: request, success: { (result) in
             CCog(message: result)
-            
-            guard let resultData = result as? NSDictionary  else {
-                return
-            }
-            
-            /// 抽取提示信息
-            guard let alertMsg = resultData["Msg"] as? String else {
-                
-                return
-            }
-            
-            if alertMsg == "操作成功" {
-                let patram = ["uid" : (AccountModel.shared()?.Id.stringValue)!,
-                              "token" : (AccountModel.shared()?.Token)!]
-                NetWorkTool.shared.postWithPath(path: REFRESH_INFO, paras: patram, success: { (result) in
-                    CCog(message: result)
-                }, failure: { (error) in
-                    CCog(message: error.localizedDescription)
-                })
-            }
         }) { (error) in
             CCog(message: error.localizedDescription)
         }
@@ -256,6 +129,5 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 }
 
 
-extension String {
-    
-}
+
+

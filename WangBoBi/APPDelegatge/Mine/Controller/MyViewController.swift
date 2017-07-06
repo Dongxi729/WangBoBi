@@ -50,12 +50,22 @@ class MyViewController: UIViewController {
         
         /// 设置
         navBar?.tintColor = UIColor.white
+        
+
+        
+        if self.tableView.frame.width != 0 {
+            CCog(message: "ddddd")
+            
+            CCog(message: AccountModel.shared()?.HeadImg)
+            self.tableView.reloadData()
+        }
     }
+    
+
     
     
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
-        
         
         UIApplication.shared.statusBarStyle = UIStatusBarStyle.default
         
@@ -63,8 +73,6 @@ class MyViewController: UIViewController {
         
         let navBar = self.navigationController?.navigationBar
         navBar?.isTranslucent = false
-//        navBar?.barStyle = UIBarStyle.default
-//        navBar?.setBackgroundImage(UIImage(), for: UIBarMetrics.default)
         navBar?.shadowImage = UIImage()
         navBar?.titleTextAttributes = [
             NSForegroundColorAttributeName : UIColor.black,
@@ -77,6 +85,7 @@ class MyViewController: UIViewController {
         navBar?.tintColor = UIColor.white
     }
     
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         title = "我的"
@@ -84,6 +93,9 @@ class MyViewController: UIViewController {
         // Do any additional setup after loading the view.
         view.addSubview(tableView)
 
+//        NotificationCenter.default.addObserver(self, selector: #selector(reload), name: NSNotification.Name(rawValue: "reloadInfo"), object: nil)
+
+        CCog(message: self.classForCoder)
     }
 }
 

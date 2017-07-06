@@ -177,14 +177,20 @@ class PersonInfoEditV : UIView {
         if let imgDataDic = dd.userInfo {
             if let imgData = imgDataDic["ima"] as? Data {
                 
-                CCog(message: imgData)
-
-                
-                
-                AccountModel.uploadImgFromLocalLibrary(imgData: imgData, finished: { (result) in
+                AccountModel.uploadHeadImg(imgData: imgData, finished: { (result) in
                     CCog(message: result)
                     
+                    if result {
+                        DispatchQueue.main.async {
+                            self.avatarImg.image = UIImage.init(data: imgData)
+                            
+                            AccountModel.reloadSEL()
+                            
+                  
+                        }
+                    }
                 })
+                
             }
         }
     }

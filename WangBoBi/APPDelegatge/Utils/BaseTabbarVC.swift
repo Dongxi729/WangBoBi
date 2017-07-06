@@ -26,6 +26,7 @@ class BaseTabbarVC: UITabBarController {
     
     //在这里修改
     override func viewWillLayoutSubviews() {
+
         let myHeight = self.tabBar.frame.height
         
         ///调整tabbar文本的高度

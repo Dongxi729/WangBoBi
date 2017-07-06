@@ -173,10 +173,10 @@ class TabViewCell: UITableViewCell {
         contentView.addSubview(frontIconim)
         contentView.addSubview(descLabel)
         contentView.addSubview(JianJIao)
-//        contentView.addSubview(SeparatorLine)
-        
+
         // 取出点击效果
         self.selectionStyle = UITableViewCellSelectionStyle.none
+        
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -239,13 +239,35 @@ class MyVCCell : UITableViewCell {
         // 取出点击效果
         self.selectionStyle = UITableViewCellSelectionStyle.none
         
+        
+        
         /// 头像
         AvatarHeadImg.setImage(urlString: AccountModel.shared()?.HeadImg, placeholderImage: #imageLiteral(resourceName: "logo"))
+        
         nameLabel.text = AccountModel.shared()?.TrueName
         emailAddress.text = AccountModel.shared()?.UserName
         
+        CCog(message: "//////")
+        CCog(message: AccountModel.shared()?.HeadImg as Any)
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(reload), name: NSNotification.Name(rawValue: "reloadInfo"), object: nil)
+        
+        CCog(message: self.classForCoder)
+    }
+    
+    
+    @objc fileprivate func reload() {
+        
+        CCog(message: "refres")
+        
+        /// 头像
+        AvatarHeadImg.setImage(urlString: AccountModel.shared()?.HeadImg, placeholderImage: #imageLiteral(resourceName: "logo"))
+        
+        nameLabel.text = AccountModel.shared()?.TrueName
+        emailAddress.text = AccountModel.shared()?.UserName
         
     }
+    
     
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")

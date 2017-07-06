@@ -10,28 +10,6 @@ import UIKit
 
 class MainPageViewController: BaseViewController {
     
-    @objc fileprivate func refreshSEL(sender : UIRefreshControl) {
-        CCog(message: "refreshSEL")
-        
-        AccountModel.indexInfo(finished: { (commenModel) in
-            self.topModel = commenModel
-            
-            CCog(message: commenModel.count)
-        }, finishedTop: { (merTopModel) in
-            self.mertopModel = merTopModel
-            CCog(message: merTopModel.count)
-        }) { (xxx) in
-            self.loginModel = xxx
-            CCog(message: xxx)
-            
-            sleep(UInt32(2.0))
-            self.collV.reloadData()
-            sender.endRefreshing()
-        }
-        
-
-    }
-    
     /// 九宫格
     lazy var collV: UICollectionView = {
         
@@ -75,6 +53,8 @@ class MainPageViewController: BaseViewController {
     /// 模型总数
     var loginModel : Int = 0
     
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -86,7 +66,7 @@ class MainPageViewController: BaseViewController {
         
         AccountModel.indexInfo(finished: { (commenModel) in
             self.topModel = commenModel
-
+            
             CCog(message: commenModel.count)
         }, finishedTop: { (merTopModel) in
             self.mertopModel = merTopModel
@@ -100,11 +80,11 @@ class MainPageViewController: BaseViewController {
         let d : headerView = collV.viewWithTag(888) as! headerView
         d.delegate = self;
         
-
+        
     }
     
     static let shared = MainPageViewController()
-
+    
 }
 
 extension MainPageViewController : UICollectionViewDataSource,UICollectionViewDelegateFlowLayout,HeadReuseDelegate {
@@ -123,7 +103,7 @@ extension MainPageViewController : UICollectionViewDataSource,UICollectionViewDe
             cell.dataSource = xxx2
             cell.topView.setLabelNo(str: "TOP" + String(indexPath.row))
         }
-
+        
         return cell
         
     }
@@ -187,18 +167,23 @@ extension MainPageViewController : UICollectionViewDataSource,UICollectionViewDe
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-
+        
         if indexPath.section == 0 {
-
+            
         } else {
             let xxx2 = topModel[indexPath.row]
+            
             
             let webVIew = WebVC()
             webVIew.url = xxx2.Href
             self.navigationController?.pushViewController(webVIew, animated: true)
             webVIew.view.backgroundColor = UIColor.white
+            
+            
+            
         }
     }
+    
     
     // MARK: - HeadReuseDelegate
     func chooseIndex(index: Int) {
@@ -233,6 +218,8 @@ extension MainPageViewController : UICollectionViewDataSource,UICollectionViewDe
 extension MainPageViewController : headerViewelegate {
     func headerViewEndfun(_ _endRefresh: () -> Void) {
         
+        UIApplication.shared.statusBarStyle = .lightContent
+        
         /// 取出刷新头
         let d : headerView = self.collV.viewWithTag(888) as! headerView
         
@@ -246,7 +233,7 @@ extension MainPageViewController : headerViewelegate {
         }) { (xxx) in
             self.loginModel = xxx
             CCog(message: xxx)
-
+            
             self.collV.reloadData()
             d.endRefresh()
         }

@@ -17,20 +17,8 @@ let LOGIN_URL = "http://192.168.1.10:8010/ifs/login.ashx"
 /// 忘记密码链接
 let FORGETPASS_URL = "http://192.168.1.10:8010/ifs/passfind.ashx"
 
-/// 发生验证码
-let SENDAUTHO_URL = ""
-
-/// 邮箱验证码
-let EMAILSIGNED_URL = ""
-
-/// 登录密码修改
-let MODIFYLOGINPASS_URL = ""
-
 /// 注册请求
 let RIGISTER_URL = "http://192.168.1.10:8010/ifs/reg.ashx"
-
-/// 验证token借口
-let CHECK_TOKEN = ""
 
 /// 首页请求接口
 let INDEX_URL = "http://192.168.1.10:8010/ifs/index.ashx"
@@ -47,7 +35,6 @@ let BIND_PHONE = "http://192.168.1.10:8010/ifs/toiv.ashx"
 /// 支付密码
 let PAY_PASS = "http://192.168.1.10:8010/ifs/resetpaypwd.ashx"
 
-
 /// 上传图片
 let UPLOAD_IMGDATA = "http://192.168.1.10:8010/ifs/headimg.ashx"
 
@@ -56,3 +43,6 @@ let TRUENAME_AUTH = "http://192.168.1.10:8010/ifs/realauth.ashx"
 
 /// 刷新接口
 let REFRESH_INFO = "http://192.168.1.10:8010/ifs/basicinfo.ashx"
+
+/// 个人接口
+let PERSON_INFO = "http://192.168.1.10:8010/ifs/basicinfo.ashx"

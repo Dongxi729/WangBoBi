@@ -26,6 +26,7 @@ class BaseViewController: UIViewController,UIGestureRecognizerDelegate,UINavigat
         //设置导航栏背景颜色透明
         UIApplication.shared.statusBarStyle = UIStatusBarStyle.lightContent
         
+  
         
         /// 设置左上角按钮
         let btnn = CommonBtn()

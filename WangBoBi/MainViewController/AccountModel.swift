@@ -366,7 +366,7 @@ class AccountModel: NSObject,NSCoding {
     // 归档账号的路径
     static let accountPath = NSSearchPathForDirectoriesInDomains(FileManager.SearchPathDirectory.documentDirectory, FileManager.SearchPathDomainMask.userDomainMask, true).last! + "/Account.plist"
     
-    // 归档账号的路径
+    // 首页数据保存
     static let userData = NSSearchPathForDirectoriesInDomains(FileManager.SearchPathDirectory.documentDirectory, FileManager.SearchPathDomainMask.userDomainMask, true).last! + "/Data.plist"
     
     // MARK: - 保存对象
@@ -376,20 +376,6 @@ class AccountModel: NSObject,NSCoding {
     }
     
     
-    
-    // MARK: - 检查用户是否有效
-    class func checuUserInfo() {
-        if isLogin() {
-            // 已经登录并且保存过的信息
-            
-            let params : [String : String ] = [:]
-            NetWorkTool.shared.postWithPath(path: CHECK_TOKEN, paras: params, success: { (result) in
-                
-            }, failure: { (error) in
-                CCog(message: error.localizedDescription)
-            })
-        }
-    }
     
     /// 登录保存
     func updateUserInfo() -> Void {
@@ -458,7 +444,7 @@ class AccountModel: NSObject,NSCoding {
             let account = AccountModel(dict: resultData["Data"] as! [String : Any])
             account.saveAccount()
             
-
+            
             CCog(message: accountPath)
             
             guard let alertMsg = resultData["Msg"] as? String else {
@@ -601,7 +587,7 @@ class AccountModel: NSObject,NSCoding {
             guard let resultData = result as? NSDictionary else {
                 return
             }
-        
+            
             /// 抽取提示信息
             guard let alertMsg = resultData["Msg"] as? String else {
                 
@@ -674,7 +660,7 @@ class AccountModel: NSObject,NSCoding {
         let param : [String :String] = ["uid" : (AccountModel.shared()?.Id.stringValue)!,
                                         "token" : (AccountModel.shared()?.Token)!]
         
-//        CCog(message: param)
+        //        CCog(message: param)
         NetWorkTool.shared.postWithPath(path: INDEX_URL, paras: param, success: { (result) in
             CCog(message: result)
             
@@ -697,8 +683,8 @@ class AccountModel: NSObject,NSCoding {
                 if let dic = resultData["Data"] as? [String : Any] {
                     
                     finishedTotalModel(dic.count)
-                    CCog(message: dic.count)
                     
+                    //头条推荐
                     if let dicc = [dic["CommendTop"] as? NSArray][0] {
                         
                         var mmm = [IndexCommentTopModel]()
@@ -716,6 +702,7 @@ class AccountModel: NSObject,NSCoding {
                         }
                     }
                     
+                    //热评商户
                     if let dicc = [dic["MerTop"] as? NSArray][0] {
                         var mmm = [IndexMertopModel]()
                         for vv in dicc {
@@ -844,13 +831,13 @@ class AccountModel: NSObject,NSCoding {
             guard let alertMsg = resultData["Msg"] as? String else {
                 return
             }
-
+            
             toast(toast: alertMsg)
             
             if alertMsg == "恭喜您，绑定手机成功" {
                 finished(true)
             }
-
+            
             
         }) { (error) in
             let alertMsg = (error as NSError).userInfo["NSLocalizedDescription"]
@@ -858,7 +845,7 @@ class AccountModel: NSObject,NSCoding {
         }
     }
     
-
+    
     
     // MARK: - 修改登录密码
     ///
@@ -1020,6 +1007,8 @@ class AccountModel: NSObject,NSCoding {
             toast(toast: "图片数据不对")
         }
     }
+    
+    
     // MARK: - 实名认证接口
     ///
     /// - Parameters:
@@ -1035,7 +1024,7 @@ class AccountModel: NSObject,NSCoding {
                                          "idcode" : idCode,
                                          "front" : frontImg,
                                          "reverse" : backImgURL]
-
+        
         CCog(message: param)
         
         NetWorkTool.shared.postWithPath(path: TRUENAME_AUTH, paras: param, success: { (result) in
@@ -1071,6 +1060,71 @@ class AccountModel: NSObject,NSCoding {
             CCog(message: error.localizedDescription)
         }
     }
+    
+    // MARK: - 上传头像
+    class func uploadHeadImg(imgData : Data,finished: @escaping (_ result : Bool)->()) {
+        let request = "http://192.168.1.10:8010/ifs/headimg.ashx?uid=\((AccountModel.shared()?.Id.stringValue)!)&token=\((AccountModel.shared()?.Token)!)&ac=myimg"
+        
+        NetWorkTool.shared.postWithImageWithData(imgData: imgData, path: request, success: { (result) in
+            CCog(message: result)
+            
+            guard let resultData = result as? NSDictionary  else {
+                return
+            }
+            
+            /// 抽取提示信息
+            guard let alertMsg = resultData["Msg"] as? String else {
+                
+                return
+            }
+            
+            if alertMsg == "操作成功" {
+                finished(true)
+            }
+            
+            toast(toast: alertMsg)
+            
+        }) { (error) in
+            CCog(message: error.localizedDescription)
+        }
+    }
+    
+    // MARK: - 刷新
+    class func reloadSEL() {
+        
+        let param : [String : String] = ["uid" : (AccountModel.shared()?.Id.stringValue)!,
+                                         "token" : (AccountModel.shared()?.Token)!]
+        
+        NetWorkTool.shared.postWithPath(path: PERSON_INFO, paras: param, success: { (result) in
+            CCog(message: result)
+            
+            guard let resultData = result as? NSDictionary  else {
+                return
+            }
+            
+            CCog(message: resultData["Data"] as! [String : Any])
+            
+            
+            userAccount = nil
+            
+            
+            /// 更新本地存储信息
+            let account = AccountModel(dict: resultData["Data"] as! [String : Any])
+            
+            
+            account.saveAccount()
+            
+            AccountModel.shared()?.updateUserInfo()
+            
+            /// 发通知刷新提示
+            NotificationCenter.default.post(name: NSNotification.Name(rawValue: "reloadInfo"), object: nil)
+            
+        }) { (error) in
+            CCog(message: error.localizedDescription)
+        }
+    }
+    
+    
     
     // MARK: - 归档接档
     func encode(with aCoder: NSCoder) {
