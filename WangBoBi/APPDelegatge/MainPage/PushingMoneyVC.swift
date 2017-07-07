@@ -38,6 +38,7 @@ class PushingMoneyVC: BaseViewController,UITextFieldDelegate,BindPhoneFooterVDel
         
         d.delegate = self
         d.tag = 1111
+        d.font = UIFont.systemFont(ofSize: 12 * SCREEN_SCALE)
         return d
     }()
     
@@ -81,6 +82,23 @@ class PushingMoneyVC: BaseViewController,UITextFieldDelegate,BindPhoneFooterVDel
         bgImg.addSubview(cardNumLabel)
         bgImg.addSubview(cardPass)
         bgImg.addSubview(cameraBn)
+        
+        /// 接收通知
+        NotificationCenter.default.addObserver(self, selector: #selector(changeCodeSEL), name: NSNotification.Name(rawValue: "changeScanCode"), object: nil)
+    }
+    
+    /// 更新充值卡账号信息
+    @objc fileprivate func changeCodeSEL() {
+        
+        CCog(message: ScanModel.shared.codeStr)
+        
+        if ScanModel.shared.codeStr?.characters.count != 0 {
+        
+            self.cardNumLabel.text = ScanModel.shared.codeStr
+            
+            NotificationCenter.default.removeObserver(self, name: NSNotification.Name(rawValue: "changeScanCode"), object: nil)
+        }
+        
     }
     
     

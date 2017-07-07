@@ -213,9 +213,14 @@ extension ScanCodeController:AVCaptureMetadataOutputObjectsDelegate {
                     //去打开地址链接
                 } else {
                     //获取非链接结果
+                    ScanModel.shared.codeStr = (object as AnyObject).stringValue
+                    NotificationCenter.default.post(name: NSNotification.Name(rawValue: "changeScanCode"), object: nil)
+                    
                     let alertViewController = UIAlertController(title: "扫描结果", message: (object as AnyObject).stringValue, preferredStyle: .alert)
-                    let actionCancel = UIAlertAction(title: "退出", style: .cancel, handler: { (action) in
+                    let actionCancel = UIAlertAction(title: "确定", style: .cancel, handler: { (action) in
                         _ = self.navigationController?.popViewController(animated: true)
+                        
+                        
                     })
                     let actinSure = UIAlertAction(title: "再次扫描", style: .default, handler: { (action) in
                         self.session.startRunning()
@@ -259,3 +264,7 @@ class BtnWithImage: UIButton {
     }
     
 }
+
+
+
+

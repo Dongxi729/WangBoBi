@@ -50,20 +50,10 @@ class MyViewController: UIViewController {
         
         /// 设置
         navBar?.tintColor = UIColor.white
-        
 
-        
-        if self.tableView.frame.width != 0 {
-            CCog(message: "ddddd")
-            
-            CCog(message: AccountModel.shared()?.HeadImg)
-            self.tableView.reloadData()
-        }
     }
     
 
-    
-    
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         
@@ -93,8 +83,6 @@ class MyViewController: UIViewController {
         // Do any additional setup after loading the view.
         view.addSubview(tableView)
 
-//        NotificationCenter.default.addObserver(self, selector: #selector(reload), name: NSNotification.Name(rawValue: "reloadInfo"), object: nil)
-
         CCog(message: self.classForCoder)
     }
 }
@@ -113,6 +101,11 @@ extension MyViewController : UITableViewDelegate,UITableViewDataSource {
             switch indexPath.row {
             case 0:
                 let cell = tableView.dequeueReusableCell(withIdentifier: "MyVCCell") as! MyVCCell
+                
+                cell.preservesSuperviewLayoutMargins = false
+                cell.separatorInset = UIEdgeInsets.zero
+                cell.layoutMargins = UIEdgeInsets.zero
+                
                 cell.backgroundColor = UIColor.colorWithHexString("2796DD")
 
                 return cell
@@ -144,7 +137,6 @@ extension MyViewController : UITableViewDelegate,UITableViewDataSource {
     }
     
     func numberOfSections(in tableView: UITableView) -> Int {
-        CCog(message: cellDataSource.count)
         return cellDataSource.count
     }
     

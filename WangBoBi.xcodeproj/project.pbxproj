@@ -128,6 +128,7 @@
 		26B14F001EF29ABA0050135B /* ReceiveMonVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26B14EFF1EF29ABA0050135B /* ReceiveMonVC.swift */; };
 		26B14F021EF29F490050135B /* ReceiveCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26B14F011EF29F490050135B /* ReceiveCell.swift */; };
 		26CF98511F0B26CD008F8F23 /* AccountModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26CF98501F0B26CD008F8F23 /* AccountModel.swift */; };
+		26DBE6C61F0F891D00551F63 /* ScanModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26DBE6C51F0F891D00551F63 /* ScanModel.swift */; };
 		26ECA3761F0134350093D12E /* AleradyCertify.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26ECA3751F0134350093D12E /* AleradyCertify.swift */; };
 		26ED24481EF3E18C00642804 /* TrueNameCertifiedVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26ED24471EF3E18C00642804 /* TrueNameCertifiedVC.swift */; };
 		26ED244A1EF3E4EA00642804 /* SetDoubelCertifiVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26ED24491EF3E4EA00642804 /* SetDoubelCertifiVC.swift */; };
@@ -337,6 +338,7 @@
 		26B14EFF1EF29ABA0050135B /* ReceiveMonVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ReceiveMonVC.swift; path = ../../../../ReceiveMonVC.swift; sourceTree = "<group>"; };
 		26B14F011EF29F490050135B /* ReceiveCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReceiveCell.swift; sourceTree = "<group>"; };
 		26CF98501F0B26CD008F8F23 /* AccountModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AccountModel.swift; sourceTree = "<group>"; };
+		26DBE6C51F0F891D00551F63 /* ScanModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ScanModel.swift; sourceTree = "<group>"; };
 		26ECA3751F0134350093D12E /* AleradyCertify.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AleradyCertify.swift; sourceTree = "<group>"; };
 		26ED24471EF3E18C00642804 /* TrueNameCertifiedVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TrueNameCertifiedVC.swift; path = ../../../TrueNameCertifiedVC.swift; sourceTree = "<group>"; };
 		26ED24491EF3E4EA00642804 /* SetDoubelCertifiVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SetDoubelCertifiVC.swift; sourceTree = "<group>"; };
@@ -554,7 +556,6 @@
 		260B20CC1EF770CD00E78FD8 /* LoginAndRigister */ = {
 			isa = PBXGroup;
 			children = (
-				26CF98501F0B26CD008F8F23 /* AccountModel.swift */,
 				260B20CE1EF770FD00E78FD8 /* controller */,
 			);
 			name = LoginAndRigister;
@@ -851,6 +852,7 @@
 		264960821EF0C08D00A559D6 /* MainViewController */ = {
 			isa = PBXGroup;
 			children = (
+				26DBE6C41F0F890100551F63 /* model */,
 				2607D1541EF21E570015625E /* MainTabBarViewController.swift */,
 				260B20CC1EF770CD00E78FD8 /* LoginAndRigister */,
 				2649607E1EF0C02C00A559D6 /* Shopper-02 */,
@@ -1148,6 +1150,15 @@
 			name = refresh;
 			sourceTree = "<group>";
 		};
+		26DBE6C41F0F890100551F63 /* model */ = {
+			isa = PBXGroup;
+			children = (
+				26CF98501F0B26CD008F8F23 /* AccountModel.swift */,
+				26DBE6C51F0F891D00551F63 /* ScanModel.swift */,
+			);
+			name = model;
+			sourceTree = "<group>";
+		};
 		26EF14A11EF900DD005663F1 /* AlertView */ = {
 			isa = PBXGroup;
 			children = (
@@ -1362,6 +1373,7 @@
 				26B14F021EF29F490050135B /* ReceiveCell.swift in Sources */,
 				264960871EF0C1B400A559D6 /* ZDXCommon.swift in Sources */,
 				2607D1551EF21E570015625E /* MainTabBarViewController.swift in Sources */,
+				26DBE6C61F0F891D00551F63 /* ScanModel.swift in Sources */,
 				26ED244A1EF3E4EA00642804 /* SetDoubelCertifiVC.swift in Sources */,
 				261004B51EF8BB9100DE000F /* AgreeMentVC.swift in Sources */,
 				2649612D1EF0D08F00A559D6 /* FTNotificationIndicator.m in Sources */,
