@@ -274,6 +274,8 @@ class UPloadIDImgCell: UITableViewCell {
     func frontChoose() -> Void {
         CCog(message: "frontChoose")
         
+        endEditing(true)
+        
         UploadHeadTool.shared.choosePic { (uploa, ddd) in
             CCog(message: uploa)
             DispatchQueue.main.async {
@@ -285,6 +287,9 @@ class UPloadIDImgCell: UITableViewCell {
     
     /// 正面选择事件
     func backChoose() -> Void {
+        
+        endEditing(true)
+        
         UploadHeadTool.shared.choosePic { (uploa, ddd) in
             //            CCog(message: uploa)
             self.leftImg.setImage(UIImage.init(data: uploa), for: .normal)

@@ -247,12 +247,7 @@ class MyVCCell : UITableViewCell {
         nameLabel.text = AccountModel.shared()?.TrueName
         emailAddress.text = AccountModel.shared()?.UserName
         
-        CCog(message: "//////")
-        CCog(message: AccountModel.shared()?.HeadImg as Any)
-        
         NotificationCenter.default.addObserver(self, selector: #selector(reload), name: NSNotification.Name(rawValue: "reloadInfo"), object: nil)
-        
-        CCog(message: self.classForCoder)
     }
     
     

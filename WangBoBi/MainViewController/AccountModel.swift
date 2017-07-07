@@ -969,7 +969,10 @@ class AccountModel: NSObject,NSCoding {
     ///   - finished: 返回图片链接地址
     class func uploadImgFromLocalLibrary(imgData : Data,finished: @escaping (_ imgUrl : String,_ uploadResult : Bool) -> ()) {
         if imgData.count > 0 {
-            NetWorkTool.shared.postWithImageWithData(imgData: imgData, path: UPLOAD_IMGDATA, success: { (result) in
+            
+            let request = "http://192.168.1.10:8010/ifs/headimg.ashx?uid=\((AccountModel.shared()?.Id.stringValue)!)&token=\((AccountModel.shared()?.Token)!)&ac=dd"
+            
+            NetWorkTool.shared.postWithImageWithData(imgData: imgData, path: request, success: { (result) in
                 CCog(message: result)
                 
                 guard let resultData = result as? NSDictionary  else {

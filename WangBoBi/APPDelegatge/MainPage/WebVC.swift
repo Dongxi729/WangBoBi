@@ -14,7 +14,7 @@ class WebVC: UIViewController,WKNavigationDelegate,WKUIDelegate {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
-        UIApplication.shared.statusBarStyle = .lightContent
+        UIApplication.shared.statusBarStyle = .default
         
         self.navigationController?.navigationBar.barTintColor = UIColor.black
     }
