@@ -4,7 +4,7 @@
 //
 //  Created by 郑东喜 on 2017/7/9.
 //  Copyright © 2017年 郑东喜. All rights reserved.
-//
+//  二级网页
 
 import UIKit
 import WebKit
@@ -25,7 +25,7 @@ class WKVC: UIViewController {
             }
         }
     }
-
+    
     lazy var webView: WKWebView = {
         let d : WKWebView = WKWebView.init(frame: self.view.bounds)
         d.addObserver(self, forKeyPath: #keyPath(WKWebView.title), options: .new, context: nil)
@@ -36,7 +36,7 @@ class WKVC: UIViewController {
     }()
     
     override func observeValue(forKeyPath keyPath: String?, of object: Any?, change: [NSKeyValueChangeKey : Any]?, context: UnsafeMutableRawPointer?) {
-   
+        
         guard let keyPath = keyPath else {return}
         guard let change = change else {return}
         
@@ -45,19 +45,16 @@ class WKVC: UIViewController {
         case "title":
             
             if let val = change[.newKey] as? String {
-                print(val)
                 self.navigationItem.title = val
             }
             break
-            case "loading":
-                if let val = change[.newKey] as? Bool {
-                    print(val)
-                }
+        case "loading":
+            if let val = change[.newKey] as? Bool {
+            }
             break
             
         case "estimatedProgress":
             if let val = change[.newKey] as? Double {
-                print(val)
             }
             break
         default:
@@ -79,7 +76,7 @@ class WKVC: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
         // Do any additional setup after loading the view.
         view.addSubview(webView)
         

@@ -1,10 +1,4 @@
-//
-//  JFNavigationController.swift
-//  BaoKanIOS
-//
-//  Created by jianfeng on 15/12/20.
-//  Copyright © 2015年 六阿哥. All rights reserved.
-//
+/// 登录后界面的导航栏
 
 import UIKit
 
@@ -55,6 +49,8 @@ class JFNavigationController: UINavigationController, UIGestureRecognizerDelegat
      - parameter animated:       是否动画
      */
     override func pushViewController(_ viewController: UIViewController, animated: Bool) {
+        
+        
         if viewControllers.count > 0 {
             viewController.hidesBottomBarWhenPushed = true
         } else {

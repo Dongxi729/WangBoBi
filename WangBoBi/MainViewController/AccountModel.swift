@@ -673,7 +673,6 @@ class AccountModel: NSObject,NSCoding {
         
 
         NetWorkTool.shared.postWithPath(path: INDEX_URL, paras: param, success: { (result) in
-            CCog(message: result)
             
             guard let resultData = result as? NSDictionary  else {
                 return

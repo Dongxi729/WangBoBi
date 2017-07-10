@@ -78,7 +78,7 @@ extension MainPageViewController : UICollectionViewDataSource,UICollectionViewDe
         if indexPath.section == 0 {
             return CGSize.init(width: itemWidth, height: itemWidth * 1.4)
         } else {
-            return CGSize.init(width: SCREEN_WIDTH - 2 * COMMON_MARGIN, height: itemWidth * 1.4)
+            return CGSize.init(width: SCREEN_WIDTH - 2 * COMMON_MARGIN, height: itemWidth * 2)
         }
     }
     
@@ -114,8 +114,6 @@ extension MainPageViewController : UICollectionViewDataSource,UICollectionViewDe
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         switch section {
         case 0:
-            
-            CCog(message: self.mertopModel.count)
             return self.mertopModel.count
         case 1:
             return self.topModel.count

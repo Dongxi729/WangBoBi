@@ -20,23 +20,19 @@ class BaseViewController: UIViewController,UIGestureRecognizerDelegate,UINavigat
         //设置导航栏背景颜色透明
         UIApplication.shared.statusBarStyle = UIStatusBarStyle.lightContent
         
-        /// 设置左上角按钮
-        let btnn = CommonBtn()
-        btnn.frame = CGRect.init(x: 0, y: SCREEN_HEIGHT * 0.01, width: SCREEN_WIDTH * 0.15, height: 20 * SCREEN_SCALE)
-        
-        btnn.addTarget(self, action:#selector(back), for: .touchUpInside)
-        
-        btnn.setBackgroundImage(UIImage.init(named: "rean"), for: .normal)
-        
-        let rightFooBarButtonItem : UIBarButtonItem = UIBarButtonItem.init(customView: btnn)
-        
-        
-        
-        /// 页面大于1，显示否则相反
         if self.navigationController?.viewControllers != nil && (self.navigationController?.viewControllers.count)! > 1 {
+            /// 设置左上角按钮
+            
+            leftBarItem.frame = CGRect.init(x: 0, y: SCREEN_HEIGHT * 0.01, width: SCREEN_WIDTH * 0.15, height: 20 * SCREEN_SCALE)
+            
+            leftBarItem.addTarget(self, action:#selector(back), for: .touchUpInside)
+            leftBarItem.setBackgroundImage(UIImage.init(named: "rean"), for: .normal)
+        
+            let rightFooBarButtonItem : UIBarButtonItem = UIBarButtonItem.init(customView: leftBarItem)
+            
             self.navigationItem.setLeftBarButton(rightFooBarButtonItem, animated: true)
         }
-        
+
         
         /// 实名认证
         ///PushingMoneyVC
@@ -44,11 +40,11 @@ class BaseViewController: UIViewController,UIGestureRecognizerDelegate,UINavigat
             NSStringFromClass(self.classForCoder).contains("AgreeMentVC") ||
             NSStringFromClass(self.classForCoder).contains("WKVC") {
             
-
+            
             UIApplication.shared.statusBarStyle = UIStatusBarStyle.default
             
             /// 为那个页面则修改左上角图标
-            btnn.setBackgroundImage(UIImage.init(named: "back"), for: .normal)
+            leftBarItem.setBackgroundImage(UIImage.init(named: "back"), for: .normal)
             
             let navBar = navigationController?.navigationBar
             navBar?.barTintColor = UIColor.clear
@@ -71,7 +67,7 @@ class BaseViewController: UIViewController,UIGestureRecognizerDelegate,UINavigat
             UIApplication.shared.statusBarStyle = UIStatusBarStyle.default
             
             /// 为那个页面则修改左上角图标
-            btnn.setBackgroundImage(UIImage.init(named: "back"), for: .normal)
+            self.leftBarItem.setBackgroundImage(UIImage.init(named: "back"), for: .normal)
             
             let navBar = navigationController?.navigationBar
             navBar?.barTintColor = UIColor.clear
@@ -106,7 +102,7 @@ class BaseViewController: UIViewController,UIGestureRecognizerDelegate,UINavigat
             NSStringFromClass(self.classForCoder).contains("ScanCodeController") {
             
             /// 为那个页面则修改左上角图标
-            btnn.setBackgroundImage(UIImage.init(named: "rean"), for: .normal)
+            self.leftBarItem.setBackgroundImage(UIImage.init(named: "rean"), for: .normal)
             
             let navBar = navigationController?.navigationBar
             navBar?.barTintColor = UIColor.clear
