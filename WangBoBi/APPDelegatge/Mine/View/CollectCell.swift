@@ -11,21 +11,12 @@ import UIKit
 /// 单个cell
 class CollectCell: UICollectionViewCell {
 
-    /// 头条推荐
-    var dataSource : IndexCommentTopModel? {
-        didSet {
 
-            self.descLabl.text = dataSource?.Title
-            self.commentLabel.text = (dataSource?.Num)! + " 好评"
-            self.imgView.setImage(urlString: dataSource?.HeadImg, placeholderImage: #imageLiteral(resourceName: "logo"))
-        }
-    }
     
     /// 热评商户
     var dataSource2 : IndexMertopModel? {
         didSet {
             self.descLabl.text = dataSource2?.Company
-            self.commentImg.image = #imageLiteral(resourceName: "saw")
             self.commentLabel.text = (dataSource2?.Num)!
             self.commentLabel.textColor = UIColor.gray
             self.imgView.setImage(urlString: dataSource2?.LogoImg, placeholderImage: #imageLiteral(resourceName: "logo"))
@@ -34,7 +25,7 @@ class CollectCell: UICollectionViewCell {
     
     
     /// 描述文本
-    lazy var descLabl: UILabel = {
+    fileprivate lazy var descLabl: UILabel = {
         let d : UILabel = UILabel.init(frame: CGRect.init(x: 0, y: self.imgView.BottomY + 5 * SCREEN_SCALE, width: self.Width, height: 13 * SCREEN_SCALE))
         d.font = UIFont.systemFont(ofSize: 12 * SCREEN_SCALE)
         return d
@@ -49,7 +40,7 @@ class CollectCell: UICollectionViewCell {
     }()
     
     /// 评论
-    lazy var commentLabel: UILabel = {
+    fileprivate lazy var commentLabel: UILabel = {
         let d : UILabel = UILabel.init(frame: CGRect.init(x: self.commentImg.RightX + COMMON_MARGIN / 2, y:self.commentImg.TopY , width: self.Width, height: 15 * SCREEN_SCALE))
         d.font = UIFont.systemFont(ofSize: 10 * SCREEN_SCALE)
         d.textColor = UIColor.red
@@ -57,8 +48,9 @@ class CollectCell: UICollectionViewCell {
     }()
     
     
+    
     /// 图片
-    lazy var imgView: UIImageView = {
+    fileprivate lazy var imgView: UIImageView = {
         let d : UIImageView = UIImageView.init(frame: CGRect.init(x: 0, y: 0, width: self.Height * 0.75, height: self.Height * 0.75))
         d.image = #imageLiteral(resourceName: "failBg")
         d.backgroundColor = UIColor.randomColor()
@@ -114,6 +106,64 @@ class TopV: UIView {
     override init(frame: CGRect) {
         super.init(frame: frame)
         addSubview(topBgV)
+    }
+    
+    required init?(coder aDecoder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+}
+
+
+/// 头条推荐Cell
+class MainHeadCell : UICollectionViewCell {
+    
+    /// 头条推荐
+    var dataSource : IndexCommentTopModel? {
+        didSet {
+
+            self.descLabl.text = dataSource?.Title
+            self.commentLabel.text = (dataSource?.Num)!
+            
+            self.imgV.setImage(urlString: dataSource?.HeadImg, placeholderImage: #imageLiteral(resourceName: "logo"))
+        }
+    }
+    
+    /// 描述文本
+    lazy var descLabl: UILabel = {
+        let d : UILabel = UILabel.init(frame: CGRect.init(x: 0, y: self.imgV.BottomY + 5 * SCREEN_SCALE, width: self.Width, height: 13 * SCREEN_SCALE))
+        d.font = UIFont.systemFont(ofSize: 12 * SCREEN_SCALE)
+        d.text = "sssssssss"
+        return d
+    }()
+    
+    /// 评论图片
+    fileprivate lazy var commentImg: UIImageView = {
+        let d : UIImageView = UIImageView.init(frame: CGRect.init(x: 0, y: self.descLabl.BottomY + COMMON_MARGIN / 2, width: 13 * SCREEN_SCALE, height: 13 * SCREEN_SCALE))
+        d.image = #imageLiteral(resourceName: "saw")
+        d.contentMode = UIViewContentMode.scaleAspectFit
+        return d
+    }()
+    
+    /// 评论
+    lazy var commentLabel: UILabel = {
+        let d : UILabel = UILabel.init(frame: CGRect.init(x: self.commentImg.RightX + COMMON_MARGIN / 2, y:self.commentImg.TopY , width: self.Width, height: 15 * SCREEN_SCALE))
+        d.font = UIFont.systemFont(ofSize: 10 * SCREEN_SCALE)
+        d.textColor = UIColor.gray
+        return d
+    }()
+    
+    lazy var imgV: UIImageView = {
+        let d : UIImageView = UIImageView.init(frame: CGRect.init(x: 0, y: 0, width: SCREEN_WIDTH - 2 * COMMON_MARGIN, height: self.bounds.height - 50))
+        return d
+    }()
+ 
+    override init(frame: CGRect) {
+        super.init(frame: frame)
+
+        self.contentView.addSubview(imgV)
+        self.contentView.addSubview(commentImg)
+        self.contentView.addSubview(descLabl)
+        self.contentView.addSubview(commentLabel)
     }
     
     required init?(coder aDecoder: NSCoder) {

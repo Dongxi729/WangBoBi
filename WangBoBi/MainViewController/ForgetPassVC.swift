@@ -22,7 +22,6 @@ class ForgetPassVC: BaseViewController,UITextFieldDelegate {
     fileprivate lazy var AddLabel: TfPlaceHolder = {
         let d : TfPlaceHolder = TfPlaceHolder.init(frame: CGRect.init(x: SCREEN_WIDTH * 0.18438001992046, y: SCREEN_HEIGHT * 0.385, width: SCREEN_WIDTH * 0.88 - SCREEN_WIDTH * 0.213, height: 30 * SCREEN_SCALE))
         d.plStrSize(str: "", holderColor: UIColor.white)
-        d.layer.borderColor = UIColor.red.cgColor
         d.delegate = self
         d.font = UIFont.init(name: "SimHei", size: 12 * SCREEN_SCALE)
         return d
@@ -32,8 +31,7 @@ class ForgetPassVC: BaseViewController,UITextFieldDelegate {
     // MARK: - 确定按钮
     fileprivate lazy var confirmBtn: UIButton = {
         let d : UIButton = UIButton.init(frame: CGRect.init(x: 0.1256038647343 * SCREEN_WIDTH, y: SCREEN_HEIGHT * 0.53804347826087, width: SCREEN_WIDTH * 0.75, height: 30 * SCREEN_SCALE))
-        d.layer.borderColor = UIColor.red.cgColor
-        d.layer.borderWidth = 1
+        
         d.addTarget(self, action: #selector(jumpToNext), for: .touchUpInside)
         return d
     }()
@@ -42,8 +40,7 @@ class ForgetPassVC: BaseViewController,UITextFieldDelegate {
     fileprivate lazy var loginBtn: UIButton = {
         let d : UIButton = UIButton.init(frame: CGRect.init(x: SCREEN_WIDTH * 0.545088542256378, y: SCREEN_HEIGHT * 0.916213761205259, width: 50 * SCREEN_SCALE, height: 30 * SCREEN_SCALE))
         d.addTarget(self, action: #selector(backToMain), for: .touchUpInside)
-        d.layer.borderColor = UIColor.red.cgColor
-        d.layer.borderWidth = 1
+        
         return d
     }()
 

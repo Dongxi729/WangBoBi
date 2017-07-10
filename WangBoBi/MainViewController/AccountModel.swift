@@ -481,49 +481,63 @@ class AccountModel: NSObject,NSCoding {
     // MARK: - 默认登录
     class func loginWithLocalPassAndAccount() -> Void {
         
-        let d : [String : String] = ["email" : (AccountModel.shared()?.Email)!,
-                                     "pwd" : (AccountModel.shared()?.UserPass)!]
-        NetWorkTool.shared.postWithPath(path: LOGIN_URL, paras: d, success: { (result) in
-            guard let resultData = result as? NSDictionary else {
-                
-                CCog(message: "登录信息无效")
-                return
+        if let email = AccountModel.shared()?.Email {
+            if let pwd = AccountModel.shared()?.UserPass {
+                let d : [String : String] = ["email" : email,
+                                             "pwd" : pwd]
+                NetWorkTool.shared.postWithPath(path: LOGIN_URL, paras: d, success: { (result) in
+                    guard let resultData = result as? NSDictionary else {
+                        
+                        CCog(message: "登录信息无效")
+                        return
+                    }
+                    
+                    let account = AccountModel(dict: resultData["Data"] as! [String : Any])
+                    account.updateUserInfo()
+                    
+                    guard let alertMsg = resultData["Msg"] as? String else {
+                        return
+                    }
+                    
+                    if alertMsg == "登陆成功" {
+                        
+                        /// 记录登录时间
+                        let now = Date()
+                        let timerStamp : TimeInterval = now.timeIntervalSince1970
+                        
+                        let timeStamp = Int(timerStamp)
+                        
+                        /// 记录本地登录成功的时间/更新
+                        UserDefaults.standard.set(timeStamp, forKey: "loginTime")
+                        UserDefaults.standard.synchronize()
+                        
+                        UIApplication.shared.keyWindow?.rootViewController = MainTabBarViewController()
+                        
+                        /// 请求首页数据
+                        //                AccountModel.shared()?.indexInfo()
+                    }
+                }) { (error) in
+                    let alertMsg = (error as NSError).userInfo["NSLocalizedDescription"]
+                    toast(toast: alertMsg! as! String)
+                    
+                    var nav = LoginNav()
+                    nav = LoginNav.init(rootViewController: LoginViewController())
+                    
+                    UIApplication.shared.keyWindow?.rootViewController = nav
+                }
             }
-            
-            let account = AccountModel(dict: resultData["Data"] as! [String : Any])
-            account.updateUserInfo()
-            
-            guard let alertMsg = resultData["Msg"] as? String else {
-                return
-            }
-            
-            if alertMsg == "登陆成功" {
-                
-                /// 记录登录时间
-                let now = Date()
-                let timerStamp : TimeInterval = now.timeIntervalSince1970
-                
-                let timeStamp = Int(timerStamp)
-                
-                /// 记录本地登录成功的时间/更新
-                UserDefaults.standard.set(timeStamp, forKey: "loginTime")
-                UserDefaults.standard.synchronize()
-                
-                UIApplication.shared.keyWindow?.rootViewController = MainTabBarViewController()
-                
-                /// 请求首页数据
-                //                AccountModel.shared()?.indexInfo()
-            }
-        }) { (error) in
-            let alertMsg = (error as NSError).userInfo["NSLocalizedDescription"]
-            toast(toast: alertMsg! as! String)
-            
-            var nav = LoginNav()
-            nav = LoginNav.init(rootViewController: LoginViewController())
-            
-            UIApplication.shared.keyWindow?.rootViewController = nav
-        }
         
+        } else {
+            CCog(message: "////")
+            
+            DispatchQueue.main.async {
+                var nav = LoginNav()
+                nav = LoginNav.init(rootViewController: LoginViewController())
+                
+                UIApplication.shared.keyWindow?.rootViewController = nav
+            }
+            
+        }
     }
     
     
@@ -660,15 +674,15 @@ class AccountModel: NSObject,NSCoding {
         let param : [String :String] = ["uid" : (AccountModel.shared()?.Id.stringValue)!,
                                         "token" : (AccountModel.shared()?.Token)!]
         
-        //        CCog(message: param)
+                CCog(message: param)
         NetWorkTool.shared.postWithPath(path: INDEX_URL, paras: param, success: { (result) in
             CCog(message: result)
             
             guard let resultData = result as? NSDictionary  else {
                 return
             }
-            //        if let resultData = NSDictionary.init(contentsOfFile: "/Users/zhengdongxi/Desktop/Data.plist") {
-            resultData.write(toFile:AccountModel.userData, atomically: true)
+//                    if let resultData = NSDictionary.init(contentsOfFile: "/Users/zhengdongxi/Desktop/Data.plist") {
+//            resultData.write(toFile:AccountModel.userData, atomically: true)
             
             CCog(message: AccountModel.userData)
             
@@ -721,7 +735,7 @@ class AccountModel: NSObject,NSCoding {
                     }
                 }
             }
-            //        }
+//                    }
         }) { (error) in
             let alertMsg = (error as NSError).userInfo["NSLocalizedDescription"]
             toast(toast: alertMsg! as! String)

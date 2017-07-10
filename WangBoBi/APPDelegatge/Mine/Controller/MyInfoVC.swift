@@ -30,7 +30,7 @@ class MyInfoVC: BaseViewController {
         let d : PersonInfoEditV = PersonInfoEditV.init(frame: CGRect.init(x: 0, y: self.personInfoV.Height * 0.25, width: self.personInfoV.Width, height: self.personInfoV.Height * 0.7))
         return d
     }()
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
 

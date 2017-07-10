@@ -74,7 +74,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         CCog(message: timeStamp)
         
-        //
+        // 取出本地时间对比操作
         if let lastLoginTime = UserDefaults.standard.object(forKey: "loginTime") as? Int {
             CCog(message: lastLoginTime)
             
@@ -127,7 +127,3 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
     }
 }
-
-
-
-

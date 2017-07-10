@@ -18,25 +18,14 @@ class ScanCodeController: BaseViewController {
     // MARK: - 扫描二维码
     fileprivate lazy var scanLabel: BtnWithImage = {
         let d : BtnWithImage = BtnWithImage.init(frame: CGRect.init(x: SCREEN_WIDTH * 0.5 - SCREEN_WIDTH / 6 + 10 * SCREEN_SCALE, y: (self.scanView?.BottomY)! + COMMON_MARGIN * SCREEN_SCALE, width: SCREEN_WIDTH / 2.5, height: 20 * SCREEN_SCALE))
-
+        
         d.setTitle(" 扫描二维码", for: .normal)
         d.setImage(#imageLiteral(resourceName: "Sweep 1"), for: .normal)
         d.setTitleColor(UIColor.white, for: .normal)
         return d
     }()
     
-    /// 设置前置小图标
-//    fileprivate lazy var scanFrontImg: UILabel = {
-//        let d : UILabel = UILabel.init(frame: CGRect.init(x: self.scanLabel.Width * 0.4, y: (self.scanView?.BottomY)! + COMMON_MARGIN * SCREEN_SCALE, width: SCREEN_WIDTH, height: 20 * SCREEN_SCALE))
-//        let atch = NSTextAttachment.init()
-//        atch.image = #imageLiteral(resourceName: "Sweep 1")
-//        let ssss : NSAttributedString = NSAttributedString(attachment: atch)
-//        
-//        let mutableString = NSMutableAttributedString.init(attributedString: ssss)
-//        
-//        d.attributedText = mutableString
-//        return d
-//    }()
+    
     
     /// 扫一扫
     fileprivate lazy var descLabel: UILabel = {
@@ -68,7 +57,7 @@ class ScanCodeController: BaseViewController {
         
         view.addSubview(scanLabel)
         view.addSubview(descLabel)
-
+        
         title = "扫一扫"
         
         /// 开始扫描
@@ -101,10 +90,10 @@ class ScanCodeController: BaseViewController {
         scanView?.backgroundColor = UIColor.clear
         scanView?.clipsToBounds = true
         view.addSubview(scanView!)
-
+        
         let scanViewImg : UIImageView = UIImageView.init(frame: (self.scanView?.frame)!)
         scanViewImg.image = #imageLiteral(resourceName: "queue")
-//        scanViewImg.backgroundColor = UIColor.red
+        //        scanViewImg.backgroundColor = UIColor.red
         view.addSubview(scanViewImg)
         
         
@@ -202,33 +191,27 @@ extension ScanCodeController:AVCaptureMetadataOutputObjectsDelegate {
             session.stopRunning()
             let object = metadataObjects[0]
             let string: String = (object as AnyObject).stringValue
-            if let url = URL(string: string) {
-                if UIApplication.shared.canOpenURL(url) {
-//                    _ = self.navigationController?.popViewController(animated: true)
-//                    if #available(iOS 10.0, *) {
-//                        UIApplication.shared.open(url)
-//                    } else {
-//                        UIApplication.shared.openURL(url)
-//                    }
-                    //去打开地址链接
-                } else {
-                    //获取非链接结果
-                    ScanModel.shared.codeStr = (object as AnyObject).stringValue
-                    NotificationCenter.default.post(name: NSNotification.Name(rawValue: "changeScanCode"), object: nil)
+            
+            CCog(message: string)
+            
+            if let _ = URL(string: string) {
+                
+                //获取非链接结果
+                ScanModel.shared.codeStr = (object as AnyObject).stringValue
+                NotificationCenter.default.post(name: NSNotification.Name(rawValue: "changeScanCode"), object: nil)
+                
+                let alertViewController = UIAlertController(title: "扫描结果", message: (object as AnyObject).stringValue, preferredStyle: .alert)
+                let actionCancel = UIAlertAction(title: "确定", style: .cancel, handler: { (action) in
+                    _ = self.navigationController?.popViewController(animated: true)
                     
-                    let alertViewController = UIAlertController(title: "扫描结果", message: (object as AnyObject).stringValue, preferredStyle: .alert)
-                    let actionCancel = UIAlertAction(title: "确定", style: .cancel, handler: { (action) in
-                        _ = self.navigationController?.popViewController(animated: true)
-                        
-                        
-                    })
-                    let actinSure = UIAlertAction(title: "再次扫描", style: .default, handler: { (action) in
-                        self.session.startRunning()
-                    })
-                    alertViewController.addAction(actionCancel)
-                    alertViewController.addAction(actinSure)
-                    self.present(alertViewController, animated: true, completion: nil)
-                }
+                    
+                })
+                let actinSure = UIAlertAction(title: "再次扫描", style: .default, handler: { (action) in
+                    self.session.startRunning()
+                })
+                alertViewController.addAction(actionCancel)
+                alertViewController.addAction(actinSure)
+                self.present(alertViewController, animated: true, completion: nil)
             }
         }
     }
@@ -264,7 +247,3 @@ class BtnWithImage: UIButton {
     }
     
 }
-
-
-
-
