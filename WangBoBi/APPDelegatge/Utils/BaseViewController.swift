@@ -10,14 +10,8 @@ import UIKit
 
 class BaseViewController: UIViewController,UIGestureRecognizerDelegate,UINavigationBarDelegate {
     
+    /// 左上角按钮
     var leftBarItem : UIButton = UIButton()
-    
-    /// 分割线
-    lazy var separatorLine: UIView = {
-        let d : UIView = UIView.init(frame: CGRect.init(x: 0, y: 0, width: SCREEN_WIDTH, height: 1))
-        d.backgroundColor = UIColor.gray
-        return d
-    }()
     
     
     override func viewWillAppear(_ animated: Bool) {
@@ -36,7 +30,7 @@ class BaseViewController: UIViewController,UIGestureRecognizerDelegate,UINavigat
         
         let rightFooBarButtonItem : UIBarButtonItem = UIBarButtonItem.init(customView: btnn)
         
-
+        
         
         /// 页面大于1，显示否则相反
         if self.navigationController?.viewControllers != nil && (self.navigationController?.viewControllers.count)! > 1 {
@@ -44,8 +38,12 @@ class BaseViewController: UIViewController,UIGestureRecognizerDelegate,UINavigat
         }
         
         
-        /// 判断当前类名是否为协议的那个页面.
-        if NSStringFromClass(self.classForCoder).contains("AgreeMentVC") {
+        /// 实名认证
+        ///PushingMoneyVC
+        if NSStringFromClass(self.classForCoder).contains("TrueNameCertifiedVC") || NSStringFromClass(self.classForCoder).contains("PushingMoneyVC") ||
+            NSStringFromClass(self.classForCoder).contains("AgreeMentVC") ||
+            NSStringFromClass(self.classForCoder).contains("WKVC") {
+            
 
             UIApplication.shared.statusBarStyle = UIStatusBarStyle.default
             
@@ -54,9 +52,30 @@ class BaseViewController: UIViewController,UIGestureRecognizerDelegate,UINavigat
             
             let navBar = navigationController?.navigationBar
             navBar?.barTintColor = UIColor.clear
+            
+            /// 修改导航栏文字样式（富文本）
+            navBar?.titleTextAttributes = [
+                
+                NSForegroundColorAttributeName : UIColor.black,
+                NSFontAttributeName : UIFont.systemFont(ofSize: 16 * SCREEN_SCALE)
+            ]
+            
+            /// 设置
+            navBar?.tintColor = UIColor.white
+        }
+        
+        
+        /// 判断当前类名是否为协议的那个页面.
+        if NSStringFromClass(self.classForCoder).contains("AgreeMentVC") {
+            
+            UIApplication.shared.statusBarStyle = UIStatusBarStyle.default
+            
+            /// 为那个页面则修改左上角图标
+            btnn.setBackgroundImage(UIImage.init(named: "back"), for: .normal)
+            
+            let navBar = navigationController?.navigationBar
+            navBar?.barTintColor = UIColor.clear
             navBar?.isTranslucent = true
-
-            view.addSubview(separatorLine)
             
             /// 修改导航栏文字样式（富文本）
             navBar?.titleTextAttributes = [
@@ -72,8 +91,6 @@ class BaseViewController: UIViewController,UIGestureRecognizerDelegate,UINavigat
             let navBar = navigationController?.navigationBar
             navBar?.barTintColor = UIColor.white
             navBar?.isTranslucent = true
-            
-            
             navBar?.setBackgroundImage(UIImage(), for: UIBarMetrics.default)
             navBar?.shadowImage = UIImage()
             
@@ -83,49 +100,10 @@ class BaseViewController: UIViewController,UIGestureRecognizerDelegate,UINavigat
             ]
         }
         
-        /// 判断当前类名是否为协议的那个页面. --- 扫描视图
-        if NSStringFromClass(self.classForCoder).contains("ScanViewController") {
-            /// 为那个页面则修改左上角图标
-            btnn.setBackgroundImage(UIImage.init(named: "back"), for: .normal)
-            
-            let navBar = navigationController?.navigationBar
-            navBar?.barTintColor = UIColor.clear
-
-            view.addSubview(separatorLine)
-            
-            /// 修改导航栏文字样式（富文本）
-            navBar?.titleTextAttributes = [
-                NSForegroundColorAttributeName : UIColor.black,
-                NSFontAttributeName : UIFont.systemFont(ofSize: 16 * SCREEN_SCALE)
-            ]
-            
-            /// 设置
-            navBar?.tintColor = UIColor.white
-        }
-        
         /// 判断当前类名是否为协议的那个页面.--- 我的信息页面
-        if NSStringFromClass(self.classForCoder).contains("MainPageVC") {
-            /// 为那个页面则修改左上角图标
-            btnn.setBackgroundImage(UIImage.init(named: "rean"), for: .normal)
-            
-            let navBar = navigationController?.navigationBar
-            navBar?.barTintColor = UIColor.clear
-
-            view.addSubview(separatorLine)
-            
-            /// 修改导航栏文字样式（富文本）
-            navBar?.titleTextAttributes = [
-                
-                NSForegroundColorAttributeName : UIColor.white,
-                NSFontAttributeName : UIFont.systemFont(ofSize: 16 * SCREEN_SCALE)
-            ]
-            
-            /// 设置
-            navBar?.tintColor = UIColor.white
-        }
-        
-        /// 判断当前类名是否为协议的那个页面.--- 我的信息页面
-        if NSStringFromClass(self.classForCoder).contains("MyInfoVC") {
+        if NSStringFromClass(self.classForCoder).contains("MainPageVC") ||
+            NSStringFromClass(self.classForCoder).contains("MyInfoVC") ||
+            NSStringFromClass(self.classForCoder).contains("ScanCodeController") {
             
             /// 为那个页面则修改左上角图标
             btnn.setBackgroundImage(UIImage.init(named: "rean"), for: .normal)
@@ -133,82 +111,16 @@ class BaseViewController: UIViewController,UIGestureRecognizerDelegate,UINavigat
             let navBar = navigationController?.navigationBar
             navBar?.barTintColor = UIColor.clear
             
-            view.addSubview(separatorLine)
+            /// 扫一扫界面
+            if NSStringFromClass(self.classForCoder).contains("ScanCodeController") {
+                navBar?.barTintColor = UIColor.black
+                navBar?.isTranslucent = false
+            }
+            
             
             /// 修改导航栏文字样式（富文本）
             navBar?.titleTextAttributes = [
                 
-                NSForegroundColorAttributeName : UIColor.white,
-                NSFontAttributeName : UIFont.systemFont(ofSize: 16 * SCREEN_SCALE)
-            ]
-            
-            /// 设置
-            navBar?.tintColor = UIColor.white
-        }
-        
-        /// 实名认证
-        if NSStringFromClass(self.classForCoder).contains("TrueNameCertifiedVC") {
-            
-            UIApplication.shared.statusBarStyle = UIStatusBarStyle.default
-            
-            /// 为那个页面则修改左上角图标
-            btnn.setBackgroundImage(UIImage.init(named: "back"), for: .normal)
-            
-            let navBar = navigationController?.navigationBar
-            navBar?.barTintColor = UIColor.clear
-            
-            view.addSubview(separatorLine)
-            
-            /// 修改导航栏文字样式（富文本）
-            navBar?.titleTextAttributes = [
-                
-                NSForegroundColorAttributeName : UIColor.black,
-                NSFontAttributeName : UIFont.systemFont(ofSize: 16 * SCREEN_SCALE)
-            ]
-            
-            /// 设置
-            navBar?.tintColor = UIColor.white
-        }
-        
-        ///PushingMoneyVC
-        /// 实名认证
-        if NSStringFromClass(self.classForCoder).contains("PushingMoneyVC") {
-            
-            UIApplication.shared.statusBarStyle = UIStatusBarStyle.default
-            
-            /// 为那个页面则修改左上角图标
-            btnn.setBackgroundImage(UIImage.init(named: "back"), for: .normal)
-            
-            let navBar = navigationController?.navigationBar
-            navBar?.barTintColor = UIColor.white
-            
-            view.addSubview(separatorLine)
-            
-            /// 修改导航栏文字样式（富文本）
-            navBar?.titleTextAttributes = [
-                
-                NSForegroundColorAttributeName : UIColor.black,
-                NSFontAttributeName : UIFont.systemFont(ofSize: 16 * SCREEN_SCALE)
-            ]
-            
-            /// 设置
-            navBar?.tintColor = UIColor.white
-        }
-        
-        /// ScanCodeController
-        if NSStringFromClass(self.classForCoder).contains("ScanCodeController") {
-            
-            /// 为那个页面则修改左上角图标
-            btnn.setBackgroundImage(UIImage.init(named: "rean"), for: .normal)
-            
-            let navBar = navigationController?.navigationBar
-            navBar?.barTintColor = UIColor.black
-            navBar?.isTranslucent = false
-            
-            view.addSubview(separatorLine)
-            
-            /// 修改导航栏文字样式（富文本）
-            navBar?.titleTextAttributes = [
                 NSForegroundColorAttributeName : UIColor.white,
                 NSFontAttributeName : UIFont.systemFont(ofSize: 16 * SCREEN_SCALE)
             ]
@@ -229,30 +141,34 @@ class BaseViewController: UIViewController,UIGestureRecognizerDelegate,UINavigat
         /// 解决导航栏跳转后，控件下移64 的Bug
         self.automaticallyAdjustsScrollViewInsets = false
         self.extendedLayoutIncludesOpaqueBars = true
+        
     }
+    
+    
     
     /// 视图消失。将整个屏幕的大小改为最初的。
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
-
+        
         view.endEditing(true)
         UIView.animate(withDuration: 0.5) {
             UIApplication.shared.keyWindow?.frame = (UIApplication.shared.keyWindow?.rootViewController?.view.bounds)!
         }
     }
-
+    
     @objc fileprivate func back() {
-
+        
         self.navigationController?.popViewController(animated: true)
     }
     
     //修复返回失效
     func gestureRecognizerShouldBegin(_ gestureRecognizer: UIGestureRecognizer) -> Bool {
         
-        if gestureRecognizer == self.navigationController?.interactivePopGestureRecognizer {
-            return (self.navigationController?.viewControllers.count)! > 1
+        if childViewControllers.count == 1 {
+            return false
+        } else {
+            return true
         }
-        return true
     }
-
+    
 }

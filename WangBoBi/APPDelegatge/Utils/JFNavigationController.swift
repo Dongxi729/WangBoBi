@@ -28,30 +28,6 @@ class JFNavigationController: UINavigationController, UIGestureRecognizerDelegat
         panGestureBack()
     }
     
-    
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        /// 判断当前类名是否为协议的那个页面.
-        if NSStringFromClass(self.classForCoder).contains("ViewController") {
-//            CCog(message: "true")
-        } else {
-//            CCog(message: "FALSE")
-        }
-        
-        
-        
-        /// 我的信息页面。导航栏透明
-        if NSStringFromClass(self.classForCoder).contains("MyInfoVC") {
-            
-            let navBar = navigationBar
-            navBar.barTintColor = UIColor.clear
-            navBar.isTranslucent = true
-            navBar.barStyle = UIBarStyle.black
-        }
-        
-        self.navigationController?.navigationBar.isHidden = true
-    }
-    
     /**
      全屏返回手势
      */

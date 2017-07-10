@@ -15,24 +15,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     var nav : UINavigationController?
     
-    // MARK: - 设置已经登录主界面
-    fileprivate func setLogedMain() -> Void {
-        window = UIWindow.init(frame: UIScreen.main.bounds)
-        
-        nav = JFNavigationController.init(rootViewController: MainTabBarViewController())
-        window?.rootViewController = nav
-        
-        /// 请求首页数据
-        /// 请求首页数据
-        //        AccountModel.shared()?.indexInfo()
-        
-        window?.makeKeyAndVisible()
-        window?.backgroundColor = UIColor.white
-        
-        // 设置全局颜色
-        UITabBar.appearance().tintColor = TABBAR_BGCOLOR
-    }
-    
     // MARK: - 设置未主界面
     func setUnlogedMain() -> Void {
         window = UIWindow.init(frame: UIScreen.main.bounds)
@@ -66,7 +48,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
         
-        
         let now = Date()
         let timerStamp : TimeInterval = now.timeIntervalSince1970
         
@@ -98,16 +79,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             } else {
                 AccountModel.logout()
                 setUnlogedMain()
-                
-                
             }
         } else {
             setUnlogedMain()
             AccountModel.logout()
         }
-        
-        
-//        testComplement()
+        //        testComplement()
         return true
         
     }

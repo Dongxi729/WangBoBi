@@ -22,7 +22,7 @@ class LoginNav: UINavigationController, UIGestureRecognizerDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-
+        
         // 全屏返回手势
         panGestureBack()
     }
@@ -41,27 +41,6 @@ class LoginNav: UINavigationController, UIGestureRecognizerDelegate {
         }
         
         super.pushViewController(viewController, animated: animated)
-        
-        //        // 压入栈后创建返回按钮
-        //        viewController.navigationItem.leftBarButtonItem = UIBarButtonItem(
-        //            image: UIImage(named: "rean")?.withRenderingMode(UIImageRenderingMode.alwaysOriginal),
-        //            style: UIBarButtonItemStyle.done,
-        //            target: self,
-        //            action: #selector(back)
-        //        )
-        
-//        let btnn = UIButton()
-//        btnn.frame = CGRect(x: 0, y: 64, width: 20, height: 20)
-//        
-//        btnn.addTarget(self, action:#selector(back), for: .touchUpInside)
-//        
-//        btnn.setBackgroundImage(UIImage.init(named: "back"), for: .normal)
-//        btnn.setBackgroundImage(UIImage.init(named: "back"), for: .highlighted)
-//        
-//        
-//        let rightFooBarButtonItem : UIBarButtonItem = UIBarButtonItem.init(customView: btnn)
-        
-//        self.navigationItem.setLeftBarButton(rightFooBarButtonItem, animated: true)
     }
     
     /**

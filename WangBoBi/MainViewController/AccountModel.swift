@@ -464,9 +464,6 @@ class AccountModel: NSObject,NSCoding {
                 UserDefaults.standard.synchronize()
                 
                 UIApplication.shared.keyWindow?.rootViewController = MainTabBarViewController()
-                
-                /// 请求首页数据
-                //                AccountModel.shared()?.indexInfo()
             } else {
                 toast(toast: alertMsg)
             }
@@ -674,7 +671,7 @@ class AccountModel: NSObject,NSCoding {
         let param : [String :String] = ["uid" : (AccountModel.shared()?.Id.stringValue)!,
                                         "token" : (AccountModel.shared()?.Token)!]
         
-                CCog(message: param)
+
         NetWorkTool.shared.postWithPath(path: INDEX_URL, paras: param, success: { (result) in
             CCog(message: result)
             
@@ -720,7 +717,6 @@ class AccountModel: NSObject,NSCoding {
                     if let dicc = [dic["MerTop"] as? NSArray][0] {
                         var mmm = [IndexMertopModel]()
                         for vv in dicc {
-                            CCog(message: vv)
                             if let diccc = vv as? NSDictionary {
                                 
                                 let topMedel = IndexMertopModel.init(dict: diccc as! [String : Any])

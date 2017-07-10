@@ -9,8 +9,6 @@
 import UIKit
 
 class PaymoneyVC: BaseViewController {
-
-
     
     
     lazy var getMoebtn: UIButton = {
@@ -19,7 +17,7 @@ class PaymoneyVC: BaseViewController {
         return d
     }()
     
-//    跳转支付
+    /// 跳转支付
     lazy var scanBtn: UIButton = {
         let l : UIButton = UIButton.init(frame: CGRect(x: COMMON_MARGIN, y: SCREEN_HEIGHT * 0.452898543813954 , width: SCREEN_WIDTH - 2 * COMMON_MARGIN, height: 50 * SCREEN_SCALE))
         l.addTarget(self, action: #selector(scanPayCode), for: .touchUpInside)
@@ -47,7 +45,7 @@ class PaymoneyVC: BaseViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
         // Do any additional setup after loading the view.
         title = "收付款"
         

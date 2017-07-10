@@ -65,9 +65,6 @@ class ScanCodeController: BaseViewController {
         view.backgroundColor = UIColor.black
         
         NotificationCenter.default.addObserver(self, selector: #selector(resetAnimatinon), name: NSNotification.Name.UIApplicationWillEnterForeground, object: nil)
-        
-        
-        
     }
     
     deinit {

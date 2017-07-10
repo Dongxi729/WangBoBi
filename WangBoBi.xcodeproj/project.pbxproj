@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		2600D2A81F064B3E00EF7F6A /* WebVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2600D2A71F064B3E00EF7F6A /* WebVC.swift */; };
 		2607D14E1EF212450015625E /* Reachability.m in Sources */ = {isa = PBXBuildFile; fileRef = 2607D14C1EF212450015625E /* Reachability.m */; };
 		2607D14F1EF212450015625E /* NetCheck.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2607D14D1EF212450015625E /* NetCheck.swift */; };
 		2607D1511EF214D50015625E /* AutoSigned.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2607D1501EF214D50015625E /* AutoSigned.swift */; };
@@ -34,6 +33,7 @@
 		261F067A1EF4FB590019CE44 /* MyBandCardVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 261F06791EF4FB590019CE44 /* MyBandCardVC.swift */; };
 		261F067C1EF50B510019CE44 /* ShouMoneyVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 261F067B1EF50B510019CE44 /* ShouMoneyVC.swift */; };
 		261F067E1EF5190C0019CE44 /* SetMoneyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 261F067D1EF5190C0019CE44 /* SetMoneyViewController.swift */; };
+		262112981F137FCA00E71F08 /* WKVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 262112971F137FCA00E71F08 /* WKVC.swift */; };
 		262304541EFA210A007B0BF6 /* LoginNav.swift in Sources */ = {isa = PBXBuildFile; fileRef = 262304531EFA210A007B0BF6 /* LoginNav.swift */; };
 		262304631EFA6988007B0BF6 /* NSArray+ ZXPUnicode.m in Sources */ = {isa = PBXBuildFile; fileRef = 2623045D1EFA6988007B0BF6 /* NSArray+ ZXPUnicode.m */; };
 		262304641EFA6988007B0BF6 /* NSDictionary+ZXPUnicode.m in Sources */ = {isa = PBXBuildFile; fileRef = 262304601EFA6988007B0BF6 /* NSDictionary+ZXPUnicode.m */; };
@@ -152,7 +152,6 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		2600D2A71F064B3E00EF7F6A /* WebVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WebVC.swift; sourceTree = "<group>"; };
 		2607D14B1EF212450015625E /* Reachability.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Reachability.h; sourceTree = "<group>"; };
 		2607D14C1EF212450015625E /* Reachability.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Reachability.m; sourceTree = "<group>"; };
 		2607D14D1EF212450015625E /* NetCheck.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NetCheck.swift; sourceTree = "<group>"; };
@@ -180,6 +179,7 @@
 		261F06791EF4FB590019CE44 /* MyBandCardVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MyBandCardVC.swift; path = ../../MainViewController/MyBandCardVC.swift; sourceTree = "<group>"; };
 		261F067B1EF50B510019CE44 /* ShouMoneyVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShouMoneyVC.swift; sourceTree = "<group>"; };
 		261F067D1EF5190C0019CE44 /* SetMoneyViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SetMoneyViewController.swift; sourceTree = "<group>"; };
+		262112971F137FCA00E71F08 /* WKVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WKVC.swift; sourceTree = "<group>"; };
 		262304531EFA210A007B0BF6 /* LoginNav.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginNav.swift; sourceTree = "<group>"; };
 		2623045D1EFA6988007B0BF6 /* NSArray+ ZXPUnicode.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSArray+ ZXPUnicode.m"; sourceTree = "<group>"; };
 		2623045E1EFA6988007B0BF6 /* NSArray+ZXPUnicode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSArray+ZXPUnicode.h"; sourceTree = "<group>"; };
@@ -379,7 +379,7 @@
 		2600D2A61F064B2C00EF7F6A /* WebView */ = {
 			isa = PBXGroup;
 			children = (
-				2600D2A71F064B3E00EF7F6A /* WebVC.swift */,
+				262112971F137FCA00E71F08 /* WKVC.swift */,
 			);
 			name = WebView;
 			sourceTree = "<group>";
@@ -1334,7 +1334,6 @@
 				262304641EFA6988007B0BF6 /* NSDictionary+ZXPUnicode.m in Sources */,
 				263CAF111EF62889006629BF /* UIImage+XLExtension.m in Sources */,
 				264960CB1EF0C28F00A559D6 /* POPPropertyAnimation.mm in Sources */,
-				2600D2A81F064B3E00EF7F6A /* WebVC.swift in Sources */,
 				26EF14A01EF8F7FD005663F1 /* ShowSuccessInfoV.swift in Sources */,
 				26ED244C1EF3E55700642804 /* ChangeLoginPassVC.swift in Sources */,
 				264960C91EF0C28F00A559D6 /* POPLayerExtras.mm in Sources */,
@@ -1374,6 +1373,7 @@
 				264960871EF0C1B400A559D6 /* ZDXCommon.swift in Sources */,
 				2607D1551EF21E570015625E /* MainTabBarViewController.swift in Sources */,
 				26DBE6C61F0F891D00551F63 /* ScanModel.swift in Sources */,
+				262112981F137FCA00E71F08 /* WKVC.swift in Sources */,
 				26ED244A1EF3E4EA00642804 /* SetDoubelCertifiVC.swift in Sources */,
 				261004B51EF8BB9100DE000F /* AgreeMentVC.swift in Sources */,
 				2649612D1EF0D08F00A559D6 /* FTNotificationIndicator.m in Sources */,

@@ -14,7 +14,7 @@ class MainPageViewController: BaseViewController {
     lazy var collV: UICollectionView = {
         
         let layout = UICollectionViewFlowLayout.init()
-
+        
         /// 设置大小出错///
         let d : UICollectionView = UICollectionView.init(frame:CGRect.init(x: 0, y: 0, width: SCREEN_WIDTH, height: SCREEN_HEIGHT - 64), collectionViewLayout: layout)
         
@@ -25,7 +25,6 @@ class MainPageViewController: BaseViewController {
         
         d.register(CollectCell.self, forCellWithReuseIdentifier: "cellID")
         d.register(MainHeadCell.self, forCellWithReuseIdentifier: "headCell")
-        d.register(UICollectionViewCell.self, forCellWithReuseIdentifier: "ccc")
         d.register(ReuseV.self, forSupplementaryViewOfKind: UICollectionElementKindSectionHeader, withReuseIdentifier: "HeadInfoView")
         d.register(HeadReuse.self, forSupplementaryViewOfKind: UICollectionElementKindSectionHeader, withReuseIdentifier: "headReuse")
         
@@ -40,7 +39,7 @@ class MainPageViewController: BaseViewController {
     
     /// 模型总数
     var loginModel : Int = 0
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -50,35 +49,31 @@ class MainPageViewController: BaseViewController {
         view.addSubview(collV)
         view.backgroundColor = COMMON_TBBGCOLOR
         
+        /// 模型取值
         AccountModel.indexInfo(finished: { (commenModel) in
             self.topModel = commenModel
-            
-            CCog(message: commenModel.count)
+        
         }, finishedTop: { (merTopModel) in
             self.mertopModel = merTopModel
-            CCog(message: merTopModel.count)
         }) { (xxx) in
             self.loginModel = xxx
             CCog(message: xxx)
             self.collV.reloadData()
         }
+        
+        /// 添加刷新控件
         self.collV.addHeaderViewfun()
         let d : headerView = collV.viewWithTag(888) as! headerView
         d.delegate = self;
     }
-    
-    static let shared = MainPageViewController()
-    
 }
 
 extension MainPageViewController : UICollectionViewDataSource,UICollectionViewDelegateFlowLayout,HeadReuseDelegate {
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         
-        
         //计算单元格的宽度
         let itemWidth = SCREEN_WIDTH / 3.5
-    
         
         if indexPath.section == 0 {
             return CGSize.init(width: itemWidth, height: itemWidth * 1.4)
@@ -91,7 +86,7 @@ extension MainPageViewController : UICollectionViewDataSource,UICollectionViewDe
         
         if indexPath.section == 0 {
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cellID", for: indexPath) as! CollectCell
-
+            
             let xxx = mertopModel[indexPath.row]
             cell.dataSource2 = xxx
             cell.topView.setLabelNo(str: "TOP" + String(indexPath.row))
@@ -99,7 +94,7 @@ extension MainPageViewController : UICollectionViewDataSource,UICollectionViewDe
             return cell
         } else {
             let ccc = collectionView.dequeueReusableCell(withReuseIdentifier: "headCell", for: indexPath) as! MainHeadCell
-
+            
             ccc.dataSource = topModel[indexPath.row]
             
             return ccc
@@ -112,7 +107,7 @@ extension MainPageViewController : UICollectionViewDataSource,UICollectionViewDe
     }
     
     func numberOfSections(in collectionView: UICollectionView) -> Int {
-    
+        
         return 2
     }
     
@@ -150,14 +145,12 @@ extension MainPageViewController : UICollectionViewDataSource,UICollectionViewDe
             header?.sectionImg.setImage(#imageLiteral(resourceName: "suggest"), for: .normal)
             return header!
         }
-    
     }
     
     //返回头部间距
     func collectionView(_ collectionView: UICollectionView,
                         layout collectionViewLayout: UICollectionViewLayout,
                         referenceSizeForHeaderInSection section: Int) -> CGSize {
-        
         
         if section == 0 {
             return CGSize.init(width: SCREEN_WIDTH, height: SCREEN_WIDTH * (749 / 640) + SCREEN_WIDTH *  (309 / 640) + 30 * SCREEN_SCALE)
@@ -174,15 +167,17 @@ extension MainPageViewController : UICollectionViewDataSource,UICollectionViewDe
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         
-        if indexPath.section == 0 {
-            
-        } else {
+        if indexPath.section == 1 {
             let xxx2 = topModel[indexPath.row]
             
-            let webVIew = WebVC()
+            let webVIew = WKVC()
             webVIew.url = xxx2.Href
+            UIApplication.shared.statusBarStyle = .default
+            
+            let ccc = UIViewController()
+            ccc.view.backgroundColor = UIColor.white
+            
             self.navigationController?.pushViewController(webVIew, animated: true)
-            webVIew.view.backgroundColor = UIColor.white
         }
     }
     
@@ -240,4 +235,3 @@ extension MainPageViewController : headerViewelegate {
         }
     }
 }
-

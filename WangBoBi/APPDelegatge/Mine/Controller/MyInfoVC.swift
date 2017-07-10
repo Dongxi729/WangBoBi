@@ -30,6 +30,17 @@ class MyInfoVC: BaseViewController {
         let d : PersonInfoEditV = PersonInfoEditV.init(frame: CGRect.init(x: 0, y: self.personInfoV.Height * 0.25, width: self.personInfoV.Width, height: self.personInfoV.Height * 0.7))
         return d
     }()
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        self.navigationController?.interactivePopGestureRecognizer?.isEnabled = false
+    }
+    
+//    override func viewWillDisappear(_ animated: Bool) {
+//        super.viewWillDisappear(animated)
+//        self.navigationController?.interactivePopGestureRecognizer?.isEnabled = true
+//    }
 
     override func viewDidLoad() {
         super.viewDidLoad()
