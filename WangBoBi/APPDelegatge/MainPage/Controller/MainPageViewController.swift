@@ -23,6 +23,7 @@ class MainPageViewController: BaseViewController {
         d.dataSource = self
         d.delegate = self
         
+        
         d.register(CollectCell.self, forCellWithReuseIdentifier: "cellID")
         d.register(MainHeadCell.self, forCellWithReuseIdentifier: "headCell")
         d.register(ReuseV.self, forSupplementaryViewOfKind: UICollectionElementKindSectionHeader, withReuseIdentifier: "HeadInfoView")
@@ -40,6 +41,12 @@ class MainPageViewController: BaseViewController {
     /// 模型总数
     var loginModel : Int = 0
     
+    lazy var replaceV: UIView = {
+        let d : UIView = UIView.init(frame: CGRect.init(x: 0, y: 0, width: SCREEN_WIDTH, height: 64))
+        d.backgroundColor = UIColor.colorWithHexString("2693DA")
+        return d
+    }()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -52,7 +59,7 @@ class MainPageViewController: BaseViewController {
         /// 模型取值
         AccountModel.indexInfo(finished: { (commenModel) in
             self.topModel = commenModel
-        
+            
         }, finishedTop: { (merTopModel) in
             self.mertopModel = merTopModel
         }) { (xxx) in
@@ -65,10 +72,16 @@ class MainPageViewController: BaseViewController {
         self.collV.addHeaderViewfun()
         let d : headerView = collV.viewWithTag(888) as! headerView
         d.delegate = self;
+        
+        /// 将过度视图插入到导航栏之下
+        view.insertSubview(replaceV, aboveSubview: (self.navigationController?.navigationBar)!)
+        
+        replaceV.alpha = 0
+        
     }
 }
 
-extension MainPageViewController : UICollectionViewDataSource,UICollectionViewDelegateFlowLayout,HeadReuseDelegate {
+extension MainPageViewController : UICollectionViewDataSource,UICollectionViewDelegateFlowLayout,HeadReuseDelegate,UICollectionViewDelegate {
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         
@@ -182,7 +195,7 @@ extension MainPageViewController : UICollectionViewDataSource,UICollectionViewDe
     
     // MARK: - HeadReuseDelegate
     func chooseIndex(index: Int) {
-
+        
         switch index {
         /// 扫一扫
         case 600:
@@ -204,6 +217,7 @@ extension MainPageViewController : UICollectionViewDataSource,UICollectionViewDe
             break
         }
     }
+    
 }
 
 // MARK: - 刷新控件
@@ -218,16 +232,37 @@ extension MainPageViewController : headerViewelegate {
         AccountModel.indexInfo(finished: { (commenModel) in
             self.topModel = commenModel
             
-            CCog(message: commenModel.count)
         }, finishedTop: { (merTopModel) in
             self.mertopModel = merTopModel
-            CCog(message: merTopModel.count)
+            
         }) { (xxx) in
             self.loginModel = xxx
-            CCog(message: xxx)
             
             self.collV.reloadData()
             d.endRefresh()
         }
     }
+    
+}
+
+// MARK: - 监听滑动距离将过度视图补充
+extension  MainPageViewController: UITableViewDelegate {
+    
+    //MARK:UIScrollViewDelegate
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        
+        let contentOffsetY = scrollView.contentOffset.y
+        
+        if contentOffsetY > 100 {
+            
+            UIView.animate(withDuration: 0.5, animations: {
+                self.replaceV.alpha = 1.0
+            })
+        } else {
+            UIView.animate(withDuration: 0.5, animations: {
+                self.replaceV.alpha = 0
+            })
+        }
+    }
+    
 }
