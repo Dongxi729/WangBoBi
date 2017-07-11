@@ -463,7 +463,10 @@ class AccountModel: NSObject,NSCoding {
                 UserDefaults.standard.set(timeStamp, forKey: "loginTime")
                 UserDefaults.standard.synchronize()
                 
+                // 设置全局颜色
+                UITabBar.appearance().tintColor = TABBAR_BGCOLOR
                 UIApplication.shared.keyWindow?.rootViewController = MainTabBarViewController()
+                
             } else {
                 toast(toast: alertMsg)
             }
@@ -508,6 +511,8 @@ class AccountModel: NSObject,NSCoding {
                         UserDefaults.standard.set(timeStamp, forKey: "loginTime")
                         UserDefaults.standard.synchronize()
                         
+                        // 设置全局颜色
+                        UITabBar.appearance().tintColor = TABBAR_BGCOLOR
                         UIApplication.shared.keyWindow?.rootViewController = MainTabBarViewController()
                         
                         /// 请求首页数据
