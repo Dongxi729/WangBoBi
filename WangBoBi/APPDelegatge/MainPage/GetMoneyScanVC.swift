@@ -20,7 +20,7 @@ class GetMoneyScanVC: BaseViewController {
     
     /// 背景
     fileprivate lazy var bgImg: UIImageView = {
-        let d : UIImageView = UIImageView.init(frame: CGRect.init(x: COMMON_MARGIN, y: 64, width: SCREEN_WIDTH - 2 * COMMON_MARGIN, height: (SCREEN_WIDTH - 2 * COMMON_MARGIN) * (670 / 600)))
+        let d : UIImageView = UIImageView.init(frame: CGRect.init(x: COMMON_MARGIN, y: 64, width: SCREEN_WIDTH - 2 * COMMON_MARGIN, height: (SCREEN_WIDTH - 2 * COMMON_MARGIN) * (567 / 600)))
         d.image = #imageLiteral(resourceName: "getMoney")
         return d
     }()
@@ -31,18 +31,11 @@ class GetMoneyScanVC: BaseViewController {
         CCog(message: "")
         self.navigationController?.pushViewController(PaymoneyVC(), animated: true)
     }
-    
-   fileprivate lazy var descLabel: UILabel = {
-        let d : UILabel = UILabel.init(frame: CGRect.init(x: 0, y: 0.225637181409295 * SCREEN_HEIGHT, width: SCREEN_WIDTH, height: 20 * SCREEN_SCALE))
-        d.textAlignment = .center
-        d.text = "无需添加好友，扫二维码向我付钱"
-        d.font = UIFont.systemFont(ofSize: 12 * SCREEN_SCALE)
-        return d
-    }()
+
     
     /// 付款二维码
     lazy var payImg: UIImageView = {
-        let d : UIImageView = UIImageView.init(frame: CGRect.init(x: SCREEN_WIDTH / 2 - SCREEN_WIDTH / 5, y: self.descLabel.BottomY, width: SCREEN_WIDTH / 2.5 , height: SCREEN_WIDTH / 2.5))
+        let d : UIImageView = UIImageView.init(frame: CGRect.init(x: self.bgImg.Width / 2 - self.bgImg.Width / 5, y: self.bgImg.Height * 0.35, width: self.bgImg.Width / 2.5 , height: SCREEN_WIDTH / 2.5))
         return d
     }()
     
@@ -55,8 +48,8 @@ class GetMoneyScanVC: BaseViewController {
         view.addSubview(bgImg)
         view.addSubview(scanBtn)
         view.backgroundColor = UIColor.colorWithHexString("093758")
-        view.addSubview(descLabel)
-        view.addSubview(payImg)
+        
+        bgImg.addSubview(payImg)
 
         
         DispatchQueue.global().async {
@@ -76,8 +69,7 @@ class GetMoneyScanVC: BaseViewController {
         if deveiceTp == .iPhone4S {
             
             scanBtn.frame = CGRect.init(x: COMMON_MARGIN, y: SCREEN_HEIGHT * 0.745833, width: SCREEN_WIDTH - 2 * COMMON_MARGIN, height: self.scanBtn.Height)
-            descLabel.frame = CGRect.init(x: 0, y: 0.302083 * SCREEN_HEIGHT, width: SCREEN_WIDTH, height: 20 * SCREEN_SCALE)
-            payImg.frame = CGRect.init(x: SCREEN_WIDTH / 2 - SCREEN_WIDTH / 5, y: self.descLabel.BottomY, width: SCREEN_WIDTH / 2.5 , height: SCREEN_WIDTH / 2.5)
+
         }
     }
 }

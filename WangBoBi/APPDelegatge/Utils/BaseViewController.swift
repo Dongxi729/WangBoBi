@@ -34,33 +34,6 @@ class BaseViewController: UIViewController,UIGestureRecognizerDelegate,UINavigat
         }
 
         
-        /// 实名认证
-        ///PushingMoneyVC
-        if NSStringFromClass(self.classForCoder).contains("TrueNameCertifiedVC") || NSStringFromClass(self.classForCoder).contains("PushingMoneyVC") ||
-            NSStringFromClass(self.classForCoder).contains("AgreeMentVC") ||
-            NSStringFromClass(self.classForCoder).contains("WKVC") {
-            
-            
-            UIApplication.shared.statusBarStyle = UIStatusBarStyle.default
-            
-            /// 为那个页面则修改左上角图标
-            leftBarItem.setBackgroundImage(UIImage.init(named: "back"), for: .normal)
-            
-            let navBar = navigationController?.navigationBar
-            navBar?.barTintColor = UIColor.clear
-            
-            /// 修改导航栏文字样式（富文本）
-            navBar?.titleTextAttributes = [
-                
-                NSForegroundColorAttributeName : UIColor.black,
-                NSFontAttributeName : UIFont.systemFont(ofSize: 16 * SCREEN_SCALE)
-            ]
-            
-            /// 设置
-            navBar?.tintColor = UIColor.white
-        }
-        
-        
         /// 判断当前类名是否为协议的那个页面.
         if NSStringFromClass(self.classForCoder).contains("AgreeMentVC") {
             
@@ -105,7 +78,7 @@ class BaseViewController: UIViewController,UIGestureRecognizerDelegate,UINavigat
             self.leftBarItem.setBackgroundImage(UIImage.init(named: "rean"), for: .normal)
             
             let navBar = navigationController?.navigationBar
-            navBar?.barTintColor = UIColor.clear
+//            navBar?.barTintColor = UIColor.clear
             
             /// 扫一扫界面
             if NSStringFromClass(self.classForCoder).contains("ScanCodeController") {
@@ -124,6 +97,44 @@ class BaseViewController: UIViewController,UIGestureRecognizerDelegate,UINavigat
             /// 设置
             navBar?.tintColor = UIColor.white
         }
+        
+        
+        /// 实名认证
+        ///PushingMoneyVC
+        if NSStringFromClass(self.classForCoder).contains("TrueNameCertifiedVC") || NSStringFromClass(self.classForCoder).contains("PushingMoneyVC") ||
+            NSStringFromClass(self.classForCoder).contains("AgreeMentVC") ||
+            NSStringFromClass(self.classForCoder).contains("WKVC") ||
+            NSStringFromClass(self.classForCoder).contains("ReceiveMonVC") {
+            
+            
+            UIApplication.shared.statusBarStyle = UIStatusBarStyle.default
+            
+            /// 为那个页面则修改左上角图标
+            leftBarItem.setBackgroundImage(UIImage.init(named: "back"), for: .normal)
+            
+            let navBar = navigationController?.navigationBar
+            
+            DispatchQueue.main.async {
+                if NSStringFromClass(self.classForCoder).contains("PushingMoneyVC") || NSStringFromClass(self.classForCoder).contains("ReceiveMonVC") {
+                    CCog(message: "ReceiveMonVC")
+                    navBar?.barTintColor = UIColor.white
+                } else {
+                    navBar?.barTintColor = UIColor.clear
+                }
+            }
+            
+            /// 修改导航栏文字样式（富文本）
+            navBar?.titleTextAttributes = [
+                
+                NSForegroundColorAttributeName : UIColor.black,
+                NSFontAttributeName : UIFont.systemFont(ofSize: 16 * SCREEN_SCALE)
+            ]
+            
+            /// 设置
+            navBar?.tintColor = UIColor.white
+        }
+        
+        
     }
     
     override func viewDidLoad() {

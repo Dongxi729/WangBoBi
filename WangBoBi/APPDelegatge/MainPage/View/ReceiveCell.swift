@@ -10,14 +10,14 @@ import UIKit
 
 class ReceiveCell : UITableViewCell {
     
-    fileprivate lazy var imgVi: UIImageView = {
+    /// 前置图标
+    lazy var imgVi: UIImageView = {
         let d : UIImageView = UIImageView.init(frame: CGRect.init(x: COMMON_MARGIN * 1.2, y: self.Height * 0.2, width: self.Height * 0.8, height: self.Height * 0.9))
-//        d.image = #imageLiteral(resourceName: "detail")
         d.contentMode = UIViewContentMode.scaleAspectFit
-        d.layer.borderWidth = 1
         return d
     }()
     
+    /// 描述文本
     lazy var descLabel: UILabel = {
         let d : UILabel = UILabel.init(frame: CGRect.init(x: self.imgVi.RightX + COMMON_MARGIN, y: COMMON_MARGIN, width: self.Width - self.imgVi.Width + COMMON_MARGIN * 1.2 * 2 , height: 60 - 2 * COMMON_MARGIN))
         return d
@@ -28,6 +28,9 @@ class ReceiveCell : UITableViewCell {
         
         contentView.addSubview(imgVi)
         contentView.addSubview(descLabel)
+        
+        /// 取消选中
+        self.selectionStyle = .none
     }
     
     required init?(coder aDecoder: NSCoder) {

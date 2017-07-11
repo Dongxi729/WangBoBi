@@ -44,7 +44,6 @@ class HeadReuse : UICollectionReusableView {
     /// 网博币/人民币
     lazy var wbBToJp: UILabel = {
         let d: UILabel = UILabel.init(frame: CGRect.init(x: self.Width * 0.173913043478261, y: self.headBgImg.Height * 0.415, width: 90 * SCREEN_SCALE, height: 20 * SCREEN_SCALE))
-        d.text = "网博币/人民币:"
         d.font = UIFont.systemFont(ofSize: 12 * SCREEN_SCALE)
         return d
     }()
@@ -52,23 +51,21 @@ class HeadReuse : UICollectionReusableView {
     /// 网博币/日币
     lazy var wbBToRp: UILabel = {
         let d: UILabel = UILabel.init(frame: CGRect.init(x: self.Width * 0.173913043478261, y: self.headBgImg.Height * 0.48, width: 75 * SCREEN_SCALE, height: 20 * SCREEN_SCALE))
-        d.text = "网博币/日币:"
         d.font = UIFont.systemFont(ofSize: 12 * SCREEN_SCALE)
         return d
     }()
     
     /// 网博币/人民币转换后的
     lazy var convertWBCToR: UILabel = {
-        let d : UILabel = UILabel.init(frame: CGRect.init(x: self.wbBToJp.RightX , y: self.wbBToJp.TopY, width: self.Width * 0.4, height: self.wbBToJp.Height))
-        d.font = UIFont.boldSystemFont(ofSize: 14 * SCREEN_SCALE)
-        
+        let d : UILabel = UILabel.init(frame: CGRect.init(x: SCREEN_WIDTH * 0.42, y: self.headBgImg.Height * 0.413, width: self.Width * 0.4, height: self.wbBToJp.Height))
+        d.font = UIFont.systemFont(ofSize: 13 * SCREEN_SCALE)
         d.text = "2000.0000"
         return d
     }()
     
     lazy var convertWBCToJ: UILabel = {
-        let d : UILabel = UILabel.init(frame: CGRect.init(x: self.wbBToRp.RightX , y: self.wbBToRp.TopY, width: self.Width * 0.4, height: self.wbBToRp.Height))
-        d.font = UIFont.boldSystemFont(ofSize: 14 * SCREEN_SCALE)
+        let d : UILabel = UILabel.init(frame: CGRect.init(x: SCREEN_WIDTH * 0.39 , y: self.headBgImg.Height * 0.475, width: self.Width * 0.4, height: self.wbBToRp.Height))
+        d.font = UIFont.systemFont(ofSize: 13 * SCREEN_SCALE)
         
         d.text = "2000.0000"
         return d

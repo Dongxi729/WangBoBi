@@ -14,22 +14,26 @@ class ReceiveMonVC: UIViewController {
     var countrySearchController = UISearchController()
     
     //原始数据集
-    let schoolArray = ["清华大学","北京大学","中国人民大学","北京交通大学","北京工业大学",
-                       "北京航空航天大学","北京理工大学","北京科技大学","中国政法大学",
-                       "中央财经大学","华北电力大学","北京体育大学","上海外国语大学","复旦大学",
-                       "华东师范大学","上海大学","河北工业大学"]
+    fileprivate let schoolArray = ["清华大学","北京大学","中国人民大学","北京交通大学","北京工业大学",
+                                   "北京航空航天大学","北京理工大学","北京科技大学","中国政法大学",
+                                   "中央财经大学","华北电力大学","北京体育大学","上海外国语大学","复旦大学",
+                                   "华东师范大学","上海大学","河北工业大学"]
     
     //搜索过滤后的结果集
-    var searchArray:[String] = [String](){
+    fileprivate var searchArray:[String] = [String](){
         didSet  {
             self.tableView.reloadData()
-            self.view.endEditing(true)
+//            self.view.endEditing(true)
         }
     }
     
     
     // MARK: - 数据源
-    var dataSource : [String] = ["转给朋友","转到其他网博币钱包","转到交易平台","转到会员平台"]
+    fileprivate var dataSource : [String] = ["转给朋友","转到其他网博币钱包","转到交易平台","转到会员平台"]
+    
+    // MARK: - 前置图标
+    fileprivate var frontIconImg : [UIImage] = [#imageLiteral(resourceName: "ofri"),#imageLiteral(resourceName: "owbag"),#imageLiteral(resourceName: "oPlat"),#imageLiteral(resourceName: "oMem")]
+    
     
     // MARK: - 最近转的
     var recentDeals : [String] = ["sads"]
@@ -43,6 +47,39 @@ class ReceiveMonVC: UIViewController {
                    forCellReuseIdentifier: "MyCell")
         return d
     }()
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        DispatchQueue.main.async {
+            
+            UIApplication.shared.statusBarStyle = .default
+            
+            let navBar = self.navigationController?.navigationBar
+            
+            navBar?.barTintColor = UIColor.white
+            self.navigationController?.navigationBar.isTranslucent = false
+            
+            /// 修改导航栏文字样式（富文本）
+            navBar?.titleTextAttributes = [
+                
+                NSForegroundColorAttributeName : UIColor.black,
+                NSFontAttributeName : UIFont.systemFont(ofSize: 16 * SCREEN_SCALE)
+            ]
+            
+            /// 设置
+            navBar?.tintColor = UIColor.white
+        }
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        
+        super.viewDidAppear(true)
+        self.tableView.reloadData()
+    }
+    
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -61,6 +98,7 @@ class ReceiveMonVC: UIViewController {
                 //            controller.searchBar.searchBarStyle = .minimal
                 controller.searchBar.placeholder = "搜索"
                 controller.searchBar.sizeToFit()
+                
                 self.tableView.tableHeaderView = controller.searchBar
                 
                 return controller
@@ -75,12 +113,6 @@ class ReceiveMonVC: UIViewController {
             // Fallback on earlier versions
         }
     }
-    
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(true)
-        self.tableView.reloadData()
-        
-    }
 }
 
 
@@ -94,6 +126,11 @@ extension ReceiveMonVC: UITableViewDelegate,UITableViewDataSource {
             let cell = tableView.dequeueReusableCell(withIdentifier: identify,
                                                      for: indexPath) as! ReceiveCell
             
+            /// 延长分割线
+            cell.preservesSuperviewLayoutMargins = false
+            cell.separatorInset = UIEdgeInsets.zero
+            cell.layoutMargins = .zero
+            
             if self.countrySearchController.isActive {
                 cell.descLabel.text = self.searchArray[indexPath.row]
                 return cell
@@ -101,6 +138,7 @@ extension ReceiveMonVC: UITableViewDelegate,UITableViewDataSource {
                 switch indexPath.section {
                 case 0:
                     cell.descLabel.text = dataSource[indexPath.row]
+                    cell.imgVi.image = frontIconImg[indexPath.row]
                 case 1:
                     cell.descLabel.text = recentDeals[indexPath.row]
                     break

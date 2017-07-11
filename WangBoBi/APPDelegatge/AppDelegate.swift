@@ -34,7 +34,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         window = UIWindow.init(frame: UIScreen.main.bounds)
         
-        nav = LoginNav.init(rootViewController: LoginViewController())
+        nav = LoginNav.init(rootViewController: MainTabBarViewController())
         window?.rootViewController = nav
         
         window?.makeKeyAndVisible()
@@ -54,6 +54,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         let timeStamp = Int(timerStamp)
         
         CCog(message: timeStamp)
+        
+//        testPae()
         
         // 取出本地时间对比操作
         if let lastLoginTime = UserDefaults.standard.object(forKey: "loginTime") as? Int {

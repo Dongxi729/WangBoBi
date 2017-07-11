@@ -182,9 +182,7 @@ extension MainPageViewController : UICollectionViewDataSource,UICollectionViewDe
     
     // MARK: - HeadReuseDelegate
     func chooseIndex(index: Int) {
-        
-        let cc = UIViewController()
-        cc.view.backgroundColor = UIColor.randomColor()
+
         switch index {
         /// 扫一扫
         case 600:
@@ -192,7 +190,7 @@ extension MainPageViewController : UICollectionViewDataSource,UICollectionViewDe
             break
         /// 首付款
         case 601:
-            self.navigationController?.pushViewController(PaymoneyVC(), animated: true)
+            self.navigationController?.pushViewController(GetMoneyScanVC(), animated: true)
             break
         /// 充值
         case 602:
@@ -200,7 +198,7 @@ extension MainPageViewController : UICollectionViewDataSource,UICollectionViewDe
             break
         /// 转账
         case 603:
-            self.navigationController?.pushViewController(cc, animated: true)
+            self.navigationController?.pushViewController(ReceiveMonVC(), animated: true)
             break
         default:
             break

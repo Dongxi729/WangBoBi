@@ -64,6 +64,24 @@ class PushingMoneyVC: BaseViewController,UITextFieldDelegate,BindPhoneFooterVDel
         return d
     }()
     
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        
+        let navBar = navigationController?.navigationBar
+
+        navBar?.barTintColor = UIColor.white
+
+        /// 修改导航栏文字样式（富文本）
+        navBar?.titleTextAttributes = [
+            
+            NSForegroundColorAttributeName : UIColor.black,
+            NSFontAttributeName : UIFont.systemFont(ofSize: 16 * SCREEN_SCALE)
+        ]
+        
+        /// 设置
+        navBar?.tintColor = UIColor.white
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -89,9 +107,7 @@ class PushingMoneyVC: BaseViewController,UITextFieldDelegate,BindPhoneFooterVDel
     
     /// 更新充值卡账号信息
     @objc fileprivate func changeCodeSEL() {
-        
-        CCog(message: ScanModel.shared.codeStr)
-        
+
         if ScanModel.shared.codeStr?.characters.count != 0 {
         
             self.cardNumLabel.text = ScanModel.shared.codeStr
