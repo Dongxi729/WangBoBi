@@ -24,6 +24,7 @@ class ForgetPassVC: BaseViewController,UITextFieldDelegate {
         d.plStrSize(str: "", holderColor: UIColor.white)
         d.delegate = self
         d.font = UIFont.init(name: "SimHei", size: 12 * SCREEN_SCALE)
+        d.layer.borderWidth = 1
         return d
     }()
     
@@ -69,7 +70,7 @@ class ForgetPassVC: BaseViewController,UITextFieldDelegate {
         let deviceType = UIDevice.current.deviceType
         if deviceType == .iPhone4S {
             CCog(message: "====")
-            AddLabel.frame = CGRect.init(x: SCREEN_WIDTH * 0.18438001992046, y: SCREEN_HEIGHT * 0.4, width: SCREEN_WIDTH * 0.88 - SCREEN_WIDTH * 0.213, height: 30 * SCREEN_SCALE)
+            AddLabel.frame = CGRect.init(x: SCREEN_WIDTH * 0.18438001992046, y: SCREEN_HEIGHT * 0.37, width: SCREEN_WIDTH * 0.88 - SCREEN_WIDTH * 0.213, height: 30 * SCREEN_SCALE)
             view.addSubview(bottomImg)
         }
        
@@ -79,30 +80,35 @@ class ForgetPassVC: BaseViewController,UITextFieldDelegate {
     
     /// 发送验证码
     @objc fileprivate func jumpToNext() {
-        /// 判断是否为空
-        if !(self.AddLabel.text?.isEmpty)! {
-            
-            
-            if (self.AddLabel.text?.validateEmail())! {
-                tfemail = AddLabel.text!
-                
-                AccountModel.sendEmailAutoCode(str: AddLabel.text!, finished: { (sendResult) in
-                    CCog(message: sendResult)
-                    
-                    if sendResult {
-                        
-                        DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 0.5, execute: {
-                            self.navigationController?.pushViewController(ForgetPassVCTwo(), animated: true)
-                        })
-                        
-                    }
-                })
-            } else {
-                toast(toast: "邮件格式不正确")
-            }
-        } else {
-            FTIndicator.showToastMessage("邮箱地址不为空")
-        }
+        
+        DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 0.5, execute: {
+            self.navigationController?.pushViewController(ForgetPassVCTwo(), animated: true)
+        })
+        
+//        /// 判断是否为空
+//        if !(self.AddLabel.text?.isEmpty)! {
+//            
+//            
+//            if (self.AddLabel.text?.validateEmail())! {
+//                tfemail = AddLabel.text!
+//                
+//                AccountModel.sendEmailAutoCode(str: AddLabel.text!, finished: { (sendResult) in
+//                    CCog(message: sendResult)
+//                    
+//                    if sendResult {
+//                        
+//                        DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 0.5, execute: {
+//                            self.navigationController?.pushViewController(ForgetPassVCTwo(), animated: true)
+//                        })
+//                        
+//                    }
+//                })
+//            } else {
+//                toast(toast: "邮件格式不正确")
+//            }
+//        } else {
+//            FTIndicator.showToastMessage("邮箱地址不为空")
+//        }
         
         
     }

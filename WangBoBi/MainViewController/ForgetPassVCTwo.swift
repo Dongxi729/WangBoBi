@@ -79,6 +79,13 @@ class ForgetPassVCTwo: BaseViewController,UITextFieldDelegate {
         view.addSubview(confirmBtn)
         
         view.addSubview(loginBtn)
+        
+        let deviceType = UIDevice.current.deviceType
+        
+        if deviceType == .iPhone4S {
+            CCog(message: "====")
+            AddLabel.frame = CGRect.init(x: SCREEN_WIDTH * 0.18438001992046, y: SCREEN_HEIGHT * 0.37, width: SCREEN_WIDTH * 0.88 - SCREEN_WIDTH * 0.213, height: 30 * SCREEN_SCALE)
+        }
     }
     
     // MARK: - UitextFieldDelegate

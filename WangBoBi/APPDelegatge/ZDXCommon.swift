@@ -194,3 +194,8 @@ func toast(toast str : String) {
     FTIndicator.showToastMessage(str)
     FTIndicator.setIndicatorStyleToDefaultStyle()
 }
+
+// MARK: - 适配所有项目类型
+func aaa<T>(_ aaa : T) -> T {
+    return aaa
+}

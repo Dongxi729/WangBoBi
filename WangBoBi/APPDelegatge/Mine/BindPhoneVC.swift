@@ -170,7 +170,7 @@ class BindPhoneCell: UITableViewCell,UITextFieldDelegate {
     
     
     lazy var inputTF: TfPlaceHolder = {
-        let d : TfPlaceHolder = TfPlaceHolder.init(frame: CGRect.init(x: self.titLabel.RightX + COMMON_MARGIN, y: self.bounds.midY - 10 * SCREEN_SCALE, width: self.Width * 0.7, height: 20 * SCREEN_SCALE))
+        let d : TfPlaceHolder = TfPlaceHolder.init(frame: CGRect.init(x: self.titLabel.RightX + COMMON_MARGIN, y: self.bounds.midY - 20 * SCREEN_SCALE, width: self.Width * 0.7, height: 40 * SCREEN_SCALE))
         d.font = UIFont.systemFont(ofSize: 13 * SCREEN_SCALE)
         d.delegate = self
         return d

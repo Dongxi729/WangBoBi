@@ -18,7 +18,6 @@ class NameCerWithDetailVC: UIViewController,UITableViewDataSource,UITableViewDel
         
         d.delegate = self;
         d.dataSource = self;
-//        d.separatorStyle = .none
         return d
     }()
     
@@ -86,7 +85,6 @@ class NameCerWithDetailVC: UIViewController,UITableViewDataSource,UITableViewDel
             cel.textLabel?.text = dataSource["title"]?[indexPath.row]
             cel.inputTF.placeholder = dataSource["content"]?[indexPath.row]
             cel.inputTF.frame = CGRect.init(x: cel.Width * 0.3, y: cel.inputTF.TopY, width: cel.Width * 0.6, height: cel.inputTF.Height)
-            cel.inputTF.layer.borderWidth = 1
             cel.indexPath = indexPath as NSIndexPath
             cel.delegate = self
             
@@ -188,7 +186,6 @@ class NameCerWithDetailVC: UIViewController,UITableViewDataSource,UITableViewDel
                 toast(toast: "姓名不合法")
             }
             
-            
         } else {
             toast(toast: "姓名不为空")
         }
@@ -233,6 +230,11 @@ class NameCerWithDetailVC: UIViewController,UITableViewDataSource,UITableViewDel
         
     }
     
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        view.endEditing(true)
+    }
 }
 
 // MARK: - Cell
