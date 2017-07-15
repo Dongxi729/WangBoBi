@@ -46,3 +46,12 @@ let REFRESH_INFO = "http://192.168.1.10:8010/ifs/basicinfo.ashx"
 
 /// 个人接口
 let PERSON_INFO = "http://192.168.1.10:8010/ifs/basicinfo.ashx"
+
+/// 商家接口
+let TELLTOPAY = "http://192.168.1.10:8010/ifs/tofellowpay.ashx"
+
+/// 商户
+let STOTRURL = "http://192.168.1.10:8010/store.aspx"
+
+/// 测试王海珍
+let TEST_URL = "https://laod.cn/hosts/2017-google-hosts.html"

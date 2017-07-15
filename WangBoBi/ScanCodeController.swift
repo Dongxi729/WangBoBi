@@ -199,9 +199,13 @@ extension ScanCodeController:AVCaptureMetadataOutputObjectsDelegate {
                 
                 let alertViewController = UIAlertController(title: "扫描结果", message: (object as AnyObject).stringValue, preferredStyle: .alert)
                 let actionCancel = UIAlertAction(title: "确定", style: .cancel, handler: { (action) in
-                    _ = self.navigationController?.popViewController(animated: true)
+//                    _ = self.navigationController?.popViewController(animated: true)
                     
-                    
+                    if (ScanModel.shared.codeStr?.hasPrefix("wbp://"))! {
+                        self.navigationController?.pushViewController(PaymentThreeVC(), animated: true)
+                    } else {
+                        toast(toast: "未扫描到付款信息")
+                    }
                 })
                 let actinSure = UIAlertAction(title: "再次扫描", style: .default, handler: { (action) in
                     self.session.startRunning()

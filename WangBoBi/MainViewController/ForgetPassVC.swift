@@ -81,34 +81,30 @@ class ForgetPassVC: BaseViewController,UITextFieldDelegate {
     /// 发送验证码
     @objc fileprivate func jumpToNext() {
         
-        DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 0.5, execute: {
-            self.navigationController?.pushViewController(ForgetPassVCTwo(), animated: true)
-        })
-        
-//        /// 判断是否为空
-//        if !(self.AddLabel.text?.isEmpty)! {
-//            
-//            
-//            if (self.AddLabel.text?.validateEmail())! {
-//                tfemail = AddLabel.text!
-//                
-//                AccountModel.sendEmailAutoCode(str: AddLabel.text!, finished: { (sendResult) in
-//                    CCog(message: sendResult)
-//                    
-//                    if sendResult {
-//                        
-//                        DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 0.5, execute: {
-//                            self.navigationController?.pushViewController(ForgetPassVCTwo(), animated: true)
-//                        })
-//                        
-//                    }
-//                })
-//            } else {
-//                toast(toast: "邮件格式不正确")
-//            }
-//        } else {
-//            FTIndicator.showToastMessage("邮箱地址不为空")
-//        }
+        /// 判断是否为空
+        if !(self.AddLabel.text?.isEmpty)! {
+            
+            
+            if (self.AddLabel.text?.validateEmail())! {
+                tfemail = AddLabel.text!
+                
+                AccountModel.sendEmailAutoCode(str: AddLabel.text!, finished: { (sendResult) in
+                    CCog(message: sendResult)
+                    
+                    if sendResult {
+                        
+                        DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 0.5, execute: {
+                            self.navigationController?.pushViewController(ForgetPassVCTwo(), animated: true)
+                        })
+                        
+                    }
+                })
+            } else {
+                toast(toast: "邮件格式不正确")
+            }
+        } else {
+            FTIndicator.showToastMessage("邮箱地址不为空")
+        }
         
         
     }

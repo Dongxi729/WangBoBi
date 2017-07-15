@@ -185,9 +185,7 @@ extension UploadHeadTool {
             //弹出选择相册的控制器
             UIApplication.shared.keyWindow?.rootViewController?.present(self.imagePicker, animated: true, completion: nil)
         }
-        
-        
-        
+
     }
     
     

@@ -54,7 +54,7 @@ class PayPassInputV : CommonV {
     }()
     
     /// 网博币
-    fileprivate lazy var wbcLabel: UILabel = {
+    lazy var wbcLabel: UILabel = {
         let d : UILabel = UILabel.init(frame: CGRect.init(x: COMMON_MARGIN, y: self.Height * 0.35, width: self.Width - 2 * COMMON_MARGIN, height: 20 * SCREEN_SCALE))
         d.font = UIFont.systemFont(ofSize: 20 * SCREEN_SCALE)
         d.textAlignment = .center
@@ -64,7 +64,15 @@ class PayPassInputV : CommonV {
     /// 可用网博币
     lazy var avaluableLabel: UILabel = {
         let d : UILabel = UILabel.init(frame: CGRect.init(x: COMMON_MARGIN, y: self.Height * 0.35 + 20 * SCREEN_SCALE, width: self.Width - 2 * COMMON_MARGIN, height: 10 * SCREEN_SCALE))
-        d.text = "可用WBC300"
+        
+        /// 可用余额显示
+        if AccountModel.shared()?.WBC != nil {
+            d.text = "可用WBC" + (AccountModel.shared()?.WBC)!
+        } else {
+            d.text = "可用WBC"
+        }
+        
+        
         d.font = UIFont.systemFont(ofSize: 10 * SCREEN_SCALE)
         d.textAlignment = .center
         d.textColor = UIColor.colorWithHexString("E5711F")
@@ -84,7 +92,7 @@ class PayPassInputV : CommonV {
         addSubview(wbcLabel)
         addSubview(avaluableLabel)
         
-        wbcLabel.text = "WBC100"
+//        wbcLabel.text = "WBC100"
         passV.passwordBlock = {(params) -> Void in
             
             self.passStr = params
@@ -108,6 +116,8 @@ class PayPassInputV : CommonV {
     
     /// 确定事件
     @objc fileprivate func confirmSEL() {
+        
+        CCog(message: "////")
         self.removeFromSuperview()
         
         self.delegate?.restoreBgColor()

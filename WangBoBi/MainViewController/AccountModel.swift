@@ -673,73 +673,84 @@ class AccountModel: NSObject,NSCoding {
     // MARK: - 首页接口
     class func indexInfo(finished : @escaping (_ values : [IndexCommentTopModel])->(),finishedTop : @escaping (_ values : [IndexMertopModel])->(),finishedTotalModel : @escaping (_ values : Int)->()) {
         
-        let param : [String :String] = ["uid" : (AccountModel.shared()?.Id.stringValue)!,
-                                        "token" : (AccountModel.shared()?.Token)!]
-        
-
-        NetWorkTool.shared.postWithPath(path: INDEX_URL, paras: param, success: { (result) in
-            
-            guard let resultData = result as? NSDictionary  else {
-                return
-            }
-//                    if let resultData = NSDictionary.init(contentsOfFile: "/Users/zhengdongxi/Desktop/Data.plist") {
-//            resultData.write(toFile:AccountModel.userData, atomically: true)
-            
-            CCog(message: AccountModel.userData)
-            
-            /// 抽取提示信息
-            guard let alertMsg = resultData["Msg"] as? String else {
+        if AccountModel.shared()?.Id.stringValue == nil {
+            DispatchQueue.main.async {
+                var nav = LoginNav()
+                nav = LoginNav.init(rootViewController: LoginViewController())
                 
-                return
+                UIApplication.shared.keyWindow?.rootViewController = nav
             }
+        } else {
+            let param : [String :String] = ["uid" : (AccountModel.shared()?.Id.stringValue)!,
+                                            "token" : (AccountModel.shared()?.Token)!]
             
-            /// 取数据
-            if alertMsg == "操作成功" {
-                if let dic = resultData["Data"] as? [String : Any] {
+            
+            NetWorkTool.shared.postWithPath(path: INDEX_URL, paras: param, success: { (result) in
+                
+                guard let resultData = result as? NSDictionary  else {
+                    return
+                }
+                //                    if let resultData = NSDictionary.init(contentsOfFile: "/Users/zhengdongxi/Desktop/Data.plist") {
+                //            resultData.write(toFile:AccountModel.userData, atomically: true)
+                
+                CCog(message: AccountModel.userData)
+                
+                /// 抽取提示信息
+                guard let alertMsg = resultData["Msg"] as? String else {
                     
-                    finishedTotalModel(dic.count)
-                    
-                    //头条推荐
-                    if let dicc = [dic["CommendTop"] as? NSArray][0] {
+                    return
+                }
+                
+                /// 取数据
+                if alertMsg == "操作成功" {
+                    if let dic = resultData["Data"] as? [String : Any] {
                         
-                        var mmm = [IndexCommentTopModel]()
-                        for vv in dicc {
-                            if let diccc = vv as? NSDictionary {
-                                
-                                let topMedel = IndexCommentTopModel.init(dict: diccc as! [String : Any])
-                                
-                                mmm.append(topMedel)
-                                
-                                if mmm.count == dicc.count {
-                                    finished(mmm)
+                        finishedTotalModel(dic.count)
+                        
+                        //头条推荐
+                        if let dicc = [dic["CommendTop"] as? NSArray][0] {
+                            
+                            var mmm = [IndexCommentTopModel]()
+                            for vv in dicc {
+                                if let diccc = vv as? NSDictionary {
+                                    
+                                    let topMedel = IndexCommentTopModel.init(dict: diccc as! [String : Any])
+                                    
+                                    mmm.append(topMedel)
+                                    
+                                    if mmm.count == dicc.count {
+                                        finished(mmm)
+                                    }
                                 }
                             }
                         }
-                    }
-                    
-                    //热评商户
-                    if let dicc = [dic["MerTop"] as? NSArray][0] {
-                        var mmm = [IndexMertopModel]()
-                        for vv in dicc {
-                            if let diccc = vv as? NSDictionary {
-                                
-                                let topMedel = IndexMertopModel.init(dict: diccc as! [String : Any])
-                                
-                                mmm.append(topMedel)
-                                
-                                if mmm.count == dicc.count {
-                                    finishedTop(mmm)
+                        
+                        //热评商户
+                        if let dicc = [dic["MerTop"] as? NSArray][0] {
+                            var mmm = [IndexMertopModel]()
+                            for vv in dicc {
+                                if let diccc = vv as? NSDictionary {
+                                    
+                                    let topMedel = IndexMertopModel.init(dict: diccc as! [String : Any])
+                                    
+                                    mmm.append(topMedel)
+                                    
+                                    if mmm.count == dicc.count {
+                                        finishedTop(mmm)
+                                    }
                                 }
                             }
                         }
                     }
                 }
+                //                    }
+            }) { (error) in
+                let alertMsg = (error as NSError).userInfo["NSLocalizedDescription"]
+                toast(toast: alertMsg! as! String)
             }
-//                    }
-        }) { (error) in
-            let alertMsg = (error as NSError).userInfo["NSLocalizedDescription"]
-            toast(toast: alertMsg! as! String)
         }
+        
+  
     }
     
     // MARK: - 发送验证码 --- 双重验证码接口
@@ -925,6 +936,10 @@ class AccountModel: NSObject,NSCoding {
                 finished(true)
             }
             
+            if alertMsg == "设置支付密码成功" {
+                finished(true)
+            }
+            
             toast(toast: alertMsg)
             
         }) { (error) in
@@ -946,7 +961,7 @@ class AccountModel: NSObject,NSCoding {
                      "token" : (AccountModel.shared()?.Token)!,
                      "oldpwd" : oldPass.md5(),
                      "newpwd" : newPass.md5(),
-                     "ac" : "rpd"]
+                     "ac" : "spd"]
         
         CCog(message: param)
         
@@ -1074,7 +1089,8 @@ class AccountModel: NSObject,NSCoding {
                 })
             }
         }) { (error) in
-            CCog(message: error.localizedDescription)
+            let alertMsg = (error as NSError).userInfo["NSLocalizedDescription"]
+            toast(toast: alertMsg! as! String)
         }
     }
     
@@ -1102,7 +1118,58 @@ class AccountModel: NSObject,NSCoding {
             toast(toast: alertMsg)
             
         }) { (error) in
-            CCog(message: error.localizedDescription)
+            let alertMsg = (error as NSError).userInfo["NSLocalizedDescription"]
+            toast(toast: alertMsg! as! String)
+        }
+    }
+    
+    /// 转账
+    /// 转账
+    ///
+    /// - Parameters:
+    ///   - wbcCount: 网博币数量
+    ///   - passStr: 密码
+    ///   - finished: 成功回调
+    class func moneySend(_ wbcCount : String,_ passStr : String,finished : @escaping (_ result : Bool) -> ()) {
+        let param : [String : Any] = ["uid" : (AccountModel.shared()?.Id.stringValue)!,
+                                      "token" : (AccountModel.shared()?.Token)!,
+                                      "topayads" : (ScanModel.shared.codeStr)!,
+                                      "wbc" : Int(wbcCount) ?? 0,
+                                      "paypass" : passStr.md5()]
+        
+        CCog(message: param)
+        
+        NetWorkTool.shared.postWithPath(path: TELLTOPAY, paras: param, success: { (result) in
+            CCog(message: result)
+            
+            guard let resultData = result as? NSDictionary  else {
+                return
+            }
+            
+            /// 抽取提示信息
+            guard let alertMsg = resultData["Msg"] as? String else {
+                
+                return
+            }
+            
+            toast(toast: alertMsg)
+            
+            
+            
+            if alertMsg == "转账成功" {
+                
+                AccountModel.reloadSEL()
+                
+                DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 1.0, execute: {
+                    finished(true)
+                })
+                
+                finished(true)
+            }
+            
+        }) { (error) in
+            let alertMsg = (error as NSError).userInfo["NSLocalizedDescription"]
+            toast(toast: alertMsg! as! String)
         }
     }
     
@@ -1123,8 +1190,7 @@ class AccountModel: NSObject,NSCoding {
             
             
             userAccount = nil
-            
-            
+
             /// 更新本地存储信息
             let account = AccountModel(dict: resultData["Data"] as! [String : Any])
             

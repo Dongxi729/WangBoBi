@@ -211,6 +211,7 @@
     [self addSubview:textField];
     self.textField = textField;
     textField.keyboardType = UIKeyboardTypeNumberPad;
+    
     [textField addTarget:self action:@selector(textChange:) forControlEvents:UIControlEventEditingChanged];
     textField.tintColor = [UIColor clearColor];
     textField.textColor = [UIColor clearColor];
@@ -246,14 +247,55 @@
     self.backgroundImageView.frame = self.bounds;
 }
 
+- (void)dismiss {
+    [self.textField resignFirstResponder];
+    
+
+    
+    [UIView animateWithDuration:0.5 animations:^{
+        
+        UIApplication.sharedApplication.keyWindow.rootViewController.view.frame = CGRectMake(0, 0, [UIScreen mainScreen].bounds.size.width, [UIScreen mainScreen].bounds.size.height);
+    }];
+}
+
 #pragma mark - 文本框内容改变
 - (void)textChange:(UITextField *)textField {
+   
+    UIToolbar * tool = [[UIToolbar alloc] initWithFrame:CGRectMake(0, 0, [UIScreen mainScreen].bounds.size.width, 40)];
+    
+    self.textField.inputAccessoryView = tool;
+
+    UIBarButtonItem * doneBtn = [[UIBarButtonItem alloc] initWithTitle:@"完成" style:UIBarButtonItemStylePlain target:self action:@selector(dismiss)];
+    
+    [tool setItems:@[doneBtn] animated:YES];
+    
+    [textField becomeFirstResponder];
+    
+    [UIView animateWithDuration:0.5 animations:^{
+        
+        UIApplication.sharedApplication.keyWindow.rootViewController.view.frame = CGRectMake(0, -100, [UIScreen mainScreen].bounds.size.width, [UIScreen mainScreen].bounds.size.height);
+    }];
+    
+    
+    
     NSString *text = textField.text;
     if (text.length > _passwordLength) {
         //substringToIndex,index从0开始, 不包含最后index所指的那个字符,在这里接到的子串不包含6所指的字符
         text = [text substringToIndex:_passwordLength];
         textField.text = text;
     }
+    
+    if (text.length == _passwordLength) {
+        
+        [UIView animateWithDuration:0.5 animations:^{
+            
+            [textField resignFirstResponder];
+            
+            UIApplication.sharedApplication.keyWindow.rootViewController.view.frame = CGRectMake(0, 0, [UIScreen mainScreen].bounds.size.width, [UIScreen mainScreen].bounds.size.height);
+        }];
+        
+    }
+    
     self.inputCount = textField.text.length;
     if (self.passwordBlock) {
         self.passwordBlock(text);
@@ -285,6 +327,7 @@
     self.textField.text = @"";
     self.inputCount = 0;
     [self textChange:self.textField];
+    
 }
 
 #pragma mark    -   private method

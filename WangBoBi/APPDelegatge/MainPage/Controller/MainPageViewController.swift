@@ -57,16 +57,16 @@ class MainPageViewController: BaseViewController {
         view.backgroundColor = COMMON_TBBGCOLOR
         
         /// 模型取值
-        AccountModel.indexInfo(finished: { (commenModel) in
-            self.topModel = commenModel
-            
-        }, finishedTop: { (merTopModel) in
-            self.mertopModel = merTopModel
-        }) { (xxx) in
-            self.loginModel = xxx
-            CCog(message: xxx)
-            self.collV.reloadData()
-        }
+//        AccountModel.indexInfo(finished: { (commenModel) in
+//            self.topModel = commenModel
+//            
+//        }, finishedTop: { (merTopModel) in
+//            self.mertopModel = merTopModel
+//        }) { (xxx) in
+//            self.loginModel = xxx
+//            CCog(message: xxx)
+//            self.collV.reloadData()
+//        }
         
         /// 添加刷新控件
         self.collV.addHeaderViewfun()
@@ -78,6 +78,15 @@ class MainPageViewController: BaseViewController {
         
         replaceV.alpha = 0
         
+        
+        /// 接收通知
+        NotificationCenter.default.addObserver(self, selector: #selector(refreshSEl), name: NSNotification.Name(rawValue: "reloadInfo"), object: nil)
+    }
+    
+    @objc private func refreshSEl() -> Void {
+        
+        CCog(message: AccountModel.shared()?.WBC)
+        self.collV.reloadData()
     }
 }
 
@@ -217,7 +226,6 @@ extension MainPageViewController : UICollectionViewDataSource,UICollectionViewDe
             break
         }
     }
-    
 }
 
 // MARK: - 刷新控件
@@ -232,6 +240,8 @@ extension MainPageViewController : headerViewelegate {
         AccountModel.indexInfo(finished: { (commenModel) in
             self.topModel = commenModel
             
+            
+            CCog(message: self.topModel)
         }, finishedTop: { (merTopModel) in
             self.mertopModel = merTopModel
             

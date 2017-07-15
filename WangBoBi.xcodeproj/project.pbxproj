@@ -44,6 +44,9 @@
 		263CAF131EF62889006629BF /* XLPasswordInputView.m in Sources */ = {isa = PBXBuildFile; fileRef = 263CAF101EF62889006629BF /* XLPasswordInputView.m */; };
 		263CAF151EF62B89006629BF /* TestViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 263CAF141EF62B89006629BF /* TestViewController.swift */; };
 		2643CFC61EF3EE2200EFC720 /* DetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2643CFC51EF3EE2200EFC720 /* DetailViewController.swift */; };
+		264793681F18DC98000F9F67 /* DetailReplaceVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 264793661F18DC98000F9F67 /* DetailReplaceVC.swift */; };
+		2647936B1F18DD28000F9F67 /* WkBaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2647936A1F18DD28000F9F67 /* WkBaseViewController.swift */; };
+		2647936D1F18DD71000F9F67 /* DetailViewController2.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2647936C1F18DD71000F9F67 /* DetailViewController2.swift */; };
 		2649606F1EF0BF2500A559D6 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 264960691EF0BF2500A559D6 /* AppDelegate.swift */; };
 		264960871EF0C1B400A559D6 /* ZDXCommon.swift in Sources */ = {isa = PBXBuildFile; fileRef = 264960861EF0C1B400A559D6 /* ZDXCommon.swift */; };
 		264960BD1EF0C28F00A559D6 /* POPAnimatableProperty.mm in Sources */ = {isa = PBXBuildFile; fileRef = 2649608C1EF0C28F00A559D6 /* POPAnimatableProperty.mm */; };
@@ -196,6 +199,9 @@
 		263CAF101EF62889006629BF /* XLPasswordInputView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XLPasswordInputView.m; sourceTree = "<group>"; };
 		263CAF141EF62B89006629BF /* TestViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TestViewController.swift; sourceTree = "<group>"; };
 		2643CFC51EF3EE2200EFC720 /* DetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DetailViewController.swift; sourceTree = "<group>"; };
+		264793661F18DC98000F9F67 /* DetailReplaceVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DetailReplaceVC.swift; sourceTree = "<group>"; };
+		2647936A1F18DD28000F9F67 /* WkBaseViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WkBaseViewController.swift; sourceTree = "<group>"; };
+		2647936C1F18DD71000F9F67 /* DetailViewController2.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DetailViewController2.swift; sourceTree = "<group>"; };
 		264960691EF0BF2500A559D6 /* AppDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		264960831EF0C19F00A559D6 /* WangBoBi-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "WangBoBi-Bridging-Header.h"; sourceTree = "<group>"; };
 		264960861EF0C1B400A559D6 /* ZDXCommon.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ZDXCommon.swift; sourceTree = "<group>"; };
@@ -831,6 +837,9 @@
 		2649607F1EF0C02C00A559D6 /* Controller */ = {
 			isa = PBXGroup;
 			children = (
+				2647936C1F18DD71000F9F67 /* DetailViewController2.swift */,
+				2647936A1F18DD28000F9F67 /* WkBaseViewController.swift */,
+				264793661F18DC98000F9F67 /* DetailReplaceVC.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -1352,6 +1361,7 @@
 				260B20C81EF76B5500E78FD8 /* MyRequestVC.swift in Sources */,
 				264960CE1EF0C28F00A559D6 /* TransformationMatrix.cpp in Sources */,
 				260B20D41EF7A08D00E78FD8 /* TfPlaceHolder.swift in Sources */,
+				2647936D1F18DD71000F9F67 /* DetailViewController2.swift in Sources */,
 				2643CFC61EF3EE2200EFC720 /* DetailViewController.swift in Sources */,
 				264960FE1EF0C9EC00A559D6 /* YYMemoryCache.m in Sources */,
 				260B20D21EF79F5100E78FD8 /* CommonV.swift in Sources */,
@@ -1365,6 +1375,7 @@
 				2649611B1EF0CD9200A559D6 /* NSString+extension.swift in Sources */,
 				264960BE1EF0C28F00A559D6 /* POPAnimation.mm in Sources */,
 				2649612C1EF0D08F00A559D6 /* FTIndicator.m in Sources */,
+				2647936B1F18DD28000F9F67 /* WkBaseViewController.swift in Sources */,
 				264961301EF0D08F00A559D6 /* FTToastIndicator.m in Sources */,
 				264961061EF0C9EC00A559D6 /* YYFrameImage.m in Sources */,
 				26F248B41EFFC05300599CC7 /* NameCerWithDetailVC.swift in Sources */,
@@ -1405,6 +1416,7 @@
 				265D430C1EFBA8B1007F5AB8 /* MyInfoVC.swift in Sources */,
 				2607D1571EF224C90015625E /* MainPageViewController.swift in Sources */,
 				265D430F1EFBD572007F5AB8 /* CodeProductor.swift in Sources */,
+				264793681F18DC98000F9F67 /* DetailReplaceVC.swift in Sources */,
 				264961051EF0C9EC00A559D6 /* YYAnimatedImageView.m in Sources */,
 				2650C1941F03AA82005BE741 /* PickerV.swift in Sources */,
 				264960BF1EF0C28F00A559D6 /* POPAnimationEvent.mm in Sources */,

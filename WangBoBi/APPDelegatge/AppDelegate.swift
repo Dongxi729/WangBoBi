@@ -45,8 +45,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
     }
     
-    func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
-        // Override point for customization after application launch.
+    /// 检查登录时间
+    func checkLoginTim() -> Void {
+        
         
         let now = Date()
         let timerStamp : TimeInterval = now.timeIntervalSince1970
@@ -54,8 +55,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         let timeStamp = Int(timerStamp)
         
         CCog(message: timeStamp)
-        
-//        testPae()
         
         // 取出本地时间对比操作
         if let lastLoginTime = UserDefaults.standard.object(forKey: "loginTime") as? Int {
@@ -86,19 +85,37 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             setUnlogedMain()
             AccountModel.logout()
         }
-        //        testComplement()
-        return true
+    }
+    
+    func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
+        // Override point for customization after application launch.
         
+        //                testComplement()
+//        testPae()
+        
+        /// 当前登录时间检验
+        //        checkLoginTim()
+        
+        //                testComplement()
+        
+        setUnlogedMain()
+        
+        checkLoginTim()
+        return true
     }
     
     //// 测试接口
     func testComplement() {
-        let compresImage = UIImageJPEGRepresentation(#imageLiteral(resourceName: "forgetPass3"), 1.0)
         
-        let request = "http://192.168.1.10:8010/ifs/headimg.ashx?uid=\((AccountModel.shared()?.Id.stringValue)!)&token=\((AccountModel.shared()?.Token)!)&ac=dd"
-        CCog(message: request)
+        let param : [String : Any] = ["uid" : (AccountModel.shared()?.Id.stringValue)!,
+                                      "token" : (AccountModel.shared()?.Token)!,
+                                      "topayads" : "wbp://3698ae12-5cec-48a6-bcf4-0d7f13a4e90b",
+                                      "wbc" : "2",
+                                      "paypass" : "123456".md5()]
         
-        NetWorkTool.shared.postWithImageWithData(imgData: compresImage!, path: request, success: { (result) in
+        CCog(message: param)
+        
+        NetWorkTool.shared.postWithPath(path: TELLTOPAY, paras: param, success: { (result) in
             CCog(message: result)
         }) { (error) in
             CCog(message: error.localizedDescription)
