@@ -528,7 +528,7 @@ class AccountModel: NSObject,NSCoding {
                     UIApplication.shared.keyWindow?.rootViewController = nav
                 }
             }
-        
+            
         } else {
             CCog(message: "////")
             
@@ -706,6 +706,15 @@ class AccountModel: NSObject,NSCoding {
                     if let dic = resultData["Data"] as? [String : Any] {
                         
                         finishedTotalModel(dic.count)
+
+                        CCog(message: dic)
+                        
+                        /// 更新本地存储信息
+                        let account = AccountModel(dict: dic)
+
+                        account.saveAccount()
+                        
+                        AccountModel.shared()?.updateUserInfo()
                         
                         //头条推荐
                         if let dicc = [dic["CommendTop"] as? NSArray][0] {
@@ -750,7 +759,7 @@ class AccountModel: NSObject,NSCoding {
             }
         }
         
-  
+        
     }
     
     // MARK: - 发送验证码 --- 双重验证码接口
@@ -1134,7 +1143,7 @@ class AccountModel: NSObject,NSCoding {
         let param : [String : Any] = ["uid" : (AccountModel.shared()?.Id.stringValue)!,
                                       "token" : (AccountModel.shared()?.Token)!,
                                       "topayads" : (ScanModel.shared.codeStr)!,
-                                      "wbc" : Int(wbcCount) ?? 0,
+                                      "wbc" : String(wbcCount) ?? 0,
                                       "paypass" : passStr.md5()]
         
         CCog(message: param)
@@ -1190,7 +1199,7 @@ class AccountModel: NSObject,NSCoding {
             
             
             userAccount = nil
-
+            
             /// 更新本地存储信息
             let account = AccountModel(dict: resultData["Data"] as! [String : Any])
             
@@ -1379,7 +1388,7 @@ class AccountModel: NSObject,NSCoding {
         SubmitTime = aDecoder.decodeObject(forKey: "SubmitTime") as? String
         WBC = aDecoder.decodeObject(forKey: "WBC") as? String
         
-        //        CCog(message: WBC)
+        CCog(message: WBC)
         CCog(message: Integral.stringValue)
     }
 }

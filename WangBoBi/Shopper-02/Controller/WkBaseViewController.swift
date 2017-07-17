@@ -31,13 +31,14 @@ class WkBaseViewController: UIViewController {
     
     /// 拦截的字符串
     var blokStr : String = ""
-    
-    /// 加载完毕
-    var isLoaded : Bool = false
+
 
     /// 左上角按钮
     var leftBarItem : UIButton = UIButton()
     
+    
+    /// 是否加载完成
+    var isLoad = false
     
     ///网页模板
     lazy var webView: WKWebView = {
@@ -68,31 +69,26 @@ class WkBaseViewController: UIViewController {
         configuration.userContentController = userContentController
         
         //支付宝
-        userContentController.add(LeakAvoider.init(delegate: self as WKScriptMessageHandler), name: "alipay")
-        
-        //返回首页
-        userContentController.add(LeakAvoider.init(delegate: self as WKScriptMessageHandler), name: "backToMain")
-        
-        //前往订单
-        userContentController.add(LeakAvoider.init(delegate: self as WKScriptMessageHandler), name: "detailRocord")
-        
-        ///由于设置了edgesForExtendedLayout,防止了页面全部控件向上偏移，所以在子页面数大于2的时候，矫正
-        if (self.navigationController?.viewControllers.count)! >= 1 {
-            let rect = CGRect(x: 0, y: 0, width: SCREEN_WIDTH, height: SCREEN_HEIGHT - 44)
-            wkV = WKWebView.init(frame: rect, configuration: configuration)
-        } else {
-            let rect = CGRect(x: 0, y: -20, width: SCREEN_WIDTH, height: SCREEN_HEIGHT - 112)
-            
-            wkV = WKWebView.init(frame: rect, configuration: configuration)
+//        userContentController.add(LeakAvoider.init(delegate: self as WKScriptMessageHandler), name: "alipay")
+
+        if self.navigationController?.viewControllers != nil {
+            ///由于设置了edgesForExtendedLayout,防止了页面全部控件向上偏移，所以在子页面数大于2的时候，矫正
+            if (self.navigationController?.viewControllers.count)! >= 1 {
+                let rect = CGRect(x: 0, y: 0, width: SCREEN_WIDTH, height: SCREEN_HEIGHT)
+                wkV = WKWebView.init(frame: rect, configuration: configuration)
+            } else {
+                let rect = CGRect(x: 0, y: -30, width: SCREEN_WIDTH, height: SCREEN_HEIGHT - 30)
+                
+                wkV = WKWebView.init(frame: rect, configuration: configuration)
+            }
         }
         
-        
-        
+
         //添加刷新控件
         wkV.scrollView.addHeaderViewfun()
         
-        //        let d : headerView = wkV.viewWithTag(888) as! headerView
-        //        d.delegate = self;
+        let d : headerView = wkV.viewWithTag(888) as! headerView
+        d.delegate = self;
         
         wkV.navigationDelegate = self;
         
@@ -167,11 +163,14 @@ class WkBaseViewController: UIViewController {
             navBar?.isTranslucent = false
         }
     }
+
     
     deinit {
         print("dealloc")
         // using KVO, always tear down, take no chances
-        self.webView.removeObserver(self, forKeyPath: #keyPath(WKWebView.estimatedProgress))
+        if isLoad {
+            self.webView.removeObserver(self, forKeyPath: #keyPath(WKWebView.estimatedProgress))
+        }
     }
 }
 
@@ -237,7 +236,6 @@ extension WkBaseViewController : WKNavigationDelegate {
         if self.limited == true {
             self.navigationItem.title = "请检查网络设置~"
         }
-        
     }
     
     
@@ -247,12 +245,13 @@ extension WkBaseViewController : WKNavigationDelegate {
         if self.navigationController?.viewControllers.count > 1 {
             ///标题赋值
             self.navigationItem.title = webView.title
+            isLoad = true
         }
         
         print("\((#file as NSString).lastPathComponent):(\(#line))\n","finish Loaded")
         
         /// 加载完毕标识符
-        self.isLoaded = true
+        self.isLoad = true
         
         blokStr = ""
         self.limited = false
@@ -273,14 +272,7 @@ extension WkBaseViewController : WKNavigationDelegate {
             })
         }
     }
-    
-    //    // MARK:- 允许拦截
-    //    func webView(_ webView: WKWebView, decidePolicyFor navigationResponse: WKNavigationResponse, decisionHandler: @escaping (WKNavigationResponsePolicy) -> Void) {
-    //
-    //        decisionHandler(.allow)
-    //    }
-    //
-    //
+
 }
 
 
@@ -308,4 +300,19 @@ class LeakAvoider : NSObject, WKScriptMessageHandler {
         self.delegate?.userContentController(
             userContentController, didReceive: message)
     }
+}
+
+
+
+// MARK: - 第三方刷新代理方法实现
+extension WkBaseViewController : headerViewelegate {
+    func headerViewEndfun(_ _endRefresh: () -> Void) {
+        
+        /// 取出刷新头
+        let d : headerView = self.webView.viewWithTag(888) as! headerView
+        d.endRefresh()
+        
+        self.webView.reload()
+    }
+    
 }

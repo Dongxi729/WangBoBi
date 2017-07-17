@@ -28,20 +28,19 @@ class DetailViewController2: WkBaseViewController {
 
 
         } else {
-
    
             let bounds = self.navigationController!.navigationBar.bounds
             
             CCog(message: self.navigationController!.navigationBar.bounds)
             
-            self.navigationController?.navigationBar.frame = CGRect(x: 0, y: 0, width: bounds.width, height: 54)
+            self.navigationController?.navigationBar.frame = CGRect(x: 0, y: 0, width: bounds.width, height: 34)
         }
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
-        self.urlString = TEST_URL
+        self.urlString = STOTRURL
         
         
         let request : URLRequest = NSURLRequest.init(url: URL.init(string: self.urlString)!, cachePolicy: .returnCacheDataElseLoad, timeoutInterval: 0) as URLRequest

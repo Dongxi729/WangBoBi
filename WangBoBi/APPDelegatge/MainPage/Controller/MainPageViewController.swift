@@ -47,26 +47,21 @@ class MainPageViewController: BaseViewController {
         return d
     }()
     
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        
-        // Do any additional setup after loading the view.
-        self.title = "钱包"
-        
-        view.addSubview(collV)
-        view.backgroundColor = COMMON_TBBGCOLOR
-        
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
         /// 模型取值
-//        AccountModel.indexInfo(finished: { (commenModel) in
-//            self.topModel = commenModel
-//            
-//        }, finishedTop: { (merTopModel) in
-//            self.mertopModel = merTopModel
-//        }) { (xxx) in
-//            self.loginModel = xxx
-//            CCog(message: xxx)
-//            self.collV.reloadData()
-//        }
+        AccountModel.indexInfo(finished: { (commenModel) in
+            self.topModel = commenModel
+            
+        }, finishedTop: { (merTopModel) in
+            self.mertopModel = merTopModel
+        }) { (xxx) in
+            self.loginModel = xxx
+            CCog(message: xxx)
+            self.collV.reloadData()
+        }
+        
+        
         
         /// 添加刷新控件
         self.collV.addHeaderViewfun()
@@ -77,16 +72,28 @@ class MainPageViewController: BaseViewController {
         view.insertSubview(replaceV, aboveSubview: (self.navigationController?.navigationBar)!)
         
         replaceV.alpha = 0
+
+        self.title = "钱包"
+        
+        if self.collV.bounds.width > 0 {
+            self.collV.removeFromSuperview()
+            view.addSubview(collV)
+        } else {
+            view.addSubview(collV)
+        }
         
         
-        /// 接收通知
-        NotificationCenter.default.addObserver(self, selector: #selector(refreshSEl), name: NSNotification.Name(rawValue: "reloadInfo"), object: nil)
+        /// 测试
+        AccountModel.reloadSEL()
+        
+        view.backgroundColor = COMMON_TBBGCOLOR
     }
     
-    @objc private func refreshSEl() -> Void {
+    override func viewDidLoad() {
+        super.viewDidLoad()
         
-        CCog(message: AccountModel.shared()?.WBC)
-        self.collV.reloadData()
+        // Do any additional setup after loading the view.
+
     }
 }
 
@@ -140,18 +147,21 @@ extension MainPageViewController : UICollectionViewDataSource,UICollectionViewDe
         case 1:
             return self.topModel.count
         default:
-            
             return 0
         }
     }
     
     func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
+
         
         if indexPath.section == 0 {
             
             let header = collectionView.dequeueReusableSupplementaryView(ofKind:
                 UICollectionElementKindSectionHeader, withReuseIdentifier: "headReuse",
                                                       for: indexPath) as? HeadReuse
+            
+//            AccountModel.reloadSEL()
+
             header?.delegate = self
             header?.sectionImg.setTitle("热评商户", for: .normal)
             header?.sectionImg.setImage(#imageLiteral(resourceName: "hot"), for: .normal)
@@ -245,14 +255,17 @@ extension MainPageViewController : headerViewelegate {
         }, finishedTop: { (merTopModel) in
             self.mertopModel = merTopModel
             
+            CCog(message: self.topModel)
+            
         }) { (xxx) in
             self.loginModel = xxx
             
             self.collV.reloadData()
             d.endRefresh()
+            
+            CCog(message: self.topModel)
         }
     }
-    
 }
 
 // MARK: - 监听滑动距离将过度视图补充

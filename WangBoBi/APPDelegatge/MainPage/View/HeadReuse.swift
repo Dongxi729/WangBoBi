@@ -24,6 +24,11 @@ class HeadReuse : UICollectionReusableView {
         return d
     }()
     
+    var zdxInt : Int? {
+        didSet {
+            CCog(message: AccountModel.shared()?.WBC)
+        }
+    }
     
     /// 补充的头部文字
     lazy var sectionImg: BtnWithImage = {
@@ -127,6 +132,17 @@ class HeadReuse : UICollectionReusableView {
         
         addSubview(bannerImg)
         addSubview(sectionImg)
+        
+ 
+        NotificationCenter.default.addObserver(self, selector: #selector(reloadSEL), name: NSNotification.Name(rawValue: "reloadInfo"), object: nil)
+    }
+    
+    @objc fileprivate func reloadSEL() {
+        /// 余额
+        self.WBCLabel.text = AccountModel.shared()?.WBC
+        
+        /// 积分
+        self.jifenLabel.text = AccountModel.shared()?.Integral.stringValue
     }
     
     @objc fileprivate func buttonSEL(sender : UIButton) {
