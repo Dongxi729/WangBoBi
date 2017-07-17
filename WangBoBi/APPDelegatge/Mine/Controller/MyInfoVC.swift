@@ -66,16 +66,15 @@ class PersonInfoEditV : UIView {
     lazy var nameLabel: UILabel = {
         let d: UILabel = UILabel.init(frame: CGRect.init(x: COMMON_MARGIN * SCREEN_SCALE, y: COMMON_MARGIN * SCREEN_SCALE, width: 40 * SCREEN_SCALE, height: 20 * SCREEN_SCALE))
         d.text = "姓名 :"
-//        d.sizeToFit()
-        d.font = UIFont.systemFont(ofSize: 11 * SCREEN_SCALE)
         d.textColor = UIColor.lightGray
+        d.font = UIFont.systemFont(ofSize: 11 * SCREEN_SCALE)
         return d
     }()
     
     /// 名字显示
     lazy var nameShowLabel: UILabel = {
         let d : UILabel = UILabel.init(frame: CGRect.init(x: self.nameLabel.RightX, y: self.nameLabel.TopY, width: 100 * SCREEN_SCALE, height: self.nameLabel.Height))
-        d.text = "khj,hlllkhlk"
+        
         d.font = UIFont.systemFont(ofSize: 11 * SCREEN_SCALE)
         return d
     }()
@@ -166,8 +165,9 @@ class PersonInfoEditV : UIView {
         if AccountModel.shared()?.TrueName?.characters.count == 0 {
             cerNameIcon.showCerNam(str: "未实名")
         } else {
-            nameLabel.text = AccountModel.shared()?.TrueName
+            nameShowLabel.text = AccountModel.shared()?.TrueName
         }
+        
         /// 头像
         avatarImg.setImage(urlString: AccountModel.shared()?.HeadImg, placeholderImage: #imageLiteral(resourceName: "logo"))
         

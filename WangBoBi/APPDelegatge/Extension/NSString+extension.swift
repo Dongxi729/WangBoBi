@@ -74,6 +74,12 @@ extension String {
         return isMatch
     }
     
+    /// 检查支付密码
+    func checkPaypass(passStr : String) -> Bool {
+        let regex = "[0-9._%+-]{6}"
+        let emailTest: NSPredicate = NSPredicate(format: "SELF MATCHES %@", regex)
+        return emailTest.evaluate(with: self)
+    }
     
     /// 校验手机号
     func checkMobile(mobileNumbel:NSString) ->Bool

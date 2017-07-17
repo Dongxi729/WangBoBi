@@ -63,6 +63,10 @@ class ChangeLoginPassVC: UIViewController,BindPhoneCellDelegate,BindPhoneFooterV
         cell.textLabel?.text = dataSource["title"]?[indexPath.row]
         cell.titLabel.sizeToFit()
         cell.inputTF.placeholder = dataSource["content"]?[indexPath.row]
+        
+        /// 设置密文显示
+        cell.titLabel.isSecureTextEntry = true
+        cell.inputTF.isSecureTextEntry = true
         cell.indexPath = indexPath as NSIndexPath
         cell.delegate = self
         

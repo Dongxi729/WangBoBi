@@ -19,8 +19,13 @@ class SetDoubelCertifiVC: UIViewController,PhoneCerViewDelegate {
     
     lazy var Bttn: UIButton = {
         let d : UIButton = UIButton.init(frame: CGRect.init(x: 0, y: self.bachV.Height * 0.93, width: SCREEN_WIDTH, height: 40 * SCREEN_SCALE))
-        d.layer.borderWidth = 1
         d.addTarget(self, action: #selector(gotoCertiDoublePass), for: .touchUpInside)
+        return d
+    }()
+    
+    lazy var shadowLine: UIView = {
+        let d : UIView = UIView.init(frame: CGRect.init(x: 0, y: 0, width: SCREEN_WIDTH, height: 1))
+        d.backgroundColor = COMMON_TBBGCOLOR
         return d
     }()
     
@@ -32,6 +37,7 @@ class SetDoubelCertifiVC: UIViewController,PhoneCerViewDelegate {
         title = "设置双重认证"
         view.addSubview(bachV)
         view.addSubview(Bttn)
+        view.addSubview(shadowLine)
         
         view.backgroundColor = UIColor.white
     }

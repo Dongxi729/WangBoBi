@@ -28,7 +28,7 @@ class SetPaymentPassVC: UIViewController,BindPhoneCellDelegate,BindPhoneFooterVD
     }()
     
     var dataSource : [String:[String]] = ["title" : ["支付密码","重复输入"],
-                                          "content" : ["请输入支付密码","请重复输入支付密码"]]
+                                          "content" : ["请输入支付密码(6位数字)","请重复输入支付密码"]]
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -57,6 +57,10 @@ class SetPaymentPassVC: UIViewController,BindPhoneCellDelegate,BindPhoneFooterVD
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "cellID") as! BindPhoneCell
         
+        /// 延长分割线
+        cell.preservesSuperviewLayoutMargins = false
+        cell.separatorInset = UIEdgeInsets.zero
+        cell.layoutMargins = .zero
         
         cell.titLabel.text = dataSource["title"]?[indexPath.row]
         cell.titLabel.sizeToFit()
@@ -106,25 +110,37 @@ class SetPaymentPassVC: UIViewController,BindPhoneCellDelegate,BindPhoneFooterVD
 
         if self.payPass != nil {
             
-            if (self.payPass?.checkPass(passStr: self.payPass!))! {
+            if (self.payPass?.checkPaypass(passStr: self.payPass!))! {
                 if self.repeatPayPass != nil {
                     if self.payPass == self.repeatPayPass {
-                        AccountModel.payPassSEL(payPass: PAY_PASS, finished: { (result) in
-                            CCog(message: result)
-                            if result {
-                                self.navigationController?.popViewController(animated: true)
-                            }
-                        })
+                        /// 根据返回值，支付密码修改密码类型切换
+                        /// 修改支付密码
+                        if AccountModel.shared()?.TraderPass?.characters.count > 0 {
+                            AccountModel.changePayPass(newPass: self.repeatPayPass!, oldPass: self.payPass!, finshed: { (result) in
+                                if result {
+                                    self.navigationController?.popViewController(animated: true)
+                                }
+                            })
+                        } else {
+                            AccountModel.payPassSEL(payPass: self.payPass!, finished: { (result) in
+                                CCog(message: result)
+                                if result {
+                                    self.navigationController?.popViewController(animated: true)
+                                }
+                            })
+                        }
+                        
+                        
                     } else {
                         toast(toast: "两次密码输入不一致")
                     }
-                
+                    
                 } else {
                     toast(toast: "确认密码不为空")
-                
+                    
                 }
             } else {
-                toast(toast: "输入密码不合法")
+                toast(toast: "输入密码不合法(6位数字)")
             }
         } else {
             toast(toast: "密码不为空")

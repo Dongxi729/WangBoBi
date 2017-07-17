@@ -24,7 +24,6 @@ class ForgetPassVC: BaseViewController,UITextFieldDelegate {
         d.plStrSize(str: "", holderColor: UIColor.white)
         d.delegate = self
         d.font = UIFont.init(name: "SimHei", size: 12 * SCREEN_SCALE)
-        d.layer.borderWidth = 1
         return d
     }()
     

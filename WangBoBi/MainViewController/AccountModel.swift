@@ -452,7 +452,7 @@ class AccountModel: NSObject,NSCoding {
             }
             
             if alertMsg == "登陆成功" {
-                
+        
                 /// 记录登录时间
                 let now = Date()
                 let timerStamp : TimeInterval = now.timeIntervalSince1970
@@ -690,10 +690,6 @@ class AccountModel: NSObject,NSCoding {
                 guard let resultData = result as? NSDictionary  else {
                     return
                 }
-                //                    if let resultData = NSDictionary.init(contentsOfFile: "/Users/zhengdongxi/Desktop/Data.plist") {
-                //            resultData.write(toFile:AccountModel.userData, atomically: true)
-                
-                CCog(message: AccountModel.userData)
                 
                 /// 抽取提示信息
                 guard let alertMsg = resultData["Msg"] as? String else {
@@ -706,8 +702,6 @@ class AccountModel: NSObject,NSCoding {
                     if let dic = resultData["Data"] as? [String : Any] {
                         
                         finishedTotalModel(dic.count)
-
-                        CCog(message: dic)
                         
                         /// 更新本地存储信息
                         let account = AccountModel(dict: dic)
@@ -966,11 +960,12 @@ class AccountModel: NSObject,NSCoding {
     ///   - oldPass: 旧密码
     ///   - finshed: 完成结果
     class func changePayPass(newPass : String,oldPass : String,finshed : @escaping (_ result : Bool) -> ()) {
+        
         let param = ["uid" : (AccountModel.shared()?.Id.stringValue)!,
                      "token" : (AccountModel.shared()?.Token)!,
                      "oldpwd" : oldPass.md5(),
                      "newpwd" : newPass.md5(),
-                     "ac" : "spd"]
+                     "ac" : "rpd"]
         
         CCog(message: param)
         
@@ -989,6 +984,10 @@ class AccountModel: NSObject,NSCoding {
             }
             
             if alertMsg == "修改支付密码成功" {
+                finshed(true)
+            }
+            
+            if alertMsg == "设置支付密码成功" {
                 finshed(true)
             }
             
@@ -1163,8 +1162,6 @@ class AccountModel: NSObject,NSCoding {
             
             toast(toast: alertMsg)
             
-            
-            
             if alertMsg == "转账成功" {
                 
                 AccountModel.reloadSEL()
@@ -1189,20 +1186,15 @@ class AccountModel: NSObject,NSCoding {
                                          "token" : (AccountModel.shared()?.Token)!]
         
         NetWorkTool.shared.postWithPath(path: PERSON_INFO, paras: param, success: { (result) in
-            CCog(message: result)
             
             guard let resultData = result as? NSDictionary  else {
                 return
             }
             
-            CCog(message: resultData["Data"] as! [String : Any])
-            
-            
             userAccount = nil
             
             /// 更新本地存储信息
             let account = AccountModel(dict: resultData["Data"] as! [String : Any])
-            
             
             account.saveAccount()
             
@@ -1212,7 +1204,9 @@ class AccountModel: NSObject,NSCoding {
             NotificationCenter.default.post(name: NSNotification.Name(rawValue: "reloadInfo"), object: nil)
             
         }) { (error) in
-            CCog(message: error.localizedDescription)
+            
+            let alertMsg = (error as NSError).userInfo["NSLocalizedDescription"]
+            toast(toast: alertMsg! as! String)
         }
     }
     
@@ -1344,7 +1338,6 @@ class AccountModel: NSObject,NSCoding {
         FrinQCode = aDecoder.decodeObject(forKey: "FrinQCode") as? String
         PayQCode = aDecoder.decodeObject(forKey: "PayQCode") as? String
         TraderPass = aDecoder.decodeObject(forKey: "TraderPass") as? String
-        CCog(message: TraderPass as Any)
         TraderStatus = aDecoder.decodeObject(forKey: "TraderStatus") as? TraderStatus
         TrueName = aDecoder.decodeObject(forKey: "TrueName") as? String
         Sex = aDecoder.decodeObject(forKey: "Sex") as? SEXEnum
@@ -1357,8 +1350,6 @@ class AccountModel: NSObject,NSCoding {
         ResidenceAdress = aDecoder.decodeObject(forKey: "ResidenceAdress") as? String
         Email = aDecoder.decodeObject(forKey: "Email") as? String
         Phone = aDecoder.decodeObject(forKey: "Phone") as? String
-        
-        CCog(message: Phone as Any)
         
         /// 识别双重认证状态、绑定手机状态
         if Phone?.characters.count > 0 {
@@ -1387,8 +1378,5 @@ class AccountModel: NSObject,NSCoding {
         WBCAdress = aDecoder.decodeObject(forKey: "WBCAdress") as? String
         SubmitTime = aDecoder.decodeObject(forKey: "SubmitTime") as? String
         WBC = aDecoder.decodeObject(forKey: "WBC") as? String
-        
-        CCog(message: WBC)
-        CCog(message: Integral.stringValue)
     }
 }

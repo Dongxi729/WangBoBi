@@ -66,6 +66,13 @@ class ChangePaypassVC: UIViewController,BindPhoneCellDelegate,BindPhoneFooterVDe
 
         cell.inputTF.placeholder = dataSource["content"]?[indexPath.row]
         cell.indexPath = indexPath as NSIndexPath
+        
+        /// 修改密文显示
+        cell.inputTF.isSecureTextEntry = true
+        
+        /// 修改键盘类型为数字键盘
+        cell.inputTF.keyboardType = .numberPad
+        
         cell.delegate = self
         
         switch indexPath.row {

@@ -17,8 +17,6 @@ class BaseViewController: UIViewController,UIGestureRecognizerDelegate,UINavigat
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
-        CCog(message: "ddddd")
-        
         //设置导航栏背景颜色透明
         UIApplication.shared.statusBarStyle = UIStatusBarStyle.lightContent
         
@@ -96,18 +94,14 @@ class BaseViewController: UIViewController,UIGestureRecognizerDelegate,UINavigat
             
             
             if NSStringFromClass(self.classForCoder).contains("DetailViewController2") {
-                
-                
                 navBar?.barTintColor = UIColor.colorWithHexString("2796DC")
                 navBar?.isTranslucent = false
-            } else {
-//                self.leftBarItem.setBackgroundImage(UIImage.init(named: "back"), for: .normal)
             }
-            
-            if NSStringFromClass(self.classForCoder).contains("DetailReplaceVC") {
-                CCog(message: "DetailReplaceVC")
-//                self.leftBarItem.setBackgroundImage(UIImage.init(named: "back"), for: .normal)
-            }
+//            
+//            if NSStringFromClass(self.classForCoder).contains("DetailReplaceVC") {
+//                CCog(message: "DetailReplaceVC")
+////                self.leftBarItem.setBackgroundImage(UIImage.init(named: "back"), for: .normal)
+//            }
             
             /// 修改导航栏文字样式（富文本）
             navBar?.titleTextAttributes = [

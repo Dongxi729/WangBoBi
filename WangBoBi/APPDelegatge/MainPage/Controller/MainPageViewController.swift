@@ -29,6 +29,7 @@ class MainPageViewController: BaseViewController {
         d.register(ReuseV.self, forSupplementaryViewOfKind: UICollectionElementKindSectionHeader, withReuseIdentifier: "HeadInfoView")
         d.register(HeadReuse.self, forSupplementaryViewOfKind: UICollectionElementKindSectionHeader, withReuseIdentifier: "headReuse")
         
+        d.showsVerticalScrollIndicator = false
         return d
     }()
     
@@ -49,18 +50,26 @@ class MainPageViewController: BaseViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        /// 模型取值
-        AccountModel.indexInfo(finished: { (commenModel) in
-            self.topModel = commenModel
-            
-        }, finishedTop: { (merTopModel) in
-            self.mertopModel = merTopModel
-        }) { (xxx) in
-            self.loginModel = xxx
-            CCog(message: xxx)
-            self.collV.reloadData()
-        }
+
         
+        /// 测试 一进来刷新信息
+//        AccountModel.reloadSEL()
+        
+    }
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        
+        /// 模型取值
+//        AccountModel.indexInfo(finished: { (commenModel) in
+//            self.topModel = commenModel
+//            
+//        }, finishedTop: { (merTopModel) in
+//            self.mertopModel = merTopModel
+//        }) { (xxx) in
+//            self.loginModel = xxx
+//            self.collV.reloadData()
+//        }
         
         
         /// 添加刷新控件
@@ -68,32 +77,17 @@ class MainPageViewController: BaseViewController {
         let d : headerView = collV.viewWithTag(888) as! headerView
         d.delegate = self;
         
-        /// 将过度视图插入到导航栏之下
-        view.insertSubview(replaceV, aboveSubview: (self.navigationController?.navigationBar)!)
-        
-        replaceV.alpha = 0
-
         self.title = "钱包"
         
-        if self.collV.bounds.width > 0 {
-            self.collV.removeFromSuperview()
-            view.addSubview(collV)
-        } else {
-            view.addSubview(collV)
-        }
+        view.addSubview(collV)
         
-        
-        /// 测试
-        AccountModel.reloadSEL()
-        
-        view.backgroundColor = COMMON_TBBGCOLOR
-    }
-    
-    override func viewDidLoad() {
-        super.viewDidLoad()
+        view.addSubview(replaceV)
+        replaceV.alpha = 0
         
         // Do any additional setup after loading the view.
+        view.backgroundColor = COMMON_TBBGCOLOR
 
+        
     }
 }
 
@@ -152,7 +146,7 @@ extension MainPageViewController : UICollectionViewDataSource,UICollectionViewDe
     }
     
     func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
-
+        
         
         if indexPath.section == 0 {
             
@@ -160,8 +154,6 @@ extension MainPageViewController : UICollectionViewDataSource,UICollectionViewDe
                 UICollectionElementKindSectionHeader, withReuseIdentifier: "headReuse",
                                                       for: indexPath) as? HeadReuse
             
-//            AccountModel.reloadSEL()
-
             header?.delegate = self
             header?.sectionImg.setTitle("热评商户", for: .normal)
             header?.sectionImg.setImage(#imageLiteral(resourceName: "hot"), for: .normal)
@@ -241,30 +233,48 @@ extension MainPageViewController : UICollectionViewDataSource,UICollectionViewDe
 // MARK: - 刷新控件
 extension MainPageViewController : headerViewelegate {
     func headerViewEndfun(_ _endRefresh: () -> Void) {
-        
+    
         UIApplication.shared.statusBarStyle = .lightContent
         
         /// 取出刷新头
         let d : headerView = self.collV.viewWithTag(888) as! headerView
         
-        AccountModel.indexInfo(finished: { (commenModel) in
-            self.topModel = commenModel
+        /// 有网络、没网络处理
+        NetCheck.shared.returnNetStatus { (result) in
             
-            
-            CCog(message: self.topModel)
-        }, finishedTop: { (merTopModel) in
-            self.mertopModel = merTopModel
-            
-            CCog(message: self.topModel)
-            
-        }) { (xxx) in
-            self.loginModel = xxx
-            
-            self.collV.reloadData()
-            d.endRefresh()
-            
-            CCog(message: self.topModel)
+            CCog(message: result)
+            if result {
+                
+                
+                AccountModel.indexInfo(finished: { (commenModel) in
+                    self.topModel = commenModel
+                    
+                    
+                    CCog(message: self.topModel)
+                }, finishedTop: { (merTopModel) in
+                    self.mertopModel = merTopModel
+                    
+                    CCog(message: self.topModel)
+                    
+                }) { (xxx) in
+                    self.loginModel = xxx
+                    
+                    self.collV.reloadData()
+                    d.endRefresh()
+                    
+                    toast(toast: "刷新成功")
+                    
+                    CCog(message: self.topModel)
+                }
+            } else {
+                d.endRefresh()
+                
+                toast(toast: "似乎已断开与互联网的连接")
+                return
+            }
         }
+        
+      
     }
 }
 
@@ -276,13 +286,13 @@ extension  MainPageViewController: UITableViewDelegate {
         
         let contentOffsetY = scrollView.contentOffset.y
         
-        if contentOffsetY > 100 {
+        if contentOffsetY > 0 {
             
-            UIView.animate(withDuration: 0.5, animations: {
+            UIView.animate(withDuration: 1.0, animations: {
                 self.replaceV.alpha = 1.0
             })
         } else {
-            UIView.animate(withDuration: 0.5, animations: {
+            UIView.animate(withDuration: 1.0, animations: {
                 self.replaceV.alpha = 0
             })
         }

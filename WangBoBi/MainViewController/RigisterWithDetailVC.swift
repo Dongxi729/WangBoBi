@@ -35,16 +35,18 @@ class RigisterWithDetailVC: BaseViewController,UITextFieldDelegate {
     }()
     
     // MARK: - 登录密码
-    fileprivate lazy var loginPass: UITextField = {
-        let d : UITextField = UITextField.init(frame: CGRect.init(x: SCREEN_WIDTH * 0.18438001992046, y: SCREEN_HEIGHT * 0.504076086956522, width: SCREEN_WIDTH * 0.88 - SCREEN_WIDTH * 0.213, height: 30 * SCREEN_SCALE))
+    fileprivate lazy var loginPass: TfPlaceHolder = {
+        let d : TfPlaceHolder = TfPlaceHolder.init(frame: CGRect.init(x: SCREEN_WIDTH * 0.18438001992046, y: SCREEN_HEIGHT * 0.504076086956522, width: SCREEN_WIDTH * 0.88 - SCREEN_WIDTH * 0.213, height: 30 * SCREEN_SCALE))
         d.delegate = self
+        d.isSecureTextEntry = true
         return d
     }()
     
-    // MARK: - 登录密码
-    fileprivate lazy var repeatPass: UITextField = {
-        let d :UITextField = UITextField.init(frame: CGRect.init(x: SCREEN_WIDTH * 0.18438001992046, y: SCREEN_HEIGHT * 0.60054347826087, width: SCREEN_WIDTH * 0.88 - SCREEN_WIDTH * 0.213, height: 30 * SCREEN_SCALE))
+    // MARK: - 确认登录密码
+    fileprivate lazy var repeatPass: TfPlaceHolder = {
+        let d :TfPlaceHolder = TfPlaceHolder.init(frame: CGRect.init(x: SCREEN_WIDTH * 0.18438001992046, y: SCREEN_HEIGHT * 0.60054347826087, width: SCREEN_WIDTH * 0.88 - SCREEN_WIDTH * 0.213, height: 30 * SCREEN_SCALE))
         d.delegate = self
+        d.isSecureTextEntry = true
         return d
     }()
     

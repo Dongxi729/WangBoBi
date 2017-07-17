@@ -63,7 +63,6 @@ class ForgetPassVCThree: BaseViewController,UITextFieldDelegate,ShowSuccessInfoV
         view.addSubview(bgImg)
         view.addSubview(saveBtn)
         
-        
         view.addSubview(newLoginPass)
         view.addSubview(repeatPass)
         

@@ -40,6 +40,12 @@ class WkBaseViewController: UIViewController {
     /// 是否加载完成
     var isLoad = false
     
+    lazy var showDowV: UIView = {
+        let d : UIView = UIView.init(frame: CGRect.init(x: 0, y: 0, width: SCREEN_WIDTH, height: 20))
+        d.backgroundColor = UIColor.colorWithHexString("2796DC")
+        return d
+    }()
+    
     ///网页模板
     lazy var webView: WKWebView = {
         var wkV : WKWebView = WKWebView.init()
@@ -71,15 +77,22 @@ class WkBaseViewController: UIViewController {
         //支付宝
 //        userContentController.add(LeakAvoider.init(delegate: self as WKScriptMessageHandler), name: "alipay")
 
+        
         if self.navigationController?.viewControllers != nil {
             ///由于设置了edgesForExtendedLayout,防止了页面全部控件向上偏移，所以在子页面数大于2的时候，矫正
-            if (self.navigationController?.viewControllers.count)! >= 1 {
-                let rect = CGRect(x: 0, y: 0, width: SCREEN_WIDTH, height: SCREEN_HEIGHT)
-                wkV = WKWebView.init(frame: rect, configuration: configuration)
-            } else {
-                let rect = CGRect(x: 0, y: -30, width: SCREEN_WIDTH, height: SCREEN_HEIGHT - 30)
+            if (self.navigationController?.viewControllers.count)! > 1 {
                 
-                wkV = WKWebView.init(frame: rect, configuration: configuration)
+                UIView.animate(withDuration: 0.5, animations: {
+                    let rect = CGRect(x: 0, y: 0, width: SCREEN_WIDTH, height: SCREEN_HEIGHT)
+                    wkV = WKWebView.init(frame: rect, configuration: configuration)
+                })
+            } else {
+
+                UIView.animate(withDuration: 0.5, animations: {
+                    let rect = CGRect(x: 0, y: 20, width: SCREEN_WIDTH, height: SCREEN_HEIGHT - 30)
+                    
+                    wkV = WKWebView.init(frame: rect, configuration: configuration)
+                })
             }
         }
         
@@ -142,13 +155,17 @@ class WkBaseViewController: UIViewController {
         leftBarItem.addTarget(self, action:#selector(back), for: .touchUpInside)
         leftBarItem.setBackgroundImage(UIImage.init(named: "rean"), for: .normal)
 
-
+        view.addSubview(showDowV)
+        showDowV.alpha = 0
     }
     
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        if self.navigationController?.viewControllers.count > 1 {
+        
+        CCog(message: self.navigationController?.viewControllers.count)
+        
+        if (self.navigationController?.viewControllers.count)! > 1 {
             UIApplication.shared.statusBarStyle = .default
             self.leftBarItem.setImage(#imageLiteral(resourceName: "back"), for: .normal)
             
@@ -191,7 +208,8 @@ extension WkBaseViewController {
     fileprivate func prepareUI() -> Void {
         
         DispatchQueue.main.async {
-            self.view.addSubview(self.webView)
+//            self.view.addSubview(self.webView)
+            self.view.insertSubview(self.webView, aboveSubview: (self.navigationController?.navigationBar)!)
         }
         
         

@@ -16,42 +16,48 @@ class DetailViewController2: WkBaseViewController {
         
         let bounds = self.navigationController!.navigationBar.bounds
         self.navigationController?.navigationBar.frame = CGRect(x: 0, y: 0, width: bounds.width, height: 64)
+        
+        self.navigationController?.navigationBar.isHidden = false
+
     }
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-
-        if self.navigationController?.viewControllers.count > 1 {
-            
-            let bounds = self.navigationController!.navigationBar.bounds
-            self.navigationController?.navigationBar.frame = CGRect(x: 0, y: 0, width: bounds.width, height: 64)
-
-
-        } else {
-   
-            let bounds = self.navigationController!.navigationBar.bounds
-            
-            CCog(message: self.navigationController!.navigationBar.bounds)
-            
-            self.navigationController?.navigationBar.frame = CGRect(x: 0, y: 0, width: bounds.width, height: 34)
-        }
+    
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
+        
+        if self.navigationController?.viewControllers.count > 1 {
+            
+            let bounds = self.navigationController!.navigationBar.bounds
+            self.navigationController?.navigationBar.frame = CGRect(x: 0, y: 0, width: bounds.width, height: 64)
+            
+            UIView.animate(withDuration: 0.2, animations: {
+                self.showDowV.alpha = 0
+            })
+        } else {
+            
+            UIView.animate(withDuration: 0.2, animations: {
+                self.showDowV.alpha = 1.0
+            })
+            
+            self.navigationController?.navigationBar.isHidden = true
+        }
+
+    }
+    
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
         self.urlString = STOTRURL
         
         
         let request : URLRequest = NSURLRequest.init(url: URL.init(string: self.urlString)!, cachePolicy: .returnCacheDataElseLoad, timeoutInterval: 0) as URLRequest
         
         self.webView.load(request)
-    }
-    
-    
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        
     }
 }
 
