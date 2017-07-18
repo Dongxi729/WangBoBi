@@ -452,7 +452,7 @@ class AccountModel: NSObject,NSCoding {
             }
             
             if alertMsg == "登陆成功" {
-        
+                
                 /// 记录登录时间
                 let now = Date()
                 let timerStamp : TimeInterval = now.timeIntervalSince1970
@@ -530,7 +530,6 @@ class AccountModel: NSObject,NSCoding {
             }
             
         } else {
-            CCog(message: "////")
             
             DispatchQueue.main.async {
                 var nav = LoginNav()
@@ -553,10 +552,8 @@ class AccountModel: NSObject,NSCoding {
     class func register(referee : String,pass : String,repeatPass : String) {
         
         let param : [String : Any] = ["email" : tfemail ?? "","pwd" : pass.md5(),"referee" : referee]
-        CCog(message: param)
         
         NetWorkTool.shared.postWithPath(path: RIGISTER_URL, paras: param, success: { (result) in
-            CCog(message: result)
             
             guard let resultData = result as? NSDictionary else {
                 return
@@ -625,14 +622,16 @@ class AccountModel: NSObject,NSCoding {
     }
     
     // MARK: - 修改密码
+    ///
+    /// - Parameters:
+    ///   - emailStr: 邮件地址
+    ///   - code: 验证码
+    ///   - newPass: 新密码
+    ///   - finished: 结果
     class func modifyPass(emailStr : String,code : String,newPass : String,finished: @escaping (_ result : Bool)->()){
         let param : [String : String] = ["email" : emailStr,"pwd" : newPass.md5(),"code" : code,"ac" : "femail"]
         
-        CCog(message: param)
-        
         NetWorkTool.shared.postWithPath(path: FORGETPASS_URL, paras: param, success: { (result) in
-            CCog(message: result)
-            
             
             guard let resultData = result as? NSDictionary  else {
                 return
@@ -671,6 +670,11 @@ class AccountModel: NSObject,NSCoding {
     
     
     // MARK: - 首页接口
+    ///
+    /// - Parameters:
+    ///   - finished: 返回结果
+    ///   - finishedTop: 热评商户
+    ///   - finishedTotalModel: 头条推荐
     class func indexInfo(finished : @escaping (_ values : [IndexCommentTopModel])->(),finishedTop : @escaping (_ values : [IndexMertopModel])->(),finishedTotalModel : @escaping (_ values : Int)->()) {
         
         if AccountModel.shared()?.Id.stringValue == nil {
@@ -705,7 +709,7 @@ class AccountModel: NSObject,NSCoding {
                         
                         /// 更新本地存储信息
                         let account = AccountModel(dict: dic)
-
+                        
                         account.saveAccount()
                         
                         AccountModel.shared()?.updateUserInfo()
@@ -763,9 +767,8 @@ class AccountModel: NSObject,NSCoding {
                                          "phone" : phoneNum,
                                          "code" : "",
                                          "ac" : "smsg"]
-        CCog(message: param)
+        
         NetWorkTool.shared.postWithPath(path: DOB_AUTH, paras: param, success: { (result) in
-            CCog(message: result)
             
             guard let resultData = result as? NSDictionary  else {
                 return
@@ -784,15 +787,18 @@ class AccountModel: NSObject,NSCoding {
         }
     }
     
+    // MARK: - 绑定手机
+    ///
+    /// - Parameter phoneNum: 手机号
     class func bindPhoneAuthSEL(phoneNum : String) {
         let param : [String : String] = ["uid" : (AccountModel.shared()?.Id.stringValue)!,
                                          "token" : (AccountModel.shared()?.Token)!,
                                          "phone" : phoneNum,
                                          "code" : "",
                                          "ac" : "smsg"]
-        CCog(message: param)
+        
         NetWorkTool.shared.postWithPath(path: BIND_PHONE, paras: param, success: { (result) in
-            CCog(message: result)
+            
             
             guard let resultData = result as? NSDictionary  else {
                 return
@@ -812,15 +818,18 @@ class AccountModel: NSObject,NSCoding {
     }
     
     // MARK: - 双重验证
+    ///
+    /// - Parameters:
+    ///   - auth: 验证码
+    ///   - phoneNum: 手机号
     class func doubleCerSEL(auth : String,phoneNum : String) {
         let param : [String : String] = ["uid" : (AccountModel.shared()?.Id.stringValue)!,
                                          "token" : (AccountModel.shared()?.Token)!,
                                          "phone" : phoneNum,
                                          "code" : auth,
                                          "ac" : "gauth"]
-        CCog(message: param)
+        
         NetWorkTool.shared.postWithPath(path: DOB_AUTH, paras: param, success: { (result) in
-            CCog(message: result)
             
             guard let resultData = result as? NSDictionary  else {
                 return
@@ -841,16 +850,19 @@ class AccountModel: NSObject,NSCoding {
     
     // MARK: - 绑定手机接口
     // MARK: - 双重验证
+    ///
+    /// - Parameters:
+    ///   - auth: 验证码
+    ///   - phoneNum: 手机号
+    ///   - finished: 返回结果
     class func bindPhoneSEL(auth : String,phoneNum : String,finished : @escaping (_ ddd : Bool) -> ()) {
         let param : [String : String] = ["uid" : (AccountModel.shared()?.Id.stringValue)!,
                                          "token" : (AccountModel.shared()?.Token)!,
                                          "phone" : phoneNum,
                                          "code" : auth,
                                          "ac" : "bpon"]
-        CCog(message: param)
+        
         NetWorkTool.shared.postWithPath(path: BIND_PHONE, paras: param, success: { (result) in
-            CCog(message: result)
-            
             guard let resultData = result as? NSDictionary  else {
                 return
             }
@@ -886,7 +898,7 @@ class AccountModel: NSObject,NSCoding {
                      "oldpwd" : oldStr.md5(),
                      "newpwd" : newPass.md5()]
         NetWorkTool.shared.postWithPath(path: CHANGELOGIN_PASS, paras: param, success: { (result) in
-            CCog(message: result)
+            
             guard let resultData = result as? NSDictionary  else {
                 return
             }
@@ -920,11 +932,8 @@ class AccountModel: NSObject,NSCoding {
                      "oldpwd" : "",
                      "newpwd" : payPass.md5(),
                      "ac" : "spd"]
-        
-        CCog(message: param)
-        
         NetWorkTool.shared.postWithPath(path: PAY_PASS, paras: param, success: { (result) in
-            CCog(message: result)
+            
             guard let resultData = result as? NSDictionary  else {
                 return
             }
@@ -967,11 +976,7 @@ class AccountModel: NSObject,NSCoding {
                      "newpwd" : newPass.md5(),
                      "ac" : "rpd"]
         
-        CCog(message: param)
-        
-        
         NetWorkTool.shared.postWithPath(path: PAY_PASS, paras: param, success: { (result) in
-            CCog(message: result)
             
             guard let resultData = result as? NSDictionary  else {
                 return
@@ -1010,7 +1015,6 @@ class AccountModel: NSObject,NSCoding {
             let request = "http://192.168.1.10:8010/ifs/headimg.ashx?uid=\((AccountModel.shared()?.Id.stringValue)!)&token=\((AccountModel.shared()?.Token)!)&ac=dd"
             
             NetWorkTool.shared.postWithImageWithData(imgData: imgData, path: request, success: { (result) in
-                CCog(message: result)
                 
                 guard let resultData = result as? NSDictionary  else {
                     return
@@ -1065,10 +1069,7 @@ class AccountModel: NSObject,NSCoding {
                                          "front" : frontImg,
                                          "reverse" : backImgURL]
         
-        CCog(message: param)
-        
         NetWorkTool.shared.postWithPath(path: TRUENAME_AUTH, paras: param, success: { (result) in
-            CCog(message: result)
             
             guard let resultData = result as? NSDictionary  else {
                 return
@@ -1103,11 +1104,14 @@ class AccountModel: NSObject,NSCoding {
     }
     
     // MARK: - 上传头像
+    ///
+    /// - Parameters:
+    ///   - imgData: 图像数据
+    ///   - finished: 返回结果
     class func uploadHeadImg(imgData : Data,finished: @escaping (_ result : Bool)->()) {
         let request = "http://192.168.1.10:8010/ifs/headimg.ashx?uid=\((AccountModel.shared()?.Id.stringValue)!)&token=\((AccountModel.shared()?.Token)!)&ac=myimg"
         
         NetWorkTool.shared.postWithImageWithData(imgData: imgData, path: request, success: { (result) in
-            CCog(message: result)
             
             guard let resultData = result as? NSDictionary  else {
                 return
@@ -1131,8 +1135,7 @@ class AccountModel: NSObject,NSCoding {
         }
     }
     
-    /// 转账
-    /// 转账
+    // MARK: - 转账
     ///
     /// - Parameters:
     ///   - wbcCount: 网博币数量
@@ -1144,8 +1147,6 @@ class AccountModel: NSObject,NSCoding {
                                       "topayads" : (ScanModel.shared.codeStr)!,
                                       "wbc" : String(wbcCount) ?? 0,
                                       "paypass" : passStr.md5()]
-        
-        CCog(message: param)
         
         NetWorkTool.shared.postWithPath(path: TELLTOPAY, paras: param, success: { (result) in
             CCog(message: result)

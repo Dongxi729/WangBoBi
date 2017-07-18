@@ -51,25 +51,23 @@ class MainPageViewController: BaseViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
 
-        
         /// 测试 一进来刷新信息
-//        AccountModel.reloadSEL()
-        
+        AccountModel.reloadSEL()  
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         /// 模型取值
-//        AccountModel.indexInfo(finished: { (commenModel) in
-//            self.topModel = commenModel
-//            
-//        }, finishedTop: { (merTopModel) in
-//            self.mertopModel = merTopModel
-//        }) { (xxx) in
-//            self.loginModel = xxx
-//            self.collV.reloadData()
-//        }
+        AccountModel.indexInfo(finished: { (commenModel) in
+            self.topModel = commenModel
+            
+        }, finishedTop: { (merTopModel) in
+            self.mertopModel = merTopModel
+        }) { (xxx) in
+            self.loginModel = xxx
+            self.collV.reloadData()
+        }
         
         
         /// 添加刷新控件

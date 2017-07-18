@@ -162,9 +162,7 @@ class WkBaseViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        
-        CCog(message: self.navigationController?.viewControllers.count)
-        
+
         if (self.navigationController?.viewControllers.count)! > 1 {
             UIApplication.shared.statusBarStyle = .default
             self.leftBarItem.setImage(#imageLiteral(resourceName: "back"), for: .normal)
