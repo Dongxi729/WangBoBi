@@ -14,8 +14,6 @@ class ShopWebReplaceV: WkBaseViewController {
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         
-        CCog(message: self.getURLStr)
-        
         let request : URLRequest = NSURLRequest.init(url: URL.init(string: self.getURLStr)!, cachePolicy: .returnCacheDataElseLoad, timeoutInterval: 0) as URLRequest
         self.webView.load(request)
         
@@ -40,11 +38,16 @@ extension ShopWebReplaceV {
     func webView(_ webView: WKWebView, decidePolicyFor navigationAction: WKNavigationAction, decisionHandler: @escaping (WKNavigationActionPolicy) -> Void) {
         self.getURLStr = (navigationAction.request.url?.absoluteString)!
         
-        CCog(message: self.getURLStr)
-        
         if navigationAction.navigationType == WKNavigationType.linkActivated {
             
+            if self.getURLStr.contains("?") {
+                self.getURLStr = self.getURLStr + ("&token=") + (AccountModel.shared()?.Token)! + "&uid=" + (AccountModel.shared()?.Id.stringValue)!
+            } else {
+                self.getURLStr = self.getURLStr + ("?&token=") + (AccountModel.shared()?.Token)! + "&uid=" + (AccountModel.shared()?.Id.stringValue)!
+            }
+            
             CCog(message: self.getURLStr)
+            
             self.aaa(str:self.getURLStr)
             
             decisionHandler(.cancel)

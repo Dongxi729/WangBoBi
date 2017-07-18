@@ -375,7 +375,26 @@ class AccountModel: NSObject,NSCoding {
         NSKeyedArchiver.archiveRootObject(self, toFile: AccountModel.accountPath)
     }
     
+    /// 登录操作
+    func loginSEL() {
+        DispatchQueue.main.async {
+            
+            let alertConte = UIAlertController.init(title: "友情提示", message: "您的账号已在异地登录，是否重新登录", preferredStyle: UIAlertControllerStyle.alert)
+            
+            let okAction = UIAlertAction.init(title: "好的", style: .default, handler: { (alert) in
+                var nav = LoginNav()
+                nav = LoginNav.init(rootViewController: LoginViewController())
+                
+                UIApplication.shared.keyWindow?.rootViewController = nav
+            })
+            
+            let cancelAction = UIAlertAction.init(title: "取消", style: .cancel, handler: nil)
     
+            alertConte.addAction(okAction)
+            alertConte.addAction(cancelAction)
+            UIApplication.shared.keyWindow?.rootViewController?.present(alertConte, animated: true, completion: nil)
+        }
+    }
     
     /// 登录保存
     func updateUserInfo() -> Void {
@@ -440,36 +459,67 @@ class AccountModel: NSObject,NSCoding {
                 return
             }
             
-            /// 更新本地存储信息
-            let account = AccountModel(dict: resultData["Data"] as! [String : Any])
-            account.saveAccount()
-            
-            
-            CCog(message: accountPath)
-            
             guard let alertMsg = resultData["Msg"] as? String else {
                 return
             }
             
-            if alertMsg == "登陆成功" {
+            toast(toast: alertMsg)
+            
+            guard let statusMsg = resultData["Status"] as? String else {
                 
-                /// 记录登录时间
-                let now = Date()
-                let timerStamp : TimeInterval = now.timeIntervalSince1970
-                
-                let timeStamp = Int(timerStamp)
-                
-                /// 记录本地登录成功的时间/更新
-                UserDefaults.standard.set(timeStamp, forKey: "loginTime")
-                UserDefaults.standard.synchronize()
-                
-                // 设置全局颜色
-                UITabBar.appearance().tintColor = TABBAR_BGCOLOR
-                UIApplication.shared.keyWindow?.rootViewController = MainTabBarViewController()
-                
-            } else {
-                toast(toast: alertMsg)
+                return
             }
+            
+            if statusMsg == "999" {
+                AccountModel.shared()?.loginSEL()
+            }
+
+            guard let dataJson = resultData["Data"] as? NSArray else {
+                return
+            }
+            
+            if dataJson.count > 0 {
+                guard let account = (resultData["Data"] as! NSArray)[0] as? [String : Any] else {
+                    return
+                }
+                
+                guard var fourSecData = (resultData["Data"] as! NSArray)[1] as? [String : Any] else {
+                    return
+                }
+                
+                for (key,value) in account {
+                    fourSecData[key] = value
+                }
+
+                /// 更新本地存储信息
+                let accountInfo = AccountModel(dict: fourSecData)
+                accountInfo.saveAccount()
+                guard let alertMsg = resultData["Msg"] as? String else {
+                    return
+                }
+                
+                if alertMsg == "登陆成功" {
+                    
+                    /// 记录登录时间
+                    let now = Date()
+                    let timerStamp : TimeInterval = now.timeIntervalSince1970
+                    
+                    let timeStamp = Int(timerStamp)
+                    
+                    /// 记录本地登录成功的时间/更新
+                    UserDefaults.standard.set(timeStamp, forKey: "loginTime")
+                    UserDefaults.standard.synchronize()
+                    
+                    // 设置全局颜色
+                    UITabBar.appearance().tintColor = TABBAR_BGCOLOR
+                    UIApplication.shared.keyWindow?.rootViewController = MainTabBarViewController()
+                    
+                } else {
+                    toast(toast: alertMsg)
+                }
+            }
+            
+            
             
             
         }) { (error) in
@@ -492,8 +542,33 @@ class AccountModel: NSObject,NSCoding {
                         return
                     }
                     
-                    let account = AccountModel(dict: resultData["Data"] as! [String : Any])
-                    account.updateUserInfo()
+                    guard let statusMsg = resultData["Status"] as? String else {
+                        
+                        return
+                    }
+                    
+                    if statusMsg == "999" {
+                        AccountModel.shared()?.loginSEL()
+                    }
+
+                    
+                    guard let account = (resultData["Data"] as! NSArray)[0] as? [String : Any] else {
+                        return
+                    }
+                    
+                    guard var fourSecData = (resultData["Data"] as! NSArray)[1] as? [String : Any] else {
+                        return
+                    }
+                    
+                    for (key,value) in account {
+                        fourSecData[key] = value
+                    }
+                    
+                    /// 更新本地存储信息
+                    let accountInfo = AccountModel(dict: fourSecData)
+                    accountInfo.saveAccount()
+                    
+                    CCog(message: accountPath)
                     
                     guard let alertMsg = resultData["Msg"] as? String else {
                         return
@@ -514,10 +589,8 @@ class AccountModel: NSObject,NSCoding {
                         // 设置全局颜色
                         UITabBar.appearance().tintColor = TABBAR_BGCOLOR
                         UIApplication.shared.keyWindow?.rootViewController = MainTabBarViewController()
-                        
-                        /// 请求首页数据
-                        //                AccountModel.shared()?.indexInfo()
                     }
+                    
                 }) { (error) in
                     let alertMsg = (error as NSError).userInfo["NSLocalizedDescription"]
                     toast(toast: alertMsg! as! String)
@@ -558,13 +631,22 @@ class AccountModel: NSObject,NSCoding {
                 return
             }
             
+            
+            guard let statusMsg = resultData["Status"] as? String else {
+                
+                return
+            }
+            
+            if statusMsg == "999" {
+                AccountModel.shared()?.loginSEL()
+            }
+            
             /// 抽取提示信息
             guard let alertMsg = resultData["Msg"] as? String else {
                 
                 return
             }
-            
-            if alertMsg == "恭喜您，注册成功" {
+                        if alertMsg == "恭喜您，注册成功" {
                 UIApplication.shared.keyWindow?.rootViewController = LoginViewController()
                 
             } else {
@@ -600,6 +682,16 @@ class AccountModel: NSObject,NSCoding {
                 return
             }
             
+            guard let statusMsg = resultData["Status"] as? String else {
+                
+                return
+            }
+            
+            if statusMsg == "999" {
+                AccountModel.shared()?.loginSEL()
+            }
+
+            
             /// 抽取提示信息
             guard let alertMsg = resultData["Msg"] as? String else {
                 
@@ -634,6 +726,15 @@ class AccountModel: NSObject,NSCoding {
             
             guard let resultData = result as? NSDictionary  else {
                 return
+            }
+            
+            guard let statusMsg = resultData["Status"] as? String else {
+                
+                return
+            }
+            
+            if statusMsg == "999" {
+                AccountModel.shared()?.loginSEL()
             }
             
             /// 抽取提示信息
@@ -677,21 +778,30 @@ class AccountModel: NSObject,NSCoding {
     class func indexInfo(finished : @escaping (_ values : [IndexCommentTopModel])->(),finishedTop : @escaping (_ values : [IndexMertopModel])->(),finishedTotalModel : @escaping (_ values : Int)->()) {
         
         if AccountModel.shared()?.Id.stringValue == nil {
-            DispatchQueue.main.async {
-                var nav = LoginNav()
-                nav = LoginNav.init(rootViewController: LoginViewController())
-                
-                UIApplication.shared.keyWindow?.rootViewController = nav
-            }
+            AccountModel.shared()?.loginSEL()
         } else {
             let param : [String :String] = ["uid" : (AccountModel.shared()?.Id.stringValue)!,
                                             "token" : (AccountModel.shared()?.Token)!]
             
+            
+            
             NetWorkTool.shared.postWithPath(path: INDEX_URL, paras: param, success: { (result) in
+                
+                CCog(message: result)
                 
                 guard let resultData = result as? NSDictionary  else {
                     return
                 }
+                
+                guard let statusMsg = resultData["Status"] as? String else {
+                    
+                    return
+                }
+                
+                if statusMsg == "999" {
+                    AccountModel.shared()?.loginSEL()
+                }
+
                 
                 /// 抽取提示信息
                 guard let alertMsg = resultData["Msg"] as? String else {
@@ -701,19 +811,19 @@ class AccountModel: NSObject,NSCoding {
                 
                 /// 取数据
                 if alertMsg == "操作成功" {
-                    if let dic = resultData["Data"] as? [String : Any] {
+                    if let dic = resultData["Data"] as? NSArray {
                         
                         finishedTotalModel(dic.count)
                         
                         /// 更新本地存储信息
-                        let account = AccountModel(dict: dic)
+                        let account = AccountModel(dict: (resultData["Data"] as? NSArray)?[0] as? NSDictionary as! [String : Any])
                         
                         account.saveAccount()
                         
                         AccountModel.shared()?.updateUserInfo()
                         
                         //头条推荐
-                        if let dicc = [dic["CommendTop"] as? NSArray][0] {
+                        if let dicc = [(((resultData["Data"] as? NSArray)?[1]) as? NSDictionary)?["CommendTop"] as? NSArray][0] {
                             
                             var mmm = [IndexCommentTopModel]()
                             for vv in dicc {
@@ -731,7 +841,47 @@ class AccountModel: NSObject,NSCoding {
                         }
                         
                         //热评商户
-                        if let dicc = [dic["MerTop"] as? NSArray][0] {
+                        if let dicc = [(((resultData["Data"] as? NSArray)?[0]) as? NSDictionary)?["MerTop"] as? NSArray][0] {
+                            var mmm = [IndexMertopModel]()
+                            for vv in dicc {
+                                if let diccc = vv as? NSDictionary {
+                                    
+                                    let topMedel = IndexMertopModel.init(dict: diccc as! [String : Any])
+                                    
+                                    mmm.append(topMedel)
+                                    
+                                    if mmm.count == dicc.count {
+                                        finishedTop(mmm)
+                                    }
+                                }
+                            }
+                        }
+                    }
+                    
+                    //头条推荐
+                    if let dicc = (resultData["Data"] as? NSArray)?[0] as? NSDictionary {
+                        
+                        //头条推荐
+                        if let dicc = [dicc["CommendTop"] as? NSArray][0] {
+                            
+                            var mmm = [IndexCommentTopModel]()
+                            for vv in dicc {
+                                if let diccc = vv as? NSDictionary {
+                                    
+                                    let topMedel = IndexCommentTopModel.init(dict: diccc as! [String : Any])
+                                    
+                                    mmm.append(topMedel)
+                                    
+                                    if mmm.count == dicc.count {
+                                        finished(mmm)
+                                    }
+                                }
+                            }
+                            
+                        }
+                        
+                        //热评商户
+                        if let dicc = [dicc["MerTop"] as? NSArray][0] {
                             var mmm = [IndexMertopModel]()
                             for vv in dicc {
                                 if let diccc = vv as? NSDictionary {
@@ -754,8 +904,6 @@ class AccountModel: NSObject,NSCoding {
                 toast(toast: alertMsg! as! String)
             }
         }
-        
-        
     }
     
     // MARK: - 发送验证码 --- 双重验证码接口
@@ -772,11 +920,24 @@ class AccountModel: NSObject,NSCoding {
                 return
             }
             
+            
+            guard let statusMsg = resultData["Status"] as? String else {
+                
+                return
+            }
+            
+            if statusMsg == "999" {
+                AccountModel.shared()?.loginSEL()
+            }
+
+            
             /// 抽取提示信息
             guard let alertMsg = resultData["Msg"] as? String else {
                 
                 return
             }
+
+            
             toast(toast: alertMsg)
             
         }) { (error) in
@@ -802,12 +963,25 @@ class AccountModel: NSObject,NSCoding {
                 return
             }
             
+            guard let statusMsg = resultData["Status"] as? String else {
+                
+                return
+            }
+            
+            if statusMsg == "999" {
+                AccountModel.shared()?.loginSEL()
+            }
+            
             /// 抽取提示信息
             guard let alertMsg = resultData["Msg"] as? String else {
                 
                 return
             }
+            
             toast(toast: alertMsg)
+            
+
+
             
         }) { (error) in
             let alertMsg = (error as NSError).userInfo["NSLocalizedDescription"]
@@ -833,12 +1007,24 @@ class AccountModel: NSObject,NSCoding {
                 return
             }
             
+            guard let statusMsg = resultData["Status"] as? String else {
+                
+                return
+            }
+            
+            if statusMsg == "999" {
+                AccountModel.shared()?.loginSEL()
+            }
+
+            
             /// 抽取提示信息
             guard let alertMsg = resultData["Msg"] as? String else {
                 
                 return
             }
             toast(toast: alertMsg)
+
+            
         }) { (error) in
             let alertMsg = (error as NSError).userInfo["NSLocalizedDescription"]
             toast(toast: alertMsg! as! String)
@@ -865,11 +1051,23 @@ class AccountModel: NSObject,NSCoding {
                 return
             }
             
+            guard let statusMsg = resultData["Status"] as? String else {
+                
+                return
+            }
+            
+            if statusMsg == "999" {
+                AccountModel.shared()?.loginSEL()
+            }
+            
+            
+            
             /// 抽取提示信息
             guard let alertMsg = resultData["Msg"] as? String else {
                 return
             }
             
+
             toast(toast: alertMsg)
             
             if alertMsg == "恭喜您，绑定手机成功" {
@@ -901,11 +1099,23 @@ class AccountModel: NSObject,NSCoding {
                 return
             }
             
+            
+            guard let statusMsg = resultData["Status"] as? String else {
+                
+                return
+            }
+            
+            if statusMsg == "999" {
+                AccountModel.shared()?.loginSEL()
+            }
+            
             /// 抽取提示信息
             guard let alertMsg = resultData["Msg"] as? String else {
                 
                 return
             }
+
+
             
             if alertMsg == "修改登陆密码成功" {
                 finished(true)
@@ -935,6 +1145,16 @@ class AccountModel: NSObject,NSCoding {
             guard let resultData = result as? NSDictionary  else {
                 return
             }
+            
+            guard let statusMsg = resultData["Status"] as? String else {
+                
+                return
+            }
+            
+            if statusMsg == "999" {
+                AccountModel.shared()?.loginSEL()
+            }
+
             
             /// 抽取提示信息
             guard let alertMsg = resultData["Msg"] as? String else {
@@ -980,6 +1200,16 @@ class AccountModel: NSObject,NSCoding {
                 return
             }
             
+            guard let statusMsg = resultData["Status"] as? String else {
+                
+                return
+            }
+            
+            if statusMsg == "999" {
+                AccountModel.shared()?.loginSEL()
+            }
+
+            
             /// 抽取提示信息
             guard let alertMsg = resultData["Msg"] as? String else {
                 
@@ -1014,9 +1244,21 @@ class AccountModel: NSObject,NSCoding {
             
             NetWorkTool.shared.postWithImageWithData(imgData: imgData, path: request, success: { (result) in
                 
+                CCog(message: result)
+                
                 guard let resultData = result as? NSDictionary  else {
                     return
                 }
+                
+                guard let statusMsg = resultData["Status"] as? String else {
+                    
+                    return
+                }
+                
+                if statusMsg == "999" {
+                    AccountModel.shared()?.loginSEL()
+                }
+
                 
                 /// 抽取提示信息
                 guard let alertMsg = resultData["Msg"] as? String else {
@@ -1073,6 +1315,16 @@ class AccountModel: NSObject,NSCoding {
                 return
             }
             
+            guard let statusMsg = resultData["Status"] as? String else {
+                
+                return
+            }
+            
+            if statusMsg == "999" {
+                AccountModel.shared()?.loginSEL()
+            }
+
+            
             /// 抽取提示信息
             guard let alertMsg = resultData["Msg"] as? String else {
                 
@@ -1115,6 +1367,16 @@ class AccountModel: NSObject,NSCoding {
                 return
             }
             
+            guard let statusMsg = resultData["Status"] as? String else {
+                
+                return
+            }
+            
+            if statusMsg == "999" {
+                AccountModel.shared()?.loginSEL()
+            }
+
+            
             /// 抽取提示信息
             guard let alertMsg = resultData["Msg"] as? String else {
                 
@@ -1153,6 +1415,16 @@ class AccountModel: NSObject,NSCoding {
                 return
             }
             
+            guard let statusMsg = resultData["Status"] as? String else {
+                
+                return
+            }
+            
+            if statusMsg == "999" {
+                AccountModel.shared()?.loginSEL()
+            }
+
+            
             /// 抽取提示信息
             guard let alertMsg = resultData["Msg"] as? String else {
                 
@@ -1184,25 +1456,81 @@ class AccountModel: NSObject,NSCoding {
         let param : [String : String] = ["uid" : (AccountModel.shared()?.Id.stringValue)!,
                                          "token" : (AccountModel.shared()?.Token)!]
         
+        CCog(message: param)
+        
         NetWorkTool.shared.postWithPath(path: PERSON_INFO, paras: param, success: { (result) in
             
             CCog(message: result)
             
-            guard let resultData = result as? NSDictionary  else {
-                return
-            }
-            
             userAccount = nil
             
             /// 更新本地存储信息
-            let account = AccountModel(dict: resultData["Data"] as! [String : Any])
+            guard let resultData = result as? NSDictionary else {
+                
+                CCog(message: "登录信息无效")
+                return
+            }
             
-            account.saveAccount()
             
-            AccountModel.shared()?.updateUserInfo()
+            guard let statusMsg = resultData["Status"] as? String else {
+                
+                return
+            }
             
-            /// 发通知刷新提示
-            NotificationCenter.default.post(name: NSNotification.Name(rawValue: "reloadInfo"), object: nil)
+            if statusMsg == "999" {
+                AccountModel.shared()?.loginSEL()
+            }
+
+            
+            guard let arrayData = (resultData["Data"] as? NSArray) else {
+                return
+            }
+            
+            if arrayData.count > 0 {
+                guard let account = (arrayData[0] as? [String : Any]) else {
+                    return
+                }
+                
+                guard var fourSecData = (arrayData[1] as? [String : Any]) else {
+                    return
+                }
+                
+                for (key,value) in account {
+                    fourSecData[key] = value
+                }
+                
+                
+                /// 更新本地存储信息
+                let accountInfo = AccountModel(dict: fourSecData)
+                accountInfo.saveAccount()
+                
+                CCog(message: accountPath)
+                
+                guard let alertMsg = resultData["Msg"] as? String else {
+                    return
+                }
+                
+                if alertMsg == "登陆成功" {
+                    
+                    /// 记录登录时间
+                    let now = Date()
+                    let timerStamp : TimeInterval = now.timeIntervalSince1970
+                    
+                    let timeStamp = Int(timerStamp)
+                    
+                    /// 记录本地登录成功的时间/更新
+                    UserDefaults.standard.set(timeStamp, forKey: "loginTime")
+                    UserDefaults.standard.synchronize()
+                    
+                    // 设置全局颜色
+                    UITabBar.appearance().tintColor = TABBAR_BGCOLOR
+                    UIApplication.shared.keyWindow?.rootViewController = MainTabBarViewController()
+                }
+                
+                /// 发通知刷新提示
+                NotificationCenter.default.post(name: NSNotification.Name(rawValue: "reloadInfo"), object: nil)
+            }
+            
             
         }) { (error) in
             

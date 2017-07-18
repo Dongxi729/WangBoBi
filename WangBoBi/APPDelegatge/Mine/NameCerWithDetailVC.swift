@@ -315,7 +315,6 @@ class UPloadIDImgCell: UITableViewCell {
         if let imgDataDic = dd.userInfo {
             if let imgData = imgDataDic["ima"] as? Data {
                 
-                CCog(message: imgData)
                 
                 DispatchQueue.main.async {
                     

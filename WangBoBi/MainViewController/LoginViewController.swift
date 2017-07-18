@@ -109,7 +109,6 @@ class LoginViewController: BaseViewController,UITextFieldDelegate {
     // MARK: - 登录事件
     @objc fileprivate func loginSEL() {
         
-        
         /// 判断输入的邮箱、密码长度是否大于0
         if !(accountLabel.text?.isEmpty)! && !(passTf.text?.isEmpty)! {
             

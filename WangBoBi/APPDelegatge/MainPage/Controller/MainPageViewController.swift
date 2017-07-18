@@ -40,6 +40,8 @@ class MainPageViewController: BaseViewController {
     /// 模型总数
     var loginModel : Int = 0
     
+    
+    
     /// 导航栏遮罩视图
     lazy var replaceV: UIView = {
         let d : UIView = UIView.init(frame: CGRect.init(x: 0, y: 0, width: SCREEN_WIDTH, height: 64))
@@ -51,10 +53,9 @@ class MainPageViewController: BaseViewController {
         super.viewWillAppear(animated)
 
         /// 测试 一进来刷新信息
-        AccountModel.reloadSEL()  
+//        AccountModel.reloadSEL()  
     }
    
-    
     /// 账单
     lazy var detailList: UIBarButtonItem = {
         let d : UIBarButtonItem = UIBarButtonItem.init(title: "账单", style: .plain, target: self, action: #selector(jumpToDetailVC))
@@ -73,7 +74,9 @@ class MainPageViewController: BaseViewController {
             self.mertopModel = merTopModel
         }) { (xxx) in
             self.loginModel = xxx
+            
             self.collV.reloadData()
+            CCog(message: self.loginModel)
         }
         
         
@@ -96,6 +99,7 @@ class MainPageViewController: BaseViewController {
         // 账单
         self.navigationItem.rightBarButtonItem = detailList
         self.navigationItem.rightBarButtonItem?.tintColor = UIColor.white
+    
     }
 
     

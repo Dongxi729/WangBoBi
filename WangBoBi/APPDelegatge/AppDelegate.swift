@@ -70,7 +70,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                 
                 /// 取出本地的账号密码重新登录，刷新本地的token
                 if AccountModel.isLogin() {
-                    AccountModel.loginWithLocalPassAndAccount()
+//                    AccountModel.loginWithLocalPassAndAccount()   
+                    UIApplication.shared.keyWindow?.rootViewController = MainTabBarViewController()
                     
                 } else {
                     setUnlogedMain()

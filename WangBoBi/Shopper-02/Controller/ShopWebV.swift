@@ -18,7 +18,6 @@ class ShopWebV: WkBaseViewController {
         self.navigationController?.navigationBar.frame = CGRect(x: 0, y: 0, width: bounds.width, height: 64)
         
         self.navigationController?.navigationBar.isHidden = false
-
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -67,10 +66,14 @@ extension ShopWebV {
         
         self.getURLStr = (navigationAction.request.url?.absoluteString)!
         
-        CCog(message: self.getURLStr)
-        
         if navigationAction.navigationType == WKNavigationType.linkActivated {
   
+            if self.getURLStr.contains("?") {
+                self.getURLStr = self.getURLStr + ("&&token=") + (AccountModel.shared()?.Token)! + "&uid=" + (AccountModel.shared()?.Id.stringValue)!
+            } else {
+                self.getURLStr = self.getURLStr + ("?&token=") + (AccountModel.shared()?.Token)! + "&uid=" + (AccountModel.shared()?.Id.stringValue)!
+            }
+
             self.aaa(str:self.getURLStr)
             
             decisionHandler(.cancel)
@@ -88,9 +91,7 @@ extension ShopWebV {
     ///
     /// - Parameter str: 跳转的链接
     fileprivate func aaa(str : String) -> Void {
-        
-        CCog(message: str)
-        
+                
         let vvv = ShopWebReplaceV()
         vvv.getURLStr = str
         

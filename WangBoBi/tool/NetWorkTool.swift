@@ -97,49 +97,16 @@ extension NetWorkTool {
             //返回主线程执行
             DispatchQueue.main.sync {
                 
-                /// 出错的解决办法
                 if let data = data {
                     
                     CCog(message: String.init(data: data, encoding: String.Encoding.utf8))
                     
-                    var jsonStr = String.init(data: data, encoding: String.Encoding.utf8)! as NSString
-                    
-                    if jsonStr.contains("[") {
-                        jsonStr = jsonStr.replacingOccurrences(of: "[", with: "{") as NSString
-                        
-                        if jsonStr.contains("]") {
-                            jsonStr = jsonStr.replacingOccurrences(of: "]", with: "}") as NSString
-
-                            let xxx = (jsonStr as String).data(using: String.Encoding(rawValue: String.Encoding.utf8.rawValue))
-
-                            
-                            if let result = try? JSONSerialization.jsonObject(with: xxx!, options: .allowFragments) {
-                                CCog(message: result)
-                                
-                                success(result)
-                            } else {
-                                CCog(message: "数据不合法")
-                            }
-                            
-                        }
-                    
-                    } else {
-                        if let result = try? JSONSerialization.jsonObject(with: data, options: .allowFragments) {
-                            
-                            success(result)
-                        }
-                    }
-                    
-                    ///
-                    if let result = try? JSONSerialization.jsonObject(with: xxx!, options: .allowFragments) {
-                        CCog(message: result)
+                    if let result = try? JSONSerialization.jsonObject(with: data, options: .allowFragments) {
                         
                         success(result)
-                    } else {
-                        CCog(message: "数据不合法")
                     }
 
-                }else {
+                } else {
                     failure(error!)
                 }
             }

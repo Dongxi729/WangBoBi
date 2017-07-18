@@ -16,7 +16,7 @@ var jumpToDetail : Bool = false
 // MARK:- 投票用户标识
 var toupiaoUserInfo = ""
 
-class WkBaseViewController: UIViewController {
+class WkBaseViewController: UIViewController,LostNetVDelegate {
     
     // MARK:- 当前捕获的链接
     var getURLStr : String = ""
@@ -45,6 +45,8 @@ class WkBaseViewController: UIViewController {
         d.backgroundColor = UIColor.colorWithHexString("2796DC")
         return d
     }()
+    
+    
     
     ///网页模板
     lazy var webView: WKWebView = {
@@ -75,7 +77,7 @@ class WkBaseViewController: UIViewController {
         configuration.userContentController = userContentController
         
         //支付宝
-//        userContentController.add(LeakAvoider.init(delegate: self as WKScriptMessageHandler), name: "alipay")
+        userContentController.add(LeakAvoider.init(delegate: self as WKScriptMessageHandler), name: "login")
 
         
         if self.navigationController?.viewControllers != nil {
@@ -138,6 +140,13 @@ class WkBaseViewController: UIViewController {
         return pro
     }()
     
+    /// 断网视图
+    lazy var lostNetV: LostNetV = {
+        let d : LostNetV = LostNetV.init(frame: self.view.bounds)
+        d.delegate = self
+        return d
+    }()
+    
     @objc fileprivate func back() -> Void {
         self.navigationController?.popViewController(animated: true)
     }
@@ -156,6 +165,8 @@ class WkBaseViewController: UIViewController {
         leftBarItem.setBackgroundImage(UIImage.init(named: "rean"), for: .normal)
 
         view.addSubview(showDowV)
+        view.addSubview(lostNetV)
+        lostNetV.isHidden = true
         showDowV.alpha = 0
     }
     
@@ -179,38 +190,13 @@ class WkBaseViewController: UIViewController {
         }
     }
 
-    
-    deinit {
-        print("dealloc")
-        // using KVO, always tear down, take no chances
-        if isLoad {
-            self.webView.removeObserver(self, forKeyPath: #keyPath(WKWebView.estimatedProgress))
-        }
-    }
-}
-
-// MARK:- 观察进度
-extension WkBaseViewController {
-    override func observeValue(forKeyPath keyPath: String?, of object: Any?, change: [NSKeyValueChangeKey : Any]?, context: UnsafeMutableRawPointer?) {
-        if (keyPath == "estimatedProgress") { // listen to changes and updated view
-            
-            progressView.isHidden = webView.estimatedProgress == 1
-            progressView.setProgress(Float(webView.estimatedProgress), animated: true)
-        }
-    }
-}
-
-
-extension WkBaseViewController {
     // MARK: - 添加控件
     fileprivate func prepareUI() -> Void {
         
         DispatchQueue.main.async {
-//            self.view.addSubview(self.webView)
+            //            self.view.addSubview(self.webView)
             self.view.insertSubview(self.webView, aboveSubview: (self.navigationController?.navigationBar)!)
         }
-        
-        
         
         //设置不拉伸界面
         self.edgesForExtendedLayout = UIRectEdge()
@@ -229,6 +215,52 @@ extension WkBaseViewController {
         
         view.addSubview(self.progressView)
     }
+    
+    deinit {
+        print("dealloc")
+        // using KVO, always tear down, take no chances
+        if isLoad {
+            self.webView.removeObserver(self, forKeyPath: #keyPath(WKWebView.estimatedProgress))
+        }
+    }
+    
+    // MARK: - 断网事件
+    func tapFUN() {
+        if self.getURLStr.characters.count == 0 {
+            
+            var stringUrl = STOTRURL
+            
+            if STOTRURL.contains("?") {
+                stringUrl = STOTRURL + ("&&token=") + (AccountModel.shared()?.Token)! + "&uid=" + (AccountModel.shared()?.Id.stringValue)!
+            } else {
+                stringUrl = STOTRURL + ("?&token=") + (AccountModel.shared()?.Token)! + "&uid=" + (AccountModel.shared()?.Id.stringValue)!
+            }
+            
+            self.webView.load(URLRequest.init(url: URL.init(string: STOTRURL)!))
+        } else {
+            
+            if self.getURLStr.contains("?") {
+                self.getURLStr = self.getURLStr + ("&&token=") + (AccountModel.shared()?.Token)! + "&uid=" + (AccountModel.shared()?.Id.stringValue)!
+            } else {
+                self.getURLStr = self.getURLStr + ("?&token=") + (AccountModel.shared()?.Token)! + "&uid=" + (AccountModel.shared()?.Id.stringValue)!
+            }
+            
+            self.webView.load(URLRequest.init(url: URL.init(string: self.getURLStr)!))
+        }
+    }
+    
+
+}
+
+// MARK:- 观察进度
+extension WkBaseViewController {
+    override func observeValue(forKeyPath keyPath: String?, of object: Any?, change: [NSKeyValueChangeKey : Any]?, context: UnsafeMutableRawPointer?) {
+        if (keyPath == "estimatedProgress") { // listen to changes and updated view
+            
+            progressView.isHidden = webView.estimatedProgress == 1
+            progressView.setProgress(Float(webView.estimatedProgress), animated: true)
+        }
+    }
 }
 
 // MARK: - 禁止3d touch预览
@@ -243,7 +275,15 @@ extension WkBaseViewController : WKUIDelegate {
 // MARK: - WKNavigationDelegate
 extension WkBaseViewController : WKNavigationDelegate {
     
+
     
+    func webView(_ webView: WKWebView, didFailProvisionalNavigation navigation: WKNavigation!, withError error: Error) {
+        toast(toast: error.localizedDescription)
+        
+
+        view.bringSubview(toFront: lostNetV)
+        lostNetV.isHidden = false
+    }
     
     
     ///开始加载
@@ -257,6 +297,8 @@ extension WkBaseViewController : WKNavigationDelegate {
     
     /// 加载完成
     func webView(_ webView: WKWebView, didFinish navigation: WKNavigation!) {
+        
+        lostNetV.isHidden = true
         
         if self.navigationController?.viewControllers.count > 1 {
             ///标题赋值
@@ -288,7 +330,6 @@ extension WkBaseViewController : WKNavigationDelegate {
             })
         }
     }
-
 }
 
 
@@ -297,7 +338,12 @@ extension WkBaseViewController : WKNavigationDelegate {
 extension WkBaseViewController : WKScriptMessageHandler {
     func userContentController(_ userContentController: WKUserContentController, didReceive message: WKScriptMessage) {
         
-        _ = message.name
+        let msg = message.name
+        
+        if msg == "login" {
+            CCog(message: "返回登录")
+            UIApplication.shared.keyWindow?.rootViewController = LoginViewController()
+        }
         
     }
 }
@@ -330,5 +376,63 @@ extension WkBaseViewController : headerViewelegate {
         
         self.webView.reload()
     }
+}
+
+protocol LostNetVDelegate {
+    /// 单机屏幕事件
+    ///
+    func tapFUN() -> Void
+}
+
+// MARK: - 断网视图
+class LostNetV: UIView {
     
+    var delegate : LostNetVDelegate?
+    
+    fileprivate lazy var imgView: UIImageView = {
+        let d : UIImageView = UIImageView.init(frame: CGRect.init(x: self.center.x - SCREEN_WIDTH * 0.1 * SCREEN_SCALE, y: SCREEN_HEIGHT * 0.3, width:SCREEN_WIDTH * 0.2 * SCREEN_SCALE, height: SCREEN_WIDTH * 0.2 * (256 / 291) * SCREEN_SCALE))
+        d.layer.borderWidth = 1
+        d.image = #imageLiteral(resourceName: "xxx")
+        d.isUserInteractionEnabled = true
+        
+        /// 单机事件
+        let tapGes = UITapGestureRecognizer.init(target: self, action: #selector(tapSEL))
+        d.addGestureRecognizer(tapGes)
+        return d
+    }()
+    
+    /// 标题
+    fileprivate lazy var titleLabel: UILabel = {
+        let d : UILabel = UILabel.init(frame: CGRect.init(x: 0, y: self.imgView.BottomY + COMMON_MARGIN * SCREEN_SCALE, width: SCREEN_WIDTH, height: 30 * SCREEN_SCALE))
+        d.font = UIFont.systemFont(ofSize: 25 * SCREEN_SCALE)
+        d.text = "网络不给力"
+        d.textColor = COMMON_TBBGCOLOR
+        d.textAlignment = .center
+        return d
+    }()
+    
+    /// 描述文本
+    lazy var descLabel: UILabel = {
+        let d : UILabel = UILabel.init(frame: CGRect.init(x: 0, y: self.titleLabel.BottomY + COMMON_MARGIN, width: SCREEN_WIDTH, height: 15 * SCREEN_SCALE))
+        d.text = "请检查网络后点击屏幕重试"
+        d.textColor = COMMON_TBBGCOLOR
+        d.textAlignment = .center
+        return d
+    }()
+    
+    @objc fileprivate func tapSEL() {
+        self.delegate?.tapFUN()
+    }
+    
+    override init(frame: CGRect) {
+        super.init(frame: frame)
+
+        addSubview(imgView)
+        addSubview(titleLabel)
+        addSubview(descLabel)
+    }
+    
+    required init?(coder aDecoder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
 }
