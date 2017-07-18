@@ -1,5 +1,5 @@
 //
-//  DetailViewController.swift
+//  ShopWebV.swift
 //  VotingApp
 //
 //  Created by 郑东喜 on 2017/3/17.
@@ -9,7 +9,7 @@
 import UIKit
 import WebKit
 
-class DetailViewController2: WkBaseViewController {
+class ShopWebV: WkBaseViewController {
     
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
@@ -62,7 +62,7 @@ class DetailViewController2: WkBaseViewController {
 }
 
 
-extension DetailViewController2 {
+extension ShopWebV {
     func webView(_ webView: WKWebView, decidePolicyFor navigationAction: WKNavigationAction, decisionHandler: @escaping (WKNavigationActionPolicy) -> Void) {
         
         self.getURLStr = (navigationAction.request.url?.absoluteString)!
@@ -82,7 +82,7 @@ extension DetailViewController2 {
 }
 
 
-extension DetailViewController2 {
+extension ShopWebV {
     
     /// 页面跳转
     ///
@@ -91,7 +91,7 @@ extension DetailViewController2 {
         
         CCog(message: str)
         
-        let vvv = DetailReplaceVC()
+        let vvv = ShopWebReplaceV()
         vvv.getURLStr = str
         
         self.navigationController?.pushViewController(vvv, animated: true)

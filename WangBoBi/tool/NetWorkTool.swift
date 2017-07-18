@@ -8,8 +8,6 @@
 
 import UIKit
 
-typealias NetWorkFinished = (_ success : Bool,_ result: [String : JSON]?,_ error : NSError?) -> ()
-
 class NetWorkTool: NSObject {
     /// 网络工具类单例
     static let shared = NetWorkTool()
@@ -99,13 +97,48 @@ extension NetWorkTool {
             //返回主线程执行
             DispatchQueue.main.sync {
                 
+                /// 出错的解决办法
                 if let data = data {
                     
-                    if let result = try? JSONSerialization.jsonObject(with: data, options: .allowFragments) {
+                    CCog(message: String.init(data: data, encoding: String.Encoding.utf8))
+                    
+                    var jsonStr = String.init(data: data, encoding: String.Encoding.utf8)! as NSString
+                    
+                    if jsonStr.contains("[") {
+                        jsonStr = jsonStr.replacingOccurrences(of: "[", with: "{") as NSString
                         
-                        success(result)
+                        if jsonStr.contains("]") {
+                            jsonStr = jsonStr.replacingOccurrences(of: "]", with: "}") as NSString
+
+                            let xxx = (jsonStr as String).data(using: String.Encoding(rawValue: String.Encoding.utf8.rawValue))
+
+                            
+                            if let result = try? JSONSerialization.jsonObject(with: xxx!, options: .allowFragments) {
+                                CCog(message: result)
+                                
+                                success(result)
+                            } else {
+                                CCog(message: "数据不合法")
+                            }
+                            
+                        }
+                    
+                    } else {
+                        if let result = try? JSONSerialization.jsonObject(with: data, options: .allowFragments) {
+                            
+                            success(result)
+                        }
                     }
                     
+                    ///
+                    if let result = try? JSONSerialization.jsonObject(with: xxx!, options: .allowFragments) {
+                        CCog(message: result)
+                        
+                        success(result)
+                    } else {
+                        CCog(message: "数据不合法")
+                    }
+
                 }else {
                     failure(error!)
                 }

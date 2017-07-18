@@ -14,8 +14,6 @@ class MainPageViewController: BaseViewController {
     lazy var collV: UICollectionView = {
         
         let layout = UICollectionViewFlowLayout.init()
-        
-        /// 设置大小出错///
         let d : UICollectionView = UICollectionView.init(frame:CGRect.init(x: 0, y: 0, width: SCREEN_WIDTH, height: SCREEN_HEIGHT - 64), collectionViewLayout: layout)
         
         d.backgroundColor = UIColor.clear
@@ -42,6 +40,7 @@ class MainPageViewController: BaseViewController {
     /// 模型总数
     var loginModel : Int = 0
     
+    /// 导航栏遮罩视图
     lazy var replaceV: UIView = {
         let d : UIView = UIView.init(frame: CGRect.init(x: 0, y: 0, width: SCREEN_WIDTH, height: 64))
         d.backgroundColor = UIColor.colorWithHexString("2693DA")
@@ -54,6 +53,14 @@ class MainPageViewController: BaseViewController {
         /// 测试 一进来刷新信息
         AccountModel.reloadSEL()  
     }
+   
+    
+    /// 账单
+    lazy var detailList: UIBarButtonItem = {
+        let d : UIBarButtonItem = UIBarButtonItem.init(title: "账单", style: .plain, target: self, action: #selector(jumpToDetailVC))
+        
+        return d
+    }()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -79,16 +86,28 @@ class MainPageViewController: BaseViewController {
         
         view.addSubview(collV)
         
+        /// 添加导航栏渐变视图
         view.addSubview(replaceV)
         replaceV.alpha = 0
         
         // Do any additional setup after loading the view.
         view.backgroundColor = COMMON_TBBGCOLOR
 
-        
+        // 账单
+        self.navigationItem.rightBarButtonItem = detailList
+        self.navigationItem.rightBarButtonItem?.tintColor = UIColor.white
+    }
+
+    
+    /// 账单
+    @objc fileprivate func jumpToDetailVC() {
+        let v : UIViewController = UIViewController.init()
+        v.view.backgroundColor = UIColor.randomColor()
+        self.navigationController?.pushViewController(v, animated: true)
     }
 }
 
+// MARK: - UICollectionViewDataSource
 extension MainPageViewController : UICollectionViewDataSource,UICollectionViewDelegateFlowLayout,HeadReuseDelegate,UICollectionViewDelegate {
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
@@ -99,7 +118,7 @@ extension MainPageViewController : UICollectionViewDataSource,UICollectionViewDe
         if indexPath.section == 0 {
             return CGSize.init(width: itemWidth, height: itemWidth * 1.4)
         } else {
-            return CGSize.init(width: SCREEN_WIDTH - 2 * COMMON_MARGIN, height: itemWidth * 2)
+            return CGSize.init(width: SCREEN_WIDTH - 2 * COMMON_MARGIN, height: itemWidth * 1.8)
         }
     }
     
@@ -120,18 +139,19 @@ extension MainPageViewController : UICollectionViewDataSource,UICollectionViewDe
             
             return ccc
         }
-        
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
         return UIEdgeInsets.init(top:0, left: COMMON_MARGIN, bottom: 0, right:COMMON_MARGIN)
     }
     
+    /// 返回几行
     func numberOfSections(in collectionView: UICollectionView) -> Int {
         
         return 2
     }
     
+    /// 返回每行对应的数量
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         switch section {
         case 0:
@@ -180,13 +200,12 @@ extension MainPageViewController : UICollectionViewDataSource,UICollectionViewDe
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForFooterInSection section: Int) -> CGSize {
-        
         return CGSize.init(width: SCREEN_WIDTH, height: COMMON_MARGIN)
-        
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         
+        /// 网页跳转
         if indexPath.section == 1 {
             let xxx2 = topModel[indexPath.row]
             
@@ -202,7 +221,7 @@ extension MainPageViewController : UICollectionViewDataSource,UICollectionViewDe
     }
     
     
-    // MARK: - HeadReuseDelegate
+    // MARK: - 四个索引图标
     func chooseIndex(index: Int) {
         
         switch index {
@@ -240,30 +259,24 @@ extension MainPageViewController : headerViewelegate {
         /// 有网络、没网络处理
         NetCheck.shared.returnNetStatus { (result) in
             
-            CCog(message: result)
             if result {
-                
-                
+
                 AccountModel.indexInfo(finished: { (commenModel) in
                     self.topModel = commenModel
-                    
                     
                     CCog(message: self.topModel)
                 }, finishedTop: { (merTopModel) in
                     self.mertopModel = merTopModel
                     
-                    CCog(message: self.topModel)
-                    
                 }) { (xxx) in
                     self.loginModel = xxx
                     
                     self.collV.reloadData()
-                    d.endRefresh()
-                    
+
                     toast(toast: "刷新成功")
-                    
-                    CCog(message: self.topModel)
                 }
+                
+                d.endRefresh()
             } else {
                 d.endRefresh()
                 
@@ -271,8 +284,6 @@ extension MainPageViewController : headerViewelegate {
                 return
             }
         }
-        
-      
     }
 }
 

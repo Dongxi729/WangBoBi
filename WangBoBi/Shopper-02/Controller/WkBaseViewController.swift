@@ -297,7 +297,7 @@ extension WkBaseViewController : WKNavigationDelegate {
 extension WkBaseViewController : WKScriptMessageHandler {
     func userContentController(_ userContentController: WKUserContentController, didReceive message: WKScriptMessage) {
         
-        let msg = message.name
+        _ = message.name
         
     }
 }

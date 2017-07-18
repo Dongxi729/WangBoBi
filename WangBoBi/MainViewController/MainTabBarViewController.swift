@@ -10,7 +10,6 @@ import UIKit
 
 class MainTabBarViewController: BaseTabbarVC {
     
-
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -31,7 +30,7 @@ extension MainTabBarViewController {
         let view = UIViewController()
         view.view.backgroundColor = UIColor.white
         //商户
-        let shopVc = JFNavigationController.init(rootViewController: DetailViewController2())
+        let shopVc = JFNavigationController.init(rootViewController: ShopWebV())
         
         //朋友
         let friendVc = JFNavigationController.init(rootViewController: view)

@@ -23,12 +23,7 @@ class HeadReuse : UICollectionReusableView {
         
         return d
     }()
-    
-    var zdxInt : Int? {
-        didSet {
-            CCog(message: AccountModel.shared()?.WBC)
-        }
-    }
+
     
     /// 补充的头部文字
     lazy var sectionImg: BtnWithImage = {
@@ -143,6 +138,14 @@ class HeadReuse : UICollectionReusableView {
         
         /// 积分
         self.jifenLabel.text = AccountModel.shared()?.Integral.stringValue
+        
+        /// 交易量
+        
+        /// 网博/人民币兑换
+        
+        /// 网博/日币兑换
+        
+        /// banner图片链接地址
     }
     
     @objc fileprivate func buttonSEL(sender : UIButton) {

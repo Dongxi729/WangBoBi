@@ -537,7 +537,6 @@ class AccountModel: NSObject,NSCoding {
                 
                 UIApplication.shared.keyWindow?.rootViewController = nav
             }
-            
         }
     }
     
@@ -687,7 +686,6 @@ class AccountModel: NSObject,NSCoding {
         } else {
             let param : [String :String] = ["uid" : (AccountModel.shared()?.Id.stringValue)!,
                                             "token" : (AccountModel.shared()?.Token)!]
-            
             
             NetWorkTool.shared.postWithPath(path: INDEX_URL, paras: param, success: { (result) in
                 
@@ -1187,6 +1185,8 @@ class AccountModel: NSObject,NSCoding {
                                          "token" : (AccountModel.shared()?.Token)!]
         
         NetWorkTool.shared.postWithPath(path: PERSON_INFO, paras: param, success: { (result) in
+            
+            CCog(message: result)
             
             guard let resultData = result as? NSDictionary  else {
                 return

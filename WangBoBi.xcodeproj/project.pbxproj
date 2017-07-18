@@ -44,9 +44,9 @@
 		263CAF131EF62889006629BF /* XLPasswordInputView.m in Sources */ = {isa = PBXBuildFile; fileRef = 263CAF101EF62889006629BF /* XLPasswordInputView.m */; };
 		263CAF151EF62B89006629BF /* TestViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 263CAF141EF62B89006629BF /* TestViewController.swift */; };
 		2643CFC61EF3EE2200EFC720 /* DetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2643CFC51EF3EE2200EFC720 /* DetailViewController.swift */; };
-		264793681F18DC98000F9F67 /* DetailReplaceVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 264793661F18DC98000F9F67 /* DetailReplaceVC.swift */; };
+		264793681F18DC98000F9F67 /* ShopWebReplaceV.swift in Sources */ = {isa = PBXBuildFile; fileRef = 264793661F18DC98000F9F67 /* ShopWebReplaceV.swift */; };
 		2647936B1F18DD28000F9F67 /* WkBaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2647936A1F18DD28000F9F67 /* WkBaseViewController.swift */; };
-		2647936D1F18DD71000F9F67 /* DetailViewController2.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2647936C1F18DD71000F9F67 /* DetailViewController2.swift */; };
+		2647936D1F18DD71000F9F67 /* ShopWebV.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2647936C1F18DD71000F9F67 /* ShopWebV.swift */; };
 		2649606F1EF0BF2500A559D6 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 264960691EF0BF2500A559D6 /* AppDelegate.swift */; };
 		264960871EF0C1B400A559D6 /* ZDXCommon.swift in Sources */ = {isa = PBXBuildFile; fileRef = 264960861EF0C1B400A559D6 /* ZDXCommon.swift */; };
 		264960BD1EF0C28F00A559D6 /* POPAnimatableProperty.mm in Sources */ = {isa = PBXBuildFile; fileRef = 2649608C1EF0C28F00A559D6 /* POPAnimatableProperty.mm */; };
@@ -124,7 +124,6 @@
 		269B5ECC1F077BD300AA573F /* footerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 269B5EC91F077BD300AA573F /* footerView.swift */; };
 		269B5ECD1F077BD300AA573F /* headerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 269B5ECA1F077BD300AA573F /* headerView.swift */; };
 		269B5ECE1F077BD300AA573F /* UIScrollView-extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 269B5ECB1F077BD300AA573F /* UIScrollView-extension.swift */; };
-		269C1C921EF1275500364F32 /* SwiftyJSON.swift in Sources */ = {isa = PBXBuildFile; fileRef = 269C1C911EF1275500364F32 /* SwiftyJSON.swift */; };
 		26A0A4A91EF0E26B00035D0D /* JFNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26A0A4A81EF0E26B00035D0D /* JFNavigationController.swift */; };
 		26A0A4AB1EF1064C00035D0D /* NetWorkTool.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26A0A4AA1EF1064C00035D0D /* NetWorkTool.swift */; };
 		26B14EFC1EF259AF0050135B /* CollectCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26B14EFB1EF259AF0050135B /* CollectCell.swift */; };
@@ -199,9 +198,9 @@
 		263CAF101EF62889006629BF /* XLPasswordInputView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XLPasswordInputView.m; sourceTree = "<group>"; };
 		263CAF141EF62B89006629BF /* TestViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TestViewController.swift; sourceTree = "<group>"; };
 		2643CFC51EF3EE2200EFC720 /* DetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DetailViewController.swift; sourceTree = "<group>"; };
-		264793661F18DC98000F9F67 /* DetailReplaceVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DetailReplaceVC.swift; sourceTree = "<group>"; };
+		264793661F18DC98000F9F67 /* ShopWebReplaceV.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShopWebReplaceV.swift; sourceTree = "<group>"; };
 		2647936A1F18DD28000F9F67 /* WkBaseViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WkBaseViewController.swift; sourceTree = "<group>"; };
-		2647936C1F18DD71000F9F67 /* DetailViewController2.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DetailViewController2.swift; sourceTree = "<group>"; };
+		2647936C1F18DD71000F9F67 /* ShopWebV.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShopWebV.swift; sourceTree = "<group>"; };
 		264960691EF0BF2500A559D6 /* AppDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		264960831EF0C19F00A559D6 /* WangBoBi-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "WangBoBi-Bridging-Header.h"; sourceTree = "<group>"; };
 		264960861EF0C1B400A559D6 /* ZDXCommon.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ZDXCommon.swift; sourceTree = "<group>"; };
@@ -337,7 +336,6 @@
 		269B5EC91F077BD300AA573F /* footerView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = footerView.swift; sourceTree = "<group>"; };
 		269B5ECA1F077BD300AA573F /* headerView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = headerView.swift; sourceTree = "<group>"; };
 		269B5ECB1F077BD300AA573F /* UIScrollView-extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIScrollView-extension.swift"; sourceTree = "<group>"; };
-		269C1C911EF1275500364F32 /* SwiftyJSON.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwiftyJSON.swift; sourceTree = "<group>"; };
 		26A0A4A81EF0E26B00035D0D /* JFNavigationController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JFNavigationController.swift; sourceTree = "<group>"; };
 		26A0A4AA1EF1064C00035D0D /* NetWorkTool.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NetWorkTool.swift; sourceTree = "<group>"; };
 		26B14EFB1EF259AF0050135B /* CollectCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CollectCell.swift; path = ../../Mine/View/CollectCell.swift; sourceTree = "<group>"; };
@@ -782,7 +780,6 @@
 				265D43181EFBE2F5007F5AB8 /* CreateCode */,
 				2623045C1EFA6988007B0BF6 /* ZXPUnicode */,
 				263CAF0A1EF62869006629BF /* passInputV */,
-				269C1C911EF1275500364F32 /* SwiftyJSON.swift */,
 				2649611F1EF0D08F00A559D6 /* FTIndicator */,
 				264960D21EF0C9EC00A559D6 /* YYWebImage */,
 				264960881EF0C28F00A559D6 /* pop */,
@@ -837,9 +834,9 @@
 		2649607F1EF0C02C00A559D6 /* Controller */ = {
 			isa = PBXGroup;
 			children = (
-				2647936C1F18DD71000F9F67 /* DetailViewController2.swift */,
+				2647936C1F18DD71000F9F67 /* ShopWebV.swift */,
 				2647936A1F18DD28000F9F67 /* WkBaseViewController.swift */,
-				264793661F18DC98000F9F67 /* DetailReplaceVC.swift */,
+				264793661F18DC98000F9F67 /* ShopWebReplaceV.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -1313,7 +1310,6 @@
 				264960C71EF0C28F00A559D6 /* POPDecayAnimation.mm in Sources */,
 				266B89011F04A5650033BFA7 /* PushingMoneyVC.swift in Sources */,
 				26B14F001EF29ABA0050135B /* ReceiveMonVC.swift in Sources */,
-				269C1C921EF1275500364F32 /* SwiftyJSON.swift in Sources */,
 				262304631EFA6988007B0BF6 /* NSArray+ ZXPUnicode.m in Sources */,
 				26ED24501EF3E5E300642804 /* SetPaymentPassVC.swift in Sources */,
 				264960CA1EF0C28F00A559D6 /* POPMath.mm in Sources */,
@@ -1361,7 +1357,7 @@
 				260B20C81EF76B5500E78FD8 /* MyRequestVC.swift in Sources */,
 				264960CE1EF0C28F00A559D6 /* TransformationMatrix.cpp in Sources */,
 				260B20D41EF7A08D00E78FD8 /* TfPlaceHolder.swift in Sources */,
-				2647936D1F18DD71000F9F67 /* DetailViewController2.swift in Sources */,
+				2647936D1F18DD71000F9F67 /* ShopWebV.swift in Sources */,
 				2643CFC61EF3EE2200EFC720 /* DetailViewController.swift in Sources */,
 				264960FE1EF0C9EC00A559D6 /* YYMemoryCache.m in Sources */,
 				260B20D21EF79F5100E78FD8 /* CommonV.swift in Sources */,
@@ -1416,7 +1412,7 @@
 				265D430C1EFBA8B1007F5AB8 /* MyInfoVC.swift in Sources */,
 				2607D1571EF224C90015625E /* MainPageViewController.swift in Sources */,
 				265D430F1EFBD572007F5AB8 /* CodeProductor.swift in Sources */,
-				264793681F18DC98000F9F67 /* DetailReplaceVC.swift in Sources */,
+				264793681F18DC98000F9F67 /* ShopWebReplaceV.swift in Sources */,
 				264961051EF0C9EC00A559D6 /* YYAnimatedImageView.m in Sources */,
 				2650C1941F03AA82005BE741 /* PickerV.swift in Sources */,
 				264960BF1EF0C28F00A559D6 /* POPAnimationEvent.mm in Sources */,

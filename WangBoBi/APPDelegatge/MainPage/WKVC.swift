@@ -49,12 +49,12 @@ class WKVC: UIViewController {
             }
             break
         case "loading":
-            if let val = change[.newKey] as? Bool {
+            if (change[.newKey] as? Bool) != nil {
             }
             break
             
         case "estimatedProgress":
-            if let val = change[.newKey] as? Double {
+            if (change[.newKey] as? Double) != nil {
             }
             break
         default:
