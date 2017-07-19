@@ -9,49 +9,53 @@
 import Foundation
 
 /// 登录链接
-let LOGIN_URL = "http://192.168.1.10:8010/ifs/login.ashx"
+let LOGIN_URL = "\(COMMON_PREFIX)/ifs/login.ashx"
 
 
-//http://192.168.1.10:8010/ifs/passfind.ashx  忘记密码接口  返回格式：JSON
+//\(COMMON_PREFIX)/ifs/passfind.ashx  忘记密码接口  返回格式：JSON
 //请求参数：email  邮箱地址 ，pwd  登陆密码MD5加密密文，code 验证码       ac  操作类型值（semail：发送验证码，femail：重置密码）
+
+/// 前缀请求
+let COMMON_PREFIX = "http://192.168.1.10:8010"
+
 /// 忘记密码链接
-let FORGETPASS_URL = "http://192.168.1.10:8010/ifs/passfind.ashx"
+let FORGETPASS_URL = "\(COMMON_PREFIX)/ifs/passfind.ashx"
 
 /// 注册请求
-let RIGISTER_URL = "http://192.168.1.10:8010/ifs/reg.ashx"
+let RIGISTER_URL = "\(COMMON_PREFIX)/ifs/reg.ashx"
 
 /// 首页请求接口
-let INDEX_URL = "http://192.168.1.10:8010/ifs/index.ashx"
+let INDEX_URL = "\(COMMON_PREFIX)/ifs/index.ashx"
 
 /// 双重验证
-let DOB_AUTH = "http://192.168.1.10:8010/ifs/dobauth.ashx"
+let DOB_AUTH = "\(COMMON_PREFIX)/ifs/dobauth.ashx"
 
 /// 修改登录密码
-let CHANGELOGIN_PASS = "http://192.168.1.10:8010/ifs/resetpwd.ashx"
+let CHANGELOGIN_PASS = "\(COMMON_PREFIX)/ifs/resetpwd.ashx"
 
 /// 绑定手机接口
-let BIND_PHONE = "http://192.168.1.10:8010/ifs/toiv.ashx"
+let BIND_PHONE = "\(COMMON_PREFIX)/ifs/toiv.ashx"
 
 /// 支付密码
-let PAY_PASS = "http://192.168.1.10:8010/ifs/resetpaypwd.ashx"
+let PAY_PASS = "\(COMMON_PREFIX)/ifs/resetpaypwd.ashx"
 
 /// 上传图片
-let UPLOAD_IMGDATA = "http://192.168.1.10:8010/ifs/headimg.ashx"
+let UPLOAD_IMGDATA = "\(COMMON_PREFIX)/ifs/headimg.ashx"
 
 /// 实名认证
-let TRUENAME_AUTH = "http://192.168.1.10:8010/ifs/realauth.ashx"
+let TRUENAME_AUTH = "\(COMMON_PREFIX)/ifs/realauth.ashx"
 
 /// 刷新接口
-let REFRESH_INFO = "http://192.168.1.10:8010/ifs/basicinfo.ashx"
+let REFRESH_INFO = "\(COMMON_PREFIX)/ifs/basicinfo.ashx"
 
 /// 个人接口
-let PERSON_INFO = "http://192.168.1.10:8010/ifs/basicinfo.ashx"
+let PERSON_INFO = "\(COMMON_PREFIX)/ifs/basicinfo.ashx"
 
 /// 商家接口
-let TELLTOPAY = "http://192.168.1.10:8010/ifs/tofellowpay.ashx"
+let TELLTOPAY = "\(COMMON_PREFIX)/ifs/tofellowpay.ashx"
 
 /// 商户
-let STOTRURL = "http://192.168.1.10:8010/store.aspx"
+let STOTRURL = "\(COMMON_PREFIX)/store.aspx"
 
 /// 测试王海珍
 let TEST_URL = "https://laod.cn/hosts/2017-google-hosts.html"

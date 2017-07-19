@@ -76,9 +76,8 @@ class WkBaseViewController: UIViewController,LostNetVDelegate {
         
         configuration.userContentController = userContentController
         
-        //支付宝
+        // 登录
         userContentController.add(LeakAvoider.init(delegate: self as WKScriptMessageHandler), name: "login")
-
         
         if self.navigationController?.viewControllers != nil {
             ///由于设置了edgesForExtendedLayout,防止了页面全部控件向上偏移，所以在子页面数大于2的时候，矫正
@@ -214,6 +213,7 @@ class WkBaseViewController: UIViewController,LostNetVDelegate {
         }
         
         view.addSubview(self.progressView)
+        view.bringSubview(toFront: self.progressView)
     }
     
     deinit {
@@ -226,29 +226,45 @@ class WkBaseViewController: UIViewController,LostNetVDelegate {
     
     // MARK: - 断网事件
     func tapFUN() {
+        loadNetFunc()
+    }
+    
+    // MARK: - loadNetFunc
+    func loadNetFunc() -> Void {
         if self.getURLStr.characters.count == 0 {
             
             var stringUrl = STOTRURL
             
-            if STOTRURL.contains("?") {
-                stringUrl = STOTRURL + ("&&token=") + (AccountModel.shared()?.Token)! + "&uid=" + (AccountModel.shared()?.Id.stringValue)!
+            if STOTRURL.contains(COMMON_PREFIX) {
+                if STOTRURL.contains("?") {
+                    stringUrl = STOTRURL + ("&&token=") + (AccountModel.shared()?.Token)! + "&uid=" + (AccountModel.shared()?.Id.stringValue)!
+                } else {
+                    stringUrl = STOTRURL + ("?&token=") + (AccountModel.shared()?.Token)! + "&uid=" + (AccountModel.shared()?.Id.stringValue)!
+                }
+                
+                self.webView.load(URLRequest.init(url: URL.init(string: STOTRURL)!))
+                
             } else {
-                stringUrl = STOTRURL + ("?&token=") + (AccountModel.shared()?.Token)! + "&uid=" + (AccountModel.shared()?.Id.stringValue)!
+                CCog(message: "")
+                lostNetV.isHidden = false
             }
             
-            self.webView.load(URLRequest.init(url: URL.init(string: STOTRURL)!))
         } else {
             
-            if self.getURLStr.contains("?") {
-                self.getURLStr = self.getURLStr + ("&&token=") + (AccountModel.shared()?.Token)! + "&uid=" + (AccountModel.shared()?.Id.stringValue)!
+            if self.getURLStr.contains(COMMON_PREFIX) {
+                if self.getURLStr.contains("?") {
+                    self.getURLStr = self.getURLStr + ("&&token=") + (AccountModel.shared()?.Token)! + "&uid=" + (AccountModel.shared()?.Id.stringValue)!
+                } else {
+                    self.getURLStr = self.getURLStr + ("?&token=") + (AccountModel.shared()?.Token)! + "&uid=" + (AccountModel.shared()?.Id.stringValue)!
+                }
+                
+                self.webView.load(URLRequest.init(url: URL.init(string: self.getURLStr)!))
             } else {
-                self.getURLStr = self.getURLStr + ("?&token=") + (AccountModel.shared()?.Token)! + "&uid=" + (AccountModel.shared()?.Id.stringValue)!
+                CCog(message: "")
+                lostNetV.isHidden = false
             }
-            
-            self.webView.load(URLRequest.init(url: URL.init(string: self.getURLStr)!))
         }
     }
-    
 
 }
 
@@ -278,11 +294,12 @@ extension WkBaseViewController : WKNavigationDelegate {
 
     
     func webView(_ webView: WKWebView, didFailProvisionalNavigation navigation: WKNavigation!, withError error: Error) {
-        toast(toast: error.localizedDescription)
+//        toast(toast: error.localizedDescription)
+//
+//        view.bringSubview(toFront: lostNetV)
+//        lostNetV.isHidden = false
         
-
-        view.bringSubview(toFront: lostNetV)
-        lostNetV.isHidden = false
+     
     }
     
     
@@ -297,6 +314,7 @@ extension WkBaseViewController : WKNavigationDelegate {
     
     /// 加载完成
     func webView(_ webView: WKWebView, didFinish navigation: WKNavigation!) {
+        CCog(message: "")
         
         lostNetV.isHidden = true
         
@@ -305,8 +323,6 @@ extension WkBaseViewController : WKNavigationDelegate {
             self.navigationItem.title = webView.title
             isLoad = true
         }
-        
-        print("\((#file as NSString).lastPathComponent):(\(#line))\n","finish Loaded")
         
         /// 加载完毕标识符
         self.isLoad = true
@@ -331,7 +347,6 @@ extension WkBaseViewController : WKNavigationDelegate {
         }
     }
 }
-
 
 
 // MARK:- 接收支付宝app接收结果
@@ -374,6 +389,8 @@ extension WkBaseViewController : headerViewelegate {
         let d : headerView = self.webView.viewWithTag(888) as! headerView
         d.endRefresh()
         
+        loadNetFunc()
+        
         self.webView.reload()
     }
 }
@@ -389,6 +406,7 @@ class LostNetV: UIView {
     
     var delegate : LostNetVDelegate?
     
+    
     fileprivate lazy var imgView: UIImageView = {
         let d : UIImageView = UIImageView.init(frame: CGRect.init(x: self.center.x - SCREEN_WIDTH * 0.1 * SCREEN_SCALE, y: SCREEN_HEIGHT * 0.3, width:SCREEN_WIDTH * 0.2 * SCREEN_SCALE, height: SCREEN_WIDTH * 0.2 * (256 / 291) * SCREEN_SCALE))
         d.layer.borderWidth = 1
@@ -402,11 +420,11 @@ class LostNetV: UIView {
     }()
     
     /// 标题
-    fileprivate lazy var titleLabel: UILabel = {
+    lazy var titleLabel: UILabel = {
         let d : UILabel = UILabel.init(frame: CGRect.init(x: 0, y: self.imgView.BottomY + COMMON_MARGIN * SCREEN_SCALE, width: SCREEN_WIDTH, height: 30 * SCREEN_SCALE))
         d.font = UIFont.systemFont(ofSize: 25 * SCREEN_SCALE)
         d.text = "网络不给力"
-        d.textColor = COMMON_TBBGCOLOR
+        d.textColor = UIColor.darkGray
         d.textAlignment = .center
         return d
     }()
@@ -415,7 +433,7 @@ class LostNetV: UIView {
     lazy var descLabel: UILabel = {
         let d : UILabel = UILabel.init(frame: CGRect.init(x: 0, y: self.titleLabel.BottomY + COMMON_MARGIN, width: SCREEN_WIDTH, height: 15 * SCREEN_SCALE))
         d.text = "请检查网络后点击屏幕重试"
-        d.textColor = COMMON_TBBGCOLOR
+        d.textColor = UIColor.darkGray
         d.textAlignment = .center
         return d
     }()

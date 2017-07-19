@@ -45,7 +45,6 @@ class ShopWebV: WkBaseViewController {
             
             self.navigationController?.navigationBar.isHidden = true
         }
-
     }
     
     
@@ -53,10 +52,19 @@ class ShopWebV: WkBaseViewController {
         super.viewDidLoad()
         self.urlString = STOTRURL
         
-        
-        let request : URLRequest = NSURLRequest.init(url: URL.init(string: self.urlString)!, cachePolicy: .returnCacheDataElseLoad, timeoutInterval: 0) as URLRequest
-        
-        self.webView.load(request)
+        if self.urlString.contains(COMMON_PREFIX) {
+            let request : URLRequest = NSURLRequest.init(url: URL.init(string: self.urlString)!, cachePolicy: .returnCacheDataElseLoad, timeoutInterval: 0) as URLRequest
+            
+            self.webView.load(request)
+        } else {
+            CCog(message: "////")
+            
+            self.webView.stopLoading()
+            self.webView.isHidden = true
+            view.bringSubview(toFront: lostNetV)
+            lostNetV.isHidden = false
+            
+        }
     }
 }
 
@@ -67,15 +75,20 @@ extension ShopWebV {
         self.getURLStr = (navigationAction.request.url?.absoluteString)!
         
         if navigationAction.navigationType == WKNavigationType.linkActivated {
-  
-            if self.getURLStr.contains("?") {
-                self.getURLStr = self.getURLStr + ("&&token=") + (AccountModel.shared()?.Token)! + "&uid=" + (AccountModel.shared()?.Id.stringValue)!
+            
+            if self.getURLStr.contains(COMMON_PREFIX) {
+                if self.getURLStr.contains("?") {
+                    self.getURLStr = self.getURLStr + ("&token=")
+                } else {
+                    self.getURLStr = self.getURLStr + ("?&token=")
+                }
+                
+                self.aaa(str:self.getURLStr)
             } else {
-                self.getURLStr = self.getURLStr + ("?&token=") + (AccountModel.shared()?.Token)! + "&uid=" + (AccountModel.shared()?.Id.stringValue)!
+                lostNetV.isHidden = false
+                lostNetV.descLabel.text = "网络加载出错，请检查网络设置"
             }
 
-            self.aaa(str:self.getURLStr)
-            
             decisionHandler(.cancel)
         } else {
             decisionHandler(.allow)

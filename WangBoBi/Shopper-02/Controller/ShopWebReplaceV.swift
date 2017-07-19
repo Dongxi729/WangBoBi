@@ -40,15 +40,18 @@ extension ShopWebReplaceV {
         
         if navigationAction.navigationType == WKNavigationType.linkActivated {
             
-            if self.getURLStr.contains("?") {
-                self.getURLStr = self.getURLStr + ("&token=") + (AccountModel.shared()?.Token)! + "&uid=" + (AccountModel.shared()?.Id.stringValue)!
+            if self.getURLStr.contains(COMMON_PREFIX) {
+                if self.getURLStr.contains("?") {
+                    self.getURLStr = self.getURLStr + ("&&token=") + (AccountModel.shared()?.Token)! + "&uid=" + (AccountModel.shared()?.Id.stringValue)!
+                } else {
+                    self.getURLStr = self.getURLStr + ("?&token=") + (AccountModel.shared()?.Token)! + "&uid=" + (AccountModel.shared()?.Id.stringValue)!
+                }
+                
+                self.aaa(str:self.getURLStr)
             } else {
-                self.getURLStr = self.getURLStr + ("?&token=") + (AccountModel.shared()?.Token)! + "&uid=" + (AccountModel.shared()?.Id.stringValue)!
+                lostNetV.isHidden = false
+                lostNetV.descLabel.text = "网络加载出错，请检查网络设置"
             }
-            
-            CCog(message: self.getURLStr)
-            
-            self.aaa(str:self.getURLStr)
             
             decisionHandler(.cancel)
         } else {
