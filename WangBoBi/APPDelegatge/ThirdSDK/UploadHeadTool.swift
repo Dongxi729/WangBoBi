@@ -68,9 +68,7 @@ class UploadHeadTool: UIView,UIImagePickerControllerDelegate, UINavigationContro
                 }
                 sheet.addAction(tempAction)
                 presentViewController(alert: sheet, animated: true, completion: nil, completion1: nil)
-                
             }
-            
         }
         
         //照片来源相机

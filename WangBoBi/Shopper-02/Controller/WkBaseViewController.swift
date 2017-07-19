@@ -31,8 +31,8 @@ class WkBaseViewController: UIViewController,LostNetVDelegate {
     
     /// 拦截的字符串
     var blokStr : String = ""
-
-
+    
+    
     /// 左上角按钮
     var leftBarItem : UIButton = UIButton()
     
@@ -88,7 +88,7 @@ class WkBaseViewController: UIViewController,LostNetVDelegate {
                     wkV = WKWebView.init(frame: rect, configuration: configuration)
                 })
             } else {
-
+                
                 UIView.animate(withDuration: 0.5, animations: {
                     let rect = CGRect(x: 0, y: 20, width: SCREEN_WIDTH, height: SCREEN_HEIGHT - 30)
                     
@@ -97,7 +97,7 @@ class WkBaseViewController: UIViewController,LostNetVDelegate {
             }
         }
         
-
+        
         //添加刷新控件
         wkV.scrollView.addHeaderViewfun()
         
@@ -162,7 +162,7 @@ class WkBaseViewController: UIViewController,LostNetVDelegate {
         
         leftBarItem.addTarget(self, action:#selector(back), for: .touchUpInside)
         leftBarItem.setBackgroundImage(UIImage.init(named: "rean"), for: .normal)
-
+        
         view.addSubview(showDowV)
         view.addSubview(lostNetV)
         lostNetV.isHidden = true
@@ -172,7 +172,7 @@ class WkBaseViewController: UIViewController,LostNetVDelegate {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-
+        
         if (self.navigationController?.viewControllers.count)! > 1 {
             UIApplication.shared.statusBarStyle = .default
             self.leftBarItem.setImage(#imageLiteral(resourceName: "back"), for: .normal)
@@ -188,7 +188,7 @@ class WkBaseViewController: UIViewController,LostNetVDelegate {
             navBar?.isTranslucent = false
         }
     }
-
+    
     // MARK: - 添加控件
     fileprivate func prepareUI() -> Void {
         
@@ -231,41 +231,45 @@ class WkBaseViewController: UIViewController,LostNetVDelegate {
     
     // MARK: - loadNetFunc
     func loadNetFunc() -> Void {
+        
         if self.getURLStr.characters.count == 0 {
-            
-            var stringUrl = STOTRURL
+            var stringUrl = self.getURLStr
             
             if STOTRURL.contains(COMMON_PREFIX) {
                 if STOTRURL.contains("?") {
-                    stringUrl = STOTRURL + ("&&token=") + (AccountModel.shared()?.Token)! + "&uid=" + (AccountModel.shared()?.Id.stringValue)!
+                    stringUrl = STOTRURL + ("&token=") + (AccountModel.shared()?.Token)! + "&uid=" + (AccountModel.shared()?.Id.stringValue)!
                 } else {
                     stringUrl = STOTRURL + ("?&token=") + (AccountModel.shared()?.Token)! + "&uid=" + (AccountModel.shared()?.Id.stringValue)!
                 }
                 
-                self.webView.load(URLRequest.init(url: URL.init(string: STOTRURL)!))
+                self.webView.load(URLRequest.init(url: URL.init(string: stringUrl)!))
                 
             } else {
                 CCog(message: "")
                 lostNetV.isHidden = false
             }
-            
         } else {
-            
-            if self.getURLStr.contains(COMMON_PREFIX) {
-                if self.getURLStr.contains("?") {
-                    self.getURLStr = self.getURLStr + ("&&token=") + (AccountModel.shared()?.Token)! + "&uid=" + (AccountModel.shared()?.Id.stringValue)!
-                } else {
-                    self.getURLStr = self.getURLStr + ("?&token=") + (AccountModel.shared()?.Token)! + "&uid=" + (AccountModel.shared()?.Id.stringValue)!
-                }
-                
-                self.webView.load(URLRequest.init(url: URL.init(string: self.getURLStr)!))
+            if isLoad {
+                self.webView.reload()
             } else {
-                CCog(message: "")
-                lostNetV.isHidden = false
+                var stringUrl = STOTRURL
+                
+                if STOTRURL.contains(COMMON_PREFIX) {
+                    if STOTRURL.contains("?") {
+                        stringUrl = STOTRURL + ("&token=") + (AccountModel.shared()?.Token)! + "&uid=" + (AccountModel.shared()?.Id.stringValue)!
+                    } else {
+                        stringUrl = STOTRURL + ("?&token=") + (AccountModel.shared()?.Token)! + "&uid=" + (AccountModel.shared()?.Id.stringValue)!
+                    }
+                    
+                    self.webView.load(URLRequest.init(url: URL.init(string: stringUrl)!))
+                    
+                } else {
+                    CCog(message: "")
+                    lostNetV.isHidden = false
+                }
             }
         }
     }
-
 }
 
 // MARK:- 观察进度
@@ -291,15 +295,15 @@ extension WkBaseViewController : WKUIDelegate {
 // MARK: - WKNavigationDelegate
 extension WkBaseViewController : WKNavigationDelegate {
     
-
+    
     
     func webView(_ webView: WKWebView, didFailProvisionalNavigation navigation: WKNavigation!, withError error: Error) {
-//        toast(toast: error.localizedDescription)
-//
-//        view.bringSubview(toFront: lostNetV)
-//        lostNetV.isHidden = false
+        //        toast(toast: error.localizedDescription)
+        //
+        //        view.bringSubview(toFront: lostNetV)
+        //        lostNetV.isHidden = false
         
-     
+        
     }
     
     
@@ -357,7 +361,22 @@ extension WkBaseViewController : WKScriptMessageHandler {
         
         if msg == "login" {
             CCog(message: "返回登录")
-            UIApplication.shared.keyWindow?.rootViewController = LoginViewController()
+            DispatchQueue.main.async {
+                let alertConte = UIAlertController.init(title: "友情提示", message: "该用户未登录,是否登录？", preferredStyle: UIAlertControllerStyle.alert)
+                
+                let okAction = UIAlertAction.init(title: "好的", style: .default, handler: { (alert) in
+                    var nav = LoginNav()
+                    nav = LoginNav.init(rootViewController: LoginViewController())
+                    
+                    UIApplication.shared.keyWindow?.rootViewController = nav
+                })
+                
+                let cancelAction = UIAlertAction.init(title: "取消", style: .cancel, handler: nil)
+                
+                alertConte.addAction(okAction)
+                alertConte.addAction(cancelAction)
+                self.present(alertConte, animated: true, completion: nil)
+            }
         }
         
     }
@@ -389,9 +408,17 @@ extension WkBaseViewController : headerViewelegate {
         let d : headerView = self.webView.viewWithTag(888) as! headerView
         d.endRefresh()
         
-        loadNetFunc()
+        NetCheck.shared.returnNetStatus { (result) in
+            if result {
+                self.webView.reload()
+                self.loadNetFunc()
+            } else {
+                d.endRefresh()
+                toast(toast: "网络不给力，请检查后重试")
+            }
+        }
         
-        self.webView.reload()
+        
     }
 }
 
@@ -444,7 +471,7 @@ class LostNetV: UIView {
     
     override init(frame: CGRect) {
         super.init(frame: frame)
-
+        
         addSubview(imgView)
         addSubview(titleLabel)
         addSubview(descLabel)

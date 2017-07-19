@@ -542,14 +542,14 @@ class AccountModel: NSObject,NSCoding {
                         return
                     }
                     
-                    guard let statusMsg = resultData["Status"] as? String else {
-                        
-                        return
-                    }
-                    
-                    if statusMsg == "999" {
-                        AccountModel.shared()?.loginSEL()
-                    }
+//                    guard let statusMsg = resultData["Status"] as? String else {
+//                        
+//                        return
+//                    }
+//                    
+//                    if statusMsg == "999" {
+//                        AccountModel.shared()?.loginSEL()
+//                    }
 
                     
                     guard let account = (resultData["Data"] as! NSArray)[0] as? [String : Any] else {
@@ -793,14 +793,14 @@ class AccountModel: NSObject,NSCoding {
                     return
                 }
                 
-                guard let statusMsg = resultData["Status"] as? String else {
-                    
-                    return
-                }
-                
-                if statusMsg == "999" {
-                    AccountModel.shared()?.loginSEL()
-                }
+//                guard let statusMsg = resultData["Status"] as? String else {
+//                    
+//                    return
+//                }
+//                
+//                if statusMsg == "999" {
+//                    AccountModel.shared()?.loginSEL()
+//                }
 
                 
                 /// 抽取提示信息

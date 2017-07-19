@@ -76,6 +76,7 @@ class JFNavigationController: UINavigationController, UIGestureRecognizerDelegat
      */
     @objc fileprivate func back() {
         popViewController(animated: true)
+        CCog(message: type(of: self))
     }
     
 }

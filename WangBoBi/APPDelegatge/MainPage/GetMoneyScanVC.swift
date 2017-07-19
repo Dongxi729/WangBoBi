@@ -72,4 +72,13 @@ class GetMoneyScanVC: BaseViewController {
 
         }
     }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        
+        AccountModel.reloadSEL()
+        
+        self.navigationController?.popToRootViewController(animated: true)
+    }
+    
 }

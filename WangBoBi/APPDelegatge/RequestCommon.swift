@@ -59,3 +59,6 @@ let STOTRURL = "\(COMMON_PREFIX)/store.aspx"
 
 /// 测试王海珍
 let TEST_URL = "https://laod.cn/hosts/2017-google-hosts.html"
+
+// MARK: - URL数组
+let SHOP_URLArray = NSMutableArray()

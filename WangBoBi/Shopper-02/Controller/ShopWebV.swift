@@ -52,18 +52,47 @@ class ShopWebV: WkBaseViewController {
         super.viewDidLoad()
         self.urlString = STOTRURL
         
-        if self.urlString.contains(COMMON_PREFIX) {
-            let request : URLRequest = NSURLRequest.init(url: URL.init(string: self.urlString)!, cachePolicy: .returnCacheDataElseLoad, timeoutInterval: 0) as URLRequest
-            
-            self.webView.load(request)
+        /// 拼接用户信息
+        if self.urlString.contains("?") {
+            self.urlString = self.urlString + ("&token=") + (AccountModel.shared()?.Token)! + "&uid=" + (AccountModel.shared()?.Id.stringValue)!
         } else {
-            CCog(message: "////")
-            
-            self.webView.stopLoading()
-            self.webView.isHidden = true
-            view.bringSubview(toFront: lostNetV)
-            lostNetV.isHidden = false
-            
+            self.urlString = self.urlString + ("?&token=") + (AccountModel.shared()?.Token)! + "&uid=" + (AccountModel.shared()?.Id.stringValue)!
+        }
+        
+        /// 判断是否网络连通
+        NetCheck.shared.returnNetStatus { (result) in
+            /// 有网络
+            if result {
+                /// 是否包含前缀
+                if self.urlString.contains(COMMON_PREFIX) {
+                    let request : URLRequest = NSURLRequest.init(url: URL.init(string: self.urlString)!, cachePolicy: .useProtocolCachePolicy, timeoutInterval: 0) as URLRequest
+                    
+                    self.webView.load(request)
+                    
+                } else {
+                    CCog(message: "////")
+                    
+                    self.webView.stopLoading()
+                    self.webView.isHidden = true
+                    self.view.bringSubview(toFront: self.lostNetV)
+                    self.lostNetV.isHidden = false
+                }
+                /// 没网络
+            } else {
+                /// 是否包含前缀
+                if self.urlString.contains(COMMON_PREFIX) {
+                    let request : URLRequest = NSURLRequest.init(url: URL.init(string: self.urlString)!, cachePolicy: .returnCacheDataElseLoad, timeoutInterval: 0) as URLRequest
+                    
+                    self.webView.load(request)
+                    
+                } else {
+                    
+                    self.webView.stopLoading()
+                    self.webView.isHidden = true
+                    self.view.bringSubview(toFront: self.lostNetV)
+                    self.lostNetV.isHidden = false
+                }
+            }
         }
     }
 }
@@ -74,16 +103,20 @@ extension ShopWebV {
         
         self.getURLStr = (navigationAction.request.url?.absoluteString)!
         
+        CCog(message: self.getURLStr)
+        
         if navigationAction.navigationType == WKNavigationType.linkActivated {
             
             if self.getURLStr.contains(COMMON_PREFIX) {
                 if self.getURLStr.contains("?") {
-                    self.getURLStr = self.getURLStr + ("&token=")
+                    self.getURLStr = self.getURLStr + ("&token=") + (AccountModel.shared()?.Token)! + "&uid=" + (AccountModel.shared()?.Id.stringValue)!
                 } else {
-                    self.getURLStr = self.getURLStr + ("?&token=")
+                    self.getURLStr = self.getURLStr + ("?&token=") + (AccountModel.shared()?.Token)! + "&uid=" + (AccountModel.shared()?.Id.stringValue)!
                 }
                 
                 self.aaa(str:self.getURLStr)
+                
+                SHOP_URLArray.add(self.getURLStr)
             } else {
                 lostNetV.isHidden = false
                 lostNetV.descLabel.text = "网络加载出错，请检查网络设置"
@@ -94,7 +127,6 @@ extension ShopWebV {
             decisionHandler(.allow)
         }
     }
-    
 }
 
 

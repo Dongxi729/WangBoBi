@@ -120,6 +120,17 @@
 		266B89071F04E1F70033BFA7 /* HeadReuse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 266B89061F04E1F70033BFA7 /* HeadReuse.swift */; };
 		266B89091F04E2200033BFA7 /* ReuseV.swift in Sources */ = {isa = PBXBuildFile; fileRef = 266B89081F04E2200033BFA7 /* ReuseV.swift */; };
 		266E97211EF3D5460057FD90 /* AccountAndSaveVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 266E97201EF3D5460057FD90 /* AccountAndSaveVC.swift */; };
+		267104A51F1F288F0094E2EE /* jcore-ios-1.1.5.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 267104A21F1F288F0094E2EE /* jcore-ios-1.1.5.a */; };
+		267104A61F1F288F0094E2EE /* jpush-ios-3.0.6.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 267104A31F1F288F0094E2EE /* jpush-ios-3.0.6.a */; };
+		267104A81F1F28A70094E2EE /* libresolv.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 267104A71F1F28A70094E2EE /* libresolv.tbd */; };
+		267104AA1F1F28AE0094E2EE /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 267104A91F1F28AE0094E2EE /* Security.framework */; };
+		267104AC1F1F28B60094E2EE /* UserNotifications.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 267104AB1F1F28B60094E2EE /* UserNotifications.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
+		267104AE1F1F28BE0094E2EE /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 267104AD1F1F28BE0094E2EE /* CoreGraphics.framework */; };
+		267104B01F1F28C60094E2EE /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 267104AF1F1F28C60094E2EE /* SystemConfiguration.framework */; };
+		267104B21F1F28CF0094E2EE /* CoreTelephony.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 267104B11F1F28CF0094E2EE /* CoreTelephony.framework */; };
+		267104B41F1F28DA0094E2EE /* CoreFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 267104B31F1F28DA0094E2EE /* CoreFoundation.framework */; };
+		267104B61F1F28E00094E2EE /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 267104B51F1F28E00094E2EE /* CFNetwork.framework */; };
+		267104B91F1F31CB0094E2EE /* CameraTool.swift in Sources */ = {isa = PBXBuildFile; fileRef = 267104B81F1F31CB0094E2EE /* CameraTool.swift */; };
 		268959181F050DFD0064C957 /* IndexLoginModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 268959171F050DFD0064C957 /* IndexLoginModel.swift */; };
 		269B5ECC1F077BD300AA573F /* footerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 269B5EC91F077BD300AA573F /* footerView.swift */; };
 		269B5ECD1F077BD300AA573F /* headerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 269B5ECA1F077BD300AA573F /* headerView.swift */; };
@@ -332,6 +343,19 @@
 		266B89061F04E1F70033BFA7 /* HeadReuse.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HeadReuse.swift; sourceTree = "<group>"; };
 		266B89081F04E2200033BFA7 /* ReuseV.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReuseV.swift; sourceTree = "<group>"; };
 		266E97201EF3D5460057FD90 /* AccountAndSaveVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AccountAndSaveVC.swift; path = "../../Mine-04/Controller/AccountAndSaveVC.swift"; sourceTree = "<group>"; };
+		267104A21F1F288F0094E2EE /* jcore-ios-1.1.5.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = "jcore-ios-1.1.5.a"; sourceTree = "<group>"; };
+		267104A31F1F288F0094E2EE /* jpush-ios-3.0.6.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = "jpush-ios-3.0.6.a"; sourceTree = "<group>"; };
+		267104A41F1F288F0094E2EE /* JPUSHService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JPUSHService.h; sourceTree = "<group>"; };
+		267104A71F1F28A70094E2EE /* libresolv.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libresolv.tbd; path = usr/lib/libresolv.tbd; sourceTree = SDKROOT; };
+		267104A91F1F28AE0094E2EE /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
+		267104AB1F1F28B60094E2EE /* UserNotifications.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UserNotifications.framework; path = System/Library/Frameworks/UserNotifications.framework; sourceTree = SDKROOT; };
+		267104AD1F1F28BE0094E2EE /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
+		267104AF1F1F28C60094E2EE /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
+		267104B11F1F28CF0094E2EE /* CoreTelephony.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreTelephony.framework; path = System/Library/Frameworks/CoreTelephony.framework; sourceTree = SDKROOT; };
+		267104B31F1F28DA0094E2EE /* CoreFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreFoundation.framework; path = System/Library/Frameworks/CoreFoundation.framework; sourceTree = SDKROOT; };
+		267104B51F1F28E00094E2EE /* CFNetwork.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CFNetwork.framework; path = System/Library/Frameworks/CFNetwork.framework; sourceTree = SDKROOT; };
+		267104B71F1F2C2D0094E2EE /* WangBoBi.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = WangBoBi.entitlements; sourceTree = "<group>"; };
+		267104B81F1F31CB0094E2EE /* CameraTool.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CameraTool.swift; sourceTree = "<group>"; };
 		268959171F050DFD0064C957 /* IndexLoginModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IndexLoginModel.swift; sourceTree = "<group>"; };
 		269B5EC91F077BD300AA573F /* footerView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = footerView.swift; sourceTree = "<group>"; };
 		269B5ECA1F077BD300AA573F /* headerView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = headerView.swift; sourceTree = "<group>"; };
@@ -372,7 +396,17 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				267104B61F1F28E00094E2EE /* CFNetwork.framework in Frameworks */,
+				267104B41F1F28DA0094E2EE /* CoreFoundation.framework in Frameworks */,
+				267104B21F1F28CF0094E2EE /* CoreTelephony.framework in Frameworks */,
+				267104B01F1F28C60094E2EE /* SystemConfiguration.framework in Frameworks */,
+				267104AE1F1F28BE0094E2EE /* CoreGraphics.framework in Frameworks */,
+				267104AC1F1F28B60094E2EE /* UserNotifications.framework in Frameworks */,
+				267104AA1F1F28AE0094E2EE /* Security.framework in Frameworks */,
+				267104A81F1F28A70094E2EE /* libresolv.tbd in Frameworks */,
+				267104A61F1F288F0094E2EE /* jpush-ios-3.0.6.a in Frameworks */,
 				264961131EF0CA4D00A559D6 /* libz.tbd in Frameworks */,
+				267104A51F1F288F0094E2EE /* jcore-ios-1.1.5.a in Frameworks */,
 				2649610F1EF0CA0900A559D6 /* libsqlite3.tbd in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -696,6 +730,7 @@
 				2607D14D1EF212450015625E /* NetCheck.swift */,
 				26F4847E1EEFD55400177670 /* ScanCodeController.swift */,
 				26A0A4AA1EF1064C00035D0D /* NetWorkTool.swift */,
+				267104B81F1F31CB0094E2EE /* CameraTool.swift */,
 			);
 			path = tool;
 			sourceTree = "<group>";
@@ -1021,6 +1056,14 @@
 		2649610D1EF0CA0900A559D6 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				267104B51F1F28E00094E2EE /* CFNetwork.framework */,
+				267104B31F1F28DA0094E2EE /* CoreFoundation.framework */,
+				267104B11F1F28CF0094E2EE /* CoreTelephony.framework */,
+				267104AF1F1F28C60094E2EE /* SystemConfiguration.framework */,
+				267104AD1F1F28BE0094E2EE /* CoreGraphics.framework */,
+				267104AB1F1F28B60094E2EE /* UserNotifications.framework */,
+				267104A91F1F28AE0094E2EE /* Security.framework */,
+				267104A71F1F28A70094E2EE /* libresolv.tbd */,
 				264961121EF0CA4D00A559D6 /* libz.tbd */,
 				264961101EF0CA3B00A559D6 /* WebP.framework */,
 				2649610E1EF0CA0900A559D6 /* libsqlite3.tbd */,
@@ -1146,6 +1189,16 @@
 			name = "PushMoney 03";
 			sourceTree = "<group>";
 		};
+		267104A11F1F288F0094E2EE /* Lib */ = {
+			isa = PBXGroup;
+			children = (
+				267104A21F1F288F0094E2EE /* jcore-ios-1.1.5.a */,
+				267104A31F1F288F0094E2EE /* jpush-ios-3.0.6.a */,
+				267104A41F1F288F0094E2EE /* JPUSHService.h */,
+			);
+			path = Lib;
+			sourceTree = "<group>";
+		};
 		269B5ECF1F077C0C00AA573F /* refresh */ = {
 			isa = PBXGroup;
 			children = (
@@ -1220,6 +1273,8 @@
 		26F4847B1EEFD55400177670 /* WangBoBi */ = {
 			isa = PBXGroup;
 			children = (
+				267104B71F1F2C2D0094E2EE /* WangBoBi.entitlements */,
+				267104A11F1F288F0094E2EE /* Lib */,
 				264960821EF0C08D00A559D6 /* MainViewController */,
 				264960791EF0BFC000A559D6 /* ThirdSDK */,
 				264960681EF0BF2500A559D6 /* Applicaiotn */,
@@ -1267,6 +1322,14 @@
 						DevelopmentTeam = 64S597X3R9;
 						LastSwiftMigration = 0830;
 						ProvisioningStyle = Automatic;
+						SystemCapabilities = {
+							com.apple.BackgroundModes = {
+								enabled = 1;
+							};
+							com.apple.Push = {
+								enabled = 1;
+							};
+						};
 					};
 				};
 			};
@@ -1440,6 +1503,7 @@
 				264960C31EF0C28F00A559D6 /* POPAnimator.mm in Sources */,
 				264960FD1EF0C9EC00A559D6 /* YYKVStorage.m in Sources */,
 				26ED24481EF3E18C00642804 /* TrueNameCertifiedVC.swift in Sources */,
+				267104B91F1F31CB0094E2EE /* CameraTool.swift in Sources */,
 				264960BD1EF0C28F00A559D6 /* POPAnimatableProperty.mm in Sources */,
 				2649611E1EF0CF9300A559D6 /* Color+Extension.swift in Sources */,
 				26EF14A31EF900F8005663F1 /* ShowFailV.swift in Sources */,
@@ -1570,6 +1634,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_ENTITLEMENTS = WangBoBi/WangBoBi.entitlements;
 				DEVELOPMENT_TEAM = 64S597X3R9;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1579,6 +1644,10 @@
 				INFOPLIST_FILE = WangBoBi/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/WangBoBi/Lib",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.wbid.netbo;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "WangBoBi/APPDelegatge/WangBoBi-Bridging-Header.h";
@@ -1593,6 +1662,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_ENTITLEMENTS = WangBoBi/WangBoBi.entitlements;
 				DEVELOPMENT_TEAM = 64S597X3R9;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1602,6 +1672,10 @@
 				INFOPLIST_FILE = WangBoBi/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/WangBoBi/Lib",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.wbid.netbo;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "WangBoBi/APPDelegatge/WangBoBi-Bridging-Header.h";

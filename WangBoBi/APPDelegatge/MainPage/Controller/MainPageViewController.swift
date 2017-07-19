@@ -75,6 +75,8 @@ class MainPageViewController: BaseViewController {
         }) { (xxx) in
             self.loginModel = xxx
             
+            self.loginModel = 66
+            
             self.collV.reloadData()
             CCog(message: self.loginModel)
         }
@@ -82,8 +84,15 @@ class MainPageViewController: BaseViewController {
         
         /// 添加刷新控件
         self.collV.addHeaderViewfun()
+        self.collV.addFooterViewfun()
+        
+        ///  头部视图
         let d : headerView = collV.viewWithTag(888) as! headerView
         d.delegate = self;
+        
+        /// 尾部视图
+        let footerView : footerView = collV.viewWithTag(999) as! footerView
+        footerView.delegate = self;
         
         self.title = "钱包"
         
@@ -99,7 +108,6 @@ class MainPageViewController: BaseViewController {
         // 账单
         self.navigationItem.rightBarButtonItem = detailList
         self.navigationItem.rightBarButtonItem?.tintColor = UIColor.white
-    
     }
 
     
@@ -135,6 +143,7 @@ extension MainPageViewController : UICollectionViewDataSource,UICollectionViewDe
             cell.dataSource2 = xxx
             cell.topView.setLabelNo(str: "TOP" + String(indexPath.row))
             
+            
             return cell
         } else {
             let ccc = collectionView.dequeueReusableCell(withReuseIdentifier: "headCell", for: indexPath) as! MainHeadCell
@@ -146,7 +155,7 @@ extension MainPageViewController : UICollectionViewDataSource,UICollectionViewDe
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
-        return UIEdgeInsets.init(top:0, left: COMMON_MARGIN, bottom: 0, right:COMMON_MARGIN)
+        return UIEdgeInsets.init(top:0, left: COMMON_MARGIN, bottom: COMMON_MARGIN, right:COMMON_MARGIN)
     }
     
     /// 返回几行
@@ -252,7 +261,7 @@ extension MainPageViewController : UICollectionViewDataSource,UICollectionViewDe
 }
 
 // MARK: - 刷新控件
-extension MainPageViewController : headerViewelegate {
+extension MainPageViewController : headerViewelegate,footerViewelegate {
     func headerViewEndfun(_ _endRefresh: () -> Void) {
     
         UIApplication.shared.statusBarStyle = .lightContent
@@ -288,6 +297,10 @@ extension MainPageViewController : headerViewelegate {
                 return
             }
         }
+    }
+    
+    func footerViewEndfun(_ _endRefresh: () -> Void) {
+        CCog(message: "尾部刷新")
     }
 }
 

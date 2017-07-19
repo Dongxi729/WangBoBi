@@ -118,35 +118,57 @@ class ScanCodeController: BaseViewController {
     /// 开始扫描
     fileprivate func scaning() {
         
-        //获取摄像设备
-        let device = AVCaptureDevice.defaultDevice(withMediaType: AVMediaTypeVideo)
-        do {
-            //创建输入流
-            let input = try AVCaptureDeviceInput.init(device: device)
-            //创建输出流
-            let output = AVCaptureMetadataOutput()
-            output.rectOfInterest = CGRect(x: 0.1, y: 0, width: 0.9, height: 1)
-            //设置代理,在主线程刷新
-            output.setMetadataObjectsDelegate(self, queue: DispatchQueue.main)
-            //初始化链接对象 / 高质量采集率
-            session.canSetSessionPreset(AVCaptureSessionPresetHigh)
-            session.addInput(input)
-            session.addOutput(output)
+        CCog(message: CameraTool.cameraPermissions())
+        
+        /// 判断摄像头是否有权限
+        if CameraTool.cameraPermissions() {
+            //获取摄像设备
+            let device = AVCaptureDevice.defaultDevice(withMediaType: AVMediaTypeVideo)
+            do {
+                //创建输入流
+                let input = try AVCaptureDeviceInput.init(device: device)
+                //创建输出流
+                let output = AVCaptureMetadataOutput()
+                output.rectOfInterest = CGRect(x: 0.1, y: 0, width: 0.9, height: 1)
+                //设置代理,在主线程刷新
+                output.setMetadataObjectsDelegate(self, queue: DispatchQueue.main)
+                //初始化链接对象 / 高质量采集率
+                session.canSetSessionPreset(AVCaptureSessionPresetHigh)
+                session.addInput(input)
+                session.addOutput(output)
+                
+                //在上面三行之后写下面代码,不然报错如下:Terminating app due to uncaught exception 'NSInvalidArgumentException', reason: '*** -[AVCaptureMetadataOutput setMetadataObjectTypes:] Unsupported type found - use -availableMetadataObjectTypes'
+                //http://stackoverflow.com/questions/31063846/avcapturemetadataoutput-setmetadataobjecttypes-unsupported-type-found
+                //设置扫码支持的编码格式
+                output.metadataObjectTypes = [AVMetadataObjectTypeQRCode,AVMetadataObjectTypeEAN13Code,AVMetadataObjectTypeEAN8Code, AVMetadataObjectTypeCode128Code]
+                
+                let layer = AVCaptureVideoPreviewLayer(session: session)
+                layer?.videoGravity = AVLayerVideoGravityResizeAspectFill
+                layer?.frame = view.layer.bounds
+                view.layer.insertSublayer(layer!, at: 0)
+                //开始捕捉
+                session.startRunning()
+                
+            } catch let error as NSError  {
+//                print("errorInfo\(error.domain)")
+                CCog(message: error.domain)
+            }
+        } else {
+            //弹出提示框
+            let sheet = UIAlertController(title: nil, message: "请在设置中打开摄像头权限", preferredStyle: .alert)
             
-            //在上面三行之后写下面代码,不然报错如下:Terminating app due to uncaught exception 'NSInvalidArgumentException', reason: '*** -[AVCaptureMetadataOutput setMetadataObjectTypes:] Unsupported type found - use -availableMetadataObjectTypes'
-            //http://stackoverflow.com/questions/31063846/avcapturemetadataoutput-setmetadataobjecttypes-unsupported-type-found
-            //设置扫码支持的编码格式
-            output.metadataObjectTypes = [AVMetadataObjectTypeQRCode,AVMetadataObjectTypeEAN13Code,AVMetadataObjectTypeEAN8Code, AVMetadataObjectTypeCode128Code]
-            
-            let layer = AVCaptureVideoPreviewLayer(session: session)
-            layer?.videoGravity = AVLayerVideoGravityResizeAspectFill
-            layer?.frame = view.layer.bounds
-            view.layer.insertSublayer(layer!, at: 0)
-            //开始捕捉
-            session.startRunning()
-            
-        } catch let error as NSError  {
-            print("errorInfo\(error.domain)")
+            let tempAction = UIAlertAction(title: "确定", style: .cancel) { (action) in
+                
+                let url = NSURL.init(string: UIApplicationOpenSettingsURLString)
+                
+                if UIApplication.shared.openURL(url! as URL) {
+                    UIApplication.shared.openURL(url! as URL)
+                }
+            }
+            sheet.addAction(tempAction)
+            DispatchQueue.main.async {
+                UIApplication.shared.keyWindow?.rootViewController?.present(sheet, animated: true, completion: nil)
+            }
         }
     }
     
