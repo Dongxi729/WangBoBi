@@ -43,7 +43,7 @@ extension MainTabBarViewController {
         
         self.setupChildVC(shopVc, title: "商户", imageName: "icon2", selectImageName: "icon2_on")
         
-        self.setupChildVC(friendVc, title: "朋友", imageName: "icon3", selectImageName: "icon3_on")
+        self.setupChildVC(friendVc, title: "朋友(未开通)", imageName: "icon3", selectImageName: "icon3_on")
         
         self.setupChildVC(meVC, title: "我的", imageName: "icon4", selectImageName: "icon4_on")
         

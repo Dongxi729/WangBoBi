@@ -379,6 +379,8 @@ class AccountModel: NSObject,NSCoding {
     func loginSEL() {
         DispatchQueue.main.async {
             
+            AccountModel.logout()
+            
             let alertConte = UIAlertController.init(title: "友情提示", message: "您的账号在异地登录，请重新登录或者修改密码！", preferredStyle: UIAlertControllerStyle.alert)
             
             let okAction = UIAlertAction.init(title: "好的", style: .default, handler: { (alert) in
@@ -1406,7 +1408,7 @@ class AccountModel: NSObject,NSCoding {
             
             if statusMsg == "999" {
                 AccountModel.shared()?.loginSEL()
-                AccountModel.logout()
+                
             }
 
             
