@@ -40,6 +40,7 @@ class WkBaseViewController: UIViewController,LostNetVDelegate {
     /// 是否加载完成
     var isLoad = false
     
+    /// 显示
     lazy var showDowV: UIView = {
         let d : UIView = UIView.init(frame: CGRect.init(x: 0, y: 0, width: SCREEN_WIDTH, height: 20))
         d.backgroundColor = UIColor.colorWithHexString("2796DC")
@@ -79,12 +80,17 @@ class WkBaseViewController: UIViewController,LostNetVDelegate {
         // 登录
         userContentController.add(LeakAvoider.init(delegate: self as WKScriptMessageHandler), name: "login")
         
+        /// 商户交易发送密码 sendPass
+        userContentController.add(LeakAvoider.init(delegate: self as WKScriptMessageHandler), name: "sendPass")
+
+        
+        
         if self.navigationController?.viewControllers != nil {
             ///由于设置了edgesForExtendedLayout,防止了页面全部控件向上偏移，所以在子页面数大于2的时候，矫正
             if (self.navigationController?.viewControllers.count)! > 1 {
                 
                 UIView.animate(withDuration: 0.5, animations: {
-                    let rect = CGRect(x: 0, y: 0, width: SCREEN_WIDTH, height: SCREEN_HEIGHT)
+                    let rect = CGRect(x: 0, y: 0, width: SCREEN_WIDTH, height: SCREEN_HEIGHT - 64)
                     wkV = WKWebView.init(frame: rect, configuration: configuration)
                 })
             } else {
@@ -146,6 +152,13 @@ class WkBaseViewController: UIViewController,LostNetVDelegate {
         return d
     }()
     
+    /// 网页出错视图
+    lazy var netWrongV: NetWrong = {
+        let d : NetWrong = NetWrong.init(frame: self.view.bounds)
+        d.delegate = self
+        return d
+    }()
+    
     @objc fileprivate func back() -> Void {
         self.navigationController?.popViewController(animated: true)
     }
@@ -163,9 +176,18 @@ class WkBaseViewController: UIViewController,LostNetVDelegate {
         leftBarItem.addTarget(self, action:#selector(back), for: .touchUpInside)
         leftBarItem.setBackgroundImage(UIImage.init(named: "rean"), for: .normal)
         
+        /// 显示替换颜色过渡图层
         view.addSubview(showDowV)
+        
+        /// 显示网络丢失图层
         view.addSubview(lostNetV)
+        
+        /// 显示网络出错（加载域名不对图层）
+        view.addSubview(netWrongV)
+        
         lostNetV.isHidden = true
+        
+        netWrongV.isHidden = true
         showDowV.alpha = 0
     }
     
@@ -367,6 +389,15 @@ extension WkBaseViewController : WKScriptMessageHandler {
             }
         }
         
+        /// 获取订单号
+        if msg == "sendPass" {
+            let dic = message.body as? NSDictionary
+            print(dic?["content"] as Any)
+            
+            if let shopStr = dic?["content"] as? String {
+                CCog(message: shopStr)
+            }
+        }
     }
 }
 
@@ -421,7 +452,7 @@ class LostNetV: UIView {
     
     
     fileprivate lazy var imgView: UIImageView = {
-        let d : UIImageView = UIImageView.init(frame: CGRect.init(x: self.center.x - SCREEN_WIDTH * 0.1 * SCREEN_SCALE, y: SCREEN_HEIGHT * 0.3, width:SCREEN_WIDTH * 0.2 * SCREEN_SCALE, height: SCREEN_WIDTH * 0.2 * (256 / 291) * SCREEN_SCALE))
+        let d : UIImageView = UIImageView.init(frame: CGRect.init(x: self.center.x - SCREEN_WIDTH * 0.2 * SCREEN_SCALE, y: SCREEN_HEIGHT * 0.3, width:SCREEN_WIDTH * 0.4 * SCREEN_SCALE, height: SCREEN_WIDTH * 0.4 * (256 / 291) * SCREEN_SCALE))
         d.layer.borderWidth = 1
         d.image = #imageLiteral(resourceName: "xxx")
         
@@ -459,6 +490,56 @@ class LostNetV: UIView {
         addSubview(descLabel)
         
         self.isUserInteractionEnabled = true
+        
+        
+        /// 单机事件
+        let tapGes = UITapGestureRecognizer.init(target: self, action: #selector(tapSEL))
+        self.addGestureRecognizer(tapGes)
+        
+    }
+    
+    required init?(coder aDecoder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+}
+
+
+// MARK: - 断网视图
+class NetWrong: UIView {
+    
+    var delegate : LostNetVDelegate?
+    
+    
+    fileprivate lazy var imgView: UIImageView = {
+        let d : UIImageView = UIImageView.init(frame: CGRect.init(x: self.center.x - SCREEN_WIDTH * 0.2 * SCREEN_SCALE, y: SCREEN_HEIGHT * 0.3, width:SCREEN_WIDTH * 0.4 * SCREEN_SCALE, height: SCREEN_WIDTH * 0.4 * (256 / 291) * SCREEN_SCALE))
+        d.image = #imageLiteral(resourceName: "error_404")
+        
+        return d
+    }()
+    
+    /// 标题
+    lazy var titleLabel: UILabel = {
+        let d : UILabel = UILabel.init(frame: CGRect.init(x: 0, y: self.imgView.BottomY + COMMON_MARGIN * SCREEN_SCALE, width: SCREEN_WIDTH, height: 30 * SCREEN_SCALE))
+        d.font = UIFont.systemFont(ofSize: 25 * SCREEN_SCALE)
+        d.text = "网页出错了~"
+        d.textColor = UIColor.darkGray
+        d.textAlignment = .center
+        return d
+    }()
+    
+
+    @objc fileprivate func tapSEL() {
+        self.delegate?.tapFUN()
+    }
+    
+    override init(frame: CGRect) {
+        super.init(frame: frame)
+        
+        addSubview(imgView)
+        addSubview(titleLabel)
+        
+        self.isUserInteractionEnabled = true
+        self.backgroundColor = UIColor.white
         
         
         /// 单机事件

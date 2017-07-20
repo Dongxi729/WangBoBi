@@ -50,7 +50,14 @@ class ShopWebV: WkBaseViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.urlString = STOTRURL
+        
+        
+        
+        if SHOP_URLArray.count == 0 {
+            self.urlString = STOTRURL
+        } else {
+            self.urlString = SHOP_URLArray.lastObject as! String
+        }
         
         /// 拼接用户信息
         if self.urlString.contains("?") {
@@ -58,11 +65,14 @@ class ShopWebV: WkBaseViewController {
         } else {
             self.urlString = self.urlString + ("?&token=") + (AccountModel.shared()?.Token)! + "&uid=" + (AccountModel.shared()?.Id.stringValue)!
         }
-        
+    
         /// 判断是否网络连通
         NetCheck.shared.returnNetStatus { (result) in
             /// 有网络
             if result {
+                
+                CCog(message: self.urlString)
+                
                 /// 是否包含前缀
                 if self.urlString.contains(COMMON_PREFIX) {
                     let request : URLRequest = NSURLRequest.init(url: URL.init(string: self.urlString)!, cachePolicy: .useProtocolCachePolicy, timeoutInterval: 0) as URLRequest
@@ -79,6 +89,8 @@ class ShopWebV: WkBaseViewController {
                 }
                 /// 没网络
             } else {
+                
+                CCog(message: self.urlString)
                 /// 是否包含前缀
                 if self.urlString.contains(COMMON_PREFIX) {
                     let request : URLRequest = NSURLRequest.init(url: URL.init(string: self.urlString)!, cachePolicy: .returnCacheDataElseLoad, timeoutInterval: 0) as URLRequest
@@ -107,8 +119,14 @@ extension ShopWebV {
         
         if navigationAction.navigationType == WKNavigationType.linkActivated {
             
+            /// 显示网络加载出错（域名不对图标）
+            if self.getURLStr.contains(".html") {
+                netWrongV.isHidden = false
+                self.webView.isHidden = true
+            }
+            
             if self.getURLStr.contains(COMMON_PREFIX) {
-                if self.getURLStr.contains("?") {
+                if self.getURLStr.contains("?") && !self.getURLStr.contains(".html") && !self.getURLStr.contains("token") {
                     self.getURLStr = self.getURLStr + ("&token=") + (AccountModel.shared()?.Token)! + "&uid=" + (AccountModel.shared()?.Id.stringValue)!
                 } else {
                     self.getURLStr = self.getURLStr + ("?&token=") + (AccountModel.shared()?.Token)! + "&uid=" + (AccountModel.shared()?.Id.stringValue)!
@@ -139,6 +157,8 @@ extension ShopWebV {
                 
         let vvv = ShopWebReplaceV()
         vvv.getURLStr = str
+        
+        
         
         self.navigationController?.pushViewController(vvv, animated: true)
         
