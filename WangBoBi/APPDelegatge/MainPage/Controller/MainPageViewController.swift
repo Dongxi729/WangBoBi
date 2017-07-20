@@ -67,32 +67,40 @@ class MainPageViewController: BaseViewController {
         super.viewDidLoad()
         
         /// 模型取值
-        AccountModel.indexInfo(finished: { (commenModel) in
+//        AccountModel.indexInfo(finished: { (commenModel) in
+//            self.topModel = commenModel
+//            
+//        }, finishedTop: { (merTopModel) in
+//            self.mertopModel = merTopModel
+//        }) { (xxx) in
+//            self.loginModel = xxx
+//            
+//            self.loginModel = 66
+//            
+//            self.collV.reloadData()
+//            CCog(message: self.loginModel)
+//        }
+        
+        AccountModel.afterLogin(finished: { (commenModel) in
             self.topModel = commenModel
-            
         }, finishedTop: { (merTopModel) in
             self.mertopModel = merTopModel
-        }) { (xxx) in
-            self.loginModel = xxx
-            
-            self.loginModel = 66
-            
+        }) { (sectionCount) in
+            self.loginModel = sectionCount
             self.collV.reloadData()
-            CCog(message: self.loginModel)
         }
-        
         
         /// 添加刷新控件
         self.collV.addHeaderViewfun()
-        self.collV.addFooterViewfun()
+//        self.collV.addFooterViewfun()
         
         ///  头部视图
         let d : headerView = collV.viewWithTag(888) as! headerView
         d.delegate = self;
         
         /// 尾部视图
-        let footerView : footerView = collV.viewWithTag(999) as! footerView
-        footerView.delegate = self;
+//        let footerView : footerView = collV.viewWithTag(999) as! footerView
+//        footerView.delegate = self;
         
         self.title = "钱包"
         
@@ -297,8 +305,11 @@ extension MainPageViewController : headerViewelegate,footerViewelegate {
                 return
             }
         }
+        
+        AccountModel.reloadSEL()
     }
     
+    /// 尾部刷新
     func footerViewEndfun(_ _endRefresh: () -> Void) {
         CCog(message: "尾部刷新")
     }

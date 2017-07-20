@@ -232,42 +232,33 @@ class WkBaseViewController: UIViewController,LostNetVDelegate {
     // MARK: - loadNetFunc
     func loadNetFunc() -> Void {
         
-        if self.getURLStr.characters.count == 0 {
-            var stringUrl = self.getURLStr
-            
-            if STOTRURL.contains(COMMON_PREFIX) {
-                if STOTRURL.contains("?") {
-                    stringUrl = STOTRURL + ("&token=") + (AccountModel.shared()?.Token)! + "&uid=" + (AccountModel.shared()?.Id.stringValue)!
-                } else {
-                    stringUrl = STOTRURL + ("?&token=") + (AccountModel.shared()?.Token)! + "&uid=" + (AccountModel.shared()?.Id.stringValue)!
-                }
-                
-                self.webView.load(URLRequest.init(url: URL.init(string: stringUrl)!))
-                
-            } else {
-                CCog(message: "")
-                lostNetV.isHidden = false
-            }
+        CCog(message: isLoad)
+        
+        if isLoad {
+            self.webView.reload()
         } else {
-            if isLoad {
-                self.webView.reload()
-            } else {
-                var stringUrl = STOTRURL
-                
+            
+            if SHOP_URLArray.count == 0 {
                 if STOTRURL.contains(COMMON_PREFIX) {
+                    
                     if STOTRURL.contains("?") {
-                        stringUrl = STOTRURL + ("&token=") + (AccountModel.shared()?.Token)! + "&uid=" + (AccountModel.shared()?.Id.stringValue)!
+                        
+                        getURLStr = STOTRURL + ("&token=") + (AccountModel.shared()?.Token)! + "&uid=" + (AccountModel.shared()?.Id.stringValue)!
                     } else {
-                        stringUrl = STOTRURL + ("?&token=") + (AccountModel.shared()?.Token)! + "&uid=" + (AccountModel.shared()?.Id.stringValue)!
+                        getURLStr = STOTRURL + ("?&token=") + (AccountModel.shared()?.Token)! + "&uid=" + (AccountModel.shared()?.Id.stringValue)!
                     }
                     
-                    self.webView.load(URLRequest.init(url: URL.init(string: stringUrl)!))
+                    self.webView.load(URLRequest.init(url: URL.init(string: getURLStr)!))
                     
                 } else {
                     CCog(message: "")
                     lostNetV.isHidden = false
                 }
+            } else {
+                self.webView.load(URLRequest.init(url: URL.init(string: SHOP_URLArray.lastObject as! String)!))
             }
+            
+            
         }
     }
 }
@@ -295,18 +286,15 @@ extension WkBaseViewController : WKUIDelegate {
 // MARK: - WKNavigationDelegate
 extension WkBaseViewController : WKNavigationDelegate {
     
-    
-    
     func webView(_ webView: WKWebView, didFailProvisionalNavigation navigation: WKNavigation!, withError error: Error) {
-        //        toast(toast: error.localizedDescription)
-        //
-        //        view.bringSubview(toFront: lostNetV)
-        //        lostNetV.isHidden = false
-        
-        
+
+        CCog(message: error.localizedDescription)
+        if error.localizedDescription == "The Internet connection appears to be offline." && isLoad == false {
+            view.bringSubview(toFront: lostNetV)
+            lostNetV.isHidden = false
+        }
     }
-    
-    
+
     ///开始加载
     func webView(_ webView: WKWebView, didStartProvisionalNavigation navigation: WKNavigation!) {
         
@@ -417,8 +405,6 @@ extension WkBaseViewController : headerViewelegate {
                 toast(toast: "网络不给力，请检查后重试")
             }
         }
-        
-        
     }
 }
 
@@ -438,11 +424,7 @@ class LostNetV: UIView {
         let d : UIImageView = UIImageView.init(frame: CGRect.init(x: self.center.x - SCREEN_WIDTH * 0.1 * SCREEN_SCALE, y: SCREEN_HEIGHT * 0.3, width:SCREEN_WIDTH * 0.2 * SCREEN_SCALE, height: SCREEN_WIDTH * 0.2 * (256 / 291) * SCREEN_SCALE))
         d.layer.borderWidth = 1
         d.image = #imageLiteral(resourceName: "xxx")
-        d.isUserInteractionEnabled = true
         
-        /// 单机事件
-        let tapGes = UITapGestureRecognizer.init(target: self, action: #selector(tapSEL))
-        d.addGestureRecognizer(tapGes)
         return d
     }()
     
@@ -475,6 +457,14 @@ class LostNetV: UIView {
         addSubview(imgView)
         addSubview(titleLabel)
         addSubview(descLabel)
+        
+        self.isUserInteractionEnabled = true
+        
+        
+        /// 单机事件
+        let tapGes = UITapGestureRecognizer.init(target: self, action: #selector(tapSEL))
+        self.addGestureRecognizer(tapGes)
+        
     }
     
     required init?(coder aDecoder: NSCoder) {

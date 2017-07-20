@@ -174,6 +174,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         JPUSHService.register(forRemoteNotificationConfig: entity, delegate: self)
         
+        
         /// 接收自定义推送消息
         //获取自定义消息推送内容
         NotificationCenter.default.addObserver(self, selector: #selector(networkDidReceiveMessage(notification:)), name: NSNotification.Name.jpfNetworkDidReceiveMessage, object: nil)

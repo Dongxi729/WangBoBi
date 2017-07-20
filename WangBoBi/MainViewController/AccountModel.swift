@@ -379,7 +379,7 @@ class AccountModel: NSObject,NSCoding {
     func loginSEL() {
         DispatchQueue.main.async {
             
-            let alertConte = UIAlertController.init(title: "友情提示", message: "您的账号已在异地登录，是否重新登录", preferredStyle: UIAlertControllerStyle.alert)
+            let alertConte = UIAlertController.init(title: "友情提示", message: "您的账号在异地登录，请重新登录或者修改密码！", preferredStyle: UIAlertControllerStyle.alert)
             
             let okAction = UIAlertAction.init(title: "好的", style: .default, handler: { (alert) in
                 var nav = LoginNav()
@@ -388,10 +388,8 @@ class AccountModel: NSObject,NSCoding {
                 UIApplication.shared.keyWindow?.rootViewController = nav
             })
             
-            let cancelAction = UIAlertAction.init(title: "取消", style: .cancel, handler: nil)
-    
             alertConte.addAction(okAction)
-            alertConte.addAction(cancelAction)
+            
             UIApplication.shared.keyWindow?.rootViewController?.present(alertConte, animated: true, completion: nil)
         }
     }
@@ -404,7 +402,7 @@ class AccountModel: NSObject,NSCoding {
     }
     
     // MARK: - 是否登录
-    class func isLogin() -> Bool{
+    class func isLogin() -> Bool {
         return AccountModel.shared() != nil
     }
     
@@ -419,7 +417,6 @@ class AccountModel: NSObject,NSCoding {
             CCog(message: "退出异常")
         }
     }
-    
     
     /**
      注销清理
@@ -442,7 +439,6 @@ class AccountModel: NSObject,NSCoding {
     ///   - emailStr: 邮箱地址
     ///   - pass: 密码
     class func getInfo(emailStr : String,pass : String) -> Void {
-        
         
         CCog(message: pass.md5())
         let param = ["email" : emailStr,"pwd" : pass.md5()]
@@ -525,91 +521,6 @@ class AccountModel: NSObject,NSCoding {
         }) { (error) in
             let alertMsg = (error as NSError).userInfo["NSLocalizedDescription"]
             toast(toast: alertMsg! as! String)
-        }
-    }
-    
-    // MARK: - 默认登录
-    class func loginWithLocalPassAndAccount() -> Void {
-        
-        if let email = AccountModel.shared()?.Email {
-            if let pwd = AccountModel.shared()?.UserPass {
-                let d : [String : String] = ["email" : email,
-                                             "pwd" : pwd]
-                NetWorkTool.shared.postWithPath(path: LOGIN_URL, paras: d, success: { (result) in
-                    guard let resultData = result as? NSDictionary else {
-                        
-                        CCog(message: "登录信息无效")
-                        return
-                    }
-                    
-//                    guard let statusMsg = resultData["Status"] as? String else {
-//                        
-//                        return
-//                    }
-//                    
-//                    if statusMsg == "999" {
-//                        AccountModel.shared()?.loginSEL()
-//                    }
-
-                    
-                    guard let account = (resultData["Data"] as! NSArray)[0] as? [String : Any] else {
-                        return
-                    }
-                    
-                    guard var fourSecData = (resultData["Data"] as! NSArray)[1] as? [String : Any] else {
-                        return
-                    }
-                    
-                    for (key,value) in account {
-                        fourSecData[key] = value
-                    }
-                    
-                    /// 更新本地存储信息
-                    let accountInfo = AccountModel(dict: fourSecData)
-                    accountInfo.saveAccount()
-                    
-                    CCog(message: accountPath)
-                    
-                    guard let alertMsg = resultData["Msg"] as? String else {
-                        return
-                    }
-                    
-                    if alertMsg == "登陆成功" {
-                        
-                        /// 记录登录时间
-                        let now = Date()
-                        let timerStamp : TimeInterval = now.timeIntervalSince1970
-                        
-                        let timeStamp = Int(timerStamp)
-                        
-                        /// 记录本地登录成功的时间/更新
-                        UserDefaults.standard.set(timeStamp, forKey: "loginTime")
-                        UserDefaults.standard.synchronize()
-                        
-                        // 设置全局颜色
-                        UITabBar.appearance().tintColor = TABBAR_BGCOLOR
-                        UIApplication.shared.keyWindow?.rootViewController = MainTabBarViewController()
-                    }
-                    
-                }) { (error) in
-                    let alertMsg = (error as NSError).userInfo["NSLocalizedDescription"]
-                    toast(toast: alertMsg! as! String)
-                    
-                    var nav = LoginNav()
-                    nav = LoginNav.init(rootViewController: LoginViewController())
-                    
-                    UIApplication.shared.keyWindow?.rootViewController = nav
-                }
-            }
-            
-        } else {
-            
-            DispatchQueue.main.async {
-                var nav = LoginNav()
-                nav = LoginNav.init(rootViewController: LoginViewController())
-                
-                UIApplication.shared.keyWindow?.rootViewController = nav
-            }
         }
     }
     
@@ -769,6 +680,22 @@ class AccountModel: NSObject,NSCoding {
     }
     
     
+    //外部闭包变量
+    var totalCount:((_ _numCount: Int)->Void)?
+    var topModel : ((_ commentTopModel : [IndexCommentTopModel])-> Void)?
+    var mertopModel : ((_ mertopModel : [IndexMertopModel])-> Void)?
+    
+    
+    class func afterLogin(finished : @escaping (_ values : [IndexCommentTopModel])->(),finishedTop : @escaping (_ values : [IndexMertopModel])->(),finishedTotalModel : @escaping (_ values : Int)->()) {
+        AccountModel.indexInfo(finished: { (aa) in
+            finished(aa)
+        }, finishedTop: { (bb) in
+            finishedTop(bb)
+        }) { (cc) in
+            finishedTotalModel(cc)
+        }
+    }
+    
     // MARK: - 首页接口
     ///
     /// - Parameters:
@@ -783,8 +710,6 @@ class AccountModel: NSObject,NSCoding {
             let param : [String :String] = ["uid" : (AccountModel.shared()?.Id.stringValue)!,
                                             "token" : (AccountModel.shared()?.Token)!]
             
-            
-            
             NetWorkTool.shared.postWithPath(path: INDEX_URL, paras: param, success: { (result) in
                 
                 CCog(message: result)
@@ -793,16 +718,15 @@ class AccountModel: NSObject,NSCoding {
                     return
                 }
                 
-//                guard let statusMsg = resultData["Status"] as? String else {
-//                    
-//                    return
-//                }
-//                
-//                if statusMsg == "999" {
-//                    AccountModel.shared()?.loginSEL()
-//                }
-
+                guard let statusMsg = resultData["Status"] as? String else {
+                    
+                    return
+                }
                 
+                if statusMsg == "999" {
+                    AccountModel.shared()?.loginSEL()
+                }
+
                 /// 抽取提示信息
                 guard let alertMsg = resultData["Msg"] as? String else {
                     
@@ -814,6 +738,7 @@ class AccountModel: NSObject,NSCoding {
                     if let dic = resultData["Data"] as? NSArray {
                         
                         finishedTotalModel(dic.count)
+                        
                         
                         /// 更新本地存储信息
                         let account = AccountModel(dict: (resultData["Data"] as? NSArray)?[0] as? NSDictionary as! [String : Any])
@@ -905,6 +830,8 @@ class AccountModel: NSObject,NSCoding {
             }
         }
     }
+    
+    
     
     // MARK: - 发送验证码 --- 双重验证码接口
     class func sendAuthSEL(phoneNum : String) {
@@ -1479,6 +1406,7 @@ class AccountModel: NSObject,NSCoding {
             
             if statusMsg == "999" {
                 AccountModel.shared()?.loginSEL()
+                AccountModel.logout()
             }
 
             
