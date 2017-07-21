@@ -222,17 +222,21 @@ class WkBaseViewController: UIViewController,LostNetVDelegate {
         //设置不拉伸界面
         self.edgesForExtendedLayout = UIRectEdge()
         
-        if self.navigationController?.viewControllers.count > 1 {
-            let height: CGFloat = 10 //whatever height you want
-            let bounds = self.navigationController!.navigationBar.bounds
-            
-            self.progressView = UIProgressView.init(frame: CGRect(x: 0, y: 0, width: bounds.width, height: bounds.height + height))
-        } else {
-            let height: CGFloat = 54 //whatever height you want
-            let bounds = self.navigationController!.navigationBar.bounds
-            self.navigationController?.navigationBar.frame = CGRect(x: 0, y: 0, width: bounds.width, height: bounds.height + height)
-            self.progressView = UIProgressView.init(frame: CGRect(x: 0, y: 0, width: bounds.width, height: bounds.height + height))
+        if self.navigationController != nil {
+            if self.navigationController?.viewControllers.count > 1 {
+                let height: CGFloat = 10 //whatever height you want
+                let bounds = self.navigationController!.navigationBar.bounds
+                
+                self.progressView = UIProgressView.init(frame: CGRect(x: 0, y: 0, width: bounds.width, height: bounds.height + height))
+            } else {
+                let height: CGFloat = 54 //whatever height you want
+                let bounds = self.navigationController!.navigationBar.bounds
+                self.navigationController?.navigationBar.frame = CGRect(x: 0, y: 0, width: bounds.width, height: bounds.height + height)
+                self.progressView = UIProgressView.init(frame: CGRect(x: 0, y: 0, width: bounds.width, height: bounds.height + height))
+            }
+
         }
+        
         
         view.addSubview(self.progressView)
         view.bringSubview(toFront: self.progressView)
@@ -373,6 +377,7 @@ extension WkBaseViewController : WKScriptMessageHandler {
             CCog(message: "返回登录")
             /// 清空本地信息
             AccountModel.logout()
+            
             DispatchQueue.main.async {
                 let alertConte = UIAlertController.init(title: "友情提示", message: "该用户未登录,是否登录？", preferredStyle: UIAlertControllerStyle.alert)
                 
@@ -515,7 +520,7 @@ class NetWrong: UIView {
     
     
     fileprivate lazy var imgView: UIImageView = {
-        let d : UIImageView = UIImageView.init(frame: CGRect.init(x: self.center.x - SCREEN_WIDTH * 0.2 * SCREEN_SCALE, y: SCREEN_HEIGHT * 0.3, width:SCREEN_WIDTH * 0.4 * SCREEN_SCALE, height: SCREEN_WIDTH * 0.4 * (256 / 291) * SCREEN_SCALE))
+        let d : UIImageView = UIImageView.init(frame: CGRect.init(x: self.center.x - SCREEN_WIDTH * 0.15 * SCREEN_SCALE, y: SCREEN_HEIGHT * 0.3, width:SCREEN_WIDTH * 0.3 * SCREEN_SCALE, height: SCREEN_WIDTH * 0.3 * (256 / 291) * SCREEN_SCALE))
         d.image = #imageLiteral(resourceName: "error_404")
         
         return d
@@ -524,8 +529,8 @@ class NetWrong: UIView {
     /// 标题
     lazy var titleLabel: UILabel = {
         let d : UILabel = UILabel.init(frame: CGRect.init(x: 0, y: self.imgView.BottomY + COMMON_MARGIN * SCREEN_SCALE, width: SCREEN_WIDTH, height: 30 * SCREEN_SCALE))
-        d.font = UIFont.systemFont(ofSize: 25 * SCREEN_SCALE)
-        d.text = "网页出错了~"
+        d.font = UIFont.systemFont(ofSize: 15 * SCREEN_SCALE)
+        d.text = "网页加载出错"
         d.textColor = UIColor.darkGray
         d.textAlignment = .center
         return d

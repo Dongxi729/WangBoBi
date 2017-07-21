@@ -429,6 +429,8 @@ class AccountModel: NSObject,NSCoding {
      */
     class func logout() {
         
+        SHOP_URLArray.removeAllObjects()
+        
         // 清除内存中的账号对象和归档
         AccountModel.userAccount = nil
         do {

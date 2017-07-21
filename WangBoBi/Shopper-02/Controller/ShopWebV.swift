@@ -74,7 +74,7 @@ class ShopWebV: WkBaseViewController {
                     
                     self.webView.load(request)
                     
-                } else {
+                } else {6
                     CCog(message: "////")
                     
                     self.webView.stopLoading()
@@ -116,15 +116,13 @@ extension ShopWebV {
             
             /// 显示网络加载出错（域名不对图标）
             if self.getURLStr.contains(".html") {
-//                netWrongV.isHidden = false
+                netWrongV.isHidden = false
 
-                let vc = UIViewController()
-                vc.view.backgroundColor = UIColor.red
+                let vc = NetWrongVC()
+                
                 self.navigationController?.pushViewController(vc, animated: true)
                 
-                self.webView.isHidden = true
-                
-                decisionHandler(.allow)
+                decisionHandler(.cancel)
                 return
             }
             
@@ -168,5 +166,19 @@ extension ShopWebV {
         
         self.navigationController?.pushViewController(vvv, animated: true)
         
+    }
+}
+
+// MARK: - 网络错误界面
+class NetWrongVC: UIViewController {
+    fileprivate lazy var lostNet: NetWrong = {
+        let d : NetWrong = NetWrong.init(frame: self.view.bounds)
+        return d
+    }()
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        title = "网页加载出错"
+        view.addSubview(lostNet)
     }
 }
