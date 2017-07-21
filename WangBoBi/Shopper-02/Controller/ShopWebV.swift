@@ -20,11 +20,6 @@ class ShopWebV: WkBaseViewController {
         self.navigationController?.navigationBar.isHidden = false
     }
     
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
-    
-    }
-    
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
@@ -50,21 +45,21 @@ class ShopWebV: WkBaseViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        
-        
+
         if SHOP_URLArray.count == 0 {
             self.urlString = STOTRURL
+            
+            /// 拼接用户信息
+            if self.urlString.contains("?") {
+                self.urlString = self.urlString + ("&token=") + (AccountModel.shared()?.Token)! + "&uid=" + (AccountModel.shared()?.Id.stringValue)!
+            } else {
+                self.urlString = self.urlString + ("?&token=") + (AccountModel.shared()?.Token)! + "&uid=" + (AccountModel.shared()?.Id.stringValue)!
+            }
         } else {
             self.urlString = SHOP_URLArray.lastObject as! String
         }
         
-        /// 拼接用户信息
-        if self.urlString.contains("?") {
-            self.urlString = self.urlString + ("&token=") + (AccountModel.shared()?.Token)! + "&uid=" + (AccountModel.shared()?.Id.stringValue)!
-        } else {
-            self.urlString = self.urlString + ("?&token=") + (AccountModel.shared()?.Token)! + "&uid=" + (AccountModel.shared()?.Id.stringValue)!
-        }
+       
     
         /// 判断是否网络连通
         NetCheck.shared.returnNetStatus { (result) in
@@ -121,8 +116,16 @@ extension ShopWebV {
             
             /// 显示网络加载出错（域名不对图标）
             if self.getURLStr.contains(".html") {
-                netWrongV.isHidden = false
+//                netWrongV.isHidden = false
+
+                let vc = UIViewController()
+                vc.view.backgroundColor = UIColor.red
+                self.navigationController?.pushViewController(vc, animated: true)
+                
                 self.webView.isHidden = true
+                
+                decisionHandler(.allow)
+                return
             }
             
             if self.getURLStr.contains(COMMON_PREFIX) {
@@ -134,7 +137,11 @@ extension ShopWebV {
                 
                 self.aaa(str:self.getURLStr)
                 
-                SHOP_URLArray.add(self.getURLStr)
+                if !self.getURLStr.contains("html") {
+                    SHOP_URLArray.add(self.getURLStr)
+                }
+                
+                
             } else {
                 lostNetV.isHidden = false
                 lostNetV.descLabel.text = "网络加载出错，请检查网络设置"
@@ -155,10 +162,9 @@ extension ShopWebV {
     /// - Parameter str: 跳转的链接
     fileprivate func aaa(str : String) -> Void {
                 
-        let vvv = ShopWebReplaceV()
+        let vvv = ShopWebV()
         vvv.getURLStr = str
-        
-        
+
         
         self.navigationController?.pushViewController(vvv, animated: true)
         

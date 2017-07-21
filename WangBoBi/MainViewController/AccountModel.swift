@@ -381,6 +381,10 @@ class AccountModel: NSObject,NSCoding {
             
             AccountModel.logout()
             
+            
+            /// 清空链接数组
+            SHOP_URLArray.removeAllObjects()
+            
             let alertConte = UIAlertController.init(title: "友情提示", message: "您的账号在异地登录，请重新登录或者修改密码！", preferredStyle: UIAlertControllerStyle.alert)
             
             let okAction = UIAlertAction.init(title: "好的", style: .default, handler: { (alert) in

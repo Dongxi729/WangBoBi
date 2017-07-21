@@ -371,6 +371,8 @@ extension WkBaseViewController : WKScriptMessageHandler {
         
         if msg == "login" {
             CCog(message: "返回登录")
+            /// 清空本地信息
+            AccountModel.logout()
             DispatchQueue.main.async {
                 let alertConte = UIAlertController.init(title: "友情提示", message: "该用户未登录,是否登录？", preferredStyle: UIAlertControllerStyle.alert)
                 
@@ -386,6 +388,8 @@ extension WkBaseViewController : WKScriptMessageHandler {
                 alertConte.addAction(okAction)
                 alertConte.addAction(cancelAction)
                 self.present(alertConte, animated: true, completion: nil)
+                
+                
             }
         }
         
