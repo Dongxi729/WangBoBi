@@ -44,7 +44,6 @@
 		263CAF131EF62889006629BF /* XLPasswordInputView.m in Sources */ = {isa = PBXBuildFile; fileRef = 263CAF101EF62889006629BF /* XLPasswordInputView.m */; };
 		263CAF151EF62B89006629BF /* TestViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 263CAF141EF62B89006629BF /* TestViewController.swift */; };
 		2643CFC61EF3EE2200EFC720 /* DetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2643CFC51EF3EE2200EFC720 /* DetailViewController.swift */; };
-		264793681F18DC98000F9F67 /* ShopWebReplaceV.swift in Sources */ = {isa = PBXBuildFile; fileRef = 264793661F18DC98000F9F67 /* ShopWebReplaceV.swift */; };
 		2647936B1F18DD28000F9F67 /* WkBaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2647936A1F18DD28000F9F67 /* WkBaseViewController.swift */; };
 		2647936D1F18DD71000F9F67 /* ShopWebV.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2647936C1F18DD71000F9F67 /* ShopWebV.swift */; };
 		2649606F1EF0BF2500A559D6 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 264960691EF0BF2500A559D6 /* AppDelegate.swift */; };
@@ -209,7 +208,6 @@
 		263CAF101EF62889006629BF /* XLPasswordInputView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XLPasswordInputView.m; sourceTree = "<group>"; };
 		263CAF141EF62B89006629BF /* TestViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TestViewController.swift; sourceTree = "<group>"; };
 		2643CFC51EF3EE2200EFC720 /* DetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DetailViewController.swift; sourceTree = "<group>"; };
-		264793661F18DC98000F9F67 /* ShopWebReplaceV.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShopWebReplaceV.swift; sourceTree = "<group>"; };
 		2647936A1F18DD28000F9F67 /* WkBaseViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WkBaseViewController.swift; sourceTree = "<group>"; };
 		2647936C1F18DD71000F9F67 /* ShopWebV.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShopWebV.swift; sourceTree = "<group>"; };
 		264960691EF0BF2500A559D6 /* AppDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -871,7 +869,6 @@
 			children = (
 				2647936C1F18DD71000F9F67 /* ShopWebV.swift */,
 				2647936A1F18DD28000F9F67 /* WkBaseViewController.swift */,
-				264793661F18DC98000F9F67 /* ShopWebReplaceV.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -1475,7 +1472,6 @@
 				265D430C1EFBA8B1007F5AB8 /* MyInfoVC.swift in Sources */,
 				2607D1571EF224C90015625E /* MainPageViewController.swift in Sources */,
 				265D430F1EFBD572007F5AB8 /* CodeProductor.swift in Sources */,
-				264793681F18DC98000F9F67 /* ShopWebReplaceV.swift in Sources */,
 				264961051EF0C9EC00A559D6 /* YYAnimatedImageView.m in Sources */,
 				2650C1941F03AA82005BE741 /* PickerV.swift in Sources */,
 				264960BF1EF0C28F00A559D6 /* POPAnimationEvent.mm in Sources */,
@@ -1639,7 +1635,6 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)",
-					"$(PROJECT_DIR)/WangBoBi/APPDelegatge/ThirdSDK",
 				);
 				INFOPLIST_FILE = WangBoBi/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
@@ -1667,7 +1662,6 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)",
-					"$(PROJECT_DIR)/WangBoBi/APPDelegatge/ThirdSDK",
 				);
 				INFOPLIST_FILE = WangBoBi/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;

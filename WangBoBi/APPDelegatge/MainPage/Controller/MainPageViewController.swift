@@ -92,16 +92,9 @@ class MainPageViewController: BaseViewController {
         
         /// 添加刷新控件
         self.collV.addHeaderViewfun()
-//        self.collV.addFooterViewfun()
-        
         ///  头部视图
         let d : headerView = collV.viewWithTag(888) as! headerView
         d.delegate = self;
-        
-        /// 尾部视图
-//        let footerView : footerView = collV.viewWithTag(999) as! footerView
-//        footerView.delegate = self;
-        
         self.title = "钱包"
         
         view.addSubview(collV)

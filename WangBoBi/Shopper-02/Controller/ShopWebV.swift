@@ -40,8 +40,8 @@ class ShopWebV: WkBaseViewController {
             
             self.navigationController?.navigationBar.isHidden = true
         }
-    }
     
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -69,19 +69,19 @@ class ShopWebV: WkBaseViewController {
                 CCog(message: self.urlString)
                 
                 /// 是否包含前缀
-                if self.urlString.contains(COMMON_PREFIX) {
+//                if self.urlString.contains(COMMON_PREFIX) {
                     let request : URLRequest = NSURLRequest.init(url: URL.init(string: self.urlString)!, cachePolicy: .useProtocolCachePolicy, timeoutInterval: 0) as URLRequest
                     
                     self.webView.load(request)
                     
-                } else {6
-                    CCog(message: "////")
-                    
-                    self.webView.stopLoading()
-                    self.webView.isHidden = true
-                    self.view.bringSubview(toFront: self.lostNetV)
-                    self.lostNetV.isHidden = false
-                }
+//                } else {
+//                    CCog(message: "////")
+//                    
+//                    self.webView.stopLoading()
+//                    self.webView.isHidden = true
+//                    self.view.bringSubview(toFront: self.lostNetV)
+//                    self.lostNetV.isHidden = false
+//                }
                 /// 没网络
             } else {
                 

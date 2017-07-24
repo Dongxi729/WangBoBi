@@ -462,7 +462,6 @@ class LostNetV: UIView {
     
     fileprivate lazy var imgView: UIImageView = {
         let d : UIImageView = UIImageView.init(frame: CGRect.init(x: self.center.x - SCREEN_WIDTH * 0.2 * SCREEN_SCALE, y: SCREEN_HEIGHT * 0.3, width:SCREEN_WIDTH * 0.4 * SCREEN_SCALE, height: SCREEN_WIDTH * 0.4 * (256 / 291) * SCREEN_SCALE))
-        d.layer.borderWidth = 1
         d.image = #imageLiteral(resourceName: "xxx")
         
         return d
@@ -510,6 +509,7 @@ class LostNetV: UIView {
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
+
 }
 
 
