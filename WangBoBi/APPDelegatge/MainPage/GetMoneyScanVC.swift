@@ -76,7 +76,13 @@ class GetMoneyScanVC: BaseViewController {
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         
-        AccountModel.reloadSEL()
+        if let uiddd = AccountModel.shared()?.Id.stringValue {
+            if let tokkken = AccountModel.shared()?.Token {
+                AccountModel.reloadSEL()
+            }
+        }
+        
+        
         
         self.navigationController?.popToRootViewController(animated: true)
     }

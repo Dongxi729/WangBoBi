@@ -54,14 +54,12 @@ class FriendMainVC: BaseViewController,UITableViewDelegate,UITableViewDataSource
         
         /// 添加表格
         view.addSubview(tableView)
-        
-//        self.edgesForExtendedLayout = []
     }
     
     // MARK: - 按钮事件
     @objc fileprivate func jumpToFriend() {
         CCog(message: "jumpToFriend")
-        self.navigationController?.pushViewController(NewFriendVC(), animated: true)
+        self.navigationController?.pushViewController(AddFrienVC(), animated: true)
     }
     
     @objc fileprivate func jumpToFriendContactVC() {
@@ -79,22 +77,19 @@ class FriendMainVC: BaseViewController,UITableViewDelegate,UITableViewDataSource
                                    "中央财经大学","华北电力大学","北京体育大学","上海外国语大学","复旦大学",
                                    "华东师范大学","上海大学","河北工业大学"]
     
+    /// 模型
+    var modelData = [FriendListModel]()
+
+    /// 模拟数据
+    fileprivate let analogueData : [String : Any] = ["moneyCount" : "-90","dateTime" : "12-30","descStr" : "链接杀戮空间","isSend" : "true","friendName" : "john"]
+//
     //搜索过滤后的结果集
     fileprivate var searchArray:[String] = [String](){
         didSet  {
             self.tableView.reloadData()
-            //            self.view.endEditing(true)
         }
     }
-    
-//    
-//    // MARK: - 数据源
-//    fileprivate var dataSource : [String] = ["转给朋友","转到其他网博币钱包","转到交易平台","转到会员平台"]
-//    
-//    // MARK: - 前置图标
-//    fileprivate var frontIconImg : [UIImage] = [#imageLiteral(resourceName: "ofri"),#imageLiteral(resourceName: "owbag"),#imageLiteral(resourceName: "oPlat"),#imageLiteral(resourceName: "oMem")]
-//    
-//    
+
     // MARK: - 最近转的
     var recentDeals : [String] = ["sads"]
     
@@ -103,17 +98,24 @@ class FriendMainVC: BaseViewController,UITableViewDelegate,UITableViewDataSource
         d.delegate = self
         d.dataSource = self
         //创建一个重用的单元格
-        d.register(ReceiveCell.self,
+        d.register(FriendCell.self,
                    forCellReuseIdentifier: "MyCell")
         return d
     }()
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        /// 模拟数据
+        self.modelData = [FriendListModel.init(dict: analogueData)]
+    }
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         
         super.viewDidAppear(true)
         self.tableView.reloadData()
+        
+     
     }
     
     
@@ -124,14 +126,17 @@ class FriendMainVC: BaseViewController,UITableViewDelegate,UITableViewDataSource
             let identify:String = "MyCell"
             //同一形式的单元格重复使用，在声明时已注册
             let cell = tableView.dequeueReusableCell(withIdentifier: identify,
-                                                     for: indexPath) as! ReceiveCell
+                                                     for: indexPath) as! FriendCell
             
             /// 延长分割线
             cell.preservesSuperviewLayoutMargins = false
             cell.separatorInset = UIEdgeInsets.zero
             cell.layoutMargins = .zero
             
-        
+            cell.stangerLabel.isHidden = false
+            
+            cell.model = FriendListModel.init(dict: analogueData)
+            
             if self.countrySearchController.isActive {
                 cell.descLabel.text = self.searchArray[indexPath.row]
                 return cell
@@ -140,6 +145,7 @@ class FriendMainVC: BaseViewController,UITableViewDelegate,UITableViewDataSource
                 
                 return cell
             }
+            
     }
     
     
@@ -151,21 +157,12 @@ class FriendMainVC: BaseViewController,UITableViewDelegate,UITableViewDataSource
         if self.countrySearchController.isActive {
             return self.searchArray.count
         } else {
-//            switch section {
-//            case 0:
-//                return dataSource.count
-//                
-//            case 1:
-//                return recentDeals.count
-//            default:
-//                break
-//            }
             return schoolArray.count
         }
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 60
+        return 61
     }
     
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {

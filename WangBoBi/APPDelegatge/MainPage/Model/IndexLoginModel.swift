@@ -76,3 +76,28 @@ class IndexMertopModel : NSObject {
     
     override func setValue(_ value: Any?, forUndefinedKey key: String) {}
 }
+
+// MARK: - 朋友列表模型
+class FriendListModel : NSObject {
+    /// 钱
+    var moneyCount : String?
+    
+    /// 日期
+    var dateTime : String?
+    
+    /// 描述文本
+    var descStr : String?
+    
+    /// 是否接收、转账
+    var isSend : String?
+    
+    /// 朋友名字
+    var friendName : String?
+    
+    init(dict: [String : Any]) {
+        super.init()
+        setValuesForKeys(dict)
+    }
+    
+    override func setValue(_ value: Any?, forUndefinedKey key: String) {}
+}

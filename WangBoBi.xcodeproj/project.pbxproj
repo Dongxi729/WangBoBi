@@ -139,6 +139,7 @@
 		26A3CAD71F2596BE002815C1 /* FriendMainVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26A3CAD61F2596BE002815C1 /* FriendMainVC.swift */; };
 		26A3CAD91F259D22002815C1 /* FriendGroupVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26A3CAD81F259D22002815C1 /* FriendGroupVC.swift */; };
 		26A3CADB1F259DE0002815C1 /* NewFriendVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26A3CADA1F259DE0002815C1 /* NewFriendVC.swift */; };
+		26A3CADD1F25DF13002815C1 /* AddFrienVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26A3CADC1F25DF13002815C1 /* AddFrienVC.swift */; };
 		26B14EFC1EF259AF0050135B /* CollectCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26B14EFB1EF259AF0050135B /* CollectCell.swift */; };
 		26B14F001EF29ABA0050135B /* ReceiveMonVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26B14EFF1EF29ABA0050135B /* ReceiveMonVC.swift */; };
 		26B14F021EF29F490050135B /* ReceiveCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26B14F011EF29F490050135B /* ReceiveCell.swift */; };
@@ -366,6 +367,7 @@
 		26A3CAD61F2596BE002815C1 /* FriendMainVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FriendMainVC.swift; sourceTree = "<group>"; };
 		26A3CAD81F259D22002815C1 /* FriendGroupVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FriendGroupVC.swift; sourceTree = "<group>"; };
 		26A3CADA1F259DE0002815C1 /* NewFriendVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewFriendVC.swift; sourceTree = "<group>"; };
+		26A3CADC1F25DF13002815C1 /* AddFrienVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddFrienVC.swift; sourceTree = "<group>"; };
 		26B14EFB1EF259AF0050135B /* CollectCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CollectCell.swift; path = ../../Mine/View/CollectCell.swift; sourceTree = "<group>"; };
 		26B14EFF1EF29ABA0050135B /* ReceiveMonVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ReceiveMonVC.swift; path = ../../../../ReceiveMonVC.swift; sourceTree = "<group>"; };
 		26B14F011EF29F490050135B /* ReceiveCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReceiveCell.swift; sourceTree = "<group>"; };
@@ -844,6 +846,7 @@
 				26A3CAD61F2596BE002815C1 /* FriendMainVC.swift */,
 				26A3CAD81F259D22002815C1 /* FriendGroupVC.swift */,
 				26A3CADA1F259DE0002815C1 /* NewFriendVC.swift */,
+				26A3CADC1F25DF13002815C1 /* AddFrienVC.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -1479,6 +1482,7 @@
 				264960C41EF0C28F00A559D6 /* POPBasicAnimation.mm in Sources */,
 				264961011EF0C9EC00A559D6 /* MKAnnotationView+YYWebImage.m in Sources */,
 				264961091EF0C9EC00A559D6 /* YYSpriteSheetImage.m in Sources */,
+				26A3CADD1F25DF13002815C1 /* AddFrienVC.swift in Sources */,
 				265D430C1EFBA8B1007F5AB8 /* MyInfoVC.swift in Sources */,
 				2607D1571EF224C90015625E /* MainPageViewController.swift in Sources */,
 				265D430F1EFBD572007F5AB8 /* CodeProductor.swift in Sources */,

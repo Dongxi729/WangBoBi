@@ -388,13 +388,11 @@ extension WkBaseViewController : WKScriptMessageHandler {
                     UIApplication.shared.keyWindow?.rootViewController = nav
                 })
                 
-                let cancelAction = UIAlertAction.init(title: "取消", style: .cancel, handler: nil)
+//                let cancelAction = UIAlertAction.init(title: "取消", style: .cancel, handler: nil)
                 
                 alertConte.addAction(okAction)
-                alertConte.addAction(cancelAction)
+//                alertConte.addAction(cancelAction)
                 self.present(alertConte, animated: true, completion: nil)
-                
-                
             }
         }
         
