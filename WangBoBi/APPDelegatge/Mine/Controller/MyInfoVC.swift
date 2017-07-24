@@ -37,11 +37,6 @@ class MyInfoVC: BaseViewController {
         self.navigationController?.interactivePopGestureRecognizer?.isEnabled = false
     }
     
-//    override func viewWillDisappear(_ animated: Bool) {
-//        super.viewWillDisappear(animated)
-//        self.navigationController?.interactivePopGestureRecognizer?.isEnabled = true
-//    }
-
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -60,8 +55,6 @@ class MyInfoVC: BaseViewController {
 // MARK: - 我的信息编辑视图
 class PersonInfoEditV : UIView {
     
-    
-    
     /// 名字
     lazy var nameLabel: UILabel = {
         let d: UILabel = UILabel.init(frame: CGRect.init(x: COMMON_MARGIN * SCREEN_SCALE, y: COMMON_MARGIN * SCREEN_SCALE, width: 40 * SCREEN_SCALE, height: 20 * SCREEN_SCALE))
@@ -74,7 +67,8 @@ class PersonInfoEditV : UIView {
     /// 名字显示
     lazy var nameShowLabel: UILabel = {
         let d : UILabel = UILabel.init(frame: CGRect.init(x: self.nameLabel.RightX, y: self.nameLabel.TopY, width: 100 * SCREEN_SCALE, height: self.nameLabel.Height))
-        
+         
+
         d.font = UIFont.systemFont(ofSize: 11 * SCREEN_SCALE)
         return d
     }()
@@ -209,6 +203,7 @@ class PersonInfoEditV : UIView {
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
+
 }
 
 

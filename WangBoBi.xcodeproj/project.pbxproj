@@ -140,6 +140,8 @@
 		26A3CAD91F259D22002815C1 /* FriendGroupVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26A3CAD81F259D22002815C1 /* FriendGroupVC.swift */; };
 		26A3CADB1F259DE0002815C1 /* NewFriendVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26A3CADA1F259DE0002815C1 /* NewFriendVC.swift */; };
 		26A3CADD1F25DF13002815C1 /* AddFrienVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26A3CADC1F25DF13002815C1 /* AddFrienVC.swift */; };
+		26A3CADF1F25EE0B002815C1 /* AddFriendInfoVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26A3CADE1F25EE0B002815C1 /* AddFriendInfoVC.swift */; };
+		26A3CAE11F25F8C6002815C1 /* PushMoneyDetailVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26A3CAE01F25F8C6002815C1 /* PushMoneyDetailVC.swift */; };
 		26B14EFC1EF259AF0050135B /* CollectCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26B14EFB1EF259AF0050135B /* CollectCell.swift */; };
 		26B14F001EF29ABA0050135B /* ReceiveMonVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26B14EFF1EF29ABA0050135B /* ReceiveMonVC.swift */; };
 		26B14F021EF29F490050135B /* ReceiveCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26B14F011EF29F490050135B /* ReceiveCell.swift */; };
@@ -368,6 +370,8 @@
 		26A3CAD81F259D22002815C1 /* FriendGroupVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FriendGroupVC.swift; sourceTree = "<group>"; };
 		26A3CADA1F259DE0002815C1 /* NewFriendVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewFriendVC.swift; sourceTree = "<group>"; };
 		26A3CADC1F25DF13002815C1 /* AddFrienVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddFrienVC.swift; sourceTree = "<group>"; };
+		26A3CADE1F25EE0B002815C1 /* AddFriendInfoVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddFriendInfoVC.swift; sourceTree = "<group>"; };
+		26A3CAE01F25F8C6002815C1 /* PushMoneyDetailVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PushMoneyDetailVC.swift; sourceTree = "<group>"; };
 		26B14EFB1EF259AF0050135B /* CollectCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CollectCell.swift; path = ../../Mine/View/CollectCell.swift; sourceTree = "<group>"; };
 		26B14EFF1EF29ABA0050135B /* ReceiveMonVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ReceiveMonVC.swift; path = ../../../../ReceiveMonVC.swift; sourceTree = "<group>"; };
 		26B14F011EF29F490050135B /* ReceiveCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReceiveCell.swift; sourceTree = "<group>"; };
@@ -847,6 +851,8 @@
 				26A3CAD81F259D22002815C1 /* FriendGroupVC.swift */,
 				26A3CADA1F259DE0002815C1 /* NewFriendVC.swift */,
 				26A3CADC1F25DF13002815C1 /* AddFrienVC.swift */,
+				26A3CADE1F25EE0B002815C1 /* AddFriendInfoVC.swift */,
+				26A3CAE01F25F8C6002815C1 /* PushMoneyDetailVC.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -1401,6 +1407,7 @@
 				262304541EFA210A007B0BF6 /* LoginNav.swift in Sources */,
 				261004B01EF8B09B00DE000F /* ForgetPassVCTwo.swift in Sources */,
 				260B20CB1EF76BAA00E78FD8 /* MyMsgVC.swift in Sources */,
+				26A3CAE11F25F8C6002815C1 /* PushMoneyDetailVC.swift in Sources */,
 				261F067A1EF4FB590019CE44 /* MyBandCardVC.swift in Sources */,
 				260B21001EF7C0E900E78FD8 /* LoginViewController.swift in Sources */,
 				266B89091F04E2200033BFA7 /* ReuseV.swift in Sources */,
@@ -1443,6 +1450,7 @@
 				2649611B1EF0CD9200A559D6 /* NSString+extension.swift in Sources */,
 				264960BE1EF0C28F00A559D6 /* POPAnimation.mm in Sources */,
 				2649612C1EF0D08F00A559D6 /* FTIndicator.m in Sources */,
+				26A3CADF1F25EE0B002815C1 /* AddFriendInfoVC.swift in Sources */,
 				2647936B1F18DD28000F9F67 /* WkBaseViewController.swift in Sources */,
 				264961301EF0D08F00A559D6 /* FTToastIndicator.m in Sources */,
 				264961061EF0C9EC00A559D6 /* YYFrameImage.m in Sources */,

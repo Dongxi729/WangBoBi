@@ -75,7 +75,8 @@ class BaseViewController: UIViewController,UIGestureRecognizerDelegate,UINavigat
         if NSStringFromClass(self.classForCoder).contains("MainPageVC") ||
             NSStringFromClass(self.classForCoder).contains("MyInfoVC") ||
             NSStringFromClass(self.classForCoder).contains("ScanCodeController") ||
-            NSStringFromClass(self.classForCoder).contains("DetailViewController2") || NSStringFromClass(self.classForCoder).contains("DetailReplaceVC") || NSStringFromClass(self.classForCoder).contains("FriendMainVC") {
+            NSStringFromClass(self.classForCoder).contains("DetailViewController2") || NSStringFromClass(self.classForCoder).contains("DetailReplaceVC") || NSStringFromClass(self.classForCoder).contains("FriendMainVC")
+        || NSStringFromClass(self.classForCoder).contains("AddFriendInfoVC") {
             
             CCog(message: "DetailViewController2")
             
@@ -125,7 +126,8 @@ class BaseViewController: UIViewController,UIGestureRecognizerDelegate,UINavigat
             NSStringFromClass(self.classForCoder).contains("ReceiveMonVC") ||
             NSStringFromClass(self.classForCoder).contains("FriendGroupVC") ||
             NSStringFromClass(self.classForCoder).contains("NewFriendVC") ||
-                NSStringFromClass(self.classForCoder).contains("AddFrienVC") {
+                NSStringFromClass(self.classForCoder).contains("AddFrienVC") ||
+            NSStringFromClass(self.classForCoder).contains("PushMoneyDetailVC") {
             
             
             UIApplication.shared.statusBarStyle = UIStatusBarStyle.default

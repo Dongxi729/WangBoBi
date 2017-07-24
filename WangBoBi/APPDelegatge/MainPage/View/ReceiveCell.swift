@@ -152,6 +152,7 @@ class FriendCell : UITableViewCell {
             self.descLabel.frame = CGRect.init(x: self.imgVi.RightX + COMMON_MARGIN * 2, y: 10, width: self.Width - self.imgVi.Width + COMMON_MARGIN * 1.2 * 2 , height: 20)
         }
         
+        self.setGetMoneyLabel.sizeToFit()
         ///// ......根据返回模型取值
     }
     
