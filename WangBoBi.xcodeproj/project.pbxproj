@@ -136,6 +136,9 @@
 		269B5ECE1F077BD300AA573F /* UIScrollView-extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 269B5ECB1F077BD300AA573F /* UIScrollView-extension.swift */; };
 		26A0A4A91EF0E26B00035D0D /* JFNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26A0A4A81EF0E26B00035D0D /* JFNavigationController.swift */; };
 		26A0A4AB1EF1064C00035D0D /* NetWorkTool.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26A0A4AA1EF1064C00035D0D /* NetWorkTool.swift */; };
+		26A3CAD71F2596BE002815C1 /* FriendMainVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26A3CAD61F2596BE002815C1 /* FriendMainVC.swift */; };
+		26A3CAD91F259D22002815C1 /* FriendGroupVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26A3CAD81F259D22002815C1 /* FriendGroupVC.swift */; };
+		26A3CADB1F259DE0002815C1 /* NewFriendVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26A3CADA1F259DE0002815C1 /* NewFriendVC.swift */; };
 		26B14EFC1EF259AF0050135B /* CollectCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26B14EFB1EF259AF0050135B /* CollectCell.swift */; };
 		26B14F001EF29ABA0050135B /* ReceiveMonVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26B14EFF1EF29ABA0050135B /* ReceiveMonVC.swift */; };
 		26B14F021EF29F490050135B /* ReceiveCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26B14F011EF29F490050135B /* ReceiveCell.swift */; };
@@ -360,6 +363,9 @@
 		269B5ECB1F077BD300AA573F /* UIScrollView-extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIScrollView-extension.swift"; sourceTree = "<group>"; };
 		26A0A4A81EF0E26B00035D0D /* JFNavigationController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JFNavigationController.swift; sourceTree = "<group>"; };
 		26A0A4AA1EF1064C00035D0D /* NetWorkTool.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NetWorkTool.swift; sourceTree = "<group>"; };
+		26A3CAD61F2596BE002815C1 /* FriendMainVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FriendMainVC.swift; sourceTree = "<group>"; };
+		26A3CAD81F259D22002815C1 /* FriendGroupVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FriendGroupVC.swift; sourceTree = "<group>"; };
+		26A3CADA1F259DE0002815C1 /* NewFriendVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewFriendVC.swift; sourceTree = "<group>"; };
 		26B14EFB1EF259AF0050135B /* CollectCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CollectCell.swift; path = ../../Mine/View/CollectCell.swift; sourceTree = "<group>"; };
 		26B14EFF1EF29ABA0050135B /* ReceiveMonVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ReceiveMonVC.swift; path = ../../../../ReceiveMonVC.swift; sourceTree = "<group>"; };
 		26B14F011EF29F490050135B /* ReceiveCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReceiveCell.swift; sourceTree = "<group>"; };
@@ -835,6 +841,9 @@
 		2649607B1EF0C02600A559D6 /* Controller */ = {
 			isa = PBXGroup;
 			children = (
+				26A3CAD61F2596BE002815C1 /* FriendMainVC.swift */,
+				26A3CAD81F259D22002815C1 /* FriendGroupVC.swift */,
+				26A3CADA1F259DE0002815C1 /* NewFriendVC.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -1440,6 +1449,7 @@
 				264960871EF0C1B400A559D6 /* ZDXCommon.swift in Sources */,
 				2607D1551EF21E570015625E /* MainTabBarViewController.swift in Sources */,
 				26DBE6C61F0F891D00551F63 /* ScanModel.swift in Sources */,
+				26A3CADB1F259DE0002815C1 /* NewFriendVC.swift in Sources */,
 				262112981F137FCA00E71F08 /* WKVC.swift in Sources */,
 				26ED244A1EF3E4EA00642804 /* SetDoubelCertifiVC.swift in Sources */,
 				261004B51EF8BB9100DE000F /* AgreeMentVC.swift in Sources */,
@@ -1479,7 +1489,9 @@
 				2649610B1EF0C9EC00A559D6 /* YYWebImageManager.m in Sources */,
 				264960FF1EF0C9EC00A559D6 /* _YYWebImageSetter.m in Sources */,
 				260B20B51EF7679D00E78FD8 /* BankModel.swift in Sources */,
+				26A3CAD91F259D22002815C1 /* FriendGroupVC.swift in Sources */,
 				264960C11EF0C28F00A559D6 /* POPAnimationRuntime.mm in Sources */,
+				26A3CAD71F2596BE002815C1 /* FriendMainVC.swift in Sources */,
 				264960C21EF0C28F00A559D6 /* POPAnimationTracer.mm in Sources */,
 				269B5ECD1F077BD300AA573F /* headerView.swift in Sources */,
 				266B89071F04E1F70033BFA7 /* HeadReuse.swift in Sources */,

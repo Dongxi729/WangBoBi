@@ -33,7 +33,7 @@ extension MainTabBarViewController {
         let shopVc = JFNavigationController.init(rootViewController: ShopWebV())
         
         //朋友
-        let friendVc = JFNavigationController.init(rootViewController: view)
+        let friendVc = JFNavigationController.init(rootViewController: FriendMainVC())
         
         //我的模块
         let meVC = JFNavigationController.init(rootViewController: MyViewController())

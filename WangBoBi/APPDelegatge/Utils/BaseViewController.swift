@@ -75,7 +75,7 @@ class BaseViewController: UIViewController,UIGestureRecognizerDelegate,UINavigat
         if NSStringFromClass(self.classForCoder).contains("MainPageVC") ||
             NSStringFromClass(self.classForCoder).contains("MyInfoVC") ||
             NSStringFromClass(self.classForCoder).contains("ScanCodeController") ||
-            NSStringFromClass(self.classForCoder).contains("DetailViewController2") || NSStringFromClass(self.classForCoder).contains("DetailReplaceVC")
+            NSStringFromClass(self.classForCoder).contains("DetailViewController2") || NSStringFromClass(self.classForCoder).contains("DetailReplaceVC") || NSStringFromClass(self.classForCoder).contains("FriendMainVC")
         {
             
             CCog(message: "DetailViewController2")
@@ -93,15 +93,18 @@ class BaseViewController: UIViewController,UIGestureRecognizerDelegate,UINavigat
             }
             
             
+            /// 细节
             if NSStringFromClass(self.classForCoder).contains("DetailViewController2") {
                 navBar?.barTintColor = UIColor.colorWithHexString("2796DC")
                 navBar?.isTranslucent = false
             }
-//            
-//            if NSStringFromClass(self.classForCoder).contains("DetailReplaceVC") {
-//                CCog(message: "DetailReplaceVC")
-////                self.leftBarItem.setBackgroundImage(UIImage.init(named: "back"), for: .normal)
-//            }
+            
+            /// 朋友界面
+            if NSStringFromClass(self.classForCoder).contains("FriendMainVC") {
+                navBar?.barTintColor = UIColor.colorWithHexString("2796DC")
+                navBar?.isTranslucent = false
+            }
+
             
             /// 修改导航栏文字样式（富文本）
             navBar?.titleTextAttributes = [
@@ -120,7 +123,9 @@ class BaseViewController: UIViewController,UIGestureRecognizerDelegate,UINavigat
         if NSStringFromClass(self.classForCoder).contains("TrueNameCertifiedVC") || NSStringFromClass(self.classForCoder).contains("PushingMoneyVC") ||
             NSStringFromClass(self.classForCoder).contains("AgreeMentVC") ||
             NSStringFromClass(self.classForCoder).contains("WKVC") ||
-            NSStringFromClass(self.classForCoder).contains("ReceiveMonVC")  {
+            NSStringFromClass(self.classForCoder).contains("ReceiveMonVC") ||
+            NSStringFromClass(self.classForCoder).contains("FriendGroupVC") ||
+            NSStringFromClass(self.classForCoder).contains("NewFriendVC") {
             
             
             UIApplication.shared.statusBarStyle = UIStatusBarStyle.default
@@ -149,6 +154,11 @@ class BaseViewController: UIViewController,UIGestureRecognizerDelegate,UINavigat
             
             /// 设置
             navBar?.tintColor = UIColor.white
+        }
+        
+        /// 朋友界面导航栏处理
+        if NSStringFromClass(self.classForCoder).contains("FriendMainVC") {
+            
         }
         
         

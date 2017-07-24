@@ -10,6 +10,9 @@ import UIKit
 
 class ReceiveCell : UITableViewCell {
     
+    ///  标识
+    var marked = false
+    
     /// 前置图标
     lazy var imgVi: UIImageView = {
         let d : UIImageView = UIImageView.init(frame: CGRect.init(x: COMMON_MARGIN * 1.2, y: self.Height * 0.2, width: self.Height * 0.8, height: self.Height * 0.9))
@@ -31,9 +34,17 @@ class ReceiveCell : UITableViewCell {
         
         /// 取消选中
         self.selectionStyle = .none
+        
+        if marked {
+            self.backgroundColor = UIColor.randomColor()
+        }
     }
+    
+
     
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
 }
+
+
