@@ -223,11 +223,17 @@ extension ScanCodeController:AVCaptureMetadataOutputObjectsDelegate {
                 let actionCancel = UIAlertAction(title: "确定", style: .cancel, handler: { (action) in
 //                    _ = self.navigationController?.popViewController(animated: true)
                     
+                    /// 支付信息
                     if (ScanModel.shared.codeStr?.hasPrefix("wbp://"))! {
                         self.navigationController?.pushViewController(PaymentThreeVC(), animated: true)
-                    } else {
-                        toast(toast: "未扫描到付款信息")
                     }
+                    
+                    /// 添加朋友
+                    if (ScanModel.shared.codeStr?.hasPrefix("wbf://"))! {
+
+                        self.navigationController?.pushViewController(AddFriendInfoVC(), animated: true)
+                    }
+                    
                 })
                 let actinSure = UIAlertAction(title: "再次扫描", style: .default, handler: { (action) in
                     self.session.startRunning()

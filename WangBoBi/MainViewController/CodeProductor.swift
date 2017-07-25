@@ -45,7 +45,7 @@ class CodeProductor: UIViewController {
         view.backgroundColor = COMMON_TBBGCOLOR
         
         view.addSubview(line)
-        
+
         DispatchQueue.global().async {
 
             let context = AccountModel.shared()?.FrinQCode

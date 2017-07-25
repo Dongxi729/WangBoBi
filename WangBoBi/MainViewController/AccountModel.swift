@@ -1475,7 +1475,101 @@ class AccountModel: NSObject,NSCoding {
         }
     }
     
-    
+    // MARK: - 获取我的朋友接口
+    class func getFriendList() {
+        let param : [String : String] = ["uid" : (AccountModel.shared()?.Id.stringValue)!,
+                                         "token" : (AccountModel.shared()?.Token)!]
+        
+        CCog(message: param)
+        NetWorkTool.shared.postWithPath(path: MY_FRIEND, paras: param, success: { (result) in
+            CCog(message: result)
+            
+            guard let resultData = result as? NSDictionary  else {
+                return
+            }
+            
+            guard let statusMsg = resultData["Status"] as? String else {
+                
+                return
+            }
+            
+            if statusMsg == "999" {
+                AccountModel.shared()?.loginSEL()
+            }
+            
+            
+            /// 抽取提示信息
+            guard let alertMsg = resultData["Msg"] as? String else {
+                
+                return
+            }
+            
+            toast(toast: alertMsg)
+            
+            
+
+        }) { (error) in
+            
+            let alertMsg = (error as NSError).userInfo["NSLocalizedDescription"]
+            toast(toast: alertMsg! as! String)
+        }
+    }
+
+    // MARK: - 加好友接口
+    class func addFriendRequest(_ finished : @escaping (_ result : Bool,_ dataDic : [AddFriendModel]) -> ()) {
+        let param : [String : String] = ["uid" : (AccountModel.shared()?.Id.stringValue)!,
+                                         "token" : (AccountModel.shared()?.Token)!,
+                                         "frqcode" : (ScanModel.shared.codeStr)!,
+                                         "ac" : "scan"]
+        
+        CCog(message: param)
+        
+        NetWorkTool.shared.postWithPath(path: ADD_FRIEND, paras: param, success: { (result) in
+            CCog(message: result)
+            
+            
+            guard let resultData = result as? NSDictionary  else {
+                return
+            }
+            
+            guard let statusMsg = resultData["Status"] as? String else {
+                
+                return
+            }
+            
+            if statusMsg == "999" {
+                AccountModel.shared()?.loginSEL()
+            }
+            
+            
+            /// 抽取提示信息
+            guard let alertMsg = resultData["Msg"] as? String else {
+                
+                return
+            }
+            
+            toast(toast: alertMsg)
+            
+            if let dic = (resultData["Data"] as? NSArray)?[0] as? NSDictionary {
+                CCog(message: dic)
+                
+                var model = [AddFriendModel]()
+                
+                let topMedel = AddFriendModel.init(dict: dic as! [String : Any])
+                
+                model.append(topMedel)
+                
+                
+                finished(true,model)
+//                AddFriendModel.init(dict: dic as! [String : Any])
+            }
+            
+        }) { (error) in
+            
+            let alertMsg = (error as NSError).userInfo["NSLocalizedDescription"]
+            toast(toast: alertMsg! as! String)
+        }
+    }
     
     // MARK: - 归档接档
     func encode(with aCoder: NSCoder) {

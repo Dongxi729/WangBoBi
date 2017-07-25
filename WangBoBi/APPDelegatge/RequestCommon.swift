@@ -60,5 +60,11 @@ let STOTRURL = "\(COMMON_PREFIX)/store.aspx"
 /// 测试王海珍
 let TEST_URL = "https://laod.cn/hosts/2017-google-hosts.html"
 
+/// 我的好友接口列表
+let MY_FRIEND = "\(COMMON_PREFIX)/ifs/myfriend.ashx"
+
+/// 添加好友列表
+let ADD_FRIEND = "\(COMMON_PREFIX)/ifs/addfriend.ashx"
+
 // MARK: - URL数组
 var SHOP_URLArray = NSMutableArray()

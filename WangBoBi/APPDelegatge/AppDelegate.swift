@@ -111,6 +111,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         /// 检查登录时间
         checkLoginTim()
         
+//        testComplement()
+        
         /// 极光推送注入
         injectJPush(didFinishLaunchingWithOptions: launchOptions)
         
@@ -121,14 +123,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func testComplement() {
         
         let param : [String : Any] = ["uid" : (AccountModel.shared()?.Id.stringValue)!,
-                                      "token" : (AccountModel.shared()?.Token)!,
-                                      "topayads" : "wbp://3698ae12-5cec-48a6-bcf4-0d7f13a4e90b",
-                                      "wbc" : "2",
-                                      "paypass" : "123456".md5()]
+                                      "token" : (AccountModel.shared()?.Token)!]
         
         CCog(message: param)
         
-        NetWorkTool.shared.postWithPath(path: TELLTOPAY, paras: param, success: { (result) in
+        NetWorkTool.shared.postWithPath(path: MY_FRIEND, paras: param, success: { (result) in
             CCog(message: result)
         }) { (error) in
             CCog(message: error.localizedDescription)

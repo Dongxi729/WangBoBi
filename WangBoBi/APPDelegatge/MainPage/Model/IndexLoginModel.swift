@@ -101,3 +101,38 @@ class FriendListModel : NSObject {
     
     override func setValue(_ value: Any?, forUndefinedKey key: String) {}
 }
+
+// MARK: - 添加好友返回模型
+class AddFriendModel : NSObject {
+//    Email = "18259129536@163.com";
+//    HeadImg = "http://192.168.1.10:8010/UploadFile/image/20170718092329.png";
+//    IsFriend = 0;
+//    TrueName = "";
+//    VerifiStatus = 0;
+//    WBCAdress = WZuEMHx9m9yyK7ZsJuX5jGAvg3FLbqqYFw;
+    
+    /// 邮箱地址
+    var Email : String?
+    
+    /// 头像 
+    var HeadImg : String?
+    
+    /// IsFriend- 是否是好友
+    var IsFriend : NSNumber?
+    
+    /// 真名
+    var TrueName : String?
+    
+    /// VerifiStatus认证状态
+    var VerifiStatus : NSNumber?
+    
+    /// WBCAdress 钱包地址
+    var WBCAdress : String?
+
+    init(dict: [String : Any]) {
+        super.init()
+        setValuesForKeys(dict)
+    }
+    
+    override func setValue(_ value: Any?, forUndefinedKey key: String) {}
+}

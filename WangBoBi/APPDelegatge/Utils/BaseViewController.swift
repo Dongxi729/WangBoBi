@@ -78,7 +78,6 @@ class BaseViewController: UIViewController,UIGestureRecognizerDelegate,UINavigat
             NSStringFromClass(self.classForCoder).contains("DetailViewController2") || NSStringFromClass(self.classForCoder).contains("DetailReplaceVC") || NSStringFromClass(self.classForCoder).contains("FriendMainVC")
         || NSStringFromClass(self.classForCoder).contains("AddFriendInfoVC") {
             
-            CCog(message: "DetailViewController2")
             
             /// 为那个页面则修改左上角图标
             self.leftBarItem.setBackgroundImage(UIImage.init(named: "rean"), for: .normal)
