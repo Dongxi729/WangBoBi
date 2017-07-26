@@ -13,4 +13,7 @@ class ScanModel: NSObject {
     
     /// 扫描的二维码
     var codeStr : String?
+    
+    /// 好友账号
+    static var friemdIDStr : String?
 }

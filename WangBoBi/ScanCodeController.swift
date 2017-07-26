@@ -232,6 +232,7 @@ extension ScanCodeController:AVCaptureMetadataOutputObjectsDelegate {
                     if (ScanModel.shared.codeStr?.hasPrefix("wbf://"))! {
 
                         self.navigationController?.pushViewController(AddFriendInfoVC(), animated: true)
+                        AddType = 0
                     }
                     
                 })

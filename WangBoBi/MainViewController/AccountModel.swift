@@ -173,6 +173,16 @@ enum realNameIntEnum : Int {
     case unNamed = 0,authing,auhFailed,authSuccess
 }
 
+/// 添加朋友方式
+///
+/// - scan: 扫描
+/// - search: 搜索
+/// - add: 添加
+enum addFriendType : Int {
+    case scan = 0,search,add
+}
+
+
 class AccountModel: NSObject,NSCoding {
     
     /// 账号
@@ -1514,15 +1524,22 @@ class AccountModel: NSObject,NSCoding {
             toast(toast: alertMsg! as! String)
         }
     }
+    
+    
 
     // MARK: - 加好友接口
-    class func addFriendRequest(_ finished : @escaping (_ result : Bool,_ dataDic : [AddFriendModel]) -> ()) {
-        let param : [String : String] = ["uid" : (AccountModel.shared()?.Id.stringValue)!,
+    /// 扫描添加方式
+    class func addFriendRequest(_ chooseType : Int,_ friendCount : String,_ friendIDStr : String,_ frqcodeStr : String,_ finished : @escaping (_ result : Bool,_ dataDic : [AddFriendModel]) -> ()) {
+        let param : [String : Any] = ["uid" : (AccountModel.shared()?.Id.stringValue)!,
                                          "token" : (AccountModel.shared()?.Token)!,
-                                         "frqcode" : (ScanModel.shared.codeStr)!,
-                                         "ac" : "scan"]
+                                         "frqcode" : frqcodeStr,
+                                         "usname" : friendCount,
+                                         "frid" : friendIDStr,
+                                         "ac" : addFriendType.init(rawValue: chooseType) ?? 0]
         
         CCog(message: param)
+        
+    
         
         NetWorkTool.shared.postWithPath(path: ADD_FRIEND, paras: param, success: { (result) in
             CCog(message: result)
@@ -1550,19 +1567,24 @@ class AccountModel: NSObject,NSCoding {
             
             toast(toast: alertMsg)
             
-            if let dic = (resultData["Data"] as? NSArray)?[0] as? NSDictionary {
-                CCog(message: dic)
-                
-                var model = [AddFriendModel]()
-                
-                let topMedel = AddFriendModel.init(dict: dic as! [String : Any])
-                
-                model.append(topMedel)
-                
-                
-                finished(true,model)
-//                AddFriendModel.init(dict: dic as! [String : Any])
+            if alertMsg == "操作成功" {
+                if let dic = (resultData["Data"] as? NSArray)?[0] as? NSDictionary {
+                    CCog(message: dic)
+                    
+                    var model = [AddFriendModel]()
+                    
+                    let topMedel = AddFriendModel.init(dict: dic as! [String : Any])
+                    
+                    model.append(topMedel)
+                    
+                    
+                    finished(true,model)
+                }
+            } else {
+                finished(false,[AddFriendModel]())
             }
+            
+          
             
         }) { (error) in
             

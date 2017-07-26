@@ -8,6 +8,9 @@
 
 import UIKit
 
+// 添加朋友类型
+var AddType : Int?
+
 class AddFrienVC: BaseViewController {
 
     fileprivate lazy var searTf: TfPlaceHolder = {
@@ -66,6 +69,8 @@ class AddFrienVC: BaseViewController {
         if ScanModel.shared.codeStr?.characters.count > 0 {
             self.searTf.text = ScanModel.shared.codeStr
         }
+        
+        
     }
     
     // MARK: - 事件操作
@@ -81,7 +86,9 @@ class AddFrienVC: BaseViewController {
             UIApplication.shared.keyWindow?.frame = (UIApplication.shared.keyWindow?.rootViewController?.view.bounds)!
         }
         
+        AddType = 1
         
+        ScanModel.friemdIDStr = self.searTf.text
     }
     
     override func viewWillDisappear(_ animated: Bool) {
