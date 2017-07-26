@@ -21,6 +21,18 @@ class FriendMainVC: BaseViewController,UITableViewDelegate,UITableViewDataSource
         return d
     }()
     
+    /// 搜索控制器
+    fileprivate lazy var countrySearchController: UISearchController = {
+        let d : UISearchController = UISearchController.init(searchResultsController: nil)
+        d.searchResultsUpdater = self   //两个样例使用不同的代理
+        d.hidesNavigationBarDuringPresentation = false
+        d.dimsBackgroundDuringPresentation = false
+        d.searchBar.subviews.first?.subviews.first?.removeFromSuperview()
+        d.searchBar.placeholder = "搜索"
+        d.searchBar.sizeToFit()
+        return d
+    }()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -29,22 +41,7 @@ class FriendMainVC: BaseViewController,UITableViewDelegate,UITableViewDataSource
         
         self.navigationItem.rightBarButtonItems = [firend,groudFriend]
         
-        DispatchQueue.main.async {
-            //配置搜索控制器
-            self.countrySearchController = ({
-                let controller = UISearchController(searchResultsController: nil)
-                controller.searchResultsUpdater = self   //两个样例使用不同的代理
-                controller.hidesNavigationBarDuringPresentation = false
-                controller.dimsBackgroundDuringPresentation = false
-                //            controller.searchBar.searchBarStyle = .minimal
-                controller.searchBar.placeholder = "搜索"
-                controller.searchBar.sizeToFit()
-                
-                self.tableView.tableHeaderView = controller.searchBar
-                
-                return controller
-            })()
-        }
+        self.tableView.tableHeaderView = countrySearchController.searchBar
         
         if #available(iOS 9.0, *) {
             self.countrySearchController.loadViewIfNeeded()
@@ -54,22 +51,22 @@ class FriendMainVC: BaseViewController,UITableViewDelegate,UITableViewDataSource
         
         /// 添加表格
         view.addSubview(tableView)
+        
+        AccountModel.GetFriendList()
+        
+        
+        view.backgroundColor = UIColor.white
+        
     }
     
     // MARK: - 按钮事件
     @objc fileprivate func jumpToFriend() {
-        CCog(message: "jumpToFriend")
         self.navigationController?.pushViewController(AddFrienVC(), animated: true)
     }
     
     @objc fileprivate func jumpToFriendContactVC() {
-        CCog(message: "jumpToFriendContactVC")
         self.navigationController?.pushViewController(FriendGroupVC(), animated: true)
     }
-    
-    
-    //搜索控制器
-    var countrySearchController = UISearchController()
     
     //原始数据集
     fileprivate let schoolArray = ["清华大学","北京大学","中国人民大学","北京交通大学","北京工业大学",
@@ -79,22 +76,22 @@ class FriendMainVC: BaseViewController,UITableViewDelegate,UITableViewDataSource
     
     /// 模型
     var modelData = [FriendListModel]()
-
+    
     /// 模拟数据
     fileprivate let analogueData : [String : Any] = ["moneyCount" : "-90","dateTime" : "12-30","descStr" : "链接杀戮空间","isSend" : "true","friendName" : "john"]
-//
+    //
     //搜索过滤后的结果集
     fileprivate var searchArray:[String] = [String](){
         didSet  {
             self.tableView.reloadData()
         }
     }
-
+    
     // MARK: - 最近转的
     var recentDeals : [String] = ["sads"]
     
     lazy var tableView: UITableView = {
-        let d : UITableView = UITableView.init(frame: CGRect.init(x: 0, y: 64, width: SCREEN_WIDTH, height: SCREEN_HEIGHT - 84), style: .grouped)
+        let d : UITableView = UITableView.init(frame: CGRect.init(x: 0, y: 64, width: SCREEN_WIDTH, height: SCREEN_HEIGHT - 74), style: .grouped)
         d.delegate = self
         d.dataSource = self
         //创建一个重用的单元格
@@ -112,13 +109,8 @@ class FriendMainVC: BaseViewController,UITableViewDelegate,UITableViewDataSource
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         
-        super.viewDidAppear(true)
         self.tableView.reloadData()
-        
-     
     }
-    
-    
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath)
         -> UITableViewCell {
@@ -140,6 +132,7 @@ class FriendMainVC: BaseViewController,UITableViewDelegate,UITableViewDataSource
             if self.countrySearchController.isActive {
                 cell.descLabel.text = self.searchArray[indexPath.row]
                 return cell
+            
             } else {
                 cell.descLabel.text = self.schoolArray[indexPath.row]
                 

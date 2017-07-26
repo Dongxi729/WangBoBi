@@ -1484,51 +1484,16 @@ class AccountModel: NSObject,NSCoding {
             toast(toast: alertMsg! as! String)
         }
     }
-    
-    // MARK: - 获取我的朋友接口
-    class func getFriendList() {
-        let param : [String : String] = ["uid" : (AccountModel.shared()?.Id.stringValue)!,
-                                         "token" : (AccountModel.shared()?.Token)!]
-        
-        CCog(message: param)
-        NetWorkTool.shared.postWithPath(path: MY_FRIEND, paras: param, success: { (result) in
-            CCog(message: result)
-            
-            guard let resultData = result as? NSDictionary  else {
-                return
-            }
-            
-            guard let statusMsg = resultData["Status"] as? String else {
-                
-                return
-            }
-            
-            if statusMsg == "999" {
-                AccountModel.shared()?.loginSEL()
-            }
-            
-            
-            /// 抽取提示信息
-            guard let alertMsg = resultData["Msg"] as? String else {
-                
-                return
-            }
-            
-            toast(toast: alertMsg)
-            
-            
-
-        }) { (error) in
-            
-            let alertMsg = (error as NSError).userInfo["NSLocalizedDescription"]
-            toast(toast: alertMsg! as! String)
-        }
-    }
-    
-    
 
     // MARK: - 加好友接口
     /// 扫描添加方式
+    ///
+    /// - Parameters:
+    ///   - chooseType: 添加类型
+    ///   - friendCount: 朋友账号
+    ///   - friendIDStr: 朋友ID
+    ///   - frqcodeStr: 好友二维码地址
+    ///   - finished:完成
     class func addFriendRequest(_ chooseType : Int,_ friendCount : String,_ friendIDStr : String,_ frqcodeStr : String,_ finished : @escaping (_ result : Bool,_ dataDic : [AddFriendModel]) -> ()) {
         let param : [String : Any] = ["uid" : (AccountModel.shared()?.Id.stringValue)!,
                                          "token" : (AccountModel.shared()?.Token)!,
@@ -1536,11 +1501,7 @@ class AccountModel: NSObject,NSCoding {
                                          "usname" : friendCount,
                                          "frid" : friendIDStr,
                                          "ac" : addFriendType.init(rawValue: chooseType) ?? 0]
-        
-        CCog(message: param)
-        
-    
-        
+       
         NetWorkTool.shared.postWithPath(path: ADD_FRIEND, paras: param, success: { (result) in
             CCog(message: result)
             
@@ -1584,14 +1545,28 @@ class AccountModel: NSObject,NSCoding {
                 finished(false,[AddFriendModel]())
             }
             
-          
-            
         }) { (error) in
             
             let alertMsg = (error as NSError).userInfo["NSLocalizedDescription"]
             toast(toast: alertMsg! as! String)
         }
     }
+
+    // MARK: - 朋友接口
+    class func GetFriendList() {
+        let param : [String : String] = ["uid" : (AccountModel.shared()?.Id.stringValue)!,
+                                         "token" : (AccountModel.shared()?.Token)!,
+                                         "limit" : "1",
+                                         "offset" : "10"]
+        
+        NetWorkTool.shared.postWithPath(path: FRIEND_LIST, paras: param, success: { (result) in
+            
+        }) { (error) in
+            let alertMsg = (error as NSError).userInfo["NSLocalizedDescription"]
+            toast(toast: alertMsg! as! String)
+        }
+    }
+
     
     // MARK: - 归档接档
     func encode(with aCoder: NSCoder) {

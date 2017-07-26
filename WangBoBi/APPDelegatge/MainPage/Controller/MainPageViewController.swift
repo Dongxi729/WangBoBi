@@ -66,21 +66,6 @@ class MainPageViewController: BaseViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        /// 模型取值
-//        AccountModel.indexInfo(finished: { (commenModel) in
-//            self.topModel = commenModel
-//            
-//        }, finishedTop: { (merTopModel) in
-//            self.mertopModel = merTopModel
-//        }) { (xxx) in
-//            self.loginModel = xxx
-//            
-//            self.loginModel = 66
-//            
-//            self.collV.reloadData()
-//            CCog(message: self.loginModel)
-//        }
-        
         AccountModel.afterLogin(finished: { (commenModel) in
             self.topModel = commenModel
         }, finishedTop: { (merTopModel) in

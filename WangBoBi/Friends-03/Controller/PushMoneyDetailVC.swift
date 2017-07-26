@@ -100,7 +100,7 @@ class PushMoneyDetailVCCell: UITableViewCell {
     lazy var rightImg: UIImageView = {
         let d : UIImageView = UIImageView.init(frame: CGRect.init(x: SCREEN_WIDTH - 30 * SCREEN_SCALE - COMMON_MARGIN, y: COMMON_MARGIN, width: 30 * SCREEN_SCALE, height: 30 * SCREEN_SCALE))
         d.layer.borderWidth = 1
-        d.image = #imageLiteral(resourceName: "add friend")
+        d.image = #imageLiteral(resourceName: "addfriend")
         return d
     }()
     
@@ -108,7 +108,7 @@ class PushMoneyDetailVCCell: UITableViewCell {
     lazy var imgV: UIImageView = {
         let d : UIImageView = UIImageView.init(frame: CGRect.init(x: COMMON_MARGIN, y: COMMON_MARGIN, width: 30 * SCREEN_SCALE, height: 30 * SCREEN_SCALE))
         d.layer.borderWidth = 1
-        d.image = #imageLiteral(resourceName: "add friend")
+        d.image = #imageLiteral(resourceName: "addfriend")
         return d
     }()
     

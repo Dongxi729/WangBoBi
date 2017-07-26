@@ -66,5 +66,8 @@ let MY_FRIEND = "\(COMMON_PREFIX)/ifs/myfriend.ashx"
 /// 添加好友列表
 let ADD_FRIEND = "\(COMMON_PREFIX)/ifs/addfriend.ashx"
 
+/// 好友列表
+let FRIEND_LIST = "\(COMMON_PREFIX)/ifs/tranfriend.ashx"
+
 // MARK: - URL数组
 var SHOP_URLArray = NSMutableArray()
