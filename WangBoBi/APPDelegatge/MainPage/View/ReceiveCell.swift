@@ -106,7 +106,7 @@ class FriendCell : UITableViewCell {
     
     /// 底部文本
     lazy var bottomLabel: UILabel = {
-        let d : UILabel = UILabel.init(frame: CGRect.init(x: self.imgVi.RightX + 2 * COMMON_MARGIN + SCREEN_WIDTH * 0.09, y: self.descLabel.BottomY + 5, width: self.descLabel.Width, height: 15))
+        let d : UILabel = UILabel.init(frame: CGRect.init(x: self.imgVi.RightX + 3 * COMMON_MARGIN + SCREEN_WIDTH * 0.09, y: self.descLabel.BottomY + 5, width: self.descLabel.Width, height: 15))
         d.font = UIFont.systemFont(ofSize: 13)
         d.text = "asdsasd"
         d.textColor = UIColor.darkGray
@@ -142,19 +142,27 @@ class FriendCell : UITableViewCell {
         
         /// 取消选中
         self.selectionStyle = .none
-    }
-    
-    override func layoutSubviews() {
-        /// 根据陌生人隐藏状态调整描述文本
+        
         if !stangerLabel.isHidden {
             self.descLabel.frame = CGRect.init(x: self.stangerLabel.RightX, y: 10, width: self.Width - self.imgVi.Width + COMMON_MARGIN * 1.2 * 2 , height: 20)
         } else {
             self.descLabel.frame = CGRect.init(x: self.imgVi.RightX + COMMON_MARGIN * 2, y: 10, width: self.Width - self.imgVi.Width + COMMON_MARGIN * 1.2 * 2 , height: 20)
         }
-        
+
         self.setGetMoneyLabel.sizeToFit()
-        ///// ......根据返回模型取值
     }
+    
+//    override func layoutSubviews() {
+//        /// 根据陌生人隐藏状态调整描述文本
+//        if !stangerLabel.isHidden {
+//            self.descLabel.frame = CGRect.init(x: self.stangerLabel.RightX, y: 10, width: self.Width - self.imgVi.Width + COMMON_MARGIN * 1.2 * 2 , height: 20)
+//        } else {
+//            self.descLabel.frame = CGRect.init(x: self.imgVi.RightX + COMMON_MARGIN * 2, y: 10, width: self.Width - self.imgVi.Width + COMMON_MARGIN * 1.2 * 2 , height: 20)
+//        }
+//        
+//        self.setGetMoneyLabel.sizeToFit()
+//        ///// ......根据返回模型取值
+//    }
     
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")

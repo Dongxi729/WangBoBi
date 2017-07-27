@@ -97,6 +97,7 @@ class FriendMainVC: BaseViewController,UITableViewDelegate,UITableViewDataSource
         //创建一个重用的单元格
         d.register(FriendCell.self,
                    forCellReuseIdentifier: "MyCell")
+        
         return d
     }()
     
@@ -131,6 +132,8 @@ class FriendMainVC: BaseViewController,UITableViewDelegate,UITableViewDataSource
             
             if self.countrySearchController.isActive {
                 cell.descLabel.text = self.searchArray[indexPath.row]
+                
+                self.countrySearchController.searchBar.resignFirstResponder()
                 return cell
             
             } else {
@@ -157,7 +160,7 @@ class FriendMainVC: BaseViewController,UITableViewDelegate,UITableViewDataSource
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 61
+        return 60
     }
     
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
@@ -177,3 +180,4 @@ class FriendMainVC: BaseViewController,UITableViewDelegate,UITableViewDataSource
         }
     }
 }
+

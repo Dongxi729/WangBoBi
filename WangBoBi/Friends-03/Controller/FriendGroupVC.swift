@@ -10,7 +10,7 @@ import UIKit
 
 class FriendGroupVC: BaseViewController, UITableViewDelegate, UITableViewDataSource,FriendHeaderDelegate,UISearchResultsUpdating {
     
-//    var tableView:UITableView?
+    //    var tableView:UITableView?
     
     var adHeaders:[String] = ["A","B","C","D","E","F","G","H","I","J","K","L","M","N","O","P","Q","R","S","T","U","V","W","X","Y","Z"]
     
@@ -22,7 +22,7 @@ class FriendGroupVC: BaseViewController, UITableViewDelegate, UITableViewDataSou
     
     /// 右边按钮
     var rightBtn : UIButton = UIButton()
-
+    
     
     /// 搜索控制器
     fileprivate lazy var countrySearchController: UISearchController = {
@@ -49,14 +49,14 @@ class FriendGroupVC: BaseViewController, UITableViewDelegate, UITableViewDataSou
         super.viewDidLoad()
         
         title = "我的朋友"
-
+        
         self.view.addSubview(self.tableView)
         
         /// 头视图
         let headerView = FriendHeader.init(frame: CGRect.init(x: 0, y: 0, width: SCREEN_WIDTH, height: 64))
         headerView.delegate = self
         tableView.tableHeaderView = headerView
-    
+        
         /// 右边按钮添加好友
         rightBtn = BigBtn.init(frame: CGRect.init(x: SCREEN_WIDTH - 20 - COMMON_MARGIN, y: 34, width: 20, height: 20))
         
@@ -76,13 +76,13 @@ class FriendGroupVC: BaseViewController, UITableViewDelegate, UITableViewDataSou
         self.tableView.tableHeaderView = dddd
         
         makeCityToGroup()
-
+        
     }
     
     var citys = ["北京市", "上海市", "天津市", "重庆市","铜陵市", "明光市", "天长市", "宁国市","宁国市","宁国市","宁国市","宁国市","宁国市","宁国市","宁国市","宁国市","宁国市","宁国市","宁国市","宁国市","宁国市","宁国市","宁国市","宁国市","宁国市","宁国市", "界首市", "桐城市", "广州市", "韶关市", "深圳市", "珠海市", "汕头市", "佛山市", "江门市", "湛江市", "茂名市", "肇庆市", "惠州市", "梅州市", "汕尾市", "河源市", "阳江市", "清远市", "东莞市", "中山市", "潮州市", "揭阳市", "云浮市", "昆明市", "曲靖市", "玉溪市", "保山市", "昭通市", "丽江市", "思茅市", "临沧市", "楚雄彝族自治州", "红河哈尼族彝族自治州", "文山壮族苗族自治州", "西双版纳傣族自治州", "大理白族自治州", "德宏傣族景颇族自治州", "怒江傈僳族自治州", "迪庆藏族自治州"]
     
     func makeCityToGroup() {
-
+        
         // 遍历citys数组中的所有城市
         for city in citys {
             
@@ -108,7 +108,7 @@ class FriendGroupVC: BaseViewController, UITableViewDelegate, UITableViewDataSou
         //拿到所有的key将它排序, 作为每个组的标题
         groupTitles = cityGroups.keys.sorted()
     }
-
+    
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
@@ -126,11 +126,11 @@ class FriendGroupVC: BaseViewController, UITableViewDelegate, UITableViewDataSou
     @objc fileprivate func jumpToFriend(){
         self.navigationController?.pushViewController(AddFrienVC(), animated: true)
     }
-
+    
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
     }
-
+    
     func numberOfSections(in tableView: UITableView) -> Int {
         if self.countrySearchController.isActive {
             return 1
@@ -192,19 +192,19 @@ class FriendGroupVC: BaseViewController, UITableViewDelegate, UITableViewDataSou
         //同一形式的单元格重复使用，在声明时已注册
         let cell = tableView.dequeueReusableCell(withIdentifier: identify, for: indexPath)
             as UITableViewCell
-
+        
         let firstLetter = groupTitles[indexPath.section]
         let citysInAGroup = cityGroups[firstLetter]!
         
         if countrySearchController.isActive {
-            if searchArray.count > 0 {
-                cell.textLabel?.text = searchArray[indexPath.row]
-            }
-
+            
+            cell.textLabel?.text = searchArray[indexPath.row]
+            self.countrySearchController.searchBar.resignFirstResponder()
+            
         } else {
             cell.textLabel?.text = citysInAGroup[indexPath.row]
         }
-
+        
         return cell
     }
     
@@ -220,13 +220,13 @@ class FriendGroupVC: BaseViewController, UITableViewDelegate, UITableViewDataSou
         self.searchArray = []
         
         self.searchArray = self.citys.filter { (school) -> Bool in
-        
+            
             return school.contains(searchController.searchBar.text!)
         }
         
-//        CCog(message: self.citys.filter({ (sc) -> Bool in
-//            return sc.contains(searchController.searchBar.text!)
-//        }))
+        //        CCog(message: self.citys.filter({ (sc) -> Bool in
+        //            return sc.contains(searchController.searchBar.text!)
+        //        }))
     }
     
     //搜索过滤后的结果集
@@ -276,7 +276,7 @@ class FriendHeader: UIView {
     @objc fileprivate func tapSEL() {
         self.delegate?.jumpToNewFriendVC()
     }
-
+    
     
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")

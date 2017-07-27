@@ -147,8 +147,10 @@
 		26B14EFC1EF259AF0050135B /* CollectCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26B14EFB1EF259AF0050135B /* CollectCell.swift */; };
 		26B14F001EF29ABA0050135B /* ReceiveMonVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26B14EFF1EF29ABA0050135B /* ReceiveMonVC.swift */; };
 		26B14F021EF29F490050135B /* ReceiveCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26B14F011EF29F490050135B /* ReceiveCell.swift */; };
+		26CB058C1F297B7F0033CA15 /* TestCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26CB058B1F297B7F0033CA15 /* TestCell.swift */; };
 		26CF98511F0B26CD008F8F23 /* AccountModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26CF98501F0B26CD008F8F23 /* AccountModel.swift */; };
 		26DBE6C61F0F891D00551F63 /* ScanModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26DBE6C51F0F891D00551F63 /* ScanModel.swift */; };
+		26DBE92F1F298B510092D6CF /* UITableView+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26DBE92E1F298B510092D6CF /* UITableView+Extension.swift */; };
 		26ECA3761F0134350093D12E /* AleradyCertify.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26ECA3751F0134350093D12E /* AleradyCertify.swift */; };
 		26ED24481EF3E18C00642804 /* TrueNameCertifiedVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26ED24471EF3E18C00642804 /* TrueNameCertifiedVC.swift */; };
 		26ED244A1EF3E4EA00642804 /* SetDoubelCertifiVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26ED24491EF3E4EA00642804 /* SetDoubelCertifiVC.swift */; };
@@ -379,8 +381,10 @@
 		26B14EFB1EF259AF0050135B /* CollectCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CollectCell.swift; path = ../../Mine/View/CollectCell.swift; sourceTree = "<group>"; };
 		26B14EFF1EF29ABA0050135B /* ReceiveMonVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ReceiveMonVC.swift; path = ../../../../ReceiveMonVC.swift; sourceTree = "<group>"; };
 		26B14F011EF29F490050135B /* ReceiveCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReceiveCell.swift; sourceTree = "<group>"; };
+		26CB058B1F297B7F0033CA15 /* TestCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TestCell.swift; sourceTree = "<group>"; };
 		26CF98501F0B26CD008F8F23 /* AccountModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AccountModel.swift; sourceTree = "<group>"; };
 		26DBE6C51F0F891D00551F63 /* ScanModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ScanModel.swift; sourceTree = "<group>"; };
+		26DBE92E1F298B510092D6CF /* UITableView+Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UITableView+Extension.swift"; sourceTree = "<group>"; };
 		26ECA3751F0134350093D12E /* AleradyCertify.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AleradyCertify.swift; sourceTree = "<group>"; };
 		26ED24471EF3E18C00642804 /* TrueNameCertifiedVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TrueNameCertifiedVC.swift; path = ../../../TrueNameCertifiedVC.swift; sourceTree = "<group>"; };
 		26ED24491EF3E4EA00642804 /* SetDoubelCertifiVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SetDoubelCertifiVC.swift; sourceTree = "<group>"; };
@@ -873,6 +877,7 @@
 		2649607D1EF0C02600A559D6 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				26CB058B1F297B7F0033CA15 /* TestCell.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -1002,6 +1007,7 @@
 				264961181EF0CD3E00A559D6 /* UIView+Extension.swift */,
 				2649611A1EF0CD9200A559D6 /* NSString+extension.swift */,
 				2650C18F1F039B66005BE741 /* UILabel + Extension.swift */,
+				26DBE92E1F298B510092D6CF /* UITableView+Extension.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -1442,6 +1448,7 @@
 				26ECA3761F0134350093D12E /* AleradyCertify.swift in Sources */,
 				260B20C81EF76B5500E78FD8 /* MyRequestVC.swift in Sources */,
 				264960CE1EF0C28F00A559D6 /* TransformationMatrix.cpp in Sources */,
+				26DBE92F1F298B510092D6CF /* UITableView+Extension.swift in Sources */,
 				260B20D41EF7A08D00E78FD8 /* TfPlaceHolder.swift in Sources */,
 				2647936D1F18DD71000F9F67 /* ShopWebV.swift in Sources */,
 				2643CFC61EF3EE2200EFC720 /* DetailViewController.swift in Sources */,
@@ -1461,6 +1468,7 @@
 				2647936B1F18DD28000F9F67 /* WkBaseViewController.swift in Sources */,
 				264961301EF0D08F00A559D6 /* FTToastIndicator.m in Sources */,
 				26632B591F2794CA00E25003 /* AddFriendMarkVC.swift in Sources */,
+				26CB058C1F297B7F0033CA15 /* TestCell.swift in Sources */,
 				264961061EF0C9EC00A559D6 /* YYFrameImage.m in Sources */,
 				26F248B41EFFC05300599CC7 /* NameCerWithDetailVC.swift in Sources */,
 				261004B21EF8B1B100DE000F /* ForgetPassVCThree.swift in Sources */,

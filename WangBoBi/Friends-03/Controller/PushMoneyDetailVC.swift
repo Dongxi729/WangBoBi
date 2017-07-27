@@ -28,6 +28,12 @@ class PushMoneyDetailVC: BaseViewController,UITableViewDataSource,UITableViewDel
         view.backgroundColor = COMMON_TBBGCOLOR
         
         view.addSubview(tableView)
+        
+        tableView.scrollToBottom(animated: false)
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
     }
     
     // MARK: - UITableViewDataSource
@@ -61,10 +67,15 @@ class PushMoneyDetailVC: BaseViewController,UITableViewDataSource,UITableViewDel
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 40
+        return dd.count
     
     }
+    
+    func numberOfSections(in tableView: UITableView) -> Int {
+        return 2
+    }
 
+    var dd = ["dd","dd","dd","dd","dd","dd","dd","dd","dd","dd","dd","dd","dd","dd","dd","dd"]
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return 90
@@ -116,6 +127,7 @@ class PushMoneyDetailVCCell: UITableViewCell {
         let d : UILabel = UILabel.init(frame: CGRect.init(x: self.detailImg.Width * 0.3,y: self.detailImg.Height * 0.15, width: 60 * SCREEN_SCALE, height: 20))
         d.text = "转账给你"
         d.textColor = UIColor.white
+        d.font = UIFont.systemFont(ofSize: 13 * SCREEN_SCALE)
         return d
     }()
     
@@ -123,6 +135,7 @@ class PushMoneyDetailVCCell: UITableViewCell {
         let d : UILabel = UILabel.init(frame: CGRect.init(x: self.pushLabel.LeftX, y: self.pushLabel.BottomY, width: self.pushLabel.Width, height: 20))
         d.text = "100"
         d.textColor = UIColor.white
+        d.font = UIFont.systemFont(ofSize: 13 * SCREEN_SCALE)
         return d
     }()
     
@@ -130,6 +143,7 @@ class PushMoneyDetailVCCell: UITableViewCell {
         let d : UILabel = UILabel.init(frame: CGRect.init(x: self.rightIMgV.Width * 0.3, y: self.rightIMgV.Height * 0.15, width: 60 * SCREEN_SCALE, height: 20))
         d.text = "转账给陈丽"
         d.textColor = UIColor.white
+        d.font = UIFont.systemFont(ofSize: 13 * SCREEN_SCALE)
         return d
     }()
     
@@ -137,6 +151,7 @@ class PushMoneyDetailVCCell: UITableViewCell {
         let d : UILabel = UILabel.init(frame: CGRect.init(x: self.rightPushLabel.LeftX, y: self.rightPushLabel.BottomY, width: 60 * SCREEN_SCALE, height: 20))
         d.text = "1000网 博币"
         d.textColor = UIColor.white
+        d.font = UIFont.systemFont(ofSize: 13 * SCREEN_SCALE)
         return d
     }()
     
@@ -164,5 +179,13 @@ class PushMoneyDetailVCCell: UITableViewCell {
     
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
+    }
+}
+
+extension UITableView {
+    func scrollToBottom(animated: Bool = false) {
+        let sections = self.numberOfSections
+        let rows = self.numberOfRows(inSection: sections - 1)
+        self.scrollToRow(at: NSIndexPath.init(row: rows - 1, section: sections - 1) as IndexPath, at: .bottom, animated: false)
     }
 }
