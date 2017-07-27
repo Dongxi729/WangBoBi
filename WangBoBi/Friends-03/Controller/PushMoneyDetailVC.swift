@@ -8,7 +8,7 @@
 
 import UIKit
 
-class PushMoneyDetailVC: BaseViewController,UITableViewDataSource,UITableViewDelegate {
+class PushMoneyDetailVC: BaseViewController,UITableViewDataSource,UITableViewDelegate,PushMoneyHeaderViewDelegate {
 
     fileprivate lazy var tableView: UITableView = {
 //        let d : UITableView = UITableView.init(frame: self.view.bounds)
@@ -17,6 +17,14 @@ class PushMoneyDetailVC: BaseViewController,UITableViewDataSource,UITableViewDel
         d.dataSource = self
         d.separatorStyle = .none
         d.register(PushMoneyDetailVCCell.self, forCellReuseIdentifier: "PushMoneyDetailVCCell")
+        
+        return d
+    }()
+    
+    /// 表头
+    fileprivate lazy var headerView: PushMoneyHeaderView = {
+        let d : PushMoneyHeaderView = PushMoneyHeaderView.init(frame: CGRect.init(x: 0, y: 0, width: SCREEN_WIDTH, height: 44))
+        d.delegate = self
         return d
     }()
     
@@ -29,18 +37,14 @@ class PushMoneyDetailVC: BaseViewController,UITableViewDataSource,UITableViewDel
         
         view.addSubview(tableView)
         
-        tableView.scrollToBottom(animated: false)
+        self.reverSeddd = self.dd.reversed()
+        
     }
     
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
-    }
     
     // MARK: - UITableViewDataSource
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "PushMoneyDetailVCCell") as! PushMoneyDetailVCCell
-        
-        
         
         if indexPath.row % 2 == 1 {
             cell.imgV.isHidden = true
@@ -63,23 +67,48 @@ class PushMoneyDetailVC: BaseViewController,UITableViewDataSource,UITableViewDel
             cell.pushMoneyLabel.isHidden = false
         }
         
+        cell.textLabel?.text = self.reverSeddd[indexPath.row]
+        
         return cell
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return dd.count
+        CCog(message: reverSeddd.count)
+        return reverSeddd.count
     
     }
     
-    func numberOfSections(in tableView: UITableView) -> Int {
-        return 2
-    }
-
-    var dd = ["dd","dd","dd","dd","dd","dd","dd","dd","dd","dd","dd","dd","dd","dd","dd","dd"]
+    var dd = ["dd","dd","dd","dd","dd","dd","ee","dd","dd","dd","dd","ff"]
+    
+    var reverSeddd : [String] = []
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return 90
     }
+    
+    // MARK: - PushMoneyHeaderViewDelegate
+    func loadMoreSEL() {
+        self.reverSeddd.insert(contentsOf: ["123","4356"], at: 0)
+        
+        CCog(message: self.reverSeddd)
+    
+        self.tableView.reloadData()
+        UIView.animate(withDuration: 0.5) {
+            self.tableView.tableHeaderView?.isHidden = true
+        }
+    }
+    
+//    // MARK: - <#Description#>
+//    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+//        CCog(message: scrollView.contentOffset.y)
+//        
+//        if scrollView.contentOffset.y < 0 {
+//            UIView.animate(withDuration: 0.5, animations: {
+//                self.tableView.tableHeaderView?.isHidden = false
+//                self.tableView.frame = CGRect.init(x: 0, y: 64, width: SCREEN_WIDTH, height: SCREEN_HEIGHT)
+//            })
+//        }
+//    }
 }
 
 
@@ -182,10 +211,41 @@ class PushMoneyDetailVCCell: UITableViewCell {
     }
 }
 
-extension UITableView {
-    func scrollToBottom(animated: Bool = false) {
-        let sections = self.numberOfSections
-        let rows = self.numberOfRows(inSection: sections - 1)
-        self.scrollToRow(at: NSIndexPath.init(row: rows - 1, section: sections - 1) as IndexPath, at: .bottom, animated: false)
+// MARK: - 表头
+protocol PushMoneyHeaderViewDelegate {
+    func loadMoreSEL()
+}
+
+
+class PushMoneyHeaderView: UIView {
+    
+    var delegate : PushMoneyHeaderViewDelegate?
+    
+    fileprivate lazy var descLabel: UILabel = {
+        let d: UILabel = UILabel.init(frame: CGRect.init(x: COMMON_MARGIN, y: COMMON_MARGIN * 0.5, width: SCREEN_WIDTH - 2 * COMMON_MARGIN, height: self.Height - COMMON_MARGIN))
+        d.text = "查看更多"
+        d.backgroundColor = UIColor.colorWithHexString("2796DD")
+        d.textAlignment = .center
+        d.layer.cornerRadius = 5
+        d.clipsToBounds = true
+        return d
+    }()
+    
+    override init(frame: CGRect) {
+        super.init(frame: frame)
+        addSubview(descLabel)
+        
+        self.isUserInteractionEnabled = true
+        let tapGes = UITapGestureRecognizer.init(target: self, action: #selector(loadMore))
+        self.addGestureRecognizer(tapGes)
+    }
+    
+    /// 加载更多
+    func loadMore() {
+        self.delegate?.loadMoreSEL()
+    }
+    
+    required init?(coder aDecoder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
     }
 }
