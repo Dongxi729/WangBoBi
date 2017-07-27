@@ -8,10 +8,9 @@
 
 import UIKit
 
-class PushMoneyDetailVC: BaseViewController,UITableViewDataSource,UITableViewDelegate,PushMoneyHeaderViewDelegate {
+class PushMoneyDetailVC: BaseViewController,UITableViewDataSource,UITableViewDelegate,headerViewelegate {
 
     fileprivate lazy var tableView: UITableView = {
-//        let d : UITableView = UITableView.init(frame: self.view.bounds)
         let d : UITableView = UITableView.init(frame: CGRect.init(x: 0, y: 64, width: SCREEN_WIDTH, height: SCREEN_HEIGHT - 64), style: .plain)
         d.delegate = self
         d.dataSource = self
@@ -21,12 +20,23 @@ class PushMoneyDetailVC: BaseViewController,UITableViewDataSource,UITableViewDel
         return d
     }()
     
-    /// 表头
-    fileprivate lazy var headerView: PushMoneyHeaderView = {
-        let d : PushMoneyHeaderView = PushMoneyHeaderView.init(frame: CGRect.init(x: 0, y: 0, width: SCREEN_WIDTH, height: 44))
-        d.delegate = self
+    lazy var activity: UIRefreshControl = {
+        let d : UIRefreshControl = UIRefreshControl.init(frame: self.view.bounds)
+        d.addTarget(self, action: #selector(refreshSEL(sender:)), for: .valueChanged)
         return d
     }()
+    
+    func refreshSEL(sender : UIRefreshControl) -> Void {
+        CCog(message: "")
+        self.reverSeddd.insert(contentsOf: ["123","4356"], at: 0)
+        
+        CCog(message: self.reverSeddd)
+        
+        self.tableView.reloadData()
+        UIView.animate(withDuration: 1.5) {
+            sender.endRefreshing()
+        }
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -39,7 +49,15 @@ class PushMoneyDetailVC: BaseViewController,UITableViewDataSource,UITableViewDel
         
         self.reverSeddd = self.dd.reversed()
         
+        /// 添加头部刷新视图
+        self.tableView.addHeaderViewfun()
+        let foot : headerView = tableView.viewWithTag(888) as! headerView
+        foot.delegate = self
+        
+        self.tableView.scrollToBottom(animated: false)
     }
+    
+    
     
     
     // MARK: - UITableViewDataSource
@@ -86,29 +104,21 @@ class PushMoneyDetailVC: BaseViewController,UITableViewDataSource,UITableViewDel
         return 90
     }
     
-    // MARK: - PushMoneyHeaderViewDelegate
-    func loadMoreSEL() {
+    
+    func headerViewEndfun(_ _endRefresh: () -> Void) {
+        
+        let d : headerView = tableView.viewWithTag(888) as! headerView
+        CCog(message: "")
+        CCog(message: "")
         self.reverSeddd.insert(contentsOf: ["123","4356"], at: 0)
         
         CCog(message: self.reverSeddd)
-    
+        
         self.tableView.reloadData()
-        UIView.animate(withDuration: 0.5) {
-            self.tableView.tableHeaderView?.isHidden = true
+        UIView.animate(withDuration: 1.5) {
+            d.endRefresh()
         }
     }
-    
-//    // MARK: - <#Description#>
-//    func scrollViewDidScroll(_ scrollView: UIScrollView) {
-//        CCog(message: scrollView.contentOffset.y)
-//        
-//        if scrollView.contentOffset.y < 0 {
-//            UIView.animate(withDuration: 0.5, animations: {
-//                self.tableView.tableHeaderView?.isHidden = false
-//                self.tableView.frame = CGRect.init(x: 0, y: 64, width: SCREEN_WIDTH, height: SCREEN_HEIGHT)
-//            })
-//        }
-//    }
 }
 
 
