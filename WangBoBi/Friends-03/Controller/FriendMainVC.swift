@@ -8,7 +8,7 @@
 
 import UIKit
 
-class FriendMainVC: BaseViewController,UITableViewDelegate,UITableViewDataSource,UISearchResultsUpdating {
+class FriendMainVC: BaseViewController,UITableViewDelegate,UITableViewDataSource,UISearchResultsUpdating,FriendMainVHeaVDelegate,headerViewelegate {
     
     lazy var groudFriend: UIBarButtonItem = {
         let d : UIBarButtonItem = UIBarButtonItem.init(image: #imageLiteral(resourceName: "groupFir"), style: .plain, target: self, action: #selector(jumpToFriendContactVC))
@@ -33,6 +33,21 @@ class FriendMainVC: BaseViewController,UITableViewDelegate,UITableViewDataSource
         return d
     }()
     
+    /// 朋友列表
+    var mertopModel = [FriendMainListModel]()
+    
+    /// 显示页数
+    fileprivate var limitCount : Int = 0
+    
+    /// 显示更多
+    fileprivate lazy var headV: FriendMainVHeaV = {
+        let d : FriendMainVHeaV = FriendMainVHeaV.init(frame: CGRect.init(x: 0, y: 0, width: SCREEN_WIDTH, height: 30))
+        d.delegate = self
+        return d
+    }()
+
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -52,8 +67,10 @@ class FriendMainVC: BaseViewController,UITableViewDelegate,UITableViewDataSource
         /// 添加表格
         view.addSubview(tableView)
         
-        AccountModel.GetFriendList()
-        
+//        AccountModel.GetFriendList(String(limitCount), "10") { (result, model) in
+//            self.mertopModel = model
+//        }
+        tableView.tableFooterView = headV
         
         view.backgroundColor = UIColor.white
         
@@ -69,7 +86,7 @@ class FriendMainVC: BaseViewController,UITableViewDelegate,UITableViewDataSource
     }
     
     //原始数据集
-    fileprivate let schoolArray = ["清华大学","北京大学","中国人民大学","北京交通大学","北京工业大学",
+    private var frien_datasource = ["清华大学","北京大学","中国人民大学","北京交通大学","北京工业大学",
                                    "北京航空航天大学","北京理工大学","北京科技大学","中国政法大学",
                                    "中央财经大学","华北电力大学","北京体育大学","上海外国语大学","复旦大学",
                                    "华东师范大学","上海大学","河北工业大学"]
@@ -87,19 +104,22 @@ class FriendMainVC: BaseViewController,UITableViewDelegate,UITableViewDataSource
         }
     }
     
-    // MARK: - 最近转的
+    /// 最近转的
     var recentDeals : [String] = ["sads"]
     
     lazy var tableView: UITableView = {
-        let d : UITableView = UITableView.init(frame: CGRect.init(x: 0, y: 64, width: SCREEN_WIDTH, height: SCREEN_HEIGHT - 74), style: .grouped)
+        let d : UITableView = UITableView.init(frame: CGRect.init(x: 0, y: 64, width: SCREEN_WIDTH, height: SCREEN_HEIGHT - 50 - 64), style: .grouped)
         d.delegate = self
         d.dataSource = self
         //创建一个重用的单元格
         d.register(FriendCell.self,
                    forCellReuseIdentifier: "MyCell")
         
+        
+        
         return d
     }()
+    
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
@@ -111,6 +131,10 @@ class FriendMainVC: BaseViewController,UITableViewDelegate,UITableViewDataSource
         super.viewDidAppear(animated)
         
         self.tableView.reloadData()
+        
+        tableView.addHeaderViewfun()
+        let foot : headerView = tableView.viewWithTag(888) as! headerView
+        foot.delegate = self
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath)
@@ -135,15 +159,14 @@ class FriendMainVC: BaseViewController,UITableViewDelegate,UITableViewDataSource
                 
                 self.countrySearchController.searchBar.resignFirstResponder()
                 return cell
-            
+                
             } else {
-                cell.descLabel.text = self.schoolArray[indexPath.row]
+                cell.descLabel.text = self.frien_datasource[indexPath.row]
                 
                 return cell
             }
             
     }
-    
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
@@ -155,7 +178,8 @@ class FriendMainVC: BaseViewController,UITableViewDelegate,UITableViewDataSource
         if self.countrySearchController.isActive {
             return self.searchArray.count
         } else {
-            return schoolArray.count
+            CCog(message: frien_datasource.count)
+            return frien_datasource.count
         }
     }
     
@@ -172,12 +196,89 @@ class FriendMainVC: BaseViewController,UITableViewDelegate,UITableViewDataSource
         }
     }
     
+    func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
+        return 0.001
+    }
     
     // MARK: - 实时进行搜索
     func updateSearchResults(for searchController: UISearchController) {
-        self.searchArray = self.schoolArray.filter { (school) -> Bool in
+        self.searchArray = self.frien_datasource.filter { (school) -> Bool in
             return school.contains(searchController.searchBar.text!)
         }
     }
+    
+    // MARK: - FriendMainVHeaVDelegate
+    func main_load() {
+        limitCount += 1
+        AccountModel.GetFriendList(String(limitCount), "10") { (result, model) in
+            if result {
+                self.tableView.reloadData()
+            }
+        }
+        
+//        let dformatter = DateFormatter()
+//        dformatter.dateFormat = "HH:mm:ss"
+//        
+//        //        frien_datasource.append(contentsOf: ["dssaada","dsdasdsada","asdsd"])
+//        frien_datasource.insert(dformatter.string(from: Date()), at: frien_datasource.count)
+//        self.tableView.reloadData()
+    }
+    
+    func headerViewEndfun(_ _endRefresh: () -> Void) {
+        let dd : headerView = self.tableView.viewWithTag(888) as! headerView
+        dd.endRefresh()
+        CCog(message: "")
+        
+//        let dformatter = DateFormatter()
+//        dformatter.dateFormat = "HH:mm:ss"
+//
+//        frien_datasource.insert(dformatter.string(from: Date()), at: 0)
+//        self.tableView.reloadData()
+        
+        AccountModel.GetFriendList("1", "10") { (result, model) in
+            if result {
+                self.tableView.reloadData()
+            }
+        }
+    }
+    
 }
 
+// MARK: - 头视图
+protocol FriendMainVHeaVDelegate {
+    func main_load()
+}
+
+class FriendMainVHeaV: UIView {
+    
+    var delegate : FriendMainVHeaVDelegate?
+    
+    lazy var reloadBtn: UILabel = {
+        let d : UILabel = UILabel.init(frame: CGRect.init(x: SCREEN_WIDTH * 0.3, y: 0, width: SCREEN_WIDTH - SCREEN_WIDTH * 0.6, height: self.Height))
+        d.text = "加载更多"
+        d.font = UIFont.systemFont(ofSize: 12)
+        d.textAlignment = .center
+        
+        d.layer.cornerRadius = 5
+        return d
+    }()
+    
+    
+    @objc fileprivate func load_more() {
+        self.delegate?.main_load()
+    }
+    
+    override init(frame: CGRect) {
+        super.init(frame: frame)
+        addSubview(reloadBtn)
+        
+        self.isUserInteractionEnabled = true
+        let tapGes = UITapGestureRecognizer.init(target: self, action: #selector(load_more))
+        
+        self.addGestureRecognizer(tapGes)
+    }
+    
+    required init?(coder aDecoder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+}

@@ -179,7 +179,7 @@ enum realNameIntEnum : Int {
 /// - search: 搜索
 /// - add: 添加
 enum addFriendType : Int {
-    case scan = 0,search,add
+    case scan = 0,search,add,rmk
 }
 
 
@@ -1494,13 +1494,16 @@ class AccountModel: NSObject,NSCoding {
     ///   - friendIDStr: 朋友ID
     ///   - frqcodeStr: 好友二维码地址
     ///   - finished:完成
-    class func addFriendRequest(_ chooseType : Int,_ friendCount : String,_ friendIDStr : String,_ frqcodeStr : String,_ finished : @escaping (_ result : Bool,_ dataDic : [AddFriendModel]) -> ()) {
+    class func addFriendRequest(_ chooseType : Int,_ friendCount : String,_ friendIDStr : String,_ frqcodeStr : String,_ rmkStr : String,_ finished : @escaping (_ result : Bool,_ dataDic : [AddFriendModel]) -> ()) {
         let param : [String : Any] = ["uid" : (AccountModel.shared()?.Id.stringValue)!,
                                          "token" : (AccountModel.shared()?.Token)!,
                                          "frqcode" : frqcodeStr,
                                          "usname" : friendCount,
                                          "frid" : friendIDStr,
+                                         "rmk": rmkStr,
                                          "ac" : addFriendType.init(rawValue: chooseType) ?? 0]
+        
+        CCog(message: param)
        
         NetWorkTool.shared.postWithPath(path: ADD_FRIEND, paras: param, success: { (result) in
             CCog(message: result)
@@ -1553,18 +1556,63 @@ class AccountModel: NSObject,NSCoding {
     }
 
     // MARK: - 朋友接口
-    class func GetFriendList() {
+    class func GetFriendList(_ limitCount : String,_ loadCount : String,finished:@escaping (_ result : Bool,_ dataDic : [FriendMainListModel]) -> ()) {
         let param : [String : String] = ["uid" : (AccountModel.shared()?.Id.stringValue)!,
                                          "token" : (AccountModel.shared()?.Token)!,
                                          "limit" : "1",
                                          "offset" : "10"]
         
         NetWorkTool.shared.postWithPath(path: FRIEND_LIST, paras: param, success: { (result) in
+            guard let resultData = result as? NSDictionary  else {
+                return
+            }
             
+            guard let statusMsg = resultData["Status"] as? String else {
+                
+                return
+            }
+            
+            if statusMsg == "999" {
+                AccountModel.shared()?.loginSEL()
+            }
+            
+            /// 抽取提示信息
+            guard let alertMsg = resultData["Msg"] as? String else {
+                
+                return
+            }
+            
+            toast(toast: alertMsg)
+            
+            if alertMsg == "操作成功" {
+                
+                if let dataArray = resultData["Data"] as? NSArray {
+                    if dataArray.count > 0 {
+                        if let dic = (resultData["Data"] as? NSArray)?[0] as? NSDictionary {
+                            CCog(message: dic)
+                            
+                            var model = [FriendMainListModel]()
+                            
+                            let topMedel = FriendMainListModel.init(dict: dic as! [String : Any])
+                            
+                            model.append(topMedel)
+                            
+                            
+                            finished(true,model)
+                        }
+                    }
+                }
+                
+                
+            } else {
+                finished(false,[FriendMainListModel]())
+            }
+
         }) { (error) in
             let alertMsg = (error as NSError).userInfo["NSLocalizedDescription"]
             toast(toast: alertMsg! as! String)
         }
+    
     }
 
     

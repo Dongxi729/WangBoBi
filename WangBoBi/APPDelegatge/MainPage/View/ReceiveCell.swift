@@ -169,5 +169,88 @@ class FriendCell : UITableViewCell {
     }
 }
 
-
-
+// MARK: - 新的朋友Cell
+class NewFriendCell : UITableViewCell {
+    
+    var new_model: NewFriendListModel? {
+        didSet {
+            CCog(message: new_model?.isAccept?.boolValue)
+        }
+    }
+    
+    override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
+        super.init(style: .default, reuseIdentifier: reuseIdentifier)
+        
+        contentView.addSubview(ne_imgVi)
+        contentView.addSubview(new_descLabel)
+        contentView.addSubview(ne_bottomLabel)
+        contentView.addSubview(new_acceptBtn)
+        contentView.addSubview(new_aleradyLabel)
+//        new_acceptBtn.isHidden = true
+//        new_aleradyLabel.isHidden = true.
+        
+//        if new_model?.isAccept?.boolValue == true {
+//            new_aleradyLabel.isHidden = true
+//            new_acceptBtn.isHidden = false
+//        } else {
+//            new_aleradyLabel.isHidden = false
+//            new_acceptBtn.isHidden = true
+//        }
+        
+    }
+    
+    
+    required init?(coder aDecoder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
+    
+    /// 前置图标
+    lazy var ne_imgVi: UIImageView = {
+        let d : UIImageView = UIImageView.init(frame: CGRect.init(x: COMMON_MARGIN , y: 7.5, width: self.Height, height: self.Height))
+        d.contentMode = UIViewContentMode.scaleAspectFit
+        d.image = #imageLiteral(resourceName: "friendBg")
+        d.layer.borderWidth = 1
+        return d
+    }()
+    
+    /// 描述文本
+    lazy var new_descLabel: UILabel = {
+        let d : UILabel = UILabel.init(frame: CGRect.init(x: self.ne_imgVi.RightX + COMMON_MARGIN * 2, y: 10, width: self.Width - self.ne_imgVi.Width + COMMON_MARGIN * 1.2 * 2 , height: 20))
+        d.font = UIFont.boldSystemFont(ofSize: 14)
+        return d
+    }()
+    
+    /// 底部文本
+    lazy var ne_bottomLabel: UILabel = {
+        let d : UILabel = UILabel.init(frame: CGRect.init(x: self.ne_imgVi.RightX + COMMON_MARGIN, y: self.new_descLabel.BottomY + 5, width: self.new_descLabel.Width, height: 15))
+        d.font = UIFont.systemFont(ofSize: 13)
+        d.text = "asdsasd"
+        d.textColor = UIColor.darkGray
+        return d
+    }()
+    
+    /// 接受
+    lazy var new_acceptBtn: UIButton = {
+        let d : UIButton = UIButton.init(frame: CGRect.init(x: SCREEN_WIDTH - COMMON_MARGIN - SCREEN_WIDTH * 0.15, y: self.center.y - self.Height * 0.15, width: SCREEN_WIDTH * 0.15, height: self.Height * 0.6))
+        d.setTitle("接受", for: .normal)
+        d.titleLabel?.font = UIFont.systemFont(ofSize: 12)
+        d.titleLabel?.sizeToFit()
+        
+        d.clipsToBounds = true
+        d.layer.cornerRadius = 5
+        d.backgroundColor = UIColor.colorWithHexString("2796DD")
+        return d
+    }()
+    
+    /// 已接收
+    lazy var new_aleradyLabel: UILabel = {
+        let d : UILabel = UILabel.init(frame: CGRect.init(x: SCREEN_WIDTH - COMMON_MARGIN - SCREEN_WIDTH * 0.15, y: self.center.y, width: SCREEN_WIDTH * 0.15, height: self.Height * 0.6))
+        d.text = "已接受"
+        d.font = UIFont.systemFont(ofSize: 12)
+        d.layer.borderWidth = 1
+        d.sizeToFit()
+        d.textColor = UIColor.colorWithHexString("2796DD")
+        return d
+    }()
+}

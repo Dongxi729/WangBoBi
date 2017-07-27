@@ -227,6 +227,7 @@ class FriendGroupVC: BaseViewController, UITableViewDelegate, UITableViewDataSou
         //        CCog(message: self.citys.filter({ (sc) -> Bool in
         //            return sc.contains(searchController.searchBar.text!)
         //        }))
+    
     }
     
     //搜索过滤后的结果集

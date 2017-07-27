@@ -42,6 +42,8 @@ class ScanCodeController: BaseViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         resetAnimatinon()
+        
+        
     }
     
     override func viewDidLoad() {

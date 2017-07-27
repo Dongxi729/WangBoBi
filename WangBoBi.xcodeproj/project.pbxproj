@@ -136,6 +136,8 @@
 		269B5ECC1F077BD300AA573F /* footerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 269B5EC91F077BD300AA573F /* footerView.swift */; };
 		269B5ECD1F077BD300AA573F /* headerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 269B5ECA1F077BD300AA573F /* headerView.swift */; };
 		269B5ECE1F077BD300AA573F /* UIScrollView-extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 269B5ECB1F077BD300AA573F /* UIScrollView-extension.swift */; };
+		269D31341F29C5F400FE8BEB /* CountDetailVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 269D31331F29C5F400FE8BEB /* CountDetailVC.swift */; };
+		269D31361F29C6F900FE8BEB /* CountDetailCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 269D31351F29C6F900FE8BEB /* CountDetailCell.swift */; };
 		26A0A4A91EF0E26B00035D0D /* JFNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26A0A4A81EF0E26B00035D0D /* JFNavigationController.swift */; };
 		26A0A4AB1EF1064C00035D0D /* NetWorkTool.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26A0A4AA1EF1064C00035D0D /* NetWorkTool.swift */; };
 		26A3CAD71F2596BE002815C1 /* FriendMainVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26A3CAD61F2596BE002815C1 /* FriendMainVC.swift */; };
@@ -147,7 +149,6 @@
 		26B14EFC1EF259AF0050135B /* CollectCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26B14EFB1EF259AF0050135B /* CollectCell.swift */; };
 		26B14F001EF29ABA0050135B /* ReceiveMonVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26B14EFF1EF29ABA0050135B /* ReceiveMonVC.swift */; };
 		26B14F021EF29F490050135B /* ReceiveCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26B14F011EF29F490050135B /* ReceiveCell.swift */; };
-		26CB058C1F297B7F0033CA15 /* TestCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26CB058B1F297B7F0033CA15 /* TestCell.swift */; };
 		26CF98511F0B26CD008F8F23 /* AccountModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26CF98501F0B26CD008F8F23 /* AccountModel.swift */; };
 		26DBE6C61F0F891D00551F63 /* ScanModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26DBE6C51F0F891D00551F63 /* ScanModel.swift */; };
 		26DBE92F1F298B510092D6CF /* UITableView+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26DBE92E1F298B510092D6CF /* UITableView+Extension.swift */; };
@@ -370,6 +371,8 @@
 		269B5EC91F077BD300AA573F /* footerView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = footerView.swift; sourceTree = "<group>"; };
 		269B5ECA1F077BD300AA573F /* headerView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = headerView.swift; sourceTree = "<group>"; };
 		269B5ECB1F077BD300AA573F /* UIScrollView-extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIScrollView-extension.swift"; sourceTree = "<group>"; };
+		269D31331F29C5F400FE8BEB /* CountDetailVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CountDetailVC.swift; sourceTree = "<group>"; };
+		269D31351F29C6F900FE8BEB /* CountDetailCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CountDetailCell.swift; sourceTree = "<group>"; };
 		26A0A4A81EF0E26B00035D0D /* JFNavigationController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JFNavigationController.swift; sourceTree = "<group>"; };
 		26A0A4AA1EF1064C00035D0D /* NetWorkTool.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NetWorkTool.swift; sourceTree = "<group>"; };
 		26A3CAD61F2596BE002815C1 /* FriendMainVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FriendMainVC.swift; sourceTree = "<group>"; };
@@ -381,7 +384,6 @@
 		26B14EFB1EF259AF0050135B /* CollectCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CollectCell.swift; path = ../../Mine/View/CollectCell.swift; sourceTree = "<group>"; };
 		26B14EFF1EF29ABA0050135B /* ReceiveMonVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ReceiveMonVC.swift; path = ../../../../ReceiveMonVC.swift; sourceTree = "<group>"; };
 		26B14F011EF29F490050135B /* ReceiveCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReceiveCell.swift; sourceTree = "<group>"; };
-		26CB058B1F297B7F0033CA15 /* TestCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TestCell.swift; sourceTree = "<group>"; };
 		26CF98501F0B26CD008F8F23 /* AccountModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AccountModel.swift; sourceTree = "<group>"; };
 		26DBE6C51F0F891D00551F63 /* ScanModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ScanModel.swift; sourceTree = "<group>"; };
 		26DBE92E1F298B510092D6CF /* UITableView+Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UITableView+Extension.swift"; sourceTree = "<group>"; };
@@ -863,6 +865,7 @@
 				26A3CAE01F25F8C6002815C1 /* PushMoneyDetailVC.swift */,
 				269165701F26DC20007F011D /* FriendTableList.swift */,
 				26632B581F2794CA00E25003 /* AddFriendMarkVC.swift */,
+				269D31331F29C5F400FE8BEB /* CountDetailVC.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -877,7 +880,7 @@
 		2649607D1EF0C02600A559D6 /* View */ = {
 			isa = PBXGroup;
 			children = (
-				26CB058B1F297B7F0033CA15 /* TestCell.swift */,
+				269D31351F29C6F900FE8BEB /* CountDetailCell.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -1397,6 +1400,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				269D31361F29C6F900FE8BEB /* CountDetailCell.swift in Sources */,
 				264960C71EF0C28F00A559D6 /* POPDecayAnimation.mm in Sources */,
 				266B89011F04A5650033BFA7 /* PushingMoneyVC.swift in Sources */,
 				26B14F001EF29ABA0050135B /* ReceiveMonVC.swift in Sources */,
@@ -1410,6 +1414,7 @@
 				260B21061EF7DFF500E78FD8 /* RigisterWithDetailVC.swift in Sources */,
 				26F80A1A1F0206C3009A9746 /* AuthFailedVC.swift in Sources */,
 				265D431B1EFBE318007F5AB8 /* String+QRCode.swift in Sources */,
+				269D31341F29C5F400FE8BEB /* CountDetailVC.swift in Sources */,
 				269B5ECC1F077BD300AA573F /* footerView.swift in Sources */,
 				269165711F26DC20007F011D /* FriendTableList.swift in Sources */,
 				260B20D61EF7A0F900E78FD8 /* ToolBar.swift in Sources */,
@@ -1468,7 +1473,6 @@
 				2647936B1F18DD28000F9F67 /* WkBaseViewController.swift in Sources */,
 				264961301EF0D08F00A559D6 /* FTToastIndicator.m in Sources */,
 				26632B591F2794CA00E25003 /* AddFriendMarkVC.swift in Sources */,
-				26CB058C1F297B7F0033CA15 /* TestCell.swift in Sources */,
 				264961061EF0C9EC00A559D6 /* YYFrameImage.m in Sources */,
 				26F248B41EFFC05300599CC7 /* NameCerWithDetailVC.swift in Sources */,
 				261004B21EF8B1B100DE000F /* ForgetPassVCThree.swift in Sources */,

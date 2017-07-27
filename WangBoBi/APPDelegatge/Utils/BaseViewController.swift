@@ -119,6 +119,8 @@ class BaseViewController: UIViewController,UIGestureRecognizerDelegate,UINavigat
         
         /// 实名认证
         ///PushingMoneyVC
+        
+        
         if NSStringFromClass(self.classForCoder).contains("TrueNameCertifiedVC") || NSStringFromClass(self.classForCoder).contains("PushingMoneyVC") ||
             NSStringFromClass(self.classForCoder).contains("AgreeMentVC") ||
             NSStringFromClass(self.classForCoder).contains("WKVC") ||
@@ -126,7 +128,9 @@ class BaseViewController: UIViewController,UIGestureRecognizerDelegate,UINavigat
             NSStringFromClass(self.classForCoder).contains("FriendGroupVC") ||
             NSStringFromClass(self.classForCoder).contains("NewFriendVC") ||
                 NSStringFromClass(self.classForCoder).contains("AddFrienVC") ||
-            NSStringFromClass(self.classForCoder).contains("PushMoneyDetailVC") {
+            NSStringFromClass(self.classForCoder).contains("PushMoneyDetailVC") ||
+            NSStringFromClass(self.classForCoder).contains("CountDetailVC") ||
+            NSStringFromClass(self.classForCoder).contains("AddFriendMarkVC") {
             
             
             UIApplication.shared.statusBarStyle = UIStatusBarStyle.default

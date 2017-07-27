@@ -126,6 +126,9 @@ class AddFriendModel : NSObject {
     /// VerifiStatus认证状态
     var VerifiStatus : NSNumber?
     
+    /// 朋友ID
+    var Id : NSNumber?
+    
     /// WBCAdress 钱包地址
     var WBCAdress : String?
 
@@ -135,4 +138,30 @@ class AddFriendModel : NSObject {
     }
     
     override func setValue(_ value: Any?, forUndefinedKey key: String) {}
+}
+
+
+// MARK: - 新的朋友模型消息模型
+class NewFriendListModel : NSObject {
+    var isAccept : NSNumber?
+    
+    init(dict: [String : Any]) {
+        super.init()
+        setValuesForKeys(dict)
+    }
+    
+    override func setValue(_ value: Any?, forUndefinedKey key: String) {}
+}
+
+
+// MARK: - 朋友界面的模型
+class FriendMainListModel : NSObject {
+    
+    init(dict: [String : Any]) {
+        super.init()
+        setValuesForKeys(dict)
+    }
+    
+    override func setValue(_ value: Any?, forUndefinedKey key: String) {}
+
 }

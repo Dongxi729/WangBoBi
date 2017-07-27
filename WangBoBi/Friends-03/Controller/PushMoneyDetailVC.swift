@@ -91,7 +91,6 @@ class PushMoneyDetailVC: BaseViewController,UITableViewDataSource,UITableViewDel
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        CCog(message: reverSeddd.count)
         return reverSeddd.count
     
     }
@@ -104,7 +103,13 @@ class PushMoneyDetailVC: BaseViewController,UITableViewDataSource,UITableViewDel
         return 90
     }
     
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        self.navigationController?.pushViewController(CountDetailVC(), animated: true)
+    }
     
+    
+    
+    // MARK: - refreshDelegate
     func headerViewEndfun(_ _endRefresh: () -> Void) {
         
         let d : headerView = tableView.viewWithTag(888) as! headerView
@@ -123,16 +128,6 @@ class PushMoneyDetailVC: BaseViewController,UITableViewDataSource,UITableViewDel
 
 
 class PushMoneyDetailVCCell: UITableViewCell {
-    
-    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-        let touch: UITouch? = touches.first
-        let touchPoint: CGPoint? = touch?.location(in: self)
-        print("\((touchPoint?.x)! / self.Width)==\((touchPoint?.y)! / self.Height)")
-        let stringFloat = Int((touchPoint?.x)!)
-        let stringFloat1 = Int((touchPoint?.y)!)
-        print("\(stringFloat)\(stringFloat1)")
-    }
-    
     
     lazy var detailImg: UIImageView = {
         let d : UIImageView = UIImageView.init(frame: CGRect.init(x: self.imgV.RightX, y: self.imgV.TopY, width: SCREEN_WIDTH * 0.6, height: SCREEN_WIDTH * 0.6 * (120 / 363)))

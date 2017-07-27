@@ -31,7 +31,6 @@ class AddFrienVC: BaseViewController {
     ///  我的二维码
     fileprivate lazy var leftBtn: UIButton = {
         let d: UIButton = UIButton.init(frame: CGRect.init(x: 0, y: SCREEN_HEIGHT * 0.125 + 64, width: SCREEN_WIDTH * 0.5, height: SCREEN_WIDTH * 0.3))
-        d.layer.borderWidth = 1
         d.addTarget(self, action: #selector(jumpToMyInfo), for: .touchUpInside)
         return d
     }()
@@ -69,12 +68,10 @@ class AddFrienVC: BaseViewController {
         if ScanModel.shared.codeStr?.characters.count > 0 {
             self.searTf.text = ScanModel.shared.codeStr
         }
-        
-        
     }
     
     // MARK: - 事件操作
-    @objc fileprivate func cancelBtnSEL(){
+    @objc fileprivate func cancelBtnSEL() {
         CCog(message: "")
         /// 缩回请求
         
@@ -103,7 +100,7 @@ class AddFrienVC: BaseViewController {
     
     /// 调往我的二维码
     @objc fileprivate func jumpToMyInfo() {
-        self.navigationController?.pushViewController(MyInfoVC(), animated: true)
+        self.navigationController?.pushViewController(CodeProductor(), animated: true)
     }
 
     /// 扫一扫

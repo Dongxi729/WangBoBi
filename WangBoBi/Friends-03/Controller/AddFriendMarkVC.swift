@@ -17,15 +17,9 @@ class AddFriendMarkVC: BaseViewController,BindPhoneFooterVDelegate {
         view.addSubview(bgV)
         view.addSubview(footerView)
         self.bgV.addSubview(sendTf)
-    }
-    
-    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-        let touch: UITouch? = touches.first
-        let touchPoint: CGPoint? = touch?.location(in: self.view)
-        print("\((touchPoint?.x)! / self.view.Width)==\((touchPoint?.y)! / self.view.Height)")
-        let stringFloat = Int((touchPoint?.x)!)
-        let stringFloat1 = Int((touchPoint?.y)!)
-        print("\(stringFloat)\(stringFloat1)")
+        view.backgroundColor = COMMON_TBBGCOLOR
+        
+        title = "朋友验证"
     }
     
     lazy var sendTf: TfPlaceHolder = {
@@ -52,7 +46,14 @@ class AddFriendMarkVC: BaseViewController,BindPhoneFooterVDelegate {
     
     // MARK: - footervieDelegate 
     func bindPhonSELDelegate() {
-        CCog(message: "")
+        CCog(message: ScanModel.friendEamil)
+        
+        
+        
+        AccountModel.addFriendRequest(3, "", ScanModel.friendEamil!, "", self.sendTf.text!) { (result, model) in
+            
+        }
+    
     }
 
 }
