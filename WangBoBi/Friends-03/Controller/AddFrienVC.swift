@@ -14,7 +14,7 @@ var AddType : Int?
 class AddFrienVC: BaseViewController {
 
     fileprivate lazy var searTf: TfPlaceHolder = {
-        let d : TfPlaceHolder = TfPlaceHolder.init(frame: CGRect.init(x: SCREEN_WIDTH * 0.11755231037232, y: SCREEN_HEIGHT * 0.0142 + 64, width: SCREEN_WIDTH - SCREEN_WIDTH * 0.15, height: SCREEN_HEIGHT * 0.075))
+        let d : TfPlaceHolder = TfPlaceHolder.init(frame: CGRect.init(x: SCREEN_WIDTH * 0.11755231037232, y: COMMON_MARGIN + 64, width: SCREEN_WIDTH - SCREEN_WIDTH * 0.15, height: SCREEN_HEIGHT * 0.075))
         d.plStrSize(str: "搜索好友账号", holderColor: UIColor.lightGray)
         
         let toolBar = ToolBar()

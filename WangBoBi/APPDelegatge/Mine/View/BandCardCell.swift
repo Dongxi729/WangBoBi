@@ -9,7 +9,7 @@
 import UIKit
 
 
-class BandCardCell: UITableViewCell {
+class BandCardCell: CommonTableViewCell {
     
     var model = CardType()
     
@@ -95,7 +95,7 @@ class BandCardCell: UITableViewCell {
 
 /// 我的银行卡第二组视图cell
 // MARK: - 银行卡第二组视图
-class AddCardCell: UITableViewCell {
+class AddCardCell: CommonTableViewCell {
     
     lazy var addICon: UIImageView = {
         let d : UIImageView = UIImageView.init(frame: CGRect.init(x: COMMON_MARGIN, y: self.bounds.midY - 10 * SCREEN_SCALE, width: 20 * SCREEN_SCALE, height: 20 * SCREEN_SCALE))
@@ -136,7 +136,7 @@ class AddCardCell: UITableViewCell {
 
 
 
-class TabViewCell: UITableViewCell {
+class TabViewCell: CommonTableViewCell {
     
     lazy var SeparatorLine: UIView = {
         let d: UIView = UIView.init(frame: CGRect.init(x: 0, y: self.Height, width: SCREEN_WIDTH, height: 0.5))
@@ -185,7 +185,7 @@ class TabViewCell: UITableViewCell {
 }
 
 /// 我的信息第一行Cell
-class MyVCCell : UITableViewCell {
+class MyVCCell : CommonTableViewCell {
     
     /// 头像
     lazy var AvatarHeadImg: UIImageView = {

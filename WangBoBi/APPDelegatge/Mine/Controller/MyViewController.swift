@@ -23,9 +23,7 @@ class MyViewController: UIViewController {
         d.dataSource = self
         d.register(TabViewCell.self, forCellReuseIdentifier: "cel")
         d.register(MyVCCell.self, forCellReuseIdentifier: "MyVCCell")
-        
-//        d.separatorStyle = UITableViewCellSeparatorStyle.none
-        
+
         return d
     }()
     
@@ -82,8 +80,6 @@ class MyViewController: UIViewController {
         
         // Do any additional setup after loading the view.
         view.addSubview(tableView)
-
-        CCog(message: self.classForCoder)
     }
 }
 
@@ -93,18 +89,15 @@ extension MyViewController : UITableViewDelegate,UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "cel") as! TabViewCell
 
-        cell.preservesSuperviewLayoutMargins = false
-        cell.separatorInset = UIEdgeInsets.zero
-        cell.layoutMargins = UIEdgeInsets.zero
         switch indexPath.section {
         case 0:
             switch indexPath.row {
             case 0:
                 let cell = tableView.dequeueReusableCell(withIdentifier: "MyVCCell") as! MyVCCell
                 
-                cell.preservesSuperviewLayoutMargins = false
-                cell.separatorInset = UIEdgeInsets.zero
-                cell.layoutMargins = UIEdgeInsets.zero
+//                cell.preservesSuperviewLayoutMargins = false
+//                cell.separatorInset = UIEdgeInsets.zero
+//                cell.layoutMargins = UIEdgeInsets.zero
                 
                 cell.backgroundColor = UIColor.colorWithHexString("2796DD")
 
@@ -160,17 +153,17 @@ extension MyViewController : UITableViewDelegate,UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         
-        let deviceType = UIDevice.current.deviceType
+//        let deviceType = UIDevice.current.deviceType
         
         switch indexPath.section {
         case 0:
             switch indexPath.row {
             case 0:
-                if deviceType == .iPhone4S {
-                    return 80
-                } else {
+//                if deviceType == .iPhone4S {
+//                    return 80
+//                } else {
                     return 80 * SCREEN_SCALE
-                }
+//                }
                 
             default:
                 return 45

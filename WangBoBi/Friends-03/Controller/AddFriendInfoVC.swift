@@ -213,7 +213,7 @@ class AddPersonInfoEditV : UIView {
                     self.moneyAddresShow.text = model[0].WBCAdress
                     
                     /// 存入单利
-                    ScanModel.friendEamil = String(describing: model[0].Id?.intValue)
+                    ScanModel.friendEamil = model[0].Id
                     
                     self.avatarImg.setImage(urlString: model[0].HeadImg, placeholderImage: #imageLiteral(resourceName: "arrow"))
                     

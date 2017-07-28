@@ -79,20 +79,17 @@ class IndexMertopModel : NSObject {
 
 // MARK: - 朋友列表模型
 class FriendListModel : NSObject {
-    /// 钱
-    var moneyCount : String?
+    /// 朋友ID
+    var Id : NSNumber?
     
-    /// 日期
-    var dateTime : String?
+    /// 用户名
+    var UserName : String?
     
-    /// 描述文本
-    var descStr : String?
+    /// 网博币钱包地址
+    var WBCAdress : String?
     
-    /// 是否接收、转账
-    var isSend : String?
-    
-    /// 朋友名字
-    var friendName : String?
+    /// 头像
+    var HeadImg : String?
     
     init(dict: [String : Any]) {
         super.init()
@@ -140,10 +137,22 @@ class AddFriendModel : NSObject {
     override func setValue(_ value: Any?, forUndefinedKey key: String) {}
 }
 
-
-// MARK: - 新的朋友模型消息模型
+// MARK: - 朋友界面的模型
 class NewFriendListModel : NSObject {
-    var isAccept : NSNumber?
+    
+//    HeadImg = "http://192.168.1.10:8010/UploadFile/image/20170718092329.png";
+//    Id = 16;
+//    Msg = "转账0.00001网博币";
+//    NoticeNum = 1;
+//    SubmitTime = "2017-07-28T18:23:59.31";
+//    UserName = "18259129536@163.com";
+    
+    var HeadImg : String?
+    var UserName : String?
+    var NoticeNum : NSNumber?
+    var SubmitTime : String?
+    var Msg : String?
+    
     
     init(dict: [String : Any]) {
         super.init()
@@ -154,8 +163,37 @@ class NewFriendListModel : NSObject {
 }
 
 
-// MARK: - 朋友界面的模型
+
+// MARK: - 新的朋友模型消息模型
 class FriendMainListModel : NSObject {
+
+//    HeadImg = "http://192.168.1.10:8010/UploadFile/image/20170727062932.png";
+//    Remark = JSP;
+//    Status = 0;
+//    SubmitTime = "2017-07-28T10:39:51.003";
+//    UserId = 6;
+//    UserName = "896944961@qq.com";
+    /// 头像
+    var HeadImg : String?
+    
+    /// 备注
+    var Remark : String?
+    
+    /// 状态
+    var Status : NSNumber?
+    
+    /// 申请加好友时间
+    var SubmitTime : String?
+    
+    /// 用户ID
+    var UserId : NSNumber?
+    
+    /// 用户名
+    var UserName : String?
+    
+    /// 好友ID
+    var AlyUserId : NSNumber?
+    
     
     init(dict: [String : Any]) {
         super.init()

@@ -33,15 +33,17 @@ class CountDetailVC: BaseViewController,UITableViewDelegate,UITableViewDataSourc
         view.addSubview(tableView)
         
         tableView.tableHeaderView = headV
+        
+        view.backgroundColor = UIColor.white
     }
     
     // MARK: - UITableViewDelegate,UITableViewDataSource
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "CountDetailCell") as! CountDetailCell
         
-        cell.preservesSuperviewLayoutMargins = false
-        cell.separatorInset = UIEdgeInsets.zero
-        cell.layoutMargins = .zero
+//        cell.preservesSuperviewLayoutMargins = false
+//        cell.separatorInset = UIEdgeInsets.zero
+//        cell.layoutMargins = .zero
         
         
         cell.count_right.text = cellDataSource[indexPath.row]

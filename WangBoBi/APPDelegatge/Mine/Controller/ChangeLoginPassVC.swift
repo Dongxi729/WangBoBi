@@ -56,9 +56,9 @@ class ChangeLoginPassVC: UIViewController,BindPhoneCellDelegate,BindPhoneFooterV
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "cellID") as! BindPhoneCell
         
-        cell.preservesSuperviewLayoutMargins = false
-        cell.separatorInset = UIEdgeInsets.zero
-        cell.layoutMargins = UIEdgeInsets.zero
+//        cell.preservesSuperviewLayoutMargins = false
+//        cell.separatorInset = UIEdgeInsets.zero
+//        cell.layoutMargins = UIEdgeInsets.zero
         
         cell.textLabel?.text = dataSource["title"]?[indexPath.row]
         cell.titLabel.sizeToFit()

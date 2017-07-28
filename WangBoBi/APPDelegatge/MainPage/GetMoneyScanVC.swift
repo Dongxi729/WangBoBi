@@ -76,8 +76,8 @@ class GetMoneyScanVC: BaseViewController {
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         
-        if let uiddd = AccountModel.shared()?.Id.stringValue {
-            if let tokkken = AccountModel.shared()?.Token {
+        if let _ = AccountModel.shared()?.Id.stringValue {
+            if let _ = AccountModel.shared()?.Token {
                 AccountModel.reloadSEL()
             }
         }

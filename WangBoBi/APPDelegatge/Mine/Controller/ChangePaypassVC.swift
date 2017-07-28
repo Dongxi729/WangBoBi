@@ -58,9 +58,9 @@ class ChangePaypassVC: UIViewController,BindPhoneCellDelegate,BindPhoneFooterVDe
         let cell = tableView.dequeueReusableCell(withIdentifier: "cellID") as! BindPhoneCell
         
         
-        cell.preservesSuperviewLayoutMargins = false
-        cell.separatorInset = UIEdgeInsets.zero
-        cell.layoutMargins = .zero
+//        cell.preservesSuperviewLayoutMargins = false
+//        cell.separatorInset = UIEdgeInsets.zero
+//        cell.layoutMargins = .zero
         
         cell.textLabel?.text = dataSource["title"]?[indexPath.row]
 

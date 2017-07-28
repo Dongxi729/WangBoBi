@@ -127,7 +127,7 @@ class PushMoneyDetailVC: BaseViewController,UITableViewDataSource,UITableViewDel
 }
 
 
-class PushMoneyDetailVCCell: UITableViewCell {
+class PushMoneyDetailVCCell: CommonTableViewCell {
     
     lazy var detailImg: UIImageView = {
         let d : UIImageView = UIImageView.init(frame: CGRect.init(x: self.imgV.RightX, y: self.imgV.TopY, width: SCREEN_WIDTH * 0.6, height: SCREEN_WIDTH * 0.6 * (120 / 363)))
@@ -226,13 +226,12 @@ class PushMoneyHeaderView: UIView {
     
     var delegate : PushMoneyHeaderViewDelegate?
     
-    fileprivate lazy var descLabel: UILabel = {
-        let d: UILabel = UILabel.init(frame: CGRect.init(x: COMMON_MARGIN, y: COMMON_MARGIN * 0.5, width: SCREEN_WIDTH - 2 * COMMON_MARGIN, height: self.Height - COMMON_MARGIN))
-        d.text = "查看更多"
+    fileprivate lazy var descLabel: BtnWithRightImg = {
+        let d: BtnWithRightImg = BtnWithRightImg.init(frame: CGRect.init(x: COMMON_MARGIN, y: COMMON_MARGIN * 0.5, width: SCREEN_WIDTH - 2 * COMMON_MARGIN, height: self.Height - COMMON_MARGIN))
+        d.setTitle("查看更多", for: .normal)
         d.backgroundColor = UIColor.colorWithHexString("2796DD")
-        d.textAlignment = .center
-        d.layer.cornerRadius = 5
-        d.clipsToBounds = true
+        d.setImage(#imageLiteral(resourceName: "arrow_down"), for: .normal)
+        d.addTarget(self, action: #selector(loadMore), for: .touchUpInside)
         return d
     }()
     
@@ -240,14 +239,37 @@ class PushMoneyHeaderView: UIView {
         super.init(frame: frame)
         addSubview(descLabel)
         
-        self.isUserInteractionEnabled = true
-        let tapGes = UITapGestureRecognizer.init(target: self, action: #selector(loadMore))
-        self.addGestureRecognizer(tapGes)
+//        self.isUserInteractionEnabled = true
+//        let tapGes = UITapGestureRecognizer.init(target: self, action: #selector(loadMore))
+//        self.addGestureRecognizer(tapGes)
     }
     
     /// 加载更多
     func loadMore() {
         self.delegate?.loadMoreSEL()
+    }
+    
+    required init?(coder aDecoder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+}
+
+
+class BtnWithRightImg: UIButton {
+    override init(frame: CGRect) {
+        super.init(frame: frame)
+        self.imageView?.contentMode = .scaleAspectFit
+        self.titleLabel?.textAlignment = .center
+        self.titleLabel?.textColor = UIColor.black
+    }
+    
+    override func titleRect(forContentRect contentRect: CGRect) -> CGRect {
+        return CGRect.init(x: 0, y: 0, width: self.Width * 0.7, height: self.Height)
+    }
+    
+    
+    override func imageRect(forContentRect contentRect: CGRect) -> CGRect {
+        return CGRect.init(x: self.Width * 0.7, y: 0, width: self.Width * 0.3, height: self.Height)
     }
     
     required init?(coder aDecoder: NSCoder) {

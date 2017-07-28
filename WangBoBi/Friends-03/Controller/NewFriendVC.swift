@@ -8,28 +8,16 @@
 
 import UIKit
 
-class NewFriendVC: BaseViewController,UITableViewDelegate,UITableViewDataSource,UISearchResultsUpdating {
+class NewFriendVC: BaseViewController,UITableViewDelegate,UITableViewDataSource,NewFriendCellDelegate {
     
+    /// 朋友接口列表
+    var topModel = [FriendMainListModel]()
     
-
     fileprivate lazy var tableView: UITableView = {
-//        let d : UITableView = UITableView.init(frame: CGRect.init(x: 0, y: 64, width: SCREEN_WIDTH, height: SCREEN_HEIGHT - 64))
         let d : UITableView = UITableView.init(frame: CGRect.init(x: 0, y: 64, width: SCREEN_WIDTH, height: SCREEN_HEIGHT - 64), style: .grouped)
         d.delegate = self
         d.dataSource = self
         d.register(NewFriendCell.self, forCellReuseIdentifier: "NewFriendCell")
-        return d
-    }()
-    
-    /// 搜索控制器
-    fileprivate lazy var countrySearchController: UISearchController = {
-        let d : UISearchController = UISearchController.init(searchResultsController: nil)
-        d.searchResultsUpdater = self   //两个样例使用不同的代理
-        d.hidesNavigationBarDuringPresentation = false
-        d.dimsBackgroundDuringPresentation = false
-        d.searchBar.subviews.first?.subviews.first?.removeFromSuperview()
-        d.searchBar.placeholder = "搜索"
-        d.searchBar.sizeToFit()
         return d
     }()
     
@@ -41,43 +29,30 @@ class NewFriendVC: BaseViewController,UITableViewDelegate,UITableViewDataSource,
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
         // Do any additional setup after loading the view.
         title = "新的朋友"
         
         view.backgroundColor = UIColor.white
         view.addSubview(tableView)
         
-        tableView.tableHeaderView = countrySearchController.searchBar
-        
-        if #available(iOS 9.0, *) {
-            self.countrySearchController.loadViewIfNeeded()
-        } else {
-            // Fallback on earlier versions
+        AccountModel.newFriend { (result, model) in
+            if result {
+                self.topModel = model
+                self.tableView.reloadData()
+            }
         }
     }
     
     // MARK: - UITableViewDelegate,UITableViewDataSource
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        
         let cell = tableView.dequeueReusableCell(withIdentifier: "NewFriendCell") as! NewFriendCell
+        let cell_model = self.topModel[indexPath.row]
+        cell.new_model = cell_model
+        cell.delegate = self
+        cell.new_indexPath = indexPath as NSIndexPath
         
-        cell.preservesSuperviewLayoutMargins = false
-        cell.separatorInset = UIEdgeInsets.zero
-        cell.layoutMargins = .zero
-        
-        
-        if self.countrySearchController.isActive {
-            cell.new_descLabel.text = self.searchArray[indexPath.row]
-            
-            self.countrySearchController.searchBar.resignFirstResponder()
-            return cell
-            
-        } else {
-            cell.new_descLabel.text = self.schoolArray[indexPath.row]
-            
-            return cell
-        }
-                
         return cell
     }
     
@@ -89,6 +64,12 @@ class NewFriendVC: BaseViewController,UITableViewDelegate,UITableViewDataSource,
         return 2 * COMMON_MARGIN
     }
     
+    
+    var userID : String?
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        userID = self.topModel[indexPath.row].AlyUserId?.stringValue
+    }
+    
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return 60
     }
@@ -98,11 +79,8 @@ class NewFriendVC: BaseViewController,UITableViewDelegate,UITableViewDataSource,
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        if self.countrySearchController.isActive {
-            return self.searchArray.count
-        } else {
-            return schoolArray.count
-        }
+        
+        return self.topModel.count
     }
     
     //搜索过滤后的结果集
@@ -111,19 +89,22 @@ class NewFriendVC: BaseViewController,UITableViewDelegate,UITableViewDataSource,
             self.tableView.reloadData()
         }
     }
-
     
-    // MARK: - searchDelegate
-    // MARK: - 实时进行搜索
-    func updateSearchResults(for searchController: UISearchController) {
+    // MARK: - NewFriendCellDelegate
+    
+    func acceptSEL(xxx: NSIndexPath) {
+        CCog(message: self.topModel[xxx.row].AlyUserId?.stringValue)
         
-        self.searchArray = []
-        
-        self.searchArray = self.schoolArray.filter { (school) -> Bool in
-            
-            return school.contains(searchController.searchBar.text!)
+        AccountModel.addFriendRequest(4, "",(self.topModel[xxx.row].AlyUserId?.stringValue)! , "", "") { (result, model) in
+
         }
     }
-
+//    func acceptSEL() {
+//        AccountModel.addFriendRequest(4, "",userID! , "", "") { (result, model) in
+//            
+//        }
+//    }
+    
+    
 }
 

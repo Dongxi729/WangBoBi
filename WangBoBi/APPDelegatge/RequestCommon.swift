@@ -71,3 +71,6 @@ let FRIEND_LIST = "\(COMMON_PREFIX)/ifs/tranfriend.ashx"
 
 // MARK: - URL数组
 var SHOP_URLArray = NSMutableArray()
+
+/// 新的朋友接口
+var NEWFRIEND_LIST = "\(COMMON_PREFIX)/ifs/alyfriend.ashx"

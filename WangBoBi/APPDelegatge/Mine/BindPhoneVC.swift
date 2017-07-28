@@ -55,11 +55,11 @@ class BindPhoneVC: UIViewController,UITableViewDelegate,UITableViewDataSource,Bi
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "cellID") as! BindPhoneCell
-        
-        cell.preservesSuperviewLayoutMargins = false
-        cell.separatorInset = UIEdgeInsets.zero
-        cell.layoutMargins = .zero
-        
+//        
+//        cell.preservesSuperviewLayoutMargins = false
+//        cell.separatorInset = UIEdgeInsets.zero
+//        cell.layoutMargins = .zero
+//        
         cell.textLabel?.text = dataSource["title"]?[indexPath.row]
         cell.titLabel.sizeToFit()
         cell.inputTF.placeholder = dataSource["content"]?[indexPath.row]
@@ -154,7 +154,7 @@ protocol BindPhoneCellDelegate : class {
     func text(indexPath : NSIndexPath,text : String) -> Void
 }
 
-class BindPhoneCell: UITableViewCell,UITextFieldDelegate {
+class BindPhoneCell: CommonTableViewCell,UITextFieldDelegate {
     
     weak var delegate : BindPhoneCellDelegate?
     

@@ -18,5 +18,8 @@ class ScanModel: NSObject {
     static var friemdIDStr : String?
     
     /// 好友邮箱地址
-    static var friendEamil : String?
+    static var friendEamil : NSNumber?
+    
+    /// 好友ID
+    static var friendIDStr : NSNumber?
 }

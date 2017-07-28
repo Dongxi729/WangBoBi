@@ -48,9 +48,9 @@ class AddFriendMarkVC: BaseViewController,BindPhoneFooterVDelegate {
     func bindPhonSELDelegate() {
         CCog(message: ScanModel.friendEamil)
         
+        let d : Int = (ScanModel.friendEamil?.intValue)!
         
-        
-        AccountModel.addFriendRequest(3, "", ScanModel.friendEamil!, "", self.sendTf.text!) { (result, model) in
+        AccountModel.addFriendRequest(2, "", String(d), "", self.sendTf.text!) { (result, model) in
             
         }
     

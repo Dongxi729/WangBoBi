@@ -75,9 +75,9 @@ class NameCerWithDetailVC: UIViewController,UITableViewDataSource,UITableViewDel
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cel = tableView.dequeueReusableCell(withIdentifier: "sss") as! BindPhoneCell
         
-        cel.separatorInset = UIEdgeInsets.zero
-        cel.layoutMargins = UIEdgeInsets.zero
-        cel.preservesSuperviewLayoutMargins = false
+//        cel.separatorInset = UIEdgeInsets.zero
+//        cel.layoutMargins = UIEdgeInsets.zero
+//        cel.preservesSuperviewLayoutMargins = false
         cel.delegate = self
         switch indexPath.section {
         case 0:

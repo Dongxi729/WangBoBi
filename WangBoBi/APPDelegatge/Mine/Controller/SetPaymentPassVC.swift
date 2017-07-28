@@ -58,9 +58,9 @@ class SetPaymentPassVC: UIViewController,BindPhoneCellDelegate,BindPhoneFooterVD
         let cell = tableView.dequeueReusableCell(withIdentifier: "cellID") as! BindPhoneCell
         
         /// 延长分割线
-        cell.preservesSuperviewLayoutMargins = false
-        cell.separatorInset = UIEdgeInsets.zero
-        cell.layoutMargins = .zero
+//        cell.preservesSuperviewLayoutMargins = false
+//        cell.separatorInset = UIEdgeInsets.zero
+//        cell.layoutMargins = .zero
         
         cell.titLabel.text = dataSource["title"]?[indexPath.row]
         cell.titLabel.sizeToFit()

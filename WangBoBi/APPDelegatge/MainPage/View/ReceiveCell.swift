@@ -8,8 +8,7 @@
 
 import UIKit
 
-class ReceiveCell : UITableViewCell {
-    
+class ReceiveCell : CommonTableViewCell {
     
     /// 前置图标
     lazy var imgVi: UIImageView = {
@@ -33,22 +32,41 @@ class ReceiveCell : UITableViewCell {
         /// 取消选中
         self.selectionStyle = .none
     }
-    
 
-    
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
 }
 
 // MARK: - 朋友
-class FriendCell : UITableViewCell {
+class FriendCell : CommonTableViewCell {
     
-    var model : FriendListModel? {
+    var model : NewFriendListModel? {
         didSet {
+            self.imgVi.setImage(urlString: model?.HeadImg, placeholderImage: #imageLiteral(resourceName: "logo"))
+            self.descLabel.text = model?.UserName
             
-            self.descLabel.text = model?.descStr
-            self.bottomLabel.text = model?.moneyCount
+            self.bottomLabel.text = model?.Msg
+            
+            var ddd : NSString = model?.SubmitTime as! NSString
+            
+            ddd = ddd.replacingOccurrences(of: "T", with: " ") as NSString
+            print(ddd)
+            
+            ddd = ddd.substring(with: NSRange.init(location: 0, length: 16)) as NSString
+            
+            self.timeLabel.text = ddd as String
+            
+            /// 时间
+            
+            if model?.NoticeNum?.intValue > 0 {
+                self.redBtn.isHidden = false
+                let badge : Int = (model?.NoticeNum?.intValue)!
+                self.redBtn.setTitle(String(badge), for: .normal)
+            } else {
+                self.redBtn.isHidden = true
+            }
+            
         }
     }
     
@@ -76,7 +94,7 @@ class FriendCell : UITableViewCell {
     
     /// 描述文本
     lazy var descLabel: UILabel = {
-        let d : UILabel = UILabel.init(frame: CGRect.init(x: self.imgVi.RightX + COMMON_MARGIN * 2, y: 10, width: self.Width - self.imgVi.Width + COMMON_MARGIN * 1.2 * 2 , height: 20))
+        let d : UILabel = UILabel.init(frame: CGRect.init(x: self.imgVi.RightX + COMMON_MARGIN * 0.5, y: 10, width: self.Width - self.imgVi.Width + COMMON_MARGIN * 1.2 * 2 , height: 20))
         d.font = UIFont.boldSystemFont(ofSize: 14)
         return d
     }()
@@ -115,7 +133,7 @@ class FriendCell : UITableViewCell {
     
     /// 收款、付款
     lazy var setGetMoneyLabel: UILabel = {
-        let d : UILabel = UILabel.init(frame: CGRect.init(x: self.imgVi.RightX + 2 * COMMON_MARGIN, y: self.descLabel.BottomY + 5, width: SCREEN_WIDTH * 0.09, height: 15))
+        let d : UILabel = UILabel.init(frame: CGRect.init(x: self.imgVi.RightX + COMMON_MARGIN * 0.5, y: self.descLabel.BottomY + 5, width: SCREEN_WIDTH * 0.09, height: 15))
         d.text = "[收款]"
         d.textColor = UIColor.colorWithHexString("2693DA")
         d.layer.borderColor = UIColor.colorWithHexString("2693DA").cgColor
@@ -152,29 +170,36 @@ class FriendCell : UITableViewCell {
         self.setGetMoneyLabel.sizeToFit()
     }
     
-//    override func layoutSubviews() {
-//        /// 根据陌生人隐藏状态调整描述文本
-//        if !stangerLabel.isHidden {
-//            self.descLabel.frame = CGRect.init(x: self.stangerLabel.RightX, y: 10, width: self.Width - self.imgVi.Width + COMMON_MARGIN * 1.2 * 2 , height: 20)
-//        } else {
-//            self.descLabel.frame = CGRect.init(x: self.imgVi.RightX + COMMON_MARGIN * 2, y: 10, width: self.Width - self.imgVi.Width + COMMON_MARGIN * 1.2 * 2 , height: 20)
-//        }
-//        
-//        self.setGetMoneyLabel.sizeToFit()
-//        ///// ......根据返回模型取值
-//    }
-    
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
 }
 
+protocol NewFriendCellDelegate {
+    func acceptSEL(xxx : NSIndexPath)
+}
+
 // MARK: - 新的朋友Cell
-class NewFriendCell : UITableViewCell {
+class NewFriendCell : CommonTableViewCell {
     
-    var new_model: NewFriendListModel? {
+    var delegate : NewFriendCellDelegate?
+    
+    var new_indexPath : NSIndexPath?
+    
+    var new_model: FriendMainListModel? {
         didSet {
-            CCog(message: new_model?.isAccept?.boolValue)
+            
+            self.ne_imgVi.setImage(urlString: new_model?.HeadImg, placeholderImage: #imageLiteral(resourceName: "logo"))
+            self.ne_bottomLabel.text = new_model?.Remark
+            self.new_descLabel.text = new_model?.UserName
+            
+            if new_model?.Status?.intValue == 0 {
+                new_aleradyLabel.isHidden = true
+                new_acceptBtn.isHidden = false
+            } else {
+                new_aleradyLabel.isHidden = false
+                new_acceptBtn.isHidden = true
+            }
         }
     }
     
@@ -186,19 +211,14 @@ class NewFriendCell : UITableViewCell {
         contentView.addSubview(ne_bottomLabel)
         contentView.addSubview(new_acceptBtn)
         contentView.addSubview(new_aleradyLabel)
-//        new_acceptBtn.isHidden = true
-//        new_aleradyLabel.isHidden = true.
-        
-//        if new_model?.isAccept?.boolValue == true {
-//            new_aleradyLabel.isHidden = true
-//            new_acceptBtn.isHidden = false
-//        } else {
-//            new_aleradyLabel.isHidden = false
-//            new_acceptBtn.isHidden = true
-//        }
-        
-    }
+   }
     
+    
+    // MARK: - 事件
+    func addcpe_SEl() -> Void {
+        self.delegate?.acceptSEL(xxx: new_indexPath!)
+    }
+
     
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
@@ -210,13 +230,12 @@ class NewFriendCell : UITableViewCell {
         let d : UIImageView = UIImageView.init(frame: CGRect.init(x: COMMON_MARGIN , y: 7.5, width: self.Height, height: self.Height))
         d.contentMode = UIViewContentMode.scaleAspectFit
         d.image = #imageLiteral(resourceName: "friendBg")
-        d.layer.borderWidth = 1
         return d
     }()
     
     /// 描述文本
     lazy var new_descLabel: UILabel = {
-        let d : UILabel = UILabel.init(frame: CGRect.init(x: self.ne_imgVi.RightX + COMMON_MARGIN * 2, y: 10, width: self.Width - self.ne_imgVi.Width + COMMON_MARGIN * 1.2 * 2 , height: 20))
+        let d : UILabel = UILabel.init(frame: CGRect.init(x: self.ne_imgVi.RightX + COMMON_MARGIN, y: 10, width: self.Width - self.ne_imgVi.Width + COMMON_MARGIN * 1.2 * 2 , height: 20))
         d.font = UIFont.boldSystemFont(ofSize: 14)
         return d
     }()
@@ -240,6 +259,8 @@ class NewFriendCell : UITableViewCell {
         d.clipsToBounds = true
         d.layer.cornerRadius = 5
         d.backgroundColor = UIColor.colorWithHexString("2796DD")
+        
+        d.addTarget(self, action: #selector(addcpe_SEl), for: .touchUpInside)
         return d
     }()
     
@@ -251,6 +272,58 @@ class NewFriendCell : UITableViewCell {
         d.layer.borderWidth = 1
         d.sizeToFit()
         d.textColor = UIColor.colorWithHexString("2796DD")
+        return d
+    }()
+}
+
+class NewFriend_Cell : CommonTableViewCell {
+    
+    var delegate : NewFriendCellDelegate?
+
+    var new_model: FriendListModel? {
+        didSet {
+            
+            self.ne_imgVi.setImage(urlString: new_model?.HeadImg, placeholderImage: #imageLiteral(resourceName: "logo"))
+            self.ne_bottomLabel.text = new_model?.WBCAdress
+            self.new_descLabel.text = new_model?.UserName
+        }
+    }
+    
+    override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
+        super.init(style: .default, reuseIdentifier: reuseIdentifier)
+        
+        contentView.addSubview(ne_imgVi)
+        contentView.addSubview(new_descLabel)
+        contentView.addSubview(ne_bottomLabel)
+
+    }
+    
+    required init?(coder aDecoder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
+    
+    /// 前置图标
+    lazy var ne_imgVi: UIImageView = {
+        let d : UIImageView = UIImageView.init(frame: CGRect.init(x: COMMON_MARGIN , y: 7.5, width: self.Height, height: self.Height))
+        d.contentMode = UIViewContentMode.scaleAspectFit
+        d.image = #imageLiteral(resourceName: "friendBg")
+        return d
+    }()
+    
+    /// 描述文本
+    lazy var new_descLabel: UILabel = {
+        let d : UILabel = UILabel.init(frame: CGRect.init(x: self.ne_imgVi.RightX + COMMON_MARGIN, y: 10, width: self.Width - self.ne_imgVi.Width + COMMON_MARGIN * 1.2 * 2 , height: 20))
+        d.font = UIFont.boldSystemFont(ofSize: 14)
+        return d
+    }()
+    
+    /// 底部文本
+    lazy var ne_bottomLabel: UILabel = {
+        let d : UILabel = UILabel.init(frame: CGRect.init(x: self.ne_imgVi.RightX + COMMON_MARGIN, y: self.new_descLabel.BottomY + 5, width: self.new_descLabel.Width, height: 15))
+        d.font = UIFont.systemFont(ofSize: 13)
+        d.text = "asdsasd"
+        d.textColor = UIColor.darkGray
         return d
     }()
 }

@@ -8,7 +8,7 @@
 
 import UIKit
 
-class CountDetailCell: UITableViewCell {
+class CountDetailCell: CommonTableViewCell {
     override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
         super.init(style: .default, reuseIdentifier: reuseIdentifier)
         

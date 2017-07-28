@@ -113,6 +113,7 @@
 		265D431E1EFBE324007F5AB8 /* Tool.swift in Sources */ = {isa = PBXBuildFile; fileRef = 265D431D1EFBE324007F5AB8 /* Tool.swift */; };
 		2662B6021F087E1200942692 /* NetLostV.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2662B6011F087E1200942692 /* NetLostV.swift */; };
 		26632B591F2794CA00E25003 /* AddFriendMarkVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26632B581F2794CA00E25003 /* AddFriendMarkVC.swift */; };
+		266AFB231F2AE3CE00A179C8 /* CommonTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 266AFB221F2AE3CE00A179C8 /* CommonTableViewCell.swift */; };
 		266B88ED1F04907A0033BFA7 /* PayPassInputV.swift in Sources */ = {isa = PBXBuildFile; fileRef = 266B88EC1F04907A0033BFA7 /* PayPassInputV.swift */; };
 		266B89011F04A5650033BFA7 /* PushingMoneyVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 266B89001F04A5650033BFA7 /* PushingMoneyVC.swift */; };
 		266B89031F04AE1D0033BFA7 /* PushMoneySuccessVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 266B89021F04AE1D0033BFA7 /* PushMoneySuccessVC.swift */; };
@@ -346,6 +347,7 @@
 		265D431D1EFBE324007F5AB8 /* Tool.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Tool.swift; sourceTree = "<group>"; };
 		2662B6011F087E1200942692 /* NetLostV.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NetLostV.swift; sourceTree = "<group>"; };
 		26632B581F2794CA00E25003 /* AddFriendMarkVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddFriendMarkVC.swift; sourceTree = "<group>"; };
+		266AFB221F2AE3CE00A179C8 /* CommonTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CommonTableViewCell.swift; sourceTree = "<group>"; };
 		266B88EC1F04907A0033BFA7 /* PayPassInputV.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PayPassInputV.swift; sourceTree = "<group>"; };
 		266B89001F04A5650033BFA7 /* PushingMoneyVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PushingMoneyVC.swift; sourceTree = "<group>"; };
 		266B89021F04AE1D0033BFA7 /* PushMoneySuccessVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PushMoneySuccessVC.swift; sourceTree = "<group>"; };
@@ -1152,6 +1154,7 @@
 				260B20D11EF79F5100E78FD8 /* CommonV.swift */,
 				26A0A4A81EF0E26B00035D0D /* JFNavigationController.swift */,
 				26EF14A41EF90DC2005663F1 /* BaseViewController.swift */,
+				266AFB221F2AE3CE00A179C8 /* CommonTableViewCell.swift */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -1454,6 +1457,7 @@
 				260B20C81EF76B5500E78FD8 /* MyRequestVC.swift in Sources */,
 				264960CE1EF0C28F00A559D6 /* TransformationMatrix.cpp in Sources */,
 				26DBE92F1F298B510092D6CF /* UITableView+Extension.swift in Sources */,
+				266AFB231F2AE3CE00A179C8 /* CommonTableViewCell.swift in Sources */,
 				260B20D41EF7A08D00E78FD8 /* TfPlaceHolder.swift in Sources */,
 				2647936D1F18DD71000F9F67 /* ShopWebV.swift in Sources */,
 				2643CFC61EF3EE2200EFC720 /* DetailViewController.swift in Sources */,

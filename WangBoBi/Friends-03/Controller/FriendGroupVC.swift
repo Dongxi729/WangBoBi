@@ -33,17 +33,27 @@ class FriendGroupVC: BaseViewController, UITableViewDelegate, UITableViewDataSou
         d.searchBar.subviews.first?.subviews.first?.removeFromSuperview()
         d.searchBar.placeholder = "搜索"
         d.searchBar.sizeToFit()
+
         return d
     }()
+    
+    @objc fileprivate func doneBtnSEL() {
+        CCog(message: type(of: self))
+    }
+    
     
     lazy var tableView: UITableView = {
         let d : UITableView = UITableView.init(frame: CGRect.init(x: 0, y: 64, width: SCREEN_WIDTH, height: SCREEN_HEIGHT - 64))
         d.delegate = self
         d.dataSource = self
-        d.register(UITableViewCell.self, forCellReuseIdentifier: "SwiftCell")
+        d.register(NewFriend_Cell.self, forCellReuseIdentifier: "SwiftCell")
         d.register(TabViewCell.self, forCellReuseIdentifier: "PushMoneyDetailVCCell")
         return d
     }()
+    
+    
+    /// 模型
+    var frienGroup_model = [FriendListModel]()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -75,11 +85,32 @@ class FriendGroupVC: BaseViewController, UITableViewDelegate, UITableViewDataSou
         /// 添加搜索栏
         self.tableView.tableHeaderView = dddd
         
-        makeCityToGroup()
+        AccountModel.friend_list { (result, model) in
+            if result {
+                self.frienGroup_model = model
+                
+                for dddd in self.frienGroup_model {
+                    CCog(message: dddd.UserName)
+                    self.citys.append(dddd.UserName!)
         
+                    
+                    if self.citys.count == self.frienGroup_model.count {
+                        DispatchQueue.main.async {
+                            CCog(message: self.citys)
+                            
+                            self.makeCityToGroup()
+                            self.tableView.reloadData()
+                        }
+                    }
+                }
+            }
+        }
     }
     
-    var citys = ["北京市", "上海市", "天津市", "重庆市","铜陵市", "明光市", "天长市", "宁国市","宁国市","宁国市","宁国市","宁国市","宁国市","宁国市","宁国市","宁国市","宁国市","宁国市","宁国市","宁国市","宁国市","宁国市","宁国市","宁国市","宁国市","宁国市", "界首市", "桐城市", "广州市", "韶关市", "深圳市", "珠海市", "汕头市", "佛山市", "江门市", "湛江市", "茂名市", "肇庆市", "惠州市", "梅州市", "汕尾市", "河源市", "阳江市", "清远市", "东莞市", "中山市", "潮州市", "揭阳市", "云浮市", "昆明市", "曲靖市", "玉溪市", "保山市", "昭通市", "丽江市", "思茅市", "临沧市", "楚雄彝族自治州", "红河哈尼族彝族自治州", "文山壮族苗族自治州", "西双版纳傣族自治州", "大理白族自治州", "德宏傣族景颇族自治州", "怒江傈僳族自治州", "迪庆藏族自治州"]
+//    var citys = ["北京市", "上海市", "天津市", "重庆市","铜陵市", "明光市", "天长市", "宁国市","宁国市","宁国市","宁国市","宁国市","宁国市","宁国市","宁国市","宁国市","宁国市","宁国市","宁国市","宁国市","宁国市","宁国市","宁国市","宁国市","宁国市","宁国市", "界首市", "桐城市", "广州市", "韶关市", "深圳市", "珠海市", "汕头市", "佛山市", "江门市", "湛江市", "茂名市", "肇庆市", "惠州市", "梅州市", "汕尾市", "河源市", "阳江市", "清远市", "东莞市", "中山市", "潮州市", "揭阳市", "云浮市", "昆明市", "曲靖市", "玉溪市", "保山市", "昭通市", "丽江市", "思茅市", "临沧市", "楚雄彝族自治州", "红河哈尼族彝族自治州", "文山壮族苗族自治州", "西双版纳傣族自治州", "大理白族自治州", "德宏傣族景颇族自治州", "怒江傈僳族自治州", "迪庆藏族自治州"]
+//    
+    
+    var citys : [String] = []
     
     func makeCityToGroup() {
         
@@ -107,6 +138,7 @@ class FriendGroupVC: BaseViewController, UITableViewDelegate, UITableViewDataSou
         
         //拿到所有的key将它排序, 作为每个组的标题
         groupTitles = cityGroups.keys.sorted()
+        
     }
     
     
@@ -137,8 +169,6 @@ class FriendGroupVC: BaseViewController, UITableViewDelegate, UITableViewDataSou
         } else {
             return cityGroups.count
         }
-        
-        
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -159,8 +189,6 @@ class FriendGroupVC: BaseViewController, UITableViewDelegate, UITableViewDataSou
         } else {
             return groupTitles
         }
-        
-        
     }
     
     // UITableViewDataSource协议中的方法，该方法的返回值决定指定分区的头部
@@ -173,9 +201,10 @@ class FriendGroupVC: BaseViewController, UITableViewDelegate, UITableViewDataSou
         } else {
             return groupTitles[section]
         }
-        
-        
-        
+    }
+    
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return 60
     }
     
     //设置分组尾部高度（不需要尾部，设0.0好像无效）
@@ -191,10 +220,12 @@ class FriendGroupVC: BaseViewController, UITableViewDelegate, UITableViewDataSou
         let identify:String = "SwiftCell"
         //同一形式的单元格重复使用，在声明时已注册
         let cell = tableView.dequeueReusableCell(withIdentifier: identify, for: indexPath)
-            as UITableViewCell
+            as! NewFriend_Cell
+        
         
         let firstLetter = groupTitles[indexPath.section]
         let citysInAGroup = cityGroups[firstLetter]!
+    
         
         if countrySearchController.isActive {
             
@@ -202,7 +233,9 @@ class FriendGroupVC: BaseViewController, UITableViewDelegate, UITableViewDataSou
             self.countrySearchController.searchBar.resignFirstResponder()
             
         } else {
-            cell.textLabel?.text = citysInAGroup[indexPath.row]
+            cell.new_descLabel.text = citysInAGroup[indexPath.row]
+            cell.ne_imgVi.setImage(urlString: self.frienGroup_model[indexPath.section].HeadImg, placeholderImage: #imageLiteral(resourceName: "logo"))
+            cell.ne_bottomLabel.text = self.frienGroup_model[indexPath.section].WBCAdress
         }
         
         return cell
@@ -223,11 +256,6 @@ class FriendGroupVC: BaseViewController, UITableViewDelegate, UITableViewDataSou
             
             return school.contains(searchController.searchBar.text!)
         }
-        
-        //        CCog(message: self.citys.filter({ (sc) -> Bool in
-        //            return sc.contains(searchController.searchBar.text!)
-        //        }))
-    
     }
     
     //搜索过滤后的结果集
