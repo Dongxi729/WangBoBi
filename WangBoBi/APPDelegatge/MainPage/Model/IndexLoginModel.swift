@@ -150,7 +150,7 @@ class NewFriendListModel : NSObject {
     var HeadImg : String?
     var UserName : String?
     var NoticeNum : NSNumber?
-    var SubmitTime : String?
+    var SubmitTime : NSString?
     var Msg : String?
     
     

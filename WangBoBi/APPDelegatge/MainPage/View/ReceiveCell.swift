@@ -48,7 +48,7 @@ class FriendCell : CommonTableViewCell {
             
             self.bottomLabel.text = model?.Msg
             
-            var ddd : NSString = model?.SubmitTime as! NSString
+            var ddd : NSString = (model?.SubmitTime!)!
             
             ddd = ddd.replacingOccurrences(of: "T", with: " ") as NSString
             print(ddd)
@@ -111,7 +111,7 @@ class FriendCell : CommonTableViewCell {
     
     /// 陌生人
     lazy var stangerLabel: UILabel = {
-        let d : UILabel = UILabel.init(frame: CGRect.init(x: self.imgVi.RightX + COMMON_MARGIN * 2, y: 10, width: SCREEN_WIDTH * 0.125, height: 20))
+        let d : UILabel = UILabel.init(frame: CGRect.init(x: self.imgVi.RightX + COMMON_MARGIN * 0.5, y: 10, width: SCREEN_WIDTH * 0.125, height: 20))
         d.text = "陌生人"
         d.textColor = UIColor.colorWithHexString("2693DA")
         d.layer.borderColor = UIColor.colorWithHexString("2693DA").cgColor
