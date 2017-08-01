@@ -34,6 +34,11 @@ class AccountAndSaveVC: UIViewController {
         return d
     }()
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        UIApplication.shared.statusBarStyle = .default
+    }
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()

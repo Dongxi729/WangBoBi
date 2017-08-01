@@ -82,9 +82,9 @@ class GetMoneyScanVC: BaseViewController {
             }
         }
         
-        
-        
-        self.navigationController?.popToRootViewController(animated: true)
+        self.navigationController?.popToViewController(MainPageViewController(), animated: true)
     }
+
+    
     
 }

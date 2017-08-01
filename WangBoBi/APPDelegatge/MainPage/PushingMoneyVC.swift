@@ -9,6 +9,7 @@
 import UIKit
 
 class PushingMoneyVC: BaseViewController,UITextFieldDelegate,BindPhoneFooterVDelegate {
+    
 
     /// 背景图片
     fileprivate lazy var bgImg: UIImageView = {

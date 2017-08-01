@@ -16,7 +16,7 @@ let LOGIN_URL = "\(COMMON_PREFIX)/ifs/login.ashx"
 //请求参数：email  邮箱地址 ，pwd  登陆密码MD5加密密文，code 验证码       ac  操作类型值（semail：发送验证码，femail：重置密码）
 
 /// 前缀请求
-let COMMON_PREFIX = "http://192.168.1.10:8010"
+let COMMON_PREFIX = "http://wbpay.ie1e.com"
 
 /// 忘记密码链接
 let FORGETPASS_URL = "\(COMMON_PREFIX)/ifs/passfind.ashx"
@@ -74,3 +74,7 @@ var SHOP_URLArray = NSMutableArray()
 
 /// 新的朋友接口
 var NEWFRIEND_LIST = "\(COMMON_PREFIX)/ifs/alyfriend.ashx"
+
+
+/// 用户转账订单接口
+var TRANPAY_ORDER = "\(COMMON_PREFIX)/ifs/tranpayorder.ashx"

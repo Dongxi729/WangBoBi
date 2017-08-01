@@ -99,7 +99,7 @@ extension NetWorkTool {
                 
                 if let data = data {
                     
-                    CCog(message: String.init(data: data, encoding: String.Encoding.utf8))
+//                    CCog(message: String.init(data: data, encoding: String.Encoding.utf8))
                     
                     if let result = try? JSONSerialization.jsonObject(with: data, options: .allowFragments) {
                         

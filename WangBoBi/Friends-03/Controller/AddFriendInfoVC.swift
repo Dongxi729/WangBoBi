@@ -10,6 +10,14 @@ import UIKit
 
 class AddFriendInfoVC: BaseViewController,AddPersonInfoEditVDelegate {
     
+    var add_model : FriendListModel? {
+        didSet {
+            CCog(message: add_model)
+        }
+    }
+    
+    
+    
     /// 背景视图
     fileprivate lazy var backGroundV: UIImageView = {
         let d : UIImageView = UIImageView.init(frame: CGRect.init(x: 0, y: 0, width: SCREEN_WIDTH, height: SCREEN_WIDTH * (500 / 640)))
@@ -44,7 +52,37 @@ class AddFriendInfoVC: BaseViewController,AddPersonInfoEditVDelegate {
         personInfoV.addSubview(editV)
         
         view.backgroundColor = COMMON_TBBGCOLOR
+        
+        /// 更新UI操作()
+        if (add_model != nil) {
+            self.editV.avatarImg.setImage(urlString: add_model?.HeadImg, placeholderImage: #imageLiteral(resourceName: "logo"))
+            self.editV.emailShowLabel.text = add_model?.UserName
+            self.editV.moneyAddresShow.text = add_model?.WBCAdress
+            
+            self.editV.strangerImg.showCerNam(str: "好友")
+            self.editV.strangerImg.backgroundColor = UIColor.white
+            self.editV.strangerImg.descLabel.textColor = UIColor.colorWithHexString("2796DC")
+            
+            /// 隐藏好友按钮
+            self.editV.addFrienBtn.isHidden = true
+        }
     }
+    
+    
+    @objc fileprivate func friendInfoShow(notifi : Notification) {
+        
+        if let userData = ((([notifi.userInfo])[0] as NSDictionary?)?["dataModel"]) as? FriendListModel {
+            
+            DispatchQueue.main.async {
+                self.editV.avatarImg.setImage(urlString: userData.HeadImg, placeholderImage: #imageLiteral(resourceName: "logo"))
+                self.editV.nameShowLabel.text = "21221"
+            }
+        }
+        
+        NotificationCenter.default.removeObserver(self, name: NSNotification.Name(rawValue: "friendInfoShow"), object: nil)
+    }
+    
+    
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
@@ -52,7 +90,6 @@ class AddFriendInfoVC: BaseViewController,AddPersonInfoEditVDelegate {
     }
     
     // MARK: - AddPersonInfoEditVDelegate
-
     func pushMoney() {
         self.navigationController?.pushViewController(ReceiveMonVC(), animated: true)
     }
@@ -72,7 +109,7 @@ protocol AddPersonInfoEditVDelegate {
 
 // MARK: - 我的信息编辑视图
 class AddPersonInfoEditV : UIView {
-    
+
     var delegate : AddPersonInfoEditVDelegate?
     
     /// 名字
@@ -87,8 +124,6 @@ class AddPersonInfoEditV : UIView {
     /// 名字显示
     lazy var nameShowLabel: UILabel = {
         let d : UILabel = UILabel.init(frame: CGRect.init(x: self.nameLabel.RightX, y: self.nameLabel.TopY, width: 100 * SCREEN_SCALE, height: self.nameLabel.Height))
-        
-        
         d.font = UIFont.systemFont(ofSize: 11 * SCREEN_SCALE)
         return d
     }()
@@ -163,7 +198,6 @@ class AddPersonInfoEditV : UIView {
     /// 陌生人logo
     lazy var strangerImg: CertifieNamed = {
         let d : CertifieNamed = CertifieNamed.init(frame: CGRect.init(x: self.avatarImg.LeftX - 25 * SCREEN_SCALE , y: self.avatarImg.BottomY - 20 * SCREEN_SCALE, width: 50 * SCREEN_SCALE, height: 20 * SCREEN_SCALE))
-        d.layer.borderWidth = 1
         return d
     }()
     
@@ -175,9 +209,6 @@ class AddPersonInfoEditV : UIView {
     
     override init(frame: CGRect) {
         super.init(frame: frame)
-        
-        CCog(message: type(of: self))
-        
         
         DispatchQueue.main.async {
             self.addSubview(self.nameLabel)
@@ -201,6 +232,8 @@ class AddPersonInfoEditV : UIView {
             
             /// 陌生人
             self.addSubview(self.strangerImg)
+            
+            
         }
         
         /// 扫描添加好友
@@ -232,7 +265,6 @@ class AddPersonInfoEditV : UIView {
             }
         }
 
-        
         /// 搜索添加好友
         if AddType == 1 {
            CCog(message: ScanModel.friemdIDStr as Any)
@@ -256,7 +288,8 @@ class AddPersonInfoEditV : UIView {
                 }
             }
         }
-    
+        
+        
     }
     
     

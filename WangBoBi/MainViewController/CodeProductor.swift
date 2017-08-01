@@ -14,8 +14,7 @@ class CodeProductor: UIViewController {
         let d : UIImageView = UIImageView.init(frame: CGRect.init(x: SCREEN_WIDTH / 2 - SCREEN_WIDTH / 6, y: SCREEN_HEIGHT * 0.15, width: SCREEN_WIDTH / 3 , height: SCREEN_WIDTH / 3))
         return d
     }()
-    
-    
+
     
     lazy var descLabel: UILabel = {
         let d : UILabel = UILabel.init(frame: CGRect.init(x: SCREEN_WIDTH / 2 - SCREEN_WIDTH * 0.35, y: self.generatImgView.BottomY + COMMON_MARGIN * SCREEN_SCALE, width: SCREEN_WIDTH * 0.7, height: 30 * SCREEN_SCALE))
@@ -32,6 +31,11 @@ class CodeProductor: UIViewController {
         d.backgroundColor = UIColor.colorWithHexString("C8C7CB")
         return d
     }()
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        UIApplication.shared.statusBarStyle = .default
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()

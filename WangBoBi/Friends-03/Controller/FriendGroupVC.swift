@@ -53,10 +53,11 @@ class FriendGroupVC: BaseViewController, UITableViewDelegate, UITableViewDataSou
     
     
     /// 模型
-    var frienGroup_model = [FriendListModel]()
+    fileprivate var frienGroup_model = [FriendListModel]()
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         
         title = "我的朋友"
         
@@ -90,13 +91,12 @@ class FriendGroupVC: BaseViewController, UITableViewDelegate, UITableViewDataSou
                 self.frienGroup_model = model
                 
                 for dddd in self.frienGroup_model {
-                    CCog(message: dddd.UserName)
+                    
                     self.citys.append(dddd.UserName!)
         
                     
                     if self.citys.count == self.frienGroup_model.count {
                         DispatchQueue.main.async {
-                            CCog(message: self.citys)
                             
                             self.makeCityToGroup()
                             self.tableView.reloadData()
@@ -107,11 +107,10 @@ class FriendGroupVC: BaseViewController, UITableViewDelegate, UITableViewDataSou
         }
     }
     
-//    var citys = ["北京市", "上海市", "天津市", "重庆市","铜陵市", "明光市", "天长市", "宁国市","宁国市","宁国市","宁国市","宁国市","宁国市","宁国市","宁国市","宁国市","宁国市","宁国市","宁国市","宁国市","宁国市","宁国市","宁国市","宁国市","宁国市","宁国市", "界首市", "桐城市", "广州市", "韶关市", "深圳市", "珠海市", "汕头市", "佛山市", "江门市", "湛江市", "茂名市", "肇庆市", "惠州市", "梅州市", "汕尾市", "河源市", "阳江市", "清远市", "东莞市", "中山市", "潮州市", "揭阳市", "云浮市", "昆明市", "曲靖市", "玉溪市", "保山市", "昭通市", "丽江市", "思茅市", "临沧市", "楚雄彝族自治州", "红河哈尼族彝族自治州", "文山壮族苗族自治州", "西双版纳傣族自治州", "大理白族自治州", "德宏傣族景颇族自治州", "怒江傈僳族自治州", "迪庆藏族自治州"]
-//    
-    
+    /// 搜索源
     var citys : [String] = []
     
+    /// 提取数据源的第一个字幕
     func makeCityToGroup() {
         
         // 遍历citys数组中的所有城市
@@ -161,6 +160,14 @@ class FriendGroupVC: BaseViewController, UITableViewDelegate, UITableViewDataSou
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
+
+//        NotificationCenter.default.post(name: NSNotification.Name(rawValue: "friendInfoShow"), object: nil, userInfo: ["dataModel" :
+//            frienGroup_model[indexPath.section]])
+//        
+        
+        let ccc = AddFriendInfoVC()
+        ccc.add_model = frienGroup_model[indexPath.section]
+        self.navigationController?.pushViewController(ccc, animated: true)
     }
     
     func numberOfSections(in tableView: UITableView) -> Int {
@@ -229,10 +236,10 @@ class FriendGroupVC: BaseViewController, UITableViewDelegate, UITableViewDataSou
         
         if countrySearchController.isActive {
             
-            cell.textLabel?.text = searchArray[indexPath.row]
-            self.countrySearchController.searchBar.resignFirstResponder()
+            cell.new_descLabel.text = searchArray[indexPath.row]
             
         } else {
+
             cell.new_descLabel.text = citysInAGroup[indexPath.row]
             cell.ne_imgVi.setImage(urlString: self.frienGroup_model[indexPath.section].HeadImg, placeholderImage: #imageLiteral(resourceName: "logo"))
             cell.ne_bottomLabel.text = self.frienGroup_model[indexPath.section].WBCAdress

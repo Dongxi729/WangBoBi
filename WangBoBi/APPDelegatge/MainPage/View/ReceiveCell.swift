@@ -67,6 +67,12 @@ class FriendCell : CommonTableViewCell {
                 self.redBtn.isHidden = true
             }
             
+            /// 是否是朋友
+            if model?.IsFriend?.intValue == 1 {
+                self.stangerLabel.text = "好友"
+            } else if model?.IsFriend?.intValue == 0 {
+                self.stangerLabel.text = "陌生人"
+            }
         }
     }
     
@@ -124,7 +130,7 @@ class FriendCell : CommonTableViewCell {
     
     /// 底部文本
     lazy var bottomLabel: UILabel = {
-        let d : UILabel = UILabel.init(frame: CGRect.init(x: self.imgVi.RightX + 3 * COMMON_MARGIN + SCREEN_WIDTH * 0.09, y: self.descLabel.BottomY + 5, width: self.descLabel.Width, height: 15))
+        let d : UILabel = UILabel.init(frame: CGRect.init(x: self.imgVi.RightX + COMMON_MARGIN + SCREEN_WIDTH * 0.09, y: self.descLabel.BottomY + 5, width: self.descLabel.Width, height: 15))
         d.font = UIFont.systemFont(ofSize: 13)
         d.text = "asdsasd"
         d.textColor = UIColor.darkGray
@@ -269,7 +275,6 @@ class NewFriendCell : CommonTableViewCell {
         let d : UILabel = UILabel.init(frame: CGRect.init(x: SCREEN_WIDTH - COMMON_MARGIN - SCREEN_WIDTH * 0.15, y: self.center.y, width: SCREEN_WIDTH * 0.15, height: self.Height * 0.6))
         d.text = "已接受"
         d.font = UIFont.systemFont(ofSize: 12)
-        d.layer.borderWidth = 1
         d.sizeToFit()
         d.textColor = UIColor.colorWithHexString("2796DD")
         return d

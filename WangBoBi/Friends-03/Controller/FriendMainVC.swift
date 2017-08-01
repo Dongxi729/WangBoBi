@@ -10,6 +10,8 @@ import UIKit
 
 class FriendMainVC: BaseViewController,UITableViewDelegate,UITableViewDataSource,UISearchResultsUpdating,FriendMainVHeaVDelegate,headerViewelegate {
     
+    
+    
     lazy var groudFriend: UIBarButtonItem = {
         let d : UIBarButtonItem = UIBarButtonItem.init(image: #imageLiteral(resourceName: "groupFir"), style: .plain, target: self, action: #selector(jumpToFriendContactVC))
         return d
@@ -70,6 +72,11 @@ class FriendMainVC: BaseViewController,UITableViewDelegate,UITableViewDataSource
         AccountModel.GetFriendList(String(limitCount), "10") { (result, model) in
             self.mertopModel = model
             CCog(message: self.mertopModel.count)
+            self.tableView.reloadData()
+            
+            for value in model {
+                self.sercchArray.append(value.UserName!)
+            }
         }
         
         tableView.tableFooterView = footer_V
@@ -152,12 +159,19 @@ class FriendMainVC: BaseViewController,UITableViewDelegate,UITableViewDataSource
             }
             
             return cell
+    
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
         
-        self.navigationController?.pushViewController(PushMoneyDetailVC(), animated: true)
+        let ccc = PushMoneyDetailVC()
+        let frid_ID : Int = (self.mertopModel[indexPath.row].Id?.intValue)!
+        ccc.Fri_frid = String(frid_ID)
+        ccc.frienName_Str = self.mertopModel[indexPath.row].UserName
+        ccc.frienHead_Str = self.mertopModel[indexPath.row].HeadImg
+        
+        self.navigationController?.pushViewController(ccc, animated: true)
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -188,12 +202,19 @@ class FriendMainVC: BaseViewController,UITableViewDelegate,UITableViewDataSource
     
     // MARK: - 实时进行搜索
     func updateSearchResults(for searchController: UISearchController) {
-        self.searchArray = self.frien_datasource.filter { (school) -> Bool in
+        CCog(message: self.sercchArray)
+        self.searchArray = []
+        self.searchArray = self.sercchArray.filter { (school) -> Bool in
             return school.contains(searchController.searchBar.text!)
         }
     }
     
     // MARK: - FriendMainVHeaVDelegate
+    
+    
+    /// 搜索的数据源
+    var sercchArray : [String] = []
+    
     func main_load() {
         
         CCog(message: "")
@@ -202,6 +223,13 @@ class FriendMainVC: BaseViewController,UITableViewDelegate,UITableViewDataSource
         AccountModel.GetFriendList(String(limitCount), "10") { (result, model) in
             if result {
                 self.tableView.reloadData()
+                
+                
+                CCog(message: model)
+                for value in model {
+                    CCog(message: value.UserName)
+                    self.searchArray.append(value.UserName!)
+                }
             }
         }
     }
@@ -209,10 +237,12 @@ class FriendMainVC: BaseViewController,UITableViewDelegate,UITableViewDataSource
     func headerViewEndfun(_ _endRefresh: () -> Void) {
         let dd : headerView = self.tableView.viewWithTag(888) as! headerView
         dd.endRefresh()
-        CCog(message: "")
         
         AccountModel.GetFriendList("1", "10") { (result, model) in
             if result {
+                for value in model {
+                    self.searchArray.append(value.UserName!)
+                }
                 self.tableView.reloadData()
             }
         }

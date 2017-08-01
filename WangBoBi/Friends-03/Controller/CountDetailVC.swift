@@ -9,6 +9,18 @@
 import UIKit
 
 class CountDetailVC: BaseViewController,UITableViewDelegate,UITableViewDataSource {
+    
+    var values : [Any] = []
+    
+    var countDetail_model : TranpayorderModel? {
+        didSet {
+            
+            view.addSubview(tableView)
+            
+            tableView.tableHeaderView = headV
+        }
+    }
+    
     fileprivate var cellDataSource : [String] = ["付款方式","转账说明","转账地址","创建时间","订单号"]
     
     fileprivate lazy var headV: CountDetaiHeadV = {
@@ -30,9 +42,7 @@ class CountDetailVC: BaseViewController,UITableViewDelegate,UITableViewDataSourc
         // Do any additional setup after loading the view.
         title = "账单详情"
         
-        view.addSubview(tableView)
         
-        tableView.tableHeaderView = headV
         
         view.backgroundColor = UIColor.white
     }
@@ -41,13 +51,9 @@ class CountDetailVC: BaseViewController,UITableViewDelegate,UITableViewDataSourc
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "CountDetailCell") as! CountDetailCell
         
-//        cell.preservesSuperviewLayoutMargins = false
-//        cell.separatorInset = UIEdgeInsets.zero
-//        cell.layoutMargins = .zero
+//        cell.count_right.text = cellDataSource[indexPath.row]
+//        cell.countcell_left.text = cellDataSource[indexPath.row]
         
-        
-        cell.count_right.text = cellDataSource[indexPath.row]
-        cell.countcell_left.text = cellDataSource[indexPath.row]
         return cell
     }
     

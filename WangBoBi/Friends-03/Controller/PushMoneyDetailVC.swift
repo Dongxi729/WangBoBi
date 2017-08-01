@@ -9,6 +9,47 @@
 import UIKit
 
 class PushMoneyDetailVC: BaseViewController,UITableViewDataSource,UITableViewDelegate,headerViewelegate {
+    
+    /// 转账订单模型
+    var pushMoney_model : [TranpayorderModel]?
+    
+    /// 好友头像
+    var frienHead_Str : String? {
+        didSet{
+            
+        }
+    }
+    
+    /// 好友名字
+    var frienName_Str :String? {
+        didSet {
+            
+        }
+    }
+    
+    var Fri_frid : String? {
+        didSet {
+            AccountModel.tranPayOrderRequest(self.Fri_frid!) { (result, model) in
+                if result {
+                    
+                    self.pushMoney_model = [TranpayorderModel]()
+                    for _model in model {
+                        self.pushMoney_model?.append(_model)
+                        
+                        if self.pushMoney_model?.count == model.count {
+                            self.view.addSubview(self.tableView)
+                            /// 添加头部刷新视图
+                            self.tableView.addHeaderViewfun()
+                            let foot : headerView = self.tableView.viewWithTag(888) as! headerView
+                            foot.delegate = self
+                            
+                            self.tableView.scrollToBottom(animated: false)
+                        }
+                    }
+                }
+            }
+        }
+    }
 
     fileprivate lazy var tableView: UITableView = {
         let d : UITableView = UITableView.init(frame: CGRect.init(x: 0, y: 64, width: SCREEN_WIDTH, height: SCREEN_HEIGHT - 64), style: .plain)
@@ -28,7 +69,6 @@ class PushMoneyDetailVC: BaseViewController,UITableViewDataSource,UITableViewDel
     
     func refreshSEL(sender : UIRefreshControl) -> Void {
         CCog(message: "")
-        self.reverSeddd.insert(contentsOf: ["123","4356"], at: 0)
         
         CCog(message: self.reverSeddd)
         
@@ -45,54 +85,42 @@ class PushMoneyDetailVC: BaseViewController,UITableViewDataSource,UITableViewDel
         
         view.backgroundColor = COMMON_TBBGCOLOR
         
-        view.addSubview(tableView)
-        
         self.reverSeddd = self.dd.reversed()
-        
-        /// 添加头部刷新视图
-        self.tableView.addHeaderViewfun()
-        let foot : headerView = tableView.viewWithTag(888) as! headerView
-        foot.delegate = self
-        
-        self.tableView.scrollToBottom(animated: false)
     }
-    
-    
-    
     
     // MARK: - UITableViewDataSource
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "PushMoneyDetailVCCell") as! PushMoneyDetailVCCell
         
         if indexPath.row % 2 == 1 {
-            cell.imgV.isHidden = true
-            cell.detailImg.isHidden = true
-            cell.rightImg.isHidden = false
-            cell.rightIMgV.isHidden = false
-            cell.rightPushWBLabel.isHidden = false
-            cell.rightPushLabel.isHidden = false
-            cell.pushLabel.isHidden = true
-            cell.pushMoneyLabel.isHidden = true
-        } else {
-            cell.imgV.isHidden = false
-            cell.detailImg.isHidden = false
-            cell.rightImg.isHidden = true
-            cell.rightIMgV.isHidden = true
-            cell.rightPushWBLabel.isHidden = true
-            cell.rightPushLabel.isHidden = true
+            cell.rightImg.frame = CGRect.init(x: COMMON_MARGIN, y: COMMON_MARGIN, width: 30 * SCREEN_SCALE, height: 30 * SCREEN_SCALE)
+            cell.rightIMgV.frame = CGRect.init(x: cell.rightImg.RightX, y: cell.rightImg.TopY, width: SCREEN_WIDTH * 0.6, height: SCREEN_WIDTH * 0.6 * (120 / 363))
+            cell.rightIMgV.image = #imageLiteral(resourceName: "out")
             
-            cell.pushLabel.isHidden = false
-            cell.pushMoneyLabel.isHidden = false
+            cell.rightPushLabel.text = "转账给你"
+            
+            
+            
+            cell.rightImg.setImage(urlString: AccountModel.shared()?.HeadImg, placeholderImage: #imageLiteral(resourceName: "logo"))
+            cell.rightPushWBLabel.frame = CGRect.init(x: cell.rightPushLabel.LeftX, y: cell.rightPushLabel.BottomY, width: SCREEN_WIDTH * 0.5, height: cell.rightPushLabel.Height)
+        } else {
+            
+            cell.rightImg.frame = CGRect.init(x: SCREEN_WIDTH - COMMON_MARGIN - 30 * SCREEN_SCALE, y: cell.rightImg.TopY, width: 30 * SCREEN_SCALE, height: 30 * SCREEN_SCALE)
+            cell.rightIMgV.frame = CGRect.init(x: SCREEN_WIDTH * 0.25, y: cell.rightImg.TopY, width: SCREEN_WIDTH * 0.6, height: SCREEN_WIDTH * 0.6 * (120 / 363))
+            cell.rightIMgV.image = #imageLiteral(resourceName: "in")
+            let _ : Int = (self.pushMoney_model![indexPath.row].ToUserId?.intValue)!
+            cell.rightPushLabel.text = "转账给" + self.frienName_Str!
+            cell.rightPushWBLabel.frame = CGRect.init(x: cell.rightPushLabel.LeftX, y: cell.rightPushLabel.BottomY, width: SCREEN_WIDTH * 0.5, height: cell.rightPushLabel.Height)
+            cell.rightImg.setImage(urlString: self.frienHead_Str, placeholderImage: #imageLiteral(resourceName: "logo"))
         }
         
-        cell.textLabel?.text = self.reverSeddd[indexPath.row]
+        cell.rightPushWBLabel.text = ((self.pushMoney_model?[indexPath.row])?.WBCBalance?.stringValue)! + "网博币"
         
         return cell
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return reverSeddd.count
-    
+        return (self.pushMoney_model?.count)!
     }
     
     var dd = ["dd","dd","dd","dd","dd","dd","ee","dd","dd","dd","dd","ff"]
@@ -104,10 +132,12 @@ class PushMoneyDetailVC: BaseViewController,UITableViewDataSource,UITableViewDel
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        self.navigationController?.pushViewController(CountDetailVC(), animated: true)
+        let ccc = CountDetailVC()
+        ccc.countDetail_model = self.pushMoney_model?[indexPath.row]
+        
+        
+        self.navigationController?.pushViewController(ccc, animated: true)
     }
-    
-    
     
     // MARK: - refreshDelegate
     func headerViewEndfun(_ _endRefresh: () -> Void) {
@@ -128,6 +158,12 @@ class PushMoneyDetailVC: BaseViewController,UITableViewDataSource,UITableViewDel
 
 
 class PushMoneyDetailVCCell: CommonTableViewCell {
+    
+    var push_model : TranpayorderModel? {
+        didSet {
+            self.pushMoneyLabel.text = push_model?.WBCBalance?.stringValue
+        }
+    }
     
     lazy var detailImg: UIImageView = {
         let d : UIImageView = UIImageView.init(frame: CGRect.init(x: self.imgV.RightX, y: self.imgV.TopY, width: SCREEN_WIDTH * 0.6, height: SCREEN_WIDTH * 0.6 * (120 / 363)))
@@ -165,50 +201,40 @@ class PushMoneyDetailVCCell: CommonTableViewCell {
         return d
     }()
     
+    
     lazy var pushMoneyLabel: UILabel = {
-        let d : UILabel = UILabel.init(frame: CGRect.init(x: self.pushLabel.LeftX, y: self.pushLabel.BottomY, width: self.pushLabel.Width, height: 20))
-        d.text = "100"
+        let d : UILabel = UILabel.init(frame: CGRect.init(x: self.pushLabel.LeftX, y: self.pushLabel.BottomY, width: self.Width * 0.5, height: 20))
         d.textColor = UIColor.white
         d.font = UIFont.systemFont(ofSize: 13 * SCREEN_SCALE)
         return d
     }()
     
-    lazy var rightPushLabel: UILabel = {
-        let d : UILabel = UILabel.init(frame: CGRect.init(x: self.rightIMgV.Width * 0.3, y: self.rightIMgV.Height * 0.15, width: 60 * SCREEN_SCALE, height: 20))
-        d.text = "转账给陈丽"
+    
+    lazy var rightPushLabel: UILabel =
+        {
+        let d : UILabel = UILabel.init(frame: CGRect.init(x: self.rightIMgV.Width * 0.3, y: self.rightIMgV.Height * 0.15, width: SCREEN_WIDTH * 0.8, height: 20))
+        d.text = "转账给"
         d.textColor = UIColor.white
         d.font = UIFont.systemFont(ofSize: 13 * SCREEN_SCALE)
         return d
     }()
     
     lazy var rightPushWBLabel: UILabel = {
-        let d : UILabel = UILabel.init(frame: CGRect.init(x: self.rightPushLabel.LeftX, y: self.rightPushLabel.BottomY, width: 60 * SCREEN_SCALE, height: 20))
+        let d : UILabel = UILabel.init(frame: CGRect.init(x: self.rightPushLabel.LeftX, y: self.rightPushLabel.BottomY, width: self.Width * 0.8, height: 20))
         d.text = "1000网 博币"
         d.textColor = UIColor.white
         d.font = UIFont.systemFont(ofSize: 13 * SCREEN_SCALE)
         return d
     }()
     
-    
-    
-    
     override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
         super.init(style: .default, reuseIdentifier: reuseIdentifier)
-        contentView.addSubview(imgV)
-        contentView.addSubview(detailImg)
+
         contentView.addSubview(rightIMgV)
         contentView.addSubview(rightImg)
-        
-        detailImg.addSubview(pushLabel)
-        detailImg.addSubview(pushMoneyLabel)
-        
+//        contentView.addSubview(imgV)
         rightIMgV.addSubview(rightPushLabel)
         rightIMgV.addSubview(rightPushWBLabel)
-        
-        pushLabel.sizeToFit()
-        pushMoneyLabel.sizeToFit()
-        rightPushLabel.sizeToFit()
-        rightPushWBLabel.sizeToFit()
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -238,10 +264,6 @@ class PushMoneyHeaderView: UIView {
     override init(frame: CGRect) {
         super.init(frame: frame)
         addSubview(descLabel)
-        
-//        self.isUserInteractionEnabled = true
-//        let tapGes = UITapGestureRecognizer.init(target: self, action: #selector(loadMore))
-//        self.addGestureRecognizer(tapGes)
     }
     
     /// 加载更多

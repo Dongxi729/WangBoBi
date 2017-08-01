@@ -24,6 +24,7 @@ struct Platform {
         #endif
         return isSim
     }()
+
 }
 
 /// 输出日志

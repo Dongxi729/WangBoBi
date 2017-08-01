@@ -147,12 +147,26 @@ class NewFriendListModel : NSObject {
 //    SubmitTime = "2017-07-28T18:23:59.31";
 //    UserName = "18259129536@163.com";
     
+    /// 头像地址
     var HeadImg : String?
+    
+    /// 用户名
     var UserName : String?
+    
+    /// 通知角标
     var NoticeNum : NSNumber?
+    
+    /// 提交时间
     var SubmitTime : NSString?
+    
+    /// 信息描述
     var Msg : String?
     
+    /// 是否是朋友
+    var IsFriend : NSNumber?
+    
+    /// 朋友ID
+    var Id : NSNumber?
     
     init(dict: [String : Any]) {
         super.init()
@@ -203,3 +217,38 @@ class FriendMainListModel : NSObject {
     override func setValue(_ value: Any?, forUndefinedKey key: String) {}
 
 }
+
+//Id = 7;
+//OrderNo = 0728182712077429964;
+//SubmitTime = "2017-07-28T18:27:12.157";
+//ToUserId = 13;
+//UserId = 6;
+//WBCBalance = "0.0001";/
+class TranpayorderModel : NSObject {
+    /// 汇款方id
+    var Id : NSNumber?
+    
+    /// 交易单号
+    var OrderNo : String?
+    
+    /// 是转给谁
+    var ToUserId : NSNumber?
+    
+    ///WBCBalance
+    var WBCBalance : NSNumber?
+    
+    /// 转账人
+    var UserId : NSNumber?
+
+    /// 交易时间
+    var SubmitTime : NSNumber?
+    
+    init(dict: [String : Any]) {
+        super.init()
+        setValuesForKeys(dict)
+    }
+    
+    override func setValue(_ value: Any?, forUndefinedKey key: String) {}
+
+}
+

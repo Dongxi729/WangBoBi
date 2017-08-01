@@ -116,6 +116,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         /// 极光推送注入
         injectJPush(didFinishLaunchingWithOptions: launchOptions)
         
+        
+        
         return true
     }
     

@@ -30,6 +30,11 @@ class BindPhoneVC: UIViewController,UITableViewDelegate,UITableViewDataSource,Bi
     var dataSource : [String:[String]] = ["title" : ["手机号","手机验证码"],
                                           "content" : ["请输入手机号","请输入验证码"]]
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        UIApplication.shared.statusBarStyle = .default
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         

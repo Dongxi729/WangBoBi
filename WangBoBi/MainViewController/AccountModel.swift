@@ -730,8 +730,6 @@ class AccountModel: NSObject,NSCoding {
             
             NetWorkTool.shared.postWithPath(path: INDEX_URL, paras: param, success: { (result) in
                 
-                CCog(message: result)
-                
                 guard let resultData = result as? NSDictionary  else {
                     return
                 }
@@ -756,7 +754,6 @@ class AccountModel: NSObject,NSCoding {
                     if let dic = resultData["Data"] as? NSArray {
                         
                         finishedTotalModel(dic.count)
-                        
                         
                         /// 更新本地存储信息
                         let account = AccountModel(dict: (resultData["Data"] as? NSArray)?[0] as? NSDictionary as! [String : Any])
@@ -820,7 +817,6 @@ class AccountModel: NSObject,NSCoding {
                                     }
                                 }
                             }
-                            
                         }
                         
                         //热评商户
@@ -849,8 +845,6 @@ class AccountModel: NSObject,NSCoding {
         }
         
     }
-    
-    
     
     // MARK: - 发送验证码 --- 双重验证码接口
     class func sendAuthSEL(phoneNum : String) {
@@ -925,8 +919,6 @@ class AccountModel: NSObject,NSCoding {
             }
             
             toast(toast: alertMsg)
-            
-            
             
             
         }) { (error) in
@@ -1006,8 +998,6 @@ class AccountModel: NSObject,NSCoding {
                 AccountModel.shared()?.loginSEL()
             }
             
-            
-            
             /// 抽取提示信息
             guard let alertMsg = resultData["Msg"] as? String else {
                 return
@@ -1060,8 +1050,6 @@ class AccountModel: NSObject,NSCoding {
                 
                 return
             }
-            
-            
             
             if alertMsg == "修改登陆密码成功" {
                 finished(true)
@@ -1186,7 +1174,7 @@ class AccountModel: NSObject,NSCoding {
     class func uploadImgFromLocalLibrary(imgData : Data,finished: @escaping (_ imgUrl : String,_ uploadResult : Bool) -> ()) {
         if imgData.count > 0 {
             
-            let request = "http://192.168.1.10:8010/ifs/headimg.ashx?uid=\((AccountModel.shared()?.Id.stringValue)!)&token=\((AccountModel.shared()?.Token)!)&ac=dd"
+            let request = "\(COMMON_PREFIX)/ifs/headimg.ashx?uid=\((AccountModel.shared()?.Id.stringValue)!)&token=\((AccountModel.shared()?.Token)!)&ac=dd"
             
             NetWorkTool.shared.postWithImageWithData(imgData: imgData, path: request, success: { (result) in
                 
@@ -1214,14 +1202,13 @@ class AccountModel: NSObject,NSCoding {
                 
                 if alertMsg == "操作成功" {
                     /// 抽取提示信息
-                    guard let headImgDic = resultData["Data"] as? NSDictionary else {
+                    guard let headImgDic = resultData["Data"] as? NSArray else {
                         
                         return
                     }
                     
                     if headImgDic.count > 0 {
-                        finished([resultData["Data"] as! NSDictionary][0]["HeadUrl"] as! String,true)
-                        CCog(message: [resultData["Data"] as! NSDictionary][0]["HeadUrl"] as! String)
+                        finished((((resultData["Data"] as? NSArray)?[0] as? NSDictionary)?["HeadUrl"] as? String)!,true)
                     }
                     
                     CCog(message: headImgDic)
@@ -1305,7 +1292,7 @@ class AccountModel: NSObject,NSCoding {
     ///   - imgData: 图像数据
     ///   - finished: 返回结果
     class func uploadHeadImg(imgData : Data,finished: @escaping (_ result : Bool)->()) {
-        let request = "http://192.168.1.10:8010/ifs/headimg.ashx?uid=\((AccountModel.shared()?.Id.stringValue)!)&token=\((AccountModel.shared()?.Token)!)&ac=myimg"
+        let request = "\(COMMON_PREFIX)/ifs/headimg.ashx?uid=\((AccountModel.shared()?.Id.stringValue)!)&token=\((AccountModel.shared()?.Token)!)&ac=myimg"
         
         NetWorkTool.shared.postWithImageWithData(imgData: imgData, path: request, success: { (result) in
             
@@ -1535,17 +1522,24 @@ class AccountModel: NSObject,NSCoding {
             toast(toast: alertMsg)
             
             if alertMsg == "操作成功" {
-                if let dic = (resultData["Data"] as? NSArray)?[0] as? NSDictionary {
+                if let dic = (resultData["Data"] as? NSArray) {
                     CCog(message: dic)
                     
-                    var model = [AddFriendModel]()
+                    var mmm = [AddFriendModel]()
                     
-                    let topMedel = AddFriendModel.init(dict: dic as! [String : Any])
-                    
-                    model.append(topMedel)
-                    
-                    
-                    finished(true,model)
+                    for vv in dic {
+                        
+                        let topMedel = AddFriendModel.init(dict: vv as! [String : Any])
+                        
+                        mmm.append(topMedel)
+                        
+                        CCog(message: mmm.count)
+                        CCog(message: vv)
+                        
+                        if mmm.count == dic.count {
+                            finished(true,mmm)
+                        }
+                    }
                 }
             } else {
                 finished(false,[AddFriendModel]())
@@ -1619,6 +1613,7 @@ class AccountModel: NSObject,NSCoding {
                 }
                 
                 
+            
             } else {
                 finished(false,[NewFriendListModel]())
             }
@@ -1627,9 +1622,82 @@ class AccountModel: NSObject,NSCoding {
             let alertMsg = (error as NSError).userInfo["NSLocalizedDescription"]
             toast(toast: alertMsg! as! String)
         }
-        
     }
     
+    // MARK: - tranpayorder	用户转账订单接口
+    ///
+    /// - Parameters:
+    ///   - fridStr: 转账人的ID
+    ///   - finished: 模型结果.
+    class func tranPayOrderRequest(_ fridStr : String,_ finished : @escaping (_ result : Bool,_ dataModel : [TranpayorderModel])-> ()) {
+        let param : [String : String] = ["uid" : (AccountModel.shared()?.Id.stringValue)!,
+                                         "token" : (AccountModel.shared()?.Token)!,
+                                         "frid" : fridStr]
+
+        CCog(message: param)
+        
+        NetWorkTool.shared.postWithPath(path: TRANPAY_ORDER, paras: param, success: { (result) in
+            CCog(message: result)
+            
+            
+            guard let resultData = result as? NSDictionary else {
+                return
+            }
+            
+            guard let statusMsg = resultData["Status"] as? String else {
+                
+                return
+            }
+            
+            if statusMsg == "999" {
+                AccountModel.shared()?.loginSEL()
+            }
+            
+            /// 抽取提示信息
+            guard let alertMsg = resultData["Msg"] as? String else {
+                
+                return
+            }
+            
+            toast(toast: alertMsg)
+            
+            if alertMsg == "操作成功" {
+                
+                if let dataArray = resultData["Data"] as? NSArray {
+                    if dataArray.count > 0 {
+                        if let dic = (resultData["Data"] as? NSArray) {
+                            CCog(message: dic)
+                            
+                            var mmm = [TranpayorderModel]()
+                            
+                            for vv in dic {
+                                
+                                let topMedel = TranpayorderModel.init(dict: vv as! [String : Any])
+                                
+                                mmm.append(topMedel)
+                                
+                                CCog(message: mmm.count)
+                                CCog(message: vv)
+                                
+                                if mmm.count == dic.count {
+                                    finished(true,mmm)
+                                }
+                            }
+                        }
+                    }
+                }
+                
+                
+            } else {
+                finished(false,[TranpayorderModel]())
+            }
+        }) { (error) in
+            let alertMsg = (error as NSError).userInfo["NSLocalizedDescription"]
+            toast(toast: alertMsg! as! String)
+        }
+    }
+
+
     
     // MARK: - 新的朋友接口
     class func newFriend(finished:@escaping (_ result : Bool,_ dataDic : [FriendMainListModel]) -> ()) {
@@ -1666,21 +1734,27 @@ class AccountModel: NSObject,NSCoding {
                 
                 if let dataArray = resultData["Data"] as? NSArray {
                     if dataArray.count > 0 {
-                        if let dic = (resultData["Data"] as? NSArray)?[0] as? NSDictionary {
-                            CCog(message: dic)
+                        if let dic = (resultData["Data"] as? NSArray) {
                             
-                            var model = [FriendMainListModel]()
+                            var mmm = [FriendMainListModel]()
                             
-                            let topMedel = FriendMainListModel.init(dict: dic as! [String : Any])
-                            
-                            model.append(topMedel)
-                            
-                            finished(true,model)
+                            for vv in dic {
+                                
+                                let topMedel = FriendMainListModel.init(dict: vv as! [String : Any])
+                                
+                                mmm.append(topMedel)
+                                
+                                CCog(message: mmm.count)
+                                CCog(message: vv)
+                                
+                                if mmm.count == dic.count {
+                                    finished(true,mmm)
+                                }
+                            }
                         }
                     }
                 }
-                
-                
+
             } else {
                 finished(false,[FriendMainListModel]())
             }
@@ -1747,8 +1821,7 @@ class AccountModel: NSObject,NSCoding {
                         }
                     }
                 }
-                
-                
+            
             } else {
                 finished(false,[FriendListModel]())
             }
@@ -1757,8 +1830,6 @@ class AccountModel: NSObject,NSCoding {
             CCog(message: error.localizedDescription)
         }
     }
-    
-    
     
     // MARK: - 归档接档
     func encode(with aCoder: NSCoder) {
