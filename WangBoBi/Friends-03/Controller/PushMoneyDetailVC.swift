@@ -23,13 +23,16 @@ class PushMoneyDetailVC: BaseViewController,UITableViewDataSource,UITableViewDel
     /// 好友名字
     var frienName_Str :String? {
         didSet {
-            
+            self.title = frienName_Str
         }
     }
     
+    
+    
     var Fri_frid : String? {
         didSet {
-            AccountModel.tranPayOrderRequest(self.Fri_frid!) { (result, model) in
+            AccountModel.tranPayOrderRequest(
+            self.Fri_frid!) { (result, model) in
                 if result {
                     
                     self.pushMoney_model = [TranpayorderModel]()
@@ -92,15 +95,13 @@ class PushMoneyDetailVC: BaseViewController,UITableViewDataSource,UITableViewDel
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "PushMoneyDetailVCCell") as! PushMoneyDetailVCCell
         
-        if indexPath.row % 2 == 1 {
+        /// 如果模型中的好友ID和当前和用户ID相同则，排列在左边，反之
+        if self.pushMoney_model?[indexPath.row].ToUserId?.intValue == AccountModel.shared()?.Id.intValue {
+            
             cell.rightImg.frame = CGRect.init(x: COMMON_MARGIN, y: COMMON_MARGIN, width: 30 * SCREEN_SCALE, height: 30 * SCREEN_SCALE)
             cell.rightIMgV.frame = CGRect.init(x: cell.rightImg.RightX, y: cell.rightImg.TopY, width: SCREEN_WIDTH * 0.6, height: SCREEN_WIDTH * 0.6 * (120 / 363))
             cell.rightIMgV.image = #imageLiteral(resourceName: "out")
-            
             cell.rightPushLabel.text = "转账给你"
-            
-            
-            
             cell.rightImg.setImage(urlString: AccountModel.shared()?.HeadImg, placeholderImage: #imageLiteral(resourceName: "logo"))
             cell.rightPushWBLabel.frame = CGRect.init(x: cell.rightPushLabel.LeftX, y: cell.rightPushLabel.BottomY, width: SCREEN_WIDTH * 0.5, height: cell.rightPushLabel.Height)
         } else {
@@ -108,14 +109,16 @@ class PushMoneyDetailVC: BaseViewController,UITableViewDataSource,UITableViewDel
             cell.rightImg.frame = CGRect.init(x: SCREEN_WIDTH - COMMON_MARGIN - 30 * SCREEN_SCALE, y: cell.rightImg.TopY, width: 30 * SCREEN_SCALE, height: 30 * SCREEN_SCALE)
             cell.rightIMgV.frame = CGRect.init(x: SCREEN_WIDTH * 0.25, y: cell.rightImg.TopY, width: SCREEN_WIDTH * 0.6, height: SCREEN_WIDTH * 0.6 * (120 / 363))
             cell.rightIMgV.image = #imageLiteral(resourceName: "in")
-            let _ : Int = (self.pushMoney_model![indexPath.row].ToUserId?.intValue)!
+
+            
             cell.rightPushLabel.text = "转账给" + self.frienName_Str!
+            
             cell.rightPushWBLabel.frame = CGRect.init(x: cell.rightPushLabel.LeftX, y: cell.rightPushLabel.BottomY, width: SCREEN_WIDTH * 0.5, height: cell.rightPushLabel.Height)
             cell.rightImg.setImage(urlString: self.frienHead_Str, placeholderImage: #imageLiteral(resourceName: "logo"))
         }
         
-        cell.rightPushWBLabel.text = ((self.pushMoney_model?[indexPath.row])?.WBCBalance?.stringValue)! + "网博币"
-        
+        cell.rightPushWBLabel.text = (self.pushMoney_model?[indexPath.row].WBCBalance)! + "网博币"
+       
         return cell
     }
     
@@ -133,9 +136,17 @@ class PushMoneyDetailVC: BaseViewController,UITableViewDataSource,UITableViewDel
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let ccc = CountDetailVC()
+
+        ccc.count_headImgStr = self.frienHead_Str
+        
+        if indexPath.row % 2 == 1 {
+            ccc.count_money = "-" + (self.pushMoney_model?[indexPath.row].WBCBalance)!
+        } else {
+            ccc.count_money = "+" + (self.pushMoney_model?[indexPath.row].WBCBalance)!
+        }
+        
+        ccc.count_nameStr = self.frienName_Str
         ccc.countDetail_model = self.pushMoney_model?[indexPath.row]
-        
-        
         self.navigationController?.pushViewController(ccc, animated: true)
     }
     
@@ -159,11 +170,11 @@ class PushMoneyDetailVC: BaseViewController,UITableViewDataSource,UITableViewDel
 
 class PushMoneyDetailVCCell: CommonTableViewCell {
     
-    var push_model : TranpayorderModel? {
-        didSet {
-            self.pushMoneyLabel.text = push_model?.WBCBalance?.stringValue
-        }
-    }
+//    var push_model : TranpayorderModel? {
+//        didSet {
+//            self.pushMoneyLabel.text = push_model?.WBCBalance
+//        }
+//    }
     
     lazy var detailImg: UIImageView = {
         let d : UIImageView = UIImageView.init(frame: CGRect.init(x: self.imgV.RightX, y: self.imgV.TopY, width: SCREEN_WIDTH * 0.6, height: SCREEN_WIDTH * 0.6 * (120 / 363)))

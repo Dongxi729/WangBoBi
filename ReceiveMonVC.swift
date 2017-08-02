@@ -23,10 +23,19 @@ class ReceiveMonVC: UIViewController {
     fileprivate var searchArray:[String] = [String](){
         didSet  {
             self.tableView.reloadData()
-//            self.view.endEditing(true)
+            //            self.view.endEditing(true)
         }
     }
     
+    /// 朋友列表
+    fileprivate var mertopModel = [NewFriendListModel]()
+    
+    
+    /// 搜索的数据源
+    var sercchArray : [String] = []
+    
+    /// 显示页数
+    fileprivate var limitCount : Int = 0
     
     // MARK: - 数据源
     fileprivate var dataSource : [String] = ["转给朋友","转到其他网博币钱包","转到交易平台","转到会员平台"]
@@ -45,6 +54,7 @@ class ReceiveMonVC: UIViewController {
         //创建一个重用的单元格
         d.register(ReceiveCell.self,
                    forCellReuseIdentifier: "MyCell")
+        d.register(FriendCell.self, forCellReuseIdentifier: "CCCC")
         return d
     }()
     
@@ -72,15 +82,11 @@ class ReceiveMonVC: UIViewController {
         }
     }
     
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
-        
-        super.viewDidAppear(true)
-        self.tableView.reloadData()
-    }
-    
-    
-    
+//    override func viewDidAppear(_ animated: Bool) {
+//        super.viewDidAppear(animated)
+//        
+//        self.tableView.reloadData()
+//    }
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -112,6 +118,17 @@ class ReceiveMonVC: UIViewController {
         } else {
             // Fallback on earlier versions
         }
+        
+        
+        AccountModel.GetFriendList(String(limitCount), "10") { (result, model) in
+            self.mertopModel = model
+            CCog(message: self.mertopModel.count)
+            self.tableView.reloadData()
+            
+            for value in model {
+                self.sercchArray.append(value.UserName!)
+            }
+        }
     }
 }
 
@@ -125,37 +142,36 @@ extension ReceiveMonVC: UITableViewDelegate,UITableViewDataSource {
             //同一形式的单元格重复使用，在声明时已注册
             let cell = tableView.dequeueReusableCell(withIdentifier: identify,
                                                      for: indexPath) as! ReceiveCell
-            
-            /// 延长分割线
-            cell.preservesSuperviewLayoutMargins = false
-            cell.separatorInset = UIEdgeInsets.zero
-            cell.layoutMargins = .zero
-            
-            if self.countrySearchController.isActive {
-                cell.descLabel.text = self.searchArray[indexPath.row]
-                return cell
-            } else {
-                switch indexPath.section {
-                case 0:
-                    cell.descLabel.text = dataSource[indexPath.row]
-                    cell.imgVi.image = frontIconImg[indexPath.row]
-                case 1:
-                    cell.descLabel.text = recentDeals[indexPath.row]
-                    break
-                default:
-                    break
-                }
+            switch indexPath.section {
+            case 0:
+                cell.descLabel.text = dataSource[indexPath.row]
+                cell.imgVi.image = frontIconImg[indexPath.row]
+            case 1:
                 
-                return cell
+                //同一形式的单元格重复使用，在声明时已注册
+                let cell = tableView.dequeueReusableCell(withIdentifier: "CCCC",
+                                                         for: indexPath) as! FriendCell
+                
+                cell.stangerLabel.isHidden = false
+                
+                cell.model = self.mertopModel[indexPath.row]
+                
+                CCog(message: "===")
+                
+                break
+            default:
+                break
             }
+            
+            return cell
     }
     
     
     func numberOfSections(in tableView: UITableView) -> Int {
-        if recentDeals.count > 0 {
-            return 2
-        } else {
+        if self.countrySearchController.isActive {
             return 1
+        } else {
+            return 2
         }
     }
     
@@ -167,16 +183,7 @@ extension ReceiveMonVC: UITableViewDelegate,UITableViewDataSource {
         if self.countrySearchController.isActive {
             return self.searchArray.count
         } else {
-            switch section {
-            case 0:
-                return dataSource.count
-                
-            case 1:
-                return recentDeals.count
-            default:
-                break
-            }
-            return 0
+            return self.mertopModel.count
         }
     }
     
@@ -196,7 +203,7 @@ extension ReceiveMonVC: UITableViewDelegate,UITableViewDataSource {
     func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
         switch section {
         case 1:
-            return "最近"
+            return "最近交易"
             
         default:
             break
@@ -205,8 +212,8 @@ extension ReceiveMonVC: UITableViewDelegate,UITableViewDataSource {
     }
 }
 
-extension ReceiveMonVC: UISearchResultsUpdating
-{
+// MARK: - 搜索代理方法
+extension ReceiveMonVC: UISearchResultsUpdating {
     //实时进行搜索
     func updateSearchResults(for searchController: UISearchController) {
         self.searchArray = self.schoolArray.filter { (school) -> Bool in

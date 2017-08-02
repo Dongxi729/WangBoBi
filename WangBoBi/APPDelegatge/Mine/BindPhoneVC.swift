@@ -267,7 +267,7 @@ class BindPhoneFooterV : UIView {
         self.bindPhoneBtn.setTitle(str, for: .normal)
         
         addSubview(bindPhoneBtn)
-        self.bindPhoneBtn.titleLabel?.font = UIFont.systemFont(ofSize: 13 * SCREEN_SCALE)
+//        self.bindPhoneBtn.titleLabel?.font = UIFont.systemFont(ofSize: 13 * SCREEN_SCALE)
         self.backgroundColor = UIColor.white
         
     }
@@ -280,7 +280,7 @@ class BindPhoneFooterV : UIView {
         d.addTarget(self, action: #selector(bindPhoneSEL(sender:)), for: .touchUpInside)
         d.titleLabel?.textAlignment = .center
         d.layer.cornerRadius = 5.0
-        d.titleLabel?.font = UIFont.systemFont(ofSize: 12 * SCREEN_SCALE)
+//        d.titleLabel?.font = UIFont.systemFont(ofSize: 12 * SCREEN_SCALE)
         return d
     }()
     

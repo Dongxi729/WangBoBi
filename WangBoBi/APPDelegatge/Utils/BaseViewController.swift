@@ -143,7 +143,6 @@ class BaseViewController: UIViewController,UIGestureRecognizerDelegate,UINavigat
             DispatchQueue.main.async {
                 if NSStringFromClass(self.classForCoder).contains("PushingMoneyVC") || NSStringFromClass(self.classForCoder).contains("ReceiveMonVC")  ||
                     NSStringFromClass(self.classForCoder).contains("DetailViewController2") {
-                    CCog(message: "ReceiveMonVC")
                     navBar?.barTintColor = UIColor.white
                 } else {
                     navBar?.barTintColor = UIColor.clear

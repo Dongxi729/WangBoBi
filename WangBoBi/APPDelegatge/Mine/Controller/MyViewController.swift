@@ -94,11 +94,6 @@ extension MyViewController : UITableViewDelegate,UITableViewDataSource {
             switch indexPath.row {
             case 0:
                 let cell = tableView.dequeueReusableCell(withIdentifier: "MyVCCell") as! MyVCCell
-                
-//                cell.preservesSuperviewLayoutMargins = false
-//                cell.separatorInset = UIEdgeInsets.zero
-//                cell.layoutMargins = UIEdgeInsets.zero
-                
                 cell.backgroundColor = UIColor.colorWithHexString("2796DD")
 
                 return cell

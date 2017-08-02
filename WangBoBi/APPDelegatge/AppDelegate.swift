@@ -65,7 +65,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             CCog(message: (timeStamp - lastLoginTime))
             
             /// 检查登录时间，小于10分钟直接登录。
-            if (timeStamp - lastLoginTime) <= 60 * 10 {
+            if (timeStamp - lastLoginTime) <= 3600 * 24 * 30 {
                 
                 UserDefaults.standard.set(timeStamp, forKey: "loginTime")
                 UserDefaults.standard.synchronize()

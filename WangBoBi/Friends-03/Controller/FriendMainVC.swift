@@ -10,8 +10,6 @@ import UIKit
 
 class FriendMainVC: BaseViewController,UITableViewDelegate,UITableViewDataSource,UISearchResultsUpdating,FriendMainVHeaVDelegate,headerViewelegate {
     
-    
-    
     lazy var groudFriend: UIBarButtonItem = {
         let d : UIBarButtonItem = UIBarButtonItem.init(image: #imageLiteral(resourceName: "groupFir"), style: .plain, target: self, action: #selector(jumpToFriendContactVC))
         return d
@@ -36,7 +34,7 @@ class FriendMainVC: BaseViewController,UITableViewDelegate,UITableViewDataSource
     }()
     
     /// 朋友列表
-    var mertopModel = [NewFriendListModel]()
+    fileprivate var mertopModel = [NewFriendListModel]()
     
     /// 显示页数
     fileprivate var limitCount : Int = 0
@@ -95,13 +93,7 @@ class FriendMainVC: BaseViewController,UITableViewDelegate,UITableViewDataSource
             self.navigationController?.pushViewController(FriendGroupVC(), animated: true)
         }
     }
-    
-    //原始数据集
-    private var frien_datasource = ["清华大学","北京大学","中国人民大学","北京交通大学","北京工业大学",
-                                    "北京航空航天大学","北京理工大学","北京科技大学","中国政法大学",
-                                    "中央财经大学","华北电力大学","北京体育大学","上海外国语大学","复旦大学",
-                                    "华东师范大学","上海大学","河北工业大学"]
-    
+
     /// 模型
     var modelData = [FriendListModel]()
     
@@ -168,10 +160,12 @@ class FriendMainVC: BaseViewController,UITableViewDelegate,UITableViewDataSource
         let ccc = PushMoneyDetailVC()
         let frid_ID : Int = (self.mertopModel[indexPath.row].Id?.intValue)!
         ccc.Fri_frid = String(frid_ID)
-        ccc.frienName_Str = self.mertopModel[indexPath.row].UserName
+        ccc.frienName_Str = self.mertopModel[indexPath.row].TrueName
         ccc.frienHead_Str = self.mertopModel[indexPath.row].HeadImg
         
+        
         self.navigationController?.pushViewController(ccc, animated: true)
+    
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -222,13 +216,12 @@ class FriendMainVC: BaseViewController,UITableViewDelegate,UITableViewDataSource
         limitCount += 1
         AccountModel.GetFriendList(String(limitCount), "10") { (result, model) in
             if result {
+                self.mertopModel = model
+                CCog(message: self.mertopModel.count)
                 self.tableView.reloadData()
                 
-                
-                CCog(message: model)
                 for value in model {
-                    CCog(message: value.UserName)
-                    self.searchArray.append(value.UserName!)
+                    self.sercchArray.append(value.UserName!)
                 }
             }
         }
@@ -240,14 +233,16 @@ class FriendMainVC: BaseViewController,UITableViewDelegate,UITableViewDataSource
         
         AccountModel.GetFriendList("1", "10") { (result, model) in
             if result {
-                for value in model {
-                    self.searchArray.append(value.UserName!)
-                }
+                self.mertopModel = model
+                CCog(message: self.mertopModel.count)
                 self.tableView.reloadData()
+                
+                for value in model {
+                    self.sercchArray.append(value.UserName!)
+                }
             }
         }
     }
-    
 }
 
 // MARK: - 头视图

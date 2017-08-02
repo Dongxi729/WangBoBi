@@ -11,5 +11,53 @@
             continueAfterRunningActions = "No">
          </BreakpointContent>
       </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "WangBoBi/Friends-03/Controller/FriendGroupVC.swift"
+            timestampString = "523332110.783428"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "89"
+            endingLineNumber = "89"
+            landmarkName = "viewDidLoad()"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "WangBoBi.FriendGroupVC.viewDidLoad () -&gt; ()"
+                  moduleName = "WangBoBi"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/zhengdongxi/Documents/zhengdongxi/Documents/%E7%BD%91%E5%8D%9A/WangBoBi/WangBoBi/Friends-03/Controller/FriendGroupVC.swift"
+                  timestampString = "523358175.602042"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "89"
+                  endingLineNumber = "89"
+                  offsetFromSymbolStart = "2308">
+               </Location>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "WangBoBi.FriendGroupVC.(viewDidLoad () -&gt; ()).(closure #1)"
+                  moduleName = "WangBoBi"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/zhengdongxi/Documents/zhengdongxi/Documents/%E7%BD%91%E5%8D%9A/WangBoBi/WangBoBi/Friends-03/Controller/FriendGroupVC.swift"
+                  timestampString = "523358175.605483"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "90"
+                  endingLineNumber = "90"
+                  offsetFromSymbolStart = "32">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
    </Breakpoints>
 </Bucket>

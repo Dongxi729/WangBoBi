@@ -157,6 +157,20 @@ extension String {
             else { return nil }
         return from ..< to
     }
+    
+    /// 检查字符串中小数后8位
+    func checkDotLenght(_ checkStr : String) -> Bool {
+        let srrr = checkStr
+        
+        let arr : [String] = srrr.components(separatedBy: ".")
+        print(arr)
+        if (arr.last?.characters.count)! > 8 {
+            print("超过位数限定")
+            return false
+        } else {
+            return true
+        }
+    }
 }
 
 

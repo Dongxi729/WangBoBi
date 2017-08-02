@@ -159,11 +159,7 @@ class FriendGroupVC: BaseViewController, UITableViewDelegate, UITableViewDataSou
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        
 
-//        NotificationCenter.default.post(name: NSNotification.Name(rawValue: "friendInfoShow"), object: nil, userInfo: ["dataModel" :
-//            frienGroup_model[indexPath.section]])
-//        
         
         let ccc = AddFriendInfoVC()
         ccc.add_model = frienGroup_model[indexPath.section]

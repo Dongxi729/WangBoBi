@@ -10,6 +10,9 @@ import UIKit
 
 class AddFriendMarkVC: BaseViewController,BindPhoneFooterVDelegate {
 
+    /// 好友邮箱地址
+    var fddFei_emailStr : Int?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -48,12 +51,10 @@ class AddFriendMarkVC: BaseViewController,BindPhoneFooterVDelegate {
     func bindPhonSELDelegate() {
         CCog(message: ScanModel.friendEamil)
         
-        let d : Int = (ScanModel.friendEamil?.intValue)!
-        
-        AccountModel.addFriendRequest(2, "", String(d), "", self.sendTf.text!) { (result, model) in
-            
+        if let fff = UserDefaults.standard.object(forKey: "frienID") as? Int {
+            AccountModel.addFriendRequest(2, "", String(fff), "", self.sendTf.text!) { (result, model) in
+                
+            }
         }
-    
     }
-
 }

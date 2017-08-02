@@ -44,7 +44,7 @@ class FriendCell : CommonTableViewCell {
     var model : NewFriendListModel? {
         didSet {
             self.imgVi.setImage(urlString: model?.HeadImg, placeholderImage: #imageLiteral(resourceName: "logo"))
-            self.descLabel.text = model?.UserName
+            self.descLabel.text = model?.TrueName
             
             self.bottomLabel.text = model?.Msg
             
@@ -69,9 +69,22 @@ class FriendCell : CommonTableViewCell {
             
             /// 是否是朋友
             if model?.IsFriend?.intValue == 1 {
-                self.stangerLabel.text = "好友"
+                self.stangerLabel.isHidden = true
+                self.descLabel.frame = CGRect.init(x: self.imgVi.RightX + COMMON_MARGIN * 0.5, y: 10, width: SCREEN_WIDTH - self.imgVi.Width - COMMON_MARGIN * 2, height: 20)
+                self.descLabel.layer.borderWidth = 1
             } else if model?.IsFriend?.intValue == 0 {
                 self.stangerLabel.text = "陌生人"
+            }
+            
+            /// 设置收到、转账的文字颜色
+            if (model?.Msg?.contains("向你"))! {
+                self.setGetMoneyLabel.text = "[收到]"
+                self.setGetMoneyLabel.textColor = UIColor.colorWithHexString("2693DA")
+                self.setGetMoneyLabel.layer.borderColor = UIColor.colorWithHexString("2693DA").cgColor
+            } else {
+                self.setGetMoneyLabel.text = "[转账]"
+                self.setGetMoneyLabel.textColor = UIColor.red
+                self.setGetMoneyLabel.layer.borderColor = UIColor.red.cgColor
             }
         }
     }

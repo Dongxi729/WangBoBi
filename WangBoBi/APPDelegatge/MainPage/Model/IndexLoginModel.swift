@@ -168,6 +168,9 @@ class NewFriendListModel : NSObject {
     /// 朋友ID
     var Id : NSNumber?
     
+    /// 真实姓名
+    var TrueName : String?
+    
     init(dict: [String : Any]) {
         super.init()
         setValuesForKeys(dict)
@@ -235,13 +238,16 @@ class TranpayorderModel : NSObject {
     var ToUserId : NSNumber?
     
     ///WBCBalance
-    var WBCBalance : NSNumber?
+    var WBCBalance : String?
     
     /// 转账人
     var UserId : NSNumber?
 
     /// 交易时间
-    var SubmitTime : NSNumber?
+    var SubmitTime : NSString?
+    
+    /// 好友网博币钱包地址
+    var WBCAdress : String?
     
     init(dict: [String : Any]) {
         super.init()

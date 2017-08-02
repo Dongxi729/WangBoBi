@@ -1534,7 +1534,6 @@ class AccountModel: NSObject,NSCoding {
                         mmm.append(topMedel)
                         
                         CCog(message: mmm.count)
-                        CCog(message: vv)
                         
                         if mmm.count == dic.count {
                             finished(true,mmm)

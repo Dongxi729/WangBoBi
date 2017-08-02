@@ -12,7 +12,6 @@ class AddFriendInfoVC: BaseViewController,AddPersonInfoEditVDelegate {
     
     var add_model : FriendListModel? {
         didSet {
-            CCog(message: add_model)
         }
     }
     
@@ -78,11 +77,8 @@ class AddFriendInfoVC: BaseViewController,AddPersonInfoEditVDelegate {
                 self.editV.nameShowLabel.text = "21221"
             }
         }
-        
-        NotificationCenter.default.removeObserver(self, name: NSNotification.Name(rawValue: "friendInfoShow"), object: nil)
+    
     }
-    
-    
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
@@ -95,7 +91,14 @@ class AddFriendInfoVC: BaseViewController,AddPersonInfoEditVDelegate {
     }
     
     func jumpToAddFriendMark() {
-        self.navigationController?.pushViewController(AddFriendMarkVC(), animated: true)
+        let ccc = AddFriendMarkVC()
+        
+        if let frien_ID = UserDefaults.standard.object(forKey: "frienID") {
+            ccc.fddFei_emailStr = frien_ID as? Int
+            self.navigationController?.pushViewController(AddFriendMarkVC(), animated: true)
+        }
+        
+        
     }
 }
 
@@ -207,6 +210,9 @@ class AddPersonInfoEditV : UIView {
         return d
     }()
     
+    /// 暂时存取添加朋友ID
+    var tempFriID : Int?
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
         
@@ -245,21 +251,36 @@ class AddPersonInfoEditV : UIView {
                     self.emailShowLabel.text = model[0].Email
                     self.moneyAddresShow.text = model[0].WBCAdress
                     
-                    /// 存入单利
-                    ScanModel.friendEamil = model[0].Id
+                    /// =====
+//                    self.tempFriID = model[0].Id?.intValue
+                    UserDefaults.standard.set(model[0].Id?.intValue, forKey: "frienID")
+                    UserDefaults.standard.synchronize()
                     
                     self.avatarImg.setImage(urlString: model[0].HeadImg, placeholderImage: #imageLiteral(resourceName: "arrow"))
                     
                     /// 是否陌生人
-                    if model[0].TrueName?.characters.count == 0 {
+                    if model[0].IsFriend?.intValue == 0 {
                         self.strangerImg.showCerNam(str: "陌生人")
                         self.strangerImg.backgroundColor = UIColor.white
                         self.strangerImg.descLabel.textColor = UIColor.black
+                    } else if model[0].IsFriend?.intValue == 1 {
+                        self.strangerImg.showCerNam(str: "好友")
+                        self.strangerImg.backgroundColor = UIColor.white
+                        self.strangerImg.descLabel.textColor = UIColor.colorWithHexString("2796DC")
+                        self.addFrienBtn.isHidden = true
+                    }
+                    
+                    
+                    /// 是否好友
+                    if model[0].VerifiStatus?.intValue == 0 {
+                        self.cerNameIcon.showCerNam(str: "未实名")
+                        self.cerNameIcon.frame = self.nameShowLabel.frame
                     }
                     
                     /// 是否好友
-                    if model[0].IsFriend?.intValue == 0 {
-                        self.cerNameIcon.showCerNam(str: "未实名")
+                    if model[0].VerifiStatus?.intValue == 3 {
+                        self.nameShowLabel.text = model[0].TrueName
+                        self.cerNameIcon.frame = self.nameShowLabel.frame
                     }
                 }
             }
@@ -272,24 +293,39 @@ class AddPersonInfoEditV : UIView {
                 if result {
                     self.emailShowLabel.text = model[0].Email
                     self.moneyAddresShow.text = model[0].WBCAdress
+                    
+                    UserDefaults.standard.set(model[0].Id?.intValue, forKey: "frienID")
+                    UserDefaults.standard.synchronize()
+                    
                     self.avatarImg.setImage(urlString: model[0].HeadImg, placeholderImage: #imageLiteral(resourceName: "arrow"))
                     
                     /// 是否陌生人
-                    if model[0].TrueName?.characters.count == 0 {
+                    if model[0].IsFriend?.intValue == 0 {
                         self.strangerImg.showCerNam(str: "陌生人")
                         self.strangerImg.backgroundColor = UIColor.white
                         self.strangerImg.descLabel.textColor = UIColor.black
+                    } else if model[0].IsFriend?.intValue == 1 {
+                        self.strangerImg.showCerNam(str: "好友")
+                        self.strangerImg.backgroundColor = UIColor.white
+                        self.strangerImg.descLabel.textColor = UIColor.colorWithHexString("2796DC")
+                        self.addFrienBtn.isHidden = true
+                    }
+                    
+                    
+                    /// 是否好友
+                    if model[0].VerifiStatus?.intValue == 0 {
+                        self.cerNameIcon.showCerNam(str: "未实名")
+                        self.cerNameIcon.frame = self.nameShowLabel.frame
                     }
                     
                     /// 是否好友
-                    if model[0].IsFriend?.intValue == 0 {
-                        self.cerNameIcon.showCerNam(str: "未实名")
+                    if model[0].VerifiStatus?.intValue == 3 {
+                        self.nameShowLabel.text = model[0].TrueName
+                        self.cerNameIcon.frame = self.nameShowLabel.frame
                     }
                 }
             }
         }
-        
-        
     }
     
     

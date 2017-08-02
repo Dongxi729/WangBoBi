@@ -66,8 +66,6 @@ class ShopWebV: WkBaseViewController {
             /// 有网络
             if result {
                 
-                CCog(message: self.urlString)
-                
                 /// 是否包含前缀
 //                if self.urlString.contains(COMMON_PREFIX) {
                     let request : URLRequest = NSURLRequest.init(url: URL.init(string: self.urlString)!, cachePolicy: .useProtocolCachePolicy, timeoutInterval: 0) as URLRequest

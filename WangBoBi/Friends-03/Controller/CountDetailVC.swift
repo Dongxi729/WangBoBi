@@ -10,14 +10,33 @@ import UIKit
 
 class CountDetailVC: BaseViewController,UITableViewDelegate,UITableViewDataSource {
     
-    var values : [Any] = []
+    /// 名字
+    var count_nameStr : String? {
+        didSet {
+            self.headV.countD_nameLbel.text = count_nameStr
+        }
+    }
     
+    /// 头像
+    var count_headImgStr : String? {
+        didSet {
+            self.headV.contDetail_headImg.setImage(urlString: count_headImgStr, placeholderImage: #imageLiteral(resourceName: "logo"))
+        }
+    }
+    
+    /// 交易金额
+    var count_money : String? {
+        didSet {
+            CCog(message: count_money)
+            self.headV.count_moneyLabel.text = count_money
+        }
+    }
+    
+    
+    /// 姓名
     var countDetail_model : TranpayorderModel? {
         didSet {
             
-            view.addSubview(tableView)
-            
-            tableView.tableHeaderView = headV
         }
     }
     
@@ -42,17 +61,46 @@ class CountDetailVC: BaseViewController,UITableViewDelegate,UITableViewDataSourc
         // Do any additional setup after loading the view.
         title = "账单详情"
         
-        
-        
         view.backgroundColor = UIColor.white
+        
+        view.addSubview(tableView)
+        
+        tableView.tableHeaderView = headV
     }
     
     // MARK: - UITableViewDelegate,UITableViewDataSource
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "CountDetailCell") as! CountDetailCell
         
-//        cell.count_right.text = cellDataSource[indexPath.row]
-//        cell.countcell_left.text = cellDataSource[indexPath.row]
+        cell.countcell_left.text = cellDataSource[indexPath.row]
+        
+        if indexPath.row == 0 {
+            cell.count_right.text = "钱包"
+        }
+        
+        if indexPath.row == 1 {
+            cell.count_right.text = "转账"
+        }
+        
+        if indexPath.row == 2 {
+            cell.count_right.text = self.countDetail_model?.WBCAdress
+            cell.count_right.font = UIFont.systemFont(ofSize: 11)
+        }
+        
+        if indexPath.row == 3 {
+            var ddd : NSString = (self.countDetail_model?.SubmitTime)!
+            
+            ddd = ddd.replacingOccurrences(of: "T", with: " ") as NSString
+            print(ddd)
+            
+            ddd = ddd.substring(with: NSRange.init(location: 0, length: 16)) as NSString
+            
+            cell.count_right.text = ddd as String
+        }
+        
+        if indexPath.row == 4 {
+            cell.count_right.text = self.countDetail_model?.OrderNo
+        }
         
         return cell
     }
@@ -95,7 +143,7 @@ class CountDetaiHeadV: UIView {
     lazy var count_SealResultLabel: UILabel = {
         let d : UILabel = UILabel.init(frame: CGRect.init(x: 0, y: self.count_moneyLabel.BottomY, width: SCREEN_WIDTH, height: 20))
         d.textAlignment = .center
-        d.text = "交易结果"
+        d.text = "交易成功"
         d.textColor = UIColor.darkGray
         d.font = UIFont.systemFont(ofSize: 12)
         return d
