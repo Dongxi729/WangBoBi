@@ -274,7 +274,7 @@ class AddPersonInfoEditV : UIView {
                     /// 是否好友
                     if model[0].VerifiStatus?.intValue == 0 {
                         self.cerNameIcon.showCerNam(str: "未实名")
-                        self.cerNameIcon.frame = self.nameShowLabel.frame
+                        self.cerNameIcon.frame = CGRect.init(x: self.nameLabel.RightX, y: self.nameLabel.TopY, width: 55 * SCREEN_SCALE, height: self.nameLabel.Height)
                     }
                     
                     /// 是否好友

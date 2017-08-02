@@ -71,7 +71,6 @@ class FriendCell : CommonTableViewCell {
             if model?.IsFriend?.intValue == 1 {
                 self.stangerLabel.isHidden = true
                 self.descLabel.frame = CGRect.init(x: self.imgVi.RightX + COMMON_MARGIN * 0.5, y: 10, width: SCREEN_WIDTH - self.imgVi.Width - COMMON_MARGIN * 2, height: 20)
-                self.descLabel.layer.borderWidth = 1
             } else if model?.IsFriend?.intValue == 0 {
                 self.stangerLabel.text = "陌生人"
             }

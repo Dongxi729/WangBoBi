@@ -27,7 +27,6 @@ class CountDetailVC: BaseViewController,UITableViewDelegate,UITableViewDataSourc
     /// 交易金额
     var count_money : String? {
         didSet {
-            CCog(message: count_money)
             self.headV.count_moneyLabel.text = count_money
         }
     }
@@ -117,6 +116,8 @@ class CountDetaiHeadV: UIView {
     lazy var contDetail_headImg: UIImageView = {
         let d: UIImageView = UIImageView.init(frame: CGRect.init(x: self.center.x - SCREEN_WIDTH * 0.05, y: COMMON_MARGIN, width: SCREEN_WIDTH * 0.1, height: SCREEN_WIDTH * 0.1))
         d.image = #imageLiteral(resourceName: "addFriIcon")
+        d.layer.cornerRadius = SCREEN_WIDTH * 0.05
+        d.clipsToBounds = true
         return d
     }()
     

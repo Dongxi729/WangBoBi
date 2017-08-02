@@ -14,7 +14,7 @@ var AddType : Int?
 class AddFrienVC: BaseViewController {
 
     fileprivate lazy var searTf: TfPlaceHolder = {
-        let d : TfPlaceHolder = TfPlaceHolder.init(frame: CGRect.init(x: SCREEN_WIDTH * 0.11755231037232, y: COMMON_MARGIN + 64, width: SCREEN_WIDTH - SCREEN_WIDTH * 0.15, height: SCREEN_HEIGHT * 0.075))
+        let d : TfPlaceHolder = TfPlaceHolder.init(frame: CGRect.init(x: SCREEN_WIDTH * 0.11755231037232, y: COMMON_MARGIN - 3 + 64, width: SCREEN_WIDTH - SCREEN_WIDTH * 0.15, height: SCREEN_HEIGHT * 0.075))
         d.plStrSize(str: "搜索好友账号", holderColor: UIColor.lightGray)
         
         let toolBar = ToolBar()
@@ -64,10 +64,6 @@ class AddFrienVC: BaseViewController {
         view.backgroundColor = COMMON_TBBGCOLOR
         
         title = "添加好友"
-        
-        if ScanModel.shared.codeStr?.characters.count > 0 {
-            self.searTf.text = ScanModel.shared.codeStr
-        }
     }
     
     // MARK: - 事件操作
@@ -75,17 +71,21 @@ class AddFrienVC: BaseViewController {
         CCog(message: "")
         /// 缩回请求
         
-        self.navigationController?.pushViewController(AddFriendInfoVC(), animated: true)
-        
-        self.searTf.resignFirstResponder()
-        // 键盘缩回操作
-        UIView.animate(withDuration: 0.5) {
-            UIApplication.shared.keyWindow?.frame = (UIApplication.shared.keyWindow?.rootViewController?.view.bounds)!
+        if self.searTf.text?.characters.count > 0 && (self.searTf.text?.validateEmail())! {
+            self.navigationController?.pushViewController(AddFriendInfoVC(), animated: true)
+            
+            self.searTf.resignFirstResponder()
+            // 键盘缩回操作
+            UIView.animate(withDuration: 0.5) {
+                UIApplication.shared.keyWindow?.frame = (UIApplication.shared.keyWindow?.rootViewController?.view.bounds)!
+            }
+            
+            AddType = 1
+            
+            ScanModel.friemdIDStr = self.searTf.text
+        } else {
+            toast(toast: "请输入正确格式的账号信息")
         }
-        
-        AddType = 1
-        
-        ScanModel.friemdIDStr = self.searTf.text
     }
     
     override func viewWillDisappear(_ animated: Bool) {

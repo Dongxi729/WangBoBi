@@ -153,6 +153,7 @@ class PersonInfoEditV : UIView {
         /// 实名显示
         if AccountModel.shared()?.TrueName?.characters.count == 0 {
             cerNameIcon.showCerNam(str: "未实名")
+            cerNameIcon.frame = CGRect.init(x: self.nameLabel.RightX, y: self.nameLabel.TopY, width: 55 * SCREEN_SCALE, height: self.nameLabel.Height)
         } else {
             nameShowLabel.text = AccountModel.shared()?.TrueName
         }
@@ -185,12 +186,9 @@ class PersonInfoEditV : UIView {
                             self.avatarImg.image = UIImage.init(data: imgData)
                             
                             AccountModel.reloadSEL()
-                            
-                  
                         }
                     }
                 })
-                
             }
         }
     }

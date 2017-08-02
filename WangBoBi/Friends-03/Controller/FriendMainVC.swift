@@ -10,6 +10,8 @@ import UIKit
 
 class FriendMainVC: BaseViewController,UITableViewDelegate,UITableViewDataSource,UISearchResultsUpdating,FriendMainVHeaVDelegate,headerViewelegate {
     
+    
+    
     lazy var groudFriend: UIBarButtonItem = {
         let d : UIBarButtonItem = UIBarButtonItem.init(image: #imageLiteral(resourceName: "groupFir"), style: .plain, target: self, action: #selector(jumpToFriendContactVC))
         return d
@@ -165,7 +167,6 @@ class FriendMainVC: BaseViewController,UITableViewDelegate,UITableViewDataSource
         
         
         self.navigationController?.pushViewController(ccc, animated: true)
-    
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -217,7 +218,6 @@ class FriendMainVC: BaseViewController,UITableViewDelegate,UITableViewDataSource
         AccountModel.GetFriendList(String(limitCount), "10") { (result, model) in
             if result {
                 self.mertopModel = model
-                CCog(message: self.mertopModel.count)
                 self.tableView.reloadData()
                 
                 for value in model {
@@ -234,7 +234,7 @@ class FriendMainVC: BaseViewController,UITableViewDelegate,UITableViewDataSource
         AccountModel.GetFriendList("1", "10") { (result, model) in
             if result {
                 self.mertopModel = model
-                CCog(message: self.mertopModel.count)
+                
                 self.tableView.reloadData()
                 
                 for value in model {

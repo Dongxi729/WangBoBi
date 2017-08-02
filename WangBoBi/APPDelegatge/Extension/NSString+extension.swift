@@ -131,12 +131,6 @@ extension String {
         return emailTest.evaluate(with: self)
     }
 
-}
-
-
-// MARK: - ，扩展String，增加转换方法
-extension String {
-    
     //Range转换为NSRange
     func nsRange(from range: Range<String.Index>) -> NSRange {
         let from = range.lowerBound.samePosition(in: utf16)

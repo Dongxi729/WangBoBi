@@ -137,12 +137,13 @@ class PushMoneyDetailVC: BaseViewController,UITableViewDataSource,UITableViewDel
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let ccc = CountDetailVC()
 
-        ccc.count_headImgStr = self.frienHead_Str
         
-        if indexPath.row % 2 == 1 {
-            ccc.count_money = "-" + (self.pushMoney_model?[indexPath.row].WBCBalance)!
-        } else {
+        if self.pushMoney_model?[indexPath.row].ToUserId?.intValue == AccountModel.shared()?.Id.intValue {
             ccc.count_money = "+" + (self.pushMoney_model?[indexPath.row].WBCBalance)!
+            ccc.count_headImgStr = AccountModel.shared()?.HeadImg
+        } else {
+            ccc.count_money = "-" + (self.pushMoney_model?[indexPath.row].WBCBalance)!
+            ccc.count_headImgStr = self.frienHead_Str
         }
         
         ccc.count_nameStr = self.frienName_Str
