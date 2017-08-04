@@ -34,10 +34,9 @@ extension ToolBar {
     
     
     func seToolBar(confirmTitle : String,cancelTitle : String,comfirmSEL : Selector?,cancelSEL : Selector?,target: Any?) -> Void {
-        //        let toolBar = UIToolbar()
         self.barStyle = UIBarStyle.default
         self.isTranslucent = true
-        self.tintColor = UIColor.orange
+        self.tintColor = UIColor.gray
         self.sizeToFit()
         
         let doneButton = UIBarButtonItem(title: confirmTitle, style: UIBarButtonItemStyle.plain, target: target, action:comfirmSEL)

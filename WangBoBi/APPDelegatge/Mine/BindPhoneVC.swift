@@ -60,11 +60,7 @@ class BindPhoneVC: UIViewController,UITableViewDelegate,UITableViewDataSource,Bi
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "cellID") as! BindPhoneCell
-//        
-//        cell.preservesSuperviewLayoutMargins = false
-//        cell.separatorInset = UIEdgeInsets.zero
-//        cell.layoutMargins = .zero
-//        
+        
         cell.textLabel?.text = dataSource["title"]?[indexPath.row]
         cell.titLabel.sizeToFit()
         cell.inputTF.placeholder = dataSource["content"]?[indexPath.row]
@@ -167,7 +163,7 @@ class BindPhoneCell: CommonTableViewCell,UITextFieldDelegate {
     
     lazy var titLabel: TfPlaceHolder = {
         let d : TfPlaceHolder = TfPlaceHolder.init(frame: CGRect.init(x: COMMON_MARGIN, y: self.bounds.midY - 7 * SCREEN_SCALE , width: 100, height: 0))
-        d.font = UIFont.systemFont(ofSize: 13 * SCREEN_SCALE)
+        d.font = UIFont.systemFont(ofSize: 12 * SCREEN_SCALE)
         d.textColor = UIColor.lightGray
         d.isEnabled = false
         d.clearButtonMode = .whileEditing
@@ -178,7 +174,7 @@ class BindPhoneCell: CommonTableViewCell,UITextFieldDelegate {
     
     lazy var inputTF: TfPlaceHolder = {
         let d : TfPlaceHolder = TfPlaceHolder.init(frame: CGRect.init(x: SCREEN_WIDTH * 0.3, y: self.bounds.midY - 20 * SCREEN_SCALE, width: self.Width * 0.7, height: 40 * SCREEN_SCALE))
-        d.font = UIFont.systemFont(ofSize: 13 * SCREEN_SCALE)
+        d.font = UIFont.systemFont(ofSize: 12 * SCREEN_SCALE)
         d.delegate = self
         d.clearButtonMode = .whileEditing
         return d

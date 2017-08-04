@@ -57,20 +57,25 @@ class AddFriendInfoVC: BaseViewController,AddPersonInfoEditVDelegate {
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         
-        self.leftBarItem.isHidden = true
         
+        let allVC = self.navigationController?.viewControllers
         
+        if let _ = allVC![allVC!.count - 2] as? ScanCodeController {
+
+            self.leftBarItem.isHidden = true
+            let pay_leftBtn = UIButton()
+            
+            pay_leftBtn.frame = CGRect.init(x: 0, y: SCREEN_HEIGHT * 0.01, width: SCREEN_WIDTH * 0.15, height: 20 * SCREEN_SCALE)
+            
+            pay_leftBtn.addTarget(self, action:#selector(pay_back), for: .touchUpInside)
+            pay_leftBtn.setBackgroundImage(#imageLiteral(resourceName: "rean"), for: .normal)
+            
+            let rightFooBarButtonItem : UIBarButtonItem = UIBarButtonItem.init(customView: pay_leftBtn)
+            
+            self.navigationItem.setLeftBarButton(rightFooBarButtonItem, animated: true)
+            
+        }
         
-        let pay_leftBtn = UIButton()
-        
-        pay_leftBtn.frame = CGRect.init(x: 0, y: SCREEN_HEIGHT * 0.01, width: SCREEN_WIDTH * 0.15, height: 20 * SCREEN_SCALE)
-        
-        pay_leftBtn.addTarget(self, action:#selector(pay_back), for: .touchUpInside)
-        pay_leftBtn.setBackgroundImage(#imageLiteral(resourceName: "rean"), for: .normal)
-        
-        let rightFooBarButtonItem : UIBarButtonItem = UIBarButtonItem.init(customView: pay_leftBtn)
-        
-        self.navigationItem.setLeftBarButton(rightFooBarButtonItem, animated: true)
     }
     
     @objc fileprivate func pay_back() {

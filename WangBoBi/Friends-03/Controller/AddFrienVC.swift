@@ -11,16 +11,23 @@ import UIKit
 // 添加朋友类型
 var AddType : Int?
 
-class AddFrienVC: BaseViewController {
+class AddFrienVC: BaseViewController,UITextFieldDelegate {
 
+    lazy var replaceLabel: UILabel = {
+        let d : UILabel = UILabel.init(frame: self.searTf.frame)
+        d.font = UIFont.systemFont(ofSize: 12)
+        d.text = "搜索好友账号"
+        d.textColor = UIColor.darkGray
+        return d
+    }()
+    
     fileprivate lazy var searTf: TfPlaceHolder = {
-        let d : TfPlaceHolder = TfPlaceHolder.init(frame: CGRect.init(x: SCREEN_WIDTH * 0.11755231037232, y: COMMON_MARGIN - 3 + 64, width: SCREEN_WIDTH - SCREEN_WIDTH * 0.15, height: SCREEN_HEIGHT * 0.075))
-        d.plStrSize(str: "搜索好友账号", holderColor: UIColor.lightGray)
-        
+        let d : TfPlaceHolder = TfPlaceHolder.init(frame: CGRect.init(x: SCREEN_WIDTH * 0.11755231037232, y: COMMON_MARGIN + 64, width: SCREEN_WIDTH - SCREEN_WIDTH * 0.15, height: SCREEN_HEIGHT * 0.075))
+
         let toolBar = ToolBar()
+        toolBar.seToolBar(confirmTitle: "确定", cancelTitle: "取消", comfirmSEL: #selector(confirmSEL), cancelSEL: #selector(cancelSEL), target: self)
 
-        toolBar.seToolBarWithOne(confirmTitle: "完成", comfirmSEL: #selector(cancelBtnSEL), target: self)
-
+        d.delegate = self
         d.inputAccessoryView = toolBar
         
         return d
@@ -55,19 +62,36 @@ class AddFrienVC: BaseViewController {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
+        
+        title = "添加好友"
         view.addSubview(addFrienBgV)
         view.addSubview(searTf)
+        view.addSubview(replaceLabel)
         
         view.addSubview(leftBtn)
         view.addSubview(rightBtn)
 
         view.backgroundColor = COMMON_TBBGCOLOR
-        
-        title = "添加好友"
     }
     
+    // MARK: - UITextFieldDelegate
+    func textFieldDidBeginEditing(_ textField: UITextField) {
+        self.replaceLabel.isHidden = true
+    }
+
+    
     // MARK: - 事件操作
-    @objc fileprivate func cancelBtnSEL() {
+    /// 取消事件
+    @objc fileprivate func cancelSEL() {
+        self.searTf.resignFirstResponder()
+        
+        if searTf.text?.characters.count == 0 {
+            self.replaceLabel.isHidden = false
+        }
+    }
+    
+    /// 确定事件
+    @objc fileprivate func confirmSEL() {
         CCog(message: "")
         /// 缩回请求
         

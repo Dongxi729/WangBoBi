@@ -125,7 +125,7 @@ class FriendMainVC: BaseViewController,UITableViewDelegate,UITableViewDataSource
     
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
-        self.countrySearchController.searchBar.resignFirstResponder()
+        self.countrySearchController.resignFirstResponder()
     }
     
     override func viewDidAppear(_ animated: Bool) {

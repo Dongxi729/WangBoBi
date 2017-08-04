@@ -102,17 +102,6 @@ class TfPlaceHolder : UITextField,UITextFieldDelegate,UIGestureRecognizerDelegat
         }
     }
     
-    //    func textFieldShouldBeginEditing(_ textField: UITextField) -> Bool {
-    //
-    //        if self.isSecureTextEntry == true {
-    //            seePassImg.isHidden = false
-    //        } else {
-    //            seePassImg.isHidden = true
-    //        }
-    //
-    //        return true
-    //    }
-    
     //统计文字个数
     func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
        

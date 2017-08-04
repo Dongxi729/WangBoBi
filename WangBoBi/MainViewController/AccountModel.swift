@@ -1389,11 +1389,7 @@ class AccountModel: NSObject,NSCoding {
         let param : [String : String] = ["uid" : (AccountModel.shared()?.Id.stringValue)!,
                                          "token" : (AccountModel.shared()?.Token)!]
         
-        CCog(message: param)
-        
         NetWorkTool.shared.postWithPath(path: PERSON_INFO, paras: param, success: { (result) in
-            
-            CCog(message: result)
             
             userAccount = nil
             
@@ -1590,7 +1586,6 @@ class AccountModel: NSObject,NSCoding {
                 if let dataArray = resultData["Data"] as? NSArray {
                     if dataArray.count > 0 {
                         if let dic = (resultData["Data"] as? NSArray) {
-                            CCog(message: dic)
                             
                             var mmm = [NewFriendListModel]()
                             

@@ -177,6 +177,17 @@ extension ReceiveMonVC: UITableViewDelegate,UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
+        switch indexPath.section {
+        case indexPath.section:
+            switch indexPath.row {
+            case 0:
+                self.navigationController?.pushViewController(FriendGroupVC(), animated: true)
+            default:
+                break
+            }
+        default:
+            break
+        }
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
