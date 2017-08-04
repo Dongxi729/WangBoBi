@@ -1768,11 +1768,8 @@ class AccountModel: NSObject,NSCoding {
     class func friend_list(finished:@escaping (_ result : Bool,_ dataDic : [FriendListModel]) -> ()) {
         let param : [String : String] = ["uid" : (AccountModel.shared()?.Id.stringValue)!,
                                          "token" : (AccountModel.shared()?.Token)!]
-        CCog(message: param)
-        
+       
         NetWorkTool.shared.postWithPath(path: MY_FRIEND, paras: param, success: { (result) in
-            
-            CCog(message: result)
             
             guard let resultData = result as? NSDictionary  else {
                 return
@@ -1800,7 +1797,6 @@ class AccountModel: NSObject,NSCoding {
                 if let dataArray = resultData["Data"] as? NSArray {
                     if dataArray.count > 0 {
                         if let dic = (resultData["Data"] as? NSArray) {
-                            CCog(message: dic)
                             
                             var mmm = [FriendListModel]()
                             
@@ -1809,10 +1805,6 @@ class AccountModel: NSObject,NSCoding {
                                 let topMedel = FriendListModel.init(dict: vv as! [String : Any])
                                 
                                 mmm.append(topMedel)
-                                
-                                CCog(message: mmm.count)
-                                CCog(message: vv)
-                                
                                 if mmm.count == dic.count {
                                     finished(true,mmm)
                                 }

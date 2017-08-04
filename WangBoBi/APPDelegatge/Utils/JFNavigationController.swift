@@ -30,17 +30,23 @@ class JFNavigationController: UINavigationController, UIGestureRecognizerDelegat
         let pan = UIPanGestureRecognizer(target: target, action: Selector(("handleNavigationTransition:")))
         pan.delegate = self
         view.addGestureRecognizer(pan)
-        interactivePopGestureRecognizer?.isEnabled = false
+        interactivePopGestureRecognizer?.isEnabled = true
     }
     
     // MARK: - UIGestureRecognizerDelegate
     func gestureRecognizerShouldBegin(_ gesture: UIGestureRecognizer) -> Bool {
+        CCog(message: add_mark)
+        
         if childViewControllers.count == 1 {
+            return false
+        } else if add_mark {
             return false
         } else {
             return true
         }
     }
+    
+    
     
     /**
      拦截push操作

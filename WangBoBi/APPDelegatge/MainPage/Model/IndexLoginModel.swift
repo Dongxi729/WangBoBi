@@ -91,6 +91,9 @@ class FriendListModel : NSObject {
     /// 头像
     var HeadImg : String?
     
+    /// 真实姓名
+    var TrueName : String?
+    
     init(dict: [String : Any]) {
         super.init()
         setValuesForKeys(dict)

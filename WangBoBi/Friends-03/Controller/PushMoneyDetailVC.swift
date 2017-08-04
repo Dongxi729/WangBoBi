@@ -31,21 +31,31 @@ class PushMoneyDetailVC: BaseViewController,UITableViewDataSource,UITableViewDel
     
     var Fri_frid : String? {
         didSet {
-            AccountModel.tranPayOrderRequest(
-            self.Fri_frid!) { (result, model) in
-                if result {
+            self.load_data()
+        }
+        
+    }
+    
+    /// 是否下拉
+    private var isRefresh = false
+    
+    /// 加载数据
+    @objc fileprivate func load_data() {
+        AccountModel.tranPayOrderRequest(self.Fri_frid!) { (result, model) in
+            if result {
+                
+                self.pushMoney_model = [TranpayorderModel]()
+                for _model in model {
+                    self.pushMoney_model?.append(_model)
                     
-                    self.pushMoney_model = [TranpayorderModel]()
-                    for _model in model {
-                        self.pushMoney_model?.append(_model)
+                    if self.pushMoney_model?.count == model.count {
+                        self.view.addSubview(self.tableView)
+                        /// 添加头部刷新视图
+                        self.tableView.addHeaderViewfun()
+                        let foot : headerView = self.tableView.viewWithTag(888) as! headerView
+                        foot.delegate = self
                         
-                        if self.pushMoney_model?.count == model.count {
-                            self.view.addSubview(self.tableView)
-                            /// 添加头部刷新视图
-                            self.tableView.addHeaderViewfun()
-                            let foot : headerView = self.tableView.viewWithTag(888) as! headerView
-                            foot.delegate = self
-                            
+                        if !self.isRefresh {
                             self.tableView.scrollToBottom(animated: false)
                         }
                     }
@@ -64,31 +74,12 @@ class PushMoneyDetailVC: BaseViewController,UITableViewDataSource,UITableViewDel
         return d
     }()
     
-    lazy var activity: UIRefreshControl = {
-        let d : UIRefreshControl = UIRefreshControl.init(frame: self.view.bounds)
-        d.addTarget(self, action: #selector(refreshSEL(sender:)), for: .valueChanged)
-        return d
-    }()
-    
-    func refreshSEL(sender : UIRefreshControl) -> Void {
-        CCog(message: "")
-        
-        CCog(message: self.reverSeddd)
-        
-        self.tableView.reloadData()
-        UIView.animate(withDuration: 1.5) {
-            sender.endRefreshing()
-        }
-    }
-    
     override func viewDidLoad() {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
         
         view.backgroundColor = COMMON_TBBGCOLOR
-        
-        self.reverSeddd = self.dd.reversed()
     }
     
     // MARK: - UITableViewDataSource
@@ -109,10 +100,7 @@ class PushMoneyDetailVC: BaseViewController,UITableViewDataSource,UITableViewDel
             cell.rightImg.frame = CGRect.init(x: SCREEN_WIDTH - COMMON_MARGIN - 30 * SCREEN_SCALE, y: cell.rightImg.TopY, width: 30 * SCREEN_SCALE, height: 30 * SCREEN_SCALE)
             cell.rightIMgV.frame = CGRect.init(x: SCREEN_WIDTH * 0.25, y: cell.rightImg.TopY, width: SCREEN_WIDTH * 0.6, height: SCREEN_WIDTH * 0.6 * (120 / 363))
             cell.rightIMgV.image = #imageLiteral(resourceName: "in")
-
-            
             cell.rightPushLabel.text = "转账给" + self.frienName_Str!
-            
             cell.rightPushWBLabel.frame = CGRect.init(x: cell.rightPushLabel.LeftX, y: cell.rightPushLabel.BottomY, width: SCREEN_WIDTH * 0.5, height: cell.rightPushLabel.Height)
             cell.rightImg.setImage(urlString: self.frienHead_Str, placeholderImage: #imageLiteral(resourceName: "logo"))
         }
@@ -128,15 +116,12 @@ class PushMoneyDetailVC: BaseViewController,UITableViewDataSource,UITableViewDel
     
     var dd = ["dd","dd","dd","dd","dd","dd","ee","dd","dd","dd","dd","ff"]
     
-    var reverSeddd : [String] = []
-    
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return 90
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let ccc = CountDetailVC()
-
         
         if self.pushMoney_model?[indexPath.row].ToUserId?.intValue == AccountModel.shared()?.Id.intValue {
             ccc.count_money = "+" + (self.pushMoney_model?[indexPath.row].WBCBalance)!
@@ -155,27 +140,19 @@ class PushMoneyDetailVC: BaseViewController,UITableViewDataSource,UITableViewDel
     func headerViewEndfun(_ _endRefresh: () -> Void) {
         
         let d : headerView = tableView.viewWithTag(888) as! headerView
-        CCog(message: "")
-        CCog(message: "")
-        self.reverSeddd.insert(contentsOf: ["123","4356"], at: 0)
         
-        CCog(message: self.reverSeddd)
+        isRefresh = true
         
-        self.tableView.reloadData()
+        self.load_data()
+        
         UIView.animate(withDuration: 1.5) {
             d.endRefresh()
         }
     }
 }
 
-
+/// 转账订单详情cell
 class PushMoneyDetailVCCell: CommonTableViewCell {
-    
-//    var push_model : TranpayorderModel? {
-//        didSet {
-//            self.pushMoneyLabel.text = push_model?.WBCBalance
-//        }
-//    }
     
     lazy var detailImg: UIImageView = {
         let d : UIImageView = UIImageView.init(frame: CGRect.init(x: self.imgV.RightX, y: self.imgV.TopY, width: SCREEN_WIDTH * 0.6, height: SCREEN_WIDTH * 0.6 * (120 / 363)))
@@ -244,7 +221,6 @@ class PushMoneyDetailVCCell: CommonTableViewCell {
 
         contentView.addSubview(rightIMgV)
         contentView.addSubview(rightImg)
-//        contentView.addSubview(imgV)
         rightIMgV.addSubview(rightPushLabel)
         rightIMgV.addSubview(rightPushWBLabel)
     }
@@ -288,7 +264,7 @@ class PushMoneyHeaderView: UIView {
     }
 }
 
-
+/// 图片靠右按钮
 class BtnWithRightImg: UIButton {
     override init(frame: CGRect) {
         super.init(frame: frame)

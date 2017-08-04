@@ -11,14 +11,20 @@ import UIKit
 class FriendGroupVC: BaseViewController, UITableViewDelegate, UITableViewDataSource,FriendHeaderDelegate,UISearchResultsUpdating {
     
     //    var tableView:UITableView?
-    
-    var adHeaders:[String] = ["A","B","C","D","E","F","G","H","I","J","K","L","M","N","O","P","Q","R","S","T","U","V","W","X","Y","Z"]
-    
-    var dataSource : [String] = ["A","B","C","D","E","F","G","H","I","J","K","L","M","N","O","P","Q","R","S","T","U","V","W","X","Y","Z","Z","Z","Z","Z","Z","Z","Z","Z","Z","Z","Z","Z","Z","Z","Z","Z","Z","Z","Z","Z","Z","Z","Z","Z","Z"]
-    
-    
     var cityGroups = [String: [String]]()
+//    
+//    var headImgGroups = [String: [String]]()
+//    
+//    var threecityGroups = [String: [String]]()
+    
     var groupTitles = [String]()
+    var headImgTitles = [String]()
+    var wbcTitles = [String]()
+    
+    /// 搜索源
+    var citys : [String] = []
+    var headImgs : [String] = []
+    var wbcArray : [String] = []
     
     /// 右边按钮
     var rightBtn : UIButton = UIButton()
@@ -33,7 +39,7 @@ class FriendGroupVC: BaseViewController, UITableViewDelegate, UITableViewDataSou
         d.searchBar.subviews.first?.subviews.first?.removeFromSuperview()
         d.searchBar.placeholder = "搜索"
         d.searchBar.sizeToFit()
-
+        
         return d
     }()
     
@@ -57,7 +63,6 @@ class FriendGroupVC: BaseViewController, UITableViewDelegate, UITableViewDataSou
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         
         title = "我的朋友"
         
@@ -92,8 +97,15 @@ class FriendGroupVC: BaseViewController, UITableViewDelegate, UITableViewDataSou
                 
                 for dddd in self.frienGroup_model {
                     
-                    self.citys.append(dddd.UserName!)
-        
+                    if dddd.TrueName?.characters.count == 0 {
+                        self.citys.append(dddd.UserName!) /// headImgs
+                        
+                    } else {
+                        self.citys.append(dddd.TrueName!)
+                    }
+                    
+                    self.headImgs.append(dddd.HeadImg!)
+                    self.wbcArray.append(dddd.WBCAdress!)
                     
                     if self.citys.count == self.frienGroup_model.count {
                         DispatchQueue.main.async {
@@ -107,37 +119,40 @@ class FriendGroupVC: BaseViewController, UITableViewDelegate, UITableViewDataSou
         }
     }
     
-    /// 搜索源
-    var citys : [String] = []
-    
     /// 提取数据源的第一个字幕
     func makeCityToGroup() {
         
         // 遍历citys数组中的所有城市
         for city in citys {
             
-            // 将中文转换为拼音
-            let cityMutableString = NSMutableString(string: city)
-            CFStringTransform(cityMutableString, nil, kCFStringTransformToLatin, false)
-            CFStringTransform(cityMutableString, nil, kCFStringTransformStripDiacritics, false)
+            if city.characters.count > 0 {
+                // 将中文转换为拼音
+                let cityMutableString = NSMutableString(string: city)
+                CFStringTransform(cityMutableString, nil, kCFStringTransformToLatin, false)
+                CFStringTransform(cityMutableString, nil, kCFStringTransformStripDiacritics, false)
+                
+                
+                if cityMutableString.length > 0 {
+                    
+                    // 拿到首字母作为key
+                    var firstLetter = cityMutableString.substring(to: 1).uppercased()
+                    
+                    if !firstLetter.checkIsNumber() {
+                        firstLetter = "#"
+                    }
             
-            // 拿到首字母作为key
-            let firstLetter = cityMutableString.substring(to: 1).uppercased()
-            
-            // 检查是否有firstLetter对应的分组存在, 有的话直接把city添加到对应的分组中
-            // 没有的话, 新建一个以firstLetter为key的分组
-            if var value = cityGroups[firstLetter] {
-                value.append(city)
-                cityGroups[firstLetter] = value
-            }
-            else {
-                cityGroups[firstLetter] = [city]
+                    if var value = cityGroups[firstLetter] {
+                        
+                        value.append(city)
+                        cityGroups[firstLetter] = value
+                    } else {
+                        cityGroups[firstLetter] = [city]
+                    }
+                }
             }
         }
-        
         //拿到所有的key将它排序, 作为每个组的标题
         groupTitles = cityGroups.keys.sorted()
-        
     }
     
     
@@ -154,12 +169,11 @@ class FriendGroupVC: BaseViewController, UITableViewDelegate, UITableViewDataSou
     }
     
     // MARK: - 右边按钮交互事件
-    @objc fileprivate func jumpToFriend(){
+    @objc fileprivate func jumpToFriend() {
         self.navigationController?.pushViewController(AddFrienVC(), animated: true)
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-
         
         let ccc = AddFriendInfoVC()
         ccc.add_model = frienGroup_model[indexPath.section]
@@ -180,10 +194,10 @@ class FriendGroupVC: BaseViewController, UITableViewDelegate, UITableViewDataSou
             return searchArray.count
         } else {
             let firstLetter = groupTitles[section]
+            
             return cityGroups[firstLetter]!.count
         }
     }
-    
     
     func sectionIndexTitles(for tableView: UITableView) -> [String]? {
         
@@ -228,17 +242,16 @@ class FriendGroupVC: BaseViewController, UITableViewDelegate, UITableViewDataSou
         
         let firstLetter = groupTitles[indexPath.section]
         let citysInAGroup = cityGroups[firstLetter]!
-    
         
         if countrySearchController.isActive {
             
             cell.new_descLabel.text = searchArray[indexPath.row]
             
         } else {
-
+            
             cell.new_descLabel.text = citysInAGroup[indexPath.row]
-            cell.ne_imgVi.setImage(urlString: self.frienGroup_model[indexPath.section].HeadImg, placeholderImage: #imageLiteral(resourceName: "logo"))
-            cell.ne_bottomLabel.text = self.frienGroup_model[indexPath.section].WBCAdress
+            cell.ne_imgVi.setImage(urlString: self.frienGroup_model[indexPath.row].HeadImg, placeholderImage: #imageLiteral(resourceName: "logo"))
+            cell.ne_bottomLabel.text = self.frienGroup_model[indexPath.row].WBCAdress
         }
         
         return cell
@@ -248,7 +261,6 @@ class FriendGroupVC: BaseViewController, UITableViewDelegate, UITableViewDataSou
     func jumpToNewFriendVC() {
         self.navigationController?.pushViewController(NewFriendVC(), animated: true)
     }
-    
     
     // MARK: - 实时进行搜索
     func updateSearchResults(for searchController: UISearchController) {
@@ -262,7 +274,7 @@ class FriendGroupVC: BaseViewController, UITableViewDelegate, UITableViewDataSou
     }
     
     //搜索过滤后的结果集
-    fileprivate var searchArray:[String] = [String](){
+    fileprivate var searchArray:[String] = [String]() {
         didSet  {
             self.tableView.reloadData()
         }

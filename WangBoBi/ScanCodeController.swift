@@ -24,8 +24,7 @@ class ScanCodeController: BaseViewController {
         d.setTitleColor(UIColor.white, for: .normal)
         return d
     }()
-    
-    
+
     
     /// 扫一扫
     fileprivate lazy var descLabel: UILabel = {
@@ -95,7 +94,7 @@ class ScanCodeController: BaseViewController {
         //        scanViewImg.backgroundColor = UIColor.red
         view.addSubview(scanViewImg)
         
-        
+        /// 设置扫描图片位置
         scanImageView = UIImageView(image: UIImage.init(named: "sweep_bg_line.png"));
         let widthOrHeight: CGFloat = 18
         
@@ -152,7 +151,7 @@ class ScanCodeController: BaseViewController {
                 session.startRunning()
                 
             } catch let error as NSError  {
-//                print("errorInfo\(error.domain)")
+                //                print("errorInfo\(error.domain)")
                 CCog(message: error.domain)
             }
         } else {
@@ -223,7 +222,6 @@ extension ScanCodeController:AVCaptureMetadataOutputObjectsDelegate {
                 
                 let alertViewController = UIAlertController(title: "扫描结果", message: (object as AnyObject).stringValue, preferredStyle: .alert)
                 let actionCancel = UIAlertAction(title: "确定", style: .cancel, handler: { (action) in
-//                    _ = self.navigationController?.popViewController(animated: true)
                     
                     /// 支付信息
                     if (ScanModel.shared.codeStr?.hasPrefix("wbp://"))! {
@@ -232,7 +230,7 @@ extension ScanCodeController:AVCaptureMetadataOutputObjectsDelegate {
                     
                     /// 添加朋友
                     if (ScanModel.shared.codeStr?.hasPrefix("wbf://"))! {
-
+                        
                         self.navigationController?.pushViewController(AddFriendInfoVC(), animated: true)
                         AddType = 0
                     }

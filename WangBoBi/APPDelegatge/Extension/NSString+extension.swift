@@ -165,6 +165,13 @@ extension String {
             return true
         }
     }
+    
+    // 校验是否是数字
+    func checkIsNumber() -> Bool {
+        let emailRegex: String = "[a-zA-Z]"
+        let emailTest: NSPredicate = NSPredicate(format: "SELF MATCHES %@", emailRegex)
+        return emailTest.evaluate(with: self)
+    }
 }
 
 

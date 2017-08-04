@@ -75,7 +75,11 @@ class FriendMainVC: BaseViewController,UITableViewDelegate,UITableViewDataSource
             self.tableView.reloadData()
             
             for value in model {
-                self.sercchArray.append(value.UserName!)
+                if !(value.TrueName?.isEmpty)! {
+                    self.sercchArray.append(value.TrueName!)
+                } else {
+                    self.sercchArray.append(value.UserName!)
+                }
             }
         }
         
@@ -99,9 +103,6 @@ class FriendMainVC: BaseViewController,UITableViewDelegate,UITableViewDataSource
     /// 模型
     var modelData = [FriendListModel]()
     
-    /// 模拟数据
-    fileprivate let analogueData : [String : Any] = ["moneyCount" : "-90","dateTime" : "12-30","descStr" : "链接杀戮空间","isSend" : "true","friendName" : "john"]
-    
     //搜索过滤后的结果集
     fileprivate var searchArray:[String] = [String](){
         didSet  {
@@ -121,6 +122,11 @@ class FriendMainVC: BaseViewController,UITableViewDelegate,UITableViewDataSource
                    forCellReuseIdentifier: "MyCell")
         return d
     }()
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        self.countrySearchController.searchBar.resignFirstResponder()
+    }
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
@@ -146,10 +152,8 @@ class FriendMainVC: BaseViewController,UITableViewDelegate,UITableViewDataSource
             
             if self.countrySearchController.isActive {
                 cell.descLabel.text = self.searchArray[indexPath.row]
-                
-                self.countrySearchController.searchBar.resignFirstResponder()
+
                 return cell
-                
             }
             
             return cell
@@ -170,6 +174,7 @@ class FriendMainVC: BaseViewController,UITableViewDelegate,UITableViewDataSource
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        
         
         if self.countrySearchController.isActive {
             return self.searchArray.count
@@ -199,13 +204,16 @@ class FriendMainVC: BaseViewController,UITableViewDelegate,UITableViewDataSource
     func updateSearchResults(for searchController: UISearchController) {
         CCog(message: self.sercchArray)
         self.searchArray = []
+
         self.searchArray = self.sercchArray.filter { (school) -> Bool in
+
             return school.contains(searchController.searchBar.text!)
         }
+        
+        CCog(message: searchArray)
     }
     
     // MARK: - FriendMainVHeaVDelegate
-    
     
     /// 搜索的数据源
     var sercchArray : [String] = []
@@ -220,8 +228,14 @@ class FriendMainVC: BaseViewController,UITableViewDelegate,UITableViewDataSource
                 self.mertopModel = model
                 self.tableView.reloadData()
                 
+                self.sercchArray = []
+                
                 for value in model {
-                    self.sercchArray.append(value.UserName!)
+                    if !(value.TrueName?.isEmpty)! {
+                        self.sercchArray.append(value.TrueName!)
+                    } else {
+                        self.sercchArray.append(value.UserName!)
+                    }
                 }
             }
         }
@@ -237,8 +251,14 @@ class FriendMainVC: BaseViewController,UITableViewDelegate,UITableViewDataSource
                 
                 self.tableView.reloadData()
                 
+                self.sercchArray = []
+                
                 for value in model {
-                    self.sercchArray.append(value.UserName!)
+                    if !(value.TrueName?.isEmpty)! {
+                        self.sercchArray.append(value.TrueName!)
+                    } else {
+                        self.sercchArray.append(value.UserName!)
+                    }
                 }
             }
         }

@@ -8,6 +8,8 @@
 
 import UIKit
 
+var add_mark = false
+
 class AddFriendInfoVC: BaseViewController,AddPersonInfoEditVDelegate {
     
     var add_model : FriendListModel? {
@@ -39,6 +41,41 @@ class AddFriendInfoVC: BaseViewController,AddPersonInfoEditVDelegate {
         return d
     }()
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        self.navigationController?.interactivePopGestureRecognizer?.isEnabled = false
+        
+        add_mark = true
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        add_mark = false
+    }
+    
+    /// 替换原有返回按键，使其返回首页
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        
+        self.leftBarItem.isHidden = true
+        
+        
+        
+        let pay_leftBtn = UIButton()
+        
+        pay_leftBtn.frame = CGRect.init(x: 0, y: SCREEN_HEIGHT * 0.01, width: SCREEN_WIDTH * 0.15, height: 20 * SCREEN_SCALE)
+        
+        pay_leftBtn.addTarget(self, action:#selector(pay_back), for: .touchUpInside)
+        pay_leftBtn.setBackgroundImage(#imageLiteral(resourceName: "rean"), for: .normal)
+        
+        let rightFooBarButtonItem : UIBarButtonItem = UIBarButtonItem.init(customView: pay_leftBtn)
+        
+        self.navigationItem.setLeftBarButton(rightFooBarButtonItem, animated: true)
+    }
+    
+    @objc fileprivate func pay_back() {
+        self.navigationController?.popToRootViewController(animated: true)
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -77,12 +114,6 @@ class AddFriendInfoVC: BaseViewController,AddPersonInfoEditVDelegate {
                 self.editV.nameShowLabel.text = "21221"
             }
         }
-    
-    }
-    
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
-        
     }
     
     // MARK: - AddPersonInfoEditVDelegate

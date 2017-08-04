@@ -49,11 +49,13 @@ class AddFriendMarkVC: BaseViewController,BindPhoneFooterVDelegate {
     
     // MARK: - footervieDelegate 
     func bindPhonSELDelegate() {
-        CCog(message: ScanModel.friendEamil)
         
         if let fff = UserDefaults.standard.object(forKey: "frienID") as? Int {
             AccountModel.addFriendRequest(2, "", String(fff), "", self.sendTf.text!) { (result, model) in
-                
+                /// 请求添加好友成功，返回首页
+                if result {
+                    self.navigationController?.popToRootViewController(animated: true)
+                }
             }
         }
     }
