@@ -50,8 +50,6 @@ class PaydescV : CommonV,UITextViewDelegate {
     fileprivate lazy var txtView: UITextView = {
         let d : UITextView = UITextView.init(frame: CGRect.init(x: COMMON_MARGIN * 1.49 * SCREEN_SCALE, y: self.Height * 0.28, width: self.Width * 0.83, height: 50 * SCREEN_SCALE))
         d.delegate = self        ///添加工具栏
-//        d.layer.borderWidth = 1
-//        d.layer.borderColor = UIColor.red.cgColor
         let toolBar = ToolBar()
         
         toolBar.seToolBarWithOne(confirmTitle: "完成", comfirmSEL: #selector(cancelBtnSEL), target: self)

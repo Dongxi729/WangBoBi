@@ -17,11 +17,7 @@ class MainTabBarViewController: BaseTabbarVC {
         
         self.setUpSubViews()
     }
-}
 
-
-// MARK:- 设置子界面
-extension MainTabBarViewController {
     fileprivate func setUpSubViews() -> Void {
         
         //首页
@@ -50,8 +46,6 @@ extension MainTabBarViewController {
         ///设置tabbar选择的图片
         let img = UIImage.init()
         self.tabBar.selectionIndicatorImage = img.scaleToSize(img: #imageLiteral(resourceName: "tabbarSelected"), size: CGSize.init(width: SCREEN_WIDTH / 4, height: 44))
-        
-      
     }
     
         

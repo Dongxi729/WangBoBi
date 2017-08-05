@@ -1595,9 +1595,6 @@ class AccountModel: NSObject,NSCoding {
                                 
                                 mmm.append(topMedel)
                                 
-                                CCog(message: mmm.count)
-                                CCog(message: vv)
-                                
                                 if mmm.count == dic.count {
                                     finished(true,mmm)
                                 }
@@ -1605,9 +1602,7 @@ class AccountModel: NSObject,NSCoding {
                         }
                     }
                 }
-                
-                
-            
+
             } else {
                 finished(false,[NewFriendListModel]())
             }
@@ -1765,6 +1760,8 @@ class AccountModel: NSObject,NSCoding {
                                          "token" : (AccountModel.shared()?.Token)!]
        
         NetWorkTool.shared.postWithPath(path: MY_FRIEND, paras: param, success: { (result) in
+            
+            CCog(message: result)
             
             guard let resultData = result as? NSDictionary  else {
                 return

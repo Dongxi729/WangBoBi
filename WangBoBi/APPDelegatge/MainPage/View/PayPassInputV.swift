@@ -106,10 +106,7 @@ class PayPassInputV : CommonV {
     @objc fileprivate func cancelSEL() {
         self.removeFromSuperview()
         
-        /// 视图正常
-        UIView.animate(withDuration: 0.5) {
-            UIApplication.shared.keyWindow?.frame = (UIApplication.shared.keyWindow?.rootViewController?.view.bounds)!
-        }
+  
         
         self.delegate?.canceelSEL()
     }
