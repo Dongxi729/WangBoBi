@@ -41,9 +41,15 @@ class AddFriendInfoVC: BaseViewController,AddPersonInfoEditVDelegate {
         return d
     }()
     
+    /// 检查导航栏的子页面是否在扫描后的情况下出现，若有，则取消返回手势。
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        self.navigationController?.interactivePopGestureRecognizer?.isEnabled = false
+    
+        let allVC = self.navigationController?.viewControllers
+        
+        if let _ = allVC![allVC!.count - 2] as? ScanCodeController {
+            self.navigationController?.interactivePopGestureRecognizer?.isEnabled = false
+        }
         
         add_mark = true
     }

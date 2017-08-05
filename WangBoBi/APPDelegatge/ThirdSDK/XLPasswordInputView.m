@@ -271,10 +271,10 @@
     
     [textField becomeFirstResponder];
     
-    [UIView animateWithDuration:0.5 animations:^{
-        
-        UIApplication.sharedApplication.keyWindow.rootViewController.view.frame = CGRectMake(0, -100, [UIScreen mainScreen].bounds.size.width, [UIScreen mainScreen].bounds.size.height);
-    }];
+//    [UIView animateWithDuration:0.5 animations:^{
+//        
+//        UIApplication.sharedApplication.keyWindow.rootViewController.view.frame = CGRectMake(0, -100, [UIScreen mainScreen].bounds.size.width, [UIScreen mainScreen].bounds.size.height);
+//    }];
     
     
     
@@ -287,12 +287,12 @@
     
     if (text.length == _passwordLength) {
         
-        [UIView animateWithDuration:0.5 animations:^{
-            
-            [textField resignFirstResponder];
-            
-            UIApplication.sharedApplication.keyWindow.rootViewController.view.frame = CGRectMake(0, 0, [UIScreen mainScreen].bounds.size.width, [UIScreen mainScreen].bounds.size.height);
-        }];
+//        [UIView animateWithDuration:0.5 animations:^{
+//            
+//            [textField resignFirstResponder];
+//            
+//            UIApplication.sharedApplication.keyWindow.rootViewController.view.frame = CGRectMake(0, 0, [UIScreen mainScreen].bounds.size.width, [UIScreen mainScreen].bounds.size.height);
+//        }];
         
     }
     

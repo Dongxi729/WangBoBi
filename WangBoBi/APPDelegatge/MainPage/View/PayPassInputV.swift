@@ -48,7 +48,7 @@ class PayPassInputV : CommonV {
     
     /// 输入密码视图
     fileprivate lazy var passV: XLPasswordInputView = {
-        let d : XLPasswordInputView = XLPasswordInputView.init(frame: CGRect(x: COMMON_MARGIN, y: self.center.y + COMMON_MARGIN * SCREEN_SCALE, width: self.Width - 2 * COMMON_MARGIN , height: 30 * SCREEN_SCALE))
+        let d : XLPasswordInputView = XLPasswordInputView.init(frame: CGRect(x: COMMON_MARGIN, y: self.Height * 0.35 + 20 * SCREEN_SCALE + 15 * SCREEN_SCALE, width: self.Width - 2 * COMMON_MARGIN , height: 30 * SCREEN_SCALE))
         d.layer.borderColor = UIColor.gray.cgColor
         return d
     }()
