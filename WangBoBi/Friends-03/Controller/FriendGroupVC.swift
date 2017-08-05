@@ -16,12 +16,16 @@ class FriendGroupVC: BaseViewController, UITableViewDelegate, UITableViewDataSou
 
     var groupTitles = [String]()
     var groupTitles2 = [String]()
-    var wbcTitles = [String]()
     
-    /// 搜索源
+    /// 显示数据源(非实名)
     var citys : [FriendListModel] = []
     
+    /// 显示数据源(实名)
     var num_citys : [FriendListModel] = []
+    
+    
+    /// 搜索数据源
+    var searchTotalArray : [String] = []
     
     /// 右边按钮
     var rightBtn : UIButton = UIButton()
@@ -71,9 +75,6 @@ class FriendGroupVC: BaseViewController, UITableViewDelegate, UITableViewDataSou
         rightBtn.addTarget(self, action: #selector(jumpToFriend), for: .touchUpInside)
         UIApplication.shared.keyWindow?.rootViewController?.view.addSubview(rightBtn)
         
-        
-        
-        
         AccountModel.friend_list { (result, model) in
             if result {
                 self.frienGroup_model = model
@@ -88,7 +89,9 @@ class FriendGroupVC: BaseViewController, UITableViewDelegate, UITableViewDataSou
                         self.num_citys.append(dddd)
                         testUserArray.append(dddd)
                         
+                        self.searchTotalArray.append(dddd.UserName!)
                     } else {
+                        self.searchTotalArray.append(dddd.TrueName!)
                         self.citys.append(dddd)
                     }
                     
@@ -218,13 +221,6 @@ class FriendGroupVC: BaseViewController, UITableViewDelegate, UITableViewDataSou
     }
     
     
-    // MARK: - UItableViewDelegate
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        
-        let ccc = AddFriendInfoVC()
-        ccc.add_model = frienGroup_model[indexPath.section]
-        self.navigationController?.pushViewController(ccc, animated: true)
-    }
     
     func numberOfSections(in tableView: UITableView) -> Int {
         if self.countrySearchController.isActive {
@@ -243,10 +239,8 @@ class FriendGroupVC: BaseViewController, UITableViewDelegate, UITableViewDataSou
             
             ///
             if section >= citys.count {
-                CCog(message: num_citys.count)
                 return num_citys.count
             } else {
-                CCog(message: citys.count)
                 return citys.count
             }
         }
@@ -315,6 +309,19 @@ class FriendGroupVC: BaseViewController, UITableViewDelegate, UITableViewDataSou
         return cell
     }
     
+    // MARK: - UItableViewDelegate
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        
+        let ccc = AddFriendInfoVC()
+        
+        if indexPath.section >= citys.count {
+            ccc.add_model = num_citys[indexPath.row]
+        } else {
+            ccc.add_model = citys[indexPath.row]
+        }
+        self.navigationController?.pushViewController(ccc, animated: true)
+    }
+    
     // MARK: - 透视图交互事件
     func jumpToNewFriendVC() {
         self.navigationController?.pushViewController(NewFriendVC(), animated: true)
@@ -325,10 +332,11 @@ class FriendGroupVC: BaseViewController, UITableViewDelegate, UITableViewDataSou
         
         self.searchArray = []
         
-//        self.searchArray = self.citys.filter { (school) -> Bool in
-//            
-//            return school.contains(searchController.searchBar.text!)
-//        }
+        self.searchArray = self.searchTotalArray.filter { (school) -> Bool in
+            
+            return school.contains(searchController.searchBar.text!)
+            
+        }
     }
     
     //搜索过滤后的结果集

@@ -106,6 +106,13 @@ class AddFriendInfoVC: BaseViewController,AddPersonInfoEditVDelegate {
             
             /// 隐藏好友按钮
             self.editV.addFrienBtn.isHidden = true
+            
+            /// 显示真实姓名
+            if !(add_model?.TrueName?.isEmpty)! {
+                self.editV.nameShowLabel.text = add_model?.TrueName
+            } else {
+                self.editV.nameShowLabel.text = add_model?.UserName
+            }
         }
     }
     
@@ -305,7 +312,6 @@ class AddPersonInfoEditV : UIView {
                         self.strangerImg.descLabel.textColor = UIColor.colorWithHexString("2796DC")
                         self.addFrienBtn.isHidden = true
                     }
-                    
                     
                     /// 是否好友
                     if model[0].VerifiStatus?.intValue == 0 {

@@ -134,6 +134,9 @@ class PushMoneyDetailVC: BaseViewController,UITableViewDataSource,UITableViewDel
         ccc.count_nameStr = self.frienName_Str
         ccc.countDetail_model = self.pushMoney_model?[indexPath.row]
         self.navigationController?.pushViewController(ccc, animated: true)
+        
+        CCog(message: self.pushMoney_model?[indexPath.row].WBCAdress)
+        
     }
     
     // MARK: - refreshDelegate
