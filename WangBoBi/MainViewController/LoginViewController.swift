@@ -10,6 +10,7 @@ import UIKit
 
 class LoginViewController: BaseViewController,UITextFieldDelegate {
     
+
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -21,9 +22,9 @@ class LoginViewController: BaseViewController,UITextFieldDelegate {
         view.addSubview(forgetPass)
         view.addSubview(createNewAccount)
 
+        ///4S 控件适配
         let deviceType = UIDevice.current.deviceType
         if deviceType == .iPhone4S {
-            
             
             passTf.frame = CGRect.init(x: SCREEN_WIDTH * 0.213, y: 0.6 * SCREEN_HEIGHT, width: SCREEN_WIDTH * 0.88 - SCREEN_WIDTH * 0.213, height: 30 * SCREEN_SCALE)
             loginBtn.frame = CGRect.init(x: SCREEN_WIDTH * 0.132045063995509, y: SCREEN_HEIGHT * 0.78, width: SCREEN_WIDTH * 0.7, height: SCREEN_HEIGHT * 0.794384044149648 - SCREEN_HEIGHT * 0.735960131106169)
@@ -116,8 +117,6 @@ class LoginViewController: BaseViewController,UITextFieldDelegate {
             localSave.synchronize()
             
             AccountModel.getInfo(emailStr: self.accountLabel.text!, pass: self.passTf.text!)
-            
-            
 
         } else {
             FTIndicator.showToastMessage("邮箱或密码为空")
@@ -138,7 +137,33 @@ class LoginViewController: BaseViewController,UITextFieldDelegate {
         DispatchQueue.main.async {
             self.navigationController?.pushViewController(vc, animated: true)
         }
+    }
+    
+    override func viewWillLayoutSubviews() {
+        super.viewWillLayoutSubviews()
+        let rect = UIApplication.shared.statusBarFrame
         
+        if UIApplication.shared.statusBarFrame != rect {
+            self.view.frame.origin.y = 20
+            CCog(message: "ddd")
+
+        } else {
+            if statusframe_changed {
+                
+                self.view.frame.size.height = SCREEN_HEIGHT - 20
+                self.accountLabel.frame = CGRect.init(x: SCREEN_WIDTH * 0.213, y: 0.493 * SCREEN_HEIGHT - 10 * SCREEN_SCALE, width: SCREEN_WIDTH * 0.88 - SCREEN_WIDTH * 0.213, height: 30 * SCREEN_SCALE)
+                
+                self.passTf.frame = CGRect.init(x: SCREEN_WIDTH * 0.213, y: 0.583 * SCREEN_HEIGHT - 10 * SCREEN_SCALE, width: SCREEN_WIDTH * 0.88 - SCREEN_WIDTH * 0.213, height: 30 * SCREEN_SCALE)
+                
+                self.createNewAccount.frame = CGRect.init(x: self.forgetPass.RightX, y: 0.807518109031346 * SCREEN_HEIGHT - 10 * SCREEN_SCALE, width: SCREEN_WIDTH * 0.16, height: 20 * SCREEN_SCALE)
+                self.forgetPass.frame = CGRect.init(x: 0.32206117934075 * SCREEN_WIDTH, y: 0.807518109031346 * SCREEN_HEIGHT - 10 * SCREEN_SCALE, width: SCREEN_WIDTH * 0.16, height: 20 * SCREEN_SCALE)
+                
+                self.loginBtn.frame = CGRect.init(x: SCREEN_WIDTH * 0.132045063995509, y: SCREEN_HEIGHT * 0.735960131106169 - 10 * SCREEN_SCALE, width: SCREEN_WIDTH * 0.7, height: SCREEN_HEIGHT * 0.794384044149648 - SCREEN_HEIGHT * 0.735960131106169)
+                CCog(message: "xxxx")
+                self.view.frame.origin.y = 0
+                self.view.frame.size.height = SCREEN_HEIGHT
+            }
+        }
     }
     
     // MARK: - 创建新账号
@@ -151,4 +176,5 @@ class LoginViewController: BaseViewController,UITextFieldDelegate {
         }
     }
     
+
 }

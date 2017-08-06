@@ -11,7 +11,7 @@ import UIKit
 class ForgetPassVCThree: BaseViewController,UITextFieldDelegate,ShowSuccessInfoVDelegate {
     
     // MARK: - 背景图片
-    lazy var bgImg: UIImageView = {
+    private lazy var bgImg: UIImageView = {
         let d: UIImageView = UIImageView.init(frame: self.view.bounds)
         d.contentMode = UIViewContentMode.scaleAspectFit
         d.image = #imageLiteral(resourceName: "forgetPass3")
@@ -20,14 +20,14 @@ class ForgetPassVCThree: BaseViewController,UITextFieldDelegate,ShowSuccessInfoV
     }()
     
     // MARK: - 登录
-    fileprivate lazy var loginBtn: UIButton = {
+    private lazy var loginBtn: UIButton = {
         let d : UIButton = UIButton.init(frame: CGRect.init(x: SCREEN_WIDTH * 0.545088542256378, y: SCREEN_HEIGHT * 0.916213761205259, width: 50 * SCREEN_SCALE, height: 30 * SCREEN_SCALE))
         d.addTarget(self, action: #selector(backToMain), for: .touchUpInside)
         return d
     }()
     
     // MARK: - 保存
-    fileprivate lazy var saveBtn: UIButton = {
+    private lazy var saveBtn: UIButton = {
         let d : UIButton = UIButton.init(frame: CGRect.init(x: 0.1256038647343 * SCREEN_WIDTH, y: SCREEN_HEIGHT * 0.614130434782609, width: SCREEN_WIDTH * 0.75, height: 30 * SCREEN_SCALE))
 
         d.addTarget(self, action: #selector(saveSEL), for: .touchUpInside)
@@ -36,7 +36,7 @@ class ForgetPassVCThree: BaseViewController,UITextFieldDelegate,ShowSuccessInfoV
 
     
     // MARK: - 新登录密码
-    lazy var newLoginPass: TfPlaceHolder = {
+    private lazy var newLoginPass: TfPlaceHolder = {
         let d : TfPlaceHolder = TfPlaceHolder.init(frame: CGRect.init(x: 0.172302725234469 * SCREEN_WIDTH, y: SCREEN_HEIGHT * 0.389945652173913, width: SCREEN_WIDTH * 0.7, height: 30 * SCREEN_SCALE))
         d.delegate = self
         d.font = UIFont.init(name: "SimHei", size: 12 * SCREEN_SCALE)
@@ -45,7 +45,7 @@ class ForgetPassVCThree: BaseViewController,UITextFieldDelegate,ShowSuccessInfoV
 
     
     // MARK: - 重复密码
-    lazy var repeatPass: TfPlaceHolder = {
+    private lazy var repeatPass: TfPlaceHolder = {
         let d : TfPlaceHolder = TfPlaceHolder.init(frame: CGRect.init(x: 0.172302725234469 * SCREEN_WIDTH, y: SCREEN_HEIGHT * 0.485054347826087, width: SCREEN_WIDTH * 0.7, height: 30 * SCREEN_SCALE))
         d.delegate = self
         d.font = UIFont.init(name: "SimHei", size: 12 * SCREEN_SCALE)
@@ -129,16 +129,6 @@ class ForgetPassVCThree: BaseViewController,UITextFieldDelegate,ShowSuccessInfoV
         view.endEditing(true)
 
     }
-
-    
-    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-        let touch: UITouch? = touches.first
-        let touchPoint: CGPoint? = touch?.location(in: self.view)
-        print("\((touchPoint?.x)! / SCREEN_WIDTH)==\((touchPoint?.y)! / SCREEN_HEIGHT)")
-        let stringFloat = Int((touchPoint?.x)!)
-        let stringFloat1 = Int((touchPoint?.y)!)
-        print("\(stringFloat)\(stringFloat1)")
-    }
     
     // MARK: - 返回首页
     @objc fileprivate func backToMain() {
@@ -155,4 +145,25 @@ class ForgetPassVCThree: BaseViewController,UITextFieldDelegate,ShowSuccessInfoV
         
         return true
     }
+    
+    override func viewWillLayoutSubviews() {
+        super.viewWillLayoutSubviews()
+        let rect = UIApplication.shared.statusBarFrame
+        
+        if UIApplication.shared.statusBarFrame != rect {
+            self.view.frame.origin.y = 20
+            CCog(message: "ddd")
+            
+        } else {
+            if statusframe_changed {
+                self.saveBtn.frame = CGRect.init(x: 0.1256038647343 * SCREEN_WIDTH, y: SCREEN_HEIGHT * 0.614130434782609 - 10 * SCREEN_SCALE, width: SCREEN_WIDTH * 0.75, height: 30 * SCREEN_SCALE)
+                self.newLoginPass.frame = CGRect.init(x: 0.172302725234469 * SCREEN_WIDTH, y: SCREEN_HEIGHT * 0.389945652173913 - 10 * SCREEN_SCALE, width: SCREEN_WIDTH * 0.7, height: 30 * SCREEN_SCALE)
+                
+                self.repeatPass.frame = CGRect.init(x: 0.172302725234469 * SCREEN_WIDTH, y: SCREEN_HEIGHT * 0.485054347826087 - 10 * SCREEN_SCALE, width: SCREEN_WIDTH * 0.7, height: 30 * SCREEN_SCALE)
+                
+                self.loginBtn.frame = CGRect.init(x: SCREEN_WIDTH * 0.545088542256378, y: SCREEN_HEIGHT * 0.916213761205259 - 10 * SCREEN_SCALE, width: 50 * SCREEN_SCALE, height: 30 * SCREEN_SCALE)
+            }
+        }
+    }
+    
 }

@@ -10,6 +10,8 @@ import UIKit
 import UserNotifications
 
 
+var statusframe_changed = false
+
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
     
@@ -116,10 +118,24 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         /// 极光推送注入
         injectJPush(didFinishLaunchingWithOptions: launchOptions)
         
+        CCog(message: UIApplication.shared.statusBarFrame)
         
+        /// 鉴别是否状态栏高度变化
+        let rect = CGRect.init(x: 0, y: 0, width: SCREEN_WIDTH, height: 40)
+        
+        if UIApplication.shared.statusBarFrame == rect {
+            statusframe_changed = true
+        }
         
         return true
     }
+    
+    func application(_ application: UIApplication, didChangeStatusBarFrame oldStatusBarFrame: CGRect) {
+        CCog(message: "didChangeStatusBarFrame")
+        UIApplication.shared.keyWindow?.rootViewController?.view.frame = CGRect.init(x: 0, y: 0, width: SCREEN_WIDTH, height: SCREEN_HEIGHT + 20)
+    }
+    
+    
     
     //// 测试接口
     func testComplement() {

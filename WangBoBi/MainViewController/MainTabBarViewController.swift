@@ -16,6 +16,42 @@ class MainTabBarViewController: BaseTabbarVC {
         // Do any additional setup after loading the view.
         
         self.setUpSubViews()
+    
+        
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        NotificationCenter.default.addObserver(self,selector:#selector(dddddd) , name: Notification.Name.UIApplicationWillChangeStatusBarFrame, object: nil)
+        
+        NotificationCenter.default.addObserver(self,selector:#selector(DDDDDD) , name: Notification.Name.UIApplicationDidChangeStatusBarFrame, object: nil)
+    }
+    
+    func dddddd() -> Void {
+        CCog(message: "UIApplicationWillChangeStatusBarFrame")
+    }
+    
+    
+    func DDDDDD() -> Void {
+        CCog(message: "UIApplicationWillChangeStatusBarFrame")
+    }
+    
+    override func viewWillLayoutSubviews() {
+        super.viewWillLayoutSubviews()
+        CCog(message: UIApplication.shared.statusBarFrame)
+
+        let rect = CGRect.init(x: 0, y: 0, width: SCREEN_WIDTH, height: 20)
+
+        if UIApplication.shared.statusBarFrame != rect {
+            CCog(message: "viewDidLayoutSubviews")
+            self.view.frame.origin.y = 20
+            CCog(message: "alskdjlskdjsaldjlsadjlaks")
+
+            self.view.frame.size.height = SCREEN_HEIGHT - 20
+        } else {
+            self.view.frame.origin.y = 0
+            self.view.frame.size.height = SCREEN_HEIGHT
+        }
     }
 
     fileprivate func setUpSubViews() -> Void {

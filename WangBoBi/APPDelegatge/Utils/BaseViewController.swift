@@ -209,4 +209,6 @@ class BaseViewController: UIViewController,UIGestureRecognizerDelegate,UINavigat
         }
     }
     
+    
+    
 }

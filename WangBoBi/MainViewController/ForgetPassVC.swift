@@ -11,7 +11,7 @@ import UIKit
 class ForgetPassVC: BaseViewController,UITextFieldDelegate {
     
     // MARK: - 背景图片
-    lazy var bgImg: UIImageView = {
+    private lazy var bgImg: UIImageView = {
         let d: UIImageView = UIImageView.init(frame: self.view.bounds)
         d.image = #imageLiteral(resourceName: "forgetPass")
         d.contentMode = .scaleAspectFill
@@ -19,7 +19,7 @@ class ForgetPassVC: BaseViewController,UITextFieldDelegate {
     }()
     
     // MARK: - 邮箱
-    fileprivate lazy var AddLabel: TfPlaceHolder = {
+    private lazy var AddLabel: TfPlaceHolder = {
         let d : TfPlaceHolder = TfPlaceHolder.init(frame: CGRect.init(x: SCREEN_WIDTH * 0.18438001992046, y: SCREEN_HEIGHT * 0.385, width: SCREEN_WIDTH * 0.88 - SCREEN_WIDTH * 0.213, height: 30 * SCREEN_SCALE))
         d.plStrSize(str: "", holderColor: UIColor.white)
         d.delegate = self
@@ -29,7 +29,7 @@ class ForgetPassVC: BaseViewController,UITextFieldDelegate {
     
 
     // MARK: - 确定按钮
-    fileprivate lazy var confirmBtn: UIButton = {
+    private lazy var confirmBtn: UIButton = {
         let d : UIButton = UIButton.init(frame: CGRect.init(x: 0.1256038647343 * SCREEN_WIDTH, y: SCREEN_HEIGHT * 0.53804347826087, width: SCREEN_WIDTH * 0.75, height: 30 * SCREEN_SCALE))
         
         d.addTarget(self, action: #selector(jumpToNext), for: .touchUpInside)
@@ -37,7 +37,7 @@ class ForgetPassVC: BaseViewController,UITextFieldDelegate {
     }()
 
     // MARK: - 登录
-    fileprivate lazy var loginBtn: UIButton = {
+    private lazy var loginBtn: UIButton = {
         let d : UIButton = UIButton.init(frame: CGRect.init(x: SCREEN_WIDTH * 0.545088542256378, y: SCREEN_HEIGHT * 0.916213761205259, width: 50 * SCREEN_SCALE, height: 30 * SCREEN_SCALE))
         d.addTarget(self, action: #selector(backToMain), for: .touchUpInside)
         
@@ -45,14 +45,44 @@ class ForgetPassVC: BaseViewController,UITextFieldDelegate {
     }()
 
     /// 底部图标
-    lazy var bottomImg: UIImageView = {
+    private lazy var bottomImg: UIImageView = {
         let d : UIImageView = UIImageView.init(frame: CGRect.init(x: 0, y: self.loginBtn.TopY, width: SCREEN_WIDTH, height: self.loginBtn.Height))
         d.image = #imageLiteral(resourceName: "bottom01")
         d.contentMode = UIViewContentMode.scaleAspectFit
         return d
     }()
 
+    override func viewWillLayoutSubviews() {
+        super.viewWillLayoutSubviews()
+        let rect = UIApplication.shared.statusBarFrame
+        
+        if UIApplication.shared.statusBarFrame != rect {
+            self.view.frame.origin.y = 20
+            CCog(message: "ddd")
+            
+        } else {
+            if statusframe_changed {
+                
+                self.view.frame.size.height = SCREEN_HEIGHT - 20
+                self.AddLabel.frame = CGRect.init(x: SCREEN_WIDTH * 0.18438001992046, y: SCREEN_HEIGHT * 0.385 - 10 * SCREEN_SCALE, width: SCREEN_WIDTH * 0.88 - SCREEN_WIDTH * 0.213, height: 30 * SCREEN_SCALE)
+                
+                self.confirmBtn.frame = CGRect.init(x: 0.1256038647343 * SCREEN_WIDTH, y: SCREEN_HEIGHT * 0.53804347826087 - 10 * SCREEN_SCALE, width: SCREEN_WIDTH * 0.75, height: 30 * SCREEN_SCALE)
+                
+                self.loginBtn.frame = CGRect.init(x: SCREEN_WIDTH * 0.545088542256378, y: SCREEN_HEIGHT * 0.916213761205259 - 10 * SCREEN_SCALE, width: 50 * SCREEN_SCALE, height: 30 * SCREEN_SCALE)
+                CCog(message: "xxxx")
+                
+                
+                let deviceType = UIDevice.current.deviceType
+                if deviceType == .iPhone4S {
+                    AddLabel.frame = CGRect.init(x: SCREEN_WIDTH * 0.18438001992046, y: SCREEN_HEIGHT * 0.37 - 10 * SCREEN_SCALE, width: SCREEN_WIDTH * 0.88 - SCREEN_WIDTH * 0.213, height: 30 * SCREEN_SCALE)
 
+                }
+                self.view.frame.origin.y = 0
+                self.view.frame.size.height = SCREEN_HEIGHT
+            }
+        }
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 

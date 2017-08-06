@@ -70,4 +70,20 @@ class LoginNav: UINavigationController, UIGestureRecognizerDelegate {
         popViewController(animated: true)
     }
     
+    /// 监听视图变化
+    override func viewWillLayoutSubviews() {
+        super.viewWillLayoutSubviews()
+        
+        let rect = CGRect.init(x: 0, y: 0, width: SCREEN_WIDTH, height: 20)
+        
+        if UIApplication.shared.statusBarFrame != rect {
+            self.view.frame.origin.y = 20
+            self.view.frame.size.height = SCREEN_HEIGHT - 20
+        } else {
+            self.view.frame.origin.y = 0
+            self.view.frame.size.height = SCREEN_HEIGHT
+            
+            
+        }
+    }
 }

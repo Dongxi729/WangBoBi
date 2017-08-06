@@ -10,7 +10,7 @@ import UIKit
 
 class RigisterWithDetailVC: BaseViewController,UITextFieldDelegate {
     
-    fileprivate lazy var bgImg: UIImageView = {
+    private lazy var bgImg: UIImageView = {
         let d : UIImageView = UIImageView.init(frame: self.view.bounds)
         d.contentMode = UIViewContentMode.scaleAspectFill
         d.image = #imageLiteral(resourceName: "RigisterSetPass")
@@ -19,7 +19,7 @@ class RigisterWithDetailVC: BaseViewController,UITextFieldDelegate {
     
     
     // MARK: - 登录
-    fileprivate lazy var loginBtn: UIButton = {
+    private lazy var loginBtn: UIButton = {
         let d : UIButton = UIButton.init(frame: CGRect.init(x: SCREEN_WIDTH * 0.545088542256378, y: SCREEN_HEIGHT * 0.916213761205259, width: 50 * SCREEN_SCALE, height: 30 * SCREEN_SCALE))
         d.addTarget(self, action: #selector(jumpTologin), for: .touchUpInside)
         
@@ -27,7 +27,7 @@ class RigisterWithDetailVC: BaseViewController,UITextFieldDelegate {
     }()
     
     // MARK: - 邀请码
-    fileprivate lazy var yaoqingBtn: TfPlaceHolder = {
+    private lazy var yaoqingBtn: TfPlaceHolder = {
         let d: TfPlaceHolder = TfPlaceHolder.init(frame: CGRect.init(x: SCREEN_WIDTH * 0.18438001992046, y: SCREEN_HEIGHT * 0.407608695652174, width: SCREEN_WIDTH * 0.88 - SCREEN_WIDTH * 0.213, height: 30 * SCREEN_SCALE))
         d.delegate = self
         d.textColor = UIColor.black
@@ -35,7 +35,7 @@ class RigisterWithDetailVC: BaseViewController,UITextFieldDelegate {
     }()
     
     // MARK: - 登录密码
-    fileprivate lazy var loginPass: TfPlaceHolder = {
+    private lazy var loginPass: TfPlaceHolder = {
         let d : TfPlaceHolder = TfPlaceHolder.init(frame: CGRect.init(x: SCREEN_WIDTH * 0.18438001992046, y: SCREEN_HEIGHT * 0.504076086956522, width: SCREEN_WIDTH * 0.88 - SCREEN_WIDTH * 0.213, height: 30 * SCREEN_SCALE))
         d.delegate = self
         d.isSecureTextEntry = true
@@ -43,7 +43,7 @@ class RigisterWithDetailVC: BaseViewController,UITextFieldDelegate {
     }()
     
     // MARK: - 确认登录密码
-    fileprivate lazy var repeatPass: TfPlaceHolder = {
+    private lazy var repeatPass: TfPlaceHolder = {
         let d :TfPlaceHolder = TfPlaceHolder.init(frame: CGRect.init(x: SCREEN_WIDTH * 0.18438001992046, y: SCREEN_HEIGHT * 0.60054347826087, width: SCREEN_WIDTH * 0.88 - SCREEN_WIDTH * 0.213, height: 30 * SCREEN_SCALE))
         d.delegate = self
         d.isSecureTextEntry = true
@@ -52,14 +52,14 @@ class RigisterWithDetailVC: BaseViewController,UITextFieldDelegate {
     
     
     // MARK: - 用户协议
-    fileprivate lazy var userAgree: UIButton = {
+    private lazy var userAgree: UIButton = {
         let d : UIButton = UIButton.init(frame: CGRect.init(x: SCREEN_WIDTH * 0.355877604461523, y: SCREEN_HEIGHT * 0.665307957193126, width: 100 * SCREEN_SCALE, height: 30 * SCREEN_SCALE))
         d.addTarget(self, action: #selector(jumpToUserAgreeVC), for: .touchUpInside)
         return d
     }()
     
     // MARK: - 协议图标
-    fileprivate lazy var agreeeBtn: UIButton = {
+    private lazy var agreeeBtn: UIButton = {
         let d : UIButton = UIButton.init(frame: CGRect.init(x: 0.0901771213697351 * SCREEN_WIDTH, y: SCREEN_HEIGHT * 0.667119565217391, width: 30 * SCREEN_SCALE, height: 30 * SCREEN_SCALE))
         d.contentMode = UIViewContentMode.scaleAspectFit
         d.addTarget(self, action: #selector(agreeSEL(sender:)), for: .touchUpInside)
@@ -68,7 +68,7 @@ class RigisterWithDetailVC: BaseViewController,UITextFieldDelegate {
     
     
     // MARK: - 同意协议按钮
-    lazy var agreeeImg: UIImageView = {
+    private lazy var agreeeImg: UIImageView = {
         let d : UIImageView = UIImageView.init(frame: CGRect.init(x: 0.0901771213697351 * SCREEN_WIDTH, y: SCREEN_HEIGHT * 0.667119565217391, width: 12 * SCREEN_SCALE, height: 12 * SCREEN_SCALE))
         
         d.contentMode = UIViewContentMode.scaleAspectFit
@@ -79,7 +79,7 @@ class RigisterWithDetailVC: BaseViewController,UITextFieldDelegate {
     }()
     
     // MARK: - 立即注册
-    lazy var rigistBtn: UIButton = {
+    private lazy var rigistBtn: UIButton = {
         let d : UIButton = UIButton.init(frame: CGRect.init(x: SCREEN_WIDTH * 0.0901771213697351, y: SCREEN_HEIGHT * 0.746829696323561, width: SCREEN_WIDTH * 0.8, height: 30 * SCREEN_SCALE))
         
         d.addTarget(self, action: #selector(rigisterSEL), for: .touchUpInside)
@@ -87,7 +87,7 @@ class RigisterWithDetailVC: BaseViewController,UITextFieldDelegate {
     }()
 
     /// 底部图标
-    lazy var bottomImg: UIImageView = {
+    private lazy var bottomImg: UIImageView = {
         let d : UIImageView = UIImageView.init(frame: CGRect.init(x: 0, y: self.loginBtn.TopY, width: SCREEN_WIDTH, height: self.loginBtn.Height))
         d.image = #imageLiteral(resourceName: "bottom01")
         d.contentMode = UIViewContentMode.scaleAspectFit
@@ -190,6 +190,44 @@ class RigisterWithDetailVC: BaseViewController,UITextFieldDelegate {
         
         UIView.animate(withDuration: 0.5) {
             UIApplication.shared.keyWindow?.frame = CGRect.init(x: 0, y: -200 * SCREEN_SCALE, width: SCREEN_WIDTH, height: SCREEN_HEIGHT)
+        }
+    }
+    
+    override func viewWillLayoutSubviews() {
+        super.viewWillLayoutSubviews()
+        let rect = UIApplication.shared.statusBarFrame
+        
+        if UIApplication.shared.statusBarFrame != rect {
+            self.view.frame.origin.y = 20
+            CCog(message: "ddd")
+            
+        } else {
+            if statusframe_changed {
+                loginBtn.frame = CGRect.init(x: SCREEN_WIDTH * 0.545088542256378, y: SCREEN_HEIGHT * 0.916213761205259 - 10 * SCREEN_SCALE, width: 50 * SCREEN_SCALE, height: 30 * SCREEN_SCALE)
+                yaoqingBtn.frame = CGRect.init(x: SCREEN_WIDTH * 0.18438001992046, y: SCREEN_HEIGHT * 0.407608695652174 - 10 * SCREEN_SCALE, width: SCREEN_WIDTH * 0.88 - SCREEN_WIDTH * 0.213, height: 30 * SCREEN_SCALE)
+
+                loginPass.frame = CGRect.init(x: SCREEN_WIDTH * 0.18438001992046, y: SCREEN_HEIGHT * 0.504076086956522 - 10 * SCREEN_SCALE, width: SCREEN_WIDTH * 0.88 - SCREEN_WIDTH * 0.213, height: 30 * SCREEN_SCALE)
+                
+                repeatPass.frame = CGRect.init(x: SCREEN_WIDTH * 0.18438001992046, y: SCREEN_HEIGHT * 0.60054347826087 - 10 * SCREEN_SCALE, width: SCREEN_WIDTH * 0.88 - SCREEN_WIDTH * 0.213, height: 30 * SCREEN_SCALE)
+                
+                userAgree.frame = CGRect.init(x: SCREEN_WIDTH * 0.355877604461523, y: SCREEN_HEIGHT * 0.665307957193126 - 10 * SCREEN_SCALE, width: 100 * SCREEN_SCALE, height: 30 * SCREEN_SCALE)
+                
+                agreeeBtn.frame = CGRect.init(x: 0.0901771213697351 * SCREEN_WIDTH, y: SCREEN_HEIGHT * 0.667119565217391 - 10 * SCREEN_SCALE, width: 30 * SCREEN_SCALE, height: 30 * SCREEN_SCALE)
+                
+                agreeeImg.frame = CGRect.init(x: 0.0901771213697351 * SCREEN_WIDTH, y: SCREEN_HEIGHT * 0.667119565217391 - 10 * SCREEN_SCALE, width: 12 * SCREEN_SCALE, height: 12 * SCREEN_SCALE)
+                
+                rigistBtn.frame = CGRect.init(x: SCREEN_WIDTH * 0.0901771213697351, y: SCREEN_HEIGHT * 0.746829696323561 - 10 * SCREEN_SCALE, width: SCREEN_WIDTH * 0.8, height: 30 * SCREEN_SCALE)
+                bottomImg.frame = CGRect.init(x: 0, y: self.loginBtn.TopY - 10 * SCREEN_SCALE, width: SCREEN_WIDTH, height: self.loginBtn.Height)
+                
+                let deviceType = UIDevice.current.deviceType
+                if deviceType == .iPhone4S {
+                    self.yaoqingBtn.frame = CGRect.init(x: SCREEN_WIDTH * 0.18438001992046, y: SCREEN_HEIGHT * 0.39 - 10 * SCREEN_SCALE, width: SCREEN_WIDTH * 0.88 - SCREEN_WIDTH * 0.213, height: 30 * SCREEN_SCALE)
+                    self.repeatPass.frame = CGRect.init(x: SCREEN_WIDTH * 0.18438001992046, y: SCREEN_HEIGHT * 0.62 - 10 * SCREEN_SCALE, width: SCREEN_WIDTH * 0.88 - SCREEN_WIDTH * 0.213, height: 30 * SCREEN_SCALE)
+                    self.userAgree.frame = CGRect.init(x: SCREEN_WIDTH * 0.355877604461523, y: SCREEN_HEIGHT * 0.68 - 10 * SCREEN_SCALE, width: 100 * SCREEN_SCALE, height: 30 * SCREEN_SCALE)
+                    self.agreeeImg.frame = CGRect.init(x: 0.0901771213697351 * SCREEN_WIDTH, y: SCREEN_HEIGHT * 0.7 - 10 * SCREEN_SCALE, width: 12 * SCREEN_SCALE, height: 12 * SCREEN_SCALE)
+                    self.rigistBtn.frame = CGRect.init(x: SCREEN_WIDTH * 0.0901771213697351, y: SCREEN_HEIGHT * 0.8 - 10 * SCREEN_SCALE, width: SCREEN_WIDTH * 0.8, height: 30 * SCREEN_SCALE)
+                }
+            }
         }
     }
 }
