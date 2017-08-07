@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>Data</key>
+	<array>
+		<dict>
+			<key>HeadImg</key>
+			<string>http://wbpay.ie1e.com/UploadFile/image/20170805051838.png</string>
+			<key>Id</key>
+			<integer>6</integer>
+			<key>IsFriend</key>
+			<integer>1</integer>
+			<key>Msg</key>
+			<string>向你转账0.00082网博币</string>
+			<key>NoticeNum</key>
+			<integer>0</integer>
+			<key>SubmitTime</key>
+			<string>2017-08-04T18:14:43.46</string>
+			<key>TrueName</key>
+			<string>郑东喜</string>
+			<key>UserName</key>
+			<string>946737816@qq.com</string>
+		</dict>
+		<dict>
+			<key>HeadImg</key>
+			<string>http://wbpay.ie1e.com/UploadFile/image/20170802062508.png</string>
+			<key>Id</key>
+			<integer>16</integer>
+			<key>IsFriend</key>
+			<integer>0</integer>
+			<key>Msg</key>
+			<string>转账0.0001网博币</string>
+			<key>NoticeNum</key>
+			<integer>0</integer>
+			<key>SubmitTime</key>
+			<string>2017-08-02T16:17:29.833</string>
+			<key>TrueName</key>
+			<string></string>
+			<key>UserName</key>
+			<string>18259129536@163.com</string>
+		</dict>
+		<dict>
+			<key>HeadImg</key>
+			<string>http://wbpay.ie1e.com/UploadFile/image/20170807124641.png</string>
+			<key>Id</key>
+			<integer>13</integer>
+			<key>IsFriend</key>
+			<integer>1</integer>
+			<key>Msg</key>
+			<string>转账0.00006网博币</string>
+			<key>NoticeNum</key>
+			<integer>2</integer>
+			<key>SubmitTime</key>
+			<string>2017-08-02T11:32:21.66</string>
+			<key>TrueName</key>
+			<string></string>
+			<key>UserName</key>
+			<string>896944961@qq.com</string>
+		</dict>
+	</array>
+	<key>Msg</key>
+	<string>操作成功</string>
+	<key>Status</key>
+	<string>0</string>
+</dict>
+</plist>

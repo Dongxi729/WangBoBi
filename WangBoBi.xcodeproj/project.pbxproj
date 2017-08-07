@@ -41,6 +41,10 @@
 		262350471F09D9E90072C7E5 /* BaseTabbarVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 262350461F09D9E90072C7E5 /* BaseTabbarVC.swift */; };
 		26359A4A1F38036C00D57201 /* ddddd.plist in Resources */ = {isa = PBXBuildFile; fileRef = 26359A491F38036C00D57201 /* ddddd.plist */; };
 		26359A4E1F38097400D57201 /* BMChineseSort.m in Sources */ = {isa = PBXBuildFile; fileRef = 26359A4D1F38097400D57201 /* BMChineseSort.m */; };
+		26359A621F3870EC00D57201 /* file.json in Resources */ = {isa = PBXBuildFile; fileRef = 26359A611F3870EC00D57201 /* file.json */; };
+		26359A651F38723B00D57201 /* ZDxListRootClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26359A631F38723B00D57201 /* ZDxListRootClass.swift */; };
+		26359A661F38723B00D57201 /* ZDxListData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26359A641F38723B00D57201 /* ZDxListData.swift */; };
+		26359A681F3877F500D57201 /* TestModelData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26359A671F3877F500D57201 /* TestModelData.swift */; };
 		263CAF111EF62889006629BF /* UIImage+XLExtension.m in Sources */ = {isa = PBXBuildFile; fileRef = 263CAF0C1EF62889006629BF /* UIImage+XLExtension.m */; };
 		263CAF121EF62889006629BF /* UIView+XLExtension.m in Sources */ = {isa = PBXBuildFile; fileRef = 263CAF0E1EF62889006629BF /* UIView+XLExtension.m */; };
 		263CAF131EF62889006629BF /* XLPasswordInputView.m in Sources */ = {isa = PBXBuildFile; fileRef = 263CAF101EF62889006629BF /* XLPasswordInputView.m */; };
@@ -218,6 +222,10 @@
 		26359A491F38036C00D57201 /* ddddd.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = ddddd.plist; path = ../../../../../Desktop/ddddd.plist; sourceTree = "<group>"; };
 		26359A4C1F38097400D57201 /* BMChineseSort.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BMChineseSort.h; sourceTree = "<group>"; };
 		26359A4D1F38097400D57201 /* BMChineseSort.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BMChineseSort.m; sourceTree = "<group>"; };
+		26359A611F3870EC00D57201 /* file.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; name = file.json; path = WangBoBi/file.json; sourceTree = SOURCE_ROOT; };
+		26359A631F38723B00D57201 /* ZDxListRootClass.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ZDxListRootClass.swift; sourceTree = "<group>"; };
+		26359A641F38723B00D57201 /* ZDxListData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ZDxListData.swift; sourceTree = "<group>"; };
+		26359A671F3877F500D57201 /* TestModelData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TestModelData.swift; sourceTree = "<group>"; };
 		263CAF0B1EF62889006629BF /* UIImage+XLExtension.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+XLExtension.h"; sourceTree = "<group>"; };
 		263CAF0C1EF62889006629BF /* UIImage+XLExtension.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+XLExtension.m"; sourceTree = "<group>"; };
 		263CAF0D1EF62889006629BF /* UIView+XLExtension.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+XLExtension.h"; sourceTree = "<group>"; };
@@ -865,9 +873,13 @@
 		2649607A1EF0C02600A559D6 /* Friends-03 */ = {
 			isa = PBXGroup;
 			children = (
+				26359A631F38723B00D57201 /* ZDxListRootClass.swift */,
+				26359A641F38723B00D57201 /* ZDxListData.swift */,
+				26359A671F3877F500D57201 /* TestModelData.swift */,
 				2649607B1EF0C02600A559D6 /* Controller */,
 				2649607C1EF0C02600A559D6 /* Model */,
 				2649607D1EF0C02600A559D6 /* View */,
+				26359A611F3870EC00D57201 /* file.json */,
 			);
 			name = "Friends-03";
 			path = "../Friends-03";
@@ -1411,6 +1423,7 @@
 				26F484871EEFD55400177670 /* LaunchScreen.storyboard in Resources */,
 				26359A4A1F38036C00D57201 /* ddddd.plist in Resources */,
 				26F484841EEFD55400177670 /* Assets.xcassets in Resources */,
+				26359A621F3870EC00D57201 /* file.json in Resources */,
 				2649612E1EF0D08F00A559D6 /* FTProgressIndicator.bundle in Resources */,
 				26F484821EEFD55400177670 /* Main.storyboard in Resources */,
 			);
@@ -1480,6 +1493,7 @@
 				26DBE92F1F298B510092D6CF /* UITableView+Extension.swift in Sources */,
 				266AFB231F2AE3CE00A179C8 /* CommonTableViewCell.swift in Sources */,
 				260B20D41EF7A08D00E78FD8 /* TfPlaceHolder.swift in Sources */,
+				26359A651F38723B00D57201 /* ZDxListRootClass.swift in Sources */,
 				2647936D1F18DD71000F9F67 /* ShopWebV.swift in Sources */,
 				2643CFC61EF3EE2200EFC720 /* DetailViewController.swift in Sources */,
 				264960FE1EF0C9EC00A559D6 /* YYMemoryCache.m in Sources */,
@@ -1511,6 +1525,7 @@
 				261004B51EF8BB9100DE000F /* AgreeMentVC.swift in Sources */,
 				2649612D1EF0D08F00A559D6 /* FTNotificationIndicator.m in Sources */,
 				2650C18C1F036109005BE741 /* GetMoneyScanVC.swift in Sources */,
+				26359A681F3877F500D57201 /* TestModelData.swift in Sources */,
 				264960C01EF0C28F00A559D6 /* POPAnimationExtras.mm in Sources */,
 				26CF98511F0B26CD008F8F23 /* AccountModel.swift in Sources */,
 				265991F41EF65D5C004391E9 /* CommonBtn.swift in Sources */,
@@ -1536,6 +1551,7 @@
 				264961011EF0C9EC00A559D6 /* MKAnnotationView+YYWebImage.m in Sources */,
 				264961091EF0C9EC00A559D6 /* YYSpriteSheetImage.m in Sources */,
 				26A3CADD1F25DF13002815C1 /* AddFrienVC.swift in Sources */,
+				26359A661F38723B00D57201 /* ZDxListData.swift in Sources */,
 				265D430C1EFBA8B1007F5AB8 /* MyInfoVC.swift in Sources */,
 				2607D1571EF224C90015625E /* MainPageViewController.swift in Sources */,
 				265D430F1EFBD572007F5AB8 /* CodeProductor.swift in Sources */,

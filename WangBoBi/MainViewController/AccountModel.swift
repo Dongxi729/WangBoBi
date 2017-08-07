@@ -1559,6 +1559,7 @@ class AccountModel: NSObject,NSCoding {
         NetWorkTool.shared.postWithPath(path: FRIEND_LIST, paras: param, success: { (result) in
             
             CCog(message: result)
+
             
             guard let resultData = result as? NSDictionary else {
                 return

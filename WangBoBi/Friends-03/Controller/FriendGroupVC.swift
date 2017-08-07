@@ -89,28 +89,32 @@ class FriendGroupVC: BaseViewController, UITableViewDelegate, UITableViewDataSou
                         testUserArray.append(dddd)
                         
                         self.searchTotalArray.append(dddd.UserName!)
+                        self.citys.append(dddd)
                     } else {
                         self.searchTotalArray.append(dddd.TrueName!)
+                        self.citys.append(dddd)
                     }
                     
                     
-                    self.citys.append(dddd)
                     
                     /// 若非真实名和真实名的数组和加起来未模型的总和
                     if self.searchTotalArray.count == model.count {
-                        CCog(message: self.searchTotalArray)
-                        
-                        CCog(message: BMChineseSort.indexArray(self.searchTotalArray))
-                        
+
                         self.indexArray = BMChineseSort.indexArray(self.searchTotalArray) as! [String]
                         CCog(message: BMChineseSort.letterSortArray(self.searchTotalArray))
                         
                         self.letterResultArr = BMChineseSort.letterSortArray(self.searchTotalArray)!
                         
-                        self.model_array = BMChineseSort.sortObjectArray(self.citys, key: "HeadImg")
-                        dump(self.model_array)
-                                                self.view.addSubview(self.tableView)
-                                                self.tableView.reloadData()
+                        self.model_array = BMChineseSort.sortObjectArray(self.citys, key: "TrueName")
+
+                        CCog(message: self.letterResultArr)
+                        
+
+                        
+                        
+                        
+                        self.view.addSubview(self.tableView)
+                        self.tableView.reloadData()
 
                     }
                 }
@@ -199,7 +203,19 @@ class FriendGroupVC: BaseViewController, UITableViewDelegate, UITableViewDataSou
 
             cell.new_descLabel.text = nameArray[indexPath.row]
             let ddd = ((self.model_array[0]) as? NSArray)?[indexPath.row] as? FriendListModel
-            CCog(message: ddd?.HeadImg)
+            
+            
+            var ddddddd = [FriendListModel]()
+            for _model in self.frienGroup_model {
+                if (_model.TrueName?.contains(cell.new_descLabel.text!))! || (_model.UserName?.contains(cell.new_descLabel.text!))! {
+                    ddddddd.append(_model)
+                    
+                    dump(ddddddd)
+                }
+                
+            }
+            
+
         }
         
         return cell

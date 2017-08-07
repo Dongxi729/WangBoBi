@@ -114,6 +114,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         checkLoginTim()
         
         //        testComplement()
+        TestModelData.TextMethod { (model) in
+            CCog(message: model.count)
+            let cellModel : [ZDxListData] = model[0].data
+        }
         
         /// 极光推送注入
         injectJPush(didFinishLaunchingWithOptions: launchOptions)
@@ -229,10 +233,7 @@ extension AppDelegate {
         print("get the deviceToken  \(deviceToken)")
         
         let token = String(data: deviceToken.base64EncodedData(), encoding: .utf8)?.trimmingCharacters(in: CharacterSet.whitespaces).trimmingCharacters(in: CharacterSet(charactersIn: "<>"))
-        
-        print("ddd",token)
-        
-        
+
         NotificationCenter.default.post(name: Notification.Name(rawValue: "DidRegisterRemoteNotification"), object: deviceToken)
         JPUSHService.registerDeviceToken(deviceToken)
         print(deviceToken)

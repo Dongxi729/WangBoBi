@@ -93,8 +93,7 @@ class NewFriendVC: BaseViewController,UITableViewDelegate,UITableViewDataSource,
     // MARK: - NewFriendCellDelegate
     
     func acceptSEL(xxx: NSIndexPath) {
-        CCog(message: self.topModel[xxx.row].AlyUserId?.stringValue)
-        
+       
         AccountModel.addFriendRequest(4, "",(self.topModel[xxx.row].AlyUserId?.stringValue)! , "", "") { (result, model) in
 
         }
