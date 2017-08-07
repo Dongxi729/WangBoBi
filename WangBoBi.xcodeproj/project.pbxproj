@@ -39,6 +39,8 @@
 		262304641EFA6988007B0BF6 /* NSDictionary+ZXPUnicode.m in Sources */ = {isa = PBXBuildFile; fileRef = 262304601EFA6988007B0BF6 /* NSDictionary+ZXPUnicode.m */; };
 		262304651EFA6988007B0BF6 /* NSObject+ZXPUnicode.m in Sources */ = {isa = PBXBuildFile; fileRef = 262304621EFA6988007B0BF6 /* NSObject+ZXPUnicode.m */; };
 		262350471F09D9E90072C7E5 /* BaseTabbarVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 262350461F09D9E90072C7E5 /* BaseTabbarVC.swift */; };
+		26359A4A1F38036C00D57201 /* ddddd.plist in Resources */ = {isa = PBXBuildFile; fileRef = 26359A491F38036C00D57201 /* ddddd.plist */; };
+		26359A4E1F38097400D57201 /* BMChineseSort.m in Sources */ = {isa = PBXBuildFile; fileRef = 26359A4D1F38097400D57201 /* BMChineseSort.m */; };
 		263CAF111EF62889006629BF /* UIImage+XLExtension.m in Sources */ = {isa = PBXBuildFile; fileRef = 263CAF0C1EF62889006629BF /* UIImage+XLExtension.m */; };
 		263CAF121EF62889006629BF /* UIView+XLExtension.m in Sources */ = {isa = PBXBuildFile; fileRef = 263CAF0E1EF62889006629BF /* UIView+XLExtension.m */; };
 		263CAF131EF62889006629BF /* XLPasswordInputView.m in Sources */ = {isa = PBXBuildFile; fileRef = 263CAF101EF62889006629BF /* XLPasswordInputView.m */; };
@@ -213,6 +215,9 @@
 		262304611EFA6988007B0BF6 /* NSObject+ZXPUnicode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSObject+ZXPUnicode.h"; sourceTree = "<group>"; };
 		262304621EFA6988007B0BF6 /* NSObject+ZXPUnicode.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSObject+ZXPUnicode.m"; sourceTree = "<group>"; };
 		262350461F09D9E90072C7E5 /* BaseTabbarVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseTabbarVC.swift; sourceTree = "<group>"; };
+		26359A491F38036C00D57201 /* ddddd.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = ddddd.plist; path = ../../../../../Desktop/ddddd.plist; sourceTree = "<group>"; };
+		26359A4C1F38097400D57201 /* BMChineseSort.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BMChineseSort.h; sourceTree = "<group>"; };
+		26359A4D1F38097400D57201 /* BMChineseSort.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BMChineseSort.m; sourceTree = "<group>"; };
 		263CAF0B1EF62889006629BF /* UIImage+XLExtension.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+XLExtension.h"; sourceTree = "<group>"; };
 		263CAF0C1EF62889006629BF /* UIImage+XLExtension.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+XLExtension.m"; sourceTree = "<group>"; };
 		263CAF0D1EF62889006629BF /* UIView+XLExtension.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+XLExtension.h"; sourceTree = "<group>"; };
@@ -697,6 +702,15 @@
 			path = ZXPUnicode;
 			sourceTree = "<group>";
 		};
+		26359A4B1F38096800D57201 /* contact */ = {
+			isa = PBXGroup;
+			children = (
+				26359A4C1F38097400D57201 /* BMChineseSort.h */,
+				26359A4D1F38097400D57201 /* BMChineseSort.m */,
+			);
+			name = contact;
+			sourceTree = "<group>";
+		};
 		263CAF0A1EF62869006629BF /* passInputV */ = {
 			isa = PBXGroup;
 			children = (
@@ -834,6 +848,7 @@
 		264960791EF0BFC000A559D6 /* ThirdSDK */ = {
 			isa = PBXGroup;
 			children = (
+				26359A4B1F38096800D57201 /* contact */,
 				269B5ECF1F077C0C00AA573F /* refresh */,
 				26F248B91EFFE9F500599CC7 /* UploadHeadTool.swift */,
 				265D43181EFBE2F5007F5AB8 /* CreateCode */,
@@ -1292,6 +1307,7 @@
 		26F484701EEFD55400177670 = {
 			isa = PBXGroup;
 			children = (
+				26359A491F38036C00D57201 /* ddddd.plist */,
 				26F4847B1EEFD55400177670 /* WangBoBi */,
 				26F4847A1EEFD55400177670 /* Products */,
 				2649610D1EF0CA0900A559D6 /* Frameworks */,
@@ -1393,6 +1409,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				26F484871EEFD55400177670 /* LaunchScreen.storyboard in Resources */,
+				26359A4A1F38036C00D57201 /* ddddd.plist in Resources */,
 				26F484841EEFD55400177670 /* Assets.xcassets in Resources */,
 				2649612E1EF0D08F00A559D6 /* FTProgressIndicator.bundle in Resources */,
 				26F484821EEFD55400177670 /* Main.storyboard in Resources */,
@@ -1550,6 +1567,7 @@
 				266B88ED1F04907A0033BFA7 /* PayPassInputV.swift in Sources */,
 				264960C31EF0C28F00A559D6 /* POPAnimator.mm in Sources */,
 				264960FD1EF0C9EC00A559D6 /* YYKVStorage.m in Sources */,
+				26359A4E1F38097400D57201 /* BMChineseSort.m in Sources */,
 				26ED24481EF3E18C00642804 /* TrueNameCertifiedVC.swift in Sources */,
 				267104B91F1F31CB0094E2EE /* CameraTool.swift in Sources */,
 				264960BD1EF0C28F00A559D6 /* POPAnimatableProperty.mm in Sources */,

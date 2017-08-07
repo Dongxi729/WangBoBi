@@ -5,6 +5,16 @@
 //  Created by 郑东喜 on 2017/6/29.
 //  Copyright © 2017年 郑东喜. All rights reserved.
 //  充值
+//08QUB8107127112	127112
+//08CWW9707016167	016167
+//08ELG8107821482	821482
+//08FBR8407025609	0256091212
+//08GPB0807448814	448814
+//08HFL8907269226	269226
+//08IUW2407483648	483648
+//08XTY0407082478	082478
+//08LQA1507920482	920482
+//08BLD6807406037	406037
 
 import UIKit
 
@@ -48,6 +58,7 @@ class PushingMoneyVC: BaseViewController,UITextFieldDelegate,BindPhoneFooterVDel
         let d : TfPlaceHolder = TfPlaceHolder.init(frame: CGRect.init(x: COMMON_MARGIN, y: self.bgImg.Height * 0.816, width: SCREEN_WIDTH - 2 * COMMON_MARGIN, height: 30 * SCREEN_SCALE))
         d.delegate = self
         d.tag = 1112
+        d.font = UIFont.systemFont(ofSize: 12 * SCREEN_SCALE)
         return d
     }()
     
@@ -115,15 +126,17 @@ class PushingMoneyVC: BaseViewController,UITextFieldDelegate,BindPhoneFooterVDel
             
             NotificationCenter.default.removeObserver(self, name: NSNotification.Name(rawValue: "changeScanCode"), object: nil)
         }
-        
     }
     
     
     /// 充值卡卡号
-    fileprivate var cardNumStr : String?
+    private var cardNumStr : String?
     
     /// 充值卡验证码
-    fileprivate var cardYZMStr : String?
+    private var cardYZMStr : String?
+    
+    /// 模型
+    private var model : [ChardCardModel]?
     
     // MARK: - actionSEL methods
     @objc fileprivate func scanCodeSEL() {
@@ -133,13 +146,40 @@ class PushingMoneyVC: BaseViewController,UITextFieldDelegate,BindPhoneFooterVDel
 
     // MARK: - bindPhonSELDelegate
     func bindPhonSELDelegate() {
-
-        UIView.animate(withDuration: 0.5) {
-            UIApplication.shared.keyWindow?.frame = CGRect.init(x: 0, y: 0, width: SCREEN_WIDTH, height: SCREEN_HEIGHT)
+        
+        if (self.cardNumLabel.text?.isEmpty)! {
+            toast(toast: "请输入卡号")
+            return
         }
         
-        /// 模拟跳完成功界面
-        self.navigationController?.pushViewController(PushMoneySuccessVC(), animated: true)
+        if (self.cardPass.text?.isEmpty)! {
+            toast(toast: "请输入密码")
+            return
+        }
+        
+        if self.cardNumLabel.text?.characters.count > 0 && self.cardPass.text?.characters.count > 0 {
+            
+//            AccountModel.rchcardSEL(self.cardNumLabel.text!, self.cardPass.text!) { (result, model) in
+//                if result {
+//                    UIView.animate(withDuration: 0.5) {
+//                        UIApplication.shared.keyWindow?.frame = CGRect.init(x: 0, y: 0, width: SCREEN_WIDTH, height: SCREEN_HEIGHT)
+//                    }
+//                    
+//                    /// 模拟跳完成功界面
+//                    self.navigationController?.pushViewController(PushMoneySuccessVC(), animated: true)
+//                }
+//            }
+            
+            AccountModel.rchcardSEL(self.cardNumLabel.text!, self.cardPass.text!, finished: { (result) in
+                if result {
+                    /// 模拟跳完成功界面
+                    self.navigationController?.pushViewController(PushMoneySuccessVC(), animated: true)
+                } else {
+                    /// 模拟跳完失败界面
+                    self.navigationController?.pushViewController(PushMoneyFailVC(), animated: true)
+                }
+            })
+        }
     }
     
     func textFieldShouldBeginEditing(_ textField: UITextField) -> Bool {

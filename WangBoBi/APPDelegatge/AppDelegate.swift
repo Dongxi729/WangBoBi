@@ -106,14 +106,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     // MARK: - 程序入口
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
-
+        
         /// 设置未登录主界面
         setUnlogedMain()
         
         /// 检查登录时间
         checkLoginTim()
         
-//        testComplement()
+        //        testComplement()
         
         /// 极光推送注入
         injectJPush(didFinishLaunchingWithOptions: launchOptions)
@@ -195,7 +195,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         /// 接收自定义推送消息
         //获取自定义消息推送内容
         NotificationCenter.default.addObserver(self, selector: #selector(networkDidReceiveMessage(notification:)), name: NSNotification.Name.jpfNetworkDidReceiveMessage, object: nil)
-
+        
     }
     
     
@@ -229,7 +229,7 @@ extension AppDelegate {
         print("get the deviceToken  \(deviceToken)")
         
         let token = String(data: deviceToken.base64EncodedData(), encoding: .utf8)?.trimmingCharacters(in: CharacterSet.whitespaces).trimmingCharacters(in: CharacterSet(charactersIn: "<>"))
-   
+        
         print("ddd",token)
         
         

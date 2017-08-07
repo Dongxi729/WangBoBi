@@ -10,12 +10,10 @@ import UIKit
 
 class FriendGroupVC: BaseViewController, UITableViewDelegate, UITableViewDataSource,FriendHeaderDelegate,UISearchResultsUpdating {
     
-    //    var tableView:UITableView?
-    var cityGroups = [String: [String]]()
-    var cityGroups2 = [String: [String]]()
-
-    var groupTitles = [String]()
-    var groupTitles2 = [String]()
+    
+    //    var tableView:UITableView
+    var indexArray = [String]()
+    var letterResultArr : NSMutableArray = []
     
     /// 显示数据源(非实名)
     var citys : [FriendListModel] = []
@@ -23,12 +21,13 @@ class FriendGroupVC: BaseViewController, UITableViewDelegate, UITableViewDataSou
     /// 显示数据源(实名)
     var num_citys : [FriendListModel] = []
     
-    
     /// 搜索数据源
     var searchTotalArray : [String] = []
     
     /// 右边按钮
     var rightBtn : UIButton = UIButton()
+    
+    var model_array : NSMutableArray = []
     
     
     /// 搜索控制器
@@ -47,7 +46,7 @@ class FriendGroupVC: BaseViewController, UITableViewDelegate, UITableViewDataSou
     @objc fileprivate func doneBtnSEL() {
         CCog(message: type(of: self))
     }
-
+    
     lazy var tableView: UITableView = {
         let d : UITableView = UITableView.init(frame: CGRect.init(x: 0, y: 64, width: SCREEN_WIDTH, height: SCREEN_HEIGHT - 64))
         d.delegate = self
@@ -64,7 +63,7 @@ class FriendGroupVC: BaseViewController, UITableViewDelegate, UITableViewDataSou
         super.viewDidLoad()
         
         title = "我的朋友"
-
+        
         
         view.backgroundColor = UIColor.white
         
@@ -92,116 +91,34 @@ class FriendGroupVC: BaseViewController, UITableViewDelegate, UITableViewDataSou
                         self.searchTotalArray.append(dddd.UserName!)
                     } else {
                         self.searchTotalArray.append(dddd.TrueName!)
-                        self.citys.append(dddd)
                     }
+                    
+                    
+                    self.citys.append(dddd)
                     
                     /// 若非真实名和真实名的数组和加起来未模型的总和
-                    if testUserArray.count + self.citys.count == model.count {
+                    if self.searchTotalArray.count == model.count {
+                        CCog(message: self.searchTotalArray)
                         
-                        CCog(message: self.citys)
+                        CCog(message: BMChineseSort.indexArray(self.searchTotalArray))
                         
-                        self.makeCityToGroup({ (result) in
-                            if result {
-                                
-                                self.makeCityToGroup2({ (result2) in
-                                    if result2 {
-                                        
-                                        self.num_citys = testUserArray
-                                        self.view.addSubview(self.tableView)
-                                        self.tableView.reloadData()
-                                        /// 添加搜索栏
-                                        /// 添加搜索栏
-                                        let dddd : UIView = UIView.init(frame: CGRect.init(x: 0, y: 0, width: SCREEN_WIDTH, height: 112))
-                                        dddd.backgroundColor = COMMON_TBBGCOLOR
-                                        dddd.addSubview(self.countrySearchController.searchBar)
-                                        
-                                        /// 添加搜索栏
-                                        self.tableView.tableHeaderView = dddd
-                                        
-                                        /// 添加新的好友制定
-                                        let foV = FriendHeader.init(frame: CGRect.init(x: 0, y: self.countrySearchController.searchBar.BottomY + COMMON_MARGIN * 0.5, width: SCREEN_WIDTH, height: 64))
-                                        foV.delegate = self
-                                        dddd.addSubview(foV)
-                                    }
-                                })
-                            }
-                        })
-                    }
-                }
-            }
-        }
-    }
-    
-    /// 提取数据源的第一个字幕
-    func makeCityToGroup(_ finished : (_ isFinished : Bool) -> ()) {
-        
-        // 遍历citys数组,排列非数字开头的数组
-        for city in citys {
-            
-            if city.TrueName?.characters.count > 0 {
-                // 将中文转换为拼音
-                let cityMutableString = NSMutableString(string: city.TrueName!)
-                CFStringTransform(cityMutableString, nil, kCFStringTransformToLatin, false)
-                CFStringTransform(cityMutableString, nil, kCFStringTransformStripDiacritics, false)
-                
-                
-                if cityMutableString.length > 0 {
-                    
-                    // 拿到首字母作为key
-                    let firstLetter = cityMutableString.substring(to: 1).uppercased()
+                        self.indexArray = BMChineseSort.indexArray(self.searchTotalArray) as! [String]
+                        CCog(message: BMChineseSort.letterSortArray(self.searchTotalArray))
+                        
+                        self.letterResultArr = BMChineseSort.letterSortArray(self.searchTotalArray)!
+                        
+                        self.model_array = BMChineseSort.sortObjectArray(self.citys, key: "HeadImg")
+                        dump(self.model_array)
+                                                self.view.addSubview(self.tableView)
+                                                self.tableView.reloadData()
 
-                    if var value = cityGroups[firstLetter] {
-                        
-                        value.append(city.TrueName!)
-                        cityGroups[firstLetter] = value
-                    } else {
-                        cityGroups[firstLetter] = [city.TrueName!]
                     }
                 }
             }
         }
-        //拿到所有的key将它排序, 作为每个组的标题
-        groupTitles = cityGroups.keys.sorted()
-        finished(true)
+        
     }
     
-    /// 提取数据源的第一个字幕
-    func makeCityToGroup2(_ finished : (_ isFinished : Bool) -> ()) {
-        
-        // 遍历citys数组,排列非数字开头的数组
-        for city in num_citys {
-            
-            if city.UserName?.characters.count > 0 {
-                // 将中文转换为拼音
-                let cityMutableString = NSMutableString(string: city.UserName!)
-                CFStringTransform(cityMutableString, nil, kCFStringTransformToLatin, false)
-                CFStringTransform(cityMutableString, nil, kCFStringTransformStripDiacritics, false)
-            
-                if cityMutableString.length > 0 {
-                    
-                    // 拿到首字母作为key
-                    var firstLetter = cityMutableString.substring(to: 1).uppercased()
-                    
-                    if !firstLetter.checkIsNumber() {
-                        firstLetter = "#"
-                    }
-                    
-                    if var value = cityGroups2[firstLetter] {
-                        
-                        value.append(city.UserName!)
-                        cityGroups2[firstLetter] = value
-                    } else {
-                        cityGroups2[firstLetter] = [city.UserName!]
-                    }
-                }
-            }
-        }
-        //拿到所有的key将它排序, 作为每个组的标题
-        groupTitles2 = cityGroups2.keys.sorted()
-        groupTitles2.append(contentsOf: groupTitles)
-        groupTitles2 = groupTitles2.reversed()
-        finished(true)
-    }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
@@ -220,15 +137,8 @@ class FriendGroupVC: BaseViewController, UITableViewDelegate, UITableViewDataSou
         self.navigationController?.pushViewController(AddFrienVC(), animated: true)
     }
     
-    
-    
     func numberOfSections(in tableView: UITableView) -> Int {
-        if self.countrySearchController.isActive {
-            return 1
-        } else {
-            /// 暂时返回两组数组(数字开头和非数字开头的)
-            return groupTitles2.count
-        }
+        return indexArray.count
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -236,13 +146,7 @@ class FriendGroupVC: BaseViewController, UITableViewDelegate, UITableViewDataSou
         if countrySearchController.isActive {
             return searchArray.count
         } else {
-            
-            ///
-            if section >= citys.count {
-                return num_citys.count
-            } else {
-                return citys.count
-            }
+            return (letterResultArr[section] as AnyObject).count
         }
     }
     
@@ -251,7 +155,7 @@ class FriendGroupVC: BaseViewController, UITableViewDelegate, UITableViewDataSou
         if countrySearchController.isActive {
             return [""]
         } else {
-            return groupTitles2
+            return indexArray
         }
     }
     
@@ -262,8 +166,8 @@ class FriendGroupVC: BaseViewController, UITableViewDelegate, UITableViewDataSou
         if countrySearchController.isActive {
             return ""
         } else {
-
-            return groupTitles2[section]
+            
+            return indexArray[section]
         }
     }
     
@@ -291,19 +195,11 @@ class FriendGroupVC: BaseViewController, UITableViewDelegate, UITableViewDataSou
             cell.new_descLabel.text = searchArray[indexPath.row]
             
         } else {
-            ///
-            if indexPath.section >= citys.count {
-                CCog(message: num_citys.count)
-                cell.ne_imgVi.setImage(urlString: num_citys[indexPath.row].HeadImg, placeholderImage: #imageLiteral(resourceName: "logo"))
-                cell.ne_bottomLabel.text = num_citys[indexPath.row].WBCAdress
-                cell.new_descLabel.text = num_citys[indexPath.row].UserName
-            } else {
-                
-                CCog(message: citys.count)
-                cell.ne_imgVi.setImage(urlString: citys[indexPath.row].HeadImg, placeholderImage: #imageLiteral(resourceName: "logo"))
-                cell.ne_bottomLabel.text = citys[indexPath.row].WBCAdress
-                cell.new_descLabel.text = citys[indexPath.row].TrueName
-            }
+            let nameArray : [String] = letterResultArr[indexPath.section] as! [String]
+
+            cell.new_descLabel.text = nameArray[indexPath.row]
+            let ddd = ((self.model_array[0]) as? NSArray)?[indexPath.row] as? FriendListModel
+            CCog(message: ddd?.HeadImg)
         }
         
         return cell
@@ -314,11 +210,11 @@ class FriendGroupVC: BaseViewController, UITableViewDelegate, UITableViewDataSou
         
         let ccc = AddFriendInfoVC()
         
-        if indexPath.section >= citys.count {
-            ccc.add_model = num_citys[indexPath.row]
-        } else {
-            ccc.add_model = citys[indexPath.row]
-        }
+        //        if indexPath.section >= citys.count {
+        //            ccc.add_model = num_citys[indexPath.row]
+        //        } else {
+        //            ccc.add_model = citys[indexPath.row]
+        //        }
         self.navigationController?.pushViewController(ccc, animated: true)
     }
     

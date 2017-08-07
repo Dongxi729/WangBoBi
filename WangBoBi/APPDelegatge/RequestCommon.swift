@@ -78,3 +78,6 @@ var NEWFRIEND_LIST = "\(COMMON_PREFIX)/ifs/alyfriend.ashx"
 
 /// 用户转账订单接口
 var TRANPAY_ORDER = "\(COMMON_PREFIX)/ifs/tranpayorder.ashx"
+
+/// 充值卡
+var RCHGACRD = "\(COMMON_PREFIX)/ifs/rchgcard.ashx"

@@ -54,6 +54,12 @@ class PushMoneyFailVC: UIViewController {
     // MARK: - methods
     /// 查看钱包余额（返回首页）
     @objc fileprivate func checkMoneyLeftSEL() {
+        
+        if let _ = AccountModel.shared()?.Id.stringValue {
+            if let _ = AccountModel.shared()?.Token {
+                AccountModel.reloadSEL()
+            }
+        }
         self.navigationController?.popToRootViewController(animated: true)
     }
     

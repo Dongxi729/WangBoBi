@@ -38,7 +38,6 @@ class MainTabBarViewController: BaseTabbarVC {
     
     override func viewWillLayoutSubviews() {
         super.viewWillLayoutSubviews()
-        CCog(message: UIApplication.shared.statusBarFrame)
 
         let rect = CGRect.init(x: 0, y: 0, width: SCREEN_WIDTH, height: 20)
 

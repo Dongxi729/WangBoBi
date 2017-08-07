@@ -22,3 +22,6 @@
 
 /// 极光推送
 #import "JPUSHService.h"
+
+/// 好友排序
+#import "BMChineseSort.h"
