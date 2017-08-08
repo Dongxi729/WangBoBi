@@ -81,3 +81,6 @@ var TRANPAY_ORDER = "\(COMMON_PREFIX)/ifs/tranpayorder.ashx"
 
 /// 充值卡
 var RCHGACRD = "\(COMMON_PREFIX)/ifs/rchgcard.ashx"
+
+/// 申述Url
+var APPEAL_URL = "http://wbpay.ie1e.com/appeal.aspx"

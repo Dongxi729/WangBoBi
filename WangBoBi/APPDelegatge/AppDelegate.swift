@@ -114,10 +114,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         checkLoginTim()
         
         //        testComplement()
-        TestModelData.TextMethod { (model) in
-            CCog(message: model.count)
-            let cellModel : [ZDxListData] = model[0].data
-        }
+//        TestModelData.TextMethod { (model) in
+//            CCog(message: model.count)
+//            let cellModel : [ZDxListData] = model[0].data
+//        }
         
         /// 极光推送注入
         injectJPush(didFinishLaunchingWithOptions: launchOptions)

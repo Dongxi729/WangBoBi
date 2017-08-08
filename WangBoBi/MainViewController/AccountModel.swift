@@ -1296,6 +1296,8 @@ class AccountModel: NSObject,NSCoding {
         
         NetWorkTool.shared.postWithImageWithData(imgData: imgData, path: request, success: { (result) in
             
+            CCog(message: result)
+            
             guard let resultData = result as? NSDictionary  else {
                 return
             }
@@ -1319,6 +1321,14 @@ class AccountModel: NSObject,NSCoding {
             if alertMsg == "操作成功" {
                 finished(true)
             }
+            
+            guard let headURLStr = ((((result as? NSDictionary)?["Data"]) as? NSArray)?[0] as? NSDictionary)?["HeadUrl"] as? String else {
+                
+                return
+            }
+            
+            CardModel.shared.applyURL = headURLStr
+            
             
             toast(toast: alertMsg)
             

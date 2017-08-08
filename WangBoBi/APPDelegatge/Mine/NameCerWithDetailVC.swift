@@ -375,5 +375,7 @@ class NameCerBtn: UIButton {
 class CardModel: NSObject {
     var frontUrl : String?
     var backURL :String?
+    /// 申述头像地址
+    var applyURL :String?
     static let shared = CardModel()
 }

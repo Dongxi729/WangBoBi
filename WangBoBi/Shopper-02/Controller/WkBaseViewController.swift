@@ -83,7 +83,12 @@ class WkBaseViewController: UIViewController,LostNetVDelegate {
         /// 商户交易发送密码 sendPass
         userContentController.add(LeakAvoider.init(delegate: self as WKScriptMessageHandler), name: "sendPass")
 
+        /// 上传照片(申述交互)
+        userContentController.add(LeakAvoider.init(delegate: self as WKScriptMessageHandler), name: "uploadDescImg")
         
+        
+        /// 保存图片到本地(申述成功后)
+        userContentController.add(LeakAvoider.init(delegate: self as WKScriptMessageHandler), name: "saveToAlbum")
         
         if self.navigationController?.viewControllers != nil {
             ///由于设置了edgesForExtendedLayout,防止了页面全部控件向上偏移，所以在子页面数大于2的时候，矫正
@@ -133,6 +138,7 @@ class WkBaseViewController: UIViewController,LostNetVDelegate {
         return wkV
         
     }()
+    
     
     
     /// 进度条
@@ -405,6 +411,53 @@ extension WkBaseViewController : WKScriptMessageHandler {
                 CCog(message: shopStr)
             }
         }
+        
+        if msg == "uploadDescImg" {
+            CCog(message: "相机")
+            
+            
+            
+            UploadHeadTool.shared.choosePic(_com: { (immgData, dic) in
+                
+            })
+            
+            /// 监听传的照片数据
+            
+            /// 接收图片选择器传来的数据信息
+            NotificationCenter.default.addObserver(self, selector: #selector(view(dd:)), name: NSNotification.Name(rawValue: "imgData"), object: nil)
+            
+        }
+        
+        /// 申述保存照片
+        if msg == "saveToAlbum" {
+            CCog(message: "保存到本地")
+
+            self.view.saveImgToAlbum()
+            toast(toast: "已成功保存到本地")
+            
+        }
+    }
+    
+    @objc fileprivate func view(dd : Notification) -> Void {
+        
+        if let imgDataDic = dd.userInfo {
+            if let imgData = imgDataDic["ima"] as? Data {
+                
+                AccountModel.uploadHeadImg(imgData: imgData, finished: { (result) in
+                    CCog(message: result)
+                    
+                    if result {
+                        DispatchQueue.main.async {
+                            let jsonStr : NSString = CardModel.shared.applyURL! as NSString
+                            CCog(message: jsonStr)
+                
+                            self.webView.evaluateJavaScript("rzObj.setFileImage('\(jsonStr)')", completionHandler: nil)
+                            
+                        }
+                    }
+                })
+            }
+        }
     }
 }
 
@@ -450,6 +503,7 @@ protocol LostNetVDelegate {
     /// 单机屏幕事件
     ///
     func tapFUN() -> Void
+
 }
 
 // MARK: - 断网视图

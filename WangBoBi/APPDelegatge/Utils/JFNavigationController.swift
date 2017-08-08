@@ -35,7 +35,6 @@ class JFNavigationController: UINavigationController, UIGestureRecognizerDelegat
     
     // MARK: - UIGestureRecognizerDelegate
     func gestureRecognizerShouldBegin(_ gesture: UIGestureRecognizer) -> Bool {
-        CCog(message: add_mark)
         
         if childViewControllers.count == 1 {
             return false

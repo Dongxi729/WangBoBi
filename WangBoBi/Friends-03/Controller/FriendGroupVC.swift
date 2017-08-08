@@ -107,9 +107,33 @@ class FriendGroupVC: BaseViewController, UITableViewDelegate, UITableViewDataSou
                         
                         self.model_array = BMChineseSort.sortObjectArray(self.citys, key: "TrueName")
 
-                        CCog(message: self.letterResultArr)
+                        var bhArray = [FriendListModel]()
                         
+                        var index = 0
+                        for model in self.frienGroup_model {
+                            
+                            for _model in self.letterResultArr {
+                                
+                                let array = _model as! NSArray
+                                for arrayValue in array {
+                                    
+                                    index += 1
+                                    CCog(message: arrayValue)
+                                    
+                                    if index == self.citys.count {
+                                        return
+                                    }
+                                    if (dddd.UserName?.contains(arrayValue as! String))! || (dddd.TrueName?.contains(arrayValue as! String))! {
+                                        bhArray.append(model)
+                                        
+                                        if bhArray.count == self.frienGroup_model.count {
+                                        }
+                                    }
+                                }
+                            }
+                        }
 
+                        
                         
                         
                         
@@ -205,15 +229,13 @@ class FriendGroupVC: BaseViewController, UITableViewDelegate, UITableViewDataSou
             let ddd = ((self.model_array[0]) as? NSArray)?[indexPath.row] as? FriendListModel
             
             
-            var ddddddd = [FriendListModel]()
-            for _model in self.frienGroup_model {
-                if (_model.TrueName?.contains(cell.new_descLabel.text!))! || (_model.UserName?.contains(cell.new_descLabel.text!))! {
-                    ddddddd.append(_model)
-                    
-                    dump(ddddddd)
-                }
-                
-            }
+//            var ddddddd = [FriendListModel]()
+//            for _model in self.frienGroup_model {
+//                CCog(message: _model.UserName)
+//                CCog(message: _model.TrueName)
+//                
+//                
+//            }
             
 
         }

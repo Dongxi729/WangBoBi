@@ -23,7 +23,7 @@ class MyViewController: UIViewController {
         d.dataSource = self
         d.register(TabViewCell.self, forCellReuseIdentifier: "cel")
         d.register(MyVCCell.self, forCellReuseIdentifier: "MyVCCell")
-
+        
         return d
     }()
     
@@ -48,14 +48,14 @@ class MyViewController: UIViewController {
         
         /// 设置
         navBar?.tintColor = UIColor.white
-
+        
     }
     
-
+    
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         
-//        UIApplication.shared.statusBarStyle = UIStatusBarStyle.default
+        //        UIApplication.shared.statusBarStyle = UIStatusBarStyle.default
         
         self.navigationController?.navigationBar.barTintColor = UIColor.white
         
@@ -88,19 +88,19 @@ class MyViewController: UIViewController {
 extension MyViewController : UITableViewDelegate,UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "cel") as! TabViewCell
-
+        
         switch indexPath.section {
         case 0:
             switch indexPath.row {
             case 0:
                 let cell = tableView.dequeueReusableCell(withIdentifier: "MyVCCell") as! MyVCCell
                 cell.backgroundColor = UIColor.colorWithHexString("2796DD")
-
+                
                 return cell
             case 1:
                 
                 cell.descLabel.text = cellDataSource["sectionOne"]?[indexPath.row]
-      
+                
             default:
                 break
             }
@@ -113,10 +113,10 @@ extension MyViewController : UITableViewDelegate,UITableViewDataSource {
             
             
             cell.descLabel.text = cellDataSource["sectionFour"]?[indexPath.row]
-//            secFourIMg
+            //            secFourIMg
             cell.frontIconim.image = UIImage.init(named: (cellDataSource["secFourIMg"]?[indexPath.row])!)
             break
-
+            
         default:
             break
         }
@@ -129,7 +129,7 @@ extension MyViewController : UITableViewDelegate,UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-
+        
         return 0.00001
     }
     
@@ -148,17 +148,17 @@ extension MyViewController : UITableViewDelegate,UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         
-//        let deviceType = UIDevice.current.deviceType
+        //        let deviceType = UIDevice.current.deviceType
         
         switch indexPath.section {
         case 0:
             switch indexPath.row {
             case 0:
-//                if deviceType == .iPhone4S {
-//                    return 80
-//                } else {
-                    return 80 * SCREEN_SCALE
-//                }
+                //                if deviceType == .iPhone4S {
+                //                    return 80
+                //                } else {
+                return 80 * SCREEN_SCALE
+                //                }
                 
             default:
                 return 45
@@ -175,7 +175,7 @@ extension MyViewController : UITableViewDelegate,UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
-
+        
         
         switch indexPath.section {
         case 0:
@@ -212,13 +212,20 @@ extension MyViewController : UITableViewDelegate,UITableViewDataSource {
                 }
             }
             
+            /// 申述
+            if indexPath.row == 2 {
+                DispatchQueue.main.async {
+                    self.navigationController?.pushViewController(MyRequestVC(), animated: true)
+                }
+            }
+            
             
             break
-
+            
         default:
             break
         }
-    
+        
     }
     
 }
