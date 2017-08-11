@@ -38,10 +38,10 @@ class ReceiveMonVC: UIViewController {
     fileprivate var limitCount : Int = 0
     
     // MARK: - 数据源
-    fileprivate var dataSource : [String] = ["转给朋友","转到其他网博币钱包","转到交易平台","转到会员平台"]
+    fileprivate var dataSource : [String] = ["转给朋友","转到其他网博币钱包"]
     
     // MARK: - 前置图标
-    fileprivate var frontIconImg : [UIImage] = [#imageLiteral(resourceName: "ofri"),#imageLiteral(resourceName: "owbag"),#imageLiteral(resourceName: "oPlat"),#imageLiteral(resourceName: "oMem")]
+    fileprivate var frontIconImg : [UIImage] = [#imageLiteral(resourceName: "ofri"),#imageLiteral(resourceName: "owbag")]
     
     
     // MARK: - 最近转的
@@ -82,11 +82,6 @@ class ReceiveMonVC: UIViewController {
         }
     }
     
-//    override func viewDidAppear(_ animated: Bool) {
-//        super.viewDidAppear(animated)
-//        
-//        self.tableView.reloadData()
-//    }
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -180,8 +175,13 @@ extension ReceiveMonVC: UITableViewDelegate,UITableViewDataSource {
         switch indexPath.section {
         case indexPath.section:
             switch indexPath.row {
+                /// 朋友
             case 0:
                 self.navigationController?.pushViewController(FriendGroupVC(), animated: true)
+                
+                ///网博币钱包--- 缺少页面
+//            case 1:
+//                self.navigationController?.pushViewController(UIViewController(), animated: true)
             default:
                 break
             }
@@ -191,11 +191,18 @@ extension ReceiveMonVC: UITableViewDelegate,UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        if self.countrySearchController.isActive {
-            return self.searchArray.count
+        
+        if section == 0 {
+            return dataSource.count
         } else {
-            return self.mertopModel.count
+            
+            if self.countrySearchController.isActive {
+                return self.searchArray.count
+            } else {
+                return self.mertopModel.count
+            }
         }
+        
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {

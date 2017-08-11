@@ -45,7 +45,6 @@ extension UIView {
     
     func saveImgToAlbum() {
         UIGraphicsBeginImageContext(CGSize.init(width: SCREEN_WIDTH, height: SCREEN_HEIGHT))
-//        self.view.drawHierarchy(in: self.view.bounds, afterScreenUpdates: true)
         UIApplication.shared.keyWindow?.rootViewController?.view.drawHierarchy(in: (UIApplication.shared.keyWindow?.rootViewController?.view.bounds)!, afterScreenUpdates: true)
         
         let image:UIImage = UIGraphicsGetImageFromCurrentImageContext()!

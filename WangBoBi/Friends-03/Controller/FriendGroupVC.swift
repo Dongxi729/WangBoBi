@@ -5,6 +5,9 @@
 //  Created by 郑东喜 on 2017/7/24.
 //  Copyright © 2017年 郑东喜. All rights reserved.
 //  好友列表(我的朋友)
+//先排序（排序的时候加一个标识首字母的字段A），排序完成后，遍历集合，（这时候加一个表示是否是该首字母的第一项的字段B），通过与集合的前一个模型中的首字母字段进行比较，如果是相同，那么，就B就为false，反之不同为true，当然集合的第一项模型的B字段一定为true。。然后我显示的时候就把每个item里隐藏的view根据B字段是否为true来控制的
+
+//https://github.com/shenAlexy/WeChatContacts
 
 import UIKit
 
@@ -27,7 +30,6 @@ class FriendGroupVC: BaseViewController, UITableViewDelegate, UITableViewDataSou
     /// 右边按钮
     var rightBtn : UIButton = UIButton()
     
-    var model_array : NSMutableArray = []
     
     
     /// 搜索控制器
@@ -96,50 +98,44 @@ class FriendGroupVC: BaseViewController, UITableViewDelegate, UITableViewDataSou
                     }
                     
                     
-                    
                     /// 若非真实名和真实名的数组和加起来未模型的总和
                     if self.searchTotalArray.count == model.count {
-
+                        
                         self.indexArray = BMChineseSort.indexArray(self.searchTotalArray) as! [String]
                         CCog(message: BMChineseSort.letterSortArray(self.searchTotalArray))
                         
                         self.letterResultArr = BMChineseSort.letterSortArray(self.searchTotalArray)!
                         
-                        self.model_array = BMChineseSort.sortObjectArray(self.citys, key: "TrueName")
-
+                        CCog(message: self.letterResultArr)
+                        
+                        
+                        
                         var bhArray = [FriendListModel]()
                         
+                        var tempArray : [String] = []
                         var index = 0
-                        for model in self.frienGroup_model {
+                        //                        for model in self.frienGroup_model {
+                        
+                        for _model in self.letterResultArr {
                             
-                            for _model in self.letterResultArr {
+                            let array = _model as! NSArray
+                            for arrayValue in array {
                                 
-                                let array = _model as! NSArray
-                                for arrayValue in array {
+                                index += 1
+                                
+                                tempArray.append(arrayValue as! String)
+                                
+                                if tempArray.count == self.citys.count {
                                     
-                                    index += 1
-                                    CCog(message: arrayValue)
-                                    
-                                    if index == self.citys.count {
-                                        return
-                                    }
-                                    if (dddd.UserName?.contains(arrayValue as! String))! || (dddd.TrueName?.contains(arrayValue as! String))! {
-                                        bhArray.append(model)
-                                        
-                                        if bhArray.count == self.frienGroup_model.count {
-                                        }
-                                    }
                                 }
                             }
                         }
-
-                        
                         
                         
                         
                         self.view.addSubview(self.tableView)
                         self.tableView.reloadData()
-
+                        
                     }
                 }
             }
@@ -224,20 +220,22 @@ class FriendGroupVC: BaseViewController, UITableViewDelegate, UITableViewDataSou
             
         } else {
             let nameArray : [String] = letterResultArr[indexPath.section] as! [String]
-
+            
             cell.new_descLabel.text = nameArray[indexPath.row]
-            let ddd = ((self.model_array[0]) as? NSArray)?[indexPath.row] as? FriendListModel
             
             
-//            var ddddddd = [FriendListModel]()
-//            for _model in self.frienGroup_model {
-//                CCog(message: _model.UserName)
-//                CCog(message: _model.TrueName)
-//                
-//                
-//            }
+            var xxxx = cell.new_descLabel.text as! NSString
             
-
+            
+            //            var ddddddd = [FriendListModel]()
+            //            for _model in self.frienGroup_model {
+            //
+            //                if (_model.TrueName?.contains(xxxx as String))! || (_model.UserName?.contains(xxxx as String))! {
+            //                    ddddddd.append(_model)
+            //
+            //                    dump(ddddddd)
+            //                }
+            //            }
         }
         
         return cell
