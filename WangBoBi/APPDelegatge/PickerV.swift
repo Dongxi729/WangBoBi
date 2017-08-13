@@ -20,7 +20,6 @@ class PickerV: UIView,UIPickerViewDelegate,UIPickerViewDataSource {
     
     fileprivate lazy var pickerV: UIPickerView = {
         let d : UIPickerView = UIPickerView.init(frame: self.bounds)
-        d.backgroundColor = UIColor.gray
         d.delegate = self
         d.dataSource = self
         return d

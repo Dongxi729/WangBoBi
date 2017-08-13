@@ -1564,12 +1564,8 @@ class AccountModel: NSObject,NSCoding {
                                          "limit" : "1",
                                          "offset" : "10"]
         
-        CCog(message: param)
-        
         NetWorkTool.shared.postWithPath(path: FRIEND_LIST, paras: param, success: { (result) in
             
-            CCog(message: result)
-
             
             guard let resultData = result as? NSDictionary else {
                 return
@@ -1765,14 +1761,17 @@ class AccountModel: NSObject,NSCoding {
         
     }
     
-    // MARK: - 朋友列表接口
+    // MARK: - 朋友列表接口--- 暂时写死
     class func friend_list(finished:@escaping (_ result : Bool,_ dataDic : [FriendListModel]) -> ()) {
         let param : [String : String] = ["uid" : (AccountModel.shared()?.Id.stringValue)!,
                                          "token" : (AccountModel.shared()?.Token)!]
+
         
         NetWorkTool.shared.postWithPath(path: MY_FRIEND, paras: param, success: { (result) in
             
-            CCog(message: result)
+            if let resultDic = result as? NSDictionary {
+                resultDic.write(toFile: "/Users/zhengdongxi/Desktop/FriendList.plist", atomically: true)
+            }
             
             //            guard let resultData = result as? NSDictionary  else {
             //                return

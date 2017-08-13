@@ -150,9 +150,7 @@ extension ReceiveMonVC: UITableViewDelegate,UITableViewDataSource {
                 cell.stangerLabel.isHidden = false
                 
                 cell.model = self.mertopModel[indexPath.row]
-                
-                CCog(message: "===")
-                
+                            
                 break
             default:
                 break
@@ -180,8 +178,8 @@ extension ReceiveMonVC: UITableViewDelegate,UITableViewDataSource {
                 self.navigationController?.pushViewController(FriendGroupVC(), animated: true)
                 
                 ///网博币钱包--- 缺少页面
-//            case 1:
-//                self.navigationController?.pushViewController(UIViewController(), animated: true)
+            case 1:
+                self.navigationController?.pushViewController(TransferVC(), animated: true)
             default:
                 break
             }

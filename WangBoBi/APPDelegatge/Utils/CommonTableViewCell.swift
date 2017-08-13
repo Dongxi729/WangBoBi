@@ -13,6 +13,7 @@ class CommonTableViewCell: UITableViewCell {
         super.init(style: .default, reuseIdentifier: reuseIdentifier)
         self.selectionStyle = .none
         
+        /// 延长系统自带分割线
         self.preservesSuperviewLayoutMargins = false
         self.separatorInset = UIEdgeInsets.zero
         self.layoutMargins = .zero

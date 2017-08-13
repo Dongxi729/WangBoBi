@@ -76,7 +76,7 @@ class BaseViewController: UIViewController,UIGestureRecognizerDelegate,UINavigat
             NSStringFromClass(self.classForCoder).contains("MyInfoVC") ||
             NSStringFromClass(self.classForCoder).contains("ScanCodeController") ||
             NSStringFromClass(self.classForCoder).contains("DetailViewController2") || NSStringFromClass(self.classForCoder).contains("DetailReplaceVC") || NSStringFromClass(self.classForCoder).contains("FriendMainVC")
-        || NSStringFromClass(self.classForCoder).contains("AddFriendInfoVC") {
+            || NSStringFromClass(self.classForCoder).contains("AddFriendInfoVC") {
             
             
             /// 为那个页面则修改左上角图标
@@ -103,7 +103,7 @@ class BaseViewController: UIViewController,UIGestureRecognizerDelegate,UINavigat
                 navBar?.barTintColor = UIColor.colorWithHexString("2796DC")
                 navBar?.isTranslucent = false
             }
-
+            
             
             /// 修改导航栏文字样式（富文本）
             navBar?.titleTextAttributes = [
@@ -127,10 +127,11 @@ class BaseViewController: UIViewController,UIGestureRecognizerDelegate,UINavigat
             NSStringFromClass(self.classForCoder).contains("ReceiveMonVC") ||
             NSStringFromClass(self.classForCoder).contains("FriendGroupVC") ||
             NSStringFromClass(self.classForCoder).contains("NewFriendVC") ||
-                NSStringFromClass(self.classForCoder).contains("AddFrienVC") ||
+            NSStringFromClass(self.classForCoder).contains("AddFrienVC") ||
             NSStringFromClass(self.classForCoder).contains("PushMoneyDetailVC") ||
             NSStringFromClass(self.classForCoder).contains("CountDetailVC") ||
-            NSStringFromClass(self.classForCoder).contains("AddFriendMarkVC") {
+            NSStringFromClass(self.classForCoder).contains("AddFriendMarkVC") ||
+            NSStringFromClass(self.classForCoder).contains("TransferVC") {
             
             
             UIApplication.shared.statusBarStyle = UIStatusBarStyle.default
@@ -142,7 +143,8 @@ class BaseViewController: UIViewController,UIGestureRecognizerDelegate,UINavigat
             
             DispatchQueue.main.async {
                 if NSStringFromClass(self.classForCoder).contains("PushingMoneyVC") || NSStringFromClass(self.classForCoder).contains("ReceiveMonVC")  ||
-                    NSStringFromClass(self.classForCoder).contains("DetailViewController2") {
+                    NSStringFromClass(self.classForCoder).contains("DetailViewController2") ||
+                    NSStringFromClass(self.classForCoder).contains("TransferVC") {
                     navBar?.barTintColor = UIColor.white
                 } else {
                     navBar?.barTintColor = UIColor.clear

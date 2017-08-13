@@ -135,7 +135,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
     
     func application(_ application: UIApplication, didChangeStatusBarFrame oldStatusBarFrame: CGRect) {
-        CCog(message: "didChangeStatusBarFrame")
         UIApplication.shared.keyWindow?.rootViewController?.view.frame = CGRect.init(x: 0, y: 0, width: SCREEN_WIDTH, height: SCREEN_HEIGHT + 20)
     }
     

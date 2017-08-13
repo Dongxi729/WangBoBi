@@ -134,9 +134,9 @@ class AddFriendInfoVC: BaseViewController,AddPersonInfoEditVDelegate {
         }
     }
     
-    // MARK: - AddPersonInfoEditVDelegate
+    // MARK: - 转账
     func pushMoney() {
-        self.navigationController?.pushViewController(ReceiveMonVC(), animated: true)
+        self.navigationController?.pushViewController(TransferVC(), animated: true)
     }
     
     func jumpToAddFriendMark() {
@@ -192,8 +192,8 @@ class AddPersonInfoEditV : UIView {
     }()
     
     /// 钱包地址显示
-    lazy var moneyAddresShow: UILabel = {
-        let d : UILabel = UILabel.init(frame: CGRect.init(x: self.moneyAddress.RightX, y: self.moneyAddress.TopY, width: self.Width * 0.7, height: self.moneyAddress.Height))
+    lazy var moneyAddresShow: LabelWithPaste = {
+        let d : LabelWithPaste = LabelWithPaste.init(frame: CGRect.init(x: self.moneyAddress.RightX, y: self.moneyAddress.TopY, width: self.Width * 0.7, height: self.moneyAddress.Height))
         
         d.font = UIFont.systemFont(ofSize: 11 * SCREEN_SCALE)
         d.numberOfLines = 0

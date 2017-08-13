@@ -56,6 +56,10 @@ class FriendMainVC: BaseViewController,UITableViewDelegate,UITableViewDataSource
         // Do any additional setup after loading the view.
         title = "朋友"
         
+        FFriendListModel.getFriendList()
+        
+        dump(FFriendListModel.shared())
+        
         self.navigationItem.rightBarButtonItems = [firend,groudFriend]
         
         self.tableView.tableHeaderView = countrySearchController.searchBar
@@ -71,7 +75,7 @@ class FriendMainVC: BaseViewController,UITableViewDelegate,UITableViewDataSource
         
         AccountModel.GetFriendList(String(limitCount), "10") { (result, model) in
             self.mertopModel = model
-            CCog(message: self.mertopModel.count)
+            
             self.tableView.reloadData()
             
             for value in model {

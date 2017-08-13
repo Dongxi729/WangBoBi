@@ -119,6 +119,7 @@
 		265D431E1EFBE324007F5AB8 /* Tool.swift in Sources */ = {isa = PBXBuildFile; fileRef = 265D431D1EFBE324007F5AB8 /* Tool.swift */; };
 		2662B6021F087E1200942692 /* NetLostV.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2662B6011F087E1200942692 /* NetLostV.swift */; };
 		26632B591F2794CA00E25003 /* AddFriendMarkVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26632B581F2794CA00E25003 /* AddFriendMarkVC.swift */; };
+		26648EB61F3EDE5900B7329C /* FFriendListModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26648EB51F3EDE5900B7329C /* FFriendListModel.swift */; };
 		266AFB231F2AE3CE00A179C8 /* CommonTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 266AFB221F2AE3CE00A179C8 /* CommonTableViewCell.swift */; };
 		266B88ED1F04907A0033BFA7 /* PayPassInputV.swift in Sources */ = {isa = PBXBuildFile; fileRef = 266B88EC1F04907A0033BFA7 /* PayPassInputV.swift */; };
 		266B89011F04A5650033BFA7 /* PushingMoneyVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 266B89001F04A5650033BFA7 /* PushingMoneyVC.swift */; };
@@ -158,6 +159,8 @@
 		26B14F001EF29ABA0050135B /* ReceiveMonVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26B14EFF1EF29ABA0050135B /* ReceiveMonVC.swift */; };
 		26B14F021EF29F490050135B /* ReceiveCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26B14F011EF29F490050135B /* ReceiveCell.swift */; };
 		26CF98511F0B26CD008F8F23 /* AccountModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26CF98501F0B26CD008F8F23 /* AccountModel.swift */; };
+		26D126991F40016A00069823 /* LabelWithPaste.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26D126981F40016A00069823 /* LabelWithPaste.swift */; };
+		26D1269B1F40205600069823 /* TransferVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26D1269A1F40205600069823 /* TransferVC.swift */; };
 		26DBE6C61F0F891D00551F63 /* ScanModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26DBE6C51F0F891D00551F63 /* ScanModel.swift */; };
 		26DBE92F1F298B510092D6CF /* UITableView+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26DBE92E1F298B510092D6CF /* UITableView+Extension.swift */; };
 		26ECA3761F0134350093D12E /* AleradyCertify.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26ECA3751F0134350093D12E /* AleradyCertify.swift */; };
@@ -361,6 +364,7 @@
 		265D431D1EFBE324007F5AB8 /* Tool.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Tool.swift; sourceTree = "<group>"; };
 		2662B6011F087E1200942692 /* NetLostV.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NetLostV.swift; sourceTree = "<group>"; };
 		26632B581F2794CA00E25003 /* AddFriendMarkVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddFriendMarkVC.swift; sourceTree = "<group>"; };
+		26648EB51F3EDE5900B7329C /* FFriendListModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FFriendListModel.swift; sourceTree = "<group>"; };
 		266AFB221F2AE3CE00A179C8 /* CommonTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CommonTableViewCell.swift; sourceTree = "<group>"; };
 		266B88EC1F04907A0033BFA7 /* PayPassInputV.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PayPassInputV.swift; sourceTree = "<group>"; };
 		266B89001F04A5650033BFA7 /* PushingMoneyVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PushingMoneyVC.swift; sourceTree = "<group>"; };
@@ -402,6 +406,8 @@
 		26B14EFF1EF29ABA0050135B /* ReceiveMonVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ReceiveMonVC.swift; path = ../../../../ReceiveMonVC.swift; sourceTree = "<group>"; };
 		26B14F011EF29F490050135B /* ReceiveCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReceiveCell.swift; sourceTree = "<group>"; };
 		26CF98501F0B26CD008F8F23 /* AccountModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AccountModel.swift; sourceTree = "<group>"; };
+		26D126981F40016A00069823 /* LabelWithPaste.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LabelWithPaste.swift; sourceTree = "<group>"; };
+		26D1269A1F40205600069823 /* TransferVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TransferVC.swift; sourceTree = "<group>"; };
 		26DBE6C51F0F891D00551F63 /* ScanModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ScanModel.swift; sourceTree = "<group>"; };
 		26DBE92E1F298B510092D6CF /* UITableView+Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UITableView+Extension.swift"; sourceTree = "<group>"; };
 		26ECA3751F0134350093D12E /* AleradyCertify.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AleradyCertify.swift; sourceTree = "<group>"; };
@@ -897,6 +903,7 @@
 				269165701F26DC20007F011D /* FriendTableList.swift */,
 				26632B581F2794CA00E25003 /* AddFriendMarkVC.swift */,
 				269D31331F29C5F400FE8BEB /* CountDetailVC.swift */,
+				26D1269A1F40205600069823 /* TransferVC.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -904,6 +911,7 @@
 		2649607C1EF0C02600A559D6 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				26648EB51F3EDE5900B7329C /* FFriendListModel.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -1220,6 +1228,7 @@
 				265991F31EF65D5C004391E9 /* CommonBtn.swift */,
 				2650C1931F03AA82005BE741 /* PickerV.swift */,
 				2662B6011F087E1200942692 /* NetLostV.swift */,
+				26D126981F40016A00069823 /* LabelWithPaste.swift */,
 			);
 			name = View;
 			sourceTree = "<group>";
@@ -1440,12 +1449,14 @@
 				264960C71EF0C28F00A559D6 /* POPDecayAnimation.mm in Sources */,
 				266B89011F04A5650033BFA7 /* PushingMoneyVC.swift in Sources */,
 				26B14F001EF29ABA0050135B /* ReceiveMonVC.swift in Sources */,
+				26D126991F40016A00069823 /* LabelWithPaste.swift in Sources */,
 				262304631EFA6988007B0BF6 /* NSArray+ ZXPUnicode.m in Sources */,
 				26ED24501EF3E5E300642804 /* SetPaymentPassVC.swift in Sources */,
 				264960CA1EF0C28F00A559D6 /* POPMath.mm in Sources */,
 				26EF14A51EF90DC2005663F1 /* BaseViewController.swift in Sources */,
 				2650C18E1F038F7A005BE741 /* PaydescV.swift in Sources */,
 				264960FB1EF0C9EC00A559D6 /* YYCache.m in Sources */,
+				26D1269B1F40205600069823 /* TransferVC.swift in Sources */,
 				264960C81EF0C28F00A559D6 /* POPGeometry.mm in Sources */,
 				260B21061EF7DFF500E78FD8 /* RigisterWithDetailVC.swift in Sources */,
 				26F80A1A1F0206C3009A9746 /* AuthFailedVC.swift in Sources */,
@@ -1544,6 +1555,7 @@
 				264960CC1EF0C28F00A559D6 /* POPSpringAnimation.mm in Sources */,
 				26A0A4A91EF0E26B00035D0D /* JFNavigationController.swift in Sources */,
 				2662B6021F087E1200942692 /* NetLostV.swift in Sources */,
+				26648EB61F3EDE5900B7329C /* FFriendListModel.swift in Sources */,
 				26F248BA1EFFE9F500599CC7 /* UploadHeadTool.swift in Sources */,
 				265992141EF66C6B004391E9 /* AddBankCardVC.swift in Sources */,
 				2650C1891F035E2E005BE741 /* PaymentThreeVC.swift in Sources */,
