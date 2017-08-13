@@ -161,6 +161,7 @@
 		26CF98511F0B26CD008F8F23 /* AccountModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26CF98501F0B26CD008F8F23 /* AccountModel.swift */; };
 		26D126991F40016A00069823 /* LabelWithPaste.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26D126981F40016A00069823 /* LabelWithPaste.swift */; };
 		26D1269B1F40205600069823 /* TransferVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26D1269A1F40205600069823 /* TransferVC.swift */; };
+		26D1269D1F40480700069823 /* ConfirmExchangeVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26D1269C1F40480700069823 /* ConfirmExchangeVC.swift */; };
 		26DBE6C61F0F891D00551F63 /* ScanModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26DBE6C51F0F891D00551F63 /* ScanModel.swift */; };
 		26DBE92F1F298B510092D6CF /* UITableView+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26DBE92E1F298B510092D6CF /* UITableView+Extension.swift */; };
 		26ECA3761F0134350093D12E /* AleradyCertify.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26ECA3751F0134350093D12E /* AleradyCertify.swift */; };
@@ -408,6 +409,7 @@
 		26CF98501F0B26CD008F8F23 /* AccountModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AccountModel.swift; sourceTree = "<group>"; };
 		26D126981F40016A00069823 /* LabelWithPaste.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LabelWithPaste.swift; sourceTree = "<group>"; };
 		26D1269A1F40205600069823 /* TransferVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TransferVC.swift; sourceTree = "<group>"; };
+		26D1269C1F40480700069823 /* ConfirmExchangeVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConfirmExchangeVC.swift; sourceTree = "<group>"; };
 		26DBE6C51F0F891D00551F63 /* ScanModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ScanModel.swift; sourceTree = "<group>"; };
 		26DBE92E1F298B510092D6CF /* UITableView+Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UITableView+Extension.swift"; sourceTree = "<group>"; };
 		26ECA3751F0134350093D12E /* AleradyCertify.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AleradyCertify.swift; sourceTree = "<group>"; };
@@ -904,6 +906,7 @@
 				26632B581F2794CA00E25003 /* AddFriendMarkVC.swift */,
 				269D31331F29C5F400FE8BEB /* CountDetailVC.swift */,
 				26D1269A1F40205600069823 /* TransferVC.swift */,
+				26D1269C1F40480700069823 /* ConfirmExchangeVC.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -1482,6 +1485,7 @@
 				264961081EF0C9EC00A559D6 /* YYImageCoder.m in Sources */,
 				2650C1851F035868005BE741 /* PaymoneyVC.swift in Sources */,
 				262304641EFA6988007B0BF6 /* NSDictionary+ZXPUnicode.m in Sources */,
+				26D1269D1F40480700069823 /* ConfirmExchangeVC.swift in Sources */,
 				263CAF111EF62889006629BF /* UIImage+XLExtension.m in Sources */,
 				264960CB1EF0C28F00A559D6 /* POPPropertyAnimation.mm in Sources */,
 				26EF14A01EF8F7FD005663F1 /* ShowSuccessInfoV.swift in Sources */,

@@ -131,7 +131,7 @@ class BaseViewController: UIViewController,UIGestureRecognizerDelegate,UINavigat
             NSStringFromClass(self.classForCoder).contains("PushMoneyDetailVC") ||
             NSStringFromClass(self.classForCoder).contains("CountDetailVC") ||
             NSStringFromClass(self.classForCoder).contains("AddFriendMarkVC") ||
-            NSStringFromClass(self.classForCoder).contains("TransferVC") {
+            NSStringFromClass(self.classForCoder).contains("TransferVC") || NSStringFromClass(self.classForCoder).contains("ConfirmExchangeVC") {
             
             
             UIApplication.shared.statusBarStyle = UIStatusBarStyle.default
@@ -144,7 +144,7 @@ class BaseViewController: UIViewController,UIGestureRecognizerDelegate,UINavigat
             DispatchQueue.main.async {
                 if NSStringFromClass(self.classForCoder).contains("PushingMoneyVC") || NSStringFromClass(self.classForCoder).contains("ReceiveMonVC")  ||
                     NSStringFromClass(self.classForCoder).contains("DetailViewController2") ||
-                    NSStringFromClass(self.classForCoder).contains("TransferVC") {
+                    NSStringFromClass(self.classForCoder).contains("TransferVC") || NSStringFromClass(self.classForCoder).contains("ConfirmExchangeVC") {
                     navBar?.barTintColor = UIColor.white
                 } else {
                     navBar?.barTintColor = UIColor.clear

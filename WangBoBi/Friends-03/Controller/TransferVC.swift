@@ -171,7 +171,6 @@ class TransferVC: BaseViewController,UITextFieldDelegate,PickVDelegate,BindPhone
         switch textField.tag {
         case 111:
             self.placeHoderLabel.isHidden = true
-            
             break
             
         case 222:
@@ -245,6 +244,7 @@ class TransferVC: BaseViewController,UITextFieldDelegate,PickVDelegate,BindPhone
     // MARK: - BindPhoneFooterVDelegate
     func bindPhonSELDelegate() {
         CCog(message: type(of: self))
+        self.navigationController?.pushViewController(ConfirmExchangeVC(), animated: true)
     }
 
 }
