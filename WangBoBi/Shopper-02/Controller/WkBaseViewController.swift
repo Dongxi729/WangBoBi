@@ -23,6 +23,8 @@ class WkBaseViewController: UIViewController,LostNetVDelegate {
     
     var urlString : String = ""
     
+    var xxxx : String?
+    
     /// 支付标识
     var payResult : Bool = false
     

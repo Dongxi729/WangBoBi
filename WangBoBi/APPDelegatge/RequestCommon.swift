@@ -84,3 +84,6 @@ var RCHGACRD = "\(COMMON_PREFIX)/ifs/rchgcard.ashx"
 
 /// 申述Url
 var APPEAL_URL = "http://wbpay.ie1e.com/appeal.aspx"
+
+/// 地址
+var ADDRESS_URL = "http://wbpay.ie1e.com/deliver.aspx"

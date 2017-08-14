@@ -219,6 +219,13 @@ extension MyViewController : UITableViewDelegate,UITableViewDataSource {
                 }
             }
             
+        case 2:
+            if indexPath.row == 0 {
+                DispatchQueue.main.async {
+                    self.navigationController?.pushViewController(AddressWebVC(), animated: true)
+                }
+            }
+            
             
             break
             

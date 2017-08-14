@@ -50,6 +50,7 @@
 		263CAF131EF62889006629BF /* XLPasswordInputView.m in Sources */ = {isa = PBXBuildFile; fileRef = 263CAF101EF62889006629BF /* XLPasswordInputView.m */; };
 		263CAF151EF62B89006629BF /* TestViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 263CAF141EF62B89006629BF /* TestViewController.swift */; };
 		2643CFC61EF3EE2200EFC720 /* DetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2643CFC51EF3EE2200EFC720 /* DetailViewController.swift */; };
+		2645DD481F4179DF00A85D75 /* AddressWebVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2645DD471F4179DF00A85D75 /* AddressWebVC.swift */; };
 		2647936B1F18DD28000F9F67 /* WkBaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2647936A1F18DD28000F9F67 /* WkBaseViewController.swift */; };
 		2647936D1F18DD71000F9F67 /* ShopWebV.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2647936C1F18DD71000F9F67 /* ShopWebV.swift */; };
 		2649606F1EF0BF2500A559D6 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 264960691EF0BF2500A559D6 /* AppDelegate.swift */; };
@@ -238,6 +239,7 @@
 		263CAF101EF62889006629BF /* XLPasswordInputView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XLPasswordInputView.m; sourceTree = "<group>"; };
 		263CAF141EF62B89006629BF /* TestViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TestViewController.swift; sourceTree = "<group>"; };
 		2643CFC51EF3EE2200EFC720 /* DetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DetailViewController.swift; sourceTree = "<group>"; };
+		2645DD471F4179DF00A85D75 /* AddressWebVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddressWebVC.swift; sourceTree = "<group>"; };
 		2647936A1F18DD28000F9F67 /* WkBaseViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WkBaseViewController.swift; sourceTree = "<group>"; };
 		2647936C1F18DD71000F9F67 /* ShopWebV.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShopWebV.swift; sourceTree = "<group>"; };
 		264960691EF0BF2500A559D6 /* AppDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -740,6 +742,14 @@
 			name = passInputV;
 			sourceTree = "<group>";
 		};
+		2645DD461F4179C300A85D75 /* MyAddress-07 */ = {
+			isa = PBXGroup;
+			children = (
+				2645DD471F4179DF00A85D75 /* AddressWebVC.swift */,
+			);
+			name = "MyAddress-07";
+			sourceTree = "<group>";
+		};
 		264931911EFCC9F5008F6761 /* Qcode01-02 */ = {
 			isa = PBXGroup;
 			children = (
@@ -842,6 +852,7 @@
 		264960751EF0BFC000A559D6 /* Mine-04 */ = {
 			isa = PBXGroup;
 			children = (
+				2645DD461F4179C300A85D75 /* MyAddress-07 */,
 				260B20B01EF7674300E78FD8 /* MyBankCard-03 */,
 				260B20C91EF76B9F00E78FD8 /* MyMsgVC-06 */,
 				260B20C61EF76B4700E78FD8 /* MyRequestVC-05 */,
@@ -1522,6 +1533,7 @@
 				260B20DA1EF7B1FD00E78FD8 /* ForgetPassVC.swift in Sources */,
 				2649611B1EF0CD9200A559D6 /* NSString+extension.swift in Sources */,
 				264960BE1EF0C28F00A559D6 /* POPAnimation.mm in Sources */,
+				2645DD481F4179DF00A85D75 /* AddressWebVC.swift in Sources */,
 				2649612C1EF0D08F00A559D6 /* FTIndicator.m in Sources */,
 				26A3CADF1F25EE0B002815C1 /* AddFriendInfoVC.swift in Sources */,
 				2647936B1F18DD28000F9F67 /* WkBaseViewController.swift in Sources */,
