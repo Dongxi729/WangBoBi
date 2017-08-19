@@ -99,8 +99,7 @@ class MainPageViewController: BaseViewController {
     
     /// 账单
     @objc fileprivate func jumpToDetailVC() {
-        let v : UIViewController = UIViewController.init()
-        v.view.backgroundColor = UIColor.randomColor()
+        let v : UIViewController = DetailVC()
         self.navigationController?.pushViewController(v, animated: true)
     }
 }
@@ -263,7 +262,6 @@ extension MainPageViewController : headerViewelegate,footerViewelegate {
                 AccountModel.indexInfo(finished: { (commenModel) in
                     self.topModel = commenModel
                     
-                    CCog(message: self.topModel)
                 }, finishedTop: { (merTopModel) in
                     self.mertopModel = merTopModel
                     

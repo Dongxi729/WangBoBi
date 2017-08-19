@@ -87,3 +87,6 @@ var APPEAL_URL = "http://wbpay.ie1e.com/appeal.aspx"
 
 /// 地址
 var ADDRESS_URL = "http://wbpay.ie1e.com/deliver.aspx"
+
+/// 账单
+var DETAIL_URL = "http://wbpay.ie1e.com/bill.aspx"

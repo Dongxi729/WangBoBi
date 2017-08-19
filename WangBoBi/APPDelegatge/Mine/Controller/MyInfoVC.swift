@@ -31,6 +31,10 @@ class MyInfoVC: BaseViewController {
         return d
     }()
 
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        toast(toast: "长按钱包地址可复制")
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -81,8 +85,8 @@ class PersonInfoEditV : UIView {
     }()
     
     /// 钱包地址显示
-    lazy var moneyAddresShow: UILabel = {
-        let d : UILabel = UILabel.init(frame: CGRect.init(x: self.moneyAddress.RightX, y: self.moneyAddress.TopY, width: self.Width * 0.7, height: self.moneyAddress.Height))
+    lazy var moneyAddresShow: LabelWithPaste = {
+        let d : LabelWithPaste = LabelWithPaste.init(frame: CGRect.init(x: self.moneyAddress.RightX, y: self.moneyAddress.TopY, width: self.Width * 0.7, height: self.moneyAddress.Height))
         
         d.font = UIFont.systemFont(ofSize: 11 * SCREEN_SCALE)
         d.numberOfLines = 0

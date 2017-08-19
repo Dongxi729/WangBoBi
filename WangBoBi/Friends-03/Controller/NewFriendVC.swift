@@ -94,7 +94,7 @@ class NewFriendVC: BaseViewController,UITableViewDelegate,UITableViewDataSource,
     
     func acceptSEL(xxx: NSIndexPath) {
        
-        AccountModel.addFriendRequest(4, "",(self.topModel[xxx.row].AlyUserId?.stringValue)! , "", "") { (result, model) in
+        AccountModel.addFriendRequest("acpt", "",(self.topModel[xxx.row].AlyUserId?.stringValue)! , "", "", "") { (result, model) in
 
         }
     }

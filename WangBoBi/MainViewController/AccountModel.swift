@@ -1344,12 +1344,13 @@ class AccountModel: NSObject,NSCoding {
     ///   - wbcCount: 网博币数量
     ///   - passStr: 密码
     ///   - finished: 成功回调
-    class func moneySend(_ wbcCount : String,_ passStr : String,finished : @escaping (_ result : Bool) -> ()) {
+    class func moneySend(_ wbcCount : String,_ passStr : String,_ moneySendType : String,finished : @escaping (_ result : Bool) -> ()) {
         let param : [String : Any] = ["uid" : (AccountModel.shared()?.Id.stringValue)!,
                                       "token" : (AccountModel.shared()?.Token)!,
                                       "topayads" : (ScanModel.shared.codeStr)!,
                                       "wbc" : String(wbcCount) ?? 0,
-                                      "paypass" : passStr.md5()]
+                                      "paypass" : passStr.md5(),
+                                      "ac" : moneySendType]
         
         NetWorkTool.shared.postWithPath(path: TELLTOPAY, paras: param, success: { (result) in
             CCog(message: result)
@@ -1488,7 +1489,7 @@ class AccountModel: NSObject,NSCoding {
     ///   - friendIDStr: 朋友ID
     ///   - frqcodeStr: 好友二维码地址
     ///   - finished:完成
-    class func addFriendRequest(_ chooseType : Int,_ friendCount : String,_ friendIDStr : String,_ frqcodeStr : String,_ rmkStr : String,_ finished : @escaping (_ result : Bool,_ dataDic : [AddFriendModel]) -> ()) {
+    class func addFriendRequest(_ chooseType : String,_ wbcadrs : String,_ friendCount : String,_ friendIDStr : String,_ frqcodeStr : String,_ rmkStr : String,_ finished : @escaping (_ result : Bool,_ dataDic : [AddFriendModel]) -> ()) {
         
         
         let param : [String : Any] = ["uid" : (AccountModel.shared()?.Id.stringValue)!,
@@ -1497,7 +1498,8 @@ class AccountModel: NSObject,NSCoding {
                                       "usname" : friendCount,
                                       "frid" : friendIDStr,
                                       "rmk": rmkStr,
-                                      "ac" : addFriendType.init(rawValue: chooseType) ?? 0]
+                                      "wbcadrs" :wbcadrs,
+                                      "ac" : chooseType]
         
         CCog(message: param)
         
@@ -1765,25 +1767,27 @@ class AccountModel: NSObject,NSCoding {
     class func friend_list(finished:@escaping (_ result : Bool,_ dataDic : [FriendListModel]) -> ()) {
         let param : [String : String] = ["uid" : (AccountModel.shared()?.Id.stringValue)!,
                                          "token" : (AccountModel.shared()?.Token)!]
-
+        
         
         NetWorkTool.shared.postWithPath(path: MY_FRIEND, paras: param, success: { (result) in
             
-            if let resultDic = result as? NSDictionary {
-                resultDic.write(toFile: "/Users/zhengdongxi/Desktop/FriendList.plist", atomically: true)
+            //            if let resultDic = result as? NSDictionary {
+            //                resultDic.write(toFile: "/Users/zhengdongxi/Desktop/FriendList.plist", atomically: true)
+            //            }
+            
+            CCog(message: result)
+            
+            guard let resultData = result as? NSDictionary  else {
+                return
             }
             
-            //            guard let resultData = result as? NSDictionary  else {
-            //                return
-            //            }
-            //
-            //            resultData.write(toFile: "/Users/zhengdongxi/Desktop/ddddd.plist", atomically: true)
-            //
-            let resultData = NSDictionary.init(contentsOfFile: "/Users/zhengdongxi/Desktop/ddddd.plist") as? NSDictionary
+            resultData.write(toFile: "/Users/zhengdongxi/Desktop/ddddd.plist", atomically: true)
+            
+            //            let resultData = NSDictionary.init(contentsOfFile: "/Users/zhengdongxi/Desktop/ddddd.plist") as? NSDictionary
             
             CCog(message: userData)
             
-            guard let statusMsg = resultData?["Status"] as? String else {
+            guard let statusMsg = resultData["Status"] as? String else {
                 
                 return
             }
@@ -1793,7 +1797,7 @@ class AccountModel: NSObject,NSCoding {
             }
             
             /// 抽取提示信息
-            guard let alertMsg = resultData?["Msg"] as? String else {
+            guard let alertMsg = resultData["Msg"] as? String else {
                 
                 return
             }
@@ -1802,9 +1806,9 @@ class AccountModel: NSObject,NSCoding {
             
             if alertMsg == "操作成功" {
                 
-                if let dataArray = resultData?["Data"] as? NSArray {
+                if let dataArray = resultData["Data"] as? NSArray {
                     if dataArray.count > 0 {
-                        if let dic = (resultData?["Data"] as? NSArray) {
+                        if let dic = (resultData["Data"] as? NSArray) {
                             
                             var mmm = [FriendListModel]()
                             
@@ -1880,7 +1884,7 @@ class AccountModel: NSObject,NSCoding {
             toast(toast: alertMsg! as! String)
         }
     }
-
+    
     
     // MARK: - 归档接档
     func encode(with aCoder: NSCoder) {

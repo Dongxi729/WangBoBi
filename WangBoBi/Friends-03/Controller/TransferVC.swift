@@ -154,7 +154,7 @@ class TransferVC: BaseViewController,UITextFieldDelegate,PickVDelegate,BindPhone
         bgImg.addSubview(wbcLabel)
         bgImg.addSubview(wbcPlaceHolder)
         
-        bgImg.addSubview(exhangeTF)
+//        bgImg.addSubview(exhangeTF)
         bgImg.addSubview(exchangePlaceHolder)
         
         bgImg.addSubview(city)
@@ -244,7 +244,20 @@ class TransferVC: BaseViewController,UITextFieldDelegate,PickVDelegate,BindPhone
     // MARK: - BindPhoneFooterVDelegate
     func bindPhonSELDelegate() {
         CCog(message: type(of: self))
-        self.navigationController?.pushViewController(ConfirmExchangeVC(), animated: true)
+        
+        /// 添加朋友操作。。获取头像。
+        if (self.wbcLabel.text?.validateMoney())! && transformLabel.text?.characters.count > 0 {
+            AccountModel.addFriendRequest("wbcadrs", self.transformLabel.text!, "", "", "", "", { (result, model) in
+                    CCog(message: result)
+                CCog(message: model)
+                let pushVC = ConfirmExchangeVC()
+                pushVC.zdxConfirmGetFriendModel = model
+                pushVC.zdxConfirmCashMoney = self.wbcLabel.text
+                self.navigationController?.pushViewController(pushVC, animated: true)
+            })
+        }
+        
+//        self.navigationController?.pushViewController(ConfirmExchangeVC(), animated: true)
     }
 
 }

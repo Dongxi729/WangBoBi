@@ -76,7 +76,7 @@ class BaseViewController: UIViewController,UIGestureRecognizerDelegate,UINavigat
             NSStringFromClass(self.classForCoder).contains("MyInfoVC") ||
             NSStringFromClass(self.classForCoder).contains("ScanCodeController") ||
             NSStringFromClass(self.classForCoder).contains("DetailViewController2") || NSStringFromClass(self.classForCoder).contains("DetailReplaceVC") || NSStringFromClass(self.classForCoder).contains("FriendMainVC")
-            || NSStringFromClass(self.classForCoder).contains("AddFriendInfoVC") {
+            || NSStringFromClass(self.classForCoder).contains("AddFriendInfoVC")   {
             
             
             /// 为那个页面则修改左上角图标
@@ -131,7 +131,8 @@ class BaseViewController: UIViewController,UIGestureRecognizerDelegate,UINavigat
             NSStringFromClass(self.classForCoder).contains("PushMoneyDetailVC") ||
             NSStringFromClass(self.classForCoder).contains("CountDetailVC") ||
             NSStringFromClass(self.classForCoder).contains("AddFriendMarkVC") ||
-            NSStringFromClass(self.classForCoder).contains("TransferVC") || NSStringFromClass(self.classForCoder).contains("ConfirmExchangeVC") {
+            NSStringFromClass(self.classForCoder).contains("TransferVC") ||
+            NSStringFromClass(self.classForCoder).contains("ConfirmExchangeVC") {
             
             
             UIApplication.shared.statusBarStyle = UIStatusBarStyle.default

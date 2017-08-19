@@ -64,6 +64,8 @@ class AddFriendInfoVC: BaseViewController,AddPersonInfoEditVDelegate {
         super.viewDidAppear(animated)
         
         
+        toast(toast: "长按钱包地址可复制")
+        
         let allVC = self.navigationController?.viewControllers
         
         if let _ = allVC![allVC!.count - 2] as? ScanCodeController {
@@ -83,6 +85,7 @@ class AddFriendInfoVC: BaseViewController,AddPersonInfoEditVDelegate {
         }
         
     }
+    
     
     @objc fileprivate func pay_back() {
         self.navigationController?.popToRootViewController(animated: true)
@@ -259,6 +262,8 @@ class AddPersonInfoEditV : UIView {
         return d
     }()
     
+
+    
     /// 暂时存取添加朋友ID
     var tempFriID : Int?
     
@@ -287,15 +292,14 @@ class AddPersonInfoEditV : UIView {
             
             /// 陌生人
             self.addSubview(self.strangerImg)
-            
-            
+
         }
         
         /// 扫描添加好友
         if AddType == 0 {
             
             /// 扫描添加
-            AccountModel.addFriendRequest(AddType!, "", "", ScanModel.shared.codeStr!, "") { (result, model) in
+            AccountModel.addFriendRequest("scan", "", "", ScanModel.shared.codeStr!, "", "") { (result, model) in
                 if result {
                     self.emailShowLabel.text = model[0].Email
                     self.moneyAddresShow.text = model[0].WBCAdress
@@ -337,7 +341,7 @@ class AddPersonInfoEditV : UIView {
         /// 搜索添加好友
         if AddType == 1 {
            CCog(message: ScanModel.friemdIDStr as Any)
-            AccountModel.addFriendRequest(AddType!, ScanModel.friemdIDStr!, "", "", "") { (result, model) in
+            AccountModel.addFriendRequest("search", ScanModel.friemdIDStr!, "", "", "", "") { (result, model) in
                 if result {
                     self.emailShowLabel.text = model[0].Email
                     self.moneyAddresShow.text = model[0].WBCAdress

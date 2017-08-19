@@ -252,9 +252,7 @@ class MyVCCell : CommonTableViewCell {
     
     
     @objc fileprivate func reload() {
-        
-        CCog(message: "refres")
-        
+                
         /// 头像
         AvatarHeadImg.setImage(urlString: AccountModel.shared()?.HeadImg, placeholderImage: #imageLiteral(resourceName: "logo"))
         

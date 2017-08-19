@@ -86,7 +86,6 @@ class FFriendListModel: NSObject,NSCoding {
         if userAccount == nil {
             /// 从本地取出数据
             userAccount = NSKeyedUnarchiver.unarchiveObject(withFile: accountPath) as? FFriendListModel
-            dump(userAccount)
             return userAccount
         } else {
             return userAccount

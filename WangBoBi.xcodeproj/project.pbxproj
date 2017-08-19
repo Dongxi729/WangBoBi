@@ -128,6 +128,10 @@
 		266B89051F04AF8C0033BFA7 /* PushMoneyFailVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 266B89041F04AF8C0033BFA7 /* PushMoneyFailVC.swift */; };
 		266B89071F04E1F70033BFA7 /* HeadReuse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 266B89061F04E1F70033BFA7 /* HeadReuse.swift */; };
 		266B89091F04E2200033BFA7 /* ReuseV.swift in Sources */ = {isa = PBXBuildFile; fileRef = 266B89081F04E2200033BFA7 /* ReuseV.swift */; };
+		266CAD1A1F47C9F000E1B506 /* DetailVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 266CAD191F47C9F000E1B506 /* DetailVC.swift */; };
+		266CAD1C1F4816A100E1B506 /* DatePickerV.swift in Sources */ = {isa = PBXBuildFile; fileRef = 266CAD1B1F4816A100E1B506 /* DatePickerV.swift */; };
+		266CAD1E1F48307600E1B506 /* DetailSelectV.swift in Sources */ = {isa = PBXBuildFile; fileRef = 266CAD1D1F48307600E1B506 /* DetailSelectV.swift */; };
+		266CAD201F4830EB00E1B506 /* CustomCollectV.swift in Sources */ = {isa = PBXBuildFile; fileRef = 266CAD1F1F4830EB00E1B506 /* CustomCollectV.swift */; };
 		266E97211EF3D5460057FD90 /* AccountAndSaveVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 266E97201EF3D5460057FD90 /* AccountAndSaveVC.swift */; };
 		267104A51F1F288F0094E2EE /* jcore-ios-1.1.5.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 267104A21F1F288F0094E2EE /* jcore-ios-1.1.5.a */; };
 		267104A61F1F288F0094E2EE /* jpush-ios-3.0.6.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 267104A31F1F288F0094E2EE /* jpush-ios-3.0.6.a */; };
@@ -375,6 +379,10 @@
 		266B89041F04AF8C0033BFA7 /* PushMoneyFailVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PushMoneyFailVC.swift; sourceTree = "<group>"; };
 		266B89061F04E1F70033BFA7 /* HeadReuse.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HeadReuse.swift; sourceTree = "<group>"; };
 		266B89081F04E2200033BFA7 /* ReuseV.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReuseV.swift; sourceTree = "<group>"; };
+		266CAD191F47C9F000E1B506 /* DetailVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DetailVC.swift; sourceTree = "<group>"; };
+		266CAD1B1F4816A100E1B506 /* DatePickerV.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DatePickerV.swift; sourceTree = "<group>"; };
+		266CAD1D1F48307600E1B506 /* DetailSelectV.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DetailSelectV.swift; sourceTree = "<group>"; };
+		266CAD1F1F4830EB00E1B506 /* CustomCollectV.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomCollectV.swift; sourceTree = "<group>"; };
 		266E97201EF3D5460057FD90 /* AccountAndSaveVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AccountAndSaveVC.swift; path = "../../Mine-04/Controller/AccountAndSaveVC.swift"; sourceTree = "<group>"; };
 		267104A21F1F288F0094E2EE /* jcore-ios-1.1.5.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = "jcore-ios-1.1.5.a"; sourceTree = "<group>"; };
 		267104A31F1F288F0094E2EE /* jpush-ios-3.0.6.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = "jpush-ios-3.0.6.a"; sourceTree = "<group>"; };
@@ -802,6 +810,7 @@
 		264960711EF0BFC000A559D6 /* MainPage-01 */ = {
 			isa = PBXGroup;
 			children = (
+				266CAD181F47C9D800E1B506 /* DetailVC */,
 				2600D2A61F064B2C00EF7F6A /* WebView */,
 				266B88FF1F04A54D0033BFA7 /* PushMoney 03 */,
 				2650C18A1F0360F4005BE741 /* GetMoneyByScan 01 */,
@@ -1243,6 +1252,7 @@
 				2650C1931F03AA82005BE741 /* PickerV.swift */,
 				2662B6011F087E1200942692 /* NetLostV.swift */,
 				26D126981F40016A00069823 /* LabelWithPaste.swift */,
+				266CAD1B1F4816A100E1B506 /* DatePickerV.swift */,
 			);
 			name = View;
 			sourceTree = "<group>";
@@ -1273,6 +1283,16 @@
 				266B89041F04AF8C0033BFA7 /* PushMoneyFailVC.swift */,
 			);
 			name = "PushMoney 03";
+			sourceTree = "<group>";
+		};
+		266CAD181F47C9D800E1B506 /* DetailVC */ = {
+			isa = PBXGroup;
+			children = (
+				266CAD1F1F4830EB00E1B506 /* CustomCollectV.swift */,
+				266CAD191F47C9F000E1B506 /* DetailVC.swift */,
+				266CAD1D1F48307600E1B506 /* DetailSelectV.swift */,
+			);
+			name = DetailVC;
 			sourceTree = "<group>";
 		};
 		267104A11F1F288F0094E2EE /* Lib */ = {
@@ -1471,6 +1491,7 @@
 				2650C18E1F038F7A005BE741 /* PaydescV.swift in Sources */,
 				264960FB1EF0C9EC00A559D6 /* YYCache.m in Sources */,
 				26D1269B1F40205600069823 /* TransferVC.swift in Sources */,
+				266CAD1C1F4816A100E1B506 /* DatePickerV.swift in Sources */,
 				264960C81EF0C28F00A559D6 /* POPGeometry.mm in Sources */,
 				260B21061EF7DFF500E78FD8 /* RigisterWithDetailVC.swift in Sources */,
 				26F80A1A1F0206C3009A9746 /* AuthFailedVC.swift in Sources */,
@@ -1508,6 +1529,7 @@
 				269B5ECE1F077BD300AA573F /* UIScrollView-extension.swift in Sources */,
 				265D431C1EFBE318007F5AB8 /* UIImage+QRCode.swift in Sources */,
 				26B14EFC1EF259AF0050135B /* CollectCell.swift in Sources */,
+				266CAD201F4830EB00E1B506 /* CustomCollectV.swift in Sources */,
 				26ED244E1EF3E59A00642804 /* ChangePaypassVC.swift in Sources */,
 				260B20C51EF76AD100E78FD8 /* BindPhoneVC.swift in Sources */,
 				266B89031F04AE1D0033BFA7 /* PushMoneySuccessVC.swift in Sources */,
@@ -1543,6 +1565,7 @@
 				26F248B41EFFC05300599CC7 /* NameCerWithDetailVC.swift in Sources */,
 				261004B21EF8B1B100DE000F /* ForgetPassVCThree.swift in Sources */,
 				26B14F021EF29F490050135B /* ReceiveCell.swift in Sources */,
+				266CAD1E1F48307600E1B506 /* DetailSelectV.swift in Sources */,
 				264960871EF0C1B400A559D6 /* ZDXCommon.swift in Sources */,
 				2607D1551EF21E570015625E /* MainTabBarViewController.swift in Sources */,
 				26DBE6C61F0F891D00551F63 /* ScanModel.swift in Sources */,
@@ -1570,6 +1593,7 @@
 				264961191EF0CD3E00A559D6 /* UIView+Extension.swift in Sources */,
 				264960CC1EF0C28F00A559D6 /* POPSpringAnimation.mm in Sources */,
 				26A0A4A91EF0E26B00035D0D /* JFNavigationController.swift in Sources */,
+				266CAD1A1F47C9F000E1B506 /* DetailVC.swift in Sources */,
 				2662B6021F087E1200942692 /* NetLostV.swift in Sources */,
 				26648EB61F3EDE5900B7329C /* FFriendListModel.swift in Sources */,
 				26F248BA1EFFE9F500599CC7 /* UploadHeadTool.swift in Sources */,

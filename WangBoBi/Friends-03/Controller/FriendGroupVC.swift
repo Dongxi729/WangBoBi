@@ -109,7 +109,6 @@ class FriendGroupVC: BaseViewController, UITableViewDelegate, UITableViewDataSou
                                         self.view.addSubview(self.tableView)
                                         self.tableView.reloadData()
                                         /// 添加搜索栏
-                                        /// 添加搜索栏
                                         let dddd : UIView = UIView.init(frame: CGRect.init(x: 0, y: 0, width: SCREEN_WIDTH, height: 112))
                                         dddd.backgroundColor = COMMON_TBBGCOLOR
                                         dddd.addSubview(self.countrySearchController.searchBar)

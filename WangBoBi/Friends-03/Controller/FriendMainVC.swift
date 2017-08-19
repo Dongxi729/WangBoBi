@@ -58,8 +58,6 @@ class FriendMainVC: BaseViewController,UITableViewDelegate,UITableViewDataSource
         
         FFriendListModel.getFriendList()
         
-        dump(FFriendListModel.shared())
-        
         self.navigationItem.rightBarButtonItems = [firend,groudFriend]
         
         self.tableView.tableHeaderView = countrySearchController.searchBar

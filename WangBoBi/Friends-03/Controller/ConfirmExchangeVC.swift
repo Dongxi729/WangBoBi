@@ -8,8 +8,26 @@
 
 import UIKit
 
-class ConfirmExchangeVC: BaseViewController,BindPhoneFooterVDelegate {
+class ConfirmExchangeVC: BaseViewController,BindPhoneFooterVDelegate,PayPassInputVDelagete {
 
+    var zdxConfirmGetFriendModel : [AddFriendModel]? {
+        didSet {
+            DispatchQueue.main.async {
+                self.headerImg.setImage(urlString: self.zdxConfirmGetFriendModel?[0].HeadImg, placeholderImage: #imageLiteral(resourceName: "logo"))
+                self.wbcLabel.text = self.zdxConfirmGetFriendModel?[0].WBCAdress!
+                self.confirm_nameLabel.text = self.zdxConfirmGetFriendModel?[0].TrueName
+            }
+        }
+    }
+    
+    /// 接收转账的金额
+    var zdxConfirmCashMoney :String? {
+        didSet {
+            self.refundMoneyNum.text = zdxConfirmCashMoney! + "WBC" + "        " + "JPY" + "30000"
+            self.totalCountUp.text = zdxConfirmCashMoney! + "WBC" + "        " + "JPY" + "30000"
+        }
+    }
+    
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
@@ -50,7 +68,7 @@ class ConfirmExchangeVC: BaseViewController,BindPhoneFooterVDelegate {
     private lazy var headerImg: UIImageView = {
         let d : UIImageView = UIImageView.init(frame: CGRect.init(x: self.bgImg.bounds.midX - 15 * SCREEN_SCALE, y: self.bgImg.Height * 0.18, width: 30 * SCREEN_SCALE, height: SCREEN_SCALE * 30))
         d.layer.cornerRadius = 15 * SCREEN_SCALE
-        d.image = #imageLiteral(resourceName: "bgV")
+        
         d.clipsToBounds = true
         return d
     }()
@@ -147,9 +165,62 @@ class ConfirmExchangeVC: BaseViewController,BindPhoneFooterVDelegate {
         bgImg.addSubview(extraPay)
     }
     
+    /// 密码视图弹窗
+    private lazy var presentPassDescV: PayPassInputV = {
+        let d : PayPassInputV = PayPassInputV.init(frame: CGRect.init(x: SCREEN_WIDTH * 0.5 - SCREEN_WIDTH * 0.35, y: 50 * SCREEN_SCALE, width: SCREEN_WIDTH * 0.7, height: (SCREEN_WIDTH * 0.7) * (410 / 450)))
+        d.delegate = self
+        return d
+    }()
+    
+    /// 输入密码
+    var confirmPass : String?
+    
+    func passStrOutput(str: String) {
+        self.confirmPass = str
+    }
+    
+    // MARK: - PayPassInputVDelagete 描述视图代理方法
+    func confirmSEL(str: String) {
+        
+    }
+    
+    // MARK: - PayPassInputVDelagete
+    /// 遮罩视图
+    private lazy var maskVuuew: UIView = {
+        let d : UIView = UIView.init(frame: (UIApplication.shared.keyWindow?.rootViewController?.view.bounds)!)
+        d.backgroundColor = UIColor.colorWithHexString("111111", alpha: 0.2)
+        return d
+    }()
+
+    
+    /// 确定事件
+    func restoreBgColor() {
+        self.maskVuuew.isHidden = true
+        ScanModel.shared.codeStr = self.zdxConfirmGetFriendModel?[0].WBCAdress!
+        AccountModel.moneySend(self.zdxConfirmCashMoney!, self.confirmPass!, "wbcadrs") { (result) in
+            CCog(message: result)
+            if result {
+                self.navigationController?.popToRootViewController(animated: true)
+            }
+        }
+    }
+    
+    func canceelSEL() {
+        self.maskVuuew.isHidden = true
+    }
+    
+    
     // MARK: - BindPhoneFooterVDelegate
     func bindPhonSELDelegate() {
         CCog(message: "确认转账")
+        
+        zdx_setupButtonSpringAnimation(maskVuuew)
+        zdx_setupButtonSpringAnimation(presentPassDescV)
+        
+        view.addSubview(maskVuuew)
+        view.addSubview(presentPassDescV)
+        
+      
     }
 
     @objc private func extraPaySEL() {
