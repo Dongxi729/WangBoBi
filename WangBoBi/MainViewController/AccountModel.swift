@@ -729,7 +729,7 @@ class AccountModel: NSObject,NSCoding {
                                             "token" : (AccountModel.shared()?.Token)!]
             
             NetWorkTool.shared.postWithPath(path: INDEX_URL, paras: param, success: { (result) in
-                
+            
                 guard let resultData = result as? NSDictionary  else {
                     return
                 }
@@ -1548,8 +1548,8 @@ class AccountModel: NSObject,NSCoding {
                         }
                     }
                 }
-            } else {
-                finished(false,[AddFriendModel]())
+            } else if alertMsg == "发送成功" {
+                finished(true,[AddFriendModel]())
             }
             
         }) { (error) in

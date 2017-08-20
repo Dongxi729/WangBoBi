@@ -121,9 +121,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         /// 极光推送注入
         injectJPush(didFinishLaunchingWithOptions: launchOptions)
-        
-        CCog(message: UIApplication.shared.statusBarFrame)
-        
+                
         /// 鉴别是否状态栏高度变化
         let rect = CGRect.init(x: 0, y: 0, width: SCREEN_WIDTH, height: 40)
         

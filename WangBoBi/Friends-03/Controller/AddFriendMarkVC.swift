@@ -51,7 +51,7 @@ class AddFriendMarkVC: BaseViewController,BindPhoneFooterVDelegate {
     func bindPhonSELDelegate() {
         
         if let fff = UserDefaults.standard.object(forKey: "frienID") as? Int {
-            AccountModel.addFriendRequest("add", "", String(fff), "", self.sendTf.text!, "") { (result, model) in
+            AccountModel.addFriendRequest("add", "","", String(fff), "", self.sendTf.text!) { (result, model) in
                 /// 请求添加好友成功，返回首页
                 if result {
                     self.navigationController?.popToRootViewController(animated: true)

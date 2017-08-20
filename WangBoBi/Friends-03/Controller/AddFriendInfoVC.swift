@@ -299,7 +299,7 @@ class AddPersonInfoEditV : UIView {
         if AddType == 0 {
             
             /// 扫描添加
-            AccountModel.addFriendRequest("scan", "", "", ScanModel.shared.codeStr!, "", "") { (result, model) in
+            AccountModel.addFriendRequest("scan", "", "","",ScanModel.shared.codeStr!, "") { (result, model) in
                 if result {
                     self.emailShowLabel.text = model[0].Email
                     self.moneyAddresShow.text = model[0].WBCAdress
@@ -341,7 +341,7 @@ class AddPersonInfoEditV : UIView {
         /// 搜索添加好友
         if AddType == 1 {
            CCog(message: ScanModel.friemdIDStr as Any)
-            AccountModel.addFriendRequest("search", ScanModel.friemdIDStr!, "", "", "", "") { (result, model) in
+            AccountModel.addFriendRequest("search", "",ScanModel.friemdIDStr!, "", "", "") { (result, model) in
                 if result {
                     self.emailShowLabel.text = model[0].Email
                     self.moneyAddresShow.text = model[0].WBCAdress
