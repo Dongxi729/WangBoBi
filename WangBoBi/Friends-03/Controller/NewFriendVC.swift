@@ -8,24 +8,12 @@
 
 import UIKit
 
-class NewFriendVC: BaseViewController,UITableViewDelegate,UITableViewDataSource,NewFriendCellDelegate {
+class NewFriendVC: BaseViewController {
     
-    /// 朋友接口列表
-    var topModel = [FriendMainListModel]()
-    
-    fileprivate lazy var tableView: UITableView = {
-        let d : UITableView = UITableView.init(frame: CGRect.init(x: 0, y: 64, width: SCREEN_WIDTH, height: SCREEN_HEIGHT - 64), style: .grouped)
-        d.delegate = self
-        d.dataSource = self
-        d.register(NewFriendCell.self, forCellReuseIdentifier: "NewFriendCell")
-        return d
-    }()
-    
-    //原始数据集
-    fileprivate let schoolArray = ["清华大学","北京大学","中国人民大学","北京交通大学","北京工业大学",
-                                   "北京航空航天大学","北京理工大学","北京科技大学","中国政法大学",
-                                   "中央财经大学","华北电力大学","北京体育大学","上海外国语大学","复旦大学",
-                                   "华东师范大学","上海大学","河北工业大学"]
+//    lazy var tbV: NewFriendV = {
+//        let d : NewFriendV = NewFriendV.init(friendFrame: self.view.bounds)
+//        return d
+//    }()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -34,40 +22,66 @@ class NewFriendVC: BaseViewController,UITableViewDelegate,UITableViewDataSource,
         title = "新的朋友"
         
         view.backgroundColor = UIColor.white
-        view.addSubview(tableView)
+        
+        CCog(message: WBCRateModel.CNYRate)
         
         AccountModel.newFriend { (result, model) in
             if result {
-                self.topModel = model
-                self.tableView.reloadData()
+
+                CCog(message: model.count)
+                
+                let d = NewFriendV.init(friendFrame: CGRect.init(x: 0, y: 0, width: Int(SCREEN_WIDTH), height: 60 * model.count))
+                d.friendListModel = model
+                d.backgroundColor = UIColor.red
+                self.view.addSubview(d)
+                
+                let footer = UIView.init(frame: CGRect.init(x: 0, y: d.BottomY, width: SCREEN_WIDTH, height: 300))
+                footer.backgroundColor = UIColor.red
+                self.view.addSubview(footer)
             }
         }
+    }
+}
+
+class NewFriendV: UIView,UITableViewDelegate,UITableViewDataSource,NewFriendCellDelegate {
+    fileprivate lazy var tableView: UITableView = {
+        let d : UITableView = UITableView.init()
+        d.delegate = self
+        d.dataSource = self
+        d.register(NewFriendCell.self, forCellReuseIdentifier: "NewFriendCell")
+        return d
+    }()
+    
+    /// 朋友接口列表
+    var friendListModel = [FriendMainListModel]()
+    
+    init(friendFrame rect : CGRect) {
+        super.init(frame: rect)
+        self.tableView.frame = rect
+//        self.friendListModel = data
+        addSubview(tableView)
+    }
+    
+    required init?(coder aDecoder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
     }
     
     // MARK: - UITableViewDelegate,UITableViewDataSource
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         let cell = tableView.dequeueReusableCell(withIdentifier: "NewFriendCell") as! NewFriendCell
-        let cell_model = self.topModel[indexPath.row]
+        let cell_model = self.friendListModel[indexPath.row]
         cell.new_model = cell_model
         cell.delegate = self
         cell.new_indexPath = indexPath as NSIndexPath
         
         return cell
     }
-    
-    func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        return "新的朋友"
-    }
-    
-    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        return 2 * COMMON_MARGIN
-    }
-    
-    
+
     var userID : String?
+    
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        userID = self.topModel[indexPath.row].AlyUserId?.stringValue
+        userID = self.friendListModel[indexPath.row].AlyUserId?.stringValue
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
@@ -80,7 +94,7 @@ class NewFriendVC: BaseViewController,UITableViewDelegate,UITableViewDataSource,
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         
-        return self.topModel.count
+        return self.friendListModel.count
     }
     
     //搜索过滤后的结果集
@@ -91,19 +105,15 @@ class NewFriendVC: BaseViewController,UITableViewDelegate,UITableViewDataSource,
     }
     
     // MARK: - NewFriendCellDelegate
-    
     func acceptSEL(xxx: NSIndexPath) {
-       
-        AccountModel.addFriendRequest("acpt", "",(self.topModel[xxx.row].AlyUserId?.stringValue)! , "", "", "") { (result, model) in
-
+        
+        AccountModel.addFriendRequest("acpt", "","" ,(self.friendListModel[xxx.row].AlyUserId?.stringValue)! , "", "") { (result, model) in
+            if result {
+                /// 添加好友成功
+                UIApplication.shared.keyWindow?.rootViewController?.navigationController?.popToRootViewController(animated: true)
+            }
         }
     }
-//    func acceptSEL() {
-//        AccountModel.addFriendRequest(4, "",userID! , "", "") { (result, model) in
-//            
-//        }
-//    }
-    
-    
 }
+
 

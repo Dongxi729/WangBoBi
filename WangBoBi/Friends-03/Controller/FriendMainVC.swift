@@ -98,7 +98,7 @@ class FriendMainVC: BaseViewController,UITableViewDelegate,UITableViewDataSource
     @objc fileprivate func jumpToFriendContactVC() {
         
         DispatchQueue.main.async {
-            self.navigationController?.pushViewController(FriendGroupVC(), animated: true)
+            self.navigationController?.pushViewController(NewFriendVC(), animated: true)
         }
     }
 

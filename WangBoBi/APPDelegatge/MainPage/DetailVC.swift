@@ -63,8 +63,12 @@ class DetailVC: WkBaseViewController,DatePickerVDelegate,DetailSelectVDelegate {
         dateV.center = (UIApplication.shared.keyWindow?.center)!
         zdx_setupButtonSpringAnimation(dateV)
         dateV.datePickerDelegate = self
-        UIApplication.shared.keyWindow?.addSubview(maskV)
-        UIApplication.shared.keyWindow?.addSubview(dateV)
+        
+        DispatchQueue.main.async {
+
+            UIApplication.shared.keyWindow?.addSubview(self.maskV)
+            UIApplication.shared.keyWindow?.addSubview(dateV)
+        }
         
         self.datePickerV = dateV
     }
@@ -91,8 +95,6 @@ class DetailVC: WkBaseViewController,DatePickerVDelegate,DetailSelectVDelegate {
     
     // MARK: - DatePickerVDelegate
     func chooseMonthAndYear(_ year: String, _ month: String) {
-        CCog(message: year)
-        CCog(message: month)
         self.maskV.removeFromSuperview()
         self.datePickerV.removeFromSuperview()
         
@@ -162,8 +164,6 @@ class DetailVC: WkBaseViewController,DatePickerVDelegate,DetailSelectVDelegate {
     func webView(_ webView: WKWebView, decidePolicyFor navigationAction: WKNavigationAction, decisionHandler: @escaping (WKNavigationActionPolicy) -> Void) {
         
         self.getURLStr = (navigationAction.request.url?.absoluteString)!
-        
-        CCog(message: self.getURLStr)
         
         if navigationAction.navigationType == WKNavigationType.linkActivated {
             

@@ -42,9 +42,7 @@ class MainTabBarViewController: BaseTabbarVC {
         let rect = CGRect.init(x: 0, y: 0, width: SCREEN_WIDTH, height: 20)
 
         if UIApplication.shared.statusBarFrame != rect {
-            CCog(message: "viewDidLayoutSubviews")
             self.view.frame.origin.y = 20
-            CCog(message: "alskdjlskdjsaldjlsadjlaks")
 
             self.view.frame.size.height = SCREEN_HEIGHT - 20
         } else {

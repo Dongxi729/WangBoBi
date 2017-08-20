@@ -62,6 +62,12 @@ class MainPageViewController: BaseViewController {
         
         return d
     }()
+
+    /// 日币汇率
+    var janRate : Int = 0
+    
+    /// 人民币汇率
+    var chiRate : Int = 0
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -70,9 +76,16 @@ class MainPageViewController: BaseViewController {
             self.topModel = commenModel
         }, finishedTop: { (merTopModel) in
             self.mertopModel = merTopModel
-        }) { (sectionCount) in
+        }, finishedTotalModel: { (sectionCount) in
             self.loginModel = sectionCount
             self.collV.reloadData()
+        }, chineseRate: { (ee) in
+            ///
+            self.chiRate = ee
+            
+        }) { (ff) in
+            ///
+            self.janRate = ff
         }
         
         /// 添加刷新控件
@@ -174,6 +187,11 @@ extension MainPageViewController : UICollectionViewDataSource,UICollectionViewDe
             header?.sectionImg.setTitle("热评商户", for: .normal)
             header?.sectionImg.setImage(#imageLiteral(resourceName: "hot"), for: .normal)
             header?.sectionImg.sizeToFit()
+
+            header?.convertWBCToR.text = String(Double((AccountModel.shared()?.WBC)!)! * Double(chiRate))
+
+            header?.convertWBCToJ.text = String(Double((AccountModel.shared()?.WBC)!)! * Double(janRate))
+
             return header!
         } else {
             let header = collectionView.dequeueReusableSupplementaryView(ofKind:
@@ -259,19 +277,37 @@ extension MainPageViewController : headerViewelegate,footerViewelegate {
             
             if result {
 
+//                AccountModel.indexInfo(finished: { (commenModel) in
+//                    self.topModel = commenModel
+//                    
+//                }, finishedTop: { (merTopModel) in
+//                    self.mertopModel = merTopModel
+//                    
+//                }) { (xxx) in
+//                    self.loginModel = xxx
+//                    
+//                    self.collV.reloadData()
+//                    
+//                    toast(toast: "刷新成功")
+//                }
+                
+                
                 AccountModel.indexInfo(finished: { (commenModel) in
                     self.topModel = commenModel
-                    
                 }, finishedTop: { (merTopModel) in
                     self.mertopModel = merTopModel
-                    
-                }) { (xxx) in
+                }, finishedTotalModel: { (xxx) in
+                    self.loginModel = xxx
                     self.loginModel = xxx
                     
                     self.collV.reloadData()
-
+                    
                     toast(toast: "刷新成功")
-                }
+                }, chineseRate: { (chinese) in
+                    
+                }, janRate: { (jpanRate) in
+                    
+                })
                 
                 d.endRefresh()
             } else {

@@ -704,13 +704,27 @@ class AccountModel: NSObject,NSCoding {
     var mertopModel : ((_ mertopModel : [IndexMertopModel])-> Void)?
     
     
-    class func afterLogin(finished : @escaping (_ values : [IndexCommentTopModel])->(),finishedTop : @escaping (_ values : [IndexMertopModel])->(),finishedTotalModel : @escaping (_ values : Int)->()) {
+//    class func afterLogin(finished : @escaping (_ values : [IndexCommentTopModel])->(),finishedTop : @escaping (_ values : [IndexMertopModel])->(),finishedTotalModel : @escaping (_ values : Int)->()) {
+//        AccountModel.indexInfo(finished: { (aa) in
+//            finished(aa)
+//        }, finishedTop: { (bb) in
+//            finishedTop(bb)
+//        }) { (cc) in
+//            finishedTotalModel(cc)
+//        }
+//    }
+    
+    class func afterLogin(finished : @escaping (_ values : [IndexCommentTopModel])->(),finishedTop : @escaping (_ values : [IndexMertopModel])->(),finishedTotalModel : @escaping (_ values : Int)->(),chineseRate : @escaping (_ values : Int)->(),janRate : @escaping (_ values : Int)->()) {
         AccountModel.indexInfo(finished: { (aa) in
             finished(aa)
         }, finishedTop: { (bb) in
             finishedTop(bb)
-        }) { (cc) in
+        }, finishedTotalModel: { (cc) in
             finishedTotalModel(cc)
+        }, chineseRate: { (dd) in
+            chineseRate(dd)
+        }) { (ee) in
+            janRate(ee)
         }
     }
     
@@ -720,7 +734,7 @@ class AccountModel: NSObject,NSCoding {
     ///   - finished: 返回结果
     ///   - finishedTop: 热评商户
     ///   - finishedTotalModel: 头条推荐
-    class func indexInfo(finished : @escaping (_ values : [IndexCommentTopModel])->(),finishedTop : @escaping (_ values : [IndexMertopModel])->(),finishedTotalModel : @escaping (_ values : Int)->()) {
+    class func indexInfo(finished : @escaping (_ values : [IndexCommentTopModel])->(),finishedTop : @escaping (_ values : [IndexMertopModel])->(),finishedTotalModel : @escaping (_ values : Int)->(),chineseRate : @escaping (_ values : Int)->(),janRate : @escaping (_ values : Int)->()) {
         
         if AccountModel.shared()?.Id.stringValue == nil {
             AccountModel.shared()?.loginSEL()
@@ -730,6 +744,8 @@ class AccountModel: NSObject,NSCoding {
             
             NetWorkTool.shared.postWithPath(path: INDEX_URL, paras: param, success: { (result) in
             
+                CCog(message: result)
+                
                 guard let resultData = result as? NSDictionary  else {
                     return
                 }
@@ -761,6 +777,21 @@ class AccountModel: NSObject,NSCoding {
                         account.saveAccount()
                         
                         AccountModel.shared()?.updateUserInfo()
+                        
+                        /// 提取汇率
+                        if let rateDic = (resultData["Data"] as? NSArray)?.lastObject as? NSDictionary {
+                            /// 中文汇率
+                            if let cnyRate = ((rateDic["WBCRate"] as? NSArray)?[0] as? NSDictionary)?["Cash"] as? Int {
+                                janRate(cnyRate)
+                                WBCRateModel.CNYRate = cnyRate
+                            }
+                            
+                            /// 日文汇率
+                            if let cnyRate = ((rateDic["WBCRate"] as? NSArray)?[1] as? NSDictionary)?["Cash"] as? Int {
+                                chineseRate(cnyRate)
+                                WBCRateModel.JPYRate = cnyRate
+                            }
+                        }
                         
                         //头条推荐
                         if let dicc = [(((resultData["Data"] as? NSArray)?[1]) as? NSDictionary)?["CommendTop"] as? NSArray][0] {
@@ -837,7 +868,9 @@ class AccountModel: NSObject,NSCoding {
                         }
                     }
                 }
-                //                    }
+                
+
+                
             }) { (error) in
                 let alertMsg = (error as NSError).userInfo["NSLocalizedDescription"]
                 toast(toast: alertMsg! as! String)
@@ -1550,6 +1583,8 @@ class AccountModel: NSObject,NSCoding {
                 }
             } else if alertMsg == "发送成功" {
                 finished(true,[AddFriendModel]())
+            }  else if alertMsg == "成功加为好友" {
+                finished(true,[AddFriendModel]())
             }
             
         }) { (error) in
@@ -1771,10 +1806,10 @@ class AccountModel: NSObject,NSCoding {
         
         NetWorkTool.shared.postWithPath(path: MY_FRIEND, paras: param, success: { (result) in
             
-            //            if let resultDic = result as? NSDictionary {
-            //                resultDic.write(toFile: "/Users/zhengdongxi/Desktop/FriendList.plist", atomically: true)
-            //            }
-            
+//                        if let resultDic = result as? NSDictionary {
+//                            resultDic.write(toFile: "/Users/zhengdongxi/Desktop/FriendList.plist", atomically: true)
+//                        }
+//            
             CCog(message: result)
             
             guard let resultData = result as? NSDictionary  else {

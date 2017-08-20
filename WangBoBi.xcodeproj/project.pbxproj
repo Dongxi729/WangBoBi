@@ -26,6 +26,7 @@
 		260B21001EF7C0E900E78FD8 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 260B20FF1EF7C0E900E78FD8 /* LoginViewController.swift */; };
 		260B21031EF7CD1F00E78FD8 /* RigisterVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 260B21021EF7CD1F00E78FD8 /* RigisterVC.swift */; };
 		260B21061EF7DFF500E78FD8 /* RigisterWithDetailVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 260B21051EF7DFF500E78FD8 /* RigisterWithDetailVC.swift */; };
+		260DF6D41F49577300BCDDF6 /* WBCRateModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 260DF6D31F49577300BCDDF6 /* WBCRateModel.swift */; };
 		261004B01EF8B09B00DE000F /* ForgetPassVCTwo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 261004AF1EF8B09B00DE000F /* ForgetPassVCTwo.swift */; };
 		261004B21EF8B1B100DE000F /* ForgetPassVCThree.swift in Sources */ = {isa = PBXBuildFile; fileRef = 261004B11EF8B1B100DE000F /* ForgetPassVCThree.swift */; };
 		261004B51EF8BB9100DE000F /* AgreeMentVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 261004B41EF8BB9100DE000F /* AgreeMentVC.swift */; };
@@ -212,6 +213,7 @@
 		260B20FF1EF7C0E900E78FD8 /* LoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		260B21021EF7CD1F00E78FD8 /* RigisterVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RigisterVC.swift; sourceTree = "<group>"; };
 		260B21051EF7DFF500E78FD8 /* RigisterWithDetailVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RigisterWithDetailVC.swift; sourceTree = "<group>"; };
+		260DF6D31F49577300BCDDF6 /* WBCRateModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WBCRateModel.swift; sourceTree = "<group>"; };
 		261004AF1EF8B09B00DE000F /* ForgetPassVCTwo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ForgetPassVCTwo.swift; sourceTree = "<group>"; };
 		261004B11EF8B1B100DE000F /* ForgetPassVCThree.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ForgetPassVCThree.swift; sourceTree = "<group>"; };
 		261004B41EF8BB9100DE000F /* AgreeMentVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AgreeMentVC.swift; sourceTree = "<group>"; };
@@ -1320,6 +1322,7 @@
 			children = (
 				26CF98501F0B26CD008F8F23 /* AccountModel.swift */,
 				26DBE6C51F0F891D00551F63 /* ScanModel.swift */,
+				260DF6D31F49577300BCDDF6 /* WBCRateModel.swift */,
 			);
 			name = model;
 			sourceTree = "<group>";
@@ -1631,6 +1634,7 @@
 				2649610A1EF0C9EC00A559D6 /* YYImageCache.m in Sources */,
 				264960C51EF0C28F00A559D6 /* POPCGUtils.mm in Sources */,
 				264960FC1EF0C9EC00A559D6 /* YYDiskCache.m in Sources */,
+				260DF6D41F49577300BCDDF6 /* WBCRateModel.swift in Sources */,
 				261F06781EF4FB060019CE44 /* MoneyBagV.swift in Sources */,
 				266B88ED1F04907A0033BFA7 /* PayPassInputV.swift in Sources */,
 				264960C31EF0C28F00A559D6 /* POPAnimator.mm in Sources */,

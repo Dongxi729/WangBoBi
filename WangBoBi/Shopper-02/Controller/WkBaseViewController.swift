@@ -340,7 +340,6 @@ extension WkBaseViewController : WKNavigationDelegate {
     
     /// 加载完成
     func webView(_ webView: WKWebView, didFinish navigation: WKNavigation!) {
-        CCog(message: "")
         
         lostNetV.isHidden = true
         
