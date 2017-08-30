@@ -124,7 +124,7 @@ extension ShopWebV {
                 return
             }
             
-            if self.getURLStr.contains(COMMON_PREFIX) {
+            if self.getURLStr.contains(COMMON_PREFIX) && !self.getURLStr.contains("#") {
                 if self.getURLStr.contains("?") && !self.getURLStr.contains(".html") && !self.getURLStr.contains("token") {
                     self.getURLStr = self.getURLStr + ("&token=") + (AccountModel.shared()?.Token)! + "&uid=" + (AccountModel.shared()?.Id.stringValue)!
                 } else {

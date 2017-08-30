@@ -150,12 +150,6 @@ class UploadHeadTool: UIView,UIImagePickerControllerDelegate, UINavigationContro
         }
     }
     
-}
-
-
-
-// MARK:- 图片上传
-extension UploadHeadTool {
     //图片选择器
     func uploadHeadImg() {
         

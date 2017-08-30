@@ -200,3 +200,7 @@ func toast(toast str : String) {
 func aaa<T>(_ aaa : T) -> T {
     return aaa
 }
+
+
+///购物车URL -- 购物车
+var urlStr = NSMutableArray()

@@ -10,6 +10,8 @@ import UIKit
 
 import WebKit
 
+ 
+
 class AddressWebVC: WkBaseViewController {
     
     override func viewDidLoad() {
@@ -17,8 +19,7 @@ class AddressWebVC: WkBaseViewController {
         
         // Do any additional setup after loading the view.
         title = "地址管理"
-
-        CCog(message: self.getURLStr)
+        
         
         if (self.navigationController?.viewControllers.count)! == 2 {
             
@@ -66,14 +67,35 @@ class AddressWebVC: WkBaseViewController {
         }
     }
     
+   
+    
     func webView(_ webView: WKWebView, decidePolicyFor navigationAction: WKNavigationAction, decisionHandler: @escaping (WKNavigationActionPolicy) -> Void) {
         
         self.getURLStr = (navigationAction.request.url?.absoluteString)!
+        urlStr.add(self.getURLStr)
         
         CCog(message: self.getURLStr)
         
+        ///  保存信息成功url
+        if self.getURLStr == "http://wbpay.ie1e.com/deliver.aspx" {
+            let allVC = self.navigationController?.viewControllers
+            
+            if let inventoryListVC = allVC![allVC!.count - 2] as? AddressWebVC {
+                
+                inventoryListVC.webView.reload()
+                self.navigationController!.popToViewController(inventoryListVC, animated: true)
+                
+                decisionHandler(.cancel)
+                return
+            }
+            
+            
+        }
+        
+        
+        
         if navigationAction.navigationType == WKNavigationType.linkActivated {
-
+            
             
             if self.getURLStr.contains(COMMON_PREFIX) {
                 if self.getURLStr.contains("?") && !self.getURLStr.contains(".html") && !self.getURLStr.contains("token"){
@@ -81,6 +103,8 @@ class AddressWebVC: WkBaseViewController {
                 } else {
                     self.getURLStr = self.getURLStr + ("?&token=") + (AccountModel.shared()?.Token)! + "&uid=" + (AccountModel.shared()?.Id.stringValue)!
                 }
+                
+                urlStr.add(self.getURLStr)
                 
                 self.aaa(str:self.getURLStr)
                 
@@ -91,6 +115,9 @@ class AddressWebVC: WkBaseViewController {
             }
             
             decisionHandler(.cancel)
+            
+            
+            
         } else {
             if self.getURLStr.contains("deliver.aspx") && !self.getURLStr.contains("token") {
                 if self.getURLStr.contains("?") && !self.getURLStr.contains(".html") && !self.getURLStr.contains("token"){
@@ -98,10 +125,11 @@ class AddressWebVC: WkBaseViewController {
                 } else {
                     self.getURLStr = self.getURLStr + ("?&token=") + (AccountModel.shared()?.Token)! + "&uid=" + (AccountModel.shared()?.Id.stringValue)!
                 }
+                urlStr.add(self.getURLStr)
                 
                 self.aaa(str:self.getURLStr)
                 decisionHandler(.cancel)
-
+                
             }
             
             decisionHandler(.allow)

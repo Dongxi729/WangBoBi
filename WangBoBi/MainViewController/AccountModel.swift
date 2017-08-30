@@ -704,15 +704,15 @@ class AccountModel: NSObject,NSCoding {
     var mertopModel : ((_ mertopModel : [IndexMertopModel])-> Void)?
     
     
-//    class func afterLogin(finished : @escaping (_ values : [IndexCommentTopModel])->(),finishedTop : @escaping (_ values : [IndexMertopModel])->(),finishedTotalModel : @escaping (_ values : Int)->()) {
-//        AccountModel.indexInfo(finished: { (aa) in
-//            finished(aa)
-//        }, finishedTop: { (bb) in
-//            finishedTop(bb)
-//        }) { (cc) in
-//            finishedTotalModel(cc)
-//        }
-//    }
+    //    class func afterLogin(finished : @escaping (_ values : [IndexCommentTopModel])->(),finishedTop : @escaping (_ values : [IndexMertopModel])->(),finishedTotalModel : @escaping (_ values : Int)->()) {
+    //        AccountModel.indexInfo(finished: { (aa) in
+    //            finished(aa)
+    //        }, finishedTop: { (bb) in
+    //            finishedTop(bb)
+    //        }) { (cc) in
+    //            finishedTotalModel(cc)
+    //        }
+    //    }
     
     class func afterLogin(finished : @escaping (_ values : [IndexCommentTopModel])->(),finishedTop : @escaping (_ values : [IndexMertopModel])->(),finishedTotalModel : @escaping (_ values : Int)->(),chineseRate : @escaping (_ values : Int)->(),janRate : @escaping (_ values : Int)->()) {
         AccountModel.indexInfo(finished: { (aa) in
@@ -743,12 +743,17 @@ class AccountModel: NSObject,NSCoding {
                                             "token" : (AccountModel.shared()?.Token)!]
             
             NetWorkTool.shared.postWithPath(path: INDEX_URL, paras: param, success: { (result) in
-            
+                
                 CCog(message: result)
                 
                 guard let resultData = result as? NSDictionary  else {
                     return
                 }
+                
+                CCog(message: resultData)
+                
+                
+                
                 
                 guard let statusMsg = resultData["Status"] as? String else {
                     
@@ -768,7 +773,7 @@ class AccountModel: NSObject,NSCoding {
                 /// 取数据
                 if alertMsg == "操作成功" {
                     if let dic = resultData["Data"] as? NSArray {
-                        
+
                         finishedTotalModel(dic.count)
                         
                         /// 更新本地存储信息
@@ -813,6 +818,7 @@ class AccountModel: NSObject,NSCoding {
                         
                         //热评商户
                         if let dicc = [(((resultData["Data"] as? NSArray)?[0]) as? NSDictionary)?["MerTop"] as? NSArray][0] {
+                            
                             var mmm = [IndexMertopModel]()
                             for vv in dicc {
                                 if let diccc = vv as? NSDictionary {
@@ -831,6 +837,8 @@ class AccountModel: NSObject,NSCoding {
                     
                     //头条推荐
                     if let dicc = (resultData["Data"] as? NSArray)?[0] as? NSDictionary {
+                        
+                        dicc.write(toFile: "/Users/zhengdongxi/Desktop/ddddd.plist", atomically: true)
                         
                         //头条推荐
                         if let dicc = [dicc["CommendTop"] as? NSArray][0] {
@@ -869,7 +877,7 @@ class AccountModel: NSObject,NSCoding {
                     }
                 }
                 
-
+                
                 
             }) { (error) in
                 let alertMsg = (error as NSError).userInfo["NSLocalizedDescription"]
@@ -1806,19 +1814,15 @@ class AccountModel: NSObject,NSCoding {
         
         NetWorkTool.shared.postWithPath(path: MY_FRIEND, paras: param, success: { (result) in
             
-//                        if let resultDic = result as? NSDictionary {
-//                            resultDic.write(toFile: "/Users/zhengdongxi/Desktop/FriendList.plist", atomically: true)
-//                        }
-//            
+            //                        if let resultDic = result as? NSDictionary {
+            //                            resultDic.write(toFile: "/Users/zhengdongxi/Desktop/FriendList.plist", atomically: true)
+            //                        }
+            //
             CCog(message: result)
             
             guard let resultData = result as? NSDictionary  else {
                 return
             }
-            
-            resultData.write(toFile: "/Users/zhengdongxi/Desktop/ddddd.plist", atomically: true)
-            
-            //            let resultData = NSDictionary.init(contentsOfFile: "/Users/zhengdongxi/Desktop/ddddd.plist") as? NSDictionary
             
             CCog(message: userData)
             

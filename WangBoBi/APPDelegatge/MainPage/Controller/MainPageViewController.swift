@@ -139,7 +139,7 @@ extension MainPageViewController : UICollectionViewDataSource,UICollectionViewDe
             
             let xxx = mertopModel[indexPath.row]
             cell.dataSource2 = xxx
-            cell.topView.setLabelNo(str: "TOP" + String(indexPath.row))
+            cell.topView.setLabelNo(str: "TOP" + String(indexPath.row + 1))
             
             
             return cell

@@ -147,6 +147,7 @@
 		267104B91F1F31CB0094E2EE /* CameraTool.swift in Sources */ = {isa = PBXBuildFile; fileRef = 267104B81F1F31CB0094E2EE /* CameraTool.swift */; };
 		268959181F050DFD0064C957 /* IndexLoginModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 268959171F050DFD0064C957 /* IndexLoginModel.swift */; };
 		268BD1111F34557F00952727 /* FriendHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 268BD1101F34557F00952727 /* FriendHeader.swift */; };
+		2690F3A21F5306900022DD92 /* sss.plist in Resources */ = {isa = PBXBuildFile; fileRef = 2690F3A11F5306900022DD92 /* sss.plist */; };
 		269165711F26DC20007F011D /* FriendTableList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 269165701F26DC20007F011D /* FriendTableList.swift */; };
 		269B5ECC1F077BD300AA573F /* footerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 269B5EC91F077BD300AA573F /* footerView.swift */; };
 		269B5ECD1F077BD300AA573F /* headerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 269B5ECA1F077BD300AA573F /* headerView.swift */; };
@@ -401,6 +402,7 @@
 		267104B81F1F31CB0094E2EE /* CameraTool.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CameraTool.swift; sourceTree = "<group>"; };
 		268959171F050DFD0064C957 /* IndexLoginModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IndexLoginModel.swift; sourceTree = "<group>"; };
 		268BD1101F34557F00952727 /* FriendHeader.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FriendHeader.swift; sourceTree = "<group>"; };
+		2690F3A11F5306900022DD92 /* sss.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = sss.plist; sourceTree = "<group>"; };
 		269165701F26DC20007F011D /* FriendTableList.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FriendTableList.swift; sourceTree = "<group>"; };
 		269B5EC91F077BD300AA573F /* footerView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = footerView.swift; sourceTree = "<group>"; };
 		269B5ECA1F077BD300AA573F /* headerView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = headerView.swift; sourceTree = "<group>"; };
@@ -833,6 +835,7 @@
 				2643CFC51EF3EE2200EFC720 /* DetailViewController.swift */,
 				261F067B1EF50B510019CE44 /* ShouMoneyVC.swift */,
 				261F067D1EF5190C0019CE44 /* SetMoneyViewController.swift */,
+				2690F3A11F5306900022DD92 /* sss.plist */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -1468,6 +1471,7 @@
 			files = (
 				26F484871EEFD55400177670 /* LaunchScreen.storyboard in Resources */,
 				26359A4A1F38036C00D57201 /* ddddd.plist in Resources */,
+				2690F3A21F5306900022DD92 /* sss.plist in Resources */,
 				26F484841EEFD55400177670 /* Assets.xcassets in Resources */,
 				26359A621F3870EC00D57201 /* file.json in Resources */,
 				2649612E1EF0D08F00A559D6 /* FTProgressIndicator.bundle in Resources */,
