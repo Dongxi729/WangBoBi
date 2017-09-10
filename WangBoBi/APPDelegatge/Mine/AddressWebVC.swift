@@ -78,16 +78,18 @@ class AddressWebVC: WkBaseViewController {
         
         ///  保存信息成功url
         if self.getURLStr == "http://wbpay.ie1e.com/deliver.aspx" {
-            let allVC = self.navigationController?.viewControllers
-            
-            if let inventoryListVC = allVC![allVC!.count - 2] as? AddressWebVC {
+            if let allVC = self.navigationController?.viewControllers {
                 
-                inventoryListVC.webView.reload()
-                self.navigationController!.popToViewController(inventoryListVC, animated: true)
-                
-                decisionHandler(.cancel)
-                return
+                if let inventoryListVC = allVC[allVC.count - 2] as? AddressWebVC {
+                    
+                    inventoryListVC.webView.reload()
+                    self.navigationController!.popToViewController(inventoryListVC, animated: true)
+                    
+                    decisionHandler(.cancel)
+                    return
+                }
             }
+            
             
             
         }

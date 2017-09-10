@@ -45,12 +45,12 @@ func CCog(message : Any,
         let dformatter = DateFormatter()
         dformatter.dateFormat = "HH:mm:ss"
         
-        print("\(dformatter.string(from: Date()))","\((file as NSString).lastPathComponent) : \(line), \(method) : \(message)")
+        print("\(dformatter.string(from: Date()))","\((file as NSString).lastPathComponent) : \(line), \(method) : \n\(message)")
     } else {
         #if DEBUG
             let dformatter = DateFormatter()
             dformatter.dateFormat = "HH:mm:ss"
-            print("\(dformatter.string(from: Date()))","\((file as NSString).lastPathComponent) : \(line), \(method) : \(message)")
+            print("\(dformatter.string(from: Date()))","\((file as NSString).lastPathComponent) : \(line), \(method) : \n\(message)")
         #endif
     }
 }

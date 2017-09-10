@@ -74,7 +74,7 @@ class LoginViewController: BaseViewController,UITextFieldDelegate {
     // MARK: - 登录按钮
     fileprivate lazy var loginBtn: UIButton = {
         let d : UIButton = UIButton.init(frame: CGRect.init(x: SCREEN_WIDTH * 0.132045063995509, y: SCREEN_HEIGHT * 0.735960131106169, width: SCREEN_WIDTH * 0.7, height: SCREEN_HEIGHT * 0.794384044149648 - SCREEN_HEIGHT * 0.735960131106169 ))
-        
+
         d.addTarget(self, action: #selector(loginSEL), for: .touchUpInside)
 
         return d
@@ -110,6 +110,8 @@ class LoginViewController: BaseViewController,UITextFieldDelegate {
     // MARK: - 登录事件
     @objc fileprivate func loginSEL() {
         
+        self.loginBtn.isUserInteractionEnabled = false
+        
         /// 判断输入的邮箱、密码长度是否大于0
         if !(accountLabel.text?.isEmpty)! && !(passTf.text?.isEmpty)! {
             
@@ -117,7 +119,7 @@ class LoginViewController: BaseViewController,UITextFieldDelegate {
             localSave.synchronize()
             
             AccountModel.getInfo(emailStr: self.accountLabel.text!, pass: self.passTf.text!)
-
+            
         } else {
             FTIndicator.showToastMessage("邮箱或密码为空")
         }
@@ -127,6 +129,11 @@ class LoginViewController: BaseViewController,UITextFieldDelegate {
         UIView.animate(withDuration: 0.5) {
             UIApplication.shared.keyWindow?.frame = (UIApplication.shared.keyWindow?.rootViewController?.view.bounds)!
         }
+        
+        DispatchQueue.main.asyncAfter(deadline: .now() + 2.0) {
+            self.loginBtn.isUserInteractionEnabled = true
+        }
+        
     }
     
     // MARK: - 忘记密码

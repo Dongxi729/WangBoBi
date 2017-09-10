@@ -104,7 +104,7 @@ class PushingMoneyVC: BaseViewController,UITextFieldDelegate,BindPhoneFooterVDel
         view.backgroundColor = COMMON_TBBGCOLOR
         
         bgImg.addSubview(cardNumLabel)
-        bgImg.addSubview(cardPass)
+//        bgImg.addSubview(cardPass)
         bgImg.addSubview(cameraBn)
         
         /// 接收通知

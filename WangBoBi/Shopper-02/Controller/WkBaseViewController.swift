@@ -393,6 +393,8 @@ extension WkBaseViewController : WKScriptMessageHandler {
                     nav = LoginNav.init(rootViewController: LoginViewController())
                     
                     UIApplication.shared.keyWindow?.rootViewController = nav
+                    SHOP_URLArray.removeAllObjects()
+                    urlStr.removeAllObjects()
                 })
                 
 //                let cancelAction = UIAlertAction.init(title: "取消", style: .cancel, handler: nil)

@@ -119,6 +119,7 @@
 		265D431B1EFBE318007F5AB8 /* String+QRCode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 265D43191EFBE318007F5AB8 /* String+QRCode.swift */; };
 		265D431C1EFBE318007F5AB8 /* UIImage+QRCode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 265D431A1EFBE318007F5AB8 /* UIImage+QRCode.swift */; };
 		265D431E1EFBE324007F5AB8 /* Tool.swift in Sources */ = {isa = PBXBuildFile; fileRef = 265D431D1EFBE324007F5AB8 /* Tool.swift */; };
+		265E8D011F6570A000528E89 /* UIButton+CSExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 265E8D001F6570A000528E89 /* UIButton+CSExtension.swift */; };
 		2662B6021F087E1200942692 /* NetLostV.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2662B6011F087E1200942692 /* NetLostV.swift */; };
 		26632B591F2794CA00E25003 /* AddFriendMarkVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26632B581F2794CA00E25003 /* AddFriendMarkVC.swift */; };
 		26648EB61F3EDE5900B7329C /* FFriendListModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26648EB51F3EDE5900B7329C /* FFriendListModel.swift */; };
@@ -372,6 +373,7 @@
 		265D43191EFBE318007F5AB8 /* String+QRCode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "String+QRCode.swift"; sourceTree = "<group>"; };
 		265D431A1EFBE318007F5AB8 /* UIImage+QRCode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIImage+QRCode.swift"; sourceTree = "<group>"; };
 		265D431D1EFBE324007F5AB8 /* Tool.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Tool.swift; sourceTree = "<group>"; };
+		265E8D001F6570A000528E89 /* UIButton+CSExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIButton+CSExtension.swift"; sourceTree = "<group>"; };
 		2662B6011F087E1200942692 /* NetLostV.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NetLostV.swift; sourceTree = "<group>"; };
 		26632B581F2794CA00E25003 /* AddFriendMarkVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddFriendMarkVC.swift; sourceTree = "<group>"; };
 		26648EB51F3EDE5900B7329C /* FFriendListModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FFriendListModel.swift; sourceTree = "<group>"; };
@@ -1071,6 +1073,7 @@
 		264960CF1EF0C33200A559D6 /* Extension */ = {
 			isa = PBXGroup;
 			children = (
+				265E8D001F6570A000528E89 /* UIButton+CSExtension.swift */,
 				2649611D1EF0CF9300A559D6 /* Color+Extension.swift */,
 				264961161EF0CBAE00A559D6 /* UIImageExtension.swift */,
 				264961141EF0CAD100A559D6 /* UIImageViewWebImage.swift */,
@@ -1561,6 +1564,7 @@
 				26FCDC551EFCF21E008087F1 /* CountDownBtn.swift in Sources */,
 				260B20DA1EF7B1FD00E78FD8 /* ForgetPassVC.swift in Sources */,
 				2649611B1EF0CD9200A559D6 /* NSString+extension.swift in Sources */,
+				265E8D011F6570A000528E89 /* UIButton+CSExtension.swift in Sources */,
 				264960BE1EF0C28F00A559D6 /* POPAnimation.mm in Sources */,
 				2645DD481F4179DF00A85D75 /* AddressWebVC.swift in Sources */,
 				2649612C1EF0D08F00A559D6 /* FTIndicator.m in Sources */,

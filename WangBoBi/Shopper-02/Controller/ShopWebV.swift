@@ -40,12 +40,13 @@ class ShopWebV: WkBaseViewController {
             
             self.navigationController?.navigationBar.isHidden = true
         }
-    
+        
     }
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
         if SHOP_URLArray.count == 0 {
             self.urlString = STOTRURL
             
@@ -56,30 +57,22 @@ class ShopWebV: WkBaseViewController {
                 self.urlString = self.urlString + ("?&token=") + (AccountModel.shared()?.Token)! + "&uid=" + (AccountModel.shared()?.Id.stringValue)!
             }
         } else {
+            CCog(message: SHOP_URLArray.lastObject!)
             self.urlString = SHOP_URLArray.lastObject as! String
         }
         
-       
-    
+        
+        
         /// 判断是否网络连通
         NetCheck.shared.returnNetStatus { (result) in
             /// 有网络
             if result {
                 
                 /// 是否包含前缀
-//                if self.urlString.contains(COMMON_PREFIX) {
-                    let request : URLRequest = NSURLRequest.init(url: URL.init(string: self.urlString)!, cachePolicy: .useProtocolCachePolicy, timeoutInterval: 0) as URLRequest
-                    
-                    self.webView.load(request)
-                    
-//                } else {
-//                    CCog(message: "////")
-//                    
-//                    self.webView.stopLoading()
-//                    self.webView.isHidden = true
-//                    self.view.bringSubview(toFront: self.lostNetV)
-//                    self.lostNetV.isHidden = false
-//                }
+                //                if self.urlString.contains(COMMON_PREFIX) {
+                let request : URLRequest = NSURLRequest.init(url: URL.init(string: self.urlString)!, cachePolicy: .useProtocolCachePolicy, timeoutInterval: 0) as URLRequest
+                
+                self.webView.load(request)
                 /// 没网络
             } else {
                 
@@ -99,6 +92,7 @@ class ShopWebV: WkBaseViewController {
                 }
             }
         }
+    
     }
 }
 
@@ -109,13 +103,14 @@ extension ShopWebV {
         self.getURLStr = (navigationAction.request.url?.absoluteString)!
         
         CCog(message: self.getURLStr)
+
         
         if navigationAction.navigationType == WKNavigationType.linkActivated {
             
             /// 显示网络加载出错（域名不对图标）
             if self.getURLStr.contains(".html") {
                 netWrongV.isHidden = false
-
+                
                 let vc = NetWrongVC()
                 
                 self.navigationController?.pushViewController(vc, animated: true)
@@ -124,8 +119,8 @@ extension ShopWebV {
                 return
             }
             
-            if self.getURLStr.contains(COMMON_PREFIX) && !self.getURLStr.contains("#") {
-                if self.getURLStr.contains("?") && !self.getURLStr.contains(".html") && !self.getURLStr.contains("token") {
+            if self.getURLStr.contains(COMMON_PREFIX) && !self.getURLStr.contains("#") && !self.getURLStr.contains("token") {
+                if self.getURLStr.contains("?") && !self.getURLStr.contains(".html") {
                     self.getURLStr = self.getURLStr + ("&token=") + (AccountModel.shared()?.Token)! + "&uid=" + (AccountModel.shared()?.Id.stringValue)!
                 } else {
                     self.getURLStr = self.getURLStr + ("?&token=") + (AccountModel.shared()?.Token)! + "&uid=" + (AccountModel.shared()?.Id.stringValue)!
@@ -133,7 +128,7 @@ extension ShopWebV {
                 
                 self.aaa(str:self.getURLStr)
                 
-                if !self.getURLStr.contains("html") {
+                if !self.getURLStr.contains(".html") {
                     SHOP_URLArray.add(self.getURLStr)
                 }
                 
@@ -142,9 +137,66 @@ extension ShopWebV {
                 lostNetV.isHidden = false
                 lostNetV.descLabel.text = "网络加载出错，请检查网络设置"
             }
-
+            
             decisionHandler(.cancel)
         } else {
+            
+            if SHOP_URLArray.count > 2 {
+                if SHOP_URLArray.contains(self.getURLStr) {
+                    CCog(message: "same")
+                
+                    
+                    
+                }
+            }
+            
+            if self.getURLStr.contains("deliver.aspx") && !self.getURLStr.contains("token") {
+                if self.getURLStr.contains("?") && !self.getURLStr.contains(".html") && !self.getURLStr.contains("token"){
+                    self.getURLStr = self.getURLStr + ("&token=") + (AccountModel.shared()?.Token)! + "&uid=" + (AccountModel.shared()?.Id.stringValue)!
+                } else {
+                    self.getURLStr = self.getURLStr + ("?&token=") + (AccountModel.shared()?.Token)! + "&uid=" + (AccountModel.shared()?.Id.stringValue)!
+                }
+                
+                if !self.getURLStr.contains(".html") {
+                    
+                    SHOP_URLArray.add(self.getURLStr)
+                }
+                
+                self.aaa(str:self.getURLStr)
+                decisionHandler(.cancel)
+                
+            } else {
+                CCog(message: SHOP_URLArray)
+                if self.getURLStr.contains("orderconfirm.aspx?merid") && !self.getURLStr.contains("token") {
+                    if self.getURLStr.contains("?") && !self.getURLStr.contains(".html") && !self.getURLStr.contains("token"){
+                        self.getURLStr = self.getURLStr + ("&token=") + (AccountModel.shared()?.Token)! + "&uid=" + (AccountModel.shared()?.Id.stringValue)!
+                    } else {
+                        self.getURLStr = self.getURLStr + ("?&token=") + (AccountModel.shared()?.Token)! + "&uid=" + (AccountModel.shared()?.Id.stringValue)!
+                    }
+                    
+                    if !self.getURLStr.contains(".html") {
+                        
+                        SHOP_URLArray.add(self.getURLStr)
+                    }
+
+                    if let allVC = self.navigationController?.viewControllers {
+                        
+                        if let inventoryListVC = allVC[allVC.count - 2] as? ShopWebV {
+                            
+                            inventoryListVC.webView.reload()
+                            self.navigationController!.popToViewController(inventoryListVC, animated: true)
+                            
+                            decisionHandler(.cancel)
+                            return
+                        }
+                    }
+                    
+                    
+                    
+                    decisionHandler(.cancel)
+                }
+            }
+            
             decisionHandler(.allow)
         }
     }
@@ -157,10 +209,10 @@ extension ShopWebV {
     ///
     /// - Parameter str: 跳转的链接
     fileprivate func aaa(str : String) -> Void {
-                
+        
         let vvv = ShopWebV()
         vvv.getURLStr = str
-
+        
         
         self.navigationController?.pushViewController(vvv, animated: true)
         
